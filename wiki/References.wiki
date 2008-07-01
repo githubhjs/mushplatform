@@ -1,4 +1,4 @@
-== References ==
+=== Plugins ===
 
 [http://www.eclipse.org/articles/Article-Plug-in-architecture/plugin_architecture.html Notes on the Eclipse Plug-in Architecture] 
 

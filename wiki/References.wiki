@@ -1,0 +1,5 @@
+== References ==
+
+[http://www.eclipse.org/articles/Article-Plug-in-architecture/plugin_architecture.html Notes on the Eclipse Plug-in Architecture] 
+
+[http://www.duduwolf.com/wiki/2007/353.html Dissect WordPress Plugin] 

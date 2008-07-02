@@ -1,0 +1,3 @@
+From 3000 miles high view, there are two parts of this platform : core and plugins.
+
+*[Core]* will be in charge of all plugins life cycle, provide core extension points, provide administration console and the entry of front-end.

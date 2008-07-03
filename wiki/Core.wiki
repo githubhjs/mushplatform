@@ -2,12 +2,18 @@
 
 *Core* will be in charge of all plugins life cycle and provide core extension points, plugin api, administration console as well the entry of front-end.
 
+  * *Plugins Init and Registry* - load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry for waiting be invoke
+  * *Plugin API* - define serials classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins
+  * *Admin Console* - from started, we should have a default admin console for plugin administration
+  * *System Layout* - this part is for front end, we must have some places to display our front-end plugin's render result
+  * *Core Extension Points* - we should define some core extension points for other plugins use, not also for core plugin but 3rd parties'
 
-== Details ==
-Here are some details about parts of core module 
+=== Plugins Init and Registry ===
 
-  * *init*
-  * *registry*
-  * *admin console*
-  * *system layout*
-  * *core extension points*
+=== Plugin API ===
+
+=== Admin Console ===
+
+=== System Layout ===
+
+=== Core Extension Points ===

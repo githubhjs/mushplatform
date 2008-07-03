@@ -20,7 +20,7 @@ Define serials packages, classes and utils for plugins, core module could invoke
 ==== [AdminConsole Admin Console] ====
 The default admin console for plugin administration and could carry on core admin console extension points
 
-==== [Entry Entry of Front-End] ====
+==== [EntryOfFE Entry of Front-End] ====
 This part is for front end, we must have some places to display our front-end plugin's render result
 
 ==== [CoreExtensionPoints Core Extension Points] ====

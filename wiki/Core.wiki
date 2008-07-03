@@ -24,4 +24,4 @@ The default admin console for plugin administration and could carry on core admi
 This part is for front end, we must have some places to display our front-end plugin's render result
 
 ==== [CoreExtensionPoints Core Extension Points] ====
-Define some core extension points for other plugins use, not also for core plugin but 3rd parties'
+Define some core extension points for other plugins use, not only for core plugin but 3rd parties'

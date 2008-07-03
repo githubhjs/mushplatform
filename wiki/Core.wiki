@@ -9,7 +9,7 @@
   * *Core Extension Points*
 
 == Details ==
-Detail description of every parts
+Detail description of each parts
 
 ==== [PluginAPI Plugin API] ====
 Define serials packages, classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins

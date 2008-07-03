@@ -2,8 +2,8 @@
 
 *Core* will be in charge of all plugins life cycle and provide core extension points, plugin api, administration console as well the entry of front-end.
 
-  * *Plugins Init and Registry* 
   * *Plugin API*
+  * *Plugins Init and Registry* 
   * *Admin Console*
   * *Entry of Front-End*
   * *Core Extension Points*

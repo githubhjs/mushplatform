@@ -11,11 +11,11 @@
 == Details ==
 Detail description of every parts
 
-==== [PluginRegistry Plugins Init and Registry] ====
-Load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry waiting be invoked
-
 ==== [PluginAPI Plugin API] ====
 Define serials packages, classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins
+
+==== [PluginRegistry Plugins Init and Registry] ====
+Load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry waiting be invoked
 
 ==== [AdminConsole Admin Console] ====
 The default admin console for plugin administration and could carry on core admin console extension points

@@ -2,21 +2,26 @@
 
 *Core* will be in charge of all plugins life cycle and provide core extension points, plugin api, administration console as well the entry of front-end.
 
-  * *Plugins Init and Registry* - load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry waiting be invoked
-  * *Plugin API* - define serials packages, classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins
-  * *Admin Console* - the default admin console for plugin administration and could carry on core admin console extension points
-  * *Entry of Front-End* - this part is for front end, we must have some places to display our front-end plugin's render result
-  * *Core Extension Points* - we should define some core extension points for other plugins use, not also for core plugin but 3rd parties'
+  * *Plugins Init and Registry* 
+  * *Plugin API*
+  * *Admin Console*
+  * *Entry of Front-End*
+  * *Core Extension Points*
 
 == Details ==
 Detail description of every parts
 
-==== Plugins Init and Registry ====
+==== [Plugins Init and Registry] ====
+Load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry waiting be invoked
 
-==== Plugin API ====
+==== [Plugin API] ====
+Define serials packages, classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins
 
-==== Admin Console ====
+==== [Admin Console] ====
+The default admin console for plugin administration and could carry on core admin console extension points
 
-==== Entry of Front-End ====
+==== [Entry of Front-End] ====
+This part is for front end, we must have some places to display our front-end plugin's render result
 
-==== Core Extension Points ====
+==== [Core Extension Points] ====
+Define some core extension points for other plugins use, not also for core plugin but 3rd parties'

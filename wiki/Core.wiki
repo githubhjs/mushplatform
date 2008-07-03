@@ -1,0 +1,13 @@
+== Summary ==
+
+*Core* will be in charge of all plugins life cycle and provide core extension points, plugin api, administration console as well the entry of front-end.
+
+
+== Details ==
+Here are some details about parts of core module 
+
+  * *init*
+  * *registry*
+  * *admin console*
+  * *system layout*
+  * *core extension points*

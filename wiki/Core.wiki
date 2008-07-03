@@ -11,12 +11,12 @@
 == Details ==
 Detail description of every parts
 
-=== Plugins Init and Registry ===
+==== Plugins Init and Registry ====
 
-=== Plugin API ===
+==== Plugin API ====
 
-=== Admin Console ===
+==== Admin Console ====
 
-=== Entry of Front-End ===
+==== Entry of Front-End ====
 
-=== Core Extension Points ===
+==== Core Extension Points ====

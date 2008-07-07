@@ -9,6 +9,14 @@
   * *Core Extension Points*
 
 == Details ==
+We use [http://rails-engines.org rails-engines] as part of our plugin core. Because engines has already implemented a mechanism which could extract some application code into a plugin. 
+
+For plugin with in Mush Platform, it is a common rails plugin and most of its code is just as normal rails code which has controllers, models, views, helpers, migrations even rake tasks. Except the normal code, as a plugin in Mush Platform, it should also follow below rules:
+
+ * All plugins located in $RAILS_ROOT/modules
+ * In plugin direcory there should have a class(file) maybe named Plugin(plugin.rb) extends plugin interface, in this class we could define some plugin's activities, include author, version, desc, routes, scriptlets, extension-points registeration and etc...
+
+
 Detail description of each parts
 
 ==== [PluginAPI Plugin API] ====

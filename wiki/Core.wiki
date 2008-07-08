@@ -13,10 +13,11 @@ We use [http://rails-engines.org rails-engines] as part of our plugin core. Beca
 
 For plugin with in Mush Platform, it is a common rails plugin and most of its code is just as normal rails code which has controllers, models, views, helpers, migrations even rake tasks. Except the normal code, as a plugin in Mush Platform, it should also follow below rules:
 
- * All plugins located in $RAILS_ROOT/modules
- * In plugin direcory there should have a class(file) maybe named Plugin(plugin.rb) extends plugin interface, in this class we could define some plugin's activities, include author, version, desc, routes, scriptlets, extension-points registeration and etc...
-
-
+ * All plugins located in $RAILS_ROOT/plugins
+ * In plugin direcory there should have a class(file) maybe named PluginName(plugin.rb) extends plugin interface, in this class we could define some plugin's activities, include author, version, desc, routes, scriptlets, extension-points registration and etc ...
+ * We should have a set of helper class which utilize extension-point registration, extension-point execution, scriptlet render etc ...
+ * At any places we use scriptlet(such as template, artilce or other plugin page), there should have some helper method to include the required plugin files.
+ 
 Detail description of each parts
 
 ==== [PluginAPI Plugin API] ====

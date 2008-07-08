@@ -23,8 +23,38 @@ Detail description of each parts
 ==== [PluginAPI Plugin API] ====
 Define serials packages, classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins
 
+ * *Plugin declare class*
+ * extends from Plugin base class
+ * declare controllers, helpers, views if needed
+ * declare routes
+ * declare extensions (add_extension or add_filter or add_action), add methods to different extension-points
+ * declare scriptlets
+
+ * *Extension class*
+ * extends from Extension base class
+ * some utilized methods for extensions
+
+ * *Scriptlet class*
+ * extends from Scriptlet base class
+ * some utilized methods for scriptlets using in other places
+
 ==== [PluginRegistry Plugins Init and Registry] ====
 Load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry waiting be invoked
+
+ * *Initialize plugins*
+ * load plugin
+ * initialize if active
+ * register extensions
+ * register scriptlets
+
+ * *Extension-Point execution*
+ * search for specific extension-point
+ * execute every registered method
+ * return result or nothing or follow the chain
+
+ * *Using scriptlets*
+ * require plugin files
+ * render scriptlets
 
 ==== [AdminConsole Admin Console] ====
 The default admin console for plugin administration and could carry on core admin console extension points

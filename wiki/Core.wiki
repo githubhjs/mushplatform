@@ -23,12 +23,13 @@ Detail description of each parts
 ==== [PluginAPI Plugin API] ====
 Define serials packages, classes and utils for plugins, core module could invoke every plugin in same way, as well as reduce effort to develop plugins
 
- * *Plugin declare class*
- * extends from Plugin base class
- * declare controllers, helpers, views if needed
- * declare routes
- * declare extensions (add_extension or add_filter or add_action), add methods to different extension-points
- * declare scriptlets
+ * *Common code*
+ * models
+ * controllers
+ * views
+ * helpers
+ * migrations
+ * etc ...
 
  * *Extension class*
  * extends from Extension base class
@@ -37,6 +38,16 @@ Define serials packages, classes and utils for plugins, core module could invoke
  * *Scriptlet class*
  * extends from Scriptlet base class
  * some utilized methods for scriptlets using in other places
+
+ * *Plugin declare class*
+ * extends from Plugin base class
+ * declare controllers, helpers, views if needed
+ * declare routes
+ * declare extensions (add_extension or add_filter or add_action), add methods to different extension-points
+ * declare scriptlets
+
+ * *Init.rb*
+ * normal init.rb file
 
 ==== [PluginRegistry Plugins Init and Registry] ====
 Load all plugins in certain directory and register all their extension (which will be invoke at certain extension point) into a global registry waiting be invoked

@@ -1,2 +1,5 @@
-# Include hook code here
-puts "this is core of mush platform"
+require 'mush'
+
+config.after_initialize do
+  Mush.init
+end

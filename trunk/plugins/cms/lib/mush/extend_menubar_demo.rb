@@ -1,3 +1,5 @@
+#A demo to show how extend a exist extension point
+#This extender should be regiestered for MenubarExtension by CmsExsension
 module ExtendMenubarDemo
   
   class << self

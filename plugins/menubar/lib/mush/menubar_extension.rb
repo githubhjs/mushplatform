@@ -1,6 +1,6 @@
 module Menubar
   module Plugin
-    class MenubarExtention < Mush::Plugin::Extension
+    class MenubarExtension < Mush::Plugin::Extension
   
       class << self
         def add_more_menu

@@ -1,11 +1,13 @@
-require 'extend_menuvar_demo'
+require 'extend_menubar_demo'
 require 'menubar'
 module Cms
   module Plugin
     class CmsExtension < Mush::Plugin::Extension
       class << self
         def init
-          regiester_for_extention(Menubar::Plugin::MenubarExtention.add_more_menu)    
+          #register ExtendMenubarDemo for MenubarExtension.add_more_menu
+          extender = generate_extender(ExtendMenubarDemo,'add_menu_to_bar')
+          regiester_for_extension(Menubar::Plugin::MenubarExtension.add_more_menu,extender)    
         end
           
       end

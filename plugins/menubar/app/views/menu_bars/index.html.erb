@@ -1,0 +1,18 @@
+<h1>Listing menu_bars</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for menu_bar in @menu_bars %>
+  <tr>
+    <td><%= link_to 'Show', menu_bar %></td>
+    <td><%= link_to 'Edit', edit_menu_bar_path(menu_bar) %></td>
+    <td><%= link_to 'Destroy', menu_bar, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New menu_bar', new_menu_bar_path %>

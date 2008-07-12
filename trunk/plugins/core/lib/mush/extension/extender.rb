@@ -1,4 +1,4 @@
-#interface of extender
+#extender interface 
 module Mush
   module Plugin
     class Extender

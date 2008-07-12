@@ -9,6 +9,10 @@ module Mush
       @@extention_regestry = {}
       class << self
         
+        def init
+          
+        end
+        
         #register extender for a  specail extention point
         def regiester_for_extention(point_id,extender)
           @@extention_regestry[point_id] ||= []

@@ -9,6 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20080713095646) do
+
+  create_table "menubars", :force => true do |t|
+    t.string "menu_name"
+    t.string "menu_link"
+  end
 
 end

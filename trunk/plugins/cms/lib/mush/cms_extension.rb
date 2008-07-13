@@ -1,4 +1,4 @@
-require 'extend_menubar_demo'
+require File.dirname(__FILE__) + '/extend_menubar_demo'
 require 'menubar'
 module Cms
   module Plugin

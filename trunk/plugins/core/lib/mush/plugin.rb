@@ -5,7 +5,7 @@ module Mush
     class << self 
       # initialize all mush plugins,
       require 'mush/scriptlet'
-      require File.dirname(__FILE__) + "/extention/extention"
+      require File.dirname(__FILE__) + "/extension/extension"
       def init
       end
     end

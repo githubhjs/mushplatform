@@ -3,7 +3,7 @@ module Mush
   module Plugin
   
     class Scriptlet
-      
+      @@scriptlet_registry = []
       class << self
         
         # TODO

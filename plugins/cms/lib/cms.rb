@@ -1,8 +1,8 @@
-require File.dirname(__FILE__) + '/mush/cms_extension'
+require File.dirname(__FILE__) + '/mush/extension/cms_extension'
 module Cms
   class << self
     def init
-      Cms::Plugin::CmsExtension.init
+      CmsExtension.init
     end
   end
 end

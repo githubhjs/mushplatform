@@ -1,20 +1,15 @@
+require File.dirname(__FILE__) + '../template/variable'
+
 module Mush
   
   module Plugin
     
-    class Scriptlet
+    class Scriptlet < Mush::Template::Variable
       
-      class << self
-        
-        def scriptle
-                  
-        end
-        
-        def execute()
-        
-        end 
-        
-      end      
+      def initialize(markup)
+        super(markup)
+      end
+      
     end
   
   end

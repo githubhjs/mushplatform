@@ -1,1 +1,1 @@
-connect "", :controller => :items
+connect "", :controller => "items"

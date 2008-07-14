@@ -18,7 +18,6 @@ module Mush
     TemplateParser              = /(#{TagStart}.*?#{TagEnd}|#{VariableStart}.*?#{VariableIncompleteEnd})/
     VariableParser              = /\[[^\]]+\]|#{VariableSegment}+/
 
-    # Templates are central to mush template. 
     # Interpretating templates is a two step process. First you compile the 
     # source code you got. During compile time some extensive error checking is performed. 
     # your code should expect to get some SyntaxErrors. 
@@ -98,7 +97,7 @@ module Mush
         when Mush::Template::Context
           args.shift
         when Hash
-          self.assigns.merge!(args.shift)        
+          self.assigns.merge!(args.shift)
           Context.new(assigns, registers, @rethrow_errors)
         when nil
           Context.new(assigns, registers, @rethrow_errors)
@@ -118,7 +117,7 @@ module Mush
             context.add_filters(options[:filters])
           end
         when Module
-          context.add_filters(args.pop)    
+          context.add_filters(args.pop)
         when Array
           context.add_filters(args.pop)            
         end

@@ -30,7 +30,7 @@ module Mush
         end
         
         #select all extenders of a special extention point
-        def select_extention_extenders(pont_id)
+        def select_extenders(pont_id)
           @@extention_regestry[pont_id]
         end
         
@@ -46,39 +46,43 @@ module Mush
         #third type:proc,priority=10(should pass one atleast)
         def generate_extender(*extender_options)
           first_param = extender_options.first
-#          function,priority = begin
-           function,priority =  case extender_options.size
-              #if params is sting or proc
-            when 1
-              raise InvalidExtenderParam ,"Invalid extender params" unless first_param.is_a?(String) || first_param.is_a?(Proc)
-              [first_param,Default_Priority]
-              #if params are (Object,method_name) or (string,priority) or (proc,priority)
-            when 2
-              second_param = extender_options[1]
-              #if params are (string,priority) or (proc,priority)
-              if second_param.is_a?(Integer)
-                [first_param,second_param]
-                #if params are (Object,method_name)  
-              elsif second_param.is_a?(String)
-                [first_param.method(second_param.to_sym),Default_Priority]
-              end
-              # if params are (object,method_name,priority)  
-            when 3
-              third_param = extender_options[2]
-              raise InvalidExtenderParam,"Invalid extender params" if third_param.is_a?(Integer)
-              [first_param.method(extender_options[1].to_sym),third_param]
+          #          function,priority = begin
+          function,priority =  case extender_options.size
+            #if params is sting or proc
+          when 1
+            raise InvalidExtenderParam ,"Invalid extender params" unless first_param.is_a?(String) || first_param.is_a?(Proc)
+            [first_param,Default_Priority]
+            #if params are (Object,method_name) or (string,priority) or (proc,priority)
+          when 2
+            second_param = extender_options[1]
+            #if params are (string,priority) or (proc,priority)
+            if second_param.is_a?(Integer)
+              [first_param,second_param]
+              #if params are (Object,method_name)  
+            elsif second_param.is_a?(String)
+              [first_param.method(second_param.to_sym),Default_Priority]
             end
-#          rescue Exception => e
-#            raise InvalidExtenderParam,"Invalid extender params"
-#          end
-          Extender.new do
+            # if params are (object,method_name,priority)  
+          when 3
+            third_param = extender_options[2]
+            raise InvalidExtenderParam,"Invalid extender params" if third_param.is_a?(Integer)
+            [first_param.method(extender_options[1].to_sym),third_param]
+          end
+          #          rescue Exception => e
+          #            raise InvalidExtenderParam,"Invalid extender params"
+          #          end
+          extender = Extender.new do
             self.function = function
             self.priority = priority
-          end
-        end 
+          end 
+          extender
+        end
         
+
+        def execute_extension(extension_method_name)
+          raise "Should be implemented"
+        end
       end
-           
     end
     
   end

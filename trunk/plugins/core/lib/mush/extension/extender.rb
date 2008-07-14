@@ -18,7 +18,7 @@ module Mush
         when Proc
           function.call
         when Method
-          action.call
+          function.call
         else
           raise "Invalid extender type"
         end

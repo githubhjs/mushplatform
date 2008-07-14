@@ -1,2 +1,0 @@
-require 'menubar'
-Menubar.init

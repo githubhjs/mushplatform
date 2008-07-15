@@ -1,5 +1,5 @@
-require 'mush/scriptlet/scriptlets'
-include Mush::Plugin::Scriptlets
+require 'mush/scriptlets'
+include Mush::Scriptlets
 
 require 'items_helper'
 include ItemsHelper

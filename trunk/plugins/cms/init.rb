@@ -1,3 +1,4 @@
-require 'cms'
+require 'extensions'
 require 'scriptlets'
-Cms.init
+
+Cms::CmsExtension.init

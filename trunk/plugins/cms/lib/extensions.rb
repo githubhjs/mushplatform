@@ -1,7 +1,8 @@
 require 'mush_admin'
-require File.dirname(__FILE__) +'/extend_menubar_demo'
+require 'admin/admin_helper'
+
 module Cms
-  class CmsExtension < Mush::Plugin::Extension
+  class CmsExtension < Mush::Extension
     class << self
       def init
         #register ExtendMenubarDemo for MenubarExtension.add_more_menu

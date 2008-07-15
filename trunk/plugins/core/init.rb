@@ -1,7 +1,9 @@
-require 'mush'
+require 'mush/scriptlet'
+require "mush/extension"
+require "mush/scriptlet_view_helper"
 
-Mush.init
+require 'mush/template/template'
+require 'mush/template/document'
 
-require 'mush/template/liquid_template'
-require 'mush/template/liquid_document'
 Liquid::Document.send :include, Mush::Template::Document
+ActionView::Base.class_eval { include Mush::ScriptletViewHelper }

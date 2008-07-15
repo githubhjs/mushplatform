@@ -1,13 +1,16 @@
-require File.dirname(__FILE__) + '../template/variable'
-
 module Mush
   
   module Plugin
     
-    class Scriptlet < Mush::Template::Variable
+    class Scriptlet < Liquid::Variable
       
       def initialize(markup)
-        super(markup)
+	super
+      end
+     
+      def render(context)
+        return '' if @name.nil?
+        context[@name]
       end
       
     end

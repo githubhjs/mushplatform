@@ -66,5 +66,5 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-  config.plugins = [:engines, :core, :all]
+  config.plugins = [:engines, :liquid, :core, :all]
 end

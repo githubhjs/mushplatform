@@ -1,5 +1,7 @@
+require 'mush/extension'
+
 module MushAdmin
-  class MushAdminExtension < Mush::Extension
+  class ExtensionPoints < Mush::ExtensionPoints
   
     class << self
     
@@ -13,7 +15,7 @@ module MushAdmin
       
       def execute_extension(point_id)
         extension_results = []
-        extenders = select_extenders(point_id)
+        extenders = @@extension_registry[point_id]
         begin
           extenders.each {|extender| extension_results << extender.execute}
         rescue Exception => e

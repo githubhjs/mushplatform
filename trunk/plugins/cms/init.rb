@@ -1,3 +1,3 @@
-#require 'cms'
+require 'cms'
 require 'scriptlets'
-#Cms.init
+Cms.init

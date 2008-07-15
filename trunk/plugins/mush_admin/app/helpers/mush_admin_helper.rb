@@ -1,0 +1,2 @@
+module MushAdminHelper
+end

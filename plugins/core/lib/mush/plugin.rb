@@ -4,7 +4,7 @@ module Mush
     attr_accessor :extensions, :scriptlets
     class << self 
       # initialize all mush plugins,
-      require 'mush/scriptlet'
+      require 'mush/scriptlet/scriptlet'
       require File.dirname(__FILE__) + "/scriptlet/scriptlet_view_helper"
       require File.dirname(__FILE__) + "/extension/extension"
       def init

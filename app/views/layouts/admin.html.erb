@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>MushPlatform</title>
+    <%= stylesheet_link_tag 'admin' %>
+  </head>
+  <body>
+  <body>
+    <div class="menu">
+      <ul>
+        <li><a class="hide" href="../menu/index.html">Scriplet</a>
+          <ul>
+            <li><a href="../menu/zero_dollars.html" title="The zero dollar ads page">Scriptlet List</a></li>
+            <li><a href="../menu/embed.html" title="Wrapping text around images">Scriptlet View</a></li>
+            <li><a class="hide" href="../menu/hover_click.html" > Scriptlet Generator> </a>
+              <ul>
+                <li><a href="../menu/form.html" title="Styling forms">Delete</a></li>
+                <li><a href="../menu/nodots.html" title="Removing active/focus borders">Generate</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a class="hide" href="index.html">Column Manage</a>
+          <ul>
+            <li><a href="spies.html" title="a coded list of spies">create column</a></li>
+            <li><a href="vertical.html" title="a horizontal vertical menu">list column</a></li>
+          </ul>
+        </li>
+      
+        <li><a class="hide" href="../opacity/index.html">OPACITY</a>
+          <ul>
+            <li><a href="../opacity/colours.html" title="colour wheel">opaque colours</a></li>
+            <li><a href="../opacity/picturemenu.html" title="a menu using opacity">opaque menu</a></li>
+            <li><a href="../opacity/png.html" title="partial opacity">partial opacity</a></li>
+            <li><a href="../opacity/png2.html" title="partial opacity II">partial opacity II</a></li>
+            <li><a class="hide" href="../menu/hover_click.html" title="Hover/click with no active/focus borders">< HOVER/CLICK</a>
+              <ul class="left">
+                <li><a href="../menu/form.html" title="Styling forms">styled form</a></li>
+                <li><a href="../menu/nodots.html" title="Removing active/focus borders">active focus</a></li>
+                <li><a href="../menu/hover_click.html" title="Hover/click with no active/focus borders">hover/click</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+       <%= @extension_menus %> 
+      </ul>
+    </div>
+    <%= yield  %>
+    
+  </body>
+</html>

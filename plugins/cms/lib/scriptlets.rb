@@ -1,15 +1,8 @@
-# require 'app/helper/scriptlet_helper'
+require 'mush/scriptlet/scriptlets'
+include Mush::Plugin::Scriptlets
 
-module Mush
-  module Plugin
-    class CmsScriptlet < Mush::Plugin::Scriptlet
-      
-      class << self
-        def init
-          add_scriptlet('article_list_by_all', :list_article)
-          add_scriptlet('article_list_by_tag', :list_article_by_tag)
-        end
-      end
-    end
-  end
-end
+require 'items_helper'
+include ItemsHelper
+  
+add_scriptlet('article_list_by_all', self, :list_article, articles)
+add_scriptlet('article_list_by_tag', self, :list_article)

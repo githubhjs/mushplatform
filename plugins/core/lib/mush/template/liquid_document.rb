@@ -1,8 +1,11 @@
+require File.dirname(__FILE__) + "/../scriptlet/scriptlets"
+
 module Mush
 
   module Template
     
     module Document
+        include Mush::Plugin::Scriptlets
     
         def parse(tokens)
           @nodelist ||= []
@@ -22,7 +25,7 @@ module Mush
                 end
 
                 # fetch the tag from registered blocks
-                if tag = Template.tags[$1]
+                if tag = Liquid::Template.tags[$1]
                   @nodelist << tag.new($1, $2, tokens)
                 else
                   # this tag is not registered with the system 
@@ -50,9 +53,8 @@ module Mush
         end  
 
         def create_scriptlet(token)
-          require File.dirname(__FILE__) + "/../scriptlet/scriptlet"
           token.scan(/^#{Liquid::ScriptletStart}(.*)#{Liquid::ScriptletEnd}$/) do |content|
-            return Mush::Plugin::Scriptlet.new(content.first)
+            return @@registry[content.first]
           end
           raise SyntaxError.new("Scriptlet '#{token}' was not properly terminated with regexp: #{Liquid::ScriptletEnd.inspect} ")
         end    

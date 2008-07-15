@@ -1,5 +1,5 @@
 module MushAdmin
-  class MushAdminExtension < Mush::Plugin::Extension
+  class MushAdminExtension < Mush::Extension
   
     class << self
     

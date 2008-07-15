@@ -8,7 +8,7 @@ module Mush
     end
     
     Default_Priority = 10
-    @@extention_regestry = {}
+    @@extension_registry = {}
     class << self
 
       def init
@@ -16,30 +16,25 @@ module Mush
 
       #register extender for a  specail extention point
       def regiester_for_extension(point_id,extender)
-        @@extention_regestry[point_id] ||= []
-        @@extention_regestry[point_id] << extender
+        @@extension_registry[point_id] ||= []
+        @@extension_registry[point_id] << extender
       end
 
       #remove extender from a specail extention point
       def unregister_for_extension(point_id,extender=nil)         
-        binders = @@extention_regestry[point_id]
+        binders = @@extension_registry[point_id]
         binders.delete(extender) if extender
       end
 
       def remove_all_extenders_of_extension(point_id)
-        @@extention_regestry[point_id] = nil
+        @@extension_registry[point_id] = nil
       end
 
       #select all extenders of a special extention point
       def select_extenders(pont_id)
-        @@extention_regestry[pont_id]
+        @@extension_registry[pont_id]
       end
 
-      #generate extention point id
-      #extention_pont_id = self.name + extention_method_name
-      def generate_extension_point_id(extention_method_name)
-        "#{self.name}.#{extention_method_name}"
-      end 
       require File.dirname(__FILE__) + "/extender"
       #arg extender_options have three type:
       #first type:Object,method_name ,priority=10(should pass tow params atleast)
@@ -79,9 +74,6 @@ module Mush
         extender
       end
 
-      def execute_extension(extension_method_name)
-        raise "Should be implemented"
-      end
     end
   end
     

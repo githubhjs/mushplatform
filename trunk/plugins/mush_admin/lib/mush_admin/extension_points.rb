@@ -5,12 +5,11 @@ module MushAdmin
   
     class << self
     
-      def add_more_menu
-        generate_extension_point_id('add_more_menu')
+      def mush_admin_add_more_menu
       end
   
-      def remove_menu
-        remove_extensions_by_point('remove_menu')   
+      def mush_admin_remove_menuend
+        
       end
       
       def execute_extension(point_id)

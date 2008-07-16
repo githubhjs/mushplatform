@@ -54,7 +54,7 @@ module Mush
 
       def create_scriptlet(token)
         token.scan(/^#{Liquid::ScriptletStart}(.*)#{Liquid::ScriptletEnd}$/) do |content|
-          return @@registry[content.first]
+          return @@scriptlets_registry[content.first]
         end
         raise SyntaxError.new("Scriptlet '#{token}' was not properly terminated with regexp: #{Liquid::ScriptletEnd.inspect} ")
       end    

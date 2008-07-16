@@ -4,8 +4,13 @@ module ItemsHelper
   end
     
   def articles_template
-    "{% for article in articles %}" +
-    " <a href='#'>article</a> " +
-    "{% endfor %}" + "limit : {{limit}} <br/>"
+    <<article
+    <ul>
+    {% for article in articles %}
+     <li><a href='#'>{{ article }}</a></li>
+    {% endfor %}
+    <li> limit : {{limit}} </li>
+    </ul>
+article
   end
 end

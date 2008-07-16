@@ -2,8 +2,9 @@ module Mush
   module Scriptlets
     @@scriptlets_registry = {}
 
-    def add_scriptlet(name, function, template = nil)
-      @@scriptlets_registry[name] = Scriptlet.new(name, self.method(function), template) unless @@scriptlets_registry[name]
+    def add_scriptlet(args)
+      args[:function] = self.method(args.delete(:function))
+      @@scriptlets_registry[args[:name]] = Scriptlet.new(args) unless @@scriptlets_registry[args[:name]]
     end
 
     def remove_scriptlet(name)

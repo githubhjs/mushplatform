@@ -3,6 +3,8 @@ include Mush::Scriptlets
 
 require 'items_helper'
 include ItemsHelper
-  
-add_scriptlet('article_list_by_all', :list_article, articles_template)
-add_scriptlet('article_list_by_tag', :list_article)
+
+Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.dirname(__FILE__) + "/../app/views")
+
+add_scriptlet( :name => 'article_list_by_all', :function => :list_article, :template => 'articles', :template_type => 'fs')
+add_scriptlet( :name => 'article_list_by_tag', :function => :list_article)

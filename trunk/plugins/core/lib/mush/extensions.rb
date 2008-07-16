@@ -4,28 +4,28 @@ module Mush
   
   module Extensions
     
+    @@extensions_registry = {}
     Default_Priority = 10
-    @@extension_registry = {}
 
     #add extension for a  specail extention point
     def add_extension(point, *extension_options)
-      @@extension_registry[point] ||= []
-      @@extension_registry[point] << generate_extension(*extension_options)
+      @@extensions_registry[point] ||= []
+      @@extensions_registry[point] << generate_extension(*extension_options)
     end
 
     #remove extension from a specail extention point
-    def remove_extension(point, extension=nil)         
-      binders = @@extension_registry[point]
+    def remove_extension(point, extension=nil)
+      binders = @@extensions_registry[point]
       binders.delete(extension) if extension
     end
 
     def remove_extensions_by_point(point)
-      @@extension_registry[point] = nil
+      @@extensions_registry[point] = nil
     end
 
     #select all extensions of a special extension point
     def select_extensions(point)
-      @@extension_registry[point]
+      @@extensions_registry[point]
     end
 
     #arg extension_options have three type:

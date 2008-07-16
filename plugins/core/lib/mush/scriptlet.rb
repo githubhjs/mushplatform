@@ -3,8 +3,16 @@ module Mush
   class Scriptlet #< Liquid::Variable
     attr_accessor :name, :function, :template, :params
 
-    def initialize(name, function, template = nil)
-      @name, @function, @template = name, function, template
+    def initialize(args = {})
+      @name, @function, @template, = args.delete(:name), args.delete(:function), args.delete(:template)
+      template_type = args.delete(:template_type)
+      case template_type
+      when 'fs'
+        @template = Liquid::Template.file_system.read_template_file(template)
+      when 'db'
+      when 'mem'
+      else  
+      end
     end
 
     def render(context)

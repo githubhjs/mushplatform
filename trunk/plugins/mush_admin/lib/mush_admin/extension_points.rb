@@ -6,18 +6,18 @@ module MushAdmin
     class << self
     
       def add_more_menu
-        generate_extension_point_id('add_more_menu') 
+        generate_extension_point_id('add_more_menu')
       end
   
       def remove_menu
-        remove_all_extenders_of_extension('remove_menu')   
+        remove_extensions_by_point('remove_menu')   
       end
       
       def execute_extension(point_id)
         extension_results = []
-        extenders = @@extension_registry[point_id]
+        extensions = Mush::Extension.select_extensions(point_id)
         begin
-          extenders.each {|extender| extension_results << extender.execute}
+          extensions.each {|extension| extension_results << extension.execute}
         rescue Exception => e
 #          raise e.message
         end

@@ -1,17 +1,12 @@
+require 'mush/extensions'
+include Mush::Extensions
+
 require 'admin/admin_helper'
-require 'mush_admin/extension_points'
+include AdminHelper
 
-module Cms
-  class CmsExtension < Mush::Extension
+# params is extension_point, class, method
+add_extension('add_more_menu', AdminHelper, 'add_menu_to_bar')
 
-    class << self
-      def init
-        #register ExtendMenubarDemo for MenubarExtension.add_more_menu
-        extender = generate_extender(ExtendMenubarDemo,'add_menu_to_bar')
-        regiester_for_extension(MushAdmin::ExtensionPoints.add_more_menu,extender)    
-      end
-          
-    end
-  end  
-end
-
+#register ExtendMenubarDemo for MenubarExtension.add_more_menu
+#extender = generate_extender(ExtendMenubarDemo,'add_menu_to_bar')
+#regiester_for_extension(MushAdmin::ExtensionPoints.add_more_menu,extender)

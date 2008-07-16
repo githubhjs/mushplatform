@@ -1,6 +1,7 @@
 #A demo to show how extend a exist extension point
-#This extender should be regiestered for MenubarExtension by CmsExsension
-module ExtendMenubarDemo
+#This extension should be regiestered for MenubarExtension by CmsExsension
+
+module AdminHelper
   
   class << self
     def add_menu_to_bar

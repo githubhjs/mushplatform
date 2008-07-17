@@ -5,7 +5,8 @@
   <title>Mush Platform Administration Console</title>
   <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/global.css' type='text/css' />
   <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/admin.css' type='text/css' />
-  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/colors-fresh.css' type='text/css' />
+  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/admin_menu.css' type='text/css' />
+  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/colors_fresh.css' type='text/css' />
   <!--[if gte IE 6]>
   <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/ie.css?version=2.5.1' type='text/css' />
   <![endif]-->
@@ -48,7 +49,32 @@
 	<li><a href='index.php'>Dashboard</a></li>
     </ul>
 
-    <ul id="adminmenu">
+    <ul id="nav">
+      <li><a href="#nogo">Home</a></li>
+      <%= do_extension('mush_admin_add_more_menu') %>
+      <li><a href="#nogo" class="current">About us &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+          <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
+                  <li><a href="#nogo">Who we are</a></li>
+                  <li><a href="#nogo">What we do</a></li>
+
+                  <li><a href="#nogo">Where to find us</a></li>
+          </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+      </li>
+    </ul>
+
+    <!--div class="menu">
+      <ul>
+        <%#= @extension_menus %>
+      </ul>
+    </div>
+
+    <ul id="sidemenu">
+	<li><a href='options-general.php'>Settings</a> </li>
+	<li><a href='plugins.php'>Plugins</a> </li>
+	<li><a href='users.php'>Users</a></li>
+    </ul-->
+    
+    <!--ul id="adminmenu">
 	<li><a href='post-new.php'>Write</a></li>
 	<li><a href='edit.php' class="current">Manage</a></li>
 	<li><a href='themes.php'>Design</a></li>
@@ -72,14 +98,14 @@
 	<li><a href='upload.php'>Media Library</a></li>
 	<li><a href='import.php'>Import</a></li>
 	<li><a href='export.php'>Export</a></li>
-    </ul>
+    </ul-->
     
     <!--div id='update-nag'>WordPress 2.6 is available! <a href="http://wordpress.org/download/">Please update now</a>.</div-->
     
     <div id="wpbody">
 
     <div class="wrap">
-    
+        <%= yield %>
     <!--
     <form id="posts-filter" action="" method="get">
     <h2>Manage Posts</h2>

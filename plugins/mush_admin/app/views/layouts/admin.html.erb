@@ -1,55 +1,179 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Mush Platform Administration Console</title>
+  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/global.css' type='text/css' />
+  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/admin.css' type='text/css' />
+  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/colors-fresh.css' type='text/css' />
+  <!--[if gte IE 6]>
+  <link rel='stylesheet' href='/plugin_assets/mush_admin/stylesheets/ie.css?version=2.5.1' type='text/css' />
+  <![endif]-->
+  <style type="text/css">* html { overflow-x: hidden; }</style>
+  <style type='text/css' media='all'>
+    @import '/plugin_assets/mush_admin/stylesheets/thickbox.css';
+    div#TB_title {
+            background-color: #222222;
+            color: #cfcfcf;
+    }
+    div#TB_title a, div#TB_title a:visited {
+            color: #cfcfcf;
+    }
+  </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <title>MushPlatform</title>
-    <%#= stylesheet_link_tag 'admin', :plugin => 'mush_admin' %>
-    <link href="/plugin_assets/mush_admin/stylesheets/admin.css?1216185973" media="screen" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-  <body>
-    <div class="menu">
-      <ul>
-        <li><a class="hide" href="../menu/index.html">Scriplet</a>
-          <ul>
-            <li><a href="../menu/zero_dollars.html" title="The zero dollar ads page">Scriptlet List</a></li>
-            <li><a href="../menu/embed.html" title="Wrapping text around images">Scriptlet View</a></li>
-            <li><a class="hide" href="../menu/hover_click.html" > Scriptlet Generator> </a>
-              <ul>
-                <li><a href="../menu/form.html" title="Styling forms">Delete</a></li>
-                <li><a href="../menu/nodots.html" title="Removing active/focus borders">Generate</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a class="hide" href="index.html">Column Manage</a>
-          <ul>
-            <li><a href="spies.html" title="a coded list of spies">create column</a></li>
-            <li><a href="vertical.html" title="a horizontal vertical menu">list column</a></li>
-          </ul>
-        </li>
-      
-        <li><a class="hide" href="../opacity/index.html">OPACITY</a>
-          <ul>
-            <li><a href="../opacity/colours.html" title="colour wheel">opaque colours</a></li>
-            <li><a href="../opacity/picturemenu.html" title="a menu using opacity">opaque menu</a></li>
-            <li><a href="../opacity/png.html" title="partial opacity">partial opacity</a></li>
-            <li><a href="../opacity/png2.html" title="partial opacity II">partial opacity II</a></li>
-            <li><a class="hide" href="../menu/hover_click.html" title="Hover/click with no active/focus borders">< HOVER/CLICK</a>
-              <ul class="left">
-                <li><a href="../menu/form.html" title="Styling forms">styled form</a></li>
-                <li><a href="../menu/nodots.html" title="Removing active/focus borders">active focus</a></li>
-                <li><a href="../menu/hover_click.html" title="Hover/click with no active/focus borders">hover/click</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-       <%= @extension_menus %> 
-      </ul>
-    </div>
-    <%= yield  %>
+  <!--script type='text/javascript' src='http://10.149.48.108/wp/wp-includes/js/jquery/jquery.js?ver=1.2.3'></script>
+  <script type='text/javascript' src='http://10.149.48.108/wp/wp-admin/js/common.js?ver=20080318'></script>
+  <script type='text/javascript' src='http://10.149.48.108/wp/wp-includes/js/jquery/jquery.color.js?ver=2.0-4561'></script>
+  <script type='text/javascript' src='http://10.149.48.108/wp/wp-admin/js/forms.js?ver=20080317'></script-->
+</head>
+
+<body class="wp-admin ">
+    <div id="wpwrap">
+    <div id="wpcontent">
     
-  </body>
+    <div id="wphead">
+        <h1>Mush Platform<span id="viewsite"><a href="http://10.149.48.108/wp/">Visit Site</a></span></h1>
+    </div>
+    
+    <div id="user_info">
+      <p>
+        Howdy, <a href="profile.php">admin</a>! | 
+        <a href="http://10.149.48.108/wp/wp-login.php?action=logout" title="Log Out">Log Out</a> | 
+        <a href="http://codex.wordpress.org/">Help</a> | 
+        <a href="http://wordpress.org/support/">Forums</a>
+      </p>
+    </div>
+    
+    <ul id="dashmenu">
+	<li><a href='index.php'>Dashboard</a></li>
+    </ul>
+
+    <ul id="adminmenu">
+	<li><a href='post-new.php'>Write</a></li>
+	<li><a href='edit.php' class="current">Manage</a></li>
+	<li><a href='themes.php'>Design</a></li>
+	<li><a href='edit-comments.php'>Comments <span id='awaiting-mod' class='count-0'><span class='comment-count'>0</span></span></a></li>
+    </ul>
+
+    <ul id="sidemenu">
+	<li><a href='options-general.php'>Settings</a> </li>
+	<li><a href='plugins.php'>Plugins</a> </li>
+	<li><a href='users.php'>Users</a></li>
+    </ul>
+
+    <ul id="submenu">
+	<li><a href='edit.php' class="current">Posts</a></li>
+	<li><a href='edit-pages.php'>Pages</a></li>
+	<li><a href='link-manager.php'>Links</a></li>
+	<li><a href='categories.php'>Categories</a></li>
+	<li><a href='edit-tags.php'>Tags</a></li>
+	<li><a href='edit-link-categories.php'>Link Categories</a></li>
+
+	<li><a href='upload.php'>Media Library</a></li>
+	<li><a href='import.php'>Import</a></li>
+	<li><a href='export.php'>Export</a></li>
+    </ul>
+    
+    <!--div id='update-nag'>WordPress 2.6 is available! <a href="http://wordpress.org/download/">Please update now</a>.</div-->
+    
+    <div id="wpbody">
+
+    <div class="wrap">
+    
+    <!--
+    <form id="posts-filter" action="" method="get">
+    <h2>Manage Posts</h2>
+
+    <ul class="subsubsub">
+    <li><a href='edit.php'  class="current">All Posts</a> |</li><li><a href='edit.php?post_status=publish' >Published (1)</a></li></ul>
+
+
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="Search Posts" class="button" />
+    </p>
+
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" /><input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" /><select name='m'>
+    <option selected="selected" value='0'>Show all dates</option>
+    <option value='200807'>July 2008</option>
+    </select>
+
+    <select name='cat' id='cat' class='postform' >
+      <option value='0'>View all categories</option>
+      <option value="1">Uncategorized</option>
+    </select>
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">Date</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Tags</th>
+
+      <th scope="col" class="num"><div class="vers"><img alt="Comments" src="images/comment-grey-bubble.png" /></div></th>
+      <th scope="col">Status</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
+          <td><abbr title="2008/07/02 9:13:00 AM">2008/07/02</abbr></td>
+          <td><strong><a class="row-title" href="post.php?action=edit&amp;post=1" title="Edit &quot;Hello world!&quot;">Hello world!</a></strong></td>
+          <td><a href="edit.php?author=1">admin</a></td>
+          <td><a href='edit.php?category_name=uncategorized'> Uncategorized</a></td>
+          <td>No Tags</td>
+          <td class="num">
+            <div class="post-com-count-wrapper">
+            <a href='edit.php?p=1' title='0 pending' class='post-com-count'><span class='comment-count'>1</span></a>
+            </div>
+          </td>
+          <td><a href="http://10.149.48.108/wp/?p=1" title="View &quot;Hello world!&quot;" rel="permalink"> Published </a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    </form>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+        <br class="clear" />
+    </div>
+
+    <br class="clear" />
+    -->
+    
+    </div><!-- wrap -->
+
+    </div><!-- wpbody -->
+    </div><!-- wpcontent -->
+    </div><!-- wpwrap -->
+    
+    <div id="footer">
+      <p>
+        Thank you for creating with <a href="http://mushplatform.org/">Mush Platform</a> | 
+        <a href="http://code.google.com/p/mushplatform">Documentation</a> | 
+        <a href="http://group.google.com/group/mushplatform">Feedback</a> | 
+        <strong><a href="http://code.google.com/p/mushplatform">Version 0.1</a></strong>
+      </p>
+    </div>
+    
+</body>
 </html>

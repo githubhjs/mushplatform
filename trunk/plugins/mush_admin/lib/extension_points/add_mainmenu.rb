@@ -4,19 +4,13 @@ require 'mush/extension_points'
 module MushAdmin
   class AddMainmenu < Mush::ExtensionPoint
     
-    def initialize(name)
-      super
-    end
-  
-    def mush_admin_add_mainmenu
-    end
-
     def do_extensions
       results = []
       begin
+        @extensions = sort_by(extensions, :priority) if extensions.size > 1
         extensions.each {|extension| results << extension.execute}
       rescue Exception => e
-#          raise e.message
+        #raise e.message
       end
       results.join(' ')
     end

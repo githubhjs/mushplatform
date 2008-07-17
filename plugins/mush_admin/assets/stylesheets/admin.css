@@ -767,10 +767,11 @@ strong .post-com-count {
 	margin: 0;
 	list-style: none;
 	padding: 6px 0 3px 0;
+    position:absolute; 
 }
 
 #submenu li {
-	font-size: 14px;
+	font-size: 13px;
 }
 
 #minisub { /* for empty submenus */

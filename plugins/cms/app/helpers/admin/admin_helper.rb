@@ -6,13 +6,13 @@ module AdminHelper
   class << self
     def add_menu_to_bar
       menu_bar = <<menu
-      <li><a class="hide" href="">Extended by cms</a>
-       <ul>
-        <li><a href="" >cms menu1</a></li>
-        <li><a href="" >cms menu2</a></li>
-        <li><a href="#">cms menu3</a></li>
-       </ul>
-      </li>
+<li><a href="#nogo">CMS &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+    <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
+            <li><a href="/admin/templates">Templates</a></li>
+            <li><a href="#nogo">Columns</a></li>
+            <li><a href="#nogo">Aritcles</a></li>
+    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+</li>
 menu
       menu_bar
     end  

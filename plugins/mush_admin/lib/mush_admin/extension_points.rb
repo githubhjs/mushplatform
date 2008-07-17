@@ -26,5 +26,4 @@ module MushAdmin
     end
   
   end
- 
 end

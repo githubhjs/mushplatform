@@ -452,7 +452,7 @@ input.readonly {
 }
 
 #update-nag, .plugin-update {
-	background-color: #fffeeb;
+	/*background-color: #fffeeb;*/
 	border-bottom-color: #ccc;
 	border-top-color: #ccc;
 	color: #555;

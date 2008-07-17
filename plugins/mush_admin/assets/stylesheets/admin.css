@@ -1,3 +1,7 @@
+#wpbody {
+  /*position:absolute;*/
+}
+
 #plugins .name {
 	font-weight: bold;
 }
@@ -525,10 +529,10 @@ td.media-icon img {
 	line-height: 29px;
 	font-size: 12px;
 	text-align: center;
-	border-bottom-width: 1px;
+	/*border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-top-width: 1px;
-	border-top-style: solid;
+	border-top-style: solid;*/
 }
 
 #update-nag a, .plugin-update a {

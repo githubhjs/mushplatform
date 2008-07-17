@@ -5,7 +5,10 @@ module MushAdmin
   
     class << self
     
-      def mush_admin_add_more_menu
+      def mush_admin_add_mainmenu
+      end
+
+      def mush_admin_add_submenu
       end
   
       def mush_admin_remove_menuend

@@ -7,4 +7,4 @@ require 'mush/template/document'
 
 Liquid::Document.send :include, Mush::Template::Document
 
-ActionView::Base.class_eval { include Mush::ExtensionPoint }
+ActionView::Base.class_eval { include Mush::ExtensionPoints }

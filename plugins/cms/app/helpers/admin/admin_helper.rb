@@ -14,7 +14,6 @@ module AdminHelper
       </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
   </li>
 menu
-      menu_bar
     end  
     
     def add_submenu

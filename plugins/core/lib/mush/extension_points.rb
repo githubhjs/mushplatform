@@ -11,12 +11,12 @@ module Mush
     def add_extension(point, *extension_options)
       extension_point =  @@extension_points_registry[point]
       unless extension_point
-        klass = point.scan(/^(.*)::(.*)$/)[0][1]
-        file = klass.scan(/^([A-Z][a-z]*)(.*)$/)[0].collect{|s| s.downcase}.join('_')
+        klass_name = point.scan(/^(.*)::(.*)$/)[0][1]
+        file = klass_name.scan(/^([A-Z][a-z]*)(.*)$/)[0].collect{|s| s.downcase}.join('_')
         require "extension_points/#{file}"
 #        klass = Object.const_get(point)
         klass = point.split("::").inject(Object) {|x,y| x.const_get(y)}
-        extension_point = klass.new(point)
+        extension_point = klass.new
         @@extension_points_registry[point] = extension_point
       end
       extension = generate_extension(*extension_options)

@@ -5,8 +5,7 @@ module Mush
   class ExtensionPoint
     attr_accessor :name, :extensions
     
-    def initialize(name)
-      @name = name
+    def initialize
       @extensions ||= []
     end
     
@@ -16,6 +15,10 @@ module Mush
     
     def do_extensions
       raise "Should be implement this by subclass"
+    end
+    
+    def sort_by(extensions, attribute)
+      extensions.sort {|x,y| x.send(attribute) <=> y.send(attribute) }
     end
     
   end

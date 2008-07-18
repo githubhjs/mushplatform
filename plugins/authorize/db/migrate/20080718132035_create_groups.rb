@@ -1,8 +1,8 @@
 class CreateGroups < ActiveRecord::Migration
   def self.up
     create_table :groups do |t|
-
-      t.timestamps
+      t.string  :group_name,:null => false
+      t.integer :group_type,:null => false
     end
   end
 

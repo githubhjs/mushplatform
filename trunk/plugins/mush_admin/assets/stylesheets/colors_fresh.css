@@ -156,7 +156,7 @@ ul.widget-control-list .sorthelper {
 }
 
 .post-com-count {
-	background-image: url(../images/bubble_bg.gif);
+	/*background-image: url(../images/bubble_bg.gif);*/
 	color: #fff;
 }
 
@@ -347,8 +347,9 @@ input.readonly {
 }
 
 #footer {
-	background: url(../images/logo-ghost.png) #464646 no-repeat 20px 10px;
-	color: #999;
+	/*background: url(../images/logo-ghost.png) #464646 no-repeat 20px 10px;*/
+        background: #464646 no-repeat 20px 10px;
+	color: #999; 
 }
 
 #media-items {

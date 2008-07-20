@@ -1,0 +1,78 @@
+    <script>set_current_channel('cms')</script>
+    <form id="posts-filter" action="" method="get">
+    <h2>Manage Posts</h2>
+
+    <ul class="subsubsub">
+    <li><a href='edit.php'  class="current">All Posts</a> |</li><li><a href='edit.php?post_status=publish' >Published (1)</a></li></ul>
+
+
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="Search Posts" class="button" />
+    </p>
+
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" /><input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" /><select name='m'>
+    <option selected="selected" value='0'>Show all dates</option>
+    <option value='200807'>July 2008</option>
+    </select>
+
+    <select name='cat' id='cat' class='postform' >
+      <option value='0'>View all categories</option>
+      <option value="1">Uncategorized</option>
+    </select>
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">Date</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Tags</th>
+
+      <th scope="col" class="num"><div class="vers"><img alt="Comments" src="images/comment-grey-bubble.png" /></div></th>
+      <th scope="col">Status</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
+          <td><abbr title="2008/07/02 9:13:00 AM">2008/07/02</abbr></td>
+          <td><strong><a class="row-title" href="post.php?action=edit&amp;post=1" title="Edit &quot;Hello world!&quot;">Hello world!</a></strong></td>
+          <td><a href="edit.php?author=1">admin</a></td>
+          <td><a href='edit.php?category_name=uncategorized'> Uncategorized</a></td>
+          <td>No Tags</td>
+          <td class="num">
+            <div class="post-com-count-wrapper">
+            <a href='edit.php?p=1' title='0 pending' class='post-com-count'><span class='comment-count'>1</span></a>
+            </div>
+          </td>
+          <td><a href="http://10.149.48.108/wp/?p=1" title="View &quot;Hello world!&quot;" rel="permalink"> Published </a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    </form>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+        <br class="clear" />
+    </div>
+
+    <br class="clear" />

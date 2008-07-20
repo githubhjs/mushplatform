@@ -26,6 +26,15 @@
   <script type='text/javascript' src='http://10.149.48.108/wp/wp-admin/js/common.js?ver=20080318'></script>
   <script type='text/javascript' src='http://10.149.48.108/wp/wp-includes/js/jquery/jquery.color.js?ver=2.0-4561'></script>
   <script type='text/javascript' src='http://10.149.48.108/wp/wp-admin/js/forms.js?ver=20080317'></script-->
+  <script src="/javascripts/prototype.js" type="text/javascript"></script>
+  <script src="/javascripts/effects.js" type="text/javascript"></script>
+  <script src="/javascripts/dragdrop.js" type="text/javascript"></script>
+  <script src="/javascripts/controls.js" type="text/javascript"></script>
+  <script>
+    function set_current_channel(channel){
+      $(channel).className = 'current';
+    }
+  </script>
 </head>
 
 <body class="wp-admin ">
@@ -33,7 +42,7 @@
     <div id="wpcontent">
     
     <div id="wphead">
-        <h1>Mush Platform<span id="viewsite"><a href="http://10.149.48.108/wp/">Visit Site</a></span></h1>
+        <h1>Mush Platform<span id="viewsite"><a href="/" target="_blank">Visit Site</a></span></h1>
     </div>
     
     <div id="user_info">
@@ -52,7 +61,7 @@
     <ul id="nav">
       <li><a href="#nogo">Home</a></li>
       <%= do_extensions('MushAdmin::AddMainmenu') %>
-      <li><a href="#nogo" class="current">About us &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+      <li><a href="#nogo">About us &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
           <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
                   <li><a href="#nogo">Who we are</a></li>
                   <li><a href="#nogo">What we do</a></li>

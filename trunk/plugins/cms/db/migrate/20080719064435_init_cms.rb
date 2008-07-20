@@ -18,8 +18,9 @@ class InitCms < ActiveRecord::Migration
     vendors.add_child(Channel.create(:name => 'yahoo', :permalink => '/vendors/yahoo'))
     
     
-    create_table "layouts", :force => true do |t|
+    create_table "templates", :force => true do |t|
       t.string :name, :null => false
+      t.string :category
       t.text :body
       t.timestamps
     end

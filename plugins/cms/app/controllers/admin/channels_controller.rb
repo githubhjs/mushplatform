@@ -19,7 +19,7 @@ class Admin::ChannelsController < ApplicationController
   def edit(id = params[:node])
     @channel = id ? Channel.find(id) : Channel.new(:name => 'Blank')
     respond_to do |format|
-      format.html { render :template => 'admin/channels/edit' }
+      format.html
       format .js { render(:update) { |page| page.replace_html 'channel-form', :partial => 'edit' } }
     end    
   end

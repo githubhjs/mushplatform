@@ -1,13 +1,17 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  
   validates_length_of :login, :within => 3..40
   validates_length_of :password, :within => 5..40
   validates_presence_of :login, :email, :password, :password_confirmation, :salt
   validates_uniqueness_of :login, :email
   validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
-
+  
+  has_many :group_users
+  has_many :groups,:through => :group_users
+  
   attr_protected :id, :salt
 
   attr_accessor :password, :password_confirmation
@@ -18,7 +22,11 @@ class User < ActiveRecord::Base
     return u if User.encrypt(pass, u.salt)==u.hashed_password
     nil
   end  
-
+ 
+  def authorizations
+    @auth_keys ||= (self.auth_values||'').split(',').map{|auth|auth.strip}
+  end
+  
   def password=(pass)
     @password=pass
     self.salt = User.random_string(10) if !self.salt?

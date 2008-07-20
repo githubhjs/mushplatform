@@ -102,71 +102,72 @@ module Authorize
       return(false) if user.blank? 
       return(true) if role.blank?
       #Roles.user_roles(user).include? role.downcase
-      return Roles.check_role(role,user)
+      return AuthManager.check_auth(user, role)
     end
    
   end
   
-  #Roles roles
-  module Roles   
-    Auth_Group_Properties,Auth_Value = {},{}
-    YAML::load(File.open(File.dirname(__FILE__)+'/roles.yml')).each do |role,auth_value|
-      auth_group ,auth_key =  role.split('_',2)
-      next if auth_group.blank? || auth_key.blank? || auth_value.to_i == 0
-      Auth_Group_Properties[auth_key] = "#{auth_group}_auth"
-      Auth_Value[auth_key] = auth_value.to_i
-    end
-    
-    def self.check_role(role,user)
-      property = Auth_Group_Properties[role.to_s]
-      auth_value = Auth_Value[role.to_s]
-      return property && auth_value && user.respond_to?(property) && (user.send(property) & auth_value == auth_value)
-    end
-    
-    def self.auth_user(user,roles)
-      if roles.is_a?(String)
-        set_auth_to_user(user,roles)
-      elsif roles.is_a?(Array)
-        roles.each {|role|set_auth_to_user(user,role)}
+  module AuthManager
+        
+    class << self
+      
+      #check if the special use has auth of role_name
+      def check_auth(user,role_name)
+        
+        return false if user.blank? || role_name.blank?
+        if user.respond_to?(:authorizations)
+          return user.authorizations.include?(role_name.strip)
+        else
+          user.class.class_eval do 
+            define_method(:authorizations) do
+              @auth_keys ||= (self.auth_values||'').split(',').map{|auth|auth.strip}
+            end
+          end
+        end 
       end
-    end
-    
-    def self.unauth_user(user,roles)
-      if roles.is_a?(String)
-        remove_user_auth(user,roles)
-      elsif roles.is_a?(Array)
-        roles.each {|role|remove_user_auth(user,role)}
+      
+      #authorize user
+      def auth_user(user,groups)
+        role_names = []
+        groups.each do |g|
+          GroupUser.create(:user_id => user.id,:group_id => g.id)
+          role_names << g.roles.map(&:role_name)
+        end
+        user.auth_values = "#{user.auth_values}#{role_names.join(',')},"
+        user.save
+      end
+        
+      #remove auth from user
+      def unauth_user(user,groups)
+        user_auth = user.auth_values
+        groups.each do |g|  
+          GroupUser.delete_all("user_id=#{user.id} and group_id = #{g.id}")
+          reduce_role_names = g.roles.map(&:role_name).join(',')
+          user_auth.gsub!(reduce_role_names,'')
+        end
+        user.auth = user_auth
+        user.save
       end 
-    end
-       
-    def self.all_authorizes
-      return Auth_Group_Properties.keys
-    end
-    
-    def self.user_authorizes(user)
-      user_auth = []
-      Auth_Value.each_key do |auth_key|
-        user_auth << auth_key if check_role(auth_key,user)
+      
+      #authoirze group
+      def auth_group(group,roles,inherit_group = nil)
+        g_roles << roles + inherit_group.roles if inherit_group
+        roles.each do |role|
+          GroupRole.create(:group_id => group.id,:role_id => role.id)
+        end
       end
-      user_auth
+      
+      #Un authorize group
+      def unauth_group(group,roles)
+        r_ids =[]
+        roles.each do |r|
+          User.connection.execute("update users set auth_values=REPLACE(auth_values,'#{r.role_name},','')  where 
+                  id in (select user_id from group_users where group_id=#{group.id})")
+          r_ids << r.id
+        end
+        GroupRole.delete("group_id=#{group.id} and role_id in (#{r_ids.join(',')})") if r_ids.size > 0
+      end    
     end
-    
-    private
-    
-    def self.remove_user_auth(user,role)
-      property = Auth_Group_Properties[role.to_s]
-      auth_value = Auth_Value[role.to_s]
-      return false if property.nil? || auth_value.nil? || !user.respond_to?(property)
-      user.send("#{property}=",(user.send(property) | auth_value) - auth_value)
-    end
-    
-    def self.set_auth_to_user(user,role)
-      property = Auth_Group_Properties[role.to_s]
-      auth_value = Auth_Value[role.to_s]
-      if !property.nil? && !auth_value.nil? &&  user.respond_to?(property)
-        user.send("#{property}=",user.send(property) | auth_value)
-      end
-    end
-    
-  end  
+  end
+  
 end

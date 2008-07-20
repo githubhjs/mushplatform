@@ -1,0 +1,16 @@
+<% form_remote_tag :url => 'channels/update' do -%>
+
+<ul class="subsubsub">
+  <li><a class="current"><%= @channel.name %></a></li>
+</ul>
+
+<%= render :partial => 'form' %>
+
+<div id="ajax-response"></div>
+
+<div class="tablenav">
+    <br class="clear" />
+</div>
+
+<br class="clear" />
+<% end -%>

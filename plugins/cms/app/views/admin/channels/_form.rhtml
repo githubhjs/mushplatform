@@ -1,0 +1,18 @@
+<%= error_messages_for 'channel' %>
+
+<input type="hidden" name="id" value="<%= @channel.id %>"
+<table class="form-table">
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="cat_name">Channel Name</label></th>
+    <td><%= text_field 'channel', 'name' %><br />
+  </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="cat_name">Permlink</label></th>
+    <td><%= text_field 'channel', 'permalink' %><br />
+  </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="cat_name">Body</label></th>
+    <td><%= text_area 'channel', 'body', :cols => 75 %><br />
+  </tr>
+</table>
+<p class="submit"><input type="submit" class="button" name="submit" value="Save Channel" /></p>

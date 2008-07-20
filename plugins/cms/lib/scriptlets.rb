@@ -1,8 +1,8 @@
 require 'mush/scriptlets'
 include Mush::Scriptlets
 
-require 'items_helper'
-include ItemsHelper
+require 'cms_helper'
+include CmsHelper
 
 Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.dirname(__FILE__) + "/../app/views")
 

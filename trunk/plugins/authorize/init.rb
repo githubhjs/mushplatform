@@ -1,2 +1,2 @@
-require 'authrize'
+require 'authorize'
 Authorize.init

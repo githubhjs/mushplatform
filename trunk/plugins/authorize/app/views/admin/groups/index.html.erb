@@ -1,18 +1,75 @@
-<h1>Listing groups</h1>
+    <script>set_current_channel('authorize')</script>
+    <form id="posts-filter" action="" method="get">
+    <h2>Manage Groups (<%= link_to 'add new','/admin/groups/new' %>)</h2>
 
-<table>
-  <tr>
-  </tr>
+    <ul class="subsubsub">
+    <li><a href='' class="current">All Groups</a> | </li><li><a href=''>Layout</a></li></ul>
 
-<% for group in @groups %>
-  <tr>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="Search Templates" class="button" />
+    </p>
 
-<%= link_to 'New group', '/admin/groups/new' %>
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" />
+    <input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" />
+    
+    <select name='cat' id='cat' class='postform' >
+      <option value='0'>Valid</option>
+      <option value="1">Invalid</option>
+    </select>
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">Group Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Description</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <% for group in @groups %>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
+          <td><strong>
+            <a class="row-title" href="/admin/groups/<%=group.id%>/edit" ><%= group.group_name %>
+              </a></strong>
+          </td>
+          <td class="num">
+            <div class="post-com-count-wrapper">
+            <a href='/admin/groups/<%= group.id %>/edit' title='0 pending' class='post-com-count'><span class='comment-count'>
+             <%= display_group_status(group) %> 
+            </span></a>
+            </div>
+          </td>
+          <td><%= group.description %></td>
+        </tr>
+        <%  end %>
+        
+      </tbody>
+    </table>
+
+    </form>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+        <br class="clear" />
+    </div>
+
+    <br class="clear" />

@@ -46,6 +46,7 @@
     // of the first level of actual data
     root.expand(true);
     //root.cascade(function(){return true;})
+    //root.firstChild.reload()
     panel.on('click',function(node, event){
       Ext.Ajax.request({
         url:'/admin/channels/edit?node=' + node.id,
@@ -54,9 +55,4 @@
       })
     })
   });
-  function findNode(id){
-    node = panel.getNodeById(id) //findChild(attribute, value);
-    node.reload;
-    node.expand(true);
-  }
 <% end -%>

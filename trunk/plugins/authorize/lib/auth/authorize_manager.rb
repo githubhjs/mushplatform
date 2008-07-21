@@ -113,7 +113,6 @@ module Authorize
       
       #check if the special use has auth of role_name
       def check_auth(user,role_name)
-        
         return false if user.blank? || role_name.blank?
         if user.respond_to?(:authorizations)
           return user.authorizations.include?(role_name.strip)
@@ -123,6 +122,7 @@ module Authorize
               @auth_keys ||= (self.auth_values||'').split(',').map{|auth|auth.strip}
             end
           end
+          return user.authorizations.include?(role_name.strip)
         end 
       end
       

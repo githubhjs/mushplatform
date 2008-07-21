@@ -4,7 +4,11 @@ class Group < ActiveRecord::Base
   has_many :roles,:through => :group_roles
   has_many :group_users
   has_many :users,:through => :group_users  
+
+  validates_uniqueness_of :group_name
+  validates_presence_of :group_name
   
+    
   Status_Valid,Status_Invalid = 0,1
   
   #this method should find from cache

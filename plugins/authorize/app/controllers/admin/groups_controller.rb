@@ -47,7 +47,7 @@ class Admin::GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         flash[:notice] = 'Group was successfully created.'
-        format.html { redirect_to(@group) }
+        format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }
@@ -64,7 +64,7 @@ class Admin::GroupsController < ApplicationController
     respond_to do |format|
       if @group.update_attributes(params[:group])
         flash[:notice] = 'Group was successfully updated.'
-        format.html { redirect_to(@group) }
+        format.html { redirect_to(:action => :index) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -83,5 +83,17 @@ class Admin::GroupsController < ApplicationController
       format.html { redirect_to(groups_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def proccess_association_roles(group)
+    orignal_roel_ids = group.roles.map(&:id)
+    new_role_ids = params[:group_auth]
+    new_role_ids.map! { |r_id|  r_id.to_i}
+    deleted_role_ids = (orignal_roel_ids||[]) - (new_role_ids||[]) 
+    GroupRole.delete_all("group_id=#{group.id} and role_id in (#{deleted_role_ids.join(',')})")  if deleted_role_ids && deleted_role_ids.size > 0
+    added_role_ids = (new_role_ids||[]) - orignal_roel_ids
+#    Authorize::Roles.auth_user(user,added_auth) if added_auth || added_auth.size > 0
   end
 end

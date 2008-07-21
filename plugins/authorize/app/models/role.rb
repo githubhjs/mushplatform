@@ -3,6 +3,9 @@ class Role < ActiveRecord::Base
   has_many :group_roles
   has_many :groups,:through => :group_roles
   
+  validates_uniqueness_of :role_name
+  validates_presence_of :role_name
+  
   Status_Valid,Status_Invalid = 0,1
   
   #this method should find from cache

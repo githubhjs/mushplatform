@@ -36,7 +36,7 @@ class Admin::ChannelsController < ApplicationController
         format .js { 
           render(:update) { |page| 
             page.replace_html 'channel-form', :partial => 'edit'
-            page.call 'findNode', "#{@parent_channel.id}" #'text', @parent_channel.name
+            page.call "panel.getNodeById(#{@parent_channel.id}).reload"
           }
         }
         format.html { redirect_to(@channel) }
@@ -58,7 +58,7 @@ class Admin::ChannelsController < ApplicationController
         format.js { 
           render(:update) { |page| 
             page.replace_html 'channel-form', :partial => 'edit' 
-            page.call 'findNode', "#{@parent_channel.id}" #'text', @parent_channel.name
+            page.call "panel.getNodeById(#{@parent_channel.id}).reload"
             #page.call 'root.reload'
             #page.call 'root.expand', true
           } 

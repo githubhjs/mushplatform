@@ -1,18 +1,18 @@
-<%= error_messages_for 'template' %>
+<%= error_messages_for 'tmplt' %>
 
-<input type="hidden" name="id" value="<%= @template.id %>"
+<input type="hidden" name="id" value="<%= @tmplt.id %>"
 <table class="form-table">
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="cat_name">Channel Name</label></th>
-    <td><%= text_field 'template', 'name' %><br />
+    <th scope="row" valign="top"><label for="template_name">Template Name</label></th>
+    <td><%= text_field 'tmplt', 'name' %><br />
   </tr>
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="cat_name">Permlink</label></th>
-    <td><%= text_field 'template', 'category' %><br />
+    <th scope="row" valign="top"><label for="category">Category</label></th>
+    <td><%= text_field 'tmplt', 'category' %><br />
   </tr>
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="cat_name">Body</label></th>
-    <td><%= text_area 'template', 'body', :cols => 75 %><br />
+    <th scope="row" valign="top"><label for="body">Body</label></th>
+    <td><%= text_area 'tmplt', 'body', :cols => 75 %><br />
   </tr>
 </table>
 <p class="submit"><input type="submit" class="button" name="submit" value="Save Template" /></p>

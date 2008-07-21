@@ -1,7 +1,9 @@
-<% form_remote_tag :url => 'channels/update' do -%>
+<script>set_current_channel('cms')</script>
+<h2>Manage Templates (<%= link_to 'add new', :controller => 'templates', :action => 'new' %>)</h2>
+<% form_tag :controller => 'admin/templates', :action => 'update' do -%>
 
 <ul class="subsubsub">
-  <li><a class="current"><%= @channel.name %></a></li>
+  <li><a class="current"><%= @tmplt.name %></a></li>
 </ul>
 
 <%= render :partial => 'form' %>

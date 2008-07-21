@@ -51,14 +51,14 @@ class Admin::ChannelsController < ApplicationController
 
   def update
     @channel = Channel.find(params[:id])
-    @parent_channel = @channel.parent_id ? Channel.find(@channel.parent_id) : Channel.new
+    @parent_channel = @channel.parent_id ? Channel.find(@channel.parent_id) : Channel.new()
     respond_to do |format|
       if @channel.update_attributes(params[:channel])
         flash[:notice] = 'Channel was successfully updated.'
         format.js { 
           render(:update) { |page| 
             page.replace_html 'channel-form', :partial => 'edit' 
-            page.call "panel.getNodeById(#{@parent_channel.id}).reload"
+            page.call "panel.getNodeById(#{@parent_channel.id ? @parent_channel.id : 1}).reload"
             #page.call 'root.reload'
             #page.call 'root.expand', true
           } 

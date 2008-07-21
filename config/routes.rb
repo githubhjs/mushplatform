@@ -36,13 +36,11 @@ ActionController::Routing::Routes.draw do |map|
   # map.root :controller => "welcome"
 
   # See how all your routes lay out with "rake routes"
-  #map.from_plugin :menubar
   map.from_plugin :mush_admin
   map.from_plugin :authorize
   map.from_plugin :cms
 
-  #map.from_plugin :mush_admin
   # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+#  map.connect ':controller/:action/:id'
+#  map.connect ':controller/:action/:id.:format'
 end

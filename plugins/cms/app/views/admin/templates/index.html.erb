@@ -40,24 +40,19 @@
       <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
       <th scope="col">Name</th>
       <th scope="col">Category</th>
-      <th scope="col">Status</th>
       <th scope="col">Date</th>
 
       </tr>
       </thead>
       <tbody>
+        <% for tmplt in @tmplts -%>
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
-          <td><strong><a class="row-title" href="post.php?action=edit&amp;post=1" title="Edit &quot;Hello world!&quot;">Hello world!</a></strong></td>
-          <td><a href='edit.php?category_name=uncategorized'>Uncategorized</a></td>
-          <td class="num">
-            <div class="post-com-count-wrapper">
-            <a href='edit.php?p=1' title='0 pending' class='post-com-count'><span class='comment-count'>1</span></a>
-            </div>
-          </td>
-          <td><a href="http://10.149.48.108/wp/?p=1" title="View &quot;Hello world!&quot;" rel="permalink"> Published </a></td>
-          <td><abbr title="2008/07/02 9:13:00 AM">2008/07/02</abbr></td>
+          <td><strong><%= link_to tmplt.name, {:controller => 'admin/templates', :action => 'edit', :id => tmplt.id}, {:class =>'tow=title'} %></strong></td>
+          <td><a href=''><%= tmplt.category %></a></td>
+          <td><abbr title="<%= tmplt.created_at %>"><%= tmplt.created_at %></abbr></td>
         </tr>
+        <% end -%>
       </tbody>
     </table>
 

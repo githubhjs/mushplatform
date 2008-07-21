@@ -1,6 +1,6 @@
 <script>set_current_channel('cms')</script>
-
-<% form_tag 'templates/create' do -%>
+<h2>Manage Templates (<%= link_to 'add new', :controller => 'templates', :action => 'new' %>)</h2>
+<% form_tag :controller => 'admin/templates', :action => 'create' do -%>
 
 <ul class="subsubsub">
   <li><a class="current">Add New</a></li>

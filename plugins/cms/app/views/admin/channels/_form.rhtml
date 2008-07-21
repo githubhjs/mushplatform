@@ -3,16 +3,24 @@
 <input type="hidden" name="id" value="<%= @channel.id %>"
 <table class="form-table">
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="cat_name">Channel Name</label></th>
-    <td><%= text_field 'channel', 'name' %><br />
+    <th scope="row" valign="top"><label for="channel_name">Parent Channel</label></th>
+    <td><%= @parent_channel.name %></td>
+  </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="channel_name">Channel Name</label></th>
+    <td><%= text_field 'channel', 'name' %></td>
   </tr>
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="cat_name">Permlink</label></th>
-    <td><%= text_field 'channel', 'permalink' %><br />
+    <th scope="row" valign="top"><label for="template">Template</label></th>
+    <td><%= select("channel", "template_id", template_options, { :include_blank => true }) %> <%= link_to 'Edit Template', :controller => 'admin/templates', :action => 'edit', :id => @channel.template_id %></td>
   </tr>
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="cat_name">Body</label></th>
-    <td><%= text_area 'channel', 'body', :cols => 75 %><br />
+    <th scope="row" valign="top"><label for="permalink">Permalink</label></th>
+    <td><%= text_field 'channel', 'permalink' %></td>
+  </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="body">Body</label></th>
+    <td><%= text_area 'channel', 'body', :cols => 65 %></td>
   </tr>
 </table>
 <p class="submit"><input type="submit" class="button" name="submit" value="Save Channel" /></p>

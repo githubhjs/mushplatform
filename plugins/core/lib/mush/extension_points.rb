@@ -62,7 +62,7 @@ module Mush
         # if params are (object,method_name,priority)  
       when 3
         third_param = extension_options[2]
-        raise InvalidExtensionParam,"Invalid extension params" if third_param.is_a?(Integer)
+        raise InvalidExtensionParam,"Invalid extension params" unless third_param.is_a?(Integer)
         [first_param.method(extension_options[1].to_sym),third_param]
       end
       #          rescue Exception => e

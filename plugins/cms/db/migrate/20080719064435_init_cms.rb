@@ -9,7 +9,7 @@ class InitCms < ActiveRecord::Migration
       t.integer :channels_count, :default => 0
       t.timestamps
     end
-    index = Channel.create(:name => 'index', :permalink => '/')
+    index = Channel.create(:name => 'index', :permalink => '/', :body => '[[article_list_by_all(limit=3000)]]', :template_id => 1)
     index.add_child(news = Channel.create(:name => 'news', :permalink => '/news'))
     index.add_child(vendors = Channel.create(:name => 'vendors', :permalink => '/vendors'))
     news.add_child(Channel.create(:name => 'general', :permalink => '/news/gneral'))
@@ -17,13 +17,13 @@ class InitCms < ActiveRecord::Migration
     vendors.add_child(Channel.create(:name => 'google', :permalink => '/vendors/google'))
     vendors.add_child(Channel.create(:name => 'yahoo', :permalink => '/vendors/yahoo'))
     
-    
     create_table "templates", :force => true do |t|
       t.string :name, :null => false
       t.string :category
       t.text :body
       t.timestamps
     end
+    Template.create(:name => 'Default Layout', :body => '<div>HEADER</div><div>{{content}}</div><div>FOOTER</div>')
     
     create_table "articles", :force => true do |t|
       t.string :title, :null => false
@@ -33,11 +33,18 @@ class InitCms < ActiveRecord::Migration
       t.integer :channel_id
       t.timestamps
     end
+
+    create_table "assets", :force => true do |t|
+      t.string :name, :null => false
+      t.string :category
+      t.timestamps
+    end
   end
 
   def self.down
     drop_table "channels"
     drop_table "templates"
     drop_table "articles"
+    drop_table "assets"
   end
 end

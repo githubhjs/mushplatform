@@ -21,4 +21,12 @@ class Group < ActiveRecord::Base
     find(:first,:conditions=>"group_name=#{g_name}")
   end
   
+  def should_inherit_groups
+    self.new_record? ? Group.all_groups :  Group.find(:all,:conditions => "status=#{Status_Valid} and id<> #{self.id}")
+  end
+  
+  def inherit_from
+    (self.inherit_group.blank? || self.inherit_group <= 0) ? nil : Group.find_by_id(self.inherit_group)
+  end
+  
 end

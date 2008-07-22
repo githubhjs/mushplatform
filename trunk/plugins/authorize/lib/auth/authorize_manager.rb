@@ -151,7 +151,7 @@ module Authorize
       
       #authoirze group
       def auth_group(group,roles,inherit_group = nil)
-        g_roles << roles + inherit_group.roles if inherit_group
+        roles << roles + inherit_group.roles if inherit_group
         roles.each do |role|
           GroupRole.create(:group_id => group.id,:role_id => role.id)
         end

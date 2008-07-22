@@ -20,4 +20,10 @@ module Admin::GroupsHelper
     end
     return check_boxes.join(' ')
   end
+  
+  def generate_inherit_group_options(group)
+    options = [['No','0']]
+    options += group.should_inherit_groups.map{|g|[g.group_name,g.id.to_s]}
+    return options_for_select(options, group.inherit_group_id ? nil : group.inherit_group_id.to_s)
+  end
 end

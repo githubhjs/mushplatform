@@ -19,6 +19,14 @@
       </td>
     </tr>
     <tr class="form-field">
+      <th scope="row" valign="top"><label for="category">Inherit From</label></th>
+      <td>
+        <select name="group[inherit_group]">
+          <%= generate_inherit_group_options(@group) %>
+        </select>
+      </td>
+    </tr>
+    <tr class="form-field">
       <th scope="row" valign="top"><label for="group">Roles</label></th>
       <td>
         <%= generate_roles_checkbox((@group.new_record? ? [] : @group.roles.map(&:id))) %>

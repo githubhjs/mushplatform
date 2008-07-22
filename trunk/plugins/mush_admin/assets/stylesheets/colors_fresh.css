@@ -35,9 +35,9 @@ input.disabled, textarea.disabled {
 	background-color: #ccc;
 }
 
-#user_info a:hover, li.widget-list-control-item h4.widget-title a:hover, .submit a, #dashmenu a:hover, #footer a, #upload-menu li a.upload-tab-link, li.widget-list-control-item h4.widget-title a,
+#user_info a:hover, li.widget-list-control-item h4.widget-title a:hover, #dashmenu a:hover, #footer a, #upload-menu li a.upload-tab-link, li.widget-list-control-item h4.widget-title a,
 #dragHelper li.widget-list-control-item h4.widget-title a,
-#draghelper li.widget-list-control-item h4.widget-title a:visited, .login #backtoblog a:hover {
+#draghelper li.widget-list-control-item h4.widget-title a:visited, .login #backtoblog a:hover /*.submit a*/ {
 	color: #fff;
 }
 

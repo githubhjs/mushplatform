@@ -8,28 +8,7 @@
     <li><a class="current">Add New</a></li>
   </ul>
 
-  <%= error_messages_for :asset %>
-  <dl class="group" id="fileform">
-    <dt id="filelbls">
-      <label for="asset_data">Select files to upload</label>
-      <label for="asset_tags" id="taglbl">Tags (comma separated)</label>
-      </dt>
-    <dd class="asset-data">
-      <ul id="filefields">
-        <li>
-          <%= file_field_tag 'asset_data[]', :id => 'asset_data_1' %>
-          <a href="#" class="remove-file" title="remove this file field"><%= image_tag '/images/mephisto/icons/trash.gif', :class => 'iconb red' %></a>
-          <a href="#" class="tagsall" id="tagsall" style="display:none">Apply tags to all</a>
-        </li>
-      </ul>
-    </dd>
-  </dl>
-  <a href="#" id="asset-add-file" class="bottom-tab">Add another file</a>
-
-  <p class="submit">
-    <%= submit_tag 'Upload Asset(s)' %>
-    or <%= link_to 'Cancel', assets_path %>
-  </p>
+  <%= render :partial => 'form' %>
   
   <div id="ajax-response"></div>
 

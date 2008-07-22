@@ -47,7 +47,7 @@ class Admin::AssetsController < ApplicationController
     respond_to do |format|
       if @asset.save
         flash[:notice] = 'Asset was successfully created.'
-        format.html { redirect_to(@asset) }
+        format.html { redirect_to(assets_url) }
         format.xml  { render :xml => @asset, :status => :created, :location => @asset }
       else
         format.html { render :action => "new" }
@@ -64,7 +64,7 @@ class Admin::AssetsController < ApplicationController
     respond_to do |format|
       if @asset.update_attributes(params[:asset])
         flash[:notice] = 'Asset was successfully updated.'
-        format.html { redirect_to(@asset) }
+        format.html { redirect_to(assets_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

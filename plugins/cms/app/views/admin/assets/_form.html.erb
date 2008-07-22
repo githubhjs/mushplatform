@@ -1,0 +1,20 @@
+  <%= error_messages_for :asset %>
+  <table class="form-table">
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="asset_name">Asset Name</label></th>
+      <td><%= text_field 'asset', 'name' %><br />
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="file">File</label></th>
+      <td><%= file_field 'asset', 'uploaded_data' %></td>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"></th>
+      <td><%= image_tag @asset.public_filename if @asset.id and @asset.content_type.index('image') %></td>
+    </tr>    
+  </table>
+
+  <p class="submit">
+    <%= submit_tag 'Save Asset' %>
+    or <%= link_to 'Cancel', assets_path, :class => 'cancel' %>
+  </p>

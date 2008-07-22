@@ -8,7 +8,7 @@ map.resources :channels, :path_prefix => '/admin', :controller => 'admin/channel
 map.connect 'admin/templates/:action/:id', :controller => 'admin/templates'
 map.resources :templates, :path_prefix => '/admin', :controller => 'admin/templates'
 
-map.connect 'admin/assets/:action/:id', :controller => 'admin/assets'
+#map.connect 'admin/assets/:action/:id', :controller => 'admin/assets'
 map.resources :assets, :path_prefix => '/admin', :controller => 'admin/assets'
 
 map.dispatch '*path', :controller => 'cms', :action => 'dispatch'

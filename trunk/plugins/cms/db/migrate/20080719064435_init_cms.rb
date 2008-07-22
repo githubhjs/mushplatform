@@ -36,9 +36,11 @@ class InitCms < ActiveRecord::Migration
 
     create_table "assets", :force => true do |t|
       t.string :name, :null => false
-      t.string :category
+      t.string :type, :content_type, :filename, :path, :category
+      t.integer :parent_id, :size, :width, :height
       t.timestamps
     end
+  
   end
 
   def self.down

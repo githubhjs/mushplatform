@@ -1,17 +1,71 @@
-<h1>Listing assets</h1>
+    <script>set_current_channel('cms')</script>
+    <form id="posts-filter" action="" method="get">
+    <h2>Manage Assets (<%= link_to 'add new', :controller => 'assets', :action => 'new' %>)</h2>
 
-<table>
-  <tr>
-  </tr>
+    <ul class="subsubsub">
+    <li><a href='' class="current">All Assets</a> | </li><li><a href=''>Images</a></li> | </li><li><a href=''>Stylesheets</a></li> | </li><li><a href=''>Javascripts</a></li></ul>
 
-<% for asset in @assets %>
-  <tr>
-    <td><%= link_to 'Show', asset %></td>
-    <td><%= link_to 'Edit', edit_asset_path(asset) %></td>
-    <td><%= link_to 'Destroy', asset, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="Search Assets" class="button" />
+    </p>
 
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" /><input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" /><select name='m'>
+    <option selected="selected" value='0'>Show all dates</option>
+    <option value='200807'>July 2008</option>
+    </select>
+
+    <select name='cat' id='cat' class='postform' >
+      <option value='0'>View all categories</option>
+      <option value="1">Uncategorized</option>
+    </select>
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">Name</th>
+      <th scope="col">File Name</th>
+      <th scope="col">Path</th>
+      <th scope="col">Category</th>
+      <th scope="col">Date</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <% for asset in @assets -%>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
+          <td><strong><%= link_to asset.name, {:controller => 'admin/templates', :action => 'edit', :id => asset.id}, {:class =>'tow=title'} %></strong></td>
+          <td><%= asset.filename %></td>
+          <td><%= asset.path %></td>
+          <td><a href=''><%= asset.category %></a></td>
+          <td><abbr title="<%= asset.created_at %>"><%= asset.created_at %></abbr></td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+
+    </form>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+        <br class="clear" />
+    </div>
+
+    <br class="clear" />

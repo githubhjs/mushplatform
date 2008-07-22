@@ -1,3 +1,4 @@
+require 'authorize'
 class Admin::GroupsController < ApplicationController
   layout 'admin'
   
@@ -46,6 +47,7 @@ class Admin::GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
+        proccess_association_roles(@group,@group.inherit_from)
         flash[:notice] = 'Group was successfully created.'
         format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
@@ -60,9 +62,10 @@ class Admin::GroupsController < ApplicationController
   # PUT /groups/1.xml
   def update
     @group = Group.find(params[:id])
-
+    
     respond_to do |format|
       if @group.update_attributes(params[:group])
+        proccess_association_roles(@group,@group.inherit_from)
         flash[:notice] = 'Group was successfully updated.'
         format.html { redirect_to(:action => :index) }
         format.xml  { head :ok }
@@ -87,13 +90,16 @@ class Admin::GroupsController < ApplicationController
   
   private
   
-  def proccess_association_roles(group)
-    orignal_roel_ids = group.roles.map(&:id)
-    new_role_ids = params[:group_auth]
-    new_role_ids.map! { |r_id|  r_id.to_i}
-    deleted_role_ids = (orignal_roel_ids||[]) - (new_role_ids||[]) 
-    GroupRole.delete_all("group_id=#{group.id} and role_id in (#{deleted_role_ids.join(',')})")  if deleted_role_ids && deleted_role_ids.size > 0
-    added_role_ids = (new_role_ids||[]) - orignal_roel_ids
-#    Authorize::Roles.auth_user(user,added_auth) if added_auth || added_auth.size > 0
+  def proccess_association_roles(group,inherit_group = nil)
+    original_roels = group.roles||[]
+    original_roel_ids = original_roels.map(&:id)
+    new_role_ids = (params[:group_auth]||[]).map! { |r_id|  r_id.to_i}
+    deleted_roles = original_roels.select{|g| !new_role_ids.include?(g.id)}
+    Authorize::AuthManager.unauth_group(group, deleted_roles)
+    added_role_ids = new_role_ids - original_roel_ids
+    if added_role_ids.size > 0
+      add_roles = Role.find(:all,:conditions => "id in (#{added_role_ids.join(',')})")
+      Authorize::AuthManager.auth_group(group,add_roles,inherit_group)
+    end
   end
 end

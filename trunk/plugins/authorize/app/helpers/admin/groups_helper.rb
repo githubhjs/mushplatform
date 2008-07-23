@@ -10,13 +10,27 @@ module Admin::GroupsHelper
   end
   
   
-  def generate_roles_checkbox(self_role_ids = [])
-    check_boxes = []
-    self_role_ids.map! { |r_id| r_id.to_i } if self_role_ids.size > 0
+  def generate_roles_checkbox(group)
     roles = Role.all_roles
     return "" if roles.blank? || roles.size <= 0
+    self_role_ids = group.new_record? ? [] : group.roles.map(&:id)
+    check_boxes = []
+    self_role_ids.map! { |r_id| r_id.to_i }
+    inherit_group = group.inherit_group
+    inherit_roles =  inherit_group.nil? ? [] : inherit_group.roles
+    inherit_role_ids = inherit_roles.map(&:id)
+    roles.delete_if{|r| inherit_role_ids.include?(r.id)}
+    check_box_options = []
     roles.each do |role|
-      check_boxes <<  (check_box_tag('group_auth[]',role.id,self_role_ids && self_role_ids.include?(role.id))) + role.role_name
+      checked = self_role_ids && self_role_ids.include?(role.id)
+      check_box_options << ['group_auth[]',role.id,checked,role.role_name]
+    end
+    inherit_roles.each do |i_role|
+      check_box_options << ['auth[]',i_role.id,true,i_role.role_name]
+    end
+    check_box_options.sort! { |f,s| f[1] <=> s[1] }
+    check_box_options.each do |opt|
+      check_boxes <<  (check_box_tag(opt[0],opt[1],opt[2]) + opt[3])
     end
     return check_boxes.join(' ')
   end

@@ -1,9 +1,4 @@
 class Group < CachedModel
-  
-  has_many :group_roles
-  has_many :roles,:through => :group_roles
-  has_many :group_users
-  has_many :users,:through => :group_users  
 
   include CachedExtend
   
@@ -16,9 +11,15 @@ class Group < CachedModel
   Cached_Role_Groups_Key = "activerecord_cached_role_groups"
   Status_Valid,Status_Invalid = 0,1
  
+  
   #this method should be called, and reutrn self's roels
-  def own_roles_from_cache
-    Role.roles_of_group(self)
+  def roles
+    Role.group_roles_from_cache(self)
+  end
+  
+  #contain inherint_group's roles
+  def own_and_inherint_roles
+    self.inherit_group.nil? ? self.roles : (self.roles+self.inherit_group.groups)
   end
   
   def update_own_roles_cache
@@ -35,12 +36,17 @@ class Group < CachedModel
     cached_groups    
   end
   
-  #===
+  def self.role_groups_from_db(role)
+    Group.find_by_sql("select g.* from groups g inner join group_roles gr on (g.id=gr.group_id and gr.role_id=#{role.id})")
+  end
+  
+  
+  
   #find a sepecail group's roles
-  def self.groups_of_role(role)
+  def self.role_groups_from_cache(role)
     r_groups = Cache.get(generate_role_groups_key(role.id))
     unless r_groups
-      r_groups = role.groups
+      r_groups = role_groups_from_db(role)
       Cache.put(generate_role_groups_key(role.id),r_groups)
     end
     r_groups
@@ -50,9 +56,18 @@ class Group < CachedModel
     "#{Cached_Role_Groups_Key}_of_#{r_id}"
   end
   
+  def users
+    User.group_users(self)
+  end
+  
+  def self.user_groups(user)
+    Group.find_by_sql("select g.* from groups g inner join group_users gu on (g.id=gu.group_id and gu.user_id=#{user.id})")
+  end
+  
   def after_save_update_cache
     update_all_groups_cache
     update_role_groups_cache
+    Cache.put("active_record:Group:#{self.id}",self)
   end
   
   def update_all_groups_cache

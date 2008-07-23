@@ -29,7 +29,7 @@
     <tr class="form-field">
       <th scope="row" valign="top"><label for="group">Roles</label></th>
       <td>
-        <%= generate_roles_checkbox((@group.new_record? ? [] : @group.roles.map(&:id))) %>
+        <%= generate_roles_checkbox(@group) %>
       </td>
     </tr>
     <tr class="form-field">

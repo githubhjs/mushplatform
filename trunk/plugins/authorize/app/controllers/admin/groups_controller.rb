@@ -28,7 +28,6 @@ class Admin::GroupsController < ApplicationController
   # GET /groups/new.xml
   def new
     @group = Group.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @group }
@@ -44,10 +43,9 @@ class Admin::GroupsController < ApplicationController
   # POST /groups.xml
   def create
     @group = Group.new(params[:group])
-
     respond_to do |format|
       if @group.save
-        proccess_association_roles(@group,@group.inherit_from)
+        proccess_association_roles(@group)
         flash[:notice] = 'Group was successfully created.'
         format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
@@ -65,7 +63,7 @@ class Admin::GroupsController < ApplicationController
     
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        proccess_association_roles(@group,@group.inherit_from)
+        proccess_association_roles(@group)
         flash[:notice] = 'Group was successfully updated.'
         format.html { redirect_to(:action => :index) }
         format.xml  { head :ok }
@@ -90,16 +88,17 @@ class Admin::GroupsController < ApplicationController
   
   private
   
-  def proccess_association_roles(group,inherit_group = nil)
+  def proccess_association_roles(group)
     original_roels = group.roles||[]
     original_roel_ids = original_roels.map(&:id)
     new_role_ids = (params[:group_auth]||[]).map! { |r_id|  r_id.to_i}
     deleted_roles = original_roels.select{|g| !new_role_ids.include?(g.id)}
     Authorize::AuthManager.unauth_group(group, deleted_roles)
     added_role_ids = new_role_ids - original_roel_ids
-    if added_role_ids.size > 0
-      add_roles = Role.find(:all,:conditions => "id in (#{added_role_ids.join(',')})")
-      Authorize::AuthManager.auth_group(group,add_roles,inherit_group)
+    if added_role_ids.size > 0 || group.inherit_group
+      add_roles = Role.find(:all,:conditions => "id in (#{added_role_ids.join(',')})") || []
+      add_roles +=  group.inherit_group.own_roles_from_cache if group.inherit_group
+      Authorize::AuthManager.auth_group(group,add_roles)
     end
   end
 end

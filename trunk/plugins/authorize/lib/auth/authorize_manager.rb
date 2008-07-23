@@ -110,19 +110,18 @@ module Authorize
   module AuthManager
         
     class << self
-      
       #check if the special use has auth of role_name
       def check_auth(user,role_name)
         return false if user.blank? || role_name.blank?
         if user.respond_to?(:authorizations)
-          return user.authorizations.include?(role_name.strip)
+          return user.authorizations.find{|auth|auth.role_name == role_name.strip}
         else
           user.class.class_eval do 
             define_method(:authorizations) do
-              @auth_keys ||= (self.auth_values||'').split(',').map{|auth|auth.strip}
+              @auth ||= self.groups.map{|g|g.own_roles_from_cache}.flatten
             end
           end
-          return user.authorizations.include?(role_name.strip)
+          return user.authorizations.find{|auth|auth.role_name == role_name.strip}
         end 
       end
       
@@ -139,35 +138,38 @@ module Authorize
         
       #remove auth from user
       def unauth_user(user,groups)
-        user_auth = user.auth_values
         groups.each do |g|  
           GroupUser.delete_all("user_id=#{user.id} and group_id = #{g.id}")
-          reduce_role_names = g.roles.map(&:role_name).join(',')
-          user_auth.gsub!(reduce_role_names,'')
         end
-        user.auth = user_auth
-        user.save
       end 
       
       #authoirze group
-      def auth_group(group,roles,inherit_group = nil)
-        roles << roles + inherit_group.roles if inherit_group
-        roles.each do |role|
-          GroupRole.create(:group_id => group.id,:role_id => role.id)
+      def auth_group(group,roles)
+        if roles.size > 0
+          roles.each do |role|
+            GroupRole.create(:group_id => group.id,:role_id => role.id)
+          end
+          group.update_own_roles_cache
         end
       end
       
       #Un authorize group
       def unauth_group(group,roles)
-        r_ids =[]
-        roles.each do |r|
-          User.connection.execute("update users set auth_values=REPLACE(auth_values,'#{r.role_name},','')  where 
-                  id in (select user_id from group_users where group_id=#{group.id})")
-          r_ids << r.id
-        end
+        r_ids = roles.map(&:id)
         GroupRole.delete("group_id=#{group.id} and role_id in (#{r_ids.join(',')})") if r_ids.size > 0
-      end    
+        group.update_own_roles_cache
+      end
+      
     end
   end
   
 end
+ #reduce user's authorize
+#          User.connection.execute("update users set auth_values=REPLACE(auth_values,'#{r.role_name},','')  where 
+#                  id in (select user_id from group_users where group_id=#{group.id})")
+#add user's atuhroize
+#        if role_names.size > 0
+#          user_auths = "#{role_names.join(',')},"
+#          User.connection.execute("update users set auth_values= CONCAT(auth_values,'#{user_auths}') where 
+#                  id in (select user_id from group_users where group_id=#{group.id})")
+#        end

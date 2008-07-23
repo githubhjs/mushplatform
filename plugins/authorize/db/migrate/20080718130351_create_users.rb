@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string   :user_name,:hashed_password,:email,:salt,:null => false
       t.datetime :created_at
-      t.string   :auth_values,:default => ''
       t.integer  :status ,:null => false,:default => 0
     end
   end

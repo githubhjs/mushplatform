@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end  
  
   def authorizations
-    @auth_keys ||= (self.auth_values||'').split(',').map{|auth|auth.strip}
+    @auth ||= self.groups.map{|g|g.own_roles_from_cache}.flatten
   end
   
   def password=(pass)

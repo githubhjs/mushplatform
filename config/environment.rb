@@ -10,7 +10,7 @@ RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
-
+require 'cached_model'
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -68,3 +68,14 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
   config.plugins = [:engines, :liquid, :core, :all]
 end
+memcache_options = {  
+   :c_threshold => 10_000,  
+   :compression => true,  
+   :debug => false,  
+   :namespace => 'cached_model_demo',  
+   :readonly => false,  
+   :urlencode => false  
+ }
+   
+CACHE = MemCache.new memcache_options  
+CACHE.servers = 'localhost:11211'  

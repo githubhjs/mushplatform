@@ -16,7 +16,7 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
-Dependencies.load_once_paths.clear
+#Dependencies.load_once_paths.clear
 
 require 'technoweenie/attachment_fu'
 Dir[File.dirname(__FILE__) + '/technoweenie/attachment_fu/backends/*.rb'].each { |f| require f }

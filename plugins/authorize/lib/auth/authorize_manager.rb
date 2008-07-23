@@ -118,13 +118,13 @@ module Authorize
         else
           user.class.class_eval do 
             define_method(:authorizations) do
-              @auth ||= self.groups.map{|g|g.own_roles_from_cache}.flatten
+              @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
             end
           end
           return user.authorizations.find{|auth|auth.role_name == role_name.strip}
         end 
       end
-      
+                 
       #authorize user
       def auth_user(user,groups)
         role_names = []
@@ -156,7 +156,7 @@ module Authorize
       #Un authorize group
       def unauth_group(group,roles)
         r_ids = roles.map(&:id)
-        GroupRole.delete("group_id=#{group.id} and role_id in (#{r_ids.join(',')})") if r_ids.size > 0
+        GroupRole.delete_all("group_id=#{group.id} and role_id in (#{r_ids.join(',')})") if r_ids.size > 0
         group.update_own_roles_cache
       end
       

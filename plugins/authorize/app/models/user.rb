@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
   
-  has_many :group_users
-  has_many :groups,:through => :group_users
-  
   attr_protected :id, :salt
 
   attr_accessor :password, :password_confirmation
@@ -24,7 +21,26 @@ class User < ActiveRecord::Base
   end  
  
   def authorizations
-    @auth ||= self.groups.map{|g|g.own_roles_from_cache}.flatten
+    @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
+  end
+  
+  def groups
+    Group.user_groups(self)
+  end
+  
+  def self.group_users(group)
+    find_by_sql("find u.* from users u inner join group_users gu on (u.id=gu.user_id and gu.group_id=#{group.id})")
+  end
+  
+  def own_roles
+    roles = []
+    self.groups.each do |u_g| 
+      roles += (u_g.groups||[])
+      if inherit_group =  u_g.inherit_group
+        roles +=  (inherit_group.groups||[])
+      end
+    end
+    roles
   end
   
   def password=(pass)

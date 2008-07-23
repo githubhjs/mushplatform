@@ -1,8 +1,5 @@
 class Role < CachedModel
-  
-  has_many :group_roles
-  has_many :groups,:through => :group_roles
-  
+ 
   include CachedExtend
   
   validates_uniqueness_of :role_name
@@ -15,8 +12,9 @@ class Role < CachedModel
   
   after_save :after_save_update_cache
   
-  def own_groups_from_cache
-    Group.groups_of_role(self)
+  
+  def groups
+    Group.role_groups_from_cache(self)
   end
   
   def update_own_groups_cache
@@ -34,13 +32,17 @@ class Role < CachedModel
   end
   
   #find a sepecail group's roles
-  def self.roles_of_group(group)
+  def self.group_roles_from_cache(group)
     g_roles = Cache.get(generate_group_roles_key(group.id))
     unless g_roles
-      g_roles = group.roles
+      g_roles = group_roles_from_db(group)
       Cache.put(generate_group_roles_key(group.id),g_roles)
     end
     g_roles
+  end
+  
+  def self.group_roles_from_db(group)
+    Role.find_by_sql("select r.* from roles r inner join group_roles gr on (r.id=gr.role_id and gr.group_id=#{group.id})") 
   end
   
   def self.generate_group_roles_key(g_id)

@@ -37,8 +37,8 @@ module CachedExtend
         return records
       end
       return super
-    rescue
-      nil
+#    rescue
+#      return super
     end
     
   end

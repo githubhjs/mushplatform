@@ -95,9 +95,8 @@ class Admin::GroupsController < ApplicationController
     deleted_roles = original_roels.select{|g| !new_role_ids.include?(g.id)}
     Authorize::AuthManager.unauth_group(group, deleted_roles)
     added_role_ids = new_role_ids - original_roel_ids
-    if added_role_ids.size > 0 || group.inherit_group
+    if added_role_ids.size > 0
       add_roles = Role.find(:all,:conditions => "id in (#{added_role_ids.join(',')})") || []
-      add_roles +=  group.inherit_group.own_roles_from_cache if group.inherit_group
       Authorize::AuthManager.auth_group(group,add_roles)
     end
   end

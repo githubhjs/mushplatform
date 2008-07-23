@@ -76,8 +76,9 @@ class Admin::AssetsController < ApplicationController
   # DELETE /assets/1
   # DELETE /assets/1.xml
   def destroy
-    @asset = Asset.find(params[:id])
-    @asset.destroy
+    params[:id].each{|id| 
+      Asset.find(id.to_i).destroy
+    } if params[:id]
 
     respond_to do |format|
       format.html { redirect_to(assets_url) }

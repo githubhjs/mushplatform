@@ -2,7 +2,7 @@
 <h2>Manage Assets (<%= link_to 'add new', :controller => 'assets', :action => 'new' %>)</h2>
 
 
-<% form_for @asset, :html => { :multipart => true } do |f| %>
+<% form_tag('/admin/assets/create', :multipart => true ) do %>
 
   <ul class="subsubsub">
     <li><a class="current">Add New</a></li>

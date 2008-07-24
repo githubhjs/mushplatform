@@ -19,7 +19,22 @@ class Group < CachedModel
   
   #contain inherint_group's roles
   def own_and_inherint_roles
-    self.inherit_group.nil? ? self.roles : (self.roles+self.inherit_group.groups)
+    g_roles = if self.inherit_group.nil?
+      self.roles
+    else
+      self.roles + self.own_inherint_roles(self.inherit_group)
+    end
+    g_roles
+  end
+  
+  def own_inherint_roles(i_group)
+    return [] if  i_group.nil?
+    g_roles = if i_group.inherit_group.nil?
+      i_group.roles
+    else
+      i_group.roles + own_inherint_roles(i_group.inherit_group)
+    end
+    g_roles
   end
   
   def update_own_roles_cache

@@ -2,6 +2,7 @@ class Channel < ActiveRecord::Base
   acts_as_nested_set :order => "id", :counter_cache => true
   Channel.include_root_in_json = false
   belongs_to :template
+  has_many :articles
   
   def after_find
     @attributes['text'] = name

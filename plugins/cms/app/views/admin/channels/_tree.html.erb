@@ -49,10 +49,19 @@
     //root.firstChild.reload()
     panel.on('click',function(node, event){
       Ext.Ajax.request({
-        url:'/admin/channels/edit?node=' + node.id,
+        url:'/admin/articles?channel_id=' + node.id,
         requestMethod:'GET',
         baseParams:{format:'js'}
       })
     })
+    panel.on('contextmenu',function(node, event){
+      document.oncontextmenu="return false";
+      Ext.Ajax.request({
+        url:'/admin/channels/edit?node=' + node.id,
+        requestMethod:'GET',
+        baseParams:{format:'js'}
+      })
+      
+    })    
   });
 <% end -%>

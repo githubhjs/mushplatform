@@ -1,0 +1,73 @@
+    <script>set_current_channel('cms')</script>
+    <% form_remote_tag( :url => '/admin/articles/destroy', :id => 'posts-filter' ) do %>
+    <input type="hidden" name="channel_id" value="<%= @channel.id %>" />
+
+    <h2>Manage Articles - <%= @channel.name %> (<%= link_to_remote 'add new', :url => {:controller => 'admin/articles', :action => 'new', :channel_id => @channel.id} %>)</h2>
+
+    <ul class="subsubsub">
+    <li><a href='' class="current">All Assets</a> | </li><li><a href=''>Images</a></li> | </li><li><a href=''>Stylesheets</a></li> | </li><li><a href=''>Javascripts</a></li></ul>
+
+
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="Search Assets" class="button" />
+    </p>
+
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
+    <select name='m'>
+    <option selected="selected" value='0'>Show all dates</option>
+    <option value='200807'>July 2008</option>
+    </select>
+
+    <select name='cat' id='cat' class='postform' >
+      <option value='0'>View all categories</option>
+      <option value="1">Uncategorized</option>
+    </select>
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">No.</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Status</th>
+      <th scope="col">Date</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <% for article in @articles -%>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= article.id %>" /></th>
+          <td><%= article.id %></td>
+          <td><strong><%= link_to_remote article.title, :url => {:controller => 'admin/articles', :action => 'edit', :id => article.id} %></strong></td>
+          <td><%= article.author %></td>
+          <td><%= article.status %></td>
+          <td><abbr title="<%= article.created_at %>"><%= article.created_at %></abbr></td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <% end -%>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+        <br class="clear" />
+    </div>
+
+    <br class="clear" />

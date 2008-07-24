@@ -15,4 +15,7 @@
     <td><%= text_area 'tmplt', 'body', :cols => 75 %><br />
   </tr>
 </table>
-<p class="submit"><input type="submit" class="button" name="submit" value="Save Template" /></p>
+<p class="submit">
+  <input type="submit" class="button" name="submit" value="Save Template" />
+  or <%= link_to 'Cancel', templates_path, :class => 'cancel' %>
+</p>

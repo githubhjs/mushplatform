@@ -1,5 +1,5 @@
     <script>set_current_channel('cms')</script>
-    <% form_remote_tag( :url => '/admin/articles/destroy', :id => 'posts-filter' ) do %>
+    <% form_remote_tag( :url => '/admin/articles/destroy', :html => {:id => 'posts-filter'} ) do %>
     <input type="hidden" name="channel_id" value="<%= @channel.id %>" />
 
     <h2>Manage Articles - <%= @channel.name %> (<%= link_to_remote 'add new', :url => {:controller => 'admin/articles', :action => 'new', :channel_id => @channel.id} %>)</h2>

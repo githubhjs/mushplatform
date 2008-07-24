@@ -1,0 +1,25 @@
+<%= error_messages_for 'article' %>
+
+<input type="hidden" name="id" value="<%= @article.id %>"
+<table class="form-table">
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="article_title">Title</label></th>
+    <td><%= text_field 'article', 'title' %></td>
+  </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="article_author">Author</label></th>
+    <td><%= text_field 'article', 'author' %></td>
+  </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="article_status">Status</label></th>
+    <td><%= text_field 'article', 'status' %></td>
+  </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="body">Body</label></th>
+    <td><%= text_area 'article', 'body', :cols => 65 %></td>
+  </tr>
+</table>
+<p class="submit">
+  <input type="submit" class="button" name="submit" value="Save Article" />
+  or <%= link_to_remote 'Cancel', :url => {:action => 'index', :channel_id => @channel.id}, :class => 'cancel' %>
+</p>

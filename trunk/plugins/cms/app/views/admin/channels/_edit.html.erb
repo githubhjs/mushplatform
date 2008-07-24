@@ -2,7 +2,7 @@
 
 <ul class="subsubsub">
   <li><a class="current"><%= @channel.name %></a></li> | 
-  <li><%= link_to_remote 'add new', :url => { :action => 'new', :parent_id => @channel.id} %></li>
+  <li><%= link_to_remote 'add new', :url => {:action => 'new', :parent_id => @channel.id} %></li>
 </ul>
 
 <%= render :partial => 'form' %>

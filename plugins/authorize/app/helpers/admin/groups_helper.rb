@@ -16,7 +16,7 @@ module Admin::GroupsHelper
     self_role_ids = group.new_record? ? [] : group.roles.map(&:id)
     check_boxes = []
     self_role_ids.map! { |r_id| r_id.to_i }
-    inherit_group = group.inherit_group
+    inherit_group = group.own_inherint_roles
     inherit_roles =  inherit_group.nil? ? [] : inherit_group.roles
     inherit_role_ids = inherit_roles.map(&:id)
     roles.delete_if{|r| inherit_role_ids.include?(r.id)}

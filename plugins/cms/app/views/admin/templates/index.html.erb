@@ -1,5 +1,5 @@
     <script>set_current_channel('cms')</script>
-    <form id="posts-filter" action="" method="get">
+    <% form_tag('/admin/templates/destroy', :id => 'posts-filter' ) do %>
     <h2>Manage Templates (<%= link_to 'add new', :controller => 'templates', :action => 'new' %>)</h2>
 
     <ul class="subsubsub">
@@ -15,7 +15,7 @@
 
     <div class="alignleft">
     <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
-    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" /><input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" /><select name='m'>
+    <select name='m'>
     <option selected="selected" value='0'>Show all dates</option>
     <option value='200807'>July 2008</option>
     </select>
@@ -47,7 +47,7 @@
       <tbody>
         <% for tmplt in @tmplts -%>
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
-          <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
+          <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= tmplt.id %>" /></th>
           <td><strong><%= link_to tmplt.name, {:controller => 'admin/templates', :action => 'edit', :id => tmplt.id}, {:class =>'tow=title'} %></strong></td>
           <td><a href=''><%= tmplt.category %></a></td>
           <td><abbr title="<%= tmplt.created_at %>"><%= tmplt.created_at %></abbr></td>
@@ -56,7 +56,7 @@
       </tbody>
     </table>
 
-    </form>
+    <% end  %>
 
     <div id="ajax-response"></div>
 

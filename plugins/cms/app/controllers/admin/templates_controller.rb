@@ -76,8 +76,10 @@ class Admin::TemplatesController < ApplicationController
   # DELETE /templates/1
   # DELETE /templates/1.xml
   def destroy
-    @tmplt = Template.find(params[:id])
-    @tmplt.destroy
+    params[:id].each{|id| 
+      tmplt = Template.find(id.to_i)
+      tmplt.destroy unless tmplt.channel
+    }
 
     respond_to do |format|
       format.html { redirect_to(templates_url) }

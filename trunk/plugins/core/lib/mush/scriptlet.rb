@@ -1,30 +1,24 @@
 module Mush
   
-  class Scriptlet #< Liquid::Variable
-    attr_accessor :name, :function, :template, :params
+  class Scriptlet < ActiveRecord::Base #< Liquid::Variable
+    attr_accessor :params
 
-    def initialize(args = {})
-      @name, @function, @template, = args.delete(:name), args.delete(:function), args.delete(:template)
-      template_type = args.delete(:template_type)
-      case template_type
-      when 'fs'
-        @template = Liquid::Template.file_system.read_template_file(template)
-      when 'db'
-      when 'mem'
-      else  
-      end
+    def scriptlet_type
+      @@scriptlet_types_registry[scriptlet_type_name]
     end
-
+    
     def render(context)
-      return '' if name.nil?
-#      vars = instance.send function if instance.respond_to?(function)
+      return '' if scriptlet_type.name.nil?
       begin
-        vars = params ? function.call(params) : function.call
+        # every scriptlet function should be return a hash 
+        # which include the parameters for template using
+        vars = params ? scriptlet_type.function.call(params) : scriptlet_type.function.call
       rescue
-        return "Scriptlet #{name} error"
+        return "Scriptlet #{scriptlet_type.name} error"
       end
-      if template
-        Liquid::Template.parse(template).render vars 
+      tmplt = Liquid::Template.file_system.read_template_file(template) if template_type == 'fs'
+      if tmplt
+        Liquid::Template.parse(tmplt).render vars 
       else
         vars.to_s
       end

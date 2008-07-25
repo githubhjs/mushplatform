@@ -59,7 +59,7 @@ class Admin::UsersController < ApplicationController
   def authorize_user
     user = User.find(params[:id])
     proccess_association_groups(user)
-    flash[:notice] = 'User was successfully authorized.'
+    flash[:notice] = 'User has bean successfully authorized.'
     redirect_to :action => :index
     return true
   end

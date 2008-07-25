@@ -3,7 +3,10 @@
     <h2>Manage Groups (<%= link_to 'add new','/admin/groups/new' %>)</h2>
 
     <ul class="subsubsub">
-    <li><a href='' class="current">All Groups</a> | </li><li><a href=''>Layout</a></li></ul>
+      <li><a href='/admin/roles'>Manage Roles</a> | </li>
+      <li><a href='/admin/groups' class="current">Manage Groups</a>|</li>
+      <li><a href="/admin/users">Manage Users</a></li>
+     </ul>
 
 
     <p id="post-search">
@@ -23,7 +26,7 @@
       <option value="1">Invalid</option>
     </select>
     <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
-
+    
     </div>
 
     <br class="clear" />

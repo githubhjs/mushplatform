@@ -3,7 +3,10 @@
     <h2>Manage users</h2>
 
     <ul class="subsubsub">
-    <li><a href='' class="current">All users</a> | </li><li><a href=''>Layout</a></li></ul>
+      <li><a href='/admin/roles'>Manage Roles</a> | </li>
+      <li><a href='/admin/groups'>Manage Groups</a>|</li>
+      <li><a href="/admin/users" class="current">Manage Users</a></li>
+    </ul>
 
 
     <p id="post-search">
@@ -23,7 +26,9 @@
       <option value="1">Invalid</option>
     </select>
     <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
-
+    <font color='read'>
+      <%= flash[:notice] %>
+    </font>
     </div>
 
     <br class="clear" />

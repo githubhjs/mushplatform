@@ -1,6 +1,6 @@
 class CreateRoles < ActiveRecord::Migration
   def self.up
-    create_table :roles do |t|
+    create_table :roles, :force => true do |t|
       t.string  :role_name,:e_name,:null => false
       t.text    :description
       t.integer  :status ,:null => false,:default => 0

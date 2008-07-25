@@ -5,7 +5,6 @@ class Admin::ArticlesController < ApplicationController
   def index
     @channel = Channel.find(params[:channel_id])
     @articles = Article.by_channel(@channel.id)
-
     respond_to do |format|
       format.html { render :layout => 'admin' } # index.html.erb
       format.xml  { render :xml => @articles }

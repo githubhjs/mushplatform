@@ -1,3 +1,4 @@
+require 'authorize'
 class Admin::UsersController < ApplicationController
   layout 'admin'
   # GET /users
@@ -46,7 +47,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         flash[:notice] = 'User was successfully created.'
-        format.html { redirect_to(@user) }
+        format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
@@ -55,15 +56,22 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def authorize_user
+    user = User.find(params[:id])
+    proccess_association_groups(user)
+    flash[:notice] = 'User was successfully authorized.'
+    redirect_to :action => :index
+    return true
+  end
+  
   # PUT /users/1
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to(@user) }
+        format.html { redirect_to(:action => :index) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -133,6 +141,19 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+    end
+  end
+  private
+  def proccess_association_groups(user)
+    user_group_ids = (user.groups || []).map(&:id)
+    form_group_ids = (params[:user_groups]||[]).map{|g_id|g_id.to_i}
+    deleted_group_ids = user_group_ids - form_group_ids
+    if deleted_group_ids && deleted_group_ids.size > 0
+      Authorize::AuthManager.unauth_user(user, deleted_group_ids)
+    end
+    add_group_ids = form_group_ids - user_group_ids
+    if add_group_ids && add_group_ids.size > 0
+      Authorize::AuthManager.auth_user(user, add_group_ids)
     end
   end
 end

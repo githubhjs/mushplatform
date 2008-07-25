@@ -59,6 +59,8 @@ class Admin::RolesController < ApplicationController
     @role = Role.find(params[:id])
 
     respond_to do |format|
+      puts "++++++++++++++++++++++++++++++++++=="
+      p params[:role]
       if @role.update_attributes(params[:role])
         flash[:notice] = 'Role was successfully updated.'
         format.html { redirect_to(:action => :index) }

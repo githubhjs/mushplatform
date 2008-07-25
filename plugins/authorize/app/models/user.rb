@@ -2,12 +2,14 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
-  validates_length_of :login, :within => 3..40
-  validates_length_of :password, :within => 5..40
+  validates_length_of :login, :within => 6..40
+  validates_length_of :password, :within => 6..40
   validates_presence_of :login, :email, :password, :password_confirmation, :salt
   validates_uniqueness_of :login, :email
   validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
+  
+  Status_Valid,Status_Invalid = 0,1
   
   attr_protected :id, :salt
 
@@ -22,6 +24,7 @@ class User < ActiveRecord::Base
  
   def authorizations
     @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
+    @auth
   end
   
   def groups
@@ -53,7 +56,7 @@ class User < ActiveRecord::Base
     new_pass = User.random_string(10)
     self.password = self.password_confirmation = new_pass
     self.save
-    Notifications.deliver_forgot_password(self.email, self.login, new_pass)
+    Notifications.deliver_forgot_password(self.email, self.user_name, new_pass)
   end
 
   protected

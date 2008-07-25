@@ -114,32 +114,34 @@ module Authorize
       def check_auth(user,role_name)
         return false if user.blank? || role_name.blank?
         if user.respond_to?(:authorizations)
-          return user.authorizations.find{|auth|auth.role_name == role_name.strip}
+          return user.authorizations.find{|auth|auth.e_name == role_name.strip}
         else
           user.class.class_eval do 
             define_method(:authorizations) do
               @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
             end
           end
-          return user.authorizations.find{|auth|auth.role_name == role_name.strip}
+          return user.authorizations.find{|auth|auth.e_name == role_name.strip}
         end 
       end
                  
       #authorize user
       def auth_user(user,groups)
-        role_names = []
-        groups.each do |g|
-          GroupUser.create(:user_id => user.id,:group_id => g.id)
-          role_names << g.roles.map(&:role_name)
+        if user && groups && groups.size > 0
+          groups.each do |g|
+            g_id = g.is_a?(Integer) ? g : g.id
+            unless GroupUser.find(:first,:conditions => "user_id=#{user.id} and group_id=#{g_id}")
+              GroupUser.create(:user_id => user.id,:group_id => g_id)
+            end
+          end
         end
-        user.auth_values = "#{user.auth_values}#{role_names.join(',')},"
-        user.save
       end
         
       #remove auth from user
       def unauth_user(user,groups)
-        groups.each do |g|  
-          GroupUser.delete_all("user_id=#{user.id} and group_id = #{g.id}")
+        if user && groups && groups.size > 0
+          g_ids = groups.map{|g| g.is_a?(Integer) ? g : g.id }
+          GroupUser.delete_all("user_id=#{user.id} and group_id in (#{g_ids.join(',')})")
         end
       end 
       
@@ -147,7 +149,9 @@ module Authorize
       def auth_group(group,roles)
         if roles.size > 0
           roles.each do |role|
-            GroupRole.create(:group_id => group.id,:role_id => role.id)
+            unless GroupRole.find(:first,:conditions => "group_id=#{group.id} and role_id=#{role.id}")
+             GroupRole.create(:group_id => group.id,:role_id => role.id) 
+            end
           end
           group.update_own_roles_cache
         end

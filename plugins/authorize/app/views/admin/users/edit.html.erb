@@ -1,12 +1,3 @@
-<h1>Editing user</h1>
-
-<% form_for(@user) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<script>set_current_channel('authorize')</script>
+<h3><a href="/admin/users">Manage users</a> >>(Edit)</h3>
+<%= render :partial => '/admin/users/form' %>

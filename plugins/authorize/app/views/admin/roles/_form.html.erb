@@ -7,11 +7,15 @@
   <%end%>
   <table class="form-table">
     <tr class="form-field form-required">
-      <th scope="row" valign="top"><label for="template_name">Role Name</label></th>
+      <th scope="row" valign="top"><label for="template_name">Role ID:</label></th>
+      <td><%= f.text_field(:e_name) %></td>
+    </tr>
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="template_name">Role Name:</label></th>
       <td><%= f.text_field(:role_name) %></td>
     </tr>
     <tr class="form-field">
-      <th scope="row" valign="top"><label for="category">Status</label></th>
+      <th scope="row" valign="top"><label for="category">Status:</label></th>
       <td>
         <select name="role[status]">
           <%= generate_role_status_opetions(@role.status) %>
@@ -19,7 +23,7 @@
       </td>
     </tr>
     <tr class="form-field">
-      <th scope="row" valign="top"><label for="body">Descriptiony</label></th>
+      <th scope="row" valign="top"><label for="body">Description:</label></th>
       <td><%= f.text_area(:description,:cols => 75,:rows => 10)%></td>
     </tr>
   </table>

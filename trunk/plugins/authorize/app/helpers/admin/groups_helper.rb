@@ -8,16 +8,14 @@ module Admin::GroupsHelper
     options = [['Valid',Group::Status_Valid.to_s],['Invalid',Group::Status_Invalid.to_s]]
     return options_for_select(options, select_value.blank? ? nil : select_value.to_s)
   end
-  
-  
+    
   def generate_roles_checkbox(group)
     roles = Role.all_roles
     return "" if roles.blank? || roles.size <= 0
     self_role_ids = group.new_record? ? [] : group.roles.map(&:id)
     check_boxes = []
     self_role_ids.map! { |r_id| r_id.to_i }
-    inherit_group = group.own_inherint_roles
-    inherit_roles =  inherit_group.nil? ? [] : inherit_group.roles
+    inherit_roles =  group.inherit_group.nil? ? [] : group.inherint_roles(group.inherit_group)
     inherit_role_ids = inherit_roles.map(&:id)
     roles.delete_if{|r| inherit_role_ids.include?(r.id)}
     check_box_options = []

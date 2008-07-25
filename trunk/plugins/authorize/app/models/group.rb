@@ -19,22 +19,17 @@ class Group < CachedModel
   
   #contain inherint_group's roles
   def own_and_inherint_roles
-    g_roles = if self.inherit_group.nil?
-      self.roles
-    else
-      self.roles + self.own_inherint_roles(self.inherit_group)
-    end
-    g_roles
+    self.inherit_group.nil? ? self.roles : (self.roles+inherint_roles(self.inherit_group))
   end
   
-  def own_inherint_roles(i_group)
-    return [] if  i_group.nil?
-    g_roles = if i_group.inherit_group.nil?
+  def inherint_roles(i_group)
+    return [] if i_group.nil?
+    i_roles = if i_group.inherit_group.nil?
       i_group.roles
     else
-      i_group.roles + own_inherint_roles(i_group.inherit_group)
+      i_group.roles + inherint_roles(i_group.inherit_group)
     end
-    g_roles
+    i_roles
   end
   
   def update_own_roles_cache
@@ -45,7 +40,7 @@ class Group < CachedModel
   def self.all_groups
     cached_groups = Cache.get(Cached_All_Groups_Key)
     unless cached_groups
-      find(:all,:conditions => "status=#{Status_Valid}")
+      cached_groups = find(:all,:conditions => "status=#{Status_Valid}")
       Cache.put(Cached_All_Groups_Key,cached_groups)
     end
     cached_groups    

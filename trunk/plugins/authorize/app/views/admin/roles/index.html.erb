@@ -36,6 +36,7 @@
       <tr>
 
       <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">Role ID</th>
       <th scope="col">Role Name</th>
       <th scope="col">Status</th>
       <th scope="col">Description</th>
@@ -47,9 +48,10 @@
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
           <td><strong>
-            <a class="row-title" href="/admin/roles/<%=role.id%>/edit" ><%= role.role_name %>
+            <a class="row-title" href="/admin/roles/<%=role.id%>/edit" ><%= role.e_name %>
               </a></strong>
           </td>
+          <td><%= role.role_name %></td>
           <td class="num">
             <div class="post-com-count-wrapper">
             <a href='/admin/roles/<%= role.id %>/edit' title='0 pending' class='post-com-count'><span class='comment-count'>

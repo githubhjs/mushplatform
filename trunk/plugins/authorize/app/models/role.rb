@@ -2,8 +2,8 @@ class Role < CachedModel
  
   include CachedExtend
   
-  validates_uniqueness_of :role_name
-  validates_presence_of :role_name
+  validates_uniqueness_of :role_name,:e_name
+  validates_presence_of :role_name,:e_name
   
   Cached_All_Roles_Key = "activerecord_cached_all_roles"
   Cached_Group_Roles_Key = "activerecord_cached_group_roles"

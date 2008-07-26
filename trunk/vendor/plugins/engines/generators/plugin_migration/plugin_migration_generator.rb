@@ -5,8 +5,7 @@ class PluginMigrationGenerator < Rails::Generator::Base
   def initialize(runtime_args, runtime_options={})
     super
     @options = {:assigns => {}}
-    
-    ensure_plugin_schema_table_exists
+    ensure_schema_table_exists    
     get_plugins_to_migrate(runtime_args)
     
     if @plugins_to_migrate.empty?
@@ -25,10 +24,9 @@ class PluginMigrationGenerator < Rails::Generator::Base
   end
   
   protected
-  
-    # Create the plugin schema table if it doesn't already exist. See
-    # Engines::RailsExtensions::Migrations#initialize_schema_migrations_table_with_engine_additions
-    def ensure_plugin_schema_table_exists
+
+    # Create the schema table if it doesn't already exist.
+    def ensure_schema_table_exists
       ActiveRecord::Base.connection.initialize_schema_migrations_table
     end
 

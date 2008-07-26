@@ -4,9 +4,9 @@ module Mush
     attr_accessor :name, :function
 
     def initialize(args = {})
-      @name, @function = args.delete(:name), args.delete(:function)
+      @name, @function = args['type_name'], args['function']
     end
-
+    
   end
 
 end

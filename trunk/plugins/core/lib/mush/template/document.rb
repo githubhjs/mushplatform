@@ -64,7 +64,7 @@ module Mush
             end
           end
           scriptlet = @@scriptlets_registry[name]
-          scriptlet.params = params
+          scriptlet.params = params if scriptlet
           return scriptlet
         end
         raise SyntaxError.new("Scriptlet '#{token}' was not properly terminated with regexp: #{Liquid::ScriptletEnd.inspect} ")

@@ -1,1 +1,1 @@
-
+require 'mush_admin'

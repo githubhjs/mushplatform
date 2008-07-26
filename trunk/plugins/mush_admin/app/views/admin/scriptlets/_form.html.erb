@@ -1,0 +1,30 @@
+  <%= error_messages_for :scriptlet %>
+  <table class="form-table">
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="scriptlet_name">Scriptlet Name</label></th>
+      <td><%= text_field 'scriptlet', 'name' %> <%= hidden_field_tag 'id', @scriptlet.id %>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="type_name">Type</label></th>
+      <td><%= select("scriptlet", "type_name", scriptlet_type_options, { :include_blank => true }) %></td>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="category">Category</label></th>
+      <td><%= text_field 'scriptlet', 'category' %></td>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="template_name">Tempalte Type</label></th>
+      <td><%= text_field 'scriptlet', 'template_type' %></td>
+    </tr>
+    <% if @scriptlet.template_type != 'fs' -%>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="type_name">Template</label></th>
+      <td><%= text_area 'scriptlet', 'template', :cols => 65 %></td>
+    </tr>
+    <% end -%>
+  </table>
+
+  <p class="submit">
+    <%= submit_tag 'Save Scriptlet' %>
+    or <%= link_to 'Cancel', scriptlets_path, :class => 'cancel' %>
+  </p>

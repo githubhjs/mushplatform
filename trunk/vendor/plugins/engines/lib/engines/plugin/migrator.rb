@@ -58,16 +58,17 @@ class Engines::Plugin::Migrator < ActiveRecord::Migrator
       WHERE plugin_name = '#{plugin.name}'
     ESQL
     ).to_i
-    current.is_a?(Array) ? current.map(&:to_i).sort : [current]
+    current ? (1..current).to_a : []
   end
   
   # Sets the version of the plugin in Engines::Plugin::Migrator.current_plugin to
   # the given version.
-  def record_version_state_after_migrating(version, plugin=current_plugin)
-    if down?
-      ActiveRecord::Base.connection.update("DELETE FROM #{self.class.schema_info_table_name} WHERE version = #{version} and plugin_name = '#{plugin.name}'")
-    else
-      ActiveRecord::Base.connection.insert("INSERT INTO #{self.class.schema_info_table_name} (plugin_name, version) VALUES ('#{plugin.name}',#{version})")
-    end
+  def record_version_state_after_migrating(version)
+    ActiveRecord::Base.connection.update(<<-ESQL
+      UPDATE #{self.class.schema_info_table_name} 
+      SET version = #{down? ? version.to_i - 1 : version.to_i} 
+      WHERE plugin_name = '#{self.current_plugin.name}'
+    ESQL
+    )
   end
 end

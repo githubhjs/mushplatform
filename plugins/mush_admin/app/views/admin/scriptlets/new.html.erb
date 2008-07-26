@@ -1,0 +1,21 @@
+<script>set_current_channel('scriptlets')</script>
+<h2>Manage Scriptlets (<%= link_to 'add new', :controller => 'scriptlets', :action => 'new' %>)</h2>
+
+
+<% form_tag('/admin/scriptlets/create', :multipart => true ) do %>
+
+  <ul class="subsubsub">
+    <li><a class="current">Add New</a></li>
+  </ul>
+
+  <%= render :partial => 'form' %>
+  
+  <div id="ajax-response"></div>
+
+  <div class="tablenav">
+      <br class="clear" />
+  </div>
+
+  <br class="clear" />
+  
+<% end -%>

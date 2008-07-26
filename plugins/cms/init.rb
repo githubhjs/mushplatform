@@ -1,3 +1,1 @@
-require 'extensions'
-require 'scriptlets'
-
+require 'cms'

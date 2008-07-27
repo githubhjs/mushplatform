@@ -55,7 +55,7 @@ module Mush
       def create_scriptlet(token)
         token.scan(/^#{Liquid::ScriptletStart}(.*)#{Liquid::ScriptletEnd}$/) do |content|
           name = reference = content.first
-          params = nil
+          params = {}
           reference.scan(/^(.*)\((.*)\)$/ ) do |s|
             name = s[0]
             if s.length > 1

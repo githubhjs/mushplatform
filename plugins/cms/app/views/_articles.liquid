@@ -1,6 +1,6 @@
     <ul>
     {% for article in articles %}
-     <li><a href='#'>{{ article }}</a></li>
+     <li><a href=''>{{ article.title }}</a></li>
     {% endfor %}
-    <li> limit : {{limit}} </li>
     </ul>
+    {{ articles | will_paginate }}

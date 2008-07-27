@@ -24,7 +24,7 @@ module WillPaginate::Liquidized
     
     def method_missing(method, &block)
      allow = [:current_page, :per_page, :total_entries, :page_count, :offset, 
-              :previous_page, :next_page, :empty?, :length, :sort_by]
+              :previous_page, :next_page, :empty?, :length, :sort_by, :total_pages]
      unless allow.include? method
        super.method_missing method, &block
      else

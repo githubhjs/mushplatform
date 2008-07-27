@@ -6,5 +6,5 @@ include CmsHelper
 
 Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.dirname(__FILE__) + "/../app/views")
 
-add_scriptlet_type('type_name' => 'article_list', 'function' => :list_article)
-add_scriptlet('name' => 'article_list_by_all', 'type_name' => 'article_list', 'template' => 'articles', 'template_type' => 'fs')
+add_scriptlet_type('type_name' => 'list_articles', 'function' => :list_articles)
+add_scriptlet('name' => 'list_article_by_channel', 'type_name' => 'list_articles', 'template' => 'articles', 'template_type' => 'fs')

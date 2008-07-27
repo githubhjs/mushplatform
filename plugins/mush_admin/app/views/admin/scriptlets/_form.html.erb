@@ -1,7 +1,7 @@
   <%= error_messages_for :scriptlet %>
   <table class="form-table">
     <tr class="form-field form-required">
-      <th scope="row" valign="top"><label for="scriptlet_name">Scriptlet Name</label></th>
+      <th scope="row" valign="top"><label for="scriptlet_name">Name</label></th>
       <td><%= text_field 'scriptlet', 'name' %> <%= hidden_field_tag 'id', @scriptlet.id %>
     </tr>
     <tr class="form-field">
@@ -14,7 +14,7 @@
     </tr>
     <tr class="form-field">
       <th scope="row" valign="top"><label for="template_name">Tempalte Type</label></th>
-      <td><%= text_field 'scriptlet', 'template_type' %></td>
+      <td><%= @scriptlet.template_type ||= 'db' %></td>
     </tr>
     <% if @scriptlet.template_type != 'fs' -%>
     <tr class="form-field">

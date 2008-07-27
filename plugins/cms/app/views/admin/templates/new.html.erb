@@ -3,7 +3,8 @@
 <% form_tag :controller => 'admin/templates', :action => 'create' do -%>
 
 <ul class="subsubsub">
-  <li><a class="current">Add New</a></li>
+  <li><a class="current">Add New</a></li> |
+    <li><a class="current"><%= link_to 'Cancel', templates_path, :class => 'cancel' %></a></li>
 </ul>
 
 <%= render :partial => 'form' %>

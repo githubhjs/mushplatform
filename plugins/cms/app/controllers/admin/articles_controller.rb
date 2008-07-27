@@ -5,6 +5,8 @@ class Admin::ArticlesController < ApplicationController
   def index
     @channel = Channel.find(params[:channel_id])
     @articles = Article.by_channel(@channel.id)
+    @articles = Article.paginate_by_channel_id @channel.id, :page => params[:page], :order => 'created_at DESC'
+    
     respond_to do |format|
       format.html { render :layout => 'admin' } # index.html.erb
       format.xml  { render :xml => @articles }
@@ -59,7 +61,7 @@ class Admin::ArticlesController < ApplicationController
         format.xml  { render :xml => @article, :status => :created, :location => @article }
         format.js { 
           @channel = @article.channel
-          @articles = Article.by_channel(@channel.id)
+          @articles = Article.paginate_by_channel_id @channel.id, :page => params[:page], :order => 'created_at DESC'
           render(:update) { |page| page.replace_html 'channel-form', :partial => 'list' } 
         }
       else
@@ -81,7 +83,7 @@ class Admin::ArticlesController < ApplicationController
         format.xml  { head :ok }
         format.js { 
           @channel = @article.channel
-          @articles = Article.by_channel(@channel.id)
+          @articles = Article.paginate_by_channel_id @channel.id, :page => params[:page], :order => 'created_at DESC'
           render(:update) { |page| page.replace_html 'channel-form', :partial => 'list' } 
         }
       else
@@ -103,7 +105,7 @@ class Admin::ArticlesController < ApplicationController
       format.xml  { head :ok }
       format.js { 
         @channel = Channel.find(params[:channel_id])
-        @articles = Article.by_channel(@channel.id)
+        @articles = Article.paginate_by_channel_id @channel.id, :page => params[:page], :order => 'created_at DESC'
         render(:update) { |page| page.replace_html 'channel-form', :partial => 'list' } 
       }
     end

@@ -4,7 +4,8 @@ class Admin::ScriptletsController < ApplicationController
   # GET /scriptlets
   # GET /scriptlets.xml
   def index
-    @scriptlets = Scriptlet.find(:all)
+#    @scriptlets = Scriptlet.find(:all)
+    @scriptlets = Scriptlet.paginate :page => params[:page], :order => 'created_at DESC'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,15 +46,15 @@ class Admin::ScriptletsController < ApplicationController
     @scriptlet = Scriptlet.new(params[:scriptlet])
 
     respond_to do |format|
-      if @scriptlet.save
+#      if @scriptlet.save
         add_scriptlet(@scriptlet.attributes)
         flash[:notice] = 'Scriptlet was successfully created.'
         format.html { redirect_to :action => 'index' }
         format.xml  { render :xml => @scriptlet, :status => :created, :location => @scriptlet }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @scriptlet.errors, :status => :unprocessable_entity }
-      end
+#      else
+#        format.html { render :action => "new" }
+#        format.xml  { render :xml => @scriptlet.errors, :status => :unprocessable_entity }
+#      end
     end
   end
 

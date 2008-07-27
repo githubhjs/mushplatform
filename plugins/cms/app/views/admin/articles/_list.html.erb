@@ -67,7 +67,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-        <br class="clear" />
+      <%= will_paginate @articles, :renderer => 'RemoteLinkRender'  %>
     </div>
 
     <br class="clear" />

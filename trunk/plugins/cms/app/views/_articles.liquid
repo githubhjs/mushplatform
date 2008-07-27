@@ -1,6 +1,6 @@
     <ul>
     {% for article in articles %}
-     <li><a href=''>{{ article.title }}</a></li>
+     <li><a href='{{ path }}/article/{{ article.id }}'>{{ article.title }}</a></li>
     {% endfor %}
     </ul>
     {{ articles | will_paginate }}

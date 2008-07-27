@@ -7,13 +7,14 @@ class CmsController < ApplicationController
   end
   
   def dispatch
+    puts params
     path = params[:path]
     if path[path.length - 2] == 'article'
       channel_layout, content = recognize_article(path)
     else
       channel_layout, content = recognize_channel(path)
     end
-    render :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content) : 'Page Not Found'
+    render :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content, 'page' => params[:page]) : 'Page Not Found'
   end
   
   def recognize_channel(path)
@@ -21,7 +22,7 @@ class CmsController < ApplicationController
     return nil, nil unless channel
     if channel.template_id
       channel_layout = channel.template.body
-      content = Liquid::Template.parse(channel.body).render
+      content = Liquid::Template.parse(channel.body).render('page' => params[:page])
     else
       channel_layout = channel.body
     end

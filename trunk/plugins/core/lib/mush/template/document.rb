@@ -59,6 +59,8 @@ module Mush
           reference.scan(/^(.*)\((.*)\)$/ ) do |s|
             name = s[0]
             if s.length > 1
+              # scriptlet params represented in ()
+              # such as list_articles(:limit=10,:name=hello)
               params = s[1].gsub(/(\w+)=([^,]*)(?=\s*,?)/,':\1=>\'\2\'')
               params = eval("{#{params}}")
             end

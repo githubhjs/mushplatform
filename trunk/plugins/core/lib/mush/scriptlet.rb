@@ -8,6 +8,12 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
   def render(context)
     return '' if scriptlet_type.name.nil?
     begin
+      # params is passed by scriplet string in template,
+      # and page is passed by cms_controller, combined 
+      # with all params.  
+      # Scriptlet method will use the params to invoke.
+      params[:page] = context['page']
+      
       # every scriptlet function should be return a hash 
       # which include the parameters for template using
       vars = params ? scriptlet_type.function.call(params) : scriptlet_type.function.call

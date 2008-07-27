@@ -5,6 +5,10 @@
       <td><%= text_field 'asset', 'name' %> <%= hidden_field_tag 'id', @asset.id %>
     </tr>
     <tr class="form-field">
+      <th scope="row" valign="top"><label for="asset_category">Category</label></th>
+      <td><%= text_field 'asset', 'category' %>
+    </tr>
+    <tr class="form-field">
       <th scope="row" valign="top"><label for="file">File</label></th>
       <td><%= file_field 'asset', 'uploaded_data' %></td>
     </tr>

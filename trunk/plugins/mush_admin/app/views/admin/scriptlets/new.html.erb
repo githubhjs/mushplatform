@@ -5,7 +5,8 @@
 <% form_tag('/admin/scriptlets/create', :multipart => true ) do %>
 
   <ul class="subsubsub">
-    <li><a class="current">Add New</a></li>
+    <li><a class="current">Add New</a></li> |
+    <li><a class="current"><%= link_to 'Cancel', scriptlets_path, :class => 'cancel' %></a></li>
   </ul>
 
   <%= render :partial => 'form' %>

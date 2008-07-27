@@ -44,9 +44,10 @@
     });
     // expand invisible root node to trigger load
     // of the first level of actual data
-    root.expand(true);
-    //root.cascade(function(){return true;})
-    //root.firstChild.reload()
+    panel.render();
+    root.expand();
+    panel.expand();
+
     panel.on('click',function(node, event){
       Ext.Ajax.request({
         url:'/admin/articles?channel_id=' + node.id,
@@ -61,7 +62,6 @@
         requestMethod:'GET',
         baseParams:{format:'js'}
       })
-      
-    })    
-  });
+    })
+  });  
 <% end -%>

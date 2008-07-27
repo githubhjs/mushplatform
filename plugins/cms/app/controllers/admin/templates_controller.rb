@@ -4,7 +4,7 @@ class Admin::TemplatesController < ApplicationController
   # GET /templates
   # GET /templates.xml
   def index
-    @tmplts = Template.paginate :page => params[:page], :order => 'created_at DESC', :per_page =>1
+    @tmplts = Template.paginate :page => params[:page], :order => 'created_at DESC'
 
     respond_to do |format|
       format.html # index.html.erb

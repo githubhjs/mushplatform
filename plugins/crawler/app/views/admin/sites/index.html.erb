@@ -1,0 +1,90 @@
+    <script>set_current_channel('crawler')</script>
+    <form id="posts-filter" action="" method="get">
+    <h2>Manage sites (<%= link_to 'add new','/admin/sites/new' %>)</h2>
+
+    <ul class="subsubsub">
+      <li><a href='/admin/roles'>Manage sites</a> | </li>
+     </ul>
+
+
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="Search Templates" class="button" />
+    </p>
+
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" />
+    <input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" />
+    
+    <select name='cat' id='cat' class='postform' >
+      <option value='0'>Runing</option>
+      <option value="1">Stoped</option>
+    </select>
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+    
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col">Site Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">State</th>
+      <th scope="col">Tiem Out(s)</th>
+      <th scope="col">Last finish time</th>
+      <th scope="col">Craw Freq(h)</th>
+      <th scope="col">Request Freq(s)</th>
+      <th scope="col">Operation</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% for site in @sites %>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="1" /></th>
+          <td><strong>
+            <a class="row-title" href="/admin/sites/<%=site.id%>/edit" ><%= site.site_name %>
+              </a></strong>
+          </td>
+          <td class="num">
+            <div class="post-com-count-wrapper">
+            <a href='/admin/sites/<%= site.id %>/edit' title='0 pending' class='post-com-count'><span class='comment-count'>
+             <%= display_status(site) %> 
+            </span></a>
+            </div>
+          </td>
+          <td class="num">
+            <div class="post-com-count-wrapper">
+            <a href='/admin/sites/<%= site.id %>/edit' title='0 pending' class='post-com-count'><span class='comment-count'>
+             <%= display_state(site) %> 
+            </span></a>
+            </div>
+          </td>
+          <td><%= site.time_out %></td>
+          <td><%=  DateUtil.timelong(site.last_finish_time) %></td>
+          <td><%= site.craw_freq/(60*60) %></td>
+          <td><%= site.request_freq %></td>
+          <td><%= display_site_operation(site) %></td>
+        </tr>
+        <%  end %>
+        
+      </tbody>
+    </table>
+
+    </form>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+        <br class="clear" />
+    </div>
+
+    <br class="clear" />

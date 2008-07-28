@@ -9,7 +9,7 @@ class InitCms < ActiveRecord::Migration
       t.integer :channels_count, :default => 0
       t.timestamps
     end
-    index = Channel.create(:name => 'index', :permalink => '/', :body => '[[article_list_by_all(limit=3000)]]', :template_id => 1)
+    index = Channel.create(:name => 'index', :permalink => '/', :body => '[[list_article_by_channel(per_page=1)]]', :template_id => 1)
     index.add_child(news = Channel.create(:name => 'news', :permalink => '/news', :template_id => 1))
     index.add_child(vendors = Channel.create(:name => 'vendors', :permalink => '/vendors'))
     news.add_child(Channel.create(:name => 'general', :permalink => '/news/general', :template_id => 1))
@@ -34,6 +34,8 @@ class InitCms < ActiveRecord::Migration
       t.integer :channel_id
       t.timestamps
     end
+    Article.create(:title => "I'm a article", :permalink => 'article-one', :author => 'someone', :channel_id => 1)
+    Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
 
     create_table "assets", :force => true do |t|
       t.string :name, :null => false
@@ -49,5 +51,6 @@ class InitCms < ActiveRecord::Migration
     drop_table "templates"
     drop_table "articles"
     drop_table "assets"
+    drop_table "scriptlets"
   end
 end

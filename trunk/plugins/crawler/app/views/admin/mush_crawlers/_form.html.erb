@@ -1,0 +1,35 @@
+<% form_for(@mush_crawler,:url => @mush_crawler.new_record? ? '/admin/mush_crawlers' : "/admin/mush_crawlers/#{@mush_crawler.id}", :html => {:multipart => true}) do |f| %>
+  <%= error_messages_for 'mush_crawler' %>
+<% unless @mush_crawler.new_record? %>
+  <ul class="subsubsub">
+    <li><a class="current"><%= @mush_crawler.crawler_name %></a></li>
+  </ul>
+  <%end%>
+  <table class="form-table">
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="template_name">Crawler Name:</label></th>
+      <td><%= f.text_field(:crawler_name) %></td>
+    </tr>
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="template_name">Crawler Freq:</label></th>
+      <td><%= f.text_field(:craw_freq) %></td>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="body">Script:</label></th>
+      <td>
+        <input type='file' name='crawler_script'>
+       </td>
+    </tr>
+  </table>
+  <p class="submit">
+    <input type="submit" class="button" name="submit" value="Save" />
+  </p>
+
+  <div id="ajax-response"></div>
+
+  <div class="tablenav">
+    <br class="clear" />
+  </div>
+
+  <br class="clear" />
+<% end %>

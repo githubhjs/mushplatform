@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :roles
+  #map.resources :roles
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -36,10 +36,11 @@ ActionController::Routing::Routes.draw do |map|
   # map.root :controller => "welcome"
 
   # See how all your routes lay out with "rake routes"
+  map.from_plugin :crawler
   map.from_plugin :mush_admin
   map.from_plugin :authorize
   map.from_plugin :cms
-
+    
   # Install the default routes as the lowest priority.
 #  map.connect ':controller/:action/:id'
 #  map.connect ':controller/:action/:id.:format'

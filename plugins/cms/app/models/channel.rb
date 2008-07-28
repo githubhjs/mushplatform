@@ -25,5 +25,8 @@ class Channel < ActiveRecord::Base
     self.to_json_without_leaf(options.merge(:methods => :leaf))
   end
   alias_method_chain :to_json, :leaf
-  
+
+  def to_liquid
+     self.attributes.stringify_keys
+  end  
 end

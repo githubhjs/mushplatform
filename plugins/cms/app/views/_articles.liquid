@@ -1,6 +1,6 @@
-    <ul>
-    {% for article in articles %}
-     <li>{{ article | article_link }}</li>
-    {% endfor %}
-    </ul>
-    {{ articles | will_paginate }}
+<ul>
+{% for article in articles %}
+ <li>{{ article | article_link }}</li>
+{% endfor %}
+</ul>
+{{ articles | will_paginate }}

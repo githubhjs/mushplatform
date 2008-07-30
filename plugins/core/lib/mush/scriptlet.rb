@@ -4,6 +4,20 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
   def scriptlet_type
     @@scriptlet_types_registry[type_name]
   end
+  
+  def type_is_fs?
+    return true if template_type == 'fs'
+    false
+  end
+  
+  def tmplt
+    if template_type == 'fs'
+      tmplt = Liquid::Template.file_system.read_template_file(template) 
+    else
+      tmplt = template
+    end
+    tmplt
+  end
 
   def render(context)
     return '' if scriptlet_type.name.nil?

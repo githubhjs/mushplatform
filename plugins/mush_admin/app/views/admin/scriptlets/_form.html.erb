@@ -13,15 +13,16 @@
       <td><%= text_field 'scriptlet', 'category' %></td>
     </tr>
     <tr class="form-field">
-      <th scope="row" valign="top"><label for="template_name">Tempalte Type</label></th>
+      <th scope="row" valign="top"><label for="template_name">Scriptlet Type</label></th>
       <td><%= @scriptlet.template_type ||= 'db' %></td>
     </tr>
-    <% if @scriptlet.template_type != 'fs' -%>
     <tr class="form-field">
       <th scope="row" valign="top"><label for="type_name">Template</label></th>
-      <td><%= text_area 'scriptlet', 'template', :cols => 65 %></td>
+      <td>
+        <%= text_area 'scriptlet', 'template', :cols => 65 unless @scriptlet.type_is_fs? %>
+        <%= text_area 'scriptlet', 'tmplt', :cols => 65, :disabled => 'disabled' if @scriptlet.type_is_fs? %>
+      </td>
     </tr>
-    <% end -%>
   </table>
 
   <p class="submit">

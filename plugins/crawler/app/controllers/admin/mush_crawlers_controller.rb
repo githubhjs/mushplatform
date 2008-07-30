@@ -1,4 +1,3 @@
-require 'crawlers/crawler_template'
 class Admin::MushCrawlersController < ApplicationController
   layout 'admin'
   # GET /mush_crawlers

@@ -24,6 +24,9 @@ class Admin::SitesController < ApplicationController
     @site = Site.new(params[:site])
     respond_to do |format|
       if @site.save
+        if params[:crawler_script].blank?
+          Rails::Generator::Scripts::Generate.new.run(["crawler",site.site_name])
+        end
         flash[:notice] = "Create site successfully"
         format.html { redirect_to :action => "index" }
         format.xml  { render :xml => @site, :status => :created, :location => @site }

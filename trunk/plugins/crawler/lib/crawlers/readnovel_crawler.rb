@@ -2,6 +2,7 @@ require 'rubygems'
 require 'hpricot'
 require 'open-uri'
 require 'iconv'
+require File.dirname(__FILE__) + '/../../../../config/environment'
 class ReadnovelCrawler
    
   Navigate_Url = %w{/ch/10.html /ch/1.html /ch/6.html /ch/3.html /ch/7.html
@@ -9,67 +10,87 @@ class ReadnovelCrawler
   }
   
   Host = "http://www.readnovel.com"
+  
+  attr_accessor :site
+  
+  def initialize(site)
+    @site = site
+  end
+  
   def fetch
     Navigate_Url.each do |path|
+      puts "#{Host}#{path}"
       doc = hpricot_doc("#{Host}#{path}")
       parse_article_pages(doc,path)
     end
+    return true
   end  
  
   private
  
   def parse_article_pages(doc,path)
-    page_div = doc.seach("//div[@class='Pager']").first
+    return if doc.nil?
+    page_div = doc.search("//div[@class='Pager']").first
     max_page = page_div.to_s.scan(/\d+(?=\.html)/).map{|p|p.to_i}.max
+    puts "max page is #{max_page}"
     page_href_perfix = path.gsub('.html','')
     (1..max_page).each do |page|
-      page_href = "#{page_href_perfix}#{page}.html"
-      doc = hpricot_doc("#{host}#{page_href}")
-      parse_article_link(doc)
-    end
-  end
- 
-  def parse_article_link(doc) 
-    doc.search('//ul/li').each do |li|
-      detail_path = (li/'h1/a').first.attributes('href')
-      parse_article_detail(detail_path)
-    end
-  end 
- 
-  def parse_article_summary(detail_path)
-    iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
-    detail_doc =  hpricot_doc("#{host}#{detail_path}")
-    unless detail_doc.nil?
-      img_src = detail_doc.search("//div[@class='shucansu'/img]").frist.attributes['src']
-      summary_div = detail_doc.search("//div[@class ='xiangxi']")
-      li_tags = (summary_div/'ul/li')
-      author = iconv.iconv((li_tags.first/'a').first.inner_html)
-      create_at = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/)
-      summary = summary_div.to_s.scan(/<\/strong>(.*)<br/).frist.first 
-      catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
+      page_href = "#{page_href_perfix}/#{page}.html"
+      puts "fetch article_link: #{Host}#{page_href}"
+      doc = hpricot_doc("#{Host}#{page_href}")
+      unless doc.nil?
+        puts "parse artice summary"
+        doc.search('//li').each do |li|
+          summary_path = (li/'h1/a').first.attributes['href']
+          puts "summary path :#{summary_path}"
+          parse_article_summary(summary_path)
+        end
+      end
     end
   end
   
-  def parse_artilce_catalog(path)
-    catalog_path = hpricot_doc("#{Host}#{path}")
-    unless catalog_path.nil?
-      catalog_li_tags = doc.search("//div[@class='mulu']/ul/li")
+  def parse_article_summary(summary_path)
+    iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
+    summary_doc =  hpricot_doc("#{Host}#{summary_path}")
+    unless summary_doc.nil?
+      article = CrawlerArticle.new
+#     article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
+      summary_div = summary_doc.search("//div[@class ='xiangxi']").first
+      li_tags = (summary_div/'ul/li')
+      article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
+      article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
+      article.summary = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
+      article.site_id = site.id
+      article.save
+      catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
+      parse_artilce_catalog(catalog_path,article)
+    end
+  end
+  
+  def parse_artilce_catalog(path,article)
+    catalog_doc = hpricot_doc("#{Host}#{path}")
+    unless catalog_doc.nil?
+      catalog_li_tags = catalog_doc.search("//div[@class='mulu']/ul/li")
       catalog_hrefs = catalog_li_tags.map{|li|(li/'a').first.attributes['href']}
       catalog_hrefs.each_with_index do |detail_url,index|
-        parse_article_detail(detail_url,index)
+        parse_article_content(detail_url,article,index)
       end
     end
   end
  
-  def parse_article_content(detail_url,index)
+  def parse_article_content(detail_url,article,index)
     detail_doc = hpricot_doc(detail_url)
     iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
     unless detail_doc.nil?
-      content_div = deail_doc.search("//div[@class='shuneirong']")
-      index_name = iconv.iconv((content_div/'h1/a').frist.inner_html)
-      contents = (content_div/'p').map do |p|
+      article_content = ArticleContent.new
+      article_content.catelog_index = index
+      article_content.article_id = article.id
+      content_div = detail_doc.search("//div[@class='shuneirong']")
+      article_content.catelog_name = iconv.iconv((content_div/'h1/a').first.inner_html)
+      article_content.content = (content_div/'p').map do |p|
         iconv.iconv(p.inner_html)
       end.join(' ')
+      article_content.save
     end
   end
   
@@ -82,6 +103,6 @@ class ReadnovelCrawler
     end
     doc
   end
- 
- 
 end
+crawler = ReadnovelCrawler.new
+crawler.fetch

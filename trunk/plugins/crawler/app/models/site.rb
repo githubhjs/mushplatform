@@ -20,6 +20,21 @@ class Site < ActiveRecord::Base
     self.craw_now = NO
   end
   
+  def set_run
+    self.state = Site_State_Running
+    save
+  end
+  
+  def set_finish
+    self.state = Site_State_Wait 
+    self.last_finish_time = Time.now
+    save
+  end
+  
+  def self.ready_to_craw_sites
+    find(:all,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and date_add(last_finish_time,Interval craw_freq second) < now()")
+  end
+  
   def before_save_by_business
     self.site_url = UrlUtil::format_url(self.site_url)
   end

@@ -2,7 +2,6 @@ require 'rubygems'
 require 'hpricot'
 require 'open-uri'
 require 'iconv'
-require File.dirname(__FILE__) + '/../../../../config/environment'
 class ReadnovelCrawler
    
   Navigate_Url = %w{/ch/10.html /ch/1.html /ch/6.html /ch/3.html /ch/7.html
@@ -11,10 +10,11 @@ class ReadnovelCrawler
   
   Host = "http://www.readnovel.com"
   
-  attr_accessor :site
+  attr_accessor :site,:latest_artice
   
   def initialize(site)
     @site = site
+    @latest_artice = CrawlerArticle.find(:first,:order => "created_at_site desc",:select => "created_at_site")
   end
   
   def fetch
@@ -32,17 +32,13 @@ class ReadnovelCrawler
     return if doc.nil?
     page_div = doc.search("//div[@class='Pager']").first
     max_page = page_div.to_s.scan(/\d+(?=\.html)/).map{|p|p.to_i}.max
-    puts "max page is #{max_page}"
     page_href_perfix = path.gsub('.html','')
     (1..max_page).each do |page|
       page_href = "#{page_href_perfix}/#{page}.html"
-      puts "fetch article_link: #{Host}#{page_href}"
       doc = hpricot_doc("#{Host}#{page_href}")
       unless doc.nil?
-        puts "parse artice summary"
         doc.search('//li').each do |li|
           summary_path = (li/'h1/a').first.attributes['href']
-          puts "summary path :#{summary_path}"
           parse_article_summary(summary_path)
         end
       end
@@ -50,10 +46,13 @@ class ReadnovelCrawler
   end
   
   def parse_article_summary(summary_path)
+    return if CrawlerArticle.find_by_source_url("#{Host}#{summary_path}")
     iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
     summary_doc =  hpricot_doc("#{Host}#{summary_path}")
     unless summary_doc.nil?
       article = CrawlerArticle.new
+      article.source_url="#{Host}#{summary_path}"
+      article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
 #     article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
       summary_div = summary_doc.search("//div[@class ='xiangxi']").first
       li_tags = (summary_div/'ul/li')
@@ -88,7 +87,11 @@ class ReadnovelCrawler
       content_div = detail_doc.search("//div[@class='shuneirong']")
       article_content.catelog_name = iconv.iconv((content_div/'h1/a').first.inner_html)
       article_content.content = (content_div/'p').map do |p|
-        iconv.iconv(p.inner_html)
+        begin
+         iconv.iconv(p.inner_html)
+        rescue Exception => e         
+          ''
+        end
       end.join(' ')
       article_content.save
     end
@@ -104,5 +107,5 @@ class ReadnovelCrawler
     doc
   end
 end
-crawler = ReadnovelCrawler.new
-crawler.fetch
+#crawler = ReadnovelCrawler.new
+#crawler.fetch

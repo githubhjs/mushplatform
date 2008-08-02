@@ -23,15 +23,15 @@ module Admin::SitesHelper
     operations = []
     case site.state
     when Site::Site_State_Running
-     operations <<  "<a href='/admin/site/#{site.id}/stop'>Stop</a>"
+      operations <<  "<a href='/admin/sites/#{site.id}/stop'>Stop</a>"
     when Site::Site_State_Wait,Site::Site_State_Timeout,Site::Site_State_Failed
-      operations << "<a href='/admin/site/#{site.id}/run'>Run</a>"
+      operations << "<a href='/admin/sites/#{site.id}/run'>Run</a>"
     end
     case site.status
     when Site::Site_Status_Enable 
-      operations <<  "<a href='/admin/#{site.id}/disable'>Disable</a>"
+      operations <<  "<a href='/admin/sites/#{site.id}/disable'>Disable</a>"
     when Site::Site_Status_Disable 
-      operations << "<a href='/admin/#{site.id}/enable'>Enable</a>"
+      operations << "<a href='/admin/sites/#{site.id}/enable'>Enable</a>"
     end
     operations.join('|')
   end

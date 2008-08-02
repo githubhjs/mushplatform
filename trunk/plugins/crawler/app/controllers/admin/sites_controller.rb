@@ -1,3 +1,5 @@
+require 'rails_generator'
+require 'rails_generator/scripts/generate'
 class Admin::SitesController < ApplicationController
   
   layout 'admin'
@@ -20,12 +22,37 @@ class Admin::SitesController < ApplicationController
     @site = Site.find(params[:id])
   end
 
+  def stop
+    site = Site.find(params[:id])
+    site.stop
+    redirect_to :action => "index"
+    return true
+  end
+  
+  def run
+    site = Site.find(params[:id])
+    site.run
+    redirect_to :action => "index"
+    return true
+  end
+  
+  def enable
+    site = Site.find(params[:id])
+    site.enable
+    redirect_to :action => "index"
+    return true
+  end
+  
+  def disable
+    @site = Site.find(params[:id])
+  end
+  
   def create
     @site = Site.new(params[:site])
     respond_to do |format|
       if @site.save
         if params[:crawler_script].blank?
-          Rails::Generator::Scripts::Generate.new.run(["crawler",site.site_name])
+          Rails::Generator::Scripts::Generate.new.run(["crawler",@site.site_name])
         end
         flash[:notice] = "Create site successfully"
         format.html { redirect_to :action => "index" }

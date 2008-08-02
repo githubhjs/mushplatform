@@ -1,24 +1,52 @@
-<% form_for(@mush_crawler,:url => @mush_crawler.new_record? ? '/admin/mush_crawlers' : "/admin/mush_crawlers/#{@mush_crawler.id}", :html => {:multipart => true}) do |f| %>
-  <%= error_messages_for 'mush_crawler' %>
-<% unless @mush_crawler.new_record? %>
-  <ul class="subsubsub">
-    <li><a class="current"><%= @mush_crawler.crawler_name %></a></li>
-  </ul>
+<% form_for(@site,:url => @site.new_record? ? '/admin/sites' : "/admin/sites/#{@site.id}", :html => {:multipart => true}) do |f| %>
+  <%= error_messages_for 'site' %>
+  <% unless @site.new_record? %>
+    <ul class="subsubsub">
+      <li><a class="current"><%= @site.site_name %></a></li>
+    </ul>
   <%end%>
   <table class="form-table">
     <tr class="form-field form-required">
-      <th scope="row" valign="top"><label for="template_name">Crawler Name:</label></th>
-      <td><%= f.text_field(:crawler_name) %></td>
+      <th scope="row" valign="top"><label for="template_name">Site Name:</label></th>
+      <td><%= f.text_field(:site_name) %></td>
     </tr>
     <tr class="form-field form-required">
-      <th scope="row" valign="top"><label for="template_name">Crawler Freq:</label></th>
+      <th scope="row" valign="top"><label for="template_name">Site Url:</label></th>
+      <td><%= f.text_field(:site_url) %></td>
+    </tr>
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="template_name">Time out:</label></th>
+      <td><%= f.text_field(:time_out) %></td>
+    </tr>
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="template_name">Craw Freq:</label></th>
       <td><%= f.text_field(:craw_freq) %></td>
+    </tr>
+    <tr class="form-field form-required">
+      <th scope="row" valign="top"><label for="template_name">Request Freq:</label></th>
+      <td><%= f.text_field(:request_freq) %></td>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="category">Status:</label></th>
+      <td>
+        <select name="site[status]">
+          <%= generate_status_options(@site.status) %>
+        </select>
+      </td>
+    </tr>
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="category">State:</label></th>
+      <td>
+        <select name="site[status]">
+          <%= generate_state_options(@site.state) %>
+        </select>
+      </td>
     </tr>
     <tr class="form-field">
       <th scope="row" valign="top"><label for="body">Script:</label></th>
       <td>
-        <input type='file' name='crawler_script'>
-       </td>
+        <input type='file' name='site[crawler_script]'>
+      </td>
     </tr>
   </table>
   <p class="submit">

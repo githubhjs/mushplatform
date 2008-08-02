@@ -1,8 +1,12 @@
 require 'util/url_util'
 class Site < ActiveRecord::Base
+  
+  validates_uniqueness_of :site_name
 
   has_many :craw_jobs,:foreign_key => 'site_id'
 
+  before_create :set_last_finish_time_before_create
+  
   Site_State_Wait    = 0
   Site_State_Running = 1
   Site_State_Timeout = 2
@@ -13,6 +17,23 @@ class Site < ActiveRecord::Base
   
   NO = 0
   YES = 1
+  
+  def before_create_by_business
+    self.last_finish_time = Time.now - self.craw_freq
+    File.delete(crawler_name) if File.exist?(crawler_name)
+  end
+  
+  def crawler_script=(form_script)
+    unless form_script.blank?
+      file = File.new(crawler_name, 'w') do |f|
+        file.write(form_script.read) 
+      end
+    end
+  end  
+  
+  def crawler_name
+    File.dirname(__FILE__) + "/../../lib/crawlers/#{self.site_name.downcase}_crawler.rb"
+  end
   
   def before_create_by_business
     self.state = Site_State_Wait
@@ -35,6 +56,10 @@ class Site < ActiveRecord::Base
     find(:all,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and date_add(last_finish_time,Interval craw_freq second) < now()")
   end
   
+  def self.one_ready_to_craw_sites
+    find(:first,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and date_add(last_finish_time,Interval craw_freq second) < now()")
+  end
+  
   def before_save_by_business
     self.site_url = UrlUtil::format_url(self.site_url)
   end
@@ -53,17 +78,18 @@ class Site < ActiveRecord::Base
     return save
   end
 
-  def stop
-    job = get_running_job
-    if (job)
-      job.stop
-    end
-  end
-
-  def get_running_job
-    CrawJob.find(:first,:conditions => {:site_id => self.id ,:status => Craw_Job_Status_Running}) 
+  
+  def run
+    self.state = Site_State_Running 
+    save 
   end
   
+  def stop
+    self.state = Site_State_Wait
+    save
+    CrawJob.stop(self.id)
+  end
+
   def stop_process_attributes
     self.state = Site_State_Failed
     self.last_finish_time = Time.now()

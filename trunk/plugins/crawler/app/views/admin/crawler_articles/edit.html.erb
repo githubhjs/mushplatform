@@ -1,0 +1,12 @@
+<h1>Editing crawler_article</h1>
+
+<% form_for(@crawler_article) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @crawler_article %> |
+<%= link_to 'Back', crawler_articles_path %>

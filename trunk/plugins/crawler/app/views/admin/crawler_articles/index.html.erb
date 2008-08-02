@@ -1,0 +1,18 @@
+<h1>Listing crawler_articles</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for crawler_article in @crawler_articles %>
+  <tr>
+    <td><%= link_to 'Show', crawler_article %></td>
+    <td><%= link_to 'Edit', edit_crawler_article_path(crawler_article) %></td>
+    <td><%= link_to 'Destroy', crawler_article, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New crawler_article', new_crawler_article_path %>

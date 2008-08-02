@@ -1,0 +1,242 @@
+<div class="L signup">
+<h2>用户注册</h2>
+<form action="/user/signup" method="post">
+<!--h3>请选择用户类别：
+                        <select name="user[user_type]" onchange="change_user_profile(this.options[this.selectedIndex].value)">
+                                <option value="1" selected="selected">个人</option>
+                                <option value="2">厂商</option>
+                                <option value="3">团队</option>
+                        </select>
+                        <script>
+      function change_user_profile(user_type){
+        var person = Ob('person');
+        var supplier = Ob('supplier');
+        var team = Ob('team');
+        if( user_type == 1 ) {
+          person.style.display = 'block';
+          supplier.style.display = 'none';
+          team.style.display = 'none';
+        } else if ( user_type == 2 ){
+          person.style.display = 'none';
+          supplier.style.display = 'block';
+          team.style.display = 'none';
+        } else if ( user_type == 3 ){
+          person.style.display = 'none';
+          supplier.style.display = 'none';
+          team.style.display = 'block';
+        }
+      }
+      </script>
+                        </h3-->
+
+<div>
+<table>
+<tr>
+  <td colspan="2"><font style="color:#16309f;">欢迎注册成为客户世界机构“好客俱乐部”会员，您只需填写简单的资料就可以在线浏览、开通个人博客及BBS服务。客户世界机构承诺将妥善保管您的相关信息，不会提供给第三方用于任何商业用途。</font></td>
+</tr>
+<tr>
+  <td colspan="2" class="tit_bg"><div class="ico">会员基本信息</div></td>
+</tr>
+
+<tr>
+  <td width="22%" align="right">用户名：</td>
+  <td width="78%"><input class="InpTxt" id="user_login" name="user[login]" size="20" type="text" value="" />&nbsp;<font style="color:#de363a;">*</font> 用户名应是字母、数字和“_”，长度在5-16字符间非中文字符</td>
+  
+</tr>
+
+<tr>
+  <td align="right">登陆密码：</td>
+  
+  <td><input class="InpTxt" id="user_password" name="user[password]" size="20" type="password" />&nbsp;<font style="color:#de363a;">*</font> 长度不能小于6个字符，只限数字（0-9）和英文（a-z），注意区分大小写</td>
+  
+</tr>
+<tr>
+  <td align="right">确认密码：</td>
+  <td><input class="InpTxt" id="user_password_confirmation" name="user[password_confirmation]" size="20" type="password" />&nbsp;<font style="color:#de363a;">*</font> 确保和密码相同 </td>
+  
+  
+</tr>
+<tr>
+  <td align="right">密码提示问题：</td>
+  <td><input class="InpTxt" id="user_email" name="user[email]" size="20" type="text" value="" />&nbsp;<font style="color:#de363a;">*</font> 用于取回密码，如：我是谁？</td>
+  
+</tr>
+<tr>
+  <td align="right">提示问题答案：</td>
+  
+  <td><input class="InpTxt" id="user_email" name="user[email]" size="20" type="text" value="" />&nbsp;<font style="color:#de363a;">*</font> 提示问题答案，如：张三</td>
+  
+</tr>
+<tr>
+  <td align="right">电子邮箱：</td>
+  <td><input class="InpTxt2" id="user_email" name="user[email]" size="20" type="text" value="" />&nbsp;<font style="color:#de363a;">*</font> 请填写真实的邮件，并有机会享受我们更多的服务</td>
+  
+  
+</tr>
+<tr>
+  <td colspan="2"></td>
+</tr>
+<tr>
+  <td colspan="2"><div class="line"></div></td>
+</tr>
+<tr>
+  <td colspan="2"><font style="color:#16309f;">如果您愿意向我们提供更详细的个人资料，我们将在资料审核后升级您的会员资格为“好客俱乐部银卡会员”【免费】，向您提供会员刊物《客户世界》的赠阅服务。</br>
+      
+      请仔细填写相关信息，我们将定期向银卡及以上资格会员提供免费的呼叫中心行业报告摘要、运营手册纲要等高价值的资料。</br>
+    为确保您可以通过审核并能够通过电邮、信函、电话及短信等各种方式获得我们的一手信息，请尽量详尽属实地填写您的信息。</font>
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="tit_bg"><div class="ico">会员详细信息</div></td>
+</tr>
+
+<tr>
+  <td align="right">真实姓名：</td>
+  <td><input type="text" class="InpTxt" id="user_profile_realname" name="user[profile][realname]" value="" size="10" maxlength="" />&nbsp;<font style="color:#de363a;">*</font> 请尽量用中文填写，以方便交流</td>
+  
+</tr>
+<tr>
+  <td align="right">公司名称：</td>
+  
+  <td><input type="text" class="InpTxt2" id="user_profile_realname" name="user[profile][realname]" value="" size="20" maxlength="" />&nbsp;<font style="color:#de363a;">*</font></td>
+  
+</tr>
+<tr>
+  <td align="right">个人照片：</td>
+  <td><input type="text" class="InpTxt" id="user_photo" name="user[photo]" value="" size="10" maxlength="" />&nbsp;<input class="button" name="提交" type="submit" value="上传照片" /></td>
+  
+</tr>
+<tr>
+  <td align="right">公司性质：</td>
+  
+  <td><input type="radio" name="user_class" value="1" class="user_class" />供应商&nbsp;&nbsp;&nbsp;<input type="radio" name="user_class" value="2" class="user_class" />用户商&nbsp;&nbsp;&nbsp;<input type="radio" name="user_class" value="3" class="user_class" />其他</td>
+  
+</tr>
+<tr>
+  <td align="right">行业分类：</td>
+  <td><select name="trade" >
+      <option value="0">请选择</option>
+      
+      <option value="保险">保险</option>
+      <option value="银行">银行</option>
+      <option value="证券">证券</option>
+      <option value="基金">基金</option>
+      <option value="通讯">通讯</option>
+      <option value="汽车">汽车</option>
+      
+      <option value="制造">制造</option>
+      <option value="房地产">房地产</option>
+      <option value="医疗与健康">医疗与健康</option>
+      
+      <option value="教育">教育</option>
+      <option value="媒体">媒体</option>
+      <option value="政府">政府</option>
+      
+      <option value="商业">商业</option>
+      <option value="旅游">旅游</option>
+      <option value="交通与物流">交通与物流</option>
+      <option value="IT">IT</option>
+      <option value="邮政">邮政</option>
+      <option value="能源">能源</option>
+      
+      
+      <option value="供应商">供应商</option>
+      <option value="外包">外包</option>
+      <option value="外包基地">外包基地</option>
+      <option value="其它">其它</option>
+      
+    </select>
+    <font style="color:#de363a;">【供应商和用户请选择行业分类】</font> 
+  </td>
+  
+  
+</tr>
+<tr>
+  <td align="right">职位：</td>
+  <td><input type="text" class="InpTxt" id="user_photo" name="user[photo]" value="" size="10" maxlength="" /></td>
+  
+</tr>
+<tr>
+  <td align="right">联系电话：</td>
+  <td><input type="text" class="InpTxt" id="user_photo" name="user[photo]" value="" size="10" maxlength="" />&nbsp;<font style="color:#de363a;">*</font> 区号+电话号码 如：021-65006500</td>
+  
+  
+</tr>
+<tr>
+  <td align="right">手机：</td>
+  <td><input type="text" class="InpTxt" id="user_photo" name="user[photo]" value="" size="10" maxlength="" /></td>
+  
+</tr>
+<tr>
+  <td align="right">传真：</td>
+  <td><input type="text" class="InpTxt" id="user_photo" name="user[photo]" value="" size="10" maxlength="" /></td>
+  
+  
+</tr>
+<tr>
+  <td align="right">通讯地址：</td>
+  <td><input type="text" class="InpTxt2" id="user_photo" name="user[photo]" value="" size="10" maxlength="" />&nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料</td>
+  
+</tr>
+<tr>
+  <td align="right">邮政编码：</td>
+  
+  <td><input type="text" class="InpTxt" id="user_photo" name="user[photo]" value="" size="10" maxlength="" />&nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料</td>
+  
+</tr>
+<tr>
+  <td align="right">企业网站：</td>
+  <td><input type="text" class="InpTxt2" id="user_photo" name="user[photo]" value="http://" size="10" maxlength="" /></td>
+  
+</tr>
+<tr>
+  
+  <td align="right">感兴趣：</td>
+  <td><input class="like" name="like " type="checkbox" value="呼叫中心" />呼叫中心&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />客户管理&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />数据营销&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />服务外包&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />其他
+  </td>
+  
+</tr>
+<tr>
+  <td colspan="2" class="tit_bg"><div class="ico">个人自述</div></td>
+  
+</tr>
+<tr>
+  <td></td>
+  <td>250字以内，展示个人风采，推荐将您的资历详细罗列</td>
+</tr>
+<tr>
+  <td align="right">个人简介：</td>
+  <td><textarea name="" class="txt" rows="4" cols="50"></textarea></td>
+  
+</tr>
+<tr>
+  <td colspan="2" align="center"><input class="button" name="提交" type="submit" value="提交信息" />
+  <input class="button" name="重写" type="reset" value="重新填写" /></td>
+</tr>
+<tr>
+  <td colspan="2"></td>
+</tr>
+<tr>
+  
+  <td colspan="2"><div class="line"></div></td>
+</tr>
+<tr>
+<td colspan="2"><font style="color:#16309f;">您可以申请成为“好客俱乐部金卡会员”【付费】，会员回报<a class="underline" href="http://www.ccmw.net/minisites/members/members.html">[http://www.ccmw.net/minisites/members/members.html]</a></br>请在此提交申请，我们的会员服务专员将第一时间与您进行联络。</font></td>
+</tr>	
+<tr>
+  <td colspan="2" align="center"><input class="button" name="vip" type="button" value="申请金卡会员" /></td>
+</tr>		
+</table>
+
+</div>
+
+
+<div>
+  
+</div>
+
+
+
+
+</form>
+</div><!--class:m_l-->

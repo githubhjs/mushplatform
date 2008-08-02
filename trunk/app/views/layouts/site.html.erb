@@ -1,0 +1,143 @@
+<script>if (top.location != self.location)top.location=self.location;</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> 客户世界 - 呼叫中心 | 客户管理 | 数据营销 | 服务外包 - [http://www.ccmw.net]</title>
+    <meta name="keywords" content="客户，呼叫中心，CTI，call center，CRM，contact center，customer，联络中心，客户服务，客户关怀，客户关系，客户管理，客户忠诚，客户分析，客户挽留，客户洞察，客户获取，客户识别，客户发展，直复营销，电话营销，数据库营销，数据分析，服务营销，VoIP" />
+    <%= stylesheet_link_tag 'scaffold','site' %>
+    <script src="http://www.ccmw.net/javascripts/main.js" type="text/javascript"></script>
+    <script src="http://www.ccmw.net/javascripts/prototype.js" type="text/javascript" ></script>
+    <script language='JavaScript' type='text/javascript' src='http://ads.ccmw.net/adx.js'></script>
+  </head>
+  <body>
+    <div id="warp">
+      <div id="top">
+        <div id="logo" class="L">
+          <a href="/"><img class="L logo" src="http://www.ccmw.net/images/logo.gif"/></a>
+          <p class="L">中国客户管理人的门户网站</p>
+        </div>
+        <div id="top_ad" class="R">
+          
+          <script language='JavaScript' type='text/javascript'>
+          </script><noscript><a href='http://ads.ccmw.net/adclick.php?n=a62d7903' target='_blank'><img src='http://ads.ccmw.net/adview.php?clientid=27&amp;n=a62d7903' border='0' alt=''></a></noscript>
+        </div>
+      </div><!--id:top-->
+      <div id="menu" class="clear">
+        <ul class="L menu">
+          <li id="index_tab" class="common"><a href="/" id="index_a">首页</a></li>
+          <li class="b">|</li>
+          
+          <li id="blog_tab" class="common"><a href="/blog" id="blog_a">博客</a></li>
+          <li class="b">|</li>
+          <li id="news_tab" class="common"><a href="/news" id="news_a">新闻</a></li>
+          <li class="b">|</li>
+          <li id="libary_tab" class="common"><a href="/libary" id="libary_a">文库</a></li>
+          <li class="b">|</li>
+          
+          <li id="vendors_tab" class="common"><a href="/vendors" id="vendors_a">供应商</a></li>
+          <li class="b">|</li>
+          <li id="spec_tab" class="common"><a href="/specialists" id="spec_a">专家</a></li>
+          <li class="b">|</li>
+          <li id="journals_tab" class="common"><a href="/journals" id="journals_a">期刊</a></li>
+          
+          <li class="b">|</li>
+          <li><a href="http://forum.ccmw.net">论坛</a></li>
+        </ul>
+        <p class="R info_txt" >
+          <iframe height="26" width="330" frameborder="0" scrolling="no" src="http://www.ccmw.net/user/login_bar"></iframe>
+        </p>
+        
+      </div><!--id:menu-->
+  
+      <div id="s_bar">
+        <p class="L" style="width:230px" id="nav_link"><a href="/">首页</a> 
+          <script>
+              if(uri.length > 1 && obja != null)
+                  document.write(">> <a href='"+ obja.href +"'>"+ obja.innerHTML +"</a>");
+          </script>
+        </p>
+        <form action="/articles/search" class="R" method="post">
+          <input type="text" class="txt" name="query" value="" size="30" />&nbsp;<input type="submit" class="search_button" value="搜索" />&nbsp;&nbsp;
+        </form>
+        
+        <p class="R">
+          <marquee align="left" width="420" direction="left" loop="-1" scrollamount="3" onMouseOver="this.stop()" onMouseOut="this.start()">
+            <a href="http://www.ccmw.net/downloads/nongmindehaizi.rar" target="_blank"><span style="color:#FF0000">原创小说《农民的孩子》电子书在线下载</span></a>&nbsp;
+            <a href="http://forum.ccmw.net/read.php?tid=37472" target="_blank">客户世界招聘</a>&nbsp;
+            <a href="http://editor.ccmw.net/blog.php?do-showone-itemid-8392-type-blog.html" target="_blank">聘各地通讯员（<span style="color:#00CC00">兼职</span>）</a>&nbsp;
+          </marquee>
+          
+        </p>
+      </div><!--id:s_bar-->
+      <div id="main" class="L">
+        <%= yield  %>
+        <div id="friend" class="border">
+          <p><b>友情链接：</b>
+            <a href="http://tech.sina.com.cn/" target="_blank">新浪科技</a> |
+            <a href="http://e.chinabyte.com/" target="_blank">比特网</a> |
+            <a href="http://www.e800.com.cn/" target="_blank">亿八佰</a> |
+            <a href="http://www.ctiforum.com/" target="_blank">CTI论坛</a> |
+            <a href="http://www.zdnet.com.cn/news" target="_blank">CNET科技资讯网</a> |
+            <a href="http://www.ciotimes.com/" target="_blank">CIO时代</a> |
+            <a href="http://www.topoint.com.cn/" target="_blank">支点网</a> |
+            <a href="http://www.microvoip.com/" target="_blank">全球VoIP联盟</a> |
+            <a href="http://www.amteam.org/" target="_blank">AMT</a> |
+            <a href="http://www.surprising.cn/" target="_blank">中国服务营销网</a> |
+            <a href="http://www.chinabi.net/" target="_blank">中国商业智能网</a> |
+            <a href="http://www.51callcenter.com/" target="_blank">51Callcenter</a> |
+            <a href="http://www.imkt.com.cn/" target="_blank">中国整合营销网</a> |
+            <a href="http://www.cncca.net/" target="_blank">CNCCA</a> |
+            <a href="http://www.iiso.org.cn/" target="_blank">信息服务外包网</a> |
+            <a href="http://www.121dm.cn/" target="_blank">121直复营销网</a> |
+            <a href="http://www.vsharing.com" target="_blank">畅享网</a> |
+            <a href="http://www.cww.com.cn" target="_blank">通信世界</a> |
+            <a href="http://www.ebworld.com.cn" target="_blank">电子商务世界</a> |
+            <a href="http://www.ccidnet.com" target="_blank">赛迪网</a> |
+            <a href="http://www.bizteller.cn/" target="_blank">企业档案在线</a> |
+            <a href="http://www.chnsourcing.com/" target="_blank">Chinasourcing</a> |
+            <a href="http://www.ccw.com.cn/" target="_blank">计世网</a> |
+            <a href="http://www.ceocio.com.cn/" target="_blank">IT经理世界</a> |
+            <a href="http://www.ctocio.com.cn/" target="_blank">IT专家网</a> |
+            <a href="http://www.prnews.cn/" target="_blank">中国商业电讯</a> |
+            <a href="http://www.iresearch.cn/" target="_blank">艾瑞网</a> |
+            <a href="http://www.csai.cn/" target="_blank">希赛网</a> |
+            <a href="http://www.cpw.com.cn/" target="_blank">电脑商报</a> |
+            <a href="http://www.ciweekly.com/" target="_blank">互联网周刊</a> |
+            <a href="http://www.ccidcom.com/" target="_blank">通信产业网</a> |
+            <a href="http://chinasourcing.mofcom.gov.cn/" target="_blank">中国服务外包网</a> |
+            <a href="http://www.cncs100.com/" target="_blank">中国客户服务网</a> |
+            <a href="http://www.voipchina.cn/" target="_blank">VOIP中国网</a> |
+            <a href="http://www.chinavoip.net/" target="_blank">中国VoIP论坛</a> |
+          </p>
+          
+        </div>
+        
+      </div><!--id:main-->
+
+      <div id="footer">
+        <a href="http://www.ccmw.net/minisites/ccminfo/gsjj.htm" target="_blank">关于我们</a> &nbsp;|&nbsp;
+        <a href="http://www.ccmw.net/minisites/ccminfo/adver.htm" target="_blank">广告服务</a> &nbsp;|&nbsp;
+        
+        <a href="http://www.ccmw.net/minisites/ccminfo/copyright.htm" target="_blank">版权说明</a> &nbsp;|&nbsp;
+        <a href="/sitemap" target="_blank">网站地图</a> &nbsp;|&nbsp;
+        <a href="http://www.ccmw.net/minisites/ccminfo/yszc.htm" target="_blank">隐私政策</a> &nbsp;|&nbsp;
+        <a href="mailto:caojian@ccmworld.net">欢迎赐稿</a> &nbsp;|&nbsp;
+        
+        <a href="index.html">网站首页</a><br/>
+        Copyright &copy;2002-2008 CCMworld Group All rights reserved.<br/>
+        <a href="http://www.ccmw.net" target="_blank">客户世界机构</a> 版权所有 京ICP备05038078号
+      </div>
+      
+    </div>  
+    <script src="/javascripts/footer2.js" type="text/javascript"></script>
+    
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        _uacct = "UA-410860-1";
+        urchinTracker();
+    </script>
+  </body>
+</html>
+

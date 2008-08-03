@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :user_profiles
+  map.resources :user_profiles,:signup
 
   #map.resources :roles
 

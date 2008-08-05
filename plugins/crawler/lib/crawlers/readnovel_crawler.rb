@@ -2,6 +2,7 @@ require 'rubygems'
 require 'hpricot'
 require 'open-uri'
 require 'iconv'
+require File.dirname(__FILE__) + '/../../../../config/environment'
 class ReadnovelCrawler
    
   Navigate_Url = %w{/ch/10.html /ch/1.html /ch/6.html /ch/3.html /ch/7.html
@@ -102,10 +103,17 @@ class ReadnovelCrawler
     begin
       doc = Hpricot(open(url)) 
     rescue Exception => e
+      CrawLogger.logger(e.message)
       nil
     end
     doc
   end
 end
-#crawler = ReadnovelCrawler.new
-#crawler.fetch
+puts "begin to fetch"
+site = Site.find_by_site_name('readnovel')
+if site
+  crawler = ReadnovelCrawler.new(site)
+  crawler.fetch
+  crawler.site.set_finish
+  CrawLogger.logger("Finish to crawler #{crawler.site.site_name}")
+end

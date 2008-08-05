@@ -1,4 +1,5 @@
 require 'util/url_util'
+require 'general/craw_logger'
 class Site < ActiveRecord::Base
   
   validates_uniqueness_of :site_name
@@ -25,6 +26,10 @@ class Site < ActiveRecord::Base
       end
     end
   end  
+  
+  def crawler_existe?
+    File.exist?(self.crawler_name)
+  end
   
   def crawler_name
     File.dirname(__FILE__) + "/../../lib/crawlers/#{self.site_name.downcase}_crawler.rb"
@@ -76,15 +81,26 @@ class Site < ActiveRecord::Base
 
   
   def run
-    self.state = Site_State_Running 
-    self.craw_now = YES
-    save 
+    puts "++++++++++++++++++++++++++++++++++++++++++++++++++"
+    puts crawler_name
+    set_run
+#    begin 
+      pid = fork do
+        exec("ruby #{crawler_name}")
+      end
+      Process.detach(pid)
+      CrawJob.create(:site_id => self.id,:crawler_pid => pid)
+      CrawLogger.logger("Start a process for #{self.site_name};pid is #{pid}")
+#    rescue Exception => e
+#      CrawLogger.logger(e.message)
+#    end  
   end
   
   def stop
+    CrawJob.stop(self.id)
+    CrawLogger.logger("Stop the process for #{self.site_name}")
     self.state = Site_State_Wait
     save
-    CrawJob.stop(self.id)
   end
 
   def stop_process_attributes

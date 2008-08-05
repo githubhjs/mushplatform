@@ -4,7 +4,7 @@
     <div>
       <table>
         <tr>
-          <td colspan="2" class="tit_bg"><div class="ico">会员登录</div></td>
+          <td colspan="2" class="tit_bg"><div class="ico">会员登录</div><%= flash[:warning] %></td>
         </tr>
         <% fields_for :user, @user do |u_field| %>
           <tr>

@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :user_name,:hashed_password,:email,:salt,:null => false
       t.datetime :created_at
       t.integer  :status ,:null => false,:default => 0
+      t.string   :pwd_question,:pwd_anwser,:default => ''
     end
   end
 

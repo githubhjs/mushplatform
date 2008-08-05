@@ -53,11 +53,11 @@ class Site < ActiveRecord::Base
   end
   
   def self.ready_to_craw_sites
-    find(:all,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and date_add(last_finish_time,Interval craw_freq second) < now()")
+    find(:all,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and (craw_now=1 or date_add(last_finish_time,Interval craw_freq second) < now())")
   end
   
   def self.one_ready_to_craw_sites
-    find(:first,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and date_add(last_finish_time,Interval craw_freq second) < now()")
+    find(:first,:conditions => "status = #{Site_Status_Enable} and state <> #{Site_State_Running} and (craw_now=1 or date_add(last_finish_time,Interval craw_freq second) < now())")
   end
   
   def before_save_by_business
@@ -81,6 +81,7 @@ class Site < ActiveRecord::Base
   
   def run
     self.state = Site_State_Running 
+    self.craw_now = YES
     save 
   end
   

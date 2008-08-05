@@ -1,0 +1,30 @@
+<div class="L signup">
+  <h2>请登录</h2>
+  <%form_tag("/login") do %>
+    <div>
+      <table>
+        <tr>
+          <td colspan="2" class="tit_bg"><div class="ico">会员登录</div></td>
+        </tr>
+        <% fields_for :user, @user do |u_field| %>
+          <tr>
+            <td align="right">用户名：</td>
+            <td>
+              <%= u_field.text_field(:user_name, :class => "InpTxt" )%>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">登陆密码：</td>
+            <td>
+            <%= u_field.password_field(:password, :class => "InpTxt")%></td>
+          </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input name="vip" type="submit" value="登录" />
+          </td>
+        </tr>		
+        <%end%>
+      </table>
+    </div>
+  <%end%>
+</div>

@@ -5,7 +5,7 @@ class Site < ActiveRecord::Base
 
   has_many :craw_jobs,:foreign_key => 'site_id'
 
-  before_create :set_last_finish_time_before_create
+  before_create :before_create_by_business
   
   Site_State_Wait    = 0
   Site_State_Running = 1
@@ -17,12 +17,7 @@ class Site < ActiveRecord::Base
   
   NO = 0
   YES = 1
-  
-  def before_create_by_business
-    self.last_finish_time = Time.now - self.craw_freq
-    File.delete(crawler_name) if File.exist?(crawler_name)
-  end
-  
+    
   def crawler_script=(form_script)
     unless form_script.blank?
       file = File.new(crawler_name, 'w') do |f|
@@ -36,6 +31,7 @@ class Site < ActiveRecord::Base
   end
   
   def before_create_by_business
+    self.last_finish_time = Time.now - self.craw_freq
     self.state = Site_State_Wait
     self.status = Site_Status_Enable
     self.craw_now = NO

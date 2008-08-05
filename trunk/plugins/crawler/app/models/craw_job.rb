@@ -1,3 +1,4 @@
+require 'general/craw_logger'
 class CrawJob < ActiveRecord::Base
   
   def self.stop(site_id)
@@ -5,8 +6,9 @@ class CrawJob < ActiveRecord::Base
     jobs.each do |job|
       puts "stop process pid:#{job.crawler_pid}"
       begin
-        Process.kill(-9, job.crawler_pid) 
+        Process.kill(9, job.crawler_pid) 
       rescue Exception => e
+        CrawLogger.logger(e.message)
       end
     end
     delete_all("site_id=#{site_id}")

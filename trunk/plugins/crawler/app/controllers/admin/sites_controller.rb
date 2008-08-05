@@ -44,14 +44,17 @@ class Admin::SitesController < ApplicationController
   end
   
   def disable
-    @site = Site.find(params[:id])
+    site = Site.find(params[:id])
+    site.disable
+    redirect_to :action => "index"
+    return true
   end
   
   def create
     @site = Site.new(params[:site])
     respond_to do |format|
       if @site.save
-        if params[:crawler_script].blank?
+        if params[:crawler_script].blank? and !@site.crawler_existe?
           Rails::Generator::Scripts::Generate.new.run(["crawler",@site.site_name])
         end
         flash[:notice] = "Create site successfully"

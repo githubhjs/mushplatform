@@ -14,7 +14,7 @@ class CreateSites < ActiveRecord::Migration
   end
 
   def self.down
-    
+    drop_table :sites
   end
   
 end

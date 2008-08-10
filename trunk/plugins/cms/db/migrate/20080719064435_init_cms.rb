@@ -31,6 +31,7 @@ class InitCms < ActiveRecord::Migration
       t.string :url, :subtitle, :display_title, :permalink, :author, :origin
       t.text :body, :excerpt
       t.integer :status
+      t.integer :crawler_article_id
       t.integer :channel_id
       t.timestamps
     end

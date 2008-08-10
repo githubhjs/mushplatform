@@ -53,13 +53,17 @@ class ReadnovelCrawler
     unless summary_doc.nil?
       article = CrawlerArticle.new
       article.source_url="#{Host}#{summary_path}"
-      article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
+      begin
+        article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
 #     article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
       summary_div = summary_doc.search("//div[@class ='xiangxi']").first
       li_tags = (summary_div/'ul/li')
       article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
       article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
       article.summary = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
+      rescue Excption => e
+       CrawLogger.logger(e.message) 
+      end
       article.site_id = site.id
       article.save
       catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
@@ -91,6 +95,7 @@ class ReadnovelCrawler
         begin
          iconv.iconv(p.inner_html)
         rescue Exception => e         
+          CrawLogger.logger(e.message) 
           ''
         end
       end.join(' ')

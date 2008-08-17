@@ -2,6 +2,10 @@ class SignupController < ApplicationController
   
   layout 'site'
   
+  def select
+    
+  end
+  
   def index
     @user = User.new
     @profile = UserProfile.new

@@ -9,7 +9,7 @@ class InitCms < ActiveRecord::Migration
       t.integer :channels_count, :default => 0
       t.timestamps
     end
-    index = Channel.create(:name => 'index', :permalink => '/', :body => '[[list_article_by_channel(per_page=1)]]', :template_id => 1)
+    index = Channel.create(:name => 'index', :permalink => '/', :body => '[[list_article_by_channel]]', :template_id => 1)
     index.add_child(news = Channel.create(:name => 'news', :permalink => '/news', :template_id => 1))
     index.add_child(vendors = Channel.create(:name => 'vendors', :permalink => '/vendors'))
     news.add_child(Channel.create(:name => 'general', :permalink => '/news/general', :template_id => 1))

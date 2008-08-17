@@ -4,7 +4,7 @@ module CmsHelper
   def article_link(article)
     channel = Channel.find(article['channel_id'])
     base_url = channel['permalink'] == '/' ? '' : channel['permalink']
-    article_url = article['permalink'] == '' ? article['id'] : article['permalink']
+    article_url = (article['permalink'] == '' or article['permalink'].nil?) ? article['id'] : article['permalink']
     link_to article['title'], "#{base_url}/article/#{article_url}"
   end
 

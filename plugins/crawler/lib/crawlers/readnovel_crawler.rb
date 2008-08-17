@@ -30,6 +30,7 @@ class ReadnovelCrawler
   private
  
   def parse_article_pages(doc,path)
+    debugger
     return if doc.nil?
     page_div = doc.search("//div[@class='Pager']").first
     max_page = page_div.to_s.scan(/\d+(?=\.html)/).map{|p|p.to_i}.max

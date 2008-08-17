@@ -381,4 +381,11 @@ a:hover,a:active{color:#de363a;text-decoration:none;}
 .signup table a{color:#de363a;}
 .signup table .button{width:auto;padding:0px;cursor:hand;border:1px solid #eee;}
 
-
+/*用户注册引导页面*/
+.personal{float:left;width:475px;}
+.company{float:right;width:475px;}
+.personal .tit,.company .tit{font-size:14px;text-align:right;font-weight:bold;}
+.personal table td,.company table td{border-bottom:1px solid #cdcdcd;border-right:1px solid #cdcdcd;padding:3px 5px 3px 3px;}
+.personal .lst td,.company .lst td{border-bottom:0px;}
+.personal .r_border,.company .r_border{border-right:0px;}
+.personal .signup_b,.company .signup_b {background:url(../images/signup_b.gif) no-repeat;width:91px;height:36px;border:none;font-size:14px;color:#fd7f04;font-weight:bold; cursor:hand;line-height:36px;text-align:center;}

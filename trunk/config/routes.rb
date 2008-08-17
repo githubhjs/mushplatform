@@ -1,9 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.resources :user_profiles
-  map.resources :signup
+  map.resources :signup, :collection => {:select => :get}
   map.connect   "/login",:controller => 'login',:action => 'login'
   map.connect   "/logout",:controller => 'login',:action => 'logout'
+
   #map.resources :roles
 
   # The priority is based upon order of creation: first created -> highest priority.

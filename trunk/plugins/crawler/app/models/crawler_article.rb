@@ -13,5 +13,6 @@ class CrawlerArticle < ActiveRecord::Base
     article.channel_id = 1
     article.save
   end
+  
 end
 

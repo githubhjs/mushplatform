@@ -16,7 +16,7 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
-ActiveSupport::Dependencies.load_once_paths.clear
+#ActiveSupport::Dependencies.load_once_paths.clear
 
 require 'acts_as_taggable'
 require 'technoweenie/attachment_fu'

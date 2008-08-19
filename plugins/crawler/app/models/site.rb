@@ -81,19 +81,17 @@ class Site < ActiveRecord::Base
 
   
   def run
-    puts "++++++++++++++++++++++++++++++++++++++++++++++++++"
-    puts crawler_name
     set_run
-#    begin 
+    begin 
       pid = fork do
         exec("ruby #{crawler_name}")
       end
       Process.detach(pid)
       CrawJob.create(:site_id => self.id,:crawler_pid => pid)
       CrawLogger.logger("Start a process for #{self.site_name};pid is #{pid}")
-#    rescue Exception => e
-#      CrawLogger.logger(e.message)
-#    end  
+    rescue Exception => e
+      CrawLogger.logger(e.message)
+    end  
   end
   
   def stop

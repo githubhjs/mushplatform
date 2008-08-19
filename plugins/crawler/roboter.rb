@@ -33,6 +33,7 @@ end
 while true
   site = Site.one_ready_to_craw_sites
   unless site.blank?
+    CrawJob.delete_all("site_id=#{site.id}")
     CrawJob.create(:site_id => site.id,:crawler_pid => Process.pid)
     begin
       puts "get a job to fetch: #{site.site_name}"

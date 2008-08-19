@@ -9,7 +9,7 @@ class CreateSites < ActiveRecord::Migration
       t.datetime :last_finish_time,:default => Time.now
       t.integer  :craw_freq,:default => 24*60*60#hour
       t.integer  :request_freq,:default => 1
-      t.integer  :craw_now,:defult => 0
+        t.integer  :craw_now,:defult => 0
     end
   end
 

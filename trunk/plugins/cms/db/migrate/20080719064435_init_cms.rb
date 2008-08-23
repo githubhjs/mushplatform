@@ -39,8 +39,9 @@ class InitCms < ActiveRecord::Migration
     Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
 
     create_table "contents", :force => true do |t|
+      t.string :title
       t.text    :body
-      t.integer :position, :default => 0
+      t.integer :page, :default => 0
       t.integer :article_id,:null => false
       t.timestamps
     end

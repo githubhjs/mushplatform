@@ -7,9 +7,8 @@ class CmsController < ApplicationController
   end
   
   def dispatch
-    puts params
     path = params[:path]
-    if path[path.length - 2] == 'article'
+    if path[path.length - 2] == 'article' or path[path.length - 4] == 'article'
       channel_layout, content = recognize_article(path)
     else
       channel_layout, content = recognize_channel(path)
@@ -31,16 +30,26 @@ class CmsController < ApplicationController
 
   def recognize_article(path)
     begin
-      case id = path.last
-      when /^(\d*)$/
-        article = Article.find(id)
+      case path.length 
+      when 3
+        article_id = path.last
+        content_page = 1
       else
-        article = Article.find_by_permalink(id)
+        article_id = path[2]
+        content_page = path.last
       end
+      
+      case article_id
+      when /^(\d*)$/
+        article = Article.find(article_id)
+      else
+        article = Article.find_by_permalink(article_id)
+      end
+      article_content = Content.find_by_article_id_and_page(article.id, content_page)
     rescue
       # if couldn't find article, using channel's 
       # template to render 'Article Not Found'
-      channel_layout, content = recognize_channel(path[0, path.length - 2])
+      channel_layout, content = recognize_channel(path[0, 1])
       content = 'Article Not Found'
       return channel_layout, content
     end
@@ -53,7 +62,7 @@ class CmsController < ApplicationController
     template = Template.find_by_name('Article')
     article_template = template.body if template
     article_template = Liquid::Template.file_system.read_template_file('article') unless article_template
-    content = Liquid::Template.parse(article_template).render('article' => article)
+    content = Liquid::Template.parse(article_template).render('article' => article, 'content' => article_content, 'channel' => article.channel)
     return channel_layout, content
   end
   

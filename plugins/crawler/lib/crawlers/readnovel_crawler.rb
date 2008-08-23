@@ -15,7 +15,7 @@ class ReadnovelCrawler
   
   def initialize(site)
     @site = site
-    @latest_artice = CrawlerArticle.find(:first,:order => "created_at_site desc",:select => "created_at_site")
+#    @latest_artice = CrawlerArticle.find(:first,:order => "created_at_site desc",:select => "created_at_site")
   end
   
   def fetch
@@ -55,15 +55,21 @@ class ReadnovelCrawler
       article = Article.new
       article.source="#{Host}#{summary_path}"
       begin
+        category = iconv.iconv(summary_doc.search("//div[@class='left_list']/a")[1].inner_html)
+        index_channel = Channel.find(1)
+        current_channel = Channel.find_by_name(category)
+        index_channel.add_child(current_channel = Channel.create(:name => category, :template_id => 1)) unless current_channel
+        article.channel_id = current_channel.id
+        
         article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
-#     article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
-      summary_div = summary_doc.search("//div[@class ='xiangxi']").first
-      li_tags = (summary_div/'ul/li')
-      article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
-#      article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
-      article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
-      rescue Excption => e
-       CrawLogger.logger(e.message) 
+#       article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
+        summary_div = summary_doc.search("//div[@class ='xiangxi']").first
+        li_tags = (summary_div/'ul/li')
+        article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
+#       article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
+        article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
+      rescue Exception => e
+        CrawLogger.logger(e.message) 
       end
 #      article.site_id = site.id
       article.save
@@ -78,7 +84,7 @@ class ReadnovelCrawler
       catalog_li_tags = catalog_doc.search("//div[@class='mulu']/ul/li")
       catalog_hrefs = catalog_li_tags.map{|li|(li/'a').first.attributes['href']}
       catalog_hrefs.each_with_index do |detail_url,index|
-        parse_article_content(detail_url,article,index)
+        parse_article_content(detail_url,article,index+1)
       end
     end
   end
@@ -91,7 +97,7 @@ class ReadnovelCrawler
 #      article_content.catelog_index = index
 #      article_content.article_id = article.id
       content_div = detail_doc.search("//div[@class='shuneirong']")
-#      article_content.catelog_name = iconv.iconv((content_div/'h1/a').first.inner_html)
+      title = iconv.iconv((content_div/'h1/a').first.inner_html)
       content = (content_div/'p').map do |p|
         begin
          iconv.iconv(p.inner_html)
@@ -100,7 +106,7 @@ class ReadnovelCrawler
           ''
         end
       end.join(' ')
-      article.contents.create(:position => index, :body => content)
+      article.contents.create(:title => title, :body => content, :page => index)
     end
   end
   

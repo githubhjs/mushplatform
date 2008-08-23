@@ -1,11 +1,21 @@
 class Article < ActiveRecord::Base
+  partial_updates = true
+
+  has_many :contents, :dependent => :destroy
+  belongs_to :channel
   acts_as_taggable
 
-  partial_updates = true
-  belongs_to :channel
   named_scope :by_channel, lambda {|id| {:conditions => "channel_id = #{id}", :order => "created_at DESC"}}
 
+  def body
+    article_body = ""
+    article_body = contents[0].body if contents.length > 0
+    article_body
+  end
+  
   def to_liquid
-     self.attributes.stringify_keys
+     atts = self.attributes.stringify_keys
+     atts["body"] = body
+     atts
   end   
 end

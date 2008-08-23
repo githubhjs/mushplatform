@@ -28,16 +28,21 @@ class InitCms < ActiveRecord::Migration
     
     create_table "articles", :force => true do |t|
       t.string :title, :null => false
-      t.string :url, :subtitle, :display_title, :permalink, :author, :origin
-      t.text :body, :excerpt
+      t.string :url, :sub_title, :display_title, :permalink, :author, :origin, :source
+      t.text :excerpt
       t.integer :status
-      t.integer :crawler_article_id
       t.integer :channel_id
       t.timestamps
     end
     Article.create(:title => "I'm a article", :permalink => 'article-one', :author => 'someone', :channel_id => 1)
     Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
 
+    create_table "contents", :force => true do |t|
+      t.text    :body
+      t.integer :article_id,:null => false
+      t.timestamps
+    end
+    
     create_table "assets", :force => true do |t|
       t.string :name, :null => false
       t.string :type, :content_type, :filename, :path, :category
@@ -51,6 +56,7 @@ class InitCms < ActiveRecord::Migration
     drop_table "channels"
     drop_table "templates"
     drop_table "articles"
+    drop_table "contents"
     drop_table "assets"
     drop_table "scriptlets"
   end

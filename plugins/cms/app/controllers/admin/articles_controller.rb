@@ -56,6 +56,7 @@ class Admin::ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
+        @article.contents.create(:body => params[:body])
         flash[:notice] = 'Article was successfully created.'
         format.html { redirect_to(@article) }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
@@ -75,6 +76,10 @@ class Admin::ArticlesController < ApplicationController
   # PUT /articles/1.xml
   def update
     @article = Article.find(params[:id])
+    content = @article.contents[0]
+    @article.contents.create(:body => params[:body]) unless content
+    content.update_attribute(:body, params[:body]) if content
+    
 
     respond_to do |format|
       if @article.update_attributes(params[:article])

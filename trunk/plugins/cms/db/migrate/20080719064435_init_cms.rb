@@ -10,12 +10,12 @@ class InitCms < ActiveRecord::Migration
       t.timestamps
     end
     index = Channel.create(:name => 'index', :permalink => '/', :body => '[[list_article_by_channel]]', :template_id => 1)
-    index.add_child(news = Channel.create(:name => 'news', :permalink => '/news', :template_id => 1))
-    index.add_child(vendors = Channel.create(:name => 'vendors', :permalink => '/vendors'))
-    news.add_child(Channel.create(:name => 'general', :permalink => '/news/general', :template_id => 1))
-    news.add_child(Channel.create(:name => 'special', :permalink => '/news/special', :template_id => 1))
-    vendors.add_child(Channel.create(:name => 'google', :permalink => '/vendors/google'))
-    vendors.add_child(Channel.create(:name => 'yahoo', :permalink => '/vendors/yahoo'))
+#    index.add_child(news = Channel.create(:name => 'news', :permalink => '/news', :template_id => 1))
+#    index.add_child(vendors = Channel.create(:name => 'vendors', :permalink => '/vendors'))
+#    news.add_child(Channel.create(:name => 'general', :permalink => '/news/general', :template_id => 1))
+#    news.add_child(Channel.create(:name => 'special', :permalink => '/news/special', :template_id => 1))
+#    vendors.add_child(Channel.create(:name => 'google', :permalink => '/vendors/google'))
+#    vendors.add_child(Channel.create(:name => 'yahoo', :permalink => '/vendors/yahoo'))
     
     create_table "templates", :force => true do |t|
       t.string :name, :null => false
@@ -24,7 +24,17 @@ class InitCms < ActiveRecord::Migration
       t.timestamps
     end
     Template.create(:name => 'Default Layout', :category => 'Layout', :body => '<div>HEADER</div><div>{{content}}</div><div>FOOTER</div>')
-    Template.create(:name => 'Article', :category => 'Template', :body => '<h2>{{article.title}}</h2><h4>{{article.subtitle}}</h4><p>{{article.author}}</p><div>{{article.body}}</div><p>{{article.author}}</p><p>Template from Database</p>')
+    Template.create(:name => 'Article', :category => 'Template', :body => '<h2>{{article.title}}</h2>
+<h4>{{article.subtitle}}</h4>
+<div>{{article.author}}</div>
+<div>{{content.body}}</div>
+{% if content.not_first? %}
+<a href="{{channel.permalink}}/article/{{article.permalink}}/page/{{content.previous_page}}">Previous</a>
+{% endif %}
+Contents
+{% if content.not_last? %}
+<a href="{{channel.permalink}}/article/{{article.permalink}}/page/{{content.next_page}}">Next</a>
+{% endif %}')
     
     create_table "articles", :force => true do |t|
       t.string :title, :null => false

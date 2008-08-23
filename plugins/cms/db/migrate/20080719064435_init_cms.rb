@@ -28,8 +28,9 @@ class InitCms < ActiveRecord::Migration
     
     create_table "articles", :force => true do |t|
       t.string :title, :null => false
-      t.string :url, :sub_title, :display_title, :permalink, :author, :origin, :source
+      t.string :display_title, :sub_title, :permalink, :author, :source
       t.text :excerpt
+      t.string :redirect_url
       t.integer :status
       t.integer :channel_id
       t.timestamps
@@ -39,6 +40,7 @@ class InitCms < ActiveRecord::Migration
 
     create_table "contents", :force => true do |t|
       t.text    :body
+      t.integer :position, :default => 0
       t.integer :article_id,:null => false
       t.timestamps
     end

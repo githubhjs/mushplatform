@@ -48,24 +48,24 @@ class ReadnovelCrawler
   end
   
   def parse_article_summary(summary_path)
-    return if CrawlerArticle.find_by_source_url("#{Host}#{summary_path}")
+    return if Article.find_by_source("#{Host}#{summary_path}")
     iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
     summary_doc =  hpricot_doc("#{Host}#{summary_path}")
     unless summary_doc.nil?
-      article = CrawlerArticle.new
-      article.source_url="#{Host}#{summary_path}"
+      article = Article.new
+      article.source="#{Host}#{summary_path}"
       begin
         article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
 #     article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
       summary_div = summary_doc.search("//div[@class ='xiangxi']").first
       li_tags = (summary_div/'ul/li')
       article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
-      article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
-      article.summary = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
+#      article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
+      article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
       rescue Excption => e
        CrawLogger.logger(e.message) 
       end
-      article.site_id = site.id
+#      article.site_id = site.id
       article.save
       catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
       parse_artilce_catalog(catalog_path,article)
@@ -87,12 +87,12 @@ class ReadnovelCrawler
     detail_doc = hpricot_doc(detail_url)
     iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
     unless detail_doc.nil?
-      article_content = ArticleContent.new
-      article_content.catelog_index = index
-      article_content.article_id = article.id
+#      article_content = Content.new
+#      article_content.catelog_index = index
+#      article_content.article_id = article.id
       content_div = detail_doc.search("//div[@class='shuneirong']")
-      article_content.catelog_name = iconv.iconv((content_div/'h1/a').first.inner_html)
-      article_content.content = (content_div/'p').map do |p|
+#      article_content.catelog_name = iconv.iconv((content_div/'h1/a').first.inner_html)
+      content = (content_div/'p').map do |p|
         begin
          iconv.iconv(p.inner_html)
         rescue Exception => e         
@@ -100,7 +100,7 @@ class ReadnovelCrawler
           ''
         end
       end.join(' ')
-      article_content.save
+      article.contents.create(:position => index, :body => content)
     end
   end
   

@@ -45,8 +45,8 @@ Contents
       t.integer :channel_id
       t.timestamps
     end
-    Article.create(:title => "I'm a article", :permalink => 'article-one', :author => 'someone', :channel_id => 1)
-    Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
+#    Article.create(:title => "I'm a article", :permalink => 'article-one', :author => 'someone', :channel_id => 1)
+#    Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
 
     create_table "contents", :force => true do |t|
       t.string :title

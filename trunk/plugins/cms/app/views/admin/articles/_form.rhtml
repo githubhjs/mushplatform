@@ -24,7 +24,7 @@
   </tr>  
   <tr class="form-field">
     <th scope="row" valign="top"><label for="body">Body</label></th>
-    <td><%= text_area 'article', 'body', :cols => 65 %></td>
+    <td><%= text_area_tag 'body', @article.body, :rows => 20, :cols => 65 %></td>
   </tr>
 </table>
 <p class="submit">

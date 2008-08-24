@@ -1,7 +1,7 @@
 class CreateSites < ActiveRecord::Migration
   
   def self.up
-    create_table :sites do |t|
+    create_table :sites, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string   :site_name
       t.string   :site_url,:limit => 255
       t.integer  :status,:state,:default => 0

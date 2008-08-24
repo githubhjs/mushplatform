@@ -1,6 +1,6 @@
 class InitCms < ActiveRecord::Migration
   def self.up
-    create_table "channels", :force => true do |t|
+    create_table "channels", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :name, :null => false
       t.string :permalink
       t.text :body
@@ -9,6 +9,9 @@ class InitCms < ActiveRecord::Migration
       t.integer :channels_count, :default => 0
       t.timestamps
     end
+    add_index "channels", :name
+    add_index "channels", :permalink
+    add_index "channels", :parent_id
     index = Channel.create(:name => 'index', :permalink => '/', :body => '[[list_article_by_channel]]', :template_id => 1)
 #    index.add_child(news = Channel.create(:name => 'news', :permalink => '/news', :template_id => 1))
 #    index.add_child(vendors = Channel.create(:name => 'vendors', :permalink => '/vendors'))
@@ -17,13 +20,13 @@ class InitCms < ActiveRecord::Migration
 #    vendors.add_child(Channel.create(:name => 'google', :permalink => '/vendors/google'))
 #    vendors.add_child(Channel.create(:name => 'yahoo', :permalink => '/vendors/yahoo'))
     
-    create_table "templates", :force => true do |t|
+    create_table "templates", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :name, :null => false
       t.string :category
       t.text :body
       t.timestamps
     end
-    Template.create(:name => 'Default Layout', :category => 'Layout', :body => '<div>HEADER</div><div>{{content}}</div><div>FOOTER</div>')
+    Template.create(:name => 'Default Layout', :category => 'Layout', :body => '<p>HEADER</p><div>{{content}}</div><p>FOOTER</p>')
     Template.create(:name => 'Article', :category => 'Template', :body => '<h2>{{article.title}}</h2>
 <h4>{{article.subtitle}}</h4>
 <div>{{article.author}}</div>
@@ -36,7 +39,7 @@ Contents
 <a href="{{channel.permalink}}/article/{{article.permalink}}/page/{{content.next_page}}">Next</a>
 {% endif %}')
     
-    create_table "articles", :force => true do |t|
+    create_table "articles", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :title, :null => false
       t.string :display_title, :sub_title, :permalink, :author, :source
       t.text :excerpt
@@ -45,18 +48,21 @@ Contents
       t.integer :channel_id
       t.timestamps
     end
+    add_index "articles", :channel_id
+    add_index "articles", :permalink
 #    Article.create(:title => "I'm a article", :permalink => 'article-one', :author => 'someone', :channel_id => 1)
 #    Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
 
-    create_table "contents", :force => true do |t|
+    create_table "contents", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :title
       t.text    :body
       t.integer :page, :default => 0
       t.integer :article_id,:null => false
       t.timestamps
     end
+    add_index "contents", [:article_id, :page]
     
-    create_table "assets", :force => true do |t|
+    create_table "assets", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :name, :null => false
       t.string :type, :content_type, :filename, :path, :category
       t.integer :parent_id, :size, :width, :height

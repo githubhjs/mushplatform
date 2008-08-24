@@ -1,6 +1,6 @@
 class CreateVocations < ActiveRecord::Migration
   def self.up
-    create_table :vocations do |t|
+    create_table :vocations, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :vocation_name,:null => false
     end
     %w{保险 银行 证券 基金 通讯 汽车 制造 房地产  医疗与健康 教育 媒体 政府 商业

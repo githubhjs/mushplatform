@@ -1,7 +1,7 @@
 class CreateUserProfiles < ActiveRecord::Migration
   
   def self.up
-    create_table :user_profiles do |t|
+    create_table :user_profiles, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string   :real_name
       t.integer  :user_id,:null => false
       t.string   :photo

@@ -17,11 +17,17 @@ class CmsController < ApplicationController
   end
   
   def recognize_channel(path)
+    if path.length > 1
+      page = path.delete_at(path.length-1)
+      path.delete("page")
+    else
+      page = params[:page]
+    end
     channel = Channel.find_by_permalink("/#{recognize_permalink(path)}")
     return nil, nil unless channel
     if channel.template_id
       channel_layout = channel.template.body
-      content = Liquid::Template.parse(channel.body).render('page' => params[:page])
+      content = Liquid::Template.parse(channel.body).render('page' => page)
     else
       channel_layout = channel.body
     end

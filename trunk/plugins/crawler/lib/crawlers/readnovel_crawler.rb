@@ -70,7 +70,7 @@ class ReadnovelCrawler
         article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
 #       article.site_id = site.id
         article.save
-        CrawLogger.logger("Fetched article #{article.title}")
+        CrawLogger.logger("Fetched article [#{category}] ##{article.id} #{article.title}")
         catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
         parse_artilce_catalog(catalog_path,article)
       rescue Exception => e
@@ -101,13 +101,14 @@ class ReadnovelCrawler
       title = iconv.iconv((content_div/'h1/a').first.inner_html)
       content = (content_div/'p').map do |p|
         begin
-         iconv.iconv(p.inner_html)
+         iconv.iconv(p.to_html)
         rescue Exception => e         
           CrawLogger.logger(e.message) 
         end
       end.join(' ')
-      article.contents.create(:title => title, :body => content, :page => index)
-      CrawLogger.logger("Fetched article content #{title}")
+      article_content = article.contents.create(:title => title, :body => content, :page => index)
+#      article_content = Content.create(:title => title, :body => content, :page => index, :article_id => article.id)
+      CrawLogger.logger("Fetched article content ##{article_content.id} #{title}")
     end
   end
   

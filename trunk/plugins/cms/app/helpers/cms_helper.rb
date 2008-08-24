@@ -24,6 +24,18 @@ module CmsHelper
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink} }
   end
 
+  def channel_link(channel)
+    channel = Channel.find(channel['id'])
+    channel['permalink'] = channel['permalink'] ? channel['permalink'] : "/channel/#{channel['id']}"
+    channel_url = channel['permalink'] == '/' ? '' : channel['permalink']
+    link_to channel['name'], channel_url
+  end
+  
+  def list_channels(args = {})
+    channel_id = args.delete(:channel_id) || 1
+    channel = Channel.find(channel_id)
+    {'channels' => channel.all_children}
+  end
 
   
 end

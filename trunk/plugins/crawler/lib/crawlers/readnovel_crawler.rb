@@ -111,13 +111,22 @@ class ReadnovelCrawler
 #      article_content.article_id = article.id
       content_div = detail_doc.search("//div[@class='shuneirong']")
       title = iconv.iconv((content_div/'h1/a').first.inner_html)
-      content = (content_div/'p').map do |p|
-        begin
-         iconv.iconv(p.to_html)
-        rescue Exception => e         
-          CrawLogger.logger(e.message) 
-        end
-      end.join(' ')
+      elements_p = (content_div/'p')
+      if elements_p.length > 0
+        content = elements_p.map do |p|
+          begin
+           iconv.iconv(p.to_html)
+          rescue Exception => e         
+            CrawLogger.logger(e.message) 
+          end
+        end.join(' ')
+      else
+        (content_div/'iframe').remove
+        (content_div/'h1').remove
+        (content_div/'script').remove
+        (content_div/'a').remove
+        content = iconv.iconv(content_div.inner_html)
+      end
       article_content = article.contents.create(:title => title, :body => content, :page => index)
 #      article_content = Content.create(:title => title, :body => content, :page => index, :article_id => article.id)
       CrawLogger.logger("Fetched article content ##{article_content.id} #{title}")

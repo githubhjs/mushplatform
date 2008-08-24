@@ -8,7 +8,7 @@ class CmsController < ApplicationController
   
   def dispatch
     path = params[:path]
-    if path[path.length - 2] == 'article' or path[path.length - 4] == 'article'
+    if path.index('article')
       channel_layout, content = recognize_article(path)
     else
       channel_layout, content = recognize_channel(path)
@@ -36,14 +36,8 @@ class CmsController < ApplicationController
 
   def recognize_article(path)
     begin
-      case path.length 
-      when 3
-        article_id = path.last
-        content_page = 1
-      else
-        article_id = path[2]
-        content_page = path.last
-      end
+      article_id = path.at(path.index('article') + 1)
+      content_page = path.index('page') ? path.last : 1
       
       case article_id
       when /^(\d*)$/

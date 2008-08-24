@@ -19,18 +19,30 @@ class ReadnovelCrawler
   end
   
   def fetch
-    Navigate_Url.each do |path|
-      puts "#{Host}#{path}"
-      doc = hpricot_doc("#{Host}#{path}")
-      parse_article_pages(doc,path)
+#    Navigate_Url.each do |path|
+#      puts "#{Host}#{path}"
+#      doc = hpricot_doc("#{Host}#{path}")
+#      parse_article_pages(doc,path)
+#    end
+    doc = hpricot_doc("http://www.readnovel.com/all.html")
+    doc.search("//div[@class='bothall']/table/tr/td/a").each do |a|
+      archive = a.attributes['href']
+      parse_archive_pages(archive)
     end
     return true
   end  
  
   private
+  
+  def parse_archive_pages(archive)
+    doc = hpricot_doc("#{Host}#{archive}")
+    doc.search("//table[@cellpadding='3']/tr/td/a").each do |a|
+      summary_path = a.attributes['href']
+      parse_article_summary(summary_path)
+    end
+  end
  
   def parse_article_pages(doc,path)
-    debugger
     return if doc.nil?
     page_div = doc.search("//div[@class='Pager']").first
     max_page = page_div.to_s.scan(/\d+(?=\.html)/).map{|p|p.to_i}.max

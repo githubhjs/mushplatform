@@ -4,6 +4,10 @@ module CmsHelper
 
   # Scriptlets
   def show_html(args = {})
+    template_name = args.delete(:template)
+    if template_name
+      return Template.find_by_name(template_name).body 
+    end
   end
   
   def list_channels(args = {})
@@ -41,6 +45,11 @@ module CmsHelper
     link_to article['title'], article_permalink(article)
   end
   
+  def content_link(content)
+    article = Article.find(content['article_id'])
+    link_to content['title'], "#{article_permalink(article.to_liquid)}/page/#{content['page']}"
+  end
+  
   def channel_link_by_article(article)
     channel = Channel.find(article['channel_id'])
     channel_link channel.to_liquid
@@ -53,6 +62,10 @@ module CmsHelper
   
   def channel_link(channel)
     link_to channel['name'], channel_permalink(channel)
+  end
+  
+  def list_contents(article)
+    article.contents.find(:all, :select => "id, title, page, article_id")
   end
   
 end

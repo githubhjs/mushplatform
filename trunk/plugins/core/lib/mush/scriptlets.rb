@@ -24,6 +24,10 @@ module Mush
       remove_scriptlet(args['name'])
       @@scriptlets_registry[args['name']] = scriptlet
     end
+    
+    def get_scriptlet(name)
+      Scriptlet.find_by_name(name)
+    end
 
     def remove_scriptlet(name)
       @@scriptlets_registry.delete(name)

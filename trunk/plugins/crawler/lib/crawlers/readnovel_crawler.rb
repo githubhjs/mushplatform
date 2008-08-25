@@ -39,6 +39,8 @@ class ReadnovelCrawler
     doc.search("//table[@cellpadding='3']/tr/td/a").each do |a|
       summary_path = a.attributes['href']
       parse_article_summary(summary_path)
+      #CrawLogger.logger("Pause 5 secends ...")
+      #sleep 5
     end
   end
  
@@ -61,32 +63,38 @@ class ReadnovelCrawler
   
   def parse_article_summary(summary_path)
     return if Article.find_by_source("#{Host}#{summary_path}")
-    iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
+    iconv = Iconv.new("UTF-8//IGNORE","GBK//IGNORE")
     summary_doc =  hpricot_doc("#{Host}#{summary_path}")
     unless summary_doc.nil?
       article = Article.new
       article.source="#{Host}#{summary_path}"
       begin
+#        CrawLogger.logger(summary_path)
         category = iconv.iconv(summary_doc.search("//div[@class='left_list']/a")[1].inner_html)
+#        CrawLogger.logger(category)
         index_channel = Channel.find(1)
         current_channel = Channel.find_by_name(category)
         index_channel.add_child(current_channel = Channel.create(:name => category, :template_id => 1)) unless current_channel
         article.channel_id = current_channel.id
         
         article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
+#        CrawLogger.logger(article.title)
 #       article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
         summary_div = summary_doc.search("//div[@class ='xiangxi']").first
         li_tags = (summary_div/'ul/li')
         article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
+#        CrawLogger.logger(article.author)
 #       article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
         article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
+#        CrawLogger.logger(article.excerpt)
 #       article.site_id = site.id
         article.save
         CrawLogger.logger("Fetched article [#{category}] ##{article.id} #{article.title}")
         catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
         parse_artilce_catalog(catalog_path,article)
       rescue Exception => e
-        CrawLogger.logger(e.message) 
+#        CrawLogger.logger(e.message) 
+        CrawLogger.logger(e)
       end
     end
   end
@@ -138,6 +146,7 @@ class ReadnovelCrawler
     begin
       doc = Hpricot(open(url)) 
     rescue Exception => e
+      CrawLogger.logger(e)
       CrawLogger.logger(e.message)
       nil
     end

@@ -47,7 +47,7 @@ module Mush
     
     def self.migrate_scriptlets
       unless ActiveRecord::Base.connection.table_exists?('scriptlets')
-        ActiveRecord::Base.connection.create_table "scriptlets", :force => true do |t|
+        ActiveRecord::Base.connection.create_table "scriptlets", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
           t.string :name, :type_name, :template_type, :category
           t.text :template
           t.timestamps

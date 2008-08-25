@@ -32,11 +32,11 @@ class InitCms < ActiveRecord::Migration
 <div>{{article.author}}</div>
 <div>{{content.body}}</div>
 {% if content.not_first? %}
-<a href="{{channel.permalink}}/article/{{article.permalink}}/page/{{content.previous_page}}">Previous</a>
+<a href="{{article | article_permalink}}/page/{{content.previous_page}}">Previous</a>
 {% endif %}
 Contents
 {% if content.not_last? %}
-<a href="{{channel.permalink}}/article/{{article.permalink}}/page/{{content.next_page}}">Next</a>
+<a href="{{article | article_permalink}}/page/{{content.next_page}}">Next</a>
 {% endif %}')
     
     create_table "articles", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|

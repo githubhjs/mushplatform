@@ -11,12 +11,16 @@
     <td><%= text_field 'channel', 'name' %></td>
   </tr>
   <tr class="form-field">
+    <th scope="row" valign="top"><label for="permalink">Permalink</label></th>
+    <td><%= text_field 'channel', 'permalink' %></td>
+  </tr>
+  <tr class="form-field">
     <th scope="row" valign="top"><label for="template">Template</label></th>
     <td><%= select("channel", "template_id", template_options, { :include_blank => true }) %> <%= link_to 'Edit Template', :controller => 'admin/templates', :action => 'edit', :id => @channel.template_id %></td>
   </tr>
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="permalink">Permalink</label></th>
-    <td><%= text_field 'channel', 'permalink' %></td>
+    <th scope="row" valign="top"><label for="article_template">Article Template</label></th>
+    <td><%= select("channel", "article_template_id", template_options, { :include_blank => true }) %> <%= link_to 'Edit Template', :controller => 'admin/templates', :action => 'edit', :id => @channel.article_template_id %></td>
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="body">Body</label></th>

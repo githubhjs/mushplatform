@@ -51,15 +51,17 @@ class CmsController < ApplicationController
       return channel_layout, content
     end
     channel = article.channel
-    if channel.template_id
-      channel_layout = channel.template.body
-    else
-      channel_layout = channel.body
-    end
-    template = Template.find_by_name('Article')
-    article_template = template.body if template
-    article_template = Liquid::Template.file_system.read_template_file('article') unless article_template
-    content = Liquid::Template.parse(article_template).render('article' => article, 'content' => article_content, 'channel' => article.channel)
+#    if channel.template_id
+#      channel_layout = channel.template.body
+#    else
+#      channel_layout = channel.body
+#    end
+#    template = Template.find_by_name('Article')
+#    article_template = template.body if template
+#    article_template = Liquid::Template.file_system.read_template_file('article') unless article_template
+#    content = Liquid::Template.parse(article_template).render('article' => article, 'content' => article_content, 'channel' => article.channel)
+    channel_layout = "{{content}}"
+    content = Liquid::Template.parse(channel.article_template.body).render('article' => article, 'content' => article_content, 'channel' => article.channel)
     return channel_layout, content
   end
   

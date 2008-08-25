@@ -2,6 +2,10 @@ module CmsHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
 
+  # Scriptlets
+  def show_html(args = {})
+  end
+  
   def list_channels(args = {})
     channel_id = args.delete(:channel_id) || 1
     channel = Channel.find(channel_id)
@@ -25,6 +29,7 @@ module CmsHelper
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
   
+  # Helper or Filter
   def article_permalink(article)
     channel = Channel.find(article['channel_id'])
     base_url = channel_permalink(channel.to_liquid)

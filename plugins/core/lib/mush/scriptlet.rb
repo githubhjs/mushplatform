@@ -32,7 +32,7 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
       # which include the parameters for template using
       vars = params ? scriptlet_type.function.call(params) : scriptlet_type.function.call
     rescue Exception => e
-      return "Scriptlet #{scriptlet_type.name} error"
+      return "Scriptlet #{scriptlet_type.name} error : #{e}"
     end
     if template_type == 'fs'
       tmplt = Liquid::Template.file_system.read_template_file(template) 

@@ -50,7 +50,7 @@ DEPR
   
     def path_for(page)
       path = @options[:path]
-      path = "#{path}/page/#{page}" unless page == 1
+      path = "#{path}/page/#{page}"
       path = path.gsub(/\/\//, '/')
       path
     end

@@ -65,7 +65,8 @@ module Mush
               params = eval("{#{params}}")
             end
           end
-          scriptlet = @@scriptlets_registry[name]
+#          scriptlet = @@scriptlets_registry[name]
+          scriptlet = get_scriptlet(name)
           scriptlet.params = params if scriptlet
           return scriptlet
         end

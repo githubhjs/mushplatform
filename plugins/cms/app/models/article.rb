@@ -15,7 +15,6 @@ class Article < ActiveRecord::Base
   
   def to_liquid
      atts = self.attributes.stringify_keys
-     atts['permalink'] = id unless permalink
      atts
   end   
 end

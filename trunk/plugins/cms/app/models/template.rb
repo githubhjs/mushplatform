@@ -1,3 +1,3 @@
-class Template < ActiveRecord::Base
+class Template < CachedModel
   has_one :channel
 end

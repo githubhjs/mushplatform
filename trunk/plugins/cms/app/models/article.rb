@@ -1,4 +1,4 @@
-class Article < ActiveRecord::Base
+class Article < CachedModel
   partial_updates = true
 
   has_many :contents, :dependent => :destroy

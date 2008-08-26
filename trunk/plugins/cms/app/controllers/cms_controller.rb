@@ -62,7 +62,7 @@ class CmsController < ApplicationController
 #    content = Liquid::Template.parse(article_template).render('article' => article, 'content' => article_content, 'channel' => article.channel)
     contents = list_contents(article)
     channel_layout = "{{content}}"
-    content = Liquid::Template.parse(channel.article_template.body).render('article' => article, 'content' => article_content, 'channel' => article.channel, 'contents' => contents)
+    content = Liquid::Template.parse(channel.article_template.body).render('article' => article, 'content' => article_content, 'channel' => channel, 'contents' => contents)
     return channel_layout, content
   end
   

@@ -1,4 +1,4 @@
-class Asset < ActiveRecord::Base
+class Asset < CachedModel
   has_attachment :storage => :file_system
   
   def filename_for_index

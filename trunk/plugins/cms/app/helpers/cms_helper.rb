@@ -47,6 +47,7 @@ module CmsHelper
   
   def content_link(content)
     article = Article.find(content['article_id'])
+    "#{article_permalink(article.to_liquid)}/page/#{content['page']}"
     link_to content['title'], "#{article_permalink(article.to_liquid)}/page/#{content['page']}"
   end
   

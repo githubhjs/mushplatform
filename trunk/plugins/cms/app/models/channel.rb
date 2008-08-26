@@ -1,4 +1,4 @@
-class Channel < ActiveRecord::Base
+class Channel < CachedModel
   acts_as_nested_set :order => "id", :counter_cache => true
   Channel.include_root_in_json = false
   belongs_to :template

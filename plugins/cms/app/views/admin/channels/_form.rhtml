@@ -23,6 +23,10 @@
     <td><%= select("channel", "article_template_id", template_options, { :include_blank => true }) %> <%= link_to 'Edit Template', :controller => 'admin/templates', :action => 'edit', :id => @channel.article_template_id %></td>
   </tr>
   <tr class="form-field">
+    <th scope="row" valign="top"><label for="content_template">Content Template</label></th>
+    <td><%= select("channel", "content_template_id", template_options, { :include_blank => true }) %> <%= link_to 'Edit Template', :controller => 'admin/templates', :action => 'edit', :id => @channel.content_template_id %></td>
+  </tr>
+  <tr class="form-field">
     <th scope="row" valign="top"><label for="body">Body</label></th>
     <td><%= text_area 'channel', 'body', :cols => 65 %></td>
   </tr>

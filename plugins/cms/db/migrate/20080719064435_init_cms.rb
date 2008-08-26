@@ -26,7 +26,7 @@ class InitCms < ActiveRecord::Migration
       t.text :body
       t.timestamps
     end
-    Template.create(:name => 'Default Layout', :category => 'Layout', :body => '<p>HEADER</p><div>{{content}}</div><p>FOOTER</p>')
+    Template.create(:name => 'Layout', :category => 'Layout', :body => '<p>HEADER</p><div>{{content}}</div><p>FOOTER</p>')
     Template.create(:name => 'Article', :category => 'Template', :body => '<h2>{{article.title}}</h2>
 <h4>{{article.subtitle}}</h4>
 <div>{{article.author}}</div>
@@ -38,6 +38,7 @@ Contents
 {% if content.not_last? %}
 <a href="{{article | article_permalink}}/page/{{content.next_page}}">Next</a>
 {% endif %}')
+    Template.create(:name => 'Content', :category => 'Template', :body => '')
     
     create_table "articles", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :title, :null => false

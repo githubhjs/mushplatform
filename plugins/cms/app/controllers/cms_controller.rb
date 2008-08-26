@@ -9,7 +9,9 @@ class CmsController < ApplicationController
   
   def dispatch
     path = params[:path]
-    if path.index('article')
+    if path.index('content')
+      channel_layout, content = recognize_content(path)
+    elsif path.index('article')
       channel_layout, content = recognize_article(path)
     else
       channel_layout, content = recognize_channel(path)
@@ -63,7 +65,31 @@ class CmsController < ApplicationController
 #    content = Liquid::Template.parse(article_template).render('article' => article, 'content' => article_content, 'channel' => article.channel)
     contents = list_contents(article)
     channel_layout = "{{content}}"
-    content = Liquid::Template.parse(channel.article_template.body).render('article' => article, 'content' => article_content, 'channel' => channel, 'contents' => contents)
+    content = Liquid::Template.parse(channel.article_template.body).render('channel' => channel, 'article' => article, 'content' => article_content, 'contents' => contents)
+    return channel_layout, content
+  end
+
+  def recognize_content(path)
+    begin
+      article_id = path.at(path.index('article') + 1)
+      
+      case article_id
+      when /^(\d*)$/
+        article = Article.find(article_id)
+      else
+        article = Article.find_by_permalink(article_id)
+      end
+    rescue
+      # if couldn't find article, using channel's 
+      # template to render 'Article Not Found'
+      channel_layout, content = recognize_channel(path[0, 1])
+      content = 'Article Not Found'
+      return channel_layout, content
+    end
+    channel = article.channel
+    contents = list_contents(article)
+    channel_layout = "{{content}}"
+    content = Liquid::Template.parse(channel.content_template.body).render('channel' => channel, 'article' => article, 'contents' => contents)
     return channel_layout, content
   end
   

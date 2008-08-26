@@ -3,6 +3,7 @@ class Channel < CachedModel
   Channel.include_root_in_json = false
   belongs_to :template
   belongs_to :article_template, :class_name => "Template", :foreign_key => "article_template_id"
+  belongs_to :content_template, :class_name => "Template", :foreign_key => "content_template_id"
   has_many :articles
   
   def after_find
@@ -12,6 +13,7 @@ class Channel < CachedModel
   
   def before_create
     self.article_template_id = 2
+    self.content_template_id = 3
   end
   
   def self.root_nodes

@@ -6,8 +6,9 @@ class Content < CachedModel
   end
   
   def not_last?
-    last_content = Content.find_by_article_id_and_page(article_id, page+1)
-    last_content ? true : false
+#    last_content = Content.find_by_article_id_and_page(article_id, page+1)
+#    last_content ? true : false
+    (page < article.contents.size) ? true : false
   end
   
   def to_liquid

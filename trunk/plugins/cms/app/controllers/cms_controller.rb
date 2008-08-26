@@ -1,4 +1,5 @@
 class CmsController < ApplicationController
+#  caches_page :dispatch
   
   def index
     template = "This is {{item}}. I love [[article_list_by_all(limit=10,length=30)]] [[article_list_by_tag]]..."

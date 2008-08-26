@@ -6,7 +6,7 @@ module CmsHelper
   def show_html(args = {})
     template_name = args.delete(:template)
     if template_name
-      return Template.find_by_name(template_name).body 
+      return Template.find_by_name(template_name).body
     end
   end
   

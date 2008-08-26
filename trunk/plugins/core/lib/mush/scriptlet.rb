@@ -40,9 +40,9 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
       tmplt = template
     end
     if tmplt
-      Liquid::Template.parse(tmplt).render vars 
+      Liquid::Template.parse(tmplt).render vars.merge(context.scopes[0])
     else
-      vars.to_s
+      Liquid::Template.parse(vars.to_s).render context.scopes[0]
     end
   end
 

@@ -1,4 +1,4 @@
-class Content < ActiveRecord::Base
+class Content < CachedModel
   belongs_to :article
   
   def not_first?

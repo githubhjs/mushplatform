@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
   def own_roles
     roles = []
     self.groups.each do |u_g| 
-      roles += (u_g.groups||[])
+      roles += (u_g.roles||[])
       if inherit_group =  u_g.inherit_group
-        roles +=  (inherit_group.groups||[])
+        roles +=  (inherit_group.roles||[])
       end
     end
     roles

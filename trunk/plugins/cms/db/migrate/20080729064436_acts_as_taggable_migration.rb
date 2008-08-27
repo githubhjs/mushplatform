@@ -1,4 +1,5 @@
 class ActsAsTaggableMigration < ActiveRecord::Migration
+  
   def self.up
     create_table :tags, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.column :name, :string
@@ -23,4 +24,5 @@ class ActsAsTaggableMigration < ActiveRecord::Migration
     drop_table :taggings
     drop_table :tags
   end
+  
 end

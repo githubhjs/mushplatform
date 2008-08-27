@@ -1,6 +1,10 @@
 class Asset < CachedModel
   has_attachment :storage => :file_system
   
+  def dir?
+    File.directory?(name)
+  end
+  
   def filename_for_index
     filename
   end

@@ -6,9 +6,11 @@ class InitCms < ActiveRecord::Migration
       t.text :body
       t.integer :lft, :rgt
       t.integer :parent_id, :template_id
+      t.integer :article_template_id,:content_template_id
       t.integer :channels_count, :default => 0
       t.timestamps
     end
+    Channel.update_all("content_template_id = 3,article_template_id = 2")
     add_index "channels", :name
     add_index "channels", :permalink
     add_index "channels", :parent_id

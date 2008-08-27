@@ -79,6 +79,7 @@ class Admin::UsersController < ApplicationController
     end
   end
   
+  
  
   # DELETE /users/1
   # DELETE /users/1.xml

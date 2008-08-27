@@ -17,14 +17,15 @@ class ApplicationController < ActionController::Base
     end
     flash[:warning]='Please login to continue'
     session[:return_to]=request.request_uri
-    redirect_to :controller => "user", :action => "login"
+    redirect_to "/login"
     return false 
   end
-
+  
   def current_user
     session[:user]
   end
 
+  
   def redirect_to_stored
     if return_to = session[:return_to]
       session[:return_to]=nil
@@ -33,5 +34,11 @@ class ApplicationController < ActionController::Base
       redirect_to :controller=>'user', :action=>'welcome'
     end
   end
-
+  
+  
+  def permission_denied
+    flash[:error] = "Plase login"
+    redirect_to "/login"
+  end
+  
 end

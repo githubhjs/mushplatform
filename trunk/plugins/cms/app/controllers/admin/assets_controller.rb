@@ -1,14 +1,20 @@
 class Admin::AssetsController < ApplicationController
   layout 'admin'
+  BASE_PATH = "#{RAILS_ROOT}/public/assets"
   
   # GET /assets
   # GET /assets.xml
   def index
     @assets = Asset.paginate :page => params[:page], :order => 'created_at DESC'
+    start_path = params[:path] ? "#{BASE_PATH}/#{params[:path]}" : BASE_PATH
+    @assets =  Dir.entries(start_path).sort.collect { |path|
+      absolute_path = "#{start_path}/#{path}"
+      relative_path = params[:path] ? absolute_path[start_path.index(params[:path]), absolute_path.length-1] : path
+      Asset.new(:filename => File.basename(absolute_path), :name => absolute_path, :path => relative_path, :created_at => File.atime(absolute_path))
+    }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @assets }
     end
   end
 

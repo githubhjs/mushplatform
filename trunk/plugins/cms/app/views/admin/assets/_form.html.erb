@@ -2,20 +2,12 @@
   <table class="form-table">
     <tr class="form-field form-required">
       <th scope="row" valign="top"><label for="asset_name">Asset Name</label></th>
-      <td><%= text_field 'asset', 'name' %> <%= hidden_field_tag 'id', @asset.id %>
+      <td><%= text_field 'asset', 'filename' %>
     </tr>
     <tr class="form-field">
-      <th scope="row" valign="top"><label for="asset_category">Category</label></th>
-      <td><%= text_field 'asset', 'category' %>
+      <th scope="row" valign="top"><label for="body">Body</label></th>
+      <td><%= text_area_tag 'body', @body, :rows => 20, :cols => 65 %></td>
     </tr>
-    <tr class="form-field">
-      <th scope="row" valign="top"><label for="file">File</label></th>
-      <td><%= file_field 'asset', 'uploaded_data' %></td>
-    </tr>
-    <tr class="form-field">
-      <th scope="row" valign="top"></th>
-      <td><%= image_tag @asset.public_filename if @asset.id and @asset.content_type.index('image') %></td>
-    </tr>    
   </table>
 
   <p class="submit">

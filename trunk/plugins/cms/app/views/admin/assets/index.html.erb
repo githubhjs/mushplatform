@@ -42,7 +42,6 @@
       <th scope="col">Name</th>
       <th scope="col">File Name</th>
       <th scope="col">Type</th>
-      <th scope="col">Category</th>
       <th scope="col">Date</th>
 
       </tr>
@@ -51,10 +50,9 @@
         <% for asset in @assets -%>
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= asset.id %>" /></th>
-          <td><strong><%= link_to asset.name, {:controller => 'admin/assets', :action => 'edit', :id => asset.id}, {:class =>'tow=title'} %></strong></td>
-          <td><%= asset.filename %></td>
+          <td><strong><%= link_to asset.filename, {:controller => 'admin/assets', :path => asset.path}, {:class =>'tow=title'} if asset.dir? %></strong><%= asset.filename unless asset.dir?%></td>
+          <td><%= asset.path %></td>
           <td><%= asset.content_type %></td>
-          <td><a href=''><%= asset.category %></a></td>
           <td><abbr title="<%= asset.created_at %>"><%= asset.created_at %></abbr></td>
         </tr>
         <% end -%>
@@ -66,7 +64,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-      <%= will_paginate @assets %>
+      <%#= will_paginate @assets %>
     </div>
 
     <br class="clear" />

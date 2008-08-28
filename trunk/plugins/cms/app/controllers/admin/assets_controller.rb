@@ -6,11 +6,33 @@ class Admin::AssetsController < ApplicationController
   # GET /assets.xml
   def index
     @assets = Asset.paginate :page => params[:page], :order => 'created_at DESC'
-    start_path = params[:path] ? "#{BASE_PATH}/#{params[:path]}" : BASE_PATH
+    start_path = (params[:path] and params[:path].length > 0) ? "#{BASE_PATH}/#{params[:path]}" : BASE_PATH
+    start_path = BASE_PATH if start_path == "#{BASE_PATH}/.."
+    start_path = BASE_PATH if start_path == "#{BASE_PATH}/."
     @assets =  Dir.entries(start_path).sort.collect { |path|
       absolute_path = "#{start_path}/#{path}"
-      relative_path = params[:path] ? absolute_path[start_path.index(params[:path]), absolute_path.length-1] : path
-      Asset.new(:filename => File.basename(absolute_path), :name => absolute_path, :path => relative_path, :created_at => File.atime(absolute_path))
+#      relative_path = params[:path] ? absolute_path[start_path.index(params[:path]), absolute_path.length-1] : path
+      
+      # file relative path
+#      relative_path = (params[:path] and params[:path].length > 0) ? path : "#{params[:path]}/#{path}"
+      relative_path = absolute_path[BASE_PATH.length+1, absolute_path.length]
+        
+      # file absolute path
+#      absolute_path = "#{BASE_PATH}/#{relative_path}"
+      
+      # file parent directory path
+      if relative_path.index('/..')
+        parent_path = relative_path[0,relative_path.length-3]
+        parent_path = parent_path.split('/')
+        parent_path.delete(parent_path.last)
+        parent_path = parent_path.join('/')
+      elsif relative_path.index('/.')
+        parent_path = relative_path[0,relative_path.length-2] 
+      else
+        parent_path = relative_path
+      end
+      
+      Asset.new(:filename => File.basename(absolute_path), :name => absolute_path, :path => parent_path, :created_at => File.atime(absolute_path))
     }
 
     respond_to do |format|

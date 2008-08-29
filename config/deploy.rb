@@ -54,6 +54,7 @@ namespace "db" do
   task :symlink_database_yml do
     run "ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml" 
     run "ln -nfs #{deploy_to}/#{shared_dir}/vendor/rails #{release_path}/vendor/rails" 
+    run "ln -nfs #{deploy_to}/#{shared_dir}/assets #{release_path}/public/assets" 
   end
 
 end

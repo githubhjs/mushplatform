@@ -2,7 +2,7 @@
   <table class="form-table">
     <tr class="form-field form-required">
       <th scope="row" valign="top"><label for="asset_name">Asset Name</label></th>
-      <td><%= text_field 'asset', 'filename' %>
+      <td><%= text_field_tag 'filename', @asset.filename, :disabled => 'disabled' %><%= hidden_field_tag 'path', @asset.path  %></td>
     </tr>
     <tr class="form-field">
       <th scope="row" valign="top"><label for="body">Body</label></th>
@@ -12,5 +12,5 @@
 
   <p class="submit">
     <%= submit_tag 'Save Asset' %>
-    or <%= link_to 'Cancel', assets_path, :class => 'cancel' %>
+    or <%= link_to 'Cancel', {:action => 'index', :path => @asset.parent_path},  :class => 'cancel' %>
   </p>

@@ -1,7 +1,8 @@
 require 'rails_generator'
 require 'rails_generator/scripts/generate'
 class Admin::SitesController < ApplicationController
-  
+  include Authorize
+  grant_to 'admin'
   layout 'admin'
   
   Site_Page_Size = 50

@@ -1,5 +1,7 @@
 require 'authorize'
 class Admin::UsersController < ApplicationController
+  include Authorize
+  grant_to 'admin'
   layout 'admin'
   # GET /users
   # GET /users.xml

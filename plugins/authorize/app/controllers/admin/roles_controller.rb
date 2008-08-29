@@ -1,4 +1,6 @@
 class Admin::RolesController < ApplicationController
+  include Authorize
+  grant_to 'admin'
   layout 'admin'
   # GET /roles
   # GET /roles.xml

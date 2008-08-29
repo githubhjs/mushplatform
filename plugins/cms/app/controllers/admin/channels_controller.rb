@@ -1,10 +1,7 @@
 class Admin::ChannelsController < ApplicationController
-  
   include Authorize
-  
-  grant_to 'admin', :only => [:index]
-  
-  
+  grant_to 'admin'
+
   layout 'admin'
   
   def index

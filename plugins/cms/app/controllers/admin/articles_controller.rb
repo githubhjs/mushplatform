@@ -1,4 +1,6 @@
 class Admin::ArticlesController < ApplicationController
+  include Authorize
+  grant_to 'admin'
   
   # GET /articles
   # GET /articles.xml

@@ -2,6 +2,8 @@ require 'shared-mime-info'
 require 'zip/zipfilesystem'
 
 class Admin::AssetsController < ApplicationController
+  include Authorize
+  grant_to 'admin'
   layout 'admin'
   BASE_PATH = "#{RAILS_ROOT}/public/assets"
   

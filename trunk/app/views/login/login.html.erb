@@ -11,6 +11,7 @@
             <td align="right">用户名：</td>
             <td>
               <%= u_field.text_field(:user_name, :class => "InpTxt" )%>
+              <%= hidden_field_tag 'admin', params[:admin] %>
             </td>
           </tr>
           <tr>

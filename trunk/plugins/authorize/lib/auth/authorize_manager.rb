@@ -50,7 +50,6 @@ module Authorize
   # action or whole controller. An empty or nil rule will always return true.
   #     permission_required('admin')
   def permission_required(rule = nil)
-    debugger
     return(false) if respond_to?(:logged_in?) && !logged_in?
     if has_permission?(rule)
       send(:permission_granted) if respond_to?(:permission_granted)
@@ -113,7 +112,6 @@ module Authorize
     class << self
       #check if the special use has auth of role_name
       def check_auth(user,role_name)
-        debugger
         return false if user.blank? || role_name.blank?
         if user.respond_to?(:authorizations)
           return user.authorizations.find{|auth|auth.e_name == role_name.strip}

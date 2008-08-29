@@ -1,4 +1,6 @@
 class Admin::TemplatesController < ApplicationController
+  include Authorize
+  grant_to 'admin'
   layout 'admin'
 
   # GET /templates

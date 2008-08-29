@@ -1,4 +1,6 @@
 class Admin::ScriptletsController < ApplicationController
+  include Authorize
+  grant_to 'admin'
   layout 'admin'
   
   # GET /scriptlets

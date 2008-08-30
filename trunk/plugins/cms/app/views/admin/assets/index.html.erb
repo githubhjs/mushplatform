@@ -47,6 +47,7 @@
       </tr>
       </thead>
       <tbody>
+        <%= hidden_field_tag 'current_path', params[:path] %>
         <% for asset in @assets -%>
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="path[<%= asset.path %>]" value="<%= asset.path %>" /></th>

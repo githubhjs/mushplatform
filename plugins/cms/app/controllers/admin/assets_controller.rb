@@ -139,20 +139,22 @@ class Admin::AssetsController < ApplicationController
   # DELETE /assets/1.xml
   def destroy
     params[:path].each{|path|
-      full_path = "#{BASE_PATH}/#{path[0]}"
-      begin
-        if File.directory?(full_path)
-          #Dir.rmdir full_path
-          FileUtils.rm_rf(full_path)
-        else
-          File.delete full_path
+      unless path.index(BASE_PATH)
+        full_path = "#{BASE_PATH}/#{path[0]}"
+        begin
+          if File.directory?(full_path)
+            #Dir.rmdir full_path
+            FileUtils.rm_rf(full_path)
+          else
+            File.delete full_path
+          end
+        rescue
         end
-      rescue
       end
     } if params[:path]
 
     respond_to do |format|
-      format.html { redirect_to(assets_url) }
+      format.html { redirect_to(:action => 'index', :path => params[:current_path] ) }
       format.xml  { head :ok }
     end
   end

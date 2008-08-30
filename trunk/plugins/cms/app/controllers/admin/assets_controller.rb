@@ -100,8 +100,10 @@ class Admin::AssetsController < ApplicationController
       filename = file.original_filename
       full_path = "#{full_dir}/#{filename}"
       File.open(full_path, "w") { |file| file.write(params[:file].read) }
-      unzip_file(full_path, full_dir) if MIME.check(full_path).subtype == 'zip'
-      File.delete full_path
+      if MIME.check(full_path).subtype == 'zip'
+        unzip_file(full_path, full_dir) 
+        File.delete full_path
+      end
     end
 
     respond_to do |format|

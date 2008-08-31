@@ -17,7 +17,7 @@ FCKConfig.AllowQueryStringDebug = false;
 FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/';
 
 FCKConfig.ToolbarSets["Simple"] = [
-	['Source','-','-','Templates'],
+	['Source','-','Templates'],
 	//['Cut','Copy','Paste','PasteWord','-','Print','SpellCheck'],
 	//['Undo','Redo','-','Find','Replace','-','SelectAll'],
 	//'/',

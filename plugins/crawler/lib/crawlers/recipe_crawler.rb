@@ -43,30 +43,40 @@ class RecipeCrawler
   end
  
   def parse_article_page(page_path,channel_id)
-    return if Article.find_by_source("#{Host}#{page_path}")
+    article =  Article.find_by_source("#{Host}#{page_path}")
     iconv = Iconv.new("UTF-8//IGNORE","GBK//IGNORE")
     doc = hpricot_doc("#{Host}#{page_path}")
     unless doc.nil?
       begin
         # save article
-        article = Article.new
-        article.source="#{Host}#{page_path}"
-        article.channel_id = channel_id
-        article.title = iconv.iconv(doc.search("//table/tbody/tr/td/h2/b").inner_html).strip
-        article.title = iconv.iconv(doc.search("//table[@width='100%']/tr/td/b")[0].inner_html).strip if article.title.length == 0
-        article.author = '孕妈咪食谱网'
-        article.save
+        unless article
+          article = Article.new 
+          article.source="#{Host}#{page_path}"
+          article.channel_id = channel_id
+          article.title = iconv.iconv(doc.search("//table/tbody/tr/td/h2/b").inner_html).strip
+          article.title = iconv.iconv(doc.search("//table[@width='100%']/tr/td/b")[0].inner_html).strip if article.title.length == 0
+          article.author = '孕妈咪食谱网'
+          article.save
+        end
         
         # save content
-        big_table = doc.search("//table/tbody/tr/td[@id='fontzoom']")
+        big_table = doc.search("//td[@class='content']")
+        big_table = doc.search("//td[@class='f14']") if big_table.length == 0
         (big_table/'table').remove
         (big_table/'link').remove
         (big_table/'style').remove
         (big_table/'script').remove
         (big_table/'div').remove
         (big_table/'a').remove
+        (big_table/'header').remove
         content = iconv.iconv(big_table.inner_html)
-        article.contents.create(:title => article.title, :body => content, :page => 1)
+        if article
+#          CrawLogger.logger(content)
+          article_content = article.contents[0]
+          article_content.update_attributes(:title => article.title, :body => content) if article_content.body.length == 0
+        else
+          article.contents.create(:title => article.title, :body => content, :page => 1)
+        end
         
         CrawLogger.logger("Fetched article [#{article.channel.name}] ##{article.id} #{article.title}")
       rescue Exception => e

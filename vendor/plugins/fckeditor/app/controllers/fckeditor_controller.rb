@@ -81,7 +81,7 @@ class FckeditorController < ActionController::Base
     end
   end
   
-  def upload_file
+  def upload
     begin
       @new_file = check_file(params[:NewFile])
       @fck_url = upload_directory_path
@@ -101,17 +101,12 @@ class FckeditorController < ActionController::Base
       @errorNumber = 110 if @errorNumber.nil?
     end
 
-    render :text => %Q'
-    <script>
-      if (window.parent.frames[\'frmUpload\']) {
-        window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});
-      }
-    </script>'
+    render :text => "<script>if (window.parent.frames[\'frmUpload\']) { window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});} </script>"
   end
 
-  def upload
-    self.upload_file
-  end
+#  def upload
+#    self.upload_file
+#  end
   
   include ActionView::Helpers::SanitizeHelper
   def check_spelling

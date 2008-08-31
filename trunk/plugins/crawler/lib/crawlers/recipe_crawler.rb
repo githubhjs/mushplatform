@@ -52,7 +52,8 @@ class RecipeCrawler
         article = Article.new
         article.source="#{Host}#{page_path}"
         article.channel_id = channel_id
-        article.title = iconv.iconv(doc.search("//table/tbody/tr/td[@height='54']/h2/b").inner_html)
+        article.title = iconv.iconv(doc.search("//table/tbody/tr/td/h2/b").inner_html).strip
+        article.title = iconv.iconv(doc.search("//table[@width='100%']/tr/td/b")[0].inner_html).strip if article.title.length == 0
         article.author = '孕妈咪食谱网'
         article.save
         

@@ -3,7 +3,7 @@ require 'fckeditor'
 require 'fckeditor_version'
 require 'fckeditor_file_utils'
 
-#FckeditorFileUtils.check_and_install
+FckeditorFileUtils.check_and_install
 
 # make plugin controller available to app
 #config.load_paths += %W(#{Fckeditor::PLUGIN_CONTROLLER_PATH} #{Fckeditor::PLUGIN_HELPER_PATH})

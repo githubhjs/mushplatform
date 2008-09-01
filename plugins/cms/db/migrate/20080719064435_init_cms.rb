@@ -59,7 +59,7 @@ Contents
     create_table "contents", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string :title
       t.text    :body
-      t.integer :page, :default => 0
+      t.integer :page, :default => 1
       t.integer :article_id,:null => false
       t.timestamps
     end

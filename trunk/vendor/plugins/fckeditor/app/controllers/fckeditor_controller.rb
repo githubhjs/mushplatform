@@ -91,7 +91,8 @@ class FckeditorController < ActionController::Base
         puts "#{ftype} is invalid MIME type"
         raise "#{ftype} is invalid MIME type"
       else
-        path = current_directory_path + "/" + @new_file.original_filename
+        filename = @new_file.original_filename
+        path = current_directory_path + "/" + filename
         File.open(path,"wb",0664) do |fp|
           FileUtils.copy_stream(@new_file, fp)
         end
@@ -101,7 +102,7 @@ class FckeditorController < ActionController::Base
       @errorNumber = 110 if @errorNumber.nil?
     end
 
-    render :text => "<script>if (window.parent.frames[\'frmUpload\']) { window.parent.frames[\'frmUpload\'].OnUploadCompleted(#{@errorNumber});} </script>"
+    render :text => "<script>window.parent.OnUploadCompleted(#{@errorNumber}, '#{@fck_url}/#{filename}', '#{}')</script>"
   end
 
 #  def upload
@@ -130,7 +131,7 @@ class FckeditorController < ActionController::Base
   
   def upload_directory_path
 #    uploaded = request.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
-    uploaded = "/#{UPLOADED}/#{params[:Type]}"
+    uploaded = "#{UPLOADED}/#{params[:Type]}"
     "#{uploaded}#{params[:CurrentFolder]}"
   end
   

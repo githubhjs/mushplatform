@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cp config/deploy_$1.rb config/deploy.rb
+cap $2

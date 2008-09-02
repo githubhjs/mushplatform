@@ -14,15 +14,24 @@
     <th scope="row" valign="top"><label for="article_author">Author</label></th>
     <td><%= text_field 'article', 'author' %></td>
   </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="article_source">Source</label></th>
+    <td><%= text_field 'article', 'source' %></td>
+  </tr>  
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_tags">Tags</label></th>
     <td><%= text_field 'article', 'tag_list' %></td>
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_status">Status</label></th>
-    <td><%= text_field 'article', 'status' %></td>
+    <td><%= select("article", "status", status_options) %></td>
   </tr>  
-
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="article_excerpt">Excerpt</label></th>
+    <td>
+        <%= text_area 'article', 'excerpt', :rows => 4, :cols => 65 %>
+    </td>
+  </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="body">Body</label></th>
     <td>

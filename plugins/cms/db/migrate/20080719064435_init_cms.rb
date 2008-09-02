@@ -49,6 +49,7 @@ Contents
       t.string :redirect_url
       t.integer :status
       t.integer :channel_id
+      t.string :cached_tag_list
       t.timestamps
     end
     add_index "articles", :channel_id

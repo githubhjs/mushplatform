@@ -1,6 +1,7 @@
 module CmsHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
+  include TagsHelper
 
   # Scriptlets
   def show_html(args = {})
@@ -31,6 +32,17 @@ module CmsHelper
     end
     permalink = channel_permalink(channel.to_liquid)
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
+  end
+  
+  def list_tags(args ={})
+    tags = []
+    tag_cloud Tag.counts, %w(tag1 tag2 tag3 tag4) do |tag, css_class|
+#      link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class
+      atts = tag.attributes.stringify_keys
+      atts['css_class'] = css_class
+      tags << atts
+    end
+    {'tags' => tags}
   end
   
   # Helper or Filter

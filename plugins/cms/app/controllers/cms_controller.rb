@@ -24,7 +24,7 @@ class CmsController < ApplicationController
     path.delete("page")
     id = path.delete('channel')
     channel = id ? Channel.find(path.first.to_i) : Channel.find_by_permalink("/#{recognize_permalink(path)}")
-    return nil, nil unless channel
+    return recognize_channel([]) unless channel
     if channel.template_id
       channel_layout = channel.template.body
       content = Liquid::Template.parse(channel.body).render('page' => page)
@@ -49,8 +49,9 @@ class CmsController < ApplicationController
     rescue
       # if couldn't find article, using channel's 
       # template to render 'Article Not Found'
-      channel_layout, content = recognize_channel(path[0, 1])
-      content = 'Article Not Found'
+#      channel_layout, content = recognize_channel(path[0, 1])
+#      content = 'Article Not Found'
+      channel_layout, content = recognize_channel([])
       return channel_layout, content
     end
     channel = article.channel

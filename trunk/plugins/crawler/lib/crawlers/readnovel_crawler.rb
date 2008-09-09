@@ -86,6 +86,7 @@ class ReadnovelCrawler
     article = Article.find_by_source(summary_path)
     iconv = Iconv.new("UTF-8//IGNORE","GBK//IGNORE")
     summary_doc =  hpricot_doc(summary_path)
+    summary_div = summary_doc.search("//div[@class ='xiangxi']").first
     unless summary_doc.nil?
       begin
         unless article

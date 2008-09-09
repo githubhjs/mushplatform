@@ -24,21 +24,42 @@ class ReadnovelCrawler
 #      doc = hpricot_doc("#{Host}#{path}")
 #      parse_article_pages(doc,path)
 #    end
-    doc = hpricot_doc("http://www.readnovel.com/all.html")
-    doc.search("//div[@class='bothall']/table/tr/td/a").each do |a|
-      archive = a.attributes['href']
-      parse_archive_pages(archive)
+
+    # from all page
+#    doc = hpricot_doc("http://www.readnovel.com/all.html")
+#    doc.search("//div[@class='bothall']/table/tr/td/a").each do |a|
+#      archive = a.attributes['href']
+#      parse_archive_pages(archive)
+#    end
+    
+    #from latest page
+    doc = hpricot_doc("http://www.readnovel.com/lastnew.html")
+    alist = doc.search("//div[@class='Pager']/a")
+    upto = alist[alist.length-2].inner_html.to_i
+    (1..upto).each do |page|
+      update_page_path = "http://www.readnovel.com/lastnew/#{page}.html"
+      parse_latest_update_pages(update_page_path)
     end
     return true
   end  
  
   private
   
+  def parse_latest_update_pages(update_page_path)
+    doc = hpricot_doc(update_page_path)
+    unless doc.nil?
+      doc.search("//span[@class='normalfont']").each{|span|
+        summary_path = span.search("//a")[0].attributes['href']
+        parse_article_summary(summary_path)
+      }    
+    end
+  end
+  
   def parse_archive_pages(archive)
     doc = hpricot_doc("#{Host}#{archive}")
     doc.search("//table[@cellpadding='3']/tr/td/a").each do |a|
       summary_path = a.attributes['href']
-      parse_article_summary(summary_path)
+      parse_article_summary("#{Host}/#{summary_path}")
       #CrawLogger.logger("Pause 5 secends ...")
       #sleep 5
     end
@@ -62,33 +83,33 @@ class ReadnovelCrawler
   end
   
   def parse_article_summary(summary_path)
-    return if Article.find_by_source("#{Host}#{summary_path}")
+    article = Article.find_by_source(summary_path)
     iconv = Iconv.new("UTF-8//IGNORE","GBK//IGNORE")
-    summary_doc =  hpricot_doc("#{Host}#{summary_path}")
+    summary_doc =  hpricot_doc(summary_path)
     unless summary_doc.nil?
-      article = Article.new
-      article.source="#{Host}#{summary_path}"
       begin
-#        CrawLogger.logger(summary_path)
-        category = iconv.iconv(summary_doc.search("//div[@class='left_list']/a")[1].inner_html)
-#        CrawLogger.logger(category)
-        index_channel = Channel.find(1)
-        current_channel = Channel.find_by_name(category)
-        index_channel.add_child(current_channel = Channel.create(:name => category, :template_id => 1)) unless current_channel
-        article.channel_id = current_channel.id
-        
-        article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
-#        CrawLogger.logger(article.title)
-#       article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
-        summary_div = summary_doc.search("//div[@class ='xiangxi']").first
-        li_tags = (summary_div/'ul/li')
-        article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
-#        CrawLogger.logger(article.author)
-#       article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
-        article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
-#        CrawLogger.logger(article.excerpt)
-#       article.site_id = site.id
-        article.save
+        unless article
+          article = Article.new 
+          article.source= summary_path
+          category = iconv.iconv(summary_doc.search("//div[@class='left_list']/a")[1].inner_html)
+          index_channel = Channel.find(1)
+          current_channel = Channel.find_by_name(category)
+          index_channel.add_child(current_channel = Channel.create(:name => category, :template_id => 1)) unless current_channel
+          article.channel_id = current_channel.id
+
+          article.title = iconv.iconv(summary_doc.search("//div[@class='readout']/h1/a").first.inner_html)
+  #        CrawLogger.logger(article.title)
+  #       article.img = summary_doc.search("//div[@class='shucansu'/img]").first.attributes['src']
+          summary_div = summary_doc.search("//div[@class ='xiangxi']").first
+          li_tags = (summary_div/'ul/li')
+          article.author = iconv.iconv((li_tags.first/'a').first.inner_html)
+  #        CrawLogger.logger(article.author)
+  #       article.created_at_site = li_tags[2].inner_html.scan(/\d{4}-\d{2}-\d{2}/).first
+          article.excerpt = iconv.iconv(summary_div.to_s).scan(/<\/strong>(.*)<br\s*\/>/m).first.first
+  #        CrawLogger.logger(article.excerpt)
+  #       article.site_id = site.id
+          article.save
+        end
         CrawLogger.logger("Fetched article [#{category}] ##{article.id} #{article.title}")
         catalog_path = summary_div.search("//div[@class='mulutu']/a").first.attributes['href']
         parse_artilce_catalog(catalog_path,article)
@@ -105,20 +126,22 @@ class ReadnovelCrawler
       catalog_li_tags = catalog_doc.search("//div[@class='mulu']/ul/li")
       catalog_hrefs = catalog_li_tags.map{|li|(li/'a').first.attributes['href']}
       catalog_hrefs.each_with_index do |detail_url,index|
-        parse_article_content(detail_url,article,index+1)
+        article_content = Content.find_by_article_id_and_page(article.id, index+1)
+        parse_article_content(detail_url,article,index+1) unless article_content
       end
     end
   end
  
   def parse_article_content(detail_url,article,index)
     detail_doc = hpricot_doc(detail_url)
-    iconv = Iconv.new("UTF-8//IGNORE","GB2312//IGNORE")
+    iconv = Iconv.new("UTF-8//IGNORE","GBK//IGNORE")
     unless detail_doc.nil?
 #      article_content = Content.new
 #      article_content.catelog_index = index
 #      article_content.article_id = article.id
       content_div = detail_doc.search("//div[@class='shuneirong']")
       title = iconv.iconv((content_div/'h1/a').first.inner_html)
+      title = title.strip if title
       elements_p = (content_div/'p')
       if elements_p.length > 0
         content = elements_p.map do |p|

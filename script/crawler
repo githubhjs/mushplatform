@@ -1,4 +1,4 @@
 #!/bin/sh
 
 ruby plugins/crawler/lib/crawlers/$1_crawler.rb &
-tail -f log/crawler.log
+#tail -f log/crawler.log

@@ -54,17 +54,17 @@ module CmsHelper
   end
 
   def article_link(article)
-    link_to article['title'], article_permalink(article)
+    link_to article['title'], article_permalink(article), :title => article['title']
   end
   
   def article_content_link(article)
-    link_to article['title'], "#{article_permalink(article)}/content"
+    link_to article['title'], "#{article_permalink(article)}/content", :title => article['title']
   end
   
   def content_link(content)
     article = Article.find(content['article_id'])
     "#{article_permalink(article.to_liquid)}/page/#{content['page']}"
-    link_to content['title'], "#{article_permalink(article.to_liquid)}/page/#{content['page']}"
+    link_to content['title'], "#{article_permalink(article.to_liquid)}/page/#{content['page']}", :title => content['title']
   end
   
   def channel_link_by_article(article)
@@ -78,7 +78,7 @@ module CmsHelper
   end
   
   def channel_link(channel)
-    link_to channel['name'], channel_permalink(channel)
+    link_to channel['name'], channel_permalink(channel), :title => channel['name']
   end
   
   def list_contents(article)

@@ -39,6 +39,7 @@ class ReadnovelCrawler
     (1..upto).each do |page|
       update_page_path = "http://www.readnovel.com/lastnew/#{page}.html"
       parse_latest_update_pages(update_page_path)
+      CrawLogger.logger("Fetched page ##{page}")
     end
     return true
   end  

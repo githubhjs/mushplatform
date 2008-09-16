@@ -6,7 +6,7 @@ module DateUtil
     end
   
     def timelong_for_input(time)
-      time.strftime('%y-%m-%d %H:%M') if time
+      time.strftime('%y-%m-%d %H:%M:%S') if time
     end
   
     # format time to short style

@@ -49,108 +49,39 @@
 
   <div class="manage_m L">
     <h2>日志管理</h2>
-    <p class="L">分类：<select name="" >
-        <option value="1" selected="selected">全部日志分类</option>
-        <option value="2">生活</option>
-        <option value="3">技术</option>
-    </select></p>
-    <table cellpadding="0" cellspacing="0">
+    <p class="L">分类：<select name="category_id" >
+        <%= generate_categories_options_for_list(params[:category_id]) %>
+      </select>
+    </p>
+    <table cellpadding="0" cellspacing="0" id = "blog_table">
       <tr>
-        <td class="tit" width="37"></td>
+        <td class="tit" width="37"><input type="checkbox" name="ifcheckd"  id="ifchecked" onclick="select_all('blog_table')"></td>
         <td class="tit" width="37">显示</td>
         <td class="tit" width="283">标题</td>
         <td class="tit" width="87">分类</td>
-        <td class="tit" width="110">作者</td>
         <td class="tit" width="110">日期</td>
-        <td class="tit" width="50">评论</td>
+        <td class="tit" width="50">回复</td>
+        <td class="tit" width="110">管理</td>
       </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-        <td class="a_tit m_border">已经搬家，重新开张</td>
-        <td class="m_border">精彩生活</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">3</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-        <td class="a_tit m_border">究竟什么是Inversion of Control (or IoC for short)？ </td>
-        <td class="m_border">技术研究</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">5</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add4.gif"/></a></td>
-        <td class="a_tit m_border">今天开始新的旅程 </td>
-        <td class="m_border">私人日志</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">4</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-        <td class="a_tit m_border">已经搬家，重新开张</td>
-        <td class="m_border">精彩生活</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">3</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-        <td class="a_tit m_border">究竟什么是Inversion of Control (or IoC for short)？ </td>
-        <td class="m_border">技术研究</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">5</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add4.gif"/></a></td>
-        <td class="a_tit m_border">今天开始新的旅程 </td>
-        <td class="m_border">私人日志</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">4</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-        <td class="a_tit m_border">已经搬家，重新开张</td>
-        <td class="m_border">精彩生活</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">3</td>
-      </tr>
-      <tr>
-        <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
-        <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-        <td class="a_tit m_border">究竟什么是Inversion of Control (or IoC for short)？ </td>
-        <td class="m_border">技术研究</td>
-        <td class="m_border">pawa</td>
-        <td class="m_border">2008-09-03</td>
-        <td class="m_border">5</td>
-      </tr>
-      <tr>
-        <td><input name="celect" type="checkbox" value="" /></td>
-        <td><a href=""><img src="/images/ico_add4.gif"/></a></td>
-        <td class="a_tit">今天开始新的旅程 </td>
-        <td>私人日志</td>
-        <td>pawa</td>
-        <td>2008-09-03</td>
-        <td>4</td>
-      </tr>
+      <%for blog in @blogs do %>
+        <tr>
+          <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
+          <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
+          <td class="a_tit m_border"><%= blog.title %></td>
+          <td class="m_border"><%= display_category_name(blog) %></td>
+          <td class="m_border"><%= timelong(blog.created_at) %></td>
+          <td class="m_border"><%= blog.comment_count %></td>
+          <td>
+            <a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
+            <%= link_to_remote('<img alt="置顶" src="/images/btn_sticky.png">',:url => manage_blog_path(blog),:html => {:title => "置顶"})%>
+            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/blogs/#{blog.id}") %>
+          </td>
+        </tr>
+      <%end%>
     </table>
     <input class="delete" name="delete" type="button" value="删 除" />
-    <select name="" >
-      <option value="1" selected="selected">转移到分类</option>
-      <option value="2">精致生活</option>
-      <option value="3">技术研究</option>
+    <select name="category_id" >
+      <%= generate_categories_options_for_list(params[:category_id]) %>
     </select>
   </div>
 

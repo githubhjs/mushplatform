@@ -1,5 +1,9 @@
 class Blog < ActiveRecord::Base
 
+  belongs_to :category
+
+  has_many   :comments
+
   named_scope :latest,:order => "if_top desc,created_at desc"
 
   Drafted_Blogs ,Published_Blogs = 0,1

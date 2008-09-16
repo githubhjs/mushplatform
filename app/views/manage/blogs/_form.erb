@@ -1,0 +1,49 @@
+<div class="blog_write_center">
+  <%form_for "blog",:url => "/manage/blogs",:html => {:name => 'blog_form'} do |f|  %>
+    <p><b>标题：</b>
+      <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %> <span><%= @blog.errors.on(:title) %></span>
+    </p>
+    <p><b>类别：</b>
+      <select name="blog[category_id]" id="blog_category_id">
+        <%= generate_categories_options(@blog.category_id) %>
+      </select>
+    <a class="grey_underline" href="javascript:void(0);" onclick="display_category_input('ajax_category_form');return false;">+&nbsp;添加分类</a>
+    </p>
+    <p id="ajax_category_form" style="display:none;">
+        <b>名字：</b>
+        <input type ="text" name="category_name" value="" id="add_ctegory_input"><input type="button" value="增加" onclick="add_category()"><span  id='onload_img' style='display:none;'><img src='/images/spinner.gif' /></span>
+    </p>
+    <p></p>
+    <p><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+      <SPAN style="COLOR: #ff0000"></SPAN>
+      <input type="hidden" id="blog_body" name="blog[body]" value="<%= @blog.body %>"></input>
+      <SPAN style="COLOR: #ff0000"></SPAN>
+      <iframe id="myEditor" src="/editor/editor.htm?id=blog_body" frameborder="0" scrolling="no" width="550" height="220"></iframe>
+    </p>
+    <p><b>标签：</b><input class="tag" name="blog[keywords]" type="text" value="<%= @blog.keywords %>" size="85" maxlength="85">&nbsp;&nbsp;&nbsp;
+      <a class="grey_underline" href="">什么是标签？</a>
+    </p>
+    <p>比如:精彩生活，技术研究 ，日记</p>
+    <p></p>
+    <table>
+      <tr>
+        <td>
+          <input name="blog[allow_comments]" type="checkbox" value="<%=Const::YES%>" <%= @blog.allow_comments == Const::YES ? 'checked': '' %>>
+        </td><td><b>允许评论</b>&nbsp;&nbsp;</td>
+        <td><input name="blog[allow_pings]" type="checkbox" value="<%= Const::YES %>" <%= @blog.allow_pings == Const::YES ? 'checked': ''%> >
+        </td><td><b>允许引用</b>&nbsp;&nbsp;</td>
+        <td>
+          <input name="blog[if_top]" type="checkbox" value="Const::YES" <%= @blog.if_top == Const::YES ? 'checked': ''%>>
+        </td><td><b>置顶</b>&nbsp;&nbsp;</td>
+      </tr>
+    </table>
+    <input class="submit" name="operate"   type="button" value="发   布"   onclick="document.blog_form.submit();return true;"/>
+    <input class="save"   name="operate"   type="button" value="保存草稿"  onclick="document.blog_form.submit();return true;"/>
+  <% end  %>
+</div>
+<script>
+    var content = myEditor.getHTML().replace(/<.*?>/g,"").split(" ").join("").split(" ").join("");
+    if(content.length==0){
+        alert('公告内容不能为空！');
+    }
+</script>

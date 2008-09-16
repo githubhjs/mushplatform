@@ -37,7 +37,7 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
-  config.plugin_paths += %W( #{RAILS_ROOT}/plugins )
+  config.plugin_paths += %W( #{RAILS_ROOT}/plugins  #{RAILS_ROOT}/lib/util )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -53,10 +53,13 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
+    :session_domain => 'ccmw.com',
     :session_key => '_mushplatform_session',
     :secret      => '6d420a423d1249c80b5a6ab34523f907a41c910d54b0a3aa8aee41d18debeed8275d1374de6f0879a60c5e944cda227519b2e2a47e8daf020208544e8cf03ffb'
   }
 
+  config.action_controller.asset_host = "http://www.ccmw.com"
+  
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
@@ -66,7 +69,6 @@ Rails::Initializer.run do |config|
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
-
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
   config.plugins = [:engines, :liquid, :fckeditor, :core, :all]

@@ -1,0 +1,8 @@
+<div class="blog_write_center">
+  <%= error_messages_for 'blog' %>
+  <%  form_for "category",:url => "/manage/category" do |f|  %>
+    <p><b>名称：</b><%= f.text_field :name,:size => '25',:maxlength => '25' %> &nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <input class="submit" name="publish" type="button" value="增加" />
+  <%end%>
+</div>

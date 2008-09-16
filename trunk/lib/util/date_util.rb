@@ -5,8 +5,8 @@ module DateUtil
       time.strftime('%m/%d/%y %H:%M:%S') if time
     end
   
-    def timelong_for_input(time)
-      time.strftime('%y-%m-%d %H:%M:%S') if time
+    def timelong_for_with_ling(time)
+      time.strftime('%y-%m-%d %H:%M') if time
     end
   
     # format time to short style

@@ -1,9 +1,21 @@
 ActionController::Routing::Routes.draw do |map|
+
   
+  map.resources :friends
+  map.resources :messages
   map.resources :user_profiles
   map.resources :signup, :collection => {:select => :get}
   map.connect   "/login",:controller => 'login',:action => 'login'
+  map.connect   "/sign_up",:controller => 'login',:action => 'sign_up'
   map.connect   "/logout",:controller => 'login',:action => 'logout'
+  map.connect   "/manage",:controller => 'manage/manage',:action => 'index'
+  
+  map.namespace :manage do |manage|
+    manage.resources :categories,:collection => {:ajax_new => :get}
+    manage.resources :comments
+    manage.resources :blogs
+  end
+
 
   #map.resources :roles
 
@@ -48,6 +60,6 @@ ActionController::Routing::Routes.draw do |map|
   map.from_plugin :cms
     
   # Install the default routes as the lowest priority.
-#  map.connect ':controller/:action/:id'
-#  map.connect ':controller/:action/:id.:format'
+  #  map.connect ':controller/:action/:id'
+  #  map.connect ':controller/:action/:id.:format'
 end

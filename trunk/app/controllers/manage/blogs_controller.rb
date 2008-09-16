@@ -9,7 +9,7 @@ class Manage::BlogsController < Manage::ManageController
   Blog_Per_Page = 30
 
   def index
-    @blogs = Blog.latest.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page)
+    @blogs = Blog.latest.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page,:include => [:category])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @blogs }

@@ -1,5 +1,4 @@
 <div class="m_l L">
-
   <div class="face L">
     <img class="border" src="/images/pic_big_none.gif"/>
     <ul>
@@ -44,18 +43,27 @@
 <div class="m_r">
 
   <!--person_menu-->
-<%=  render :partial => "/manage/blogs/person_menu" %>
+<%=  render :partial => "/manage/share/person_menu" %>
 <!--person_menu-->
 
   <div class="manage_m L">
     <h2>日志管理</h2>
-    <p class="L">分类：<select name="category_id" >
+    <p class="L">分类：
+      <select name="category_id"  onchange="window.location.href='/manage/blogs?category_id=' + this.options[this.options.selectedIndex].value">
         <%= generate_categories_options_for_list(params[:category_id]) %>
       </select>
+      <span style="">
+        <%= display_publish_notice %>
+      </span>
     </p>
+    
+    
     <table cellpadding="0" cellspacing="0" id = "blog_table">
+      <form action ="/manage/blogs/batch_publish" method ="post">
       <tr>
+        <% if action_name == "drafts"  %>
         <td class="tit" width="37"><input type="checkbox" name="ifcheckd"  id="ifchecked" onclick="select_all('blog_table')"></td>
+        <%end%>
         <td class="tit" width="37">显示</td>
         <td class="tit" width="283">标题</td>
         <td class="tit" width="87">分类</td>
@@ -64,8 +72,10 @@
         <td class="tit" width="110">管理</td>
       </tr>
       <%for blog in @blogs do %>
-        <tr>
-          <td class="m_border"><input name="celect" type="checkbox" value="" /></td>
+        <tr id="t_<%= blog.id %>">
+          <%if action_name == 'drafts'%>
+          <td class="m_border"><input name="blog_ids[]" type="checkbox" value="<%= blog.id %>" /></td>
+          <%end%>
           <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
           <td class="a_tit m_border"><%= blog.title %></td>
           <td class="m_border"><%= display_category_name(blog) %></td>
@@ -73,17 +83,23 @@
           <td class="m_border"><%= blog.comment_count %></td>
           <td>
             <a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
-            <%= link_to_remote('<img alt="置顶" src="/images/btn_sticky.png">',:url => manage_blog_path(blog),:html => {:title => "置顶"})%>
-            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/blogs/#{blog.id}") %>
+            <%unless blog.is_sticky? %>
+              <%= link_to_remote('<img alt="置顶" src="/images/btn_sticky.png" >',:url =>"/manage/blogs/#{blog.id}/sticky",:method => :get,:html => {:title => "置顶",:id => "d_a_#{blog.id}"})%>
+            <%else%>
+              <%= link_to_remote('<img alt="取消置顶" src="/images/btn_unsticky.png" >',:method => :get,:url => "/manage/blogs/#{blog.id}/sticky",:html => {:title => "取消置顶",:id => "d_a_#{blog.id}"})%>
+            <%end%>
+            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/blogs/#{blog.id}/delete") %>
           </td>
         </tr>
       <%end%>
     </table>
-    <input class="delete" name="delete" type="button" value="删 除" />
-    <select name="category_id" >
-      <%= generate_categories_options_for_list(params[:category_id]) %>
-    </select>
+    <input type="hidden" name="category_id" value="<%= params[:category_id] %>">
+    <% if action_name == "drafts" %>
+      <input class="delete" name="publish" type="submit" value="发 布" />
+    <% end %>
+    </form>
+     <select name="category_id"  onchange="window.location.href='/manage/blogs?category_id=' + this.options[this.options.selectedIndex].value">
+        <%= generate_categories_options_for_list(params[:category_id]) %>
+    </select>      
   </div>
-
 </div><!--m_r-->
-

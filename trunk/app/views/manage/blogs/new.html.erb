@@ -42,14 +42,13 @@
 
 <div class="m_r">
 <!--person_menu-->
-<%=  render :partial => "/manage/blogs/person_menu" %>
+<%=  render :partial => "/manage/share/person_menu" %>
 <!--person_menu-->
   <div class="blog_write_m L">
     <h2>写新日志</h2>
     <div class="blog_write_top clear"></div>
-     <%= render :partial => "/manage/blogs/form" %>
+     <%= render :partial => "/manage/blogs/form",:locals => {:method_name => :post} %>
     <div class="blog_write_bottom"></div>
   </div>
-   </div>
 </div><!--m_r-->
 

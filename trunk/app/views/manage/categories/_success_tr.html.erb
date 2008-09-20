@@ -1,0 +1,6 @@
+<tr id="t_<%= category.id %>">
+  <%= render :partial => "/manage/categories/category_td" ,:locals => {:category => category} %>
+</tr>
+<tr id="t_<%= category.id %>_edit" style="display:none;background-color:#ffff99">
+ <%= render :partial => "/manage/categories/category_td_edit" ,:locals => {:category => category} %>
+</tr>

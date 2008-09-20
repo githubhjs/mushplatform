@@ -1,9 +1,12 @@
 class Manage::CommentsController < Manage::ManageController
+
+  Commens_Per_Page = 30
+
   # GET /comments
   # GET /comments.xml
   def index
-    @comments = Comment.find(:all)
-
+    @comments = Comment.paginate(:page => params[:page]||1,:per_page => Commens_Per_Page,
+      :conditions => "user_id=#{current_user.id}")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @comments }
@@ -14,7 +17,6 @@ class Manage::CommentsController < Manage::ManageController
   # GET /comments/1.xml
   def show
     @comment = Comment.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @comment }

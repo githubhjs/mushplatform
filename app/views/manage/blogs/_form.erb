@@ -1,5 +1,5 @@
 <div class="blog_write_center">
-  <%form_for "blog",:url => "/manage/blogs",:html => {:name => 'blog_form'} do |f|  %>
+  <%form_for :blog,:url => "/manage/blogs/#{@blog.id}",:html => {:name => 'blog_form' ,:method => method_name} do |f|  %>
     <p><b>标题：</b>
       <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %> <span><%= @blog.errors.on(:title) %></span>
     </p>
@@ -16,7 +16,7 @@
     <p></p>
     <p><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
       <SPAN style="COLOR: #ff0000"></SPAN>
-      <input type="hidden" id="blog_body" name="blog[body]" value="<%= @blog.body %>"></input>
+      <input type="hidden" id="blog_body" name="blog[body]" value="<%= h(@blog.body)%>"></input>
       <SPAN style="COLOR: #ff0000"></SPAN>
       <iframe id="myEditor" src="/editor/editor.htm?id=blog_body" frameborder="0" scrolling="no" width="550" height="220"></iframe>
     </p>
@@ -37,13 +37,9 @@
         </td><td><b>置顶</b>&nbsp;&nbsp;</td>
       </tr>
     </table>
-    <input class="submit" name="operate"   type="button" value="发   布"   onclick="document.blog_form.submit();return true;"/>
-    <input class="save"   name="operate"   type="button" value="保存草稿"  onclick="document.blog_form.submit();return true;"/>
+    <input class="submit" name="publish"   type="submit"   value="提   交"  />
+    <% if @blog.new_record? || !@blog.is_published? %>
+     <input class="save"   name="to_draft"   type="submit"  value="存为草稿" />
+    <% end %>
   <% end  %>
 </div>
-<script>
-    var content = myEditor.getHTML().replace(/<.*?>/g,"").split(" ").join("").split(" ").join("");
-    if(content.length==0){
-        alert('公告内容不能为空！');
-    }
-</script>

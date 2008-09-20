@@ -1,0 +1,6 @@
+<td class="m_border"><%= category.name %></td>
+<td class="m_border"><%= category.blogs.count %></td>
+<td>
+  <a href="#" title="编辑" onclick="Element.show('t_<%= category.id %>_edit');Element.hide('t_<%= category.id  %>');return false;"><img alt="编辑" src="/images/btn_edit.png"></a>
+  <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/categories/#{category.id}/delete") %>
+</td>

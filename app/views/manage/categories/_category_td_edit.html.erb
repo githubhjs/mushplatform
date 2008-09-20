@@ -1,0 +1,8 @@
+<td class="m_border">
+  <input type="text" name="category_name" value="<%= category.name %>" id="text_input_<%= category.id %>">
+</td>
+<td class="m_border"><%= category.blogs.count %></td>
+<td>
+  <input type="button" value="修改" onclick = "update_category(<%= category.id %>)">
+  <input type="button" value="取消"  onclick="Element.hide('t_<%= category.id %>_edit');Element.show('t_<%= category.id  %>')">
+</td>

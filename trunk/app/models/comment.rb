@@ -1,3 +1,5 @@
 class Comment < ActiveRecord::Base
-  blongs_to :blog
+
+  belongs_to :blog
+  
 end

@@ -11,14 +11,28 @@ module Manage::BlogsHelper
   end
   
   def display_category_name(blog)
-     blog.category ? blog.category.name :  "无分类"
+    blog.category ? blog.category.name :  "无分类"
   end
+
+  def display_publish_notice
+    info = if  !flash[:success_notice].blank?
+      "<img src='/images/icon_success_lrg.gif'>" + flash[:success_notice]
+    elsif !flash[:error_notice].blank?
+      <<notice
+          <img src='/images/icon_error_lrg.gif'>
+          <font color='red'>
+            #{flash[:error_notice] }
+          </font>
+notice
+    else
+      ""
+    end
+    info
+  end
+
 
   def display_author_name(blog)
     
   end
 
-  def timelong(time)
-      time.strftime('%y-%m-%d %H:%M') if time
-  end
 end

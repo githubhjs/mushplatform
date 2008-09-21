@@ -1,19 +1,26 @@
 ActionController::Routing::Routes.draw do |map|
-
-  
+ 
   map.resources :friends
-  map.resources :messages
-  map.resources :user_profiles
   map.resources :signup, :collection => {:select => :get}
   map.connect   "/login",:controller => 'login',:action => 'login'
   map.connect   "/sign_up",:controller => 'login',:action => 'sign_up'
   map.connect   "/logout",:controller => 'login',:action => 'logout'
   map.connect   "/manage",:controller => 'manage/manage',:action => 'index'
+  map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"
+  
+  map.with_options :controller => "manage/themes" do |theme|
+    theme.connect      "/manage/themes",        :action => 'index'
+    theme.connect    "/manage/themes/preview",:action => "preview"
+    theme.connect    "/manage/themes/switchto",:action => "switchto"
+  end
   
   map.namespace :manage do |manage|
-    manage.resources :categories,:collection => {:ajax_new => :get}
+    manage.resources :categories,:collection => {:ajax_new => :get},:member => {:delete => :get,:ajax_update => :get}
     manage.resources :comments
-    manage.resources :blogs
+    manage.resources :messages,:member => { :delete => :get }
+    manage.resources :blogs,:member => {:delete => :get,:sticky => :get},
+      :collection => {:drafts => :get,:batch_publish => :post}
+    manage.resources :user_profiles
   end
 
 
@@ -54,10 +61,10 @@ ActionController::Routing::Routes.draw do |map|
   # map.root :controller => "welcome"
 
   # See how all your routes lay out with "rake routes"
-  map.from_plugin :crawler
-  map.from_plugin :mush_admin
-  map.from_plugin :authorize
-  map.from_plugin :cms
+    map.from_plugin :crawler
+    map.from_plugin :mush_admin
+    map.from_plugin :authorize
+    map.from_plugin :cms
     
   # Install the default routes as the lowest priority.
   #  map.connect ':controller/:action/:id'

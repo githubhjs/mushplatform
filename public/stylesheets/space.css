@@ -140,3 +140,67 @@ bottom:10px;}
 .blog_write_m .blog_write_center .submit{margin:20px 40px 20px 280px;width:60px;float:left;cursor:hand;}
 .blog_write_m .blog_write_center .save{margin:20px 0px 20px 0px;cursor:hand;}
 
+/*鎴戠殑绌洪棿-涓汉璧勬枡*/
+.space_info{margin:10px 0 10px 20px;}
+.space_info li{font-size:14px;height:30px;width:145px;}
+.space_info li img{margin-right:10px;width:20px;height:18px;}
+.space_info li span{color:#999;}
+
+.person_date_m{padding:0 30px;text-align:center;}
+.person_date_m h2{width:746px;float:right;color:#de363a;background:url(../images/ico_person_date.gif) no-repeat 660px 0;text-align:right;line-height:23px;margin:20px 0px 0 0;}
+.person_date_m table{width:746px;border:1px solid #ccc;margin:10px 0;}
+.person_date_m table td{padding:5px 10px 0 10px;height:20px;}
+.person_date_m table .top{background-color:#f4f4f3;padding-left:10px;font-weight:bold;}
+.person_date_m table span{font-weight:normal;color:#de363a;}
+.person_date_m table .tit{font-weight:bold;text-align:right;}
+.person_date_m table .face img{width:63px;height:78px;}
+.person_date_m table .face{border:1px solid #ccc;padding:1px;width:63px;height:78px;}
+.person_date_m table input{height:20px;}
+.person_date_m .button{height:22px;line-height:18px;padding:0 3px;margin:10px 10px;cursor:hand;}
+
+/*鍗氬_妯℃澘璁剧疆*/
+.templet_m{padding:0 30px;text-align:center;}
+.templet_m h2{width:746px;float:right;color:#de363a;background:url(../images/ico_templet.gif) no-repeat 650px 0;text-align:right;line-height:23px;margin:20px 0px 0 0;}
+.templet_m .main_b{width:746px;border:1px solid #ccc;margin:10px 0;text-align:center;}
+.templet_m .main_b .big_pic{border-bottom:1px dotted #ccc;}
+.templet_m .main_b .big_pic h4{margin:10px 0;}
+.templet_m .main_b .big_pic .name{font-size:14px;color:#de363a;margin:3px 0 10px 0;}
+.templet_m .main_b .pic_li{width:248px;float:left;padding:10px 0;}
+.templet_m .main_b .pic_li h6{color:#de363a;margin:5px 0;}
+.templet_m .main_b .pic_li a{text-decoration:underline;}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}

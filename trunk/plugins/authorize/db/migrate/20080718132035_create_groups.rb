@@ -7,6 +7,7 @@ class CreateGroups < ActiveRecord::Migration
       t.integer :status ,:null => false,:default => 0
       t.integer :inherit_group_id,:default => 0
       t.text    :description
+      t.string  :theme_name
     end
     
   end

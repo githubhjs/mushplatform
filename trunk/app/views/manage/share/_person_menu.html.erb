@@ -1,16 +1,27 @@
-<div class="person_menu">
-  <div class="p_m1">
+<div class="p_m1">
     <div class="m1_bg">
       <ul class="L">
-        <li><a href="">我的空间</a></li>
+        <% if params[:controller] == 'manage/user_profiles' %>
+          <li class="hot">我的空间</li>
+        <%else%>
+          <li><a href="/manage/user_profiles"> 我的空间 </a></li>
+       <%end%>
         <li class="border"></li>
-        <li class="hot">博客</li>
+        <% if params[:controller] =~ /blogs|categories|comments|themes/%>
+           <li class="hot">博客</li>
+        <%else%>
+           <li class="hot"><a href="/manage/blogs">博客</a></li>
+        <%end%>
         <li class="border"></li>
         <li><a href="">相册</a></li>
         <li class="border"></li>
         <li><a href="">活动</a></li>
         <li class="border"></li>
-        <li><a href="">公告</a></li>
+        <% if params[:controller] == 'manage/messages' %>
+            <li class="hot">公告</li>
+        <%else%>
+            <li><a href="/manage/messages">公告</a></li>
+        <%end%>
         <li class="border"></li>
         <li><a href="">交易</a></li>
         <li class="border"></li>
@@ -18,17 +29,3 @@
       <P class="R"><a href="">安全退出</a></P>
     </div>
   </div>
-  <div class="p_m2">
-    <div class="m2_bg">
-      <ul class="L">
-        <li><a href="/manage/blogs">日志管理</a></li>
-        <li><a href="/manage/blogs/new">写新日志</a></li>
-        <li><a href="/manage/blogs/drafts">草稿箱</a></li>
-        <li><a href="">模板设置</a></li>
-        <li><a href="/manage/categories">分类管理</a></li>
-        <li><a href="/manage/comments">评论管理</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="shadow"></div>
-</div>

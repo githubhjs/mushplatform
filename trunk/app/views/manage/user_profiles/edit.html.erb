@@ -14,12 +14,12 @@
       <div class="v_info L">
         <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
         <p class="L">昵称：<a href="">xiao-fox</a></p>
-        <p class="L"><img class="add" src="/images/ico_add2.gif"/><font style="color:#de363a;">加为好友</font></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
       </div>
       <div class="v_info L">
         <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
         <p class="L">昵称：<a href="">pawa</a></p>
-        <p class="L"><a href=""><img class="add" src="/mages/ico_add.gif"/></a><a href="">加为好友</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
       </div>
       <div class="v_info L">
         <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
@@ -41,14 +41,10 @@
 </div><!--m_l-->
 
 <div class="m_r">
-<!--person_menu-->
-<%=  render :partial => "/manage/share/blog_menu" %>
-<!--person_menu-->
-  <div class="blog_write_m L">
-    <h2>写新日志</h2>
-    <div class="blog_write_top clear"></div>
-     <%= render :partial => "/manage/blogs/form",:locals => {:method_name => :post} %>
-    <div class="blog_write_bottom"></div>
-  </div>
-</div><!--m_r-->
 
+  <!--person_menu-->
+<%=  render :partial => "/manage/user_profiles/profile_menu" %>
+<!--person_menu-->
+<%= render :partial => "/manage/user_profiles/form" %>
+  
+</div><!--m_r-->

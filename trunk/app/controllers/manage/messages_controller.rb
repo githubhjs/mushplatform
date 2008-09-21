@@ -1,13 +1,15 @@
-class MessagesController < ApplicationController
+class Manage::MessagesController < Manage::ManageController
+  
+  Messages_Per_Page = 30
+  
   # GET /messages
   # GET /messages.xml
+  
   def index
-    @messages = Message.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @messages }
-    end
+    @messages = Message.paginate(:page => params[:page]||1,:per_page => Messages_Per_Page,
+      :conditions => "user_id=#{current_user.id}")
+    render :template => "/manage/messages/index"
+    return 
   end
 
   # GET /messages/1
@@ -41,16 +43,12 @@ class MessagesController < ApplicationController
   # POST /messages.xml
   def create
     @message = Message.new(params[:message])
-
-    respond_to do |format|
-      if @message.save
-        flash[:notice] = 'Message was successfully created.'
-        format.html { redirect_to(@message) }
-        format.xml  { render :xml => @message, :status => :created, :location => @message }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
-      end
+    @message.user_id = current_user.id
+    if @message.save
+      flash[:notice] = 'Message was successfully created.'
+      redirect_to :action => index
+    else
+      format.html render :action => "new" 
     end
   end
 
@@ -58,19 +56,26 @@ class MessagesController < ApplicationController
   # PUT /messages/1.xml
   def update
     @message = Message.find(params[:id])
-
-    respond_to do |format|
-      if @message.update_attributes(params[:message])
-        flash[:notice] = 'Message was successfully updated.'
-        format.html { redirect_to(@message) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
-      end
+    if @message.update_attributes(params[:message])
+      flash[:notice] = 'Message was successfully updated.'
+      redirect_to :action => :index
+    else
+      render :action => "edit"
     end
   end
 
+  def delete
+    if Message.find(params[:id]).destroy
+      render :update do |page|
+        page["t_#{params[:id]}"].visual_effect :highlight
+        page["t_#{params[:id]}"].remove
+      end
+    else
+      render :update do |page|
+        page["t_#{params[:id]}"].visual_effect :highlight
+      end
+    end
+  end
   # DELETE /messages/1
   # DELETE /messages/1.xml
   def destroy

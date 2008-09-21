@@ -1,13 +1,12 @@
-class UserProfilesController < ApplicationController
+class Manage::UserProfilesController < Manage::ManageController
+  
+  helper :signup
+  
   # GET /user_profiles
   # GET /user_profiles.xml
   def index
-    @user_profiles = UserProfile.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @user_profiles }
-    end
+    @user_profile = current_user.user_profile || UserProfile.new
+    render :template => "/manage/user_profiles/edit"
   end
 
   # GET /user_profiles/1

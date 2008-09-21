@@ -3,7 +3,9 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   
   has_one :user_profile
-  
+
+
+
   validates_length_of :user_name, :within => 5..40
   validates_length_of :password, :within => 6..40
   validates_presence_of :user_name, :email, :password, :password_confirmation, :salt
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
   
   attr_protected :id, :salt
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation,:theme
 
   def self.authenticate(user_name, pass)
     u=find(:first, :conditions=>["user_name = ?", user_name])

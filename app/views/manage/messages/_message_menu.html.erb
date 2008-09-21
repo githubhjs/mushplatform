@@ -1,0 +1,20 @@
+<div class="person_menu">
+  <%=  render :partial => "/manage/share/person_menu"%>
+  <div class="p_m2">
+    <div class="m2_bg">
+      <ul class="L">
+        <% if action_name =='index' %>
+          <li class="hot">公告管理</li>
+        <%else%>
+          <li class="hot"><a href="/manage/messages">公告管理</a></li>
+        <%end%>
+        <%if action_name != "index"%>
+          <li>发布公告</li>
+        <%else%>
+          <li><a href="/manage/messages/new">发布公告</a></li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+  <div class="shadow"></div>
+</div>

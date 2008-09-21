@@ -1,2 +1,2 @@
-module MessagesHelper
+module Manage::MessagesHelper
 end

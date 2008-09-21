@@ -1,0 +1,5 @@
+<%= select("friend_level2", "city_id", @citys, {}, { "onchange" => remote_function(
+        :with => "'parent_id='+value",
+        :update => 'county_select',
+        :complete => "Element.show('county_select')",
+        :url => { :action => :select_with_ajax1 } ) })%>

@@ -1,0 +1,142 @@
+<div class="person_date_m L">
+<h2>个人资料</h2>
+<table cellpadding="0" cellspacing="1">
+<tr>
+  <td class="top" colspan="2">我的头像</td>
+</tr>
+<tr>
+  <td class="tit" width="103">当前头像：</td>
+  <td width="638"><div class="face"><img src="images/pic_big_none.gif"/></div></td>
+</tr>
+<tr>
+<td class="tit" >上传头像：</td>
+<td><input name="liulan" type="text" size="30" maxlength="30" /><input style="margin-right:5px;" name="liulan" type="button" value="浏览..." /><input name="upload" type="button" value="上 传" /></br>接受jpg、png、gif格式图片</td>
+</tr>
+<tr><td> </td><td></td></tr>
+<tr>
+  <td class="top" colspan="2">基本资料 -<span> 本栏目为必填资料，本栏目资料不完整将不能完成注册。</span></td>
+</tr>
+<tr>
+  <td class="tit" >用户名：</td>
+  <td style="font-size:14px;"><b>pawa</b></td>
+</tr>
+<tr>
+  <td class="tit" ><span>&lowast;</span> 注册邮箱：</td>
+  <td><input name="email" type="text" size="50" maxlength="50" /> <a class="grey_underline" href="">验证邮箱</a></td>
+</tr>
+<% fields_for :user_profile, @user_profile do |p_field| %>
+  <tr>
+    <td class="tit" ><span>&lowast;</span> 性别：</td>
+    <td>
+      <%= generate_sex_radio(@user_profile.sex) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="tit" ><span>&lowast;</span> 城市：</td>
+    <td>
+    <%= p_field.text_field(:city, :class => "InpTxt")%>&nbsp;
+    </td>
+  </tr>
+  <tr><td> </td><td></td></tr>
+
+  <tr>
+    <td class="top" colspan="2">详细资料 - <span>本栏目为非必填资料，完整填写本栏目的用户将得到100个积分。</span></td>
+  </tr>
+  <tr>
+    <td class="tit">真实姓名：</td>
+    <td>
+      <%= p_field.text_field(:real_name, :class => "InpTxt")%>&nbsp;
+    <font style="color:#de363a;">*</font> 请尽量用中文填写，以方便交流</td>
+  </tr>
+  <tr>
+    <td class="tit">公司名称：</td>
+    <td>
+      <%= p_field.text_field(:company_name, :class => "InpTxt")%>&nbsp;
+      <font style="color:#de363a;">*</font>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="tit">公司性质：</td>
+    <td>
+      <%= generate_company_nature_radio(@user_profile.company_nature)%>
+    </td>
+  </tr>
+  <tr>
+    <td class="tit">行业分类：</td>
+    <td>
+      <select name="profile[vocation_id]" >
+        <%= generate_vocations_select(@user_profile.vocation_id)%>
+      </select>
+      <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
+    </td>
+  </tr>
+  <tr>
+    <td class="tit">职位：</td>
+    <td>
+      <%= p_field.text_field(:position, :class => "InpTxt")%>
+    </td>
+
+  </tr>
+  <tr>
+    <td class="tit">联系电话：</td>
+    <td>
+      <%= p_field.text_field(:tel, :class => "InpTxt")%>&nbsp;
+    <font style="color:#de363a;">*</font> 区号+电话号码 如：021-65006500</td>
+  </tr>
+  <tr>
+    <td class="tit">手机：</td>
+    <td>
+    <%= p_field.text_field(:mobile, :class => "InpTxt")%>
+  </tr>
+  <tr>
+    <td class="tit">传真：</td>
+    <td>
+      <%= p_field.text_field(:fax, :class => "InpTxt")%>
+    </td>
+  </tr>
+  <tr>
+    <td class="tit">通讯地址：</td>
+    <td>
+      <%= p_field.text_field(:adress, :size => 50)%>
+      &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料
+    </td>
+  </tr>
+  <tr>
+    <td class="tit">邮政编码：</td>
+    <td>
+      <%= p_field.text_field(:zipcode, :class => "InpTxt")%>
+    &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料</td>
+
+  </tr>
+  <tr>
+    <td class="tit">企业网站：</td>
+    <td>
+      <%= p_field.text_field(:web_site, :class => "InpTxt")%>
+    </td>
+
+  </tr>
+  <tr>
+    <td class="tit">感兴趣：</td>
+    <td><input class="like" name="like " type="checkbox" value="呼叫中心" />呼叫中心&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />客户管理&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />数据营销&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />服务外包&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />其他
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="tit_bg"><div class="ico">个人自述</div></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>250字以内，展示个人风采，推荐将您的资历详细罗列</td>
+  </tr>
+  <tr>
+    <td class="tit">个人简介：</td>
+    <td>
+      <textarea name="profile[introduction]" class="txt" rows="4" cols="50">
+  <%= @user_profile.introduction%>
+    </textarea></td>
+  </tr>
+<%end%>
+</table>
+<input class="button" name="save" type="button" value="保 存" />
+<input class="button" name="reset" type="button" value="重 置" />
+</div>

@@ -1,3 +1,4 @@
+<%  form_tag "/manaage/user_profiles/#{@user_profile.id}",:method => :put do  %>
 <div class="person_date_m L">
 <h2>个人资料</h2>
 <table cellpadding="0" cellspacing="1">
@@ -6,11 +7,13 @@
 </tr>
 <tr>
   <td class="tit" width="103">当前头像：</td>
-  <td width="638"><div class="face"><img src="images/pic_big_none.gif"/></div></td>
+  <td width="638"><div class="face"><img src="/images/pic_big_none.gif"/></div></td>
 </tr>
 <tr>
 <td class="tit" >上传头像：</td>
-<td><input name="liulan" type="text" size="30" maxlength="30" /><input style="margin-right:5px;" name="liulan" type="button" value="浏览..." /><input name="upload" type="button" value="上 传" /></br>接受jpg、png、gif格式图片</td>
+<td><input name="liulan" type="file" size="30" name="user_profile[photo]" maxlength="30" />
+<input name="upload" type="button" value="上 传" />
+</br>接受jpg、png、gif格式图片</td>
 </tr>
 <tr><td> </td><td></td></tr>
 <tr>
@@ -22,19 +25,23 @@
 </tr>
 <tr>
   <td class="tit" ><span>&lowast;</span> 注册邮箱：</td>
-  <td><input name="email" type="text" size="50" maxlength="50" /> <a class="grey_underline" href="">验证邮箱</a></td>
+  <td><input name="user_email" type="text" size="50" maxlength="50" value="<%@user.email%>"  onblur="validate_user_emial(this)" id="user_email"/>
+  <font style="color:#de363a;display:none" id="emial_error" >【请输入正确格式电子邮件】</font>
+  </td>
 </tr>
 <% fields_for :user_profile, @user_profile do |p_field| %>
   <tr>
     <td class="tit" ><span>&lowast;</span> 性别：</td>
     <td>
       <%= generate_sex_radio(@user_profile.sex) %>
+      <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
     </td>
   </tr>
   <tr>
     <td class="tit" ><span>&lowast;</span> 城市：</td>
     <td>
     <%= p_field.text_field(:city, :class => "InpTxt")%>&nbsp;
+    <font style="color:#de363a;display:none" id="city_error" >【请选填写城市】</font>
     </td>
   </tr>
   <tr><td> </td><td></td></tr>
@@ -137,6 +144,7 @@
   </tr>
 <%end%>
 </table>
-<input class="button" name="save" type="button" value="保 存" />
+<input class="button" name="save" type="button" value="保 存" onclick="validate_form(document.user_date_form)"/>
 <input class="button" name="reset" type="button" value="重 置" />
 </div>
+<%  end %> 

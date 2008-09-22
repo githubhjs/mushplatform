@@ -5,7 +5,8 @@ class Manage::UserProfilesController < Manage::ManageController
   # GET /user_profiles
   # GET /user_profiles.xml
   def index
-    @user_profile = current_user.user_profile || UserProfile.new
+    @user = current_user
+    @user_profile = @user.user_profile || UserProfile.new
     render :template => "/manage/user_profiles/edit"
   end
 
@@ -13,7 +14,6 @@ class Manage::UserProfilesController < Manage::ManageController
   # GET /user_profiles/1.xml
   def show
     @user_profile = UserProfile.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user_profile }
@@ -40,7 +40,6 @@ class Manage::UserProfilesController < Manage::ManageController
   # POST /user_profiles.xml
   def create
     @user_profile = UserProfile.new(params[:user_profile])
-
     respond_to do |format|
       if @user_profile.save
         flash[:notice] = 'UserProfile was successfully created.'
@@ -57,9 +56,10 @@ class Manage::UserProfilesController < Manage::ManageController
   # PUT /user_profiles/1.xml
   def update
     @user_profile = UserProfile.find(params[:id])
-
+    @user = User.find(@user_profile.user_id)
+    @user.emial = params[:user_email]
     respond_to do |format|
-      if @user_profile.update_attributes(params[:user_profile])
+      if @user_profile.update_attributes(params[:user_profile]) && @user
         flash[:notice] = 'UserProfile was successfully updated.'
         format.html { redirect_to(@user_profile) }
         format.xml  { head :ok }
@@ -68,6 +68,10 @@ class Manage::UserProfilesController < Manage::ManageController
         format.xml  { render :xml => @user_profile.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  def upload_image
+    
   end
 
   # DELETE /user_profiles/1

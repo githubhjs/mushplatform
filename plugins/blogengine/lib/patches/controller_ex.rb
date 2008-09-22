@@ -21,7 +21,7 @@ module ThememExt
     current_theme.layout  
   end  
   
-  def setup_themer #设置视图文件（View) 读取路径  
+  def setup_themer 
     self.view_paths = ::ActionController::Base.view_paths.dup.unshift("#{Theme.themes_root}/#{current_theme.name}/views")  
   end
   

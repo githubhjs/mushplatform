@@ -3,7 +3,7 @@ class ThemeGenerator < Rails::Generator::NamedBase
   def manifest
     record do |m|
       # Theme folder(s)
-      theme_path = File.join("#{RAILS_ROOT}","themes",file_name)
+      theme_path = File.join("themes",file_name)
       m.directory theme_path
       # theme content folders
       m.directory File.join( theme_path, "images" )

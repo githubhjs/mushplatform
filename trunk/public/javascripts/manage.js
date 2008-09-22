@@ -84,3 +84,23 @@ function do_delete(element){
         method:'get'
     });
 }
+
+function validate_email(value_str){
+    var email_regexp = /^[a-zA-Z0-9_\.]+@[a-zA-Z0-9-]+[\.a-zA-Z]+$/;
+    return email_regexp.test(value_str);
+}
+
+function validate_user_emial(_input){
+    if(validate_email(_input.value)){
+        Element.hide('emial_error');
+    }else{
+        Element.show('emial_error');
+    }
+}
+function validate_form(_form){
+   if(validate_email($('user_email').value) && $('user_profile_city').value != ''){
+       _form.submit();
+   }else{
+       alert("请完善必填内容");
+   }
+}

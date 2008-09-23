@@ -19,6 +19,17 @@ class Manage::UserProfilesController < Manage::ManageController
       format.xml  { render :xml => @user_profile }
     end
   end
+  
+  
+  def upload_image
+    user_profile = UserProfile.find(params[:id])
+    user_profile.user_icon = params[:user_photo]
+    if user_profile.save
+      render :template => 'ok'
+    else
+      render :template => 'no'
+    end
+  end
 
   # GET /user_profiles/new
   # GET /user_profiles/new.xml

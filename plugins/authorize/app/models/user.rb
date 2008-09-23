@@ -4,14 +4,12 @@ class User < ActiveRecord::Base
   
   has_one :user_profile
 
-
-
   validates_length_of :user_name, :within => 5..40
   validates_length_of :password, :within => 6..40
   validates_presence_of :user_name, :email, :password, :password_confirmation, :salt
   validates_uniqueness_of :user_name, :email
   validates_confirmation_of :password
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "电子邮件格式不正确"  
   
   Status_Valid,Status_Invalid = 0,1
   

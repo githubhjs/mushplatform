@@ -7,7 +7,6 @@ class AddDefaultAuthorizeData < ActiveRecord::Migration
     Authorize::AuthManager.auth_group(group,[role])
     Authorize::AuthManager.auth_user(user, [group.id])
   end
-
   def self.down
   end
 end

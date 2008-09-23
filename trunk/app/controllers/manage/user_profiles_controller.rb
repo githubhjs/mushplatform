@@ -68,9 +68,9 @@ class Manage::UserProfilesController < Manage::ManageController
   def update
     @user_profile = UserProfile.find(params[:id])
     @user = User.find(@user_profile.user_id)
-    @user.emial = params[:user_email]
+    @user.email = params[:user_email]
     respond_to do |format|
-      if @user_profile.update_attributes(params[:user_profile]) && @user
+      if @user_profile.update_attributes(params[:user_profile]) && @user.save
         flash[:notice] = 'UserProfile was successfully updated.'
         format.html { redirect_to(@user_profile) }
         format.xml  { head :ok }
@@ -80,7 +80,7 @@ class Manage::UserProfilesController < Manage::ManageController
       end
     end
   end
-
+  
   def upload_image
     
   end
@@ -90,7 +90,6 @@ class Manage::UserProfilesController < Manage::ManageController
   def destroy
     @user_profile = UserProfile.find(params[:id])
     @user_profile.destroy
-
     respond_to do |format|
       format.html { redirect_to(user_profiles_url) }
       format.xml  { head :ok }

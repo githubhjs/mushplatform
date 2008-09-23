@@ -97,7 +97,9 @@ function validate_user_emial(_input){
         Element.show('emial_error');
     }
 }
+
 function validate_form(_form){
+    alert(_form);
    if(validate_email($('user_email').value) && $('user_profile_city').value != ''){
        _form.submit();
    }else{

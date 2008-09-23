@@ -16,5 +16,4 @@ module Manage::UserProfilesHelper
     radio_boxes <<  (radio_button_tag('user_auth[]',Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
     radio_boxes.join('')
   end
-  form_tag
 end

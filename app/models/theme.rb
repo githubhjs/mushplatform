@@ -1,5 +1,7 @@
 require 'yaml'
 class Theme
+
+  attr_accessor :name,:path
   
   def initialize(name, path)  
     @name, @path = name, path  

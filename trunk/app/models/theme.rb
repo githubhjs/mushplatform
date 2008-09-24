@@ -6,19 +6,23 @@ class Theme
   end  
   
   def them_info
-    @info ||= (YAML::load(File.open(path+'/theme.yml')) || {})
+    @info ||= begin
+      File.exist?("#{@path}/theme.yml") ?  (YAML::load(File.open(@path+'/theme.yml')) || {}) : {}
+    rescue Exception => e
+      {}
+    end  
   end
 
   def title 
-    @info[:title]
+    them_info[:title]||@name
   end
 
   def description
-    @info[:description]
+    them_info[:description] || @name
   end
   
   def enable?
-    @info[:enabled]
+    them_info[:enabled]||true
   end
   
   def layout #模板文件,在layouts文件里，叫default.html.erb  
@@ -26,7 +30,7 @@ class Theme
   end  
 
   def icon
-    "/images/#{self.path}/preview.png"
+    "/images/#{@name}/preview.png"
   end
 
   def self.find(name) #查找指定(name)的Theme  
@@ -36,6 +40,7 @@ class Theme
           
   def self.themes_root #所有theme的root  
     RAILS_ROOT + "/themes"
+    #     "/home/liuikai/team/mushplatform" + "/themes"
     #    File.dirname(__FILE__) + "/../../themes"
   end  
       
@@ -66,12 +71,10 @@ class Theme
     RAILS_ROOT + "/app/views/blogs"
   end
 
-  def self.search_theme_directory 
-    glob = "#{themes_root}/[-_a-zA-Z0-9]+"  
-    Dir.glob(glob).select do |theme_path|  
+  def self.search_theme_directory   
+    Dir.glob("#{themes_root}/*").select do |theme_path|  
       File.readable?("#{theme_path}/about.markdown")  
     end.compact  
   end
   
 end
-#p Theme.search_theme_directory

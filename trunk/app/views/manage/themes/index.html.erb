@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-
+  
   <div class="comment">
     <div class="tit border"><h6>未读评论<span style="color:#999;">（3）</span></h6></div>
     <div class="comment_m">
@@ -37,11 +37,11 @@
       <p><a href=""><b>admin:</b></a><a href="">出趟海吧，打一网渔！</a></p>
     </div>
   </div>
-
+  
 </div><!--m_l-->
 
 <div class="m_r">
-
+  
   <!--person_menu-->
 <%=  render :partial => "/manage/share/blog_menu" %>
   <!--person_menu-->
@@ -51,64 +51,17 @@
       <div class="big_pic">
         <h4>当前使用的模板</h4>
         <img src="/images/pic_templet_big.gif"/>
-
+        
         <p class="name">有咖啡的日子</p>
       </div>
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-
-      </div>
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
-
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
-
-      <div class="pic_li">
-
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-
-      </div>
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
-
-      <div class="pic_li">
-        <img src="/images/pic_templet_li.gif"/>
-        <h6>影像生活</h6>
-        <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>
-      </div>
+      <% for theme in @themes do %>
+          <div class="pic_li">
+            <img src="<%= theme.icon %>"/>
+            <h6><%= theme.title %></h6>
+            <p><a href="">浏览范例blog</a> | <a href="">使用此模板</a></p>  
+          </div>
+        <%end%>
+      </div>  
     </div>
-
-  </div>
-
-</div><!--m_r-->
+  
+  </div><!--m_r-->

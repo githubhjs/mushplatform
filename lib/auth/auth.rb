@@ -1,5 +1,6 @@
 module Auth
-  
+
+  protected  
   def login_required(admin=nil)
     if session[:user]
       return true

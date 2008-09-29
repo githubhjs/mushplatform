@@ -1,13 +1,13 @@
 <div class="atomentry">
   <h2 class="title">
-    <%= blog.title %>
+    <%= article.title %>
   </h2>
   <div class="author">
     Posted by <cite>My self</cite>
-    <abbr class="published" title="<%= blog.title %>"><%= blog.created_at %></abbr>
+    <abbr class="published" title="<%= article.title %>"><%= article.created_at %></abbr>
   </div>
   <div class="content">
-    <%= h blog.body %>
+    <%= h article.body %>
   </div>
   <p class="info">
     comments info

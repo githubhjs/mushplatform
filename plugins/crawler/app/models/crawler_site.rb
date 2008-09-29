@@ -1,7 +1,8 @@
 require 'util/url_util'
 require 'general/craw_logger'
-class Site < ActiveRecord::Base
+class CrawlerSite < ActiveRecord::Base
   
+  set_table_name 'crawler_sites'
   validates_uniqueness_of :site_name
 
   has_many :craw_jobs,:foreign_key => 'site_id'

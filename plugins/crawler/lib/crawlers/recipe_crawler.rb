@@ -98,7 +98,7 @@ class RecipeCrawler
   end
 end
 puts "begin to fetch"
-site = Site.find_by_site_name('recipe')
+site = CrawlerSite.find_by_site_name('recipe')
 if site
   crawler = RecipeCrawler.new(site)
   crawler.fetch

@@ -1,6 +1,6 @@
 require 'rails_generator'
 require 'rails_generator/scripts/generate'
-class Admin::SitesController < ApplicationController
+class Admin::CrawlerSitesController < ApplicationController
   include Authorize
   grant_to 'admin'
   layout 'admin'
@@ -8,51 +8,51 @@ class Admin::SitesController < ApplicationController
   Site_Page_Size = 50
   
   def index
-    @sites = Site.find(:all)
+    @sites = CrawlerSite.find(:all)
   end
 
   def show
-    @site = Site.find(params[:id])
+    @site = CrawlerSite.find(params[:id])
   end
 
   def new
-    @site = Site.new
+    @site = CrawlerSite.new
   end
 
   def edit
-    @site = Site.find(params[:id])
+    @site = CrawlerSite.find(params[:id])
   end
 
   def stop
-    site = Site.find(params[:id])
+    site = CrawlerSite.find(params[:id])
     site.stop
     redirect_to :action => "index"
     return true
   end
   
   def run
-    site = Site.find(params[:id])
+    site = CrawlerSite.find(params[:id])
     site.run
     redirect_to :action => "index"
     return true
   end
   
   def enable
-    site = Site.find(params[:id])
+    site = CrawlerSite.find(params[:id])
     site.enable
     redirect_to :action => "index"
     return true
   end
   
   def disable
-    site = Site.find(params[:id])
+    site = CrawlerSite.find(params[:id])
     site.disable
     redirect_to :action => "index"
     return true
   end
   
   def create
-    @site = Site.new(params[:site])
+    @site = CrawlerSite.new(params[:crawler_site])
     respond_to do |format|
       if @site.save
         if params[:crawler_script].blank? and !@site.crawler_existe?
@@ -69,9 +69,9 @@ class Admin::SitesController < ApplicationController
   end
 
   def update
-    @site = Site.find(params[:id])
+    @site = CrawlerSite.find(params[:id])
     respond_to do |format|
-      if @site.update_attributes(params[:site])
+      if @site.update_attributes(params[:crawler_site])
         flash[:notice] = 'Update sie successfully'
         format.html { redirect_to :action => "index"}
         format.xml  { head :ok }

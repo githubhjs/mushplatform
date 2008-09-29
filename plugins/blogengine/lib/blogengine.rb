@@ -9,7 +9,7 @@ module BlogEngine
         if File.directory?("#{theme_path}/#{media}")
           public_theme_path = "#{public_path}/#{media}/#{File.basename(theme_path)}"
           FileUtils.makedirs(public_theme_path) unless File.directory?(public_theme_path)
-          puts "try to cop #{theme_path}/#{media}/* to #{public_theme_path}"
+          #puts "try to cop #{theme_path}/#{media}/* to #{public_theme_path}"
           cp_r("#{theme_path}/#{media}",public_theme_path)
         end
       end

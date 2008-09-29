@@ -179,7 +179,7 @@ class ReadnovelCrawler
   end
 end
 puts "begin to fetch"
-site = Site.find_by_site_name('readnovel')
+site = CrawlerSite.find_by_site_name('readnovel')
 if site
   crawler = ReadnovelCrawler.new(site)
   crawler.fetch

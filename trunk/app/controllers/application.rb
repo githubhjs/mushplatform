@@ -8,10 +8,11 @@ class ApplicationController < ActionController::Base
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '753e9f8530306cea8709833fd5983953'
-  
-  include AccountLocation
+
+   
   include Auth
-  
+ 
+  protected
   def redirect_to_stored
     if return_to = session[:return_to]
       session[:return_to]=nil
@@ -28,5 +29,5 @@ class ApplicationController < ActionController::Base
     login_url = "#{login_url}?admin=true" if session[:return_to].index('admin')
     redirect_to login_url
   end
-  
+ 
 end

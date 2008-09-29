@@ -15,7 +15,7 @@ module Auth
   end 
   
   def is_space_admin?
-    unless  current_user && current_user.user_name == request.subdomains.first
+    unless  current_user #&& current_user.user_name == request.subdomains.first
       flash[:warning]='Please login to continue'
       session[:return_to] = request.request_uri
       redirect_to "/login"

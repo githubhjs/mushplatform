@@ -18,7 +18,7 @@
       <td width="22%" align="right">用户名：</td>
       <td width="78%">
         <%= u_field.text_field(:user_name, :class => "InpTxt" )%>
-        ;<font style="color:#de363a;">*</font> 用户名应是字母、数字和“_”，长度在5-16字符间非中文字符
+        &nbsp;<font style="color:#de363a;">*</font> 用户名应是字母、数字和“_”，长度在5-16字符间非中文字符
       </td>
   
     </tr>
@@ -27,14 +27,14 @@
       <td align="right">登陆密码：</td>
       <td>
         <%= u_field.password_field(:password, :class => "InpTxt")%>
-        &nbsp;<font style="color:#de363a;">
-      *</font> 长度不能小于6个字符，只限数字（0-9）和英文（a-z），注意区分大小写</td>
+        &nbsp;<font style="color:#de363a;">*</font> 长度不能小于6个字符，只限数字（0-9）和英文（a-z），注意区分大小写</td>
   
     </tr>
     <tr>
       <td align="right">确认密码：</td>
       <td>
-      <%= u_field.password_field(:password_confirmation, :class => "InpTxt")%>&nbsp;<font style="color:#de363a;">*</font> 确保和密码相同 </td>
+      <%= u_field.password_field(:password_confirmation, :class => "InpTxt")%>
+      &nbsp;<font style="color:#de363a;">*</font> 确保和密码相同 </td>
     </tr>
     <tr>
       <td align="right">密码提示问题：</td>

@@ -13,7 +13,13 @@ class LoginController < ApplicationController
     session[:user] = User.authenticate(params[:user][:user_name],params[:user][:password])
     if session[:user]
       flash[:message]  = "Login successful"
-      redirect_to session[:return_to] || "/admin"
+      #redirect_to session[:return_to] || "/admin" 
+      unless params[:admin].blank?
+        redirect_to session[:return_to] || "/admin"
+      else
+        redirect_to session[:return_to] || "/manage"
+      end
+      
     else
       flash[:warning] = "Login unsuccessful"
       render :template => 'login/login', :layout => get_layout

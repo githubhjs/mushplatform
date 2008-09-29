@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'RMagick'
+#require 'RMagick'
 require 'net/http'
-require 'base64' 
+#require 'base64' 
 require 'fileutils'
 module ImageUtil
   
@@ -78,8 +78,7 @@ module ImageUtil
         false        
       end
       return result
-    end
-    
+    end   
     #extract image's postfix,witch is the format of 
     #the special image
     def extract_image_format(img_url)

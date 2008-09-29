@@ -10,8 +10,10 @@ class Manage::ThemesController <  Manage::ManageController
   end
 
   def switchto
-    current_user.theme_name = params[:theme_name]
-    current_user.save
+    unless params[:theme_name].blank?
+      current_user.theme_name = params[:theme_name]
+      User.swich_theme(current_user.id, params[:theme_name])
+    end
     redirect_to :action => 'index'
   end
 

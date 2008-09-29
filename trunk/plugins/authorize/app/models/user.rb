@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
     end
     roles
   end
+
+  def self.swich_theme(user_id,theme_name)
+    connection.execute("update users set theme_name='#{theme_name}' where id=#{user_id}")
+  end
   
   def password=(pass)
     @password=pass

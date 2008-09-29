@@ -9,7 +9,7 @@ class UserProfile < ActiveRecord::Base
   
   attr_accessor :user_icon
     
-  validates_length_of :city,:minimum => 1,:too_short => "请填写您所在的城市"
+  #validates_length_of :city,:minimum => 1,:too_short => "请填写您所在的城市"
   validates_length_of :sex,:minimum => 1,:too_short => "选选择性别"
  
   Image_Size = "100X100"

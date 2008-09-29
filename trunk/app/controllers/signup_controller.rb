@@ -1,6 +1,7 @@
 class SignupController < ApplicationController
   
   layout 'site'
+  skip_before_filter :verify_authenticity_token
   
   def select
     

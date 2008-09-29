@@ -12,12 +12,10 @@ module ThememExt
   protected
 
   def space_owner
-    session[:current_space_owner] ||= User.find_by_user_name(request.subdomains.first)
+    User.find_by_user_name(request.subdomains.first)
   end
 
   def current_theme
-    debugger
-    puts "++++++++++++++++++++++++++++++++++*********************#{space_owner.theme_name}"
     space_owner.theme ||= Theme.find(space_owner.theme_name)
   end
   

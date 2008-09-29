@@ -1,7 +1,7 @@
-class CreateSites < ActiveRecord::Migration
+class CreateCrawlerSites < ActiveRecord::Migration
   
   def self.up
-    create_table :sites, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    create_table :crawler_sites, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string   :site_name
       t.string   :site_url,:limit => 255
       t.integer  :status,:state,:default => 0
@@ -9,12 +9,12 @@ class CreateSites < ActiveRecord::Migration
       t.datetime :last_finish_time,:default => Time.now
       t.integer  :craw_freq,:default => 24*60*60#hour
       t.integer  :request_freq,:default => 1
-        t.integer  :craw_now,:defult => 0
+      t.integer  :craw_now,:defult => 0
     end
   end
 
   def self.down
-    drop_table :sites
+    drop_table :crawler_sites
   end
   
 end

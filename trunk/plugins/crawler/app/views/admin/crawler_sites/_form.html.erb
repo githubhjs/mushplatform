@@ -1,5 +1,5 @@
-<% form_for(@site,:url => @site.new_record? ? '/admin/sites' : "/admin/sites/#{@site.id}", :html => {:multipart => true}) do |f| %>
-  <%= error_messages_for 'site' %>
+<% form_for(@site,:url => @site.new_record? ? '/admin/crawler_sites' : "/admin/crawler_sites/#{@site.id}", :html => {:multipart => true}) do |f| %>
+  <%= error_messages_for 'crawler_site' %>
   <% unless @site.new_record? %>
     <ul class="subsubsub">
       <li><a class="current"><%= @site.site_name %></a></li>

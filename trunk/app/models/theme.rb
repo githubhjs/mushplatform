@@ -28,7 +28,7 @@ class Theme
   end
   
   def layout #模板文件,在layouts文件里，叫default.html.erb  
-    self.path + "/layouts/default"
+     "/layouts/default"
   end  
 
   def icon

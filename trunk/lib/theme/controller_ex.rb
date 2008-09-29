@@ -10,7 +10,7 @@ module ControllerEx
   protected
 
   def space_owner
-    seesion[:current_space_owner] ||= User.find_by_user_name(request.subdomains.first)
+    session[:current_space_owner] ||= User.find_by_user_name(request.subdomains.first)
   end
 
   def current_theme

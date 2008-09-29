@@ -12,7 +12,7 @@ class MySpaceController < ApplicationController
 
   protected
   def current_space_owner
-    @current_space_owner ||= User.find_by_user_name(request.subdomains.first)
+    User.find_by_user_name(request.subdomains.first)
   end
   
 end

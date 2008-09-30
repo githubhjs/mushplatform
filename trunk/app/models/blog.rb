@@ -42,4 +42,8 @@ class Blog < ActiveRecord::Base
     true
   end
   
+  def to_liquid
+     self.attributes.stringify_keys
+  end    
+  
  end

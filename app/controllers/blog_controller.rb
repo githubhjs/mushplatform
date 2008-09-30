@@ -1,5 +1,5 @@
 class BlogController < ApplicationController
-  Blog_Count_PerPage =   15
+  Blog_Count_PerPage =   1
   
   def dispatch
     user = current_blog_user
@@ -23,7 +23,7 @@ class BlogController < ApplicationController
     if user
       page = path.index('page') ? path.delete_at(path.length-1) : params[:page]
       entries = Blog.publised_blogs.paginate_by_user_id user.id, :page => page, :per_page => Blog_Count_PerPage
-      content = parse_template(user.theme_name, 'entries').render('entries' => entries, 'page' => page)
+      content = parse_template(user.theme_name, 'entries').render('entries' => entries, 'page' => page, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'})
     else
       content = "Page Not Found"
     end

@@ -1,3 +1,5 @@
 {% for entry in entries %}
 {% include 'entry' %}
 {% endfor %}
+
+{{ entries | will_paginate }}

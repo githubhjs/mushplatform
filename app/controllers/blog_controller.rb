@@ -5,14 +5,22 @@ class BlogController < ApplicationController
     user = current_blog_user
     path = params[:path]
     if path.index('entry')
+      # /entry/1234
       content = recognize_entry(user, path)
     elsif path.index('category')
+      # /category/mood
       content = recognize_category(user, path)
     elsif path.index('archives')
+      # /archives/2008/10
+      content = recognize_archives(user, path)
+    elsif path.index('tag')
+      # /tag/olympic
       content = recognize_archives(user, path)
     elsif path.index('search')
+      # /search/olympic
       content = recognize_search(user, path)
     else
+      # /
       content = recognize_entries(user, path)
     end
     render :text => parse_template(user.theme_name, 'layout').render('content' => content) 

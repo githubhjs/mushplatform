@@ -7,7 +7,7 @@ class CreateSidebars < ActiveRecord::Migration
       t.integer :bar_index
       t.text    :description
       t.text    :settings
-      t.integer :sidebar_id,:null => false
+      t.string :sidebar_id,:null => false
     end
   end
 

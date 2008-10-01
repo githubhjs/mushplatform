@@ -59,7 +59,11 @@
           <td class="m_border"><a href="#"><%= sidebar.title %></a></td>
           <td class="a_tit m_border"><%=  sidebar.description %></td>
           <td class="m_border">
-            <a href="/manage/sidebars/<%= sidebar.sidebar_id %>/active">激活</a>
+            <% unless sidebar.actived?(@user.id) %>
+            <a href="/manage/sidebars/<%= sidebar.sidebar_id %>/active">添加</a>
+            <%else%>
+              已添加
+            <%end%>
           </td>
         </tr>
       <%end%>

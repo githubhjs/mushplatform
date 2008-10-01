@@ -6,37 +6,38 @@ class Manage::SidebarsController < Manage::ManageController
     @sidebar_users = SidebarUser.user_sidebars(current_user.id).find(:all)
     @max_bar_index = SidebarUser.max_bar_index(current_user.id)
     @min_bar_index = SidebarUser.min_bar_index(current_user.id)
+    @user = current_user
   end
 
   def active
     sidebar = Sidebar.find(params[:id])
-    SidebarUser.create(:sidebar_id => sidebar.title,:user_id => current_user.id,:bar_index => SidebarUser.user_sidebars.count + 1,
+    SidebarUser.create(:bar_name => sidebar.title,:user_id => current_user.id,:bar_index => (SidebarUser.max_bar_index(current_user.id) + 1),
       :description => sidebar.description,:sidebar_id => sidebar.sidebar_id)
-    render :action => 'index'
+    redirect_to :action => 'index'
   end
 
   def remove
     SidebarUser.delete_all("user_id=#{current_user.id} and sidebar_id ='#{params[:id]}'") 
-    render :action => 'index'
+    redirect_to :action => 'index'
   end
   
-  def down
+  def lower
     current_bar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => {:sidebar_id => params[:id]})
-    if current_bar.bar_index > SidebarUser.SidebarUser.min_bar_index(current_user.id)
+    if current_bar.bar_index > SidebarUser.min_bar_index(current_user.id)
       SidebarUser.update_all("bar_index=#{current_bar.bar_index + 1}", "user_id=#{current_user.id} and bar_index=#{current_bar.bar_index-1}")
       current_bar.update_attribute(:bar_index, current_bar.bar_index-1)
     end
-    render :action => 'index'
+    redirect_to :action => 'index'
   end
 
-  def up
-    max_bar_index = max_bar_index(current_user.id)
+  def higher
+    max_bar_index = SidebarUser.max_bar_index(current_user.id)
     current_bar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => {:sidebar_id => params[:id]})
-    if max_bar_index > current_bar.index
+    if max_bar_index > current_bar.bar_index
       SidebarUser.update_all("bar_index=#{current_bar.bar_index-1}", "user_id=#{current_user.id} and bar_index=#{current_bar.bar_index+1}")
       current_bar.update_attribute(:bar_index, current_bar.bar_index+1)
     end
-    render :action => 'index'
+    redirect_to :action => 'index'
   end
   
   # GET /sidebars/1

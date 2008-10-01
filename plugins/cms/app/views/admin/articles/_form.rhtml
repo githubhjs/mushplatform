@@ -22,9 +22,16 @@
     <th scope="row" valign="top"><label for="article_tags">Tags</label></th>
     <td><%= text_field 'article', 'tag_list' %></td>
   </tr>
+  
+  <%= do_extensions('MushAdmin::AddArticleExtraAttributes', @article) %>
+  
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_status">Status</label></th>
-    <td><%= select("article", "status", status_options) %></td>
+    <td>
+        <%= select("article", "status", status_options) %>
+        <%= select("article", "top", top_options) %>
+        <%= select("article", "sticky", sticky_options) %>
+    </td>
   </tr>  
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_excerpt">Excerpt</label></th>

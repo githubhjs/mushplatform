@@ -10,14 +10,14 @@ module Mush
     end
 
     #to execute function
-    def execute
+    def execute(params)
       case function
       when String
         eval(function)
       when Proc
-        function.call
+        params ? function.call(params) : function.call
       when Method
-        function.call
+        params ? function.call(params) : function.call
       else
         raise "Invalid extension type"
       end

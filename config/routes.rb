@@ -69,6 +69,7 @@ ActionController::Routing::Routes.draw do |map|
   map.from_plugin :crawler
   map.from_plugin :mush_admin
   map.from_plugin :authorize
+  map.from_plugin :ccmw
   map.from_plugin :cms
     
   # Install the default routes as the lowest priority.

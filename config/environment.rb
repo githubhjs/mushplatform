@@ -71,7 +71,7 @@ Rails::Initializer.run do |config|
   # config.active_record.schema_format = :sql
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-  config.plugins = [:engines, :liquid, :fckeditor, :core, :all]
+  config.plugins = [:engines, :liquid, :fckeditor, :core, :ccmw, :all]
 end
 memcache_options = {  
    :c_threshold => 10_000,  

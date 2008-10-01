@@ -1,0 +1,19 @@
+<%= error_messages_for 'article_category' %>
+
+<input type="hidden" name="id" value="<%= @article_category.id %>">
+<table class="form-table">
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="category">Category</label></th>
+    <td><%= combobox_field 'article_category', 'category', categories %></td>
+  </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="article_category_name">Name</label></th>
+    <td>
+        <%= text_field 'article_category', 'name' %>
+    </td>
+  </tr>
+</table>
+<p class="submit">
+  <input type="submit" class="button" name="submit" value="Save Tag" />
+  or <%= link_to 'Cancel', article_categories_path, :class => 'cancel' %>
+</p>

@@ -20,8 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.namespace :manage do |manage|
     manage.resources :categories,:collection => {:ajax_new => :get},:member => {:delete => :get,:ajax_update => :get}
-    manage.resources :comments,:member => {:active => :get,:remove => :get,:down => :get,:up => :get}
-    manage.resources :sidebars
+    manage.resources :comments
+    manage.resources :sidebars,:member => {:active => :get,:remove => :get,:lower => :get,:higher => :get}
     manage.resources :messages,:member => { :delete => :get }
     manage.resources :blogs,:member => {:delete => :get,:sticky => :get},
       :collection => {:drafts => :get,:batch_publish => :post}

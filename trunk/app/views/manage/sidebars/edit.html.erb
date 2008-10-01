@@ -1,0 +1,12 @@
+<h1>Editing sidebar</h1>
+
+<% form_for(@sidebar) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @sidebar %> |
+<%= link_to 'Back', sidebars_path %>

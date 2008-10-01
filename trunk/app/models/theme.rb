@@ -16,15 +16,15 @@ class Theme
   end
 
   def title 
-    them_info[:title]||@name
+    them_info['title']||@name
   end
 
   def description
-    them_info[:description] || @name
+    them_info['description'] || @name
   end
   
   def enable?
-    them_info[:enabled]||true
+    them_info['enabled']||true
   end
   
   def layout #模板文件,在layouts文件里，叫default.html.erb  

@@ -12,7 +12,8 @@ module Mush
       extension_point =  @@extension_points_registry[point]
       unless extension_point
         klass_name = point.scan(/^(.*)::(.*)$/)[0][1]
-        file = klass_name.scan(/^([A-Z][a-z]*)(.*)$/)[0].collect{|s| s.downcase}.join('_')
+#        file = klass_name.scan(/^([A-Z][a-z]*)(.*)$/)[0].collect{|s| s.downcase}.join('_')
+        file = klass_name.underscore
         require "extension_points/#{file}"
 #        klass = Object.const_get(point)
         klass = point.split("::").inject(Object) {|x,y| x.const_get(y)}
@@ -32,9 +33,9 @@ module Mush
       @@extension_points_registry.delete(point)
     end
 
-    def do_extensions(point)
+    def do_extensions(point, params = nil)
       extension_point = @@extension_points_registry[point]
-      extension_point.do_extensions if extension_point
+      extension_point.do_extensions(params) if extension_point
     end
     
     #arg extension_options have three type:

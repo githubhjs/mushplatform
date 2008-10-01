@@ -13,8 +13,16 @@ module Mush
       @extensions << extension
     end
     
-    def do_extensions
-      raise "Should be implement this by subclass"
+    def do_extensions(params)
+      # default implemtation, subclass could overridenn this
+      results = []
+      begin
+        @extensions = sort_by(extensions, :priority) if extensions.size > 1
+        extensions.each {|extension| results << extension.execute(params)}
+      rescue Exception => e
+        #raise e.message
+      end
+      results.join(' ')
     end
     
     def sort_by(extensions, attribute)

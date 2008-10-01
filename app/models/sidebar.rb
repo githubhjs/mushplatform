@@ -36,7 +36,7 @@ class Sidebar
   end
   
   #===
-def self.sidebars_root #所有sidebar的root  
+  def self.sidebars_root #所有sidebar的root
     RAILS_ROOT + "/sidebars"
     #     "/home/liuikai/team/mushplatform" + "/sidebars"
     #    File.dirname(__FILE__) + "/../../sidebars"
@@ -45,7 +45,10 @@ def self.sidebars_root #所有sidebar的root
   def self.sidebar_path(name) #指定(name)sidebar的path
     "#{sidebars_root}/#{name}"
   end  
-      
+
+  def path
+    "#{Sidebar.sidebars_root}/#{self.name}"
+  end
   def self.sidebar_from_path(path) #查找指定(path)的sidebar
     name = path.scan(/[-\w]+$/i).flatten.first  
     self.new(name, path)  
@@ -57,8 +60,8 @@ def self.sidebars_root #所有sidebar的root
     end  
   end  
   
-  def self.find(name) #查找指定(name)的Theme  
-    name.blank? ? nil : self.new(name,sidebar_path(name))  
+  def self.find(name) #查找指定(name)的Theme
+    name.blank? || !File.exist?(sidebar_path(name)) ? nil : self.new(name,sidebar_path(name))  
   end  
 
   def self.installed_sidebars
@@ -66,11 +69,32 @@ def self.sidebars_root #所有sidebar的root
   end  
 
   def liquid_template
-   "#{sidebars_root}/views/content.liquid" 
+    "#{self.path}/views/content.liquid"
+  end
+  
+  def get_context(options = {})
+    helper = begin
+      Object.const_get(helper_name)
+    rescue Exception => e
+      require helper_path
+      Object.const_get(helper_name)
+    end
+    helper.get_context(options)
   end
 
-  def get_context
-    
+  def helper_name
+    self.name.split('_').map{|nm|nm.capitalize}.join('')+"SidebarHelper"
+  end
+
+  def helper_path
+    return "#{path}/helpers/#{self.name}_sidebar_helper"
+  end
+  
+  def get_content(options)
+    Liquid::Template.file_system = Liquid::LocalFileSystem.new(liquid_template)
+    parse = Liquid::Template.parse(IO.read(liquid_template))
+    content = parse.render('entries' => get_context(options))
+    content
   end
   
   def self.search_sidebar_directory

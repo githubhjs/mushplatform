@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
- 
-#  map.resources :friends
+  
+  #  map.resources :friends
   map.resources :signup, :collection => {:select => :get}
   map.connect   "/login",:controller => 'login',:action => 'login'
   map.connect   "/sign_up",:controller => 'login',:action => 'sign_up'
@@ -8,9 +8,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect   "/manage",:controller => 'manage/manage',:action => 'index'
   map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"
   
-#  map.with_options :controller => "my_space",:requirements => {:subdomain => /^(?!www$)\w+/ } do |my_space|
-#    my_space.connect "/" ,:action => 'index'
-#  end
+  #  map.with_options :controller => "my_space",:requirements => {:subdomain => /^(?!www$)\w+/ } do |my_space|
+  #    my_space.connect "/" ,:action => 'index'
+  #  end
   
   map.with_options :controller => "manage/themes" do |theme|
     theme.connect      "/manage/themes",        :action => 'index'
@@ -20,7 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.namespace :manage do |manage|
     manage.resources :categories,:collection => {:ajax_new => :get},:member => {:delete => :get,:ajax_update => :get}
-    manage.resources :comments
+    manage.resources :comments,:member => {:active => :get,:remove => :get,:down => :get,:up => :get}
+    manage.resources :sidebars
     manage.resources :messages,:member => { :delete => :get }
     manage.resources :blogs,:member => {:delete => :get,:sticky => :get},
       :collection => {:drafts => :get,:batch_publish => :post}

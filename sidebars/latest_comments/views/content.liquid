@@ -1,0 +1,8 @@
+<h3 class='sidebar-title'>Latest comments</h3>
+<div class='static-body'>
+<ul>
+{% for entry in entries %}
+   <li><a href="http://www.typosphere.org" title="Typo">{{entry.title}}</a></li>
+{% endfor %}
+</ul>
+</div>

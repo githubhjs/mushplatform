@@ -1,4 +1,5 @@
 class BlogController < ApplicationController
+
   Blog_Count_PerPage =   1
   
   def dispatch
@@ -23,14 +24,14 @@ class BlogController < ApplicationController
       # /
       content = recognize_entries(user, path)
     end
-    render :text => parse_template(user.theme_name, 'layout').render('content' => content) 
+    render :text => parse_template(user.theme_name, 'layout').render('content' => content,'sidebar_content' => generate_sidebar_content(user)) 
   end
   
   protected
   def recognize_entries(user, path)
     if user
       page = path.index('page') ? path.delete_at(path.length-1) : params[:page]
-      entries = Blog.publised_blogs.paginate_by_user_id user.id, :page => page, :per_page => Blog_Count_PerPage
+      entries = Blog.publised_blogs.paginate(:page => page, :per_page => Blog_Count_PerPage,:conditions => "user_id=#{user.id}")
       content = parse_template(user.theme_name, 'entries').render('entries' => entries, 'page' => page, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'})
     else
       content = "Page Not Found"
@@ -38,6 +39,12 @@ class BlogController < ApplicationController
     return content
   end  
 
+  def generate_sidebar_content(user)
+    sidebar_infos = SidebarUser.user_sidebars(user.id).map{|bar|
+      Sidebar.find(bar.sidebar_id)}.compact.map{|sidebar|sidebar.get_content(:user_id => user.id)}
+    sidebar_infos.join('   ')
+  end
+  
   def recognize_entry(user, path)
     if user
       entry = Blog.publised_blogs.find(path.last.to_i)

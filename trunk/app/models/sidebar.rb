@@ -7,6 +7,10 @@ class Sidebar
     @name, @path = name, path  
   end
 
+  def actived?(user_id)
+    SidebarUser.find(:first,:conditions => "user_id=#{user_id} and sidebar_id = '#{self.sidebar_id}'")
+  end
+
   def sidebar_info
     @info ||= begin
       File.exist?("#{@path}/description.yml") ?  (YAML::load(File.open(@path+'/description.yml')) || {}) : {}

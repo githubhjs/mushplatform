@@ -11,7 +11,7 @@ class Manage::SidebarsController < Manage::ManageController
 
   def active
     sidebar = Sidebar.find(params[:id])
-    SidebarUser.create(:bar_name => sidebar.title,:user_id => current_user.id,:bar_index => (SidebarUser.max_bar_index(current_user.id) + 1),
+    SidebarUser.create(:bar_name => sidebar.title,:user_id => current_user.id,:bar_index => ((SidebarUser.max_bar_index(current_user.id)||0) + 1),
       :description => sidebar.description,:sidebar_id => sidebar.sidebar_id)
     redirect_to :action => 'index'
   end

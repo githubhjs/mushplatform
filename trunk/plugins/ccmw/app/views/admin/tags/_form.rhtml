@@ -1,0 +1,19 @@
+<%= error_messages_for 'tag' %>
+
+<input type="hidden" name="id" value="<%= @tag.id %>">
+<table class="form-table">
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="category">Category</label></th>
+    <td><%= combobox_field 'tag', 'category', tag_categories %></td>
+  </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="tag_name">Name</label></th>
+    <td>
+        <%= text_field 'tag', 'name' %>
+    </td>
+  </tr>
+</table>
+<p class="submit">
+  <input type="submit" class="button" name="submit" value="Save Tag" />
+  or <%= link_to 'Cancel', tags_path, :class => 'cancel' %>
+</p>

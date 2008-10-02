@@ -24,8 +24,10 @@ class Manage::SidebarsController < Manage::ManageController
   def lower
     current_bar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => {:sidebar_id => params[:id]})
     if current_bar.bar_index > SidebarUser.min_bar_index(current_user.id)
-      SidebarUser.update_all("bar_index=#{current_bar.bar_index + 1}", "user_id=#{current_user.id} and bar_index=#{current_bar.bar_index-1}")
-      current_bar.update_attribute(:bar_index, current_bar.bar_index-1)
+      lower_sidebar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => "bar_index < #{current_bar.bar_index}")
+      lower_index,current_index = lower_sidebar.bar_index,current_bar.bar_index
+      lower_sidebar.update_attribute(:bar_index,current_index)
+      current_bar.update_attribute(:bar_index, lower_index)
     end
     redirect_to :action => 'index'
   end
@@ -34,8 +36,10 @@ class Manage::SidebarsController < Manage::ManageController
     max_bar_index = SidebarUser.max_bar_index(current_user.id)
     current_bar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => {:sidebar_id => params[:id]})
     if max_bar_index > current_bar.bar_index
-      SidebarUser.update_all("bar_index=#{current_bar.bar_index-1}", "user_id=#{current_user.id} and bar_index=#{current_bar.bar_index+1}")
-      current_bar.update_attribute(:bar_index, current_bar.bar_index+1)
+      higher_sidebar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => "bar_index > #{current_bar.bar_index}")
+      higher_index,current_index  = higher_sidebar.bar_index,current_bar.bar_index
+      higher_sidebar.update_attribute(:bar_index,current_index)
+      current_bar.update_attribute(:bar_index, higher_index)
     end
     redirect_to :action => 'index'
   end
@@ -87,7 +91,6 @@ class Manage::SidebarsController < Manage::ManageController
   # PUT /sidebars/1.xml
   def update
     @sidebar = Sidebar.find(params[:id])
-
     respond_to do |format|
       if @sidebar.update_attributes(params[:sidebar])
         flash[:notice] = 'Sidebar was successfully updated.'
@@ -105,7 +108,6 @@ class Manage::SidebarsController < Manage::ManageController
   def destroy
     @sidebar = Sidebar.find(params[:id])
     @sidebar.destroy
-
     respond_to do |format|
       format.html { redirect_to(sidebars_url) }
       format.xml  { head :ok }

@@ -1,1 +1,8 @@
-"default template info"
+<h3 class='sidebar-title'>Links</h3>
+<div class='static-body'>
+<ul>
+{% for entry in entries %}
+   <li><a href="http://www.typosphere.org" title="Typo">entry.title</a></li>
+{% endfor %}
+</ul>
+</div>

@@ -85,4 +85,26 @@ module CmsHelper
     article.contents.find(:all, :select => "id, title, page, article_id")
   end
   
+  def channels_select
+    channels.collect {|p| [ p.name, p.id ] }
+  end
+  
+  def channels(channel_list = [], channel = nil, prefix = '')
+    unless channel
+      channel = Channel.find(1) 
+      channel_list << channel
+    end
+    if channel.children_count > 0
+      prefix = "#{prefix}|--"
+      channel.direct_children.each{|c|
+        c.name = "#{prefix}#{c.name}"
+        channel_list << c
+        channels(channel_list, c, prefix)
+      }
+    else
+      return 
+    end
+    channel_list
+  end
+  
 end

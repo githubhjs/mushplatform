@@ -6,4 +6,8 @@ module LatestCommentsSidebarHelper
     Comment.latest_comments(option[:user_id]).find(:all,:limit => Default_Laest_Comments_Count)
   end
   
+  def self.get_edit_context(options = {})
+      {}
+    end
+  
 end

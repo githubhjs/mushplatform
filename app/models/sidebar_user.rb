@@ -7,6 +7,8 @@ class SidebarUser < ActiveRecord::Base
   
   validates_uniqueness_of :sidebar_id, :scope => :user_id
 
+  serialize :settings, Hash
+  
   named_scope :user_sidebars, lambda { |user_id|
     { :conditions => { :user_id => user_id },:order => "bar_index desc" }
   }

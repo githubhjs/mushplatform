@@ -48,8 +48,9 @@ class Manage::MessagesController < Manage::ManageController
       flash[:notice] = 'Message was successfully created.'
       redirect_to :action => index
     else
-      format.html render :action => "new" 
+      render :action => "new" 
     end
+    return 
   end
 
   # PUT /messages/1

@@ -67,7 +67,11 @@ class Manage::SidebarsController < Manage::ManageController
 
   # GET /sidebars/1/edit
   def edit
-    @sidebar = Sidebar.find(params[:id])
+    sidebar = SidebarUser.find(:first,:conditions => "user_id=#{current_user.id} and sidebar_id='#{params[:id]}'")
+    sidebar.update_attribute(:settings,params[:sidebar])
+    render :update do |page|
+      page.hide("edit_#{params[:id]}")
+    end
   end
 
   # POST /sidebars

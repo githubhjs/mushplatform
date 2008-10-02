@@ -71,17 +71,31 @@ class Sidebar
   def liquid_template
     "#{self.path}/views/content.liquid"
   end
+
+  def edit_template
+    "#{self.path}/views/edit.liquid"
+  end
+  
+  def get_edit_context(options = {})
+    helper = get_helper
+    helper.get_edit_context(options)
+  end
   
   def get_context(options = {})
+    helper = get_helper
+    helper.get_context(options)
+  end
+
+  def get_helper
     helper = begin
       Object.const_get(helper_name)
     rescue Exception => e
       require helper_path
       Object.const_get(helper_name)
     end
-    helper.get_context(options)
+    helper
   end
-
+  
   def helper_name
     self.name.split('_').map{|nm|nm.capitalize}.join('')+"SidebarHelper"
   end
@@ -91,12 +105,24 @@ class Sidebar
   end
   
   def get_content(options)
-    Liquid::Template.file_system = Liquid::LocalFileSystem.new(liquid_template)
-    parse = Liquid::Template.parse(IO.read(liquid_template))
-    content = parse.render('entries' => get_context(options))
-    content
+    pares_template(liquid_template,{'entries' => get_context(options)})
   end
   
+  def get_edit_page(options)
+    pares_template(edit_template,get_edit_context(options))
+  end  
+  
+  def pares_template(template_path,options = {})
+    content = begin
+      Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
+      parse = Liquid::Template.parse(IO.read(template_path))
+      parse.render(options)
+    rescue Exception => e
+      'No info'
+    end
+    content
+  end
+
   def self.search_sidebar_directory
     Dir.glob("#{sidebars_root}/*").select do |sidebar_path|
       File.directory?(sidebar_path) &&  File.readable?("#{sidebar_path}/description.yml")

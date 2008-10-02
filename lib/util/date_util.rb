@@ -42,6 +42,11 @@ module DateUtil
       end
     end
 
+    def month_days(month)
+     m_dates = [31,28,31,30,31,30,31,31,30,31,30,31]
+     m_dates[month - 1]
+    end
+
     def distance_of_time_in_words(minutes)
       case
       when minutes < 1

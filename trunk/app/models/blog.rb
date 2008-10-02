@@ -16,11 +16,15 @@ class Blog < ActiveRecord::Base
   named_scope :publised_blogs,:conditions => "published = #{Published_Blogs}",:order => "if_top desc,created_at desc"
   named_scope :latest,:order => "if_top desc,created_at desc"
 
-  named_scope :day_blogs,lambda { |day|
-    { :conditions => "created_at >= #{day} and created_at <#{day.next} and published = #{Drafted_Blogs} " ,
+  named_scope :day_blogs,lambda { |day,user_id|
+    { :conditions => "updated_at >= '#{day}' and updated_at <'#{day.next}' and published = #{Published_Blogs}  and user_id = #{user_id}" ,
       :order => "if_top desc,created_at desc"}
   }
   
+  def self.blog_count_by_day(day,user_id)
+    count('id', :conditions => "updated_at >= '#{day}' and updated_at < '#{day.next}' and published = #{Published_Blogs}  and user_id = #{user_id} ")
+  end
+
   def sticky
     self.if_top = self.if_top^Const::YES
     if save
@@ -45,6 +49,10 @@ class Blog < ActiveRecord::Base
       Blog.update_all("published = #{Published_Blogs}", "id in (#{ids.join(',')})")
     end
     true
+  end
+  
+  def self.generate_sql_from_arry(arry)
+    arry ? sanitize_sql_array(arry) : ''
   end
   
   def to_liquid

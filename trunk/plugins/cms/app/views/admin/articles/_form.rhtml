@@ -1,6 +1,7 @@
 <%= error_messages_for 'article' %>
 
-<input type="hidden" name="id" value="<%= @article.id %>"
+<input type="hidden" name="id" value="<%= @article.id %>">
+<input type="hidden" name="standalone" value="<%= @standalone %>">
 <table class="form-table">
   <tr class="form-field form-required">
     <th scope="row" valign="top"><label for="article_title">Title</label></th>
@@ -22,7 +23,10 @@
     <th scope="row" valign="top"><label for="article_tags">Tags</label></th>
     <td><%= text_field 'article', 'tag_list' %></td>
   </tr>
-  
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="article_category_id">Channel</label></th>
+    <td><%= select 'article', 'channel_id', channels_select %></td>
+  </tr>  
   <%= do_extensions('MushAdmin::AddArticleExtraAttributes', @article) %>
   
   <tr class="form-field">
@@ -49,5 +53,5 @@
 </table>
 <p class="submit">
   <input type="submit" class="button" name="submit" value="Save Article" />
-  or <%= link_to_remote 'Cancel', :url => {:action => 'index', :channel_id => @channel.id}, :class => 'cancel' %>
+  or <%= link_to_remote 'Cancel', :url => {:action => 'index', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''}, :class => 'cancel' %>
 </p>

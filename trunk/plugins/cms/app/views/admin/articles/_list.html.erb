@@ -1,11 +1,12 @@
     <script>set_current_channel('cms')</script>
     <% form_remote_tag(:url => '/admin/articles/destroy', :html => {:id => 'posts-filter'}) do %>
     <input type="hidden" name="channel_id" value="<%= @channel.id %>" />
+    <input type="hidden" name="standalone" value="<%= @standalone %>"
 
-    <h2>Manage Articles - <%= @channel.name %> (<%= link_to_remote 'add new', :url => {:controller => 'admin/articles', :action => 'new', :channel_id => @channel.id} %>)</h2>
+    <h2>Manage Articles - <%= @channel.name %> (<%= link_to_remote 'add new', :url => {:controller => 'admin/articles', :action => 'new', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''} %>)</h2>
 
     <ul class="subsubsub">
-    <li><a href='' class="current">All Assets</a> | </li><li><a href=''>Images</a></li> | </li><li><a href=''>Stylesheets</a></li> | </li><li><a href=''>Javascripts</a></li></ul>
+    <li><a href='' class="current">All Articles</a> | </li><li><a href=''>Images</a></li> | </li><li><a href=''>Stylesheets</a></li> | </li><li><a href=''>Javascripts</a></li></ul>
 
 
     <p id="post-search">
@@ -53,7 +54,7 @@
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= article.id %>" /></th>
           <td><%= article.id %></td>
-          <td><strong><%= link_to_remote article.title, :url => {:controller => 'admin/articles', :action => 'edit', :id => article.id} %></strong></td>
+          <td><strong><%= link_to_remote article.title, :url => {:controller => 'admin/articles', :action => 'edit', :id => article.id, :standalone => @standalone ? @standalone : ''} %></strong></td>
           <td><%= article.author %></td>
           <td><%= article.status %></td>
           <td><abbr title="<%= article.created_at %>"><%= article.created_at %></abbr></td>

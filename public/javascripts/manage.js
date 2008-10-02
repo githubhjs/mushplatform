@@ -99,10 +99,22 @@ function validate_user_emial(_input){
 }
 
 function validate_form(_form){
-    alert(_form);
    if(validate_email($('user_email').value) && $('user_profile_city').value != ''){
        _form.submit();
    }else{
        alert("请完善必填内容");
    }
+}
+
+function post_sidebar_form(_from,bar_id){
+    new Ajax.Request('/manage/sidebars/friend_link/edit', {
+        method:'get',
+        asynchronous:false,
+        evalScripts:true,
+        onComplete:function(){
+          Element.hide('onload_img');
+          Element.hide('edit_'+bar_id);
+        },
+        parameters:Form.serialize(_from)
+        })
 }

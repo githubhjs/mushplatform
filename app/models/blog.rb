@@ -16,6 +16,11 @@ class Blog < ActiveRecord::Base
   named_scope :publised_blogs,:conditions => "published = #{Published_Blogs}",:order => "if_top desc,created_at desc"
   named_scope :latest,:order => "if_top desc,created_at desc"
 
+  named_scope :day_blogs,lambda { |day|
+    { :conditions => "created_at >= #{day} and created_at <#{day.next} and published = #{Drafted_Blogs} " ,
+      :order => "if_top desc,created_at desc"}
+  }
+  
   def sticky
     self.if_top = self.if_top^Const::YES
     if save

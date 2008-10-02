@@ -1,5 +1,5 @@
 module MessageBordSidebarHelper
-    def get_content(option = {})
+    def self.get_context(option = {})
       {}
     end
 end

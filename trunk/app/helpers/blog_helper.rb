@@ -9,8 +9,6 @@ module BlogHelper
       Sidebar.find(bar.sidebar_id)}.compact.map{|sidebar|sidebar.get_content(sidebar_options())}
     sidebar_infos.join('   ')
   end
-
-  private
-  
+   
   
 end

@@ -38,8 +38,7 @@ class BlogController < ApplicationController
     end
     return content
   end  
-
-  
+    
   def generate_sidebar_content(user)
     sidebar_infos = SidebarUser.user_sidebars(user.id).map{|bar|
       Sidebar.find(bar.sidebar_id)}.compact.map{|sidebar|sidebar.get_content(sidebar_options())}
@@ -90,7 +89,7 @@ class BlogController < ApplicationController
     end
     #如果是按照关键字搜索的
     unless params[:keyword].blank?
-      conditions << Blog.generate_sql_from_arry(["(title like ? or body like ?  or keywords like ?)","%#{params[:keyword]}%"],"%#{params[:keyword]}%","%#{params[:keyword]}%")
+      conditions << Blog.generate_sql_from_arry(["(title like ? or body like ?  or keywords like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%","%#{params[:keyword]}%"])
     end
     #如果是按照类别查询
     unless params[:category_id].blank?

@@ -26,7 +26,22 @@ class Theme
   def enable?
     them_info['enabled']||true
   end
+
+  def path
+    "#{RAILS_ROOT}/themes/#{self.name}"
+  end
+
+  def liquid_layout
+    "#{self.path}/templates/layout"
+  end
   
+  def index_liquid_template
+    "#{self.path}/templates/entries"
+  end
+  
+  def view_path
+    "#{self.path}/templates"
+  end
   def layout #模板文件,在layouts文件里，叫default.html.erb  
      "/layouts/default"
   end  

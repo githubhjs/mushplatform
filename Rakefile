@@ -9,6 +9,17 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
+namespace :db do
+  desc "Loads a schema.rb file into the database and then loads the initial database fixtures."
+  task :bootstrap do
+    system "rake db:migrate:plugin[authorize]"
+    system "rake db:migrate:plugin[cms]"
+    system "rake db:migrate:plugin[blogengine]"
+    system "rake db:migrate:plugin[ccmw]"
+    system "rake db:migrate"
+  end
+end
+
 namespace :data do
   namespace :migrate do
     desc "Migrate all"

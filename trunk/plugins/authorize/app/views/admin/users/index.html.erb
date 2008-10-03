@@ -11,15 +11,12 @@
 
     <p id="post-search">
       <input type="text" id="post-search-input" name="s" value="" />
-      <input type="submit" value="Search Templates" class="button" />
+      <input type="submit" value="Search Users" class="button" />
     </p>
 
     <div class="tablenav">
 
     <div class="alignleft">
-    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
-    <input type="hidden" id="_wpnonce" name="_wpnonce" value="1c529154d8" />
-    <input type="hidden" name="_wp_http_referer" value="/wp/wp-admin/edit.php" />
     
     <select name='cat' id='cat' class='postform' >
       <option value='0'>Valid</option>
@@ -74,7 +71,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-        <br class="clear" />
+        <%= will_paginate @users %>
     </div>
 
     <br class="clear" />

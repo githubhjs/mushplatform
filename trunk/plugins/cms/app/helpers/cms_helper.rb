@@ -1,3 +1,4 @@
+require 'paginator'
 module CmsHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
@@ -18,21 +19,32 @@ module CmsHelper
   end
 
   def list_articles(args = {})
-    channel_id = args.delete(:channel_id) #|| 1
+    channel_id = args.delete(:channel_id) || 1
     order = args.delete(:order) || 'created_at DESC'
     per_page = args.delete(:per_page) || 20
+    page = args.delete(:page) || 1
     will_args = args
+    conditions = "channel_id = #{channel_id}"
     
-    if channel_id
-      channel = Channel.find(channel_id)
-      articles = Article.paginate_by_channel_id channel_id, :page => args.delete(:page), :order => order, :per_page => per_page
-    else
-      channel = Channel.find(1)
-      articles = Article.paginate :page => args.delete(:page), :order => order, :per_page => per_page
-    end
+    channel = Channel.find(channel_id)
+    articles = Article.paginate :page => page, :order => order, :per_page => per_page,
+                                :conditions => conditions
     permalink = channel_permalink(channel.to_liquid)
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
+  
+  def list_articles_by_tags(args = {})
+    tags = args.delete(:tags)
+    order = args.delete(:order) || 'created_at DESC'
+    per_page = args.delete(:per_page) || 20
+    page = args.delete(:page) || 1
+    will_args = args
+    if tags
+      articles = tag_paginator(Article, tags.split('+'), nil, per_page.to_i, page.to_i)
+    end
+    permalink = "/tags/#{tags}"
+    { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
+  end  
   
   def list_tags(args ={})
     tags = []
@@ -106,5 +118,24 @@ module CmsHelper
     end
     channel_list
   end
+  
+  # paginate a call to find_tagged_with
+  # klass is the tagged class
+  # tag is the tag to find
+  # count is the total number of items with that tag, if nil count_tags is called
+  # per_page is numbe rof items per page
+  # page is the page we are on
+  # order is the order to return the items in
+  def tag_paginator(klass, tag, count=nil, per_page=10, page=1, order='created_at DESC')
+    count ||= klass.count_tags(tag)
+    pager = ::Paginator.new(count, per_page) do |offset, per_page|
+      klass.find_tagged_with(tag, :order => order, :limit => per_page, :offset => offset)
+    end
+
+    page ||= 1
+    returning WillPaginate::Collection.new(page, per_page, count) do |p|
+      p.replace pager.page(page).items
+    end
+  end  
   
 end

@@ -6,6 +6,26 @@ module CcmwHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormOptionsHelper
   
+  # Scriptlets
+  def list_articles_by_categories(args = {})
+    categories = args.delete(:categories)
+    order = args.delete(:order) || 'created_at DESC'
+    per_page = args.delete(:per_page) || 8
+    will_args = args
+    
+    conditions = ""
+    if categories and categories.length > 0
+      categories_id = categories.split('+').collect{|name| ArticleCategory.find_by_name(name)}.collect{|category| category.id}.join(",")
+      conditions = "category_id in (#{categories_id})"
+    else
+    end
+    articles = Article.paginate :page => args.delete(:page), :order => order, :per_page => per_page,
+                                :conditions => conditions
+    #permalink = channel_permalink(channel.to_liquid)
+    permalink = ''
+    { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
+  end
+  
   def add_mainmenu
     <<menu
 <li><a href="/admin/article_categories" id="ccmw">CCMW &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->

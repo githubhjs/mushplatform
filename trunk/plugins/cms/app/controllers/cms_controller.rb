@@ -7,6 +7,8 @@ class CmsController < ApplicationController
       channel_layout, content = recognize_content(path)
     elsif path.index('article')
       channel_layout, content = recognize_article(path)
+    elsif path.index('tags')
+      channel_layout, content = recognize_tags(path)
     else
       channel_layout, content = recognize_channel(path)
     end
@@ -85,6 +87,20 @@ class CmsController < ApplicationController
     contents = list_contents(article)
     channel_layout = "{{content}}"
     content = Liquid::Template.parse(channel.content_template.body).render('channel' => channel, 'article' => article, 'contents' => contents)
+    return channel_layout, content
+  end
+
+  def recognize_tags(path)
+    page = path.index('page') ? path.delete_at(path.length-1) : params[:page]
+    path.delete("page")
+    tags = path[1]
+    channel = Channel.find(1)
+    if channel.template_id
+      channel_layout = channel.template.body
+      content = Liquid::Template.parse(channel.body).render('page' => page)
+    else
+      channel_layout = channel.body
+    end
     return channel_layout, content
   end
   

@@ -31,52 +31,54 @@ namespace :data do
       
       # articles
       SArticle.find(:all).each{|sa|
-        a = Article.create(
-          :title => sa.title,
-          :display_title => sa.display_title,
-          :sub_title => sa.subtitle,
-          :author => sa.author,
-          :source => sa.origin,
-          :excerpt => sa.excerpt,
-          :redirect_url => sa.url,
-          :status => sa.published,
-          :top => sa.ontoped,
-          :sticky => sa.onfocused,
-          :user_id => sa.user_id,
-          :channel_id => 1,
-          :created_at => sa.created_at,
-          :updated_at => sa.updated_at
-        )
-        Content.create(
-          :id => a.id,
-          :title => a.title,
-          :body => sa.body,
-          :page => 1,
-          :article_id => a.id,
-          :created_at => a.created_at,
-          :updated_at => a.updated_at
-        )
+        unless Article.find_by_title(sa.title)
+          a = Article.create(
+            :title => sa.title,
+            :display_title => sa.display_title,
+            :sub_title => sa.subtitle,
+            :author => sa.author,
+            :source => sa.origin,
+            :excerpt => sa.excerpt,
+            :redirect_url => sa.url,
+            :status => sa.published,
+            :top => sa.ontoped,
+            :sticky => sa.onfocused,
+            :user_id => sa.user_id,
+            :channel_id => 1,
+            :created_at => sa.created_at,
+            :updated_at => sa.updated_at
+          )
+          Content.create(
+            :id => a.id,
+            :title => a.title,
+            :body => sa.body,
+            :page => 1,
+            :article_id => a.id,
+            :created_at => a.created_at,
+            :updated_at => a.updated_at
+          )
 
-        # category
-        article = Article.find(a.id)
-        sc = sa.category
-        if sc
-          ac = ArticleCategory.find_by_name(sc.name)
-          if ac
-            cn = ac.name
-            article.update_attribute('category_id', ac.id)
+          # category
+          article = Article.find(a.id)
+          sc = sa.category
+          if sc
+            ac = ArticleCategory.find_by_name(sc.name)
+            if ac
+              cn = ac.name
+              article.update_attribute('category_id', ac.id)
+            end
           end
+
+          # tags
+          article = Article.find(a.id)
+          sts = sa.tags.collect{|st| st.name}.join(',')
+          article.tag_list = sts
+          article.save
+
+          # log
+          STDOUT.puts "##{article.id} [#{cn}] #{article.title} (#{article.cached_tag_list})"
+          STDOUT.flush
         end
-
-        # tags
-        article = Article.find(a.id)
-        sts = sa.tags.collect{|st| st.name}.join(',')
-        article.tag_list = sts
-        article.save
-
-        # log
-        STDOUT.puts "##{article.id} [#{cn}] #{article.title} (#{article.cached_tag_list})"
-        STDOUT.flush
       }
     end
     

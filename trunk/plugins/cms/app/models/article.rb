@@ -14,6 +14,16 @@ class Article < CachedModel
 #      [Content.new]
 #    end
 #  end
+
+  # Return the count of tag tags in this class
+  def self.count_tags(tag)
+    tag_conditions = ""
+    if tag
+      tag_conditions = tag.map { |t| sanitize_sql(["name LIKE ?", t]) }.join(" OR ")
+      tag_conditions = "(" + tag_conditions + ") AND"
+    end
+    count_by_sql("select count(*) FROM tags, taggings WHERE #{tag_conditions} tags.id = taggings.tag_id AND taggable_type = 'Article'")
+  end  
   
   def body
     article_body = ""

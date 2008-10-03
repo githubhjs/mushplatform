@@ -1,3 +1,4 @@
+
 # Extend the Base ActionController to support themes
 module ThememExt
   

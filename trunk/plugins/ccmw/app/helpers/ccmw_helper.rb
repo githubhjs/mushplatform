@@ -5,7 +5,6 @@ module CcmwHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormOptionsHelper
-  include TagsHelper
   
   def add_mainmenu
     <<menu

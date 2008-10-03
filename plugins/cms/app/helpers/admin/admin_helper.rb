@@ -6,7 +6,7 @@ module AdminHelper
   class << self
     def add_mainmenu
       <<menu
-  <li><a href="/admin/articles?standalone=true" id="cms">Articles &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+  <li><a href="/admin/articles?standalone=true" id="articles">Articles &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
       <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
               <li><a href="/admin/articles/new?standalone=true">New</a></li>
               <li><a href="/admin/articles?standalone=true">Aritcles</a></li>

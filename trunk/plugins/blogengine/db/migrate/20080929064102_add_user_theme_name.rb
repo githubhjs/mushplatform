@@ -2,7 +2,7 @@ class AddUserThemeName < ActiveRecord::Migration
   def self.up
     add_column "users", "theme_name", :string
     User.find(:all){|user|
-      user.update_attribute(:theme_name => 'standard_issue')
+      user.update_attribute(:theme_name => 'default')
     }
   end
 

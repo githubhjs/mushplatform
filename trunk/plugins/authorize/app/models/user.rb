@@ -1,6 +1,6 @@
 require 'digest/sha1'
 
-class User < ActiveRecord::Base
+class User < CachedModel
   
   has_one :user_profile
 
@@ -68,7 +68,12 @@ class User < ActiveRecord::Base
   protected
 
   def self.encrypt(pass, salt)
-    Digest::SHA1.hexdigest(pass+salt)
+    hashed_password = hashed(pass)
+    hashed(salt + hashed_password)
+  end
+  
+  def self.hashed(str)
+    Digest::SHA1.hexdigest("#{USER_SALT}--#{str}--}")[0..39]
   end
 
   def self.random_string(len)

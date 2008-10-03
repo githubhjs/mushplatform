@@ -12,7 +12,7 @@ class MySpaceController < ApplicationController
     render_liquid({:template => 'entries',:layout => true},{'entries' => entries, 'page' => params[:page]||1, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}})
   end
 
-    
+  protected
    def generate_conditions
     conditions = ["user_id=#{current_blog_user.id}"]
     #如果是安月份查询

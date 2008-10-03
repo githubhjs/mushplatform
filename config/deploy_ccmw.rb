@@ -67,11 +67,15 @@ end
 namespace :deploy do
   desc "Set the proper permissions for directory"
   task :change_owner do
-    run "sudo chown www-data:www-data #{current_path} -R"
-    run "sudo chown www-data:www-data #{release_path} -R"
+    run "chown www-data:www-data #{current_path} -R"
+    run "chown www-data:www-data #{release_path} -R"
   end
 
   task :restart, :roles => :web do
-    run "sudo /etc/init.d/lighttpd restart"
+    run "/etc/init.d/lighttpd restart"
+  end
+  
+  task :svn_update, :roles => :web do
+    run "svn update app config db lib plugins script sidebars themes vendor"
   end
 end

@@ -26,6 +26,24 @@ module CcmwHelper
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
   
+  def list_categories_by_category(args ={})
+    category = args.delete(:category)
+    categories = ArticleCategory.find_all_by_category(category)
+    { 'categories' => categories }
+  end
+  
+  def list_links_by_category(args = {})
+    category = args.delete(:category)
+    links = Link.find_all_by_category(category)
+    { 'links' => links }
+  end
+  
+  def list_tags_by_category(args ={})
+    category = args.delete(:category)
+    tags = Tag.find_all_by_category(category)
+    { 'tags' => tags }
+  end
+  
   def add_mainmenu
     <<menu
 <li><a href="/admin/article_categories" id="ccmw">CCMW &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->

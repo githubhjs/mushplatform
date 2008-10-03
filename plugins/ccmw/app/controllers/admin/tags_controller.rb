@@ -16,7 +16,8 @@ class Admin::TagsController < ApplicationController
 #    when '未分类'
 #      @tags = Tag.paginate_by_category '', conditions
     else
-      @tags = Tag.paginate_by_category @category, conditions
+      conditions[:conditions] = "category = '#{@category}'"
+      @tags = Tag.paginate conditions
     end
 
     respond_to do |format|

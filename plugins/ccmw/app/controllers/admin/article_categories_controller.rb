@@ -16,7 +16,8 @@ class Admin::ArticleCategoriesController < ApplicationController
 #    when '未分类'
 #      @article_categories = ArticleCategory.paginate_by_category '', conditions
     else
-      @article_categories = ArticleCategory.paginate_by_category @category, conditions
+      conditions[:conditions] = "category = '#{@category}'"
+      @article_categories = ArticleCategory.paginate conditions
     end
 
     respond_to do |format|

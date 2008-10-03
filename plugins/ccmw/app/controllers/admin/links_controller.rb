@@ -16,7 +16,8 @@ class Admin::LinksController < ApplicationController
 #    when '未分类'
 #      @links = Link.paginate_by_category '', conditions
     else
-      @links = Link.paginate_by_category @category, conditions
+      conditions[:conditions] = "category = '#{@category}'"
+      @links = Link.paginate conditions
     end
 
     respond_to do |format|

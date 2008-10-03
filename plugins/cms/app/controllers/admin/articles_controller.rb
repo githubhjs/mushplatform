@@ -91,6 +91,7 @@ class Admin::ArticlesController < ApplicationController
     content.update_attributes(:title => @article.title, :body => params[:body]) if content
     
     respond_to do |format|
+      @article = Article.find(params[:id])
       if @article.update_attributes(params[:article])
         flash[:notice] = 'Article was successfully updated.'
         format.html { redirect_to(@article) }
@@ -133,7 +134,8 @@ class Admin::ArticlesController < ApplicationController
     else 
       channel = Channel.find(channel_id)
 #      @articles = Article.by_channel(@channel.id)
-      articles = Article.paginate_by_channel_id channel_id, :page => params[:page], :order => 'created_at DESC'
+      articles = Article.paginate :page => params[:page], :order => 'created_at DESC',
+                                  :conditions => "channel_id = #{channel_id}"
     end
     return channel, articles
   end

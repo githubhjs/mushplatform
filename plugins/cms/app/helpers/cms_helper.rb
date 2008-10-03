@@ -94,7 +94,7 @@ module CmsHelper
       channel = Channel.find(1) 
       channel_list << channel
     end
-    if channel.children_count > 0
+    if !channel.child? and channel.children_count > 0
       prefix = "#{prefix}|--"
       channel.direct_children.each{|c|
         c.name = "#{prefix}#{c.name}"

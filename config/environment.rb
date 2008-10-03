@@ -6,7 +6,7 @@ ENV['HOME'] = '/home'
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-#RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.0' #unless defined? RAILS_GEM_VERSION
 
 @@stored_theme = nil
 
@@ -73,6 +73,9 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
   config.plugins = [:engines, :liquid, :fckeditor, :core, :ccmw, :all]
 end
+
+USER_SALT="shadowfox"
+
 memcache_options = {  
    :c_threshold => 10_000,  
    :compression => true,  

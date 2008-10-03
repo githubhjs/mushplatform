@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd $1
+svn update app config db lib plugins script sidebars themes vendor

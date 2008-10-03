@@ -76,6 +76,6 @@ namespace :deploy do
   end
   
   task :svn_update, :roles => :web do
-    run "svn update app config db lib plugins script sidebars themes vendor"
+    run "#{current_path}/script/update #{current_path}"
   end
 end

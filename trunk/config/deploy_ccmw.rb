@@ -19,7 +19,7 @@ role :db,  "www.ccmw.net", :primary => true
 
 after "deploy:setup", "db:create_database_yml"
 after "deploy:update_code", "db:symlink_database_yml"
-#after "deploy:symlink", "deploy:change_owner" 
+after "deploy:symlink", "deploy:change_owner" 
 
 namespace "db" do
   

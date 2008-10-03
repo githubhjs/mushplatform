@@ -73,7 +73,7 @@ namespace :deploy do
   end
 
   task :restart, :roles => :web do
-    run "/etc/init.d/lighttpd restart"
+    run "/etc/init.d/lighttpd restart &"
   end
   
   task :svn_update, :roles => :web do

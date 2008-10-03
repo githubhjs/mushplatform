@@ -102,7 +102,7 @@ module CmsHelper
         channels(channel_list, c, prefix)
       }
     else
-      return 
+      return channel_list
     end
     channel_list
   end

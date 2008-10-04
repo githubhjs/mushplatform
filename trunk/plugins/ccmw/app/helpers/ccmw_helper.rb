@@ -22,12 +22,12 @@ module CcmwHelper
       conditions = "category_id in (#{categories_id})"
     else
     end
-    if paginate
+    if paginate == "true"
       articles = Article.paginate :page => page, :order => order, :per_page => per_page,
                                   :conditions => conditions
     else
-      articles = Article.find :all, :page => page, :order => order, :per_page => per_page,
-                              :conditions => conditions, :offset => offset
+      articles = Article.find :all, :order => order, :offset => offset, :limit => per_page,
+                              :conditions => conditions
     end
     #permalink = channel_permalink(channel.to_liquid)
     permalink = ''

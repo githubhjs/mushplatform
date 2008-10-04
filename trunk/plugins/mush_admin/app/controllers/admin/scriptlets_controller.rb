@@ -49,7 +49,7 @@ class Admin::ScriptletsController < ApplicationController
 
     respond_to do |format|
 #      if @scriptlet.save
-        add_scriptlet(@scriptlet.attributes)
+        @scriptlet = add_scriptlet(@scriptlet.attributes)
         flash[:notice] = 'Scriptlet was successfully created.'
         format.html { redirect_to :action => 'edit', :id => @scriptlet }
         format.xml  { render :xml => @scriptlet, :status => :created, :location => @scriptlet }

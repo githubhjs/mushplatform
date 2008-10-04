@@ -23,6 +23,7 @@ module Mush
       ) unless scriptlet
       remove_scriptlet(args['name'])
       @@scriptlets_registry[args['name']] = scriptlet
+      scriptlet
     end
     
     def get_scriptlet(name)

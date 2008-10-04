@@ -21,7 +21,7 @@ module CcmwHelper
     else
     end
     articles = Article.paginate :page => args.delete(:page), :order => order, :per_page => per_page,
-                                :conditions => conditions, :offet => offset
+                                :conditions => conditions, :offset => offset
     #permalink = channel_permalink(channel.to_liquid)
     permalink = ''
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }

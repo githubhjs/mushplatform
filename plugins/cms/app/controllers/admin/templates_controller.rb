@@ -49,7 +49,7 @@ class Admin::TemplatesController < ApplicationController
     respond_to do |format|
       if @tmplt.save
         flash[:notice] = 'Template was successfully created.'
-        format.html { redirect_to :controller => 'admin/templates' }
+        format.html { redirect_to :controller => 'admin/templates', :action => 'edit', :id => @tmplt.id }
         format.xml  { render :xml => @tmplt, :status => :created, :location => @tmplt }
       else
         format.html { render :action => "new" }

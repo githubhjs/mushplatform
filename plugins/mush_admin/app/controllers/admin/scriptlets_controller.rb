@@ -51,7 +51,7 @@ class Admin::ScriptletsController < ApplicationController
 #      if @scriptlet.save
         add_scriptlet(@scriptlet.attributes)
         flash[:notice] = 'Scriptlet was successfully created.'
-        format.html { redirect_to :action => 'index' }
+        format.html { redirect_to :action => 'edit', :id => @scriptlet }
         format.xml  { render :xml => @scriptlet, :status => :created, :location => @scriptlet }
 #      else
 #        format.html { render :action => "new" }
@@ -69,7 +69,7 @@ class Admin::ScriptletsController < ApplicationController
       if @scriptlet.update_attributes(params[:scriptlet])
         add_scriptlet(@scriptlet.attributes)
         flash[:notice] = 'Scriptlet was successfully updated.'
-        format.html { redirect_to :action => 'index' }
+        format.html { redirect_to :action => 'edit', :id => @scriptlet }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

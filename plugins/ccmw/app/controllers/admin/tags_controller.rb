@@ -7,7 +7,7 @@ class Admin::TagsController < ApplicationController
   # GET /Tags.xml
   def index
     @category = params[:category]
-    conditions = {:page => params[:page], :order => 'name DESC'}
+    conditions = {:page => params[:page], :order => 'id DESC'}
     case @category
     when nil
       @tags = Tag.paginate conditions

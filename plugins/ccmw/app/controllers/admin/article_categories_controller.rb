@@ -7,7 +7,7 @@ class Admin::ArticleCategoriesController < ApplicationController
   # GET /ArticleCategories.xml
   def index
     @category = params[:category]
-    conditions = {:page => params[:page], :order => 'name DESC'}
+    conditions = {:page => params[:page], :order => 'id DESC'}
     case @category
     when nil
       @article_categories = ArticleCategory.paginate conditions

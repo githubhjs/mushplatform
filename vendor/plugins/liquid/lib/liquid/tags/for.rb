@@ -102,7 +102,8 @@ module Liquid
             'rindex'  => length - index,
             'rindex0' => length - index -1,
             'first'   => (index == 0),
-            'last'    => (index == length - 1) }
+            'last'    => (index == length - 1),
+            'modulus' => index % 2         }
         
           result << render_all(@nodelist, context)
         end

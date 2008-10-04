@@ -51,13 +51,16 @@ module CcmwHelper
   
   def list_tags_by_category(args ={})
     category = args.delete(:category)
+    path = args.delete(:path)
     page = args.delete(:page)
     per_page = args.delete(:per_page) || 8
     offset = args.delete(:offset) || 0    
     order = args.delete(:order) || "position DESC"
+    will_args = args
+    
     tags = Tag.paginate :page => page, :order => order, :per_page => per_page,
                         :conditions => "category = '#{category}'"
-    { 'tags' => tags }
+    { 'tags' => tags, 'path' => path, 'will_paginate_options' => {:path => path}.merge(will_args) }
   end
   
   def add_mainmenu

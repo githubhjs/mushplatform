@@ -84,5 +84,9 @@ class User < CachedModel
     return newpass
   end
 
+  def to_liquid
+    self.attributes.stringify_keys
+  end
+  
 end
 

@@ -14,7 +14,7 @@ module CcmwHelper
     page = args.delete(:page)
     per_page = args.delete(:per_page) || 8
     offset = args.delete(:offset) || 0
-    paginate = args.delete(:paginate) || true
+    paginate = args.delete(:paginate) || "true"
     will_args = args
     
     conditions = ""
@@ -56,7 +56,7 @@ module CcmwHelper
     per_page = args.delete(:per_page) || 8
     offset = args.delete(:offset) || 0    
     order = args.delete(:order) || "position DESC"
-    paginate = args.delete(:paginate) || false
+    paginate = args.delete(:paginate) || "false"
     will_args = args
     
     if paginate == "true"

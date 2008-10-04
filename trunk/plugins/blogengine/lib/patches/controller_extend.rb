@@ -3,6 +3,8 @@
 
 module ControllerExtend
 
+  protected
+
   def render_liquid(path_info={},local_assigns={})
     template = path_info[:template].blank? ? current_theme.index_liquid_template + '.liquid' : "#{current_theme.view_path}/#{path_info[:template]}.liquid"
     layout = liquid_layout(path_info[:layout])
@@ -10,8 +12,12 @@ module ControllerExtend
       content = parse_template(template,local_assigns)
       render :text => parse_template(layout,{'content' => content,'sidebar_content' => generate_sidebar_content})
     else
-      render_file(template, true, local_assigns)
+      render :text =>  parse_template(template,local_assigns)
     end
+  end
+  
+  def parse_liquid(template,options)
+    parse_template("#{current_theme.view_path}/#{template}.liquid",options)
   end
   
   def liquid_layout(pass_layout)

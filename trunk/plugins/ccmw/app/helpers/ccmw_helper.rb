@@ -51,8 +51,12 @@ module CcmwHelper
   
   def list_tags_by_category(args ={})
     category = args.delete(:category)
+    page = args.delete(:page)
+    per_page = args.delete(:per_page) || 8
+    offset = args.delete(:offset) || 0    
     order = args.delete(:order) || "position DESC"
-    tags = Tag.find_all_by_category(category, :order => order)
+    tags = Tag.paginate :page => page, :order => order, :per_page => per_page,
+                        :conditions => "category = #{category}"
     { 'tags' => tags }
   end
   

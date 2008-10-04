@@ -56,10 +56,15 @@ module CcmwHelper
     per_page = args.delete(:per_page) || 8
     offset = args.delete(:offset) || 0    
     order = args.delete(:order) || "position DESC"
+    paginate = args.delete(:paginate) || false
     will_args = args
     
-    tags = Tag.paginate :page => page, :order => order, :per_page => per_page,
-                        :conditions => "category = '#{category}'"
+    if paginate == "true"
+      tags = Tag.paginate :page => page, :order => order, :per_page => per_page,
+                          :conditions => "category = '#{category}'"
+    else
+      tags = Tag.find_all_by_category(category, :order => order)
+    end
     { 'tags' => tags, 'path' => path, 'will_paginate_options' => {:path => path}.merge(will_args) }
   end
   

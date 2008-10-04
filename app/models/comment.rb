@@ -2,6 +2,9 @@ class Comment < ActiveRecord::Base
 
   belongs_to :blog
 
+   validates_length_of :title,:in => 1..120,:too_short => "名字不能少于1个字符",:too_long => "标题不能大于120个字符"
+   validates_length_of :body,:minimum => 5,:too_short => "内容不能少于5个字符"
+  
   named_scope :latest_comments, lambda { |user_id|
     { :conditions => { :user_id => user_id },:order => "created_at desc" }
   }

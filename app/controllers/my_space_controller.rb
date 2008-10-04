@@ -4,16 +4,60 @@ class MySpaceController < ApplicationController
   
   Blog_Count_PerPage =   5
 
+  Comment_Count_PerPage = 2
+
   include ThememExt
+  
+  skip_before_filter :verify_authenticity_token,:only => [:create_comment]
   
   def index
     entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage,
       :conditions =>generate_conditions)
-    render_liquid({:template => 'entries',:layout => true},{'entries' => entries, 'page' => params[:page]||1, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}})
+    render_liquid({:template => 'entries',:layout => true},{'entries' => entries, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
+  end
+
+  def show
+    @blog = Blog.find(params[:id])
+    @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at desc")
+    render_liquid({:template => 'article',:layout => true},{'article' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => request.path}})
+  end
+
+  def create_comment
+    if user = (current_user || (params[:user] && User.authenticate(params[:user][:user_name],params[:user][:password])))
+      @comment = Comment.new(params[:comment])
+      @comment.author = user.user_name
+      @comment.email = user.email
+      @comment.user_id = user.id
+      if @comment.save
+        content = parse_liquid('comment',{'comment' => @comment })
+        render :update do |page|
+          page.insert_html :bottom, 'comments',content
+        end
+      else
+        render :update do |page|
+          page['erro_info'].show
+        end
+      end
+    else
+      session[:return_to] = "/articles/#{params[:id]}"
+      redirect_to "/login"
+    end
   end
 
   protected
-   def generate_conditions
+  
+  def keep_params
+    orignal_params = {}
+    [:month,:date,:year,:keyword,:category_id,:tag].each do |attr|
+      orignal_params[attr.to_s] = params[attr] unless params[attr].blank?
+    end
+    orignal_params['page'] = params[:page] || 1
+    orignal_params[:path]  = request.path
+    orignal_params
+  end
+
+
+  def generate_conditions
     conditions = ["user_id=#{current_blog_user.id}"]
     #如果是安月份查询
     unless params[:month].blank?

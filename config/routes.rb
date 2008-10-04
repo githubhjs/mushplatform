@@ -10,6 +10,12 @@ ActionController::Routing::Routes.draw do |map|
   
   map.with_options :controller => "my_space",:conditions => { :subdomain => /^(?!www$)\w+/ } do  |my_space|
     my_space.connect "/" ,:action => 'index'
+    my_space.connect "/page/:page" ,:action => 'index'
+    my_space.connect '/categories/category_id/articles',:action => 'index'
+    my_space.connect '/categories/category_id/articles/page/:page',:action => 'index'
+    my_space.connect '/articles/:id',:action => 'show'
+    my_space.connect '/articles/:id/page/:page',:action => 'show'
+    my_space.connect '/articles/:id/comments',:action => 'create_comment'
   end
   
   map.with_options :controller => "manage/themes" do |theme|

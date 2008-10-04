@@ -68,7 +68,9 @@ module CmsHelper
   end
 
   def article_link(article)
-    link_to article['title'], article_permalink(article), :title => article['title']
+    
+    title = (article['display_title'] and article['display_title'].length > 0) ? title = article['display_title'] : title = article['title']
+    link_to title, article_permalink(article), :title => article['title']
   end
   
   def article_content_link(article)

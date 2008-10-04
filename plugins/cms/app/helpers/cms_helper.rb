@@ -142,4 +142,14 @@ module CmsHelper
     end
   end  
   
+  # format time to long style
+  def timelong( time )
+    time.strftime('%Y-%m-%d %H:%M:%S') if time
+  end
+  
+  # format time to short style
+  def dateshort( time )
+    time.strftime('%Y-%m-%d') if time
+  end
+  
 end

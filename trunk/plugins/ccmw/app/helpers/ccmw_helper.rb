@@ -9,6 +9,7 @@ module CcmwHelper
   # Scriptlets
   def list_articles_by_categories(args = {})
     categories = args.delete(:categories)
+    status = args.delete(:status)
     order = args.delete(:order) || 'created_at DESC'
     page = args.delete(:page)
     per_page = args.delete(:per_page) || 8
@@ -20,7 +21,9 @@ module CcmwHelper
     if categories and categories.length > 0
       categories_id = categories.split('+').collect{|name| ArticleCategory.find_by_name(name)}.collect{|category| category.id}.join(",")
       conditions = "category_id in (#{categories_id})"
-    else
+    end
+    if status
+      order = "#{status} DESC, #{order}"
     end
     if paginate == "true"
       articles = Article.paginate :page => page, :order => order, :per_page => per_page,

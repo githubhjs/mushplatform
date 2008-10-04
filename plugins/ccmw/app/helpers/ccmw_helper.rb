@@ -34,14 +34,14 @@ module CcmwHelper
   
   def list_links_by_category(args = {})
     category = args.delete(:category)
-    order = args.delete(:order) || "position DESC"
-    links = Link.find_all_by_category(category, :order => order)
+    links = Link.find_all_by_category(category)
     { 'links' => links }
   end
   
   def list_tags_by_category(args ={})
     category = args.delete(:category)
-    tags = Tag.find_all_by_category(category)
+    order = args.delete(:order) || "position DESC"
+    tags = Tag.find_all_by_category(category, :order => order)
     { 'tags' => tags }
   end
   

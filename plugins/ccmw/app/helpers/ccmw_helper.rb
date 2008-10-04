@@ -11,6 +11,7 @@ module CcmwHelper
     categories = args.delete(:categories)
     order = args.delete(:order) || 'created_at DESC'
     per_page = args.delete(:per_page) || 8
+    offset = args.delete(:offset) || 0
     will_args = args
     
     conditions = ""
@@ -20,7 +21,7 @@ module CcmwHelper
     else
     end
     articles = Article.paginate :page => args.delete(:page), :order => order, :per_page => per_page,
-                                :conditions => conditions
+                                :conditions => conditions, :offet => offset
     #permalink = channel_permalink(channel.to_liquid)
     permalink = ''
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }

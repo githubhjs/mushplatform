@@ -56,7 +56,7 @@ module CcmwHelper
     offset = args.delete(:offset) || 0    
     order = args.delete(:order) || "position DESC"
     tags = Tag.paginate :page => page, :order => order, :per_page => per_page,
-                        :conditions => "category = #{category}"
+                        :conditions => "category = '#{category}'"
     { 'tags' => tags }
   end
   

@@ -10,9 +10,10 @@ module CcmwHelper
   def list_articles_by_categories(args = {})
     categories = args.delete(:categories)
     order = args.delete(:order) || 'created_at DESC'
+    page = args.delete(:page)
     per_page = args.delete(:per_page) || 8
     offset = args.delete(:offset) || 0
-    paginate = args.delete(:paginate) || "true"
+    paginate = args.delete(:paginate) || true
     will_args = args
     
     conditions = ""
@@ -21,11 +22,11 @@ module CcmwHelper
       conditions = "category_id in (#{categories_id})"
     else
     end
-    if paginate == "true"
-      articles = Article.paginate :page => args.delete(:page), :order => order, :per_page => per_page,
+    if paginate
+      articles = Article.paginate :page => page, :order => order, :per_page => per_page,
                                   :conditions => conditions
     else
-      articles = Article.find :all, :page => args.delete(:page), :order => order, :per_page => per_page,
+      articles = Article.find :all, :page => page, :order => order, :per_page => per_page,
                               :conditions => conditions, :offset => offset
     end
     #permalink = channel_permalink(channel.to_liquid)

@@ -22,13 +22,14 @@ module CmsHelper
     channel_id = args.delete(:channel_id) || 1
     order = args.delete(:order) || 'created_at DESC'
     per_page = args.delete(:per_page) || 20
+    offset = args.delete(:offset) || 0
     page = args.delete(:page) || 1
     will_args = args
     conditions = "channel_id = #{channel_id}"
     
     channel = Channel.find(channel_id)
     articles = Article.paginate :page => page, :order => order, :per_page => per_page,
-                                :conditions => conditions
+                                :conditions => conditions, :offset => offset
     permalink = channel_permalink(channel.to_liquid)
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
@@ -37,10 +38,11 @@ module CmsHelper
     tags = args.delete(:tags)
     order = args.delete(:order) || 'created_at DESC'
     per_page = args.delete(:per_page) || 20
+    offset = args.delete(:offset) || 0
     page = args.delete(:page) || 1
     will_args = args
     if tags
-      articles = tag_paginator(Article, tags.split('+'), nil, per_page.to_i, page.to_i)
+      articles = tag_paginator(Article, tags.split('+'), nil, per_page.to_i, page.to_i, offset)
     end
     permalink = "/tags/#{tags}"
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
@@ -126,7 +128,7 @@ module CmsHelper
   # per_page is numbe rof items per page
   # page is the page we are on
   # order is the order to return the items in
-  def tag_paginator(klass, tag, count=nil, per_page=10, page=1, order='created_at DESC')
+  def tag_paginator(klass, tag, count=nil, per_page=10, page=1, offset = 0, order='created_at DESC')
     count ||= klass.count_tags(tag)
     pager = ::Paginator.new(count, per_page) do |offset, per_page|
       klass.find_tagged_with(tag, :order => order, :limit => per_page, :offset => offset)

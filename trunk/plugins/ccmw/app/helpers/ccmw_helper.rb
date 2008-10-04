@@ -12,7 +12,7 @@ module CcmwHelper
     order = args.delete(:order) || 'created_at DESC'
     per_page = args.delete(:per_page) || 8
     offset = args.delete(:offset) || 0
-    paginate = args.delete(:paginate)
+    paginate = args.delete(:paginate) || "true"
     will_args = args
     
     conditions = ""

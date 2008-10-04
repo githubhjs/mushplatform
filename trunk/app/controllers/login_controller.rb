@@ -17,7 +17,7 @@ class LoginController < ApplicationController
       unless params[:admin].blank?
         redirect_to session[:return_to] || "/admin"
       else
-        redirect_to session[:return_to] || "/manage"
+        redirect_to session[:return_to] || params[:forward] || "/manage"
       end
       
     else

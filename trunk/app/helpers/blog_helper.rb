@@ -1,7 +1,7 @@
 module BlogHelper
     
   def entry_permalink(entry)
-    link_to entry['title'], "/entry/#{entry['id']}", :title => entry['title']
+    link_to entry['title'], "/blogs/#{entry['id']}", :title => entry['title']
   end
 
   def display_sidebar(user)
@@ -10,9 +10,9 @@ module BlogHelper
     sidebar_infos.join('   ')
   end
 
-  def timelong(time)
-      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      
-  end   
+#  def timelong(time)
+#      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      
+#  end   
 #  
 #  def gravatar_tag(email, options={})
 #    options.update(:gravatar_id => Digest::MD5.hexdigest(email.strip))

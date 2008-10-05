@@ -8,9 +8,9 @@ class Blog < ActiveRecord::Base
 
   Drafted_Blogs ,Published_Blogs = 0,1
   
-  validates_length_of :title,:in => 5..120,:too_short => "名字不能少于5个字符",:too_long => "标题不能大于120个字符"
+  #validates_length_of :title,:in => 5..120,:too_short => "名字不能少于5个字符",:too_long => "标题不能大于120个字符"
   
-  validates_length_of :body,:minimum => 20,:too_short => "内容不能少于20个字符"
+  #validates_length_of :body,:minimum => 20,:too_short => "内容不能少于20个字符"
   
   named_scope :draft_blogs ,:conditions  => "published = #{Drafted_Blogs}",:order => "if_top desc,created_at desc"
   named_scope :publised_blogs,:conditions => "published = #{Published_Blogs}",:order => "if_top desc,created_at desc"

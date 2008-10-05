@@ -4,9 +4,9 @@ class MySpaceController < ApplicationController
   
   include ControllerExtend
   
-  Blog_Count_PerPage =   2
+  Blog_Count_PerPage =   5
 
-  Comment_Count_PerPage = 2
+  Comment_Count_PerPage = 50
 
   include ThememExt
    

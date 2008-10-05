@@ -159,6 +159,51 @@ namespace :data do
         STDOUT.puts "##{u.id} #{u.user_name}"
       }
     end
+   
+    desc "Migrate blog"
+    task :blog => :environment do
+      entries = SBlogEntry.find(:all, :conditions => "")
+      if entries != nil
+        entries.each { |entry|
+          #puts entry.subject
+          user = User.find_by_user_name(entry.blog_user.username) if entry.blog_user
+          if user
+            if entry.text
+              text = entry.text.content 
+              excerpt = text.gsub(/\<(.+?)\>/, '').substr(0,200) if text.length > 200
+              excerpt = text if text.length <= 200
+            end
+            b = Blog.create(
+              :title => entry.subject,
+              :author => "<a href='http://#{entry.blog_user.username}.ccmw.net'>#{entry.blog_user.username}</a>",
+              :published => 1,
+              :excerpt => excerpt,
+              :body => text,
+              :created_at => Time.at(entry.postdate),
+              :category_id => entry.blog_category_mapping[entry.cid],
+              :user_id => user.id
+            )
+            entry.comments.each{|comment|
+              c = Comment.create(
+                :blog_id => b.id,
+                :title => comment.subject,
+                :author => comment.author,
+                :ip => comment.userip,
+                :body => comment.content,
+                :created_at => comment.postdate,
+                :user_id => 0
+              )
+              cuser = User.find_by_user_name(comment.blog_user.username).id if comment.blog_user
+              if cuser
+                c.user_id = cuser.id
+                c.save
+              end
+            }
+            STDOUT.puts "##{b.id} #{b.title}"
+          end
+        }   
+      end
+    end
     
   end
 end

@@ -6,7 +6,7 @@ class MySpaceController < ApplicationController
   
   include ControllerExtend
   
-  Blog_Count_PerPage =   5
+  Blog_Count_PerPage =   2
 
   Comment_Count_PerPage = 2
 
@@ -54,7 +54,7 @@ class MySpaceController < ApplicationController
 #      orignal_params[attr.to_s] = params[attr] unless params[attr].blank?
 #    end
     orignal_params['page'] = params[:page] || 1
-    orignal_params[:path]  = request.path
+    orignal_params[:path]  = request.path.gsub(/\/page\/\d+/,'')
     orignal_params
   end
 

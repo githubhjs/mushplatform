@@ -61,9 +61,9 @@ class CmsController < ApplicationController
 #    article_template = Liquid::Template.file_system.read_template_file('article') unless article_template
 #    content = Liquid::Template.parse(article_template).render('article' => article, 'content' => article_content, 'channel' => article.channel)
     contents = list_contents(article)
-    channel_layout = "{{content}}"
+    channel_layout = channel.template.body
     #content = Liquid::Template.parse(channel.article_template.body).render('channel' => channel, 'article' => article, 'content' => article_content, 'contents' => contents)
-    content = Liquid::Template.parse(channel.template.body).render('channel' => channel, 'article' => article, 'content' => article_content, 'contents' => contents)
+    content = Liquid::Template.parse(find_template(channel,'article')).render('channel' => channel, 'article' => article, 'content' => article_content, 'contents' => contents)
     return channel_layout, content
   end
 
@@ -108,4 +108,13 @@ class CmsController < ApplicationController
   def recognize_permalink(path)
     path.join('/')
   end  
+  
+  def find_template(channel,type)
+    template = Template.find_by_name("#{channel.name}_#{type}")
+    unless template
+      template = Template.find_by_name("#{type}")
+    end
+    template ? template.body : "#{type.capitalize} Template Not Found"
+  end
+  
 end

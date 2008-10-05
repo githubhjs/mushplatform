@@ -1,6 +1,6 @@
 <ul>
 {% for article in articles %}
- <li>[{{ article | channel_link_by_article }}] {{ article | article_content_link }}</li>
+ <li>[{{ article | channel_link_by_article }}] {{ article | article_link }}</li>
 {% endfor %}
 </ul>
 {{ articles | will_paginate }}

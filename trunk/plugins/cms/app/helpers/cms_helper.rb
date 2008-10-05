@@ -87,6 +87,7 @@ module CmsHelper
     channel = Channel.find(article['channel_id'])
     channel_link channel.to_liquid
   end
+
   
   def channel_permalink(channel)
     channel['permalink'] = (channel['permalink'] and channel['permalink'].length > 0) ? channel['permalink'] : "/channel/#{channel['id']}"
@@ -99,6 +100,19 @@ module CmsHelper
   
   def list_contents(article)
     article.contents.find(:all, :select => "id, title, page, article_id")
+  end
+  
+  def tags_link_by_article(article)
+    tags_link = ""
+    article = Article.find(article['id'])
+    article.tags.each{|tag|
+      tags_link << "#{link_to(tag['name'], tag_permalink(tag), :title => tag['name'])} "
+    }
+    tags_link
+  end
+  
+  def tag_permalink(tag)
+    "/tags/#{tag.name}"
   end
   
   def channels_select

@@ -14,4 +14,4 @@ map.resources :assets, :path_prefix => '/admin', :controller => 'admin/assets'
 map.connect 'admin/articles/:action/:id', :controller => 'admin/articles'
 #map.resources :articles, :path_prefix => '/admin', :controller => 'admin/articles'
 
-map.dispatch '*path', :controller => 'site', :action => 'dispatch'
+map.dispatch '*path', :controller => 'cms', :action => 'dispatch'

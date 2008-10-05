@@ -1,6 +1,6 @@
 class CreateFriends < ActiveRecord::Migration
   def self.up
-    create_table :friends do |t|
+    create_table :friends, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
 
       t.timestamps
     end

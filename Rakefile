@@ -12,10 +12,10 @@ require 'tasks/rails'
 namespace :db do
   desc "Loads a schema.rb file into the database and then loads the initial database fixtures."
   task :bootstrap do
-    system "rake db:migrate:plugin[authorize]"
-    system "rake db:migrate:plugin[cms]"
-    system "rake db:migrate:plugin[blogengine]"
-    system "rake db:migrate:plugin[ccmw]"
+    system "rake db:migrate:pluginenvironment[authorize]"
+    system "rake db:migrate:pluginenvironment[cms]"
+    system "rake db:migrate:pluginenvironment[blogengine]"
+    system "rake db:migrate:pluginenvironment[ccmw]"
     system "rake db:migrate"
   end
 end
@@ -33,6 +33,7 @@ namespace :data do
       SArticle.find(:all).each{|sa|
         unless Article.find_by_title(sa.title)
           a = Article.create(
+            :id => sa.id,
             :title => sa.title,
             :display_title => sa.display_title,
             :sub_title => sa.subtitle,
@@ -100,8 +101,8 @@ namespace :data do
     desc "Migrate tags"
     task :tags => :environment do
       STDOUT.puts "Migrate tags ..."
-      STag.find(:all, :conditions => "parent_id is NULL").each{|st|
-        st.children.each{|stc|
+      STag.find(:all, :conditions => "parent_id is NULL", :order => "id").each{|st|
+        st.children.find(:all, :order => "id").each{|stc|
           t = Tag.create(
             :id => stc.id,
             :name => stc.name,
@@ -109,7 +110,7 @@ namespace :data do
             :bottom => stc.bottom,
             :category => st.name
           )
-          STDOUT.puts "##{t.id} #{t.name}"
+          STDOUT.puts "##{stc.id} ##{t.id} #{t.name}"
         }
       }
     end
@@ -117,9 +118,10 @@ namespace :data do
     desc "Migrate links"
     task :links => :environment do
       STDOUT.puts "Migrate links ..."
-      SLinkword.find(:all, :conditions => "parent_id is NULL").each{|sl|
-        sl.children.each{|slc|
+      SLinkword.find(:all, :conditions => "parent_id is NULL", :order => "id").each{|sl|
+        sl.children.find(:all, :order => "id").each{|slc|
           l = Link.create(
+            :id => slc.id,
             :name => slc.name,
             :url => slc.url,
             :memo => slc.memo,
@@ -133,7 +135,7 @@ namespace :data do
     desc "Migrate users"
     task :users => :environment do
       STDOUT.puts "Migrate users ..."
-      SUser.find(:all).each{|su|
+      SUser.find(:all, :order => "id").each{|su|
         if su.login == 'admin'
           u = MUser.find(1)
           u.update_attributes(
@@ -145,6 +147,7 @@ namespace :data do
           )
         else
           u = MUser.create(
+            :id => su.id,
             :user_name => su.login,
             :email => su.email,
             :hashed_password => su.salted_password,

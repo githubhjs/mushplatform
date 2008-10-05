@@ -42,7 +42,8 @@ Contents
 {% endif %}')
     Template.create(:name => 'Content', :category => 'Template', :body => '')
     
-    create_table "articles", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    create_table "articles", :id => false, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+      t.integer :id
       t.string :title, :null => false
       t.string :display_title, :sub_title, :permalink, :author, :source
       t.text :excerpt
@@ -57,7 +58,8 @@ Contents
 #    Article.create(:title => "I'm a article", :permalink => 'article-one', :author => 'someone', :channel_id => 1)
 #    Article.create(:title => "I'm another article", :permalink => 'article-two', :author => 'someone', :channel_id => 1)
 
-    create_table "contents", :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+    create_table "contents", :id => false, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
+      t.integer :id
       t.string :title
       t.text    :body
       t.integer :page, :default => 1

@@ -18,7 +18,7 @@ module CalendarSidebarHelper
       cell_attrs = {:class => 'day'}
       count = Blog.blog_count_by_day(d,params[:user_id])
       if count > 0
-        cell_text = "<a href='/#{d.year}/#{d.month}/#{d.mday}' style='background-color: #003355;front-color:white;' title='查看今天日志'>#{d.mday}</a>"
+        cell_text = "<a href='/articles/#{d.year}/#{d.month}/#{d.mday}' style='background-color: #003355;front-color:white;' title='查看今天日志'>#{d.mday}</a>"
         #        cell_attrs[:class] = 'specialDay'
         [cell_text, cell_attrs]
       end

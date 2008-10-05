@@ -1,4 +1,8 @@
 class MySpaceController < ApplicationController
+
+  protect_from_forgery :except => :create_comment
+  
+  skip_before_filter :verify_authenticity_token,:only => [:create_comment]  
   
   include ControllerExtend
   
@@ -7,9 +11,7 @@ class MySpaceController < ApplicationController
   Comment_Count_PerPage = 2
 
   include ThememExt
-  
-  skip_before_filter :verify_authenticity_token,:only => [:create_comment]
-  
+   
   def index
     entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage,
       :conditions =>generate_conditions)
@@ -48,9 +50,9 @@ class MySpaceController < ApplicationController
   
   def keep_params
     orignal_params = {}
-    [:month,:date,:year,:keyword,:category_id,:tag].each do |attr|
-      orignal_params[attr.to_s] = params[attr] unless params[attr].blank?
-    end
+#    [:month,:date,:year,:keyword,:category_id,:tag].each do |attr|
+#      orignal_params[attr.to_s] = params[attr] unless params[attr].blank?
+#    end
     orignal_params['page'] = params[:page] || 1
     orignal_params[:path]  = request.path
     orignal_params
@@ -60,15 +62,15 @@ class MySpaceController < ApplicationController
   def generate_conditions
     conditions = ["user_id=#{current_blog_user.id}"]
     #如果是安月份查询
-    unless params[:month].blank?
+    if (!params[:month].blank? and !params[:year].blank?) and params[:date].blank? 
       m_dates = [31,28,31,30,31,30,31,31,30,31,30,31]
-      limit_date  = Date.parse(params[:month])
+      limit_date  = Date.parse("#{params[:year]}-#{params[:month]}-1")
       max_date = limit_date + m_dates[limit_date.month-1] - 1
       conditions <<  "(updated_at >= '#{limit_date}' and updated_at <= '#{max_date}')"
     end
     #如果是按日期查询
-    unless params[:date].blank?
-      date = Date.parse(params[:date])
+    unless params[:year].blank? or params[:month].blank? or params[:date].blank?
+      date = Date.parse("#{params[:year]}-#{params[:month]}-#{params[:date]}")
       conditions <<  "(updated_at >= '#{date}' and updated_at <= '#{date.next}')"
     end
     #如果是按照关键字搜索的

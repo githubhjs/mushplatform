@@ -10,7 +10,8 @@ class LoginController < ApplicationController
   end
   
   def sign_up
-    session[:user] = User.authenticate(params[:user][:user_name],params[:user][:password])
+    debugger
+    session[:user] = params[:user].blank? ? nil : User.authenticate(params[:user][:user_name],params[:user][:password])
     if session[:user]
       flash[:message]  = "Login successful"
       #redirect_to session[:return_to] || "/admin" 

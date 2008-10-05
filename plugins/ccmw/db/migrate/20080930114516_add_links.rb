@@ -1,7 +1,6 @@
 class AddLinks < ActiveRecord::Migration
   def self.up
-    create_table "links", :id => false, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8", :force => true do |t|
-      t.integer :id
+    create_table "links", :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8", :force => true do |t|
       t.string :name, :url, :category
       t.text :memo
     end

@@ -12,10 +12,10 @@ require 'tasks/rails'
 namespace :db do
   desc "Loads a schema.rb file into the database and then loads the initial database fixtures."
   task :bootstrap do
-    system "rake db:migrate:pluginenvironment[authorize]"
-    system "rake db:migrate:pluginenvironment[cms]"
-    system "rake db:migrate:pluginenvironment[blogengine]"
-    system "rake db:migrate:pluginenvironment[ccmw]"
+    system "rake db:migrate:plugin[authorize]"
+    system "rake db:migrate:plugin[cms]"
+    system "rake db:migrate:plugin[blogengine]"
+    system "rake db:migrate:plugin[ccmw]"
     system "rake db:migrate"
   end
 end

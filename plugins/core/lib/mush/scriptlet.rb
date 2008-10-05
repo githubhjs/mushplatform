@@ -27,6 +27,7 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
       # with all params.  
       # Scriptlet method will use the params to invoke.
       params[:page] = context['page']
+      params[:dynamics] = context['dynamics']
       
       # every scriptlet function should be return a hash 
       # which include the parameters for template using

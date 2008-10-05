@@ -9,6 +9,7 @@ module CcmwHelper
   # Scriptlets
   def list_articles_by_categories(args = {})
     categories = args.delete(:categories)
+    categories = args.delete(:dynamics) if args[:dynamics]
     status = args.delete(:status)
     order = args.delete(:order) || 'created_at DESC'
     page = args.delete(:page)
@@ -19,7 +20,7 @@ module CcmwHelper
     
     conditions = ""
     if categories and categories.length > 0
-      categories_id = categories.split('+').collect{|name| ArticleCategory.find_by_name(name)}.collect{|category| category.id}.join(",")
+      categories_id = categories.split('+').collect{|name| ArticleCategory.find_by_name(name)}.collect{|category| category.id if category}.join(",")
       conditions = "category_id in (#{categories_id})"
     end
     if status
@@ -33,7 +34,7 @@ module CcmwHelper
                               :conditions => conditions
     end
     #permalink = channel_permalink(channel.to_liquid)
-    permalink = ''
+    permalink = "/categories/#{categories}"
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
   

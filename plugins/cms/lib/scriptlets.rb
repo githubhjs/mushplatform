@@ -15,4 +15,6 @@ add_scriptlet('name' => 'show_html', 'type_name' => 'show_html')
 add_scriptlet('name' => 'tag_cloud', 'type_name' => 'list_tags', 'template' =>"{% for tag in tags %}
 <a href=\"/tags/{{tag.name}}\" class=\"{{tag.css_class}}\">{{tag.name}}</a>
 {% endfor %}" )
-add_scriptlet('name' => 'list_article_by_channel', 'type_name' => 'list_articles', 'template' => 'articles', 'template_type' => 'fs')
+add_scriptlet('name' => 'list_articles_by_channel', 'type_name' => 'list_articles', 'template' => "{% for article in articles %}
+ <li>[{{ article | channel_link_by_article }}] {{ article | article_link }}</li>
+{% endfor %}", 'template_type' => 'db')

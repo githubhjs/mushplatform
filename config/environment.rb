@@ -89,3 +89,17 @@ memcache_options = {
    
 CACHE = MemCache.new memcache_options  
 CACHE.servers = 'localhost:11211'  
+
+class String
+  def substr(start, eend)
+    return if( start < 0 or start > eend )
+    c = 0
+    r = ''
+    self.each_char do |x|
+      c += 1
+      r += x if c > start
+      break if c == eend
+    end
+    r
+  end
+end

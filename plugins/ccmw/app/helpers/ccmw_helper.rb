@@ -9,7 +9,7 @@ module CcmwHelper
   # Scriptlets
   def list_articles_by_categories(args = {})
     categories = args.delete(:categories)
-    categories = args.delete(:dynamics) if args[:dynamics]
+    categories = args.delete(:dynamics) if categories.nil? and args[:dynamics]
     status = args.delete(:status)
     order = args.delete(:order) || 'created_at DESC'
     page = args.delete(:page)

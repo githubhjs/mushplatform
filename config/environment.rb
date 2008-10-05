@@ -73,7 +73,7 @@ Rails::Initializer.run do |config|
   # config.active_record.schema_format = :sql
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-  config.plugins = [:engines, :liquid, :fckeditor, :core, :ccmw, :all]
+  config.plugins = [:engines, :liquid, :fckeditor, :core, :authorize, :cms, :all]
 end
 
 USER_SALT="shadowfox"

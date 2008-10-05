@@ -184,19 +184,17 @@ namespace :data do
               :user_id => user.id
             )
             entry.comments.each{|comment|
-              c = Comment.create(
-                :blog_id => b.id,
-                :title => comment.subject,
-                :author => comment.author,
-                :ip => comment.userip,
-                :body => comment.content,
-                :created_at => comment.postdate,
-                :user_id => 0
-              )
               cuser = User.find_by_user_name(comment.blog_user.username).id if comment.blog_user
               if cuser
-                c.user_id = cuser.id
-                c.save
+                c = Comment.create(
+                  :blog_id => b.id,
+                  :title => comment.subject,
+                  :author => comment.author,
+                  :ip => comment.userip,
+                  :body => comment.content,
+                  :created_at => comment.postdate,
+                  :user_id => cuser.id
+                )
               end
             }
             STDOUT.puts "##{b.id} #{b.title}"

@@ -1,6 +1,6 @@
 class CreateAreas < ActiveRecord::Migration
   def self.up
-    create_table :areas do |t|
+    create_table :areas, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.integer :areaid ,:father_id,:null => false
       t.string  :area,:null => false
     end

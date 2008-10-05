@@ -1,6 +1,6 @@
 class CreatePersonalSidebars < ActiveRecord::Migration
   def self.up
-    create_table :personal_sidebars do |t|
+    create_table :personal_sidebars, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string     :title,     :null => false
       t.text       :template,  :null => false
       t.text       :description

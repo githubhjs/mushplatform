@@ -1,7 +1,7 @@
 class CreateBlogs < ActiveRecord::Migration
   
   def self.up
-    create_table :blogs do |t|
+    create_table :blogs, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string   :title,:author,:keywords,:text_filter,:permalink
       t.text     :body,:body_html,:extended,:excerpt,:extended_html
       t.integer  :allow_comments,:allow_pings

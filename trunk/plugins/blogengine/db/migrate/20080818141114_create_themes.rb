@@ -1,6 +1,6 @@
 class CreateThemes < ActiveRecord::Migration
   def self.up
-    create_table :themes do |t|
+    create_table :themes, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
 
       t.timestamps
     end

@@ -62,7 +62,7 @@ module CmsHelper
   
   # Helper or Filter
   def article_content(article)
-    article.find(article['id']).contents[0].body
+    Article.find(article['id']).contents[0].body
   end
 
   def article_permalink(article)

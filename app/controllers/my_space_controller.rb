@@ -1,6 +1,4 @@
 class MySpaceController < ApplicationController
-
-  protect_from_forgery :except => :create_comment
   
   skip_before_filter :verify_authenticity_token,:only => [:create_comment]  
   
@@ -21,7 +19,7 @@ class MySpaceController < ApplicationController
   def show
     @blog = Blog.find(params[:id])
     @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at desc")
-    render_liquid({:template => 'article',:layout => true},{'article' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => request.path}})
+    render_liquid({:template => 'article',:layout => true},{'article' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => request.path.gsub(/\/page\/\d+/,'')}})
   end
 
   def create_comment
@@ -37,12 +35,15 @@ class MySpaceController < ApplicationController
         end
       else
         render :update do |page|
+          page.replace_html 'erro_info',@comment.errors.full_messages.join(';')
           page['erro_info'].show
         end
       end
     else
-      session[:return_to] = "/articles/#{params[:id]}"
-      redirect_to "/login"
+      render :update do |page|
+          page.replace_html 'erro_info', "用户名或者密码不对" 
+          page['erro_info'].show
+      end
     end
   end
 

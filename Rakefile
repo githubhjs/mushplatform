@@ -94,6 +94,7 @@ namespace :data do
             :category => sc.name
           )
           STDOUT.puts "##{ac.id} #{ac.name}"
+          STDOUT.flush
         }
       }
     end
@@ -111,6 +112,7 @@ namespace :data do
             :category => st.name
           )
           STDOUT.puts "##{stc.id} ##{t.id} #{t.name}"
+          STDOUT.flush
         }
       }
     end
@@ -128,6 +130,7 @@ namespace :data do
             :category => sl.name
           )
           STDOUT.puts "##{l.id} #{l.name}"
+          STDOUT.flush
         }
       }
     end 
@@ -157,6 +160,7 @@ namespace :data do
           )
         end
         STDOUT.puts "##{u.id} #{u.user_name}"
+        STDOUT.flush
       }
     end
    
@@ -185,20 +189,23 @@ namespace :data do
                 :user_id => user.id
               )
               entry.comments.each{|comment|
+                c = Comment.create(
+                  :blog_id => b.id,
+                  :title => comment.subject,
+                  :author => comment.author,
+                  :ip => comment.userip,
+                  :body => comment.content,
+                  :created_at => comment.postdate,
+                  :user_id => 0
+                )
                 cuser = User.find_by_user_name(comment.blog_user.username) if comment.blog_user
                 if cuser
-                  c = Comment.create(
-                    :blog_id => b.id,
-                    :title => comment.subject,
-                    :author => comment.author,
-                    :ip => comment.userip,
-                    :body => comment.content,
-                    :created_at => comment.postdate,
-                    :user_id => cuser.id
-                  )
+                  c.user_id = cuser.id
+                  c.save
                 end
               }
               STDOUT.puts "##{b.id} #{b.title}"
+              STDOUT.flush
             end
           end
         }   

@@ -18,6 +18,7 @@ class User < CachedModel
   attr_accessor :password, :password_confirmation,:theme
 
   def self.authenticate(user_name, pass)
+    debugger
     u=find(:first, :conditions=>["user_name = ?", user_name])
     return nil if u.nil?
     return u if User.encrypt(pass, u.salt)==u.hashed_password

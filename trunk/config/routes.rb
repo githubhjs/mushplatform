@@ -21,9 +21,9 @@ ActionController::Routing::Routes.draw do |map|
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
     my_space.connect '/categories/:category_id/articles',:action => 'index'
     my_space.connect '/categories/:category_id/articles/page/:page',:action => 'index'
-    my_space.connect '/articles/:id',:action => 'show'
-    my_space.connect '/articles/:id/page/:page',:action => 'show'
-    my_space.connect '/articles/:id/comments',:action => 'create_comment'
+    my_space.connect '/blogs/:id/comments',:action => 'show'
+    my_space.connect '/blogs/:id/comments/page/:page',:action => 'show'
+    my_space.connect '/blogs/:id/comments/create',:action => 'create_comment'
   end
   
   map.with_options :controller => "manage/themes" do |theme|

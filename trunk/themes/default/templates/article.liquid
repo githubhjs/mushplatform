@@ -27,7 +27,7 @@
 <div class="atomentry">  
 </div>
 
-<form name="comment_form" id="commentform" action="/articles/{{article.id}}/comments">
+<form name="comment_form" id="commentform" method="post" action="/blogs/{{article.id}}/comments/create">
   <h2 id="respond">发表留言</h2><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
 {% if if_login %}
 {% else%}

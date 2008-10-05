@@ -36,7 +36,7 @@ module CmsHelper
   
   def list_articles_by_tags(args = {})
     tags = args.delete(:tags)
-    tags = args.delete(:dynamics) if args[:dynamics]
+    tags = args.delete(:dynamics) if tags.nil? and args[:dynamics]
     order = args.delete(:order) || 'created_at DESC'
     per_page = args.delete(:per_page) || 20
     offset = args.delete(:offset) || 0

@@ -66,7 +66,7 @@ module CmsHelper
   end
 
   def article_permalink(article)
-    return article['redirect_url'] if article['redirect_url']
+    return article['redirect_url'] if article['redirect_url'] and article['redirect_url'].length > 0
     channel = Channel.find(article['channel_id'])
     base_url = channel_permalink(channel.to_liquid)
     article_url = (article['permalink'] == '' or article['permalink'].nil?) ? article['id'] : article['permalink']

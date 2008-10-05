@@ -61,6 +61,10 @@ module CmsHelper
   end
   
   # Helper or Filter
+  def article_content(article)
+    article.find(article['id']).contents[0]
+  end
+
   def article_permalink(article)
     channel = Channel.find(article['channel_id'])
     base_url = channel_permalink(channel.to_liquid)
@@ -69,7 +73,6 @@ module CmsHelper
   end
 
   def article_link(article)
-    
     title = (article['display_title'] and article['display_title'].length > 0) ? title = article['display_title'] : title = article['title']
     link_to title, article_permalink(article), :title => article['title']
   end

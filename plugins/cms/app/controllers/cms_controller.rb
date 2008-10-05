@@ -10,7 +10,12 @@ class CmsController < ApplicationController
     elsif path.length == 0 or path.index('channel')
       channel_layout, content = recognize_channel(path)
     else
-      channel_layout, content = recognize_other(path)
+      channel = Channel.find_by_permalink("/#{path[0]}")
+      if channel
+        channel_layout, content = recognize_channel(path)
+      else
+        channel_layout, content = recognize_other(path)
+      end
     end
     render :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content, 'page' => params[:page]) : 'Page Not Found'
   end

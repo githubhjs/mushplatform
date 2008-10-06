@@ -32,7 +32,7 @@ class Sidebar
   end
   
   def enable?
-    sidebar_info['enabled']||true
+    sidebar_info['enable']||false
   end
   
   #===

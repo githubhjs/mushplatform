@@ -34,9 +34,12 @@ module ControllerExtend
   end
   
   def generate_sidebar_content
-    sidebar_infos = SidebarUser.user_sidebars(current_blog_user.id).map{|bar|
-      Sidebar.find(bar.sidebar_id)}.compact.map{|sidebar|sidebar.get_content(sidebar_options())}
-    sidebar_infos.join('   ')
+    sidebar_contents = SidebarUser.user_sidebars(current_blog_user.id).map{|bar|
+      #Sidebar.find(bar.sidebar_id)}.compact.map{|sidebar|sidebar.get_content(sidebar_options().merge({:id =>sidebar.id}))
+      sidebar = Sidebar.find( bar.sidebar_id )
+      sidebar.get_content(sidebar_options().merge({:id => bar.id}))
+    }
+    sidebar_contents.join('   ')
   end
   
   def sidebar_options

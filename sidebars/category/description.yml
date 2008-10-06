@@ -1,3 +1,4 @@
 title:   日志分类
 description: 显示日志分类
 sidebar_id: category
+enable: true

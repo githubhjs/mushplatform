@@ -2,6 +2,8 @@ require 'yaml'
 class Theme
 
   attr_accessor :name,:path
+
+  Default_Theme_Name = 'default'
   
   def initialize(name, path)  
     @name, @path = name, path  

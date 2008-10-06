@@ -9,11 +9,18 @@ class Comment < ActiveRecord::Base
     { :conditions => { :blog_user_id => user_id },:order => "created_at desc" }
   }
 
+  def realtitle
+    if title and title.length == 0
+      (!body.blank? and body.length >= 12) ? body.substr(0,12) : body
+    else
+      title
+    end
+  end
   
   def to_liquid
     atts = self.attributes.stringify_keys
     atts['author'] = 'guest' if self.user_id == 0
-    atts['title'] = atts['body'].substr(0,12) if self.title.length == 0
+    atts['title'] = realtitle
     atts
   end
   

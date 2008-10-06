@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect   "/login",:controller => 'login',:action => 'login'
   map.connect   "/sign_up",:controller => 'login',:action => 'sign_up'
   map.connect   "/logout",:controller => 'login',:action => 'logout'
-  map.connect   "/manage",:controller => 'manage/manage',:action => 'index'
+  map.connect   "/manage",:controller => 'manage/blogs',:action => 'index'
   map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"
   
   map.with_options :controller => "my_space",:conditions => { :subdomain => /^(?!www$)\w+/ } do  |my_space|

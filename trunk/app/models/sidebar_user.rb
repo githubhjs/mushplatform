@@ -10,11 +10,11 @@ class SidebarUser < ActiveRecord::Base
   serialize :settings, Hash
   
   named_scope :user_sidebars, lambda { |user_id|
-    { :conditions => { :user_id => user_id },:order => "bar_index desc" }
+    { :conditions => { :user_id => user_id },:order => "bar_index " }
   }
-
+  
   def self.max_bar_index(user_id)
-      SidebarUser.maximum('bar_index',:conditions => {:user_id => user_id})
+    SidebarUser.maximum('bar_index',:conditions => {:user_id => user_id})
   end
 
   def self.min_bar_index(user_id)

@@ -107,9 +107,10 @@ function validate_form(_form){
 }
 
 function post_sidebar_form(_from,bar_id){
-    new Ajax.Request('/manage/sidebars/friend_link/edit', {
+    Element.show("onload_img");
+    new Ajax.Request(_form.action, {
         method:'get',
-        asynchronous:false,
+        asynchronous:true,
         evalScripts:true,
         onComplete:function(){
           Element.hide('onload_img');

@@ -1,4 +1,6 @@
 class Manage::SidebarsController < Manage::ManageController
+  skip_before_filter :verify_authenticity_token
+  
   # GET /sidebars
   # GET /sidebars.xml
   def index
@@ -17,30 +19,31 @@ class Manage::SidebarsController < Manage::ManageController
   end
 
   def remove
-    SidebarUser.delete_all("user_id=#{current_user.id} and sidebar_id ='#{params[:id]}'") 
+    #SidebarUser.delete_all("user_id=#{current_user.id} and sidebar_id ='#{params[:id]}'") 
+    SidebarUser.destroy(params[:id])
     redirect_to :action => 'index'
   end
   
   def lower
-    current_bar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => {:sidebar_id => params[:id]})
-    if current_bar.bar_index > SidebarUser.min_bar_index(current_user.id)
-      lower_sidebar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => "bar_index < #{current_bar.bar_index}")
-      lower_index,current_index = lower_sidebar.bar_index,current_bar.bar_index
-      lower_sidebar.update_attribute(:bar_index,current_index)
-      current_bar.update_attribute(:bar_index, lower_index)
+    max_bar_index = SidebarUser.max_bar_index(current_user.id)
+    current_bar = SidebarUser.find(params[:id])
+    if max_bar_index > current_bar.bar_index
+      higher_sidebar = SidebarUser.find(:first,:conditions => "bar_index > #{current_bar.bar_index}",:order => "bar_index")
+      higher_index,current_index  = higher_sidebar.bar_index,current_bar.bar_index
+      higher_sidebar.update_attribute(:bar_index,current_index)
+      current_bar.update_attribute(:bar_index, higher_index)
     end
     redirect_to :action => 'index'
   end
 
   def higher
-    max_bar_index = SidebarUser.max_bar_index(current_user.id)
-    current_bar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => {:sidebar_id => params[:id]})
-    if max_bar_index > current_bar.bar_index
-      higher_sidebar = SidebarUser.user_sidebars(current_user.id).find(:first,:conditions => "bar_index > #{current_bar.bar_index}")
-      higher_index,current_index  = higher_sidebar.bar_index,current_bar.bar_index
-      higher_sidebar.update_attribute(:bar_index,current_index)
-      current_bar.update_attribute(:bar_index, higher_index)
-    end
+    current_bar = SidebarUser.find(params[:id])
+    if current_bar.bar_index > SidebarUser.min_bar_index(current_user.id)
+      lower_sidebar = SidebarUser.find(:first,:conditions => "bar_index < #{current_bar.bar_index}",:order => "bar_index desc")
+      lower_index,current_index = lower_sidebar.bar_index,current_bar.bar_index
+      lower_sidebar.update_attribute(:bar_index,current_index)
+      current_bar.update_attribute(:bar_index, lower_index)
+    end    
     redirect_to :action => 'index'
   end
   
@@ -67,10 +70,12 @@ class Manage::SidebarsController < Manage::ManageController
 
   # GET /sidebars/1/edit
   def edit
-    sidebar = SidebarUser.find(:first,:conditions => "user_id=#{current_user.id} and sidebar_id='#{params[:id]}'")
-    sidebar.update_attribute(:settings,params[:sidebar])
-    render :update do |page|
-      page.hide("edit_#{params[:id]}")
+    sidebar = SidebarUser.find(params[:id])
+    name = params[:sidebar][:header] if params[:sidebar][:header].length > 0
+    sidebar.update_attributes(:bar_name => name, :settings => params[:sidebar])
+    respond_to do |format|
+      format.html { redirect_to "/manage/sidebars" }
+      format.js { render(:update) {|page| page.hide "edit_#{params[:id]}"} }
     end
   end
 

@@ -1,3 +1,4 @@
-#title:   Message Bord
-#description: This is the description... All light and fluffy.
-#sidebar_id: message_bord
+title:   Message Bord
+description: This is the description... All light and fluffy.
+sidebar_id: message_bord
+enable: false

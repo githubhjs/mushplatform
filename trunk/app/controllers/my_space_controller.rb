@@ -28,6 +28,7 @@ class MySpaceController < ApplicationController
       @comment.author = user.user_name
       @comment.email = user.email
       @comment.user_id = user.id
+      @comment.blog_user_id = current_blog_user.id
       if @comment.save
         content = parse_liquid('comment',{'comment' => @comment })
         render :update do |page|

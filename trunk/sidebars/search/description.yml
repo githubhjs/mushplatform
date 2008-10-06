@@ -1,4 +1,4 @@
-title:   搜索日志
-description: 可以让访客搜索自己的日志
+title:   搜索
+description: 搜索日志
 sidebar_id: search
-enable: false
+enable: true

@@ -30,7 +30,7 @@ namespace :data do
       STDOUT.puts "Migrate articles ..."
       
       # articles
-      SArticle.find(:all).each{|sa|
+      SArticle.find(:all, :offset => 20000).each{|sa|
         unless Article.find_by_title(sa.title)
           a = Article.create(
             :id => sa.id,
@@ -165,8 +165,8 @@ namespace :data do
     end
    
     desc "Migrate blog"
-    task :blog => :environment do
-      entries = SBlogEntry.find(:all, :conditions => "")
+    task :blogs => :environment do
+      entries = SBlogEntry.find(:all, :conditions => "", :offset => 9000)
       if entries != nil
         entries.each { |entry|
           #puts entry.subject
@@ -196,7 +196,8 @@ namespace :data do
                   :ip => comment.userip,
                   :body => comment.content,
                   :created_at => comment.postdate,
-                  :user_id => 0
+                  :user_id => 0,
+                  :blog_user_id => user.id
                 )
                 cuser = User.find_by_user_name(comment.blog_user.username) if comment.blog_user
                 if cuser

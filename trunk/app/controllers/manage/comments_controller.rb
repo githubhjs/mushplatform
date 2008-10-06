@@ -6,7 +6,7 @@ class Manage::CommentsController < Manage::ManageController
   # GET /comments.xml
   def index
     @comments = Comment.paginate(:page => params[:page]||1,:per_page => Commens_Per_Page,
-      :conditions => "user_id=#{current_user.id}")
+      :conditions => "blog_user_id=#{current_user.id}")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @comments }

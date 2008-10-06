@@ -29,9 +29,9 @@ solid #4d4c4c;position:relative;}
 
 #main{width:984px;clear:both;}
 
-#friend{clear:both;width:100%;background-color:#f4f4f4;margin-bottom:10px;}
+#friend{clear:both;width:100%;background-color:#f4f4f4;margin-bottom:10px;margin-top:10px;}
 #friend p{border-bottom:1px dotted #ccc;line-height:18px;margin:3px 4px 4px 6px;font-family:Arial,宋体;}
-#footer{text-align:center;}
+#footer{text-align:center;margin-top:10px;margin-bottom:10px;}
 
 /*会员频道-个人首页*/
 .red_underline:link,.red_underline:visited{color:#de363a;text-decoration:none;}
@@ -108,7 +108,7 @@ height:25px;padding:0 15px;}
 .person .face li{width:82px;float:left;color:#de363a;line-height:25px;text-align:center;}
 .comment .comment_m p{line-height:25px;height:25px;width:165px;overflow:hidden;}
 
-.manage_m,.blog_write_m{padding:0 30px;text-align:center;}
+.manage_m,.blog_write_m{padding:0 30px;text-align:center;padding-bottom:20px;}
 .manage_m h2{width:746px;float:right;color:#de363a;background:url(/images/ico_blog_manage.gif) no-repeat 640px 0;text-
 align:right;line-height:23px;margin:20px 0px 0 0;}
 .manage_m table{width:746px;border:1px solid #ccc;margin:10px 0;text-align:center;}

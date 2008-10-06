@@ -5,7 +5,7 @@ class SidebarUser < ActiveRecord::Base
   
   set_table_name :sidebars
   
-  validates_uniqueness_of :sidebar_id, :scope => :user_id
+  #validates_uniqueness_of :sidebar_id, :scope => :user_id
 
   serialize :settings, Hash
   

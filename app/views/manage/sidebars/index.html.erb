@@ -46,9 +46,9 @@
 <%=  render :partial => "/manage/share/blog_menu" %>
 <!--person_menu-->
 
-  <div class="manage_m L">
-    <h2>可选择的条目</h2>
-    <table cellpadding="0" cellspacing="0" id = "available">
+  <div class="manage_m L" style="padding: 0 0px 0 5px;">
+    <h2 style="width:380px">可选择的条目</h2>
+    <table cellpadding="0" cellspacing="0" id = "available" style="width:380px">
       <tr >
         <td class="tit" width="87">条目名称</td>
         <td class="tit" width="283">描述</td>
@@ -59,17 +59,15 @@
           <td class="m_border"><a href="#"><%= sidebar.title %></a></td>
           <td class="a_tit m_border"><%=  sidebar.description %></td>
           <td class="m_border">
-            <% unless sidebar.actived?(@user.id) %>
               <a href="/manage/sidebars/<%= sidebar.sidebar_id %>/active">添加</a>
-            <%else%>
-              已添加
-            <%end%>
           </td>
         </tr>
       <%end%>
     </table>
-    <h2>你激活的条目</h2>
-    <table cellpadding="0" cellspacing="0" id = "active">
+  </div>    
+  <div class="manage_m R" style="padding: 0 5px 0 0px;">
+    <h2 style="width:380px">已激活的条目</h2>
+    <table cellpadding="0" cellspacing="0" id = "active" style="width:380px">
       <tr>
         <td class="tit" width="87">条目名称</td>
         <td class="tit" width="87">描述</td>
@@ -80,8 +78,8 @@
           <td class="m_border"><a href="#"><%= sidebar_user.bar_name %></a></td>
           <td class="m_border"><%=  sidebar_user.description %></td>
           <td class="m_border">
-            <a href="#" title="编辑" onclick="Element.toggle('edit_<%=  sidebar_user.sidebar_id %>');return false;"><img alt="编辑" src="/images/btn_edit.png"></a>
-            <a title="移除" href="/manage/sidebars/<%= sidebar_user.sidebar_id %>/remove"><img src="/images/btn_delete.png" title ='移除'></a>
+            <a href="#" title="编辑" onclick="Element.toggle('edit_<%=  sidebar_user.id %>');return false;"><img alt="编辑" src="/images/btn_edit.png"></a>
+            <a title="移除" href="/manage/sidebars/<%= sidebar_user.id %>/remove"><img src="/images/btn_delete.png" title ='移除'></a>
             <% if @max_bar_index > sidebar_user.bar_index %>
 
               <a href="/manage/sidebars/<%= sidebar_user.sidebar_id %>/higher"><img alt="Icon_digg" src="/images/icon_digg.gif" title="上移"></a>
@@ -91,9 +89,9 @@
             <%end%>
           </td>
         </tr>
-        <tr id="edit_<%=  sidebar_user.sidebar_id%>" style="display:none;">
+        <tr id="edit_<%=  sidebar_user.id %>" style="display:none;">
           <td colspan='3'>
-            <%= display_sidebar_setting_info(@user.id,sidebar_user.sidebar_id) %>
+            <%= display_sidebar_setting_info(@user.id,sidebar_user.id) %>
           </td>
         </tr>
       <%end%>

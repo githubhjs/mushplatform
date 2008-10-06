@@ -1,6 +1,11 @@
 <div class="p_m1">
     <div class="m1_bg">
       <ul class="L">
+        <% if params[:controller] == 'manage/blog_configs' %>
+          <li class="hot">系统设置</li>
+        <%else%>
+          <li><a href="/manage/blog_configs">系统设置</a></li>
+       <%end%>
         <% if params[:controller] == 'manage/user_profiles' %>
           <li class="hot">我的空间</li>
         <%else%>

@@ -1,18 +1,13 @@
 <div class="p_m1">
     <div class="m1_bg">
       <ul class="L">
-        <% if params[:controller] == 'manage/blog_configs' %>
-          <li class="hot">系统设置</li>
-        <%else%>
-          <li><a href="/manage/blog_configs">系统设置</a></li>
-       <%end%>
         <% if params[:controller] == 'manage/user_profiles' %>
           <li class="hot">我的空间</li>
         <%else%>
           <li><a href="/manage/user_profiles"> 我的空间 </a></li>
        <%end%>
         <li class="border"></li>
-        <% if params[:controller] =~ /blogs|categories|comments|themes/%>
+        <% if params[:controller] =~ /blogs|categories|comments|themes|blog_configs/%>
            <li class="hot">博客</li>
         <%else%>
            <li class="hot"><a href="/manage/blogs">博客</a></li>
@@ -30,6 +25,11 @@
         <!--li class="border"></li>
         <li><a href="">交易</a></li>
         <li class="border"></li-->
+        <%# if params[:controller] == 'manage/blog_configs' %>
+          <!--li class="hot">系统设置</li-->
+        <%#else%>
+          <!--li><a href="/manage/blog_configs">系统设置</a></li-->
+       <%#end%>
       </ul>
       <P class="R"><a href="/logout">安全退出</a></P>
     </div>

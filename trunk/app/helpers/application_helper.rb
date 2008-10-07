@@ -2,7 +2,7 @@
 module ApplicationHelper
   
   def timelong(time)
-    time.strftime('%y-%m-%d %H:%M') if time
+    time.strftime('%Y-%m-%d %H:%M:%S') if time
   end
 
   def display_sitebar(sidebars)

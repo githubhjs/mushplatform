@@ -62,9 +62,12 @@
           <td class="m_border"><a href="#"><%= comment.blog.title if comment.blog %></a>&nbsp;</td>
           <td class="m_border"><%= comment.author %>&nbsp;</td>
           <td class="m_border"><%= timelong(comment.created_at) %>&nbsp;</td>
-          <td class="m_border">&nbsp;</td>
+          <td class="m_border">
+            <%= link_to image_tag("/images/btn_delete.png", :alt => '删除'), {:controller => 'manage/comments', :action => 'destroy', :id => comment.id, :page => params[:page]}, :method => 'delete' %>
+          </td>
         </tr>
       <%end%>
     </table>
+    <%= will_paginate @comments, {:prev_label => '上一页', :next_label => '下一页'} %>
   </div>
 </div><!--m_r-->

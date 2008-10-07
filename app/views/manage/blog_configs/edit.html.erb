@@ -60,6 +60,9 @@
       <p><b>博客名称：</b><font style="color:red;"><%= @blog_config.errors.on(:blog_name) %></font>
         <%= f.text_field :blog_name,:size => '65',:maxlength => '65' ,:class => "title" %>
       </p>
+      <p><b>个人签名：</b><font style="color:red;"><%= @blog_config.errors.on(:announcement) %></font>
+        <%= f.text_field :announcement,:size => '65',:maxlength => '65' ,:class => "title" %>
+      </p>
       <p><b>博客皮肤：</b>
         <select name="blog_config[theme_name]">
           <%= generate_theme_options(@blog_config.theme_name) %>

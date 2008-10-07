@@ -3,7 +3,7 @@ require 'digest/sha1'
 class User < CachedModel
   
   has_one :user_profile
-
+    
   validates_length_of :user_name, :within => 5..40
   validates_length_of :password, :within => 6..40
   validates_presence_of :user_name, :email, :password, :password_confirmation, :salt
@@ -25,6 +25,10 @@ class User < CachedModel
     nil
   end  
  
+  def blog_config
+    @blog_config ||= BlogConfig.find_or_create_by_user_id(self.id)
+  end
+  
   def authorizations
     @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
     @auth

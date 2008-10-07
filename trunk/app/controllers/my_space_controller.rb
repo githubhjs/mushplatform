@@ -7,9 +7,9 @@ class MySpaceController < ApplicationController
   Blog_Count_PerPage =   5
 
   Comment_Count_PerPage = 50
-
-  include ThememExt
-   
+  
+  helper_method :current_blog_user  
+  
   def index
     entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage,
       :conditions =>generate_conditions)

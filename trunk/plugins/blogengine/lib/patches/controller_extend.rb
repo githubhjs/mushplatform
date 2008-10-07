@@ -10,7 +10,8 @@ module ControllerExtend
     layout = liquid_layout(path_info[:layout])
     unless layout.blank?
       content = parse_template(template,local_assigns)
-      render :text => parse_template(layout,{'content' => content,'sidebar_content' => generate_sidebar_content})
+      render :text => parse_template(layout,{'content' => content,'sidebar_content' => generate_sidebar_content,
+          'blog_name' => current_blog_user.blog_config.blog_name,'announcement' => current_blog_user.blog_config.announcement})
     else
       render :text =>  parse_template(template,local_assigns)
     end
@@ -60,7 +61,7 @@ module ControllerExtend
     theme_name = unless passed_theme .blank?
       passed_theme
     else
-      current_blog_user ? current_blog_user.theme_name : ''
+      current_blog_user ? current_blog_user.blog_config.theme_name : ''
     end
     @curent_theme = Theme.find(theme_name)
   end

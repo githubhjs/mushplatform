@@ -72,6 +72,6 @@ module ControllerExtend
   end
   
   def current_blog_user
-    @user ||= User.find_by_user_name(request.subdomains.first)
+    User.find_by_user_name(request.subdomains.first)
   end   
 end

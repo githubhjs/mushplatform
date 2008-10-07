@@ -15,7 +15,7 @@ class User < CachedModel
   
   attr_protected :id, :salt
 
-  attr_accessor :password, :password_confirmation,:theme
+  attr_accessor :password, :password_confirmation,:theme,:blog_config
 
   def self.authenticate(user_name, pass)
     debugger
@@ -29,6 +29,9 @@ class User < CachedModel
     @blog_config ||= BlogConfig.find_or_create_by_user_id(self.id)
   end
   
+  def blog_config=(confg)
+    @blog_config = confg
+  end
   def authorizations
     @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
     @auth
@@ -52,11 +55,11 @@ class User < CachedModel
     end
     roles
   end
-
-  def self.swich_theme(user_id,theme_name)
-    connection.execute("update users set theme_name='#{theme_name}' where id=#{user_id}")
-  end
-  
+#
+#  def self.swich_theme(user_id,theme_name)
+#    connection.execute("update users set theme_name='#{theme_name}' where id=#{user_id}")
+#  end
+#  
   def password=(pass)
     @password=pass
     self.salt = User.random_string(10) if !self.salt?

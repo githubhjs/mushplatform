@@ -57,7 +57,7 @@
          <img src='/images/icon_error_lrg.gif'><font color='red'><%= category.errors.full_messages.join(';') %></font>
        <%end%>
       </div>
-      <p><b>博客名称：</b><font style="color:red;"><%= @blog_config.errors.on(:title) %></font>
+      <p><b>博客名称：</b><font style="color:red;"><%= @blog_config.errors.on(:blog_name) %></font>
         <%= f.text_field :blog_name,:size => '65',:maxlength => '65' ,:class => "title" %>
       </p>
       <p><b>博客皮肤：</b>
@@ -66,8 +66,12 @@
         </select>
       </p>
       <p><b>每页文章数:</b>
-        <font style="color:red;"><%= @blog_config.errors.on(:content) %></font>
+        <font style="color:red;"><%= @blog_config.errors.on(:blog_perpage) %></font>
         <%= f.text_field :blog_perpage %>
+      </p>
+       <p><b>每夜评论数:</b>
+        <font style="color:red;"><%= @blog_config.errors.on(:comment_perpage) %></font>
+        <%= f.text_field :comment_perpage %>
       </p>
       <input class="submit"  type="submit" value="发 布" />
     </div>

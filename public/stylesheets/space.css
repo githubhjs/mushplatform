@@ -204,3 +204,6 @@ bottom:10px;}
   font-size: 12px;
   list-style: square;
 }
+
+.pagination {}
+.pagination .current {font-weight:bold;}

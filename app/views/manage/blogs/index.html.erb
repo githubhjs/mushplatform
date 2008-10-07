@@ -76,12 +76,12 @@
           <%if action_name == 'drafts'%>
           <td class="m_border"><input name="blog_ids[]" type="checkbox" value="<%= blog.id %>" /></td>
           <%end%>
-          <td class="m_border"><a href=""><img src="/images/ico_add3.gif"/></a></td>
-          <td class="a_tit m_border"><%= blog.title %></td>
+          <td class="m_border"><img src="/images/ico_add3.gif"/></td>
+          <td class="a_tit m_border"><a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><%= blog.title %></a></td>
           <td class="m_border"><%= display_category_name(blog) %></td>
           <td class="m_border"><%= timelong(blog.created_at) %></td>
           <td class="m_border"><%= blog.comment_count %></td>
-          <td>
+          <td class="m_border">
             <a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
             <%unless blog.is_sticky? %>
               <%= link_to_remote('<img alt="置顶" src="/images/btn_sticky.png" >',:url =>"/manage/blogs/#{blog.id}/sticky",:method => :get,:html => {:title => "置顶",:id => "d_a_#{blog.id}"})%>
@@ -93,6 +93,7 @@
         </tr>
       <%end%>
     </table>
+    <%= will_paginate @blogs, {:prev_label => '上一页', :next_label => '下一页'} %>
     <input type="hidden" name="category_id" value="<%= params[:category_id] %>">
     <% if action_name == "drafts" %>
       <input class="delete" name="publish" type="submit" value="发 布" />

@@ -6,7 +6,7 @@ class Manage::BlogsController < Manage::ManageController
   
   skip_before_filter :verify_authenticity_token,:only => [:create,:update,:batch_publish]
   
-  Blog_Per_Page = 30
+  Blog_Per_Page = 10
     
   def index
     @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page,

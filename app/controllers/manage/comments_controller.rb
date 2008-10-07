@@ -1,12 +1,12 @@
 class Manage::CommentsController < Manage::ManageController
 
-  Commens_Per_Page = 30
+  Commens_Per_Page = 20
 
   # GET /comments
   # GET /comments.xml
   def index
     @comments = Comment.paginate(:page => params[:page]||1,:per_page => Commens_Per_Page,
-      :conditions => "blog_user_id=#{current_user.id}")
+      :conditions => "blog_user_id=#{current_user.id}", :order => "id DESC")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @comments }
@@ -80,7 +80,7 @@ class Manage::CommentsController < Manage::ManageController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(comments_url) }
+      format.html { redirect_to(manage_comments_url, :page => params[:page]) }
       format.xml  { head :ok }
     end
   end

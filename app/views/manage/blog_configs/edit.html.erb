@@ -42,11 +42,11 @@
 </div><!--m_l-->
 
 <div class="m_r">
-  <!--person_menu-->
-<%=  render :partial => "/manage/messages/message_menu"%>
+<!--person_menu-->
+<%=  render :partial => "/manage/share/blog_menu" %>
 <!--person_menu-->
   <div class="blog_write_m L">
-    <h2>系统设置</h2>
+    <h2>博客设置</h2>
     <div class="blog_write_top clear"></div>
     <%form_for :blog_config,:url => "/manage/blog_configs/#{@blog_config.id}",:html => {:name => 'message_form' ,:method => :put} do |f|  %>
     <div class="blog_write_center">
@@ -76,7 +76,7 @@
         <font style="color:red;"><%= @blog_config.errors.on(:comment_perpage) %></font>
         <%= f.text_field :comment_perpage %>
       </p>
-      <input class="submit"  type="submit" value="发 布" />
+      <input class="submit"  type="submit" value="保 存" />
     </div>
     <%end%>
     <div class="blog_write_bottom"></div>

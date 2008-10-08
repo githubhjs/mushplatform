@@ -1028,9 +1028,9 @@ html, body {
 }
 
 #link_name, #link_url, #link_description {
-	font-size: 1.7em;
+/*	font-size: 1.7em;
 	padding: 4px 3px;
-	width: 98%;
+	width: 98%; */
 }
 
 #edit-slug-box {

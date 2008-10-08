@@ -19,6 +19,14 @@
     <th scope="row" valign="top"><label for="link_url">URL</label></th>
     <td><%= text_field 'link', 'url' %></td>
   </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top"><label for="link_image">Image</label></th>
+    <td><%= file_field 'link', 'uploaded_data' %></td>
+  </tr>
+  <tr class="form-field">
+    <th scope="row" valign="top">&nbsp;</th>
+    <td><%= image_tag @link.public_filename if @link.id %></td>
+  </tr>  
 </table>
 <p class="submit">
   <input type="submit" class="button" name="submit" value="Save Link" />

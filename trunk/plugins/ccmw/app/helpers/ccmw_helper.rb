@@ -69,6 +69,18 @@ module CcmwHelper
     { 'tags' => tags, 'path' => path, 'will_paginate_options' => {:path => path}.merge(will_args) }
   end
   
+  def focus_images_from_links(args ={})
+    category = args.delete(:category)
+    links = Link.find_all_by_category(category)
+    files, urls, texts = [], [], []
+    links.each{|link|
+      files << link.public_filename
+      urls << link.url
+      texts << link.name
+    }
+    {'files' => files, 'urls' => urls, 'texts' => texts}
+  end
+  
   def add_mainmenu
     <<menu
 <li><a href="/admin/article_categories" id="ccmw">CCMW &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->

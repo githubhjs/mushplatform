@@ -18,7 +18,6 @@ class User < CachedModel
   attr_accessor :password, :password_confirmation,:theme,:blog_config
 
   def self.authenticate(user_name, pass)
-    debugger
     u=find(:first, :conditions=>["user_name = ?", user_name])
     return nil if u.nil?
     return u if User.encrypt(pass, u.salt)==u.hashed_password
@@ -55,11 +54,12 @@ class User < CachedModel
     end
     roles
   end
-#
-#  def self.swich_theme(user_id,theme_name)
-#    connection.execute("update users set theme_name='#{theme_name}' where id=#{user_id}")
-#  end
-#  
+
+  def self.swich_theme(user_id,theme_name)
+    #connection.execute("update users set theme_name='#{theme_name}' where id=#{user_id}")
+    User.find(user_id).blog_config.update_attribute(:theme_name, theme_name)
+  end
+  
   def password=(pass)
     @password=pass
     self.salt = User.random_string(10) if !self.salt?

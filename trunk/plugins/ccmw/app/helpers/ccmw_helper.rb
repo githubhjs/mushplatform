@@ -78,7 +78,7 @@ module CcmwHelper
       urls << link.url
       texts << link.name
     }
-    {'files' => files, 'urls' => urls, 'texts' => texts}
+    {'files' => files.join('|'), 'urls' => urls.join('|'), 'texts' => texts.join('|')}
   end
   
   def add_mainmenu

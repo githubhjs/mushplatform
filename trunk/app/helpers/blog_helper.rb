@@ -10,6 +10,21 @@ module BlogHelper
     sidebar_infos.join('   ')
   end
 
+  def parse_year_of_date(date_str)
+    date = parse_date_from_str(date_str)
+    date ? date.year : ''
+  end
+
+  def parse_month_of_date(date_str)
+    date = parse_date_from_str(date_str)
+    date ? date.month : ''
+  end
+
+  def parse_date_from_str(date_str)
+    dates = date_str.split('-')
+    dates[2] = '01'
+    Date.parse(dates.jion('-'))
+  end
 #  def timelong(time)
 #      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      
 #  end   

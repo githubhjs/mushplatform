@@ -118,6 +118,7 @@ class Sidebar
       parse = Liquid::Template.parse(IO.read(template_path))
       parse.render(options)
     rescue Exception => e
+#      raise e.message
       'No info'
     end
     content

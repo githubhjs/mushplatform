@@ -10,6 +10,7 @@ class SidebarGenerator < Rails::Generator::NamedBase
       m.template 'helpers/sidebar_helper.rb', "#{theme_path}/helpers/#{file_name.underscore}_sidebar_helper.rb"
       m.template 'views/content.html.erb', "#{theme_path}/views/content.html.erb"
       m.template 'views/content.liquid', "#{theme_path}/views/content.liquid"
+      m.template 'views/edit.liquid', "#{theme_path}/views/edit.liquid"
     end
 
   end

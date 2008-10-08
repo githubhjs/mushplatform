@@ -7,6 +7,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect   "/logout",:controller => 'login',:action => 'logout'
   map.connect   "/manage",:controller => 'manage/blogs',:action => 'index'
   map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"
+  map.connect   "/front/editors/upload_editor_image",:controller => 'front/editors',:action => "upload_editor_image"
+  map.connect   "/front/editors/upload_editor_attach",:controller => 'front/editors',:action => "upload_editor_attach"
+  
   
   map.with_options :controller => "my_space",:conditions => { :subdomain => /^(?!www$)\w+/ } do  |my_space|
     my_space.connect "/" ,:action => 'index'

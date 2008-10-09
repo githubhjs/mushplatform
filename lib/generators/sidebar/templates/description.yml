@@ -1,3 +1,4 @@
 title:   <%= class_name.underscore.humanize.titleize %>
 description: This is the description... All light and fluffy.
 sidebar_id: <%= class_name.underscore %>
+enable: true

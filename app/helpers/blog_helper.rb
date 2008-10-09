@@ -25,9 +25,9 @@ module BlogHelper
     dates[2] = '01'
     Date.parse(dates.join('-'))
   end
-#  def timelong(time)
-#      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      
-#  end   
+  def timelong(time)
+      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      
+  end   
 #  
 #  def gravatar_tag(email, options={})
 #    options.update(:gravatar_id => Digest::MD5.hexdigest(email.strip))

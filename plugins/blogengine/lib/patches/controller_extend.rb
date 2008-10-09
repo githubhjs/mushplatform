@@ -1,6 +1,3 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
 module ControllerExtend
 
   protected
@@ -10,8 +7,9 @@ module ControllerExtend
     layout = liquid_layout(path_info[:layout])
     unless layout.blank?
       content = parse_template(template,local_assigns)
+      home = "http://#{request.host_with_port}"
       render :text => parse_template(layout,{'content' => content,'sidebar_content' => generate_sidebar_content,
-          'blog_name' => current_blog_user.blog_config.blog_name,'announcement' => current_blog_user.blog_config.announcement})
+          'blog_name' => current_blog_user.blog_config.blog_name,'announcement' => current_blog_user.blog_config.announcement, 'home' => home})
     else
       render :text =>  parse_template(template,local_assigns)
     end

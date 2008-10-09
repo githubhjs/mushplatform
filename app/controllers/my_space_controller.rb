@@ -11,8 +11,7 @@ class MySpaceController < ApplicationController
   helper_method :current_blog_user  
   
   def index
-    entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage,
-      :conditions =>generate_conditions)
+    entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions =>generate_conditions)
     render_liquid({:template => 'entries',:layout => true},{'entries' => entries, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
   end
 

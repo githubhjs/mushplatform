@@ -23,7 +23,7 @@ module BlogHelper
   def parse_date_from_str(date_str)
     dates = date_str.split('-')
     dates[2] = '01'
-    Date.parse(dates.jion('-'))
+    Date.parse(dates.join('-'))
   end
 #  def timelong(time)
 #      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      

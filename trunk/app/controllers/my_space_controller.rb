@@ -67,12 +67,12 @@ class MySpaceController < ApplicationController
       m_dates = [31,28,31,30,31,30,31,31,30,31,30,31]
       limit_date  = Date.parse("#{params[:year]}-#{params[:month]}-1")
       max_date = limit_date + m_dates[limit_date.month-1] - 1
-      conditions <<  "(updated_at >= '#{limit_date}' and updated_at <= '#{max_date}')"
+      conditions <<  "(created_at >= '#{limit_date}' and created_at <= '#{max_date}')"
     end
     #如果是按日期查询
     unless params[:year].blank? or params[:month].blank? or params[:date].blank?
       date = Date.parse("#{params[:year]}-#{params[:month]}-#{params[:date]}")
-      conditions <<  "(updated_at >= '#{date}' and updated_at <= '#{date.next}')"
+      conditions <<  "(created_at >= '#{date}' and created_at <= '#{date.next}')"
     end
     #如果是按照关键字搜索的
     unless params[:keyword].blank?

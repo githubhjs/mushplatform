@@ -1,5 +1,5 @@
 class CmsController < ApplicationController
-#  caches_page :dispatch
+  caches_page :dispatch
   
   def dispatch
     path = params[:path]

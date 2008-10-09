@@ -61,6 +61,7 @@ Rails::Initializer.run do |config|
   }
 
   #config.action_controller.asset_host = "http://www.ccmw.com"
+  config.action_controller.page_cache_directory = RAILS_ROOT+"/public/cache/"
   
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information

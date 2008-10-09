@@ -47,9 +47,9 @@
 <%=  render :partial => "/manage/share/blog_menu" %>
 <!--person_menu-->
 
-  <div class="manage_m L" style="padding: 0 0px 20px 5px;">
-    <h2 style="width:380px">可选择的条目</h2>
-    <table cellpadding="0" cellspacing="0" id = "available" style="width:380px">
+  <div class="manage_m L" style="padding: 0 0px 20px 5px;width:380px;">
+    <h2  style="width:380px">可选择的条目</h2>
+    <table cellpadding="0" cellspacing="0" id = "available"  style="width:380px">
       <tr >
         <td class="tit" width="87">条目名称</td>
         <td class="tit" width="283">描述</td>
@@ -68,7 +68,7 @@
       <%end%>
     </table>
   </div>    
-  <div class="manage_m R" style="padding: 0 5px 20px 0px;">
+  <div class="manage_m R" style="padding: 0 5px 20px 0px;width:380px;">
     <h2 style="width:380px">已激活的条目</h2>
     <table cellpadding="0" cellspacing="0" id = "active" style="width:380px">
       <tr>
@@ -93,7 +93,9 @@
         </tr>
         <tr>
           <td colspan='3' class="m_border">
-            <%= display_sidebar_setting_info(@user.id,sidebar_user.id) %> &nbsp;
+            <div id="edit_<%= sidebar_user.id %>" style="display:none">
+            <%= display_sidebar_setting_info(@user.id,sidebar_user.id) %> 
+            </div> &nbsp;
           </td>
         </tr>
       <%end%>

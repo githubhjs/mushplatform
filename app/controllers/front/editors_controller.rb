@@ -5,12 +5,12 @@ class Front::EditorsController < ApplicationController
     file = params[:imgfile]  
     filename = params[:imgfile].original_filename.split('.').reverse    
     filename = Time.now.strftime("%Y%m%d%H%M%S")  + rand(10000).to_s + "." + filename[0]    
-    File.open("#{File.expand_path(RAILS_ROOT)}/public/upload/editor_image/#{filename}", "wb") do |f|     
+    File.open("#{File.expand_path(RAILS_ROOT)}/public/assets/blog/images/#{filename}", "wb") do |f|     
       f.write(file.read)          
     end        
-    render :text => "<script>window.parent.LoadIMG('/upload/editor_image/#{filename}')</script>"  
-  rescue  
-    render :text => "<script>window.parent.alert('您上传的图片无效或者损坏！');window.parent.divProcessing.style.display='none'; </script>"  
+    render :text => "<script>window.parent.LoadIMG('/assets/blog/images/#{filename}')</script>"  
+  rescue  Exception => e
+    render :text => "<script>window.parent.alert('您上传的图片无效或者损坏！#{e}');window.parent.divProcessing.style.display='none'; </script>"  
   end  
        
   # 上传附件  
@@ -18,10 +18,10 @@ class Front::EditorsController < ApplicationController
     file = params[:attach]  
     filename = params[:attach].original_filename.split('.').reverse    
     filename = Time.now.strftime("%Y%m%d%H%M%S") + rand(10000).to_s + "." + filename[0]    
-    File.open("#{File.expand_path(RAILS_ROOT)}/public/upload/editor_attach/#{filename}", "wb") do |f|     
-      f.write(file.read)          
+    File.open("#{File.expand_path(RAILS_ROOT)}/assets/blog/files/#{filename}", "wb") do |f|     
+      f.write(file.read) 
     end        
-    render :text => "<script>window.parent.LoadAttach('/upload/editor_attach/#{filename}')</script>"  
+    render :text => "<script>window.parent.LoadAttach('/assets/blog/files/#{filename}')</script>"  
   rescue  
     render :text => "<script>window.parent.alert('您上传的附件无效或者损坏！');window.parent.divProcessing.style.display='none'; </script>"  
   end  

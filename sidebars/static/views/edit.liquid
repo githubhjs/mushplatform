@@ -1,4 +1,3 @@
-<div id="edit_{{id}}" style="display:none">
   <form action="/manage/sidebars/{{id}}/edit" method="get" onsubmit="post_sidebar_form(this, {{id}});return false;">
     <span>标题</span>
     <input type="text" name="sidebar[header]" value="{{ header }}" style="width:300px;" /><br/>
@@ -7,5 +6,4 @@
     <input type="submit" value="保存">
     <span  id='onload_img' style='display:none;'><img src='/images/spinner.gif' /></span>
   </form>
-</div>
 <!--  onsubmit="post_sidebar_form(this, {{id}});return false;" -->

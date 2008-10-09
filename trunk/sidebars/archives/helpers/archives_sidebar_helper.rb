@@ -4,7 +4,7 @@ module ArchivesSidebarHelper
 
   def self.get_context(option = {})
     counts = Blog.count(:conditions => "published = #{Blog::Published_Blogs} and user_id=#{option[:user_id]}",
-      :group => "date_format(created_at,'%Y-%m')",:order => "updated_at desc",:limit => Default_Archive_Count)
+      :group => "date_format(created_at,'%Y-%m')",:order => "created_at desc",:limit => Default_Archive_Count)
     counts.map{|c|Archives.new(c.first,c.last)}
   end
 

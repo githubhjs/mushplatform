@@ -1,13 +1,12 @@
 class Blog < ActiveRecord::Base
 
   belongs_to :category
-
   has_many   :comments
-
-  
-
   Drafted_Blogs ,Published_Blogs = 0,1
-  
+  acts_as_taggable
+
+  attr_accessor :tag_names
+
   #validates_length_of :title,:in => 5..120,:too_short => "名字不能少于5个字符",:too_long => "标题不能大于120个字符"
   
   #validates_length_of :body,:minimum => 20,:too_short => "内容不能少于20个字符"
@@ -51,12 +50,25 @@ class Blog < ActiveRecord::Base
     true
   end
   
+  def tag_names=(t_names)
+    self.tag_list = t_names.strip.split(/\s+/).map{|nm|nm.strip}  unless t_names.blank? 
+  end
+
+  def tag_names
+    self.tag_list.join('  ')
+  end
+
   def self.generate_sql_from_arry(arry)
     arry ? sanitize_sql_array(arry) : ''
   end
   
   def to_liquid
-     self.attributes.stringify_keys
+    self.attributes.stringify_keys
   end    
   
- end
+end
+Tag.class_eval do 
+  def to_liquid
+    self.attributes.stringify_keys
+  end    
+end

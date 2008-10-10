@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   def permission_denied
     flash[:error] = "Plase login"
     session[:return_to]=request.request_uri
-    login_url = "/login"
+    login_url = "/user/login"
     login_url = "#{login_url}?admin=true" if session[:return_to].index('admin')
     redirect_to login_url
   end

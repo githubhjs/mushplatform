@@ -7,7 +7,7 @@ module Auth
     end
     flash[:warning]='Please login to continue'
     session[:return_to] = request.request_uri
-    redirect_to "/login"
+    redirect_to "/user/login"
     return false 
   end
   
@@ -19,7 +19,7 @@ module Auth
     unless  current_user && current_user.user_name == request.subdomains.first
       flash[:warning]='Please login to continue'
       session[:return_to] = request.request_uri
-      redirect_to "/login"
+      redirect_to "/user/login"
       return false
     end
     return true

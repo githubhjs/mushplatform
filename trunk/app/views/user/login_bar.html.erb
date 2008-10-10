@@ -1,0 +1,23 @@
+<style>
+.login_bar{background:url(../../images/menu_bg.gif) repeat-x;width:330px;height:26px;line-height:26px;color:#fff;text-align:right;font-size:12px;padding-right:5px;}
+.login_bar span{color:#fff;}
+.login_bar a:link,.login_bar a:visited{color:#fff;text-decoration:none;}
+.login_bar a:hover,.login_bar a:active{color:#333;text-decoration:none;}
+</style>
+<div class="login_bar">
+<% if session[:user]  %>
+  <%= session[:user].user_name %>，您已经登录！
+  <%#= link_to '设置', :controller => 'user', :action => 'settings', :id => session[:user] %> 
+  <!--span>|</span>
+  <%#= link_to '密码', {:controller => 'user', :action => 'change_password', :id => session[:user]} %>
+  <span>|</span-->
+  <a target="_blank" href="http://<%=session[:user].user_name%>.ccmw.net/manage">博客</a>
+  <span>|</span>
+  <a target="_blank" href="http://forum.ccmw.net/login.php?action=login&jumpurl=&step=2&cktime=31536000">论坛</a>
+  <span>|</span>
+  <%= link_to '退出', :controller => 'user', :action => 'logout', :page => 'index' %>
+<% else  %>
+  <a href="/user/login">登录</a> |
+  <a href="/user/signup">注册</a>
+<% end %>
+</div>

@@ -1,6 +1,6 @@
 <div class="L signup">
   <h2>请登录</h2>
-  <%form_tag("/sign_up") do %>
+  <%form_tag("/user/login") do %>
     <div>
       <table>
         <tr>
@@ -12,6 +12,8 @@
             <td>
               <%= u_field.text_field(:user_name, :class => "InpTxt" )%>
               <%= hidden_field_tag 'admin', params[:admin] %>
+              <%= hidden_field_tag 'forward', params[:forward] %>
+
             </td>
           </tr>
           <tr>

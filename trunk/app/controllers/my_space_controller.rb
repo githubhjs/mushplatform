@@ -41,8 +41,8 @@ class MySpaceController < ApplicationController
       end
     else
       render :update do |page|
-          page.replace_html 'erro_info', "用户名或者密码不对" 
-          page['erro_info'].show
+        page.replace_html 'erro_info', "用户名或者密码不对"
+        page['erro_info'].show
       end
     end
   end
@@ -51,9 +51,9 @@ class MySpaceController < ApplicationController
   
   def keep_params
     orignal_params = {}
-#    [:month,:date,:year,:keyword,:category_id,:tag].each do |attr|
-#      orignal_params[attr.to_s] = params[attr] unless params[attr].blank?
-#    end
+    #    [:month,:date,:year,:keyword,:category_id,:tag].each do |attr|
+    #      orignal_params[attr.to_s] = params[attr] unless params[attr].blank?
+    #    end
     orignal_params['page'] = params[:page] || 1
     orignal_params[:path]  = request.path.gsub(/\/page\/\d+/,'')
     orignal_params
@@ -84,7 +84,7 @@ class MySpaceController < ApplicationController
     end
     #如果是按照tag管理
     unless params[:tag].blank?
-      conditions << ["keywords like ?","%#{params[:tag]}%"]
+      conditions << "id in (select taggable_id from taggings where tag_id=#{params[:tag]})"
     end
     conditions.join(' and  ')
   end

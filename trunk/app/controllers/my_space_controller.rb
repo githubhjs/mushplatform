@@ -6,6 +6,8 @@ class MySpaceController < ApplicationController
   
   Blog_Count_PerPage =   5
 
+  Rss_Blog_Perppage = 10
+
   Comment_Count_PerPage = 50
   
   helper_method :current_blog_user  
@@ -45,6 +47,12 @@ class MySpaceController < ApplicationController
         page['erro_info'].show
       end
     end
+  end
+
+  def rss
+    @blogs = Blog.publised_blogs.find(:all,:conditions => "user_id=#{current_blog_user.id}",:limit => Rss_Blog_Perppage)
+    @user = current_blog_user
+    render :content_type => "application/xml",:template => "/my_space/rss",:layout => 'rss'
   end
 
   protected

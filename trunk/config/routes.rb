@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/blogs/:id/comments',:action => 'show'
     my_space.connect '/blogs/:id/comments/page/:page',:action => 'show'
     my_space.connect '/blogs/:id/comments/create',:action => 'create_comment'
-    
+    my_space.connect '/rss',:action => 'rss'
   end
   
   map.with_options :controller => "manage/themes" do |theme|

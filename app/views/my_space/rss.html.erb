@@ -1,0 +1,10 @@
+<% for blog in @blogs  do %>
+    
+      <item>
+        <title><![CDATA[<%= h blog.title %>]]></title>
+        <link><![CDATA[http://<%=request.domain(2)%>/blogs/<%= blog.id %>]]></link>
+        <pubDate><![CDATA[<%=timelong(blog.updated_at)%>]]></pubDate>
+        <description><![CDATA[<%=h blog.body %>]]></description>
+      </item>
+    
+  <%end %>

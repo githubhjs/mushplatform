@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /data/projects/ccmw/current/tmp/html
+wget -q -i /data/projects/ccmw/shared/urls
+rm /data/projects/ccmw/current/tmp/html/*

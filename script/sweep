@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/boot'
 require File.dirname(__FILE__) + '/../config/environment'
-SiteSweeper::sweep
+SiteSweeper::sweep "*.html"
+system "/data/projects/ccmw/current/script/cache"

@@ -30,7 +30,7 @@ namespace :data do
       STDOUT.puts "Migrate articles ..."
       
       # articles
-      SArticle.find(:all, :conditions => "id > 25000").each{|sa| #, :offset => 20000, :limit => (SArticle.count - 20000)).each{|sa|
+      SArticle.find(:all, :conditions => "", :offset => (SArticle.count - 1000), :limit => 1000 ).each{|sa|
         unless Article.find_by_title(sa.title)
           a = Article.create(
             :id => sa.id,
@@ -166,7 +166,7 @@ namespace :data do
    
     desc "Migrate blog"
     task :blogs => :environment do
-      entries = SBlogEntry.find(:all, :conditions => "itemid > 10000") #, :offset => 7000, :limit => (SBlogEntry.count - 7000))
+      entries = SBlogEntry.find(:all, :conditions => "", :offset => (SBlogEntry.count - 500), :limit => 500 )
       if entries != nil
         entries.each { |entry|
           #puts entry.subject

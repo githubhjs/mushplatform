@@ -1,34 +1,33 @@
-<div class="atomentry">
-  <h2 class="title">
-    {{ article | entry_permalink }}
-  </h2>
-  <div class="author">
-    Posted by <cite>{{ article.author }}</cite>
-    <abbr class="published" title="{{ article.title }}">{{ article.created_at|timelong }}</abbr>
+<ul id="posts">
+<div class="postsTop"></div>
+<li>
+  <div class="postHeader">
+    <h3>{{ article.created_at | timelong }}</h3>
+    <h2>{{ article | entry_permalink }}</h2>
   </div>
-  <div class="content">
+  <div class="clear"></div>
+  <div class="postBody">
     {{ article.body }}
   </div>
-</div>
-<div id='comments'>
-{% for comment in comments %}
-<div class="atomentry">
-  <div class="author">
-    Posted by <cite>{{ comment.author }}</cite>
-    <abbr class="published" title="{{ comment.title }}">{{ comment.created_at | timelong }}</abbr>
+  <div class="clear"></div>
+  <div class="postFooter">
+    <div class="menubar"><span class="author"><a href="http://home.blogbus.com/profile/new-skin">New-Skin</a></span> 发表于<span class="time">16:59:06</span> | <a href="http://new-skin147.blogbus.com/logs/27751424.html" class="readmore">阅读全文</a> | <a href="http://new-skin147.blogbus.com/logs/27751424.html#cmt_form" class="cmt">评论 <span class="count">0</span></a> |  <a href="http://www.blogbus.com/user/?mm=Post&amp;aa=Edit&amp;blogid=4364395&amp;id=27751424" class="edit">编辑</a> | <a href="javascript:void(0)" onclick='window.open("http://pindao.blogbus.com/digsys?id=27751424&amp;code=dd0890fe140566fe0b41ea4884e4e185&amp;url=http%3A%2F%2Fnew-skin147.blogbus.com%2Flogs%2F27751424.html&amp;t=BlogBus%E4%B9%8B%E5%95%86%E4%B8%9A%E9%80%BB%E8%BE%91%EF%BC%9A%E5%8F%91%E5%8A%A8%E4%BA%94%E7%99%BE%E4%B8%87%E5%8D%9A%E5%AE%A2%E7%9A%84%E2%80%9C%E7%A4%BE%E4%BC%9A%E8%BF%90%E5%8A%A8%E2%80%9D")' class="dig">推荐 <span id="dc27751424" class="count"></span></a></div>
   </div>
-  <div class="content">
-    {{ comment.body }}
-  </div>
-</div>
-{% endfor %}
-</div>
-{{ comments | will_paginate }}
-<div class="atomentry">  
-</div>
+</li>
+<div class="postsBottom"></div>
+</ul>
 
+<ul id="comments"><h2>评论</h2>
+{% for comment in comments %}
+<li><div class='cmtBody'>{{ comment.body }}</div>
+<div class='menubar'><span class='author'>{{ comment.author }} | </span> 发表于<span class='time'>{{ comment.created_at | timelong }}</span>
+</li>
+{% endfor %}
+</ul>
+
+<div id="commentForm">
 <form name="comment_form" id="commentform" method="post" action="/blogs/{{article.id}}/comments/create">
-  <h2 id="respond">发表留言</h2><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
+  <h2 id="respond">发表评论</h2><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
 {% if if_login %}
 {% else%}
   <p>(<span class='author'>(你还没有登陆，可以<a href="/login?forward=/articles/{{article.id}}">登陆</a>后再来评论)</span>)</br>
@@ -41,12 +40,12 @@
   </p>
 {% endif %}
   <p>
-                <input type="text" name="comment[title]" class='styled' size=22>
 		<label>标 题(<span class='author'>不能为空</span>)</label>
+        <input type="text" name="comment[title]" class='styled' size=22>
 	</p>
   <p>
+      <label>内 容(<span class='author'>至少5个字符</span>)</label>
       <textarea name="comment[body]" class="styled" rows=10 cols=20>{{comment.body}}</textarea>
-      (<span class='author'>至少5个字符</span>)
   </p>
    <input type="hidden" name="comment[blog_id]" value="{{article.id}}">
   <p>
@@ -54,3 +53,4 @@
     <img src="/images/spinner.gif" id="comment_loading" style ="display:none" >
   </p>
 </form>
+</div>

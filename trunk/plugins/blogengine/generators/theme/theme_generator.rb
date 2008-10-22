@@ -22,6 +22,7 @@ class ThemeGenerator < Rails::Generator::NamedBase
       # entries
       m.template 'entries.liquid', File.join( theme_path, 'templates', 'entries.liquid' )
       m.template 'entry.liquid', File.join( theme_path, 'templates', 'entry.liquid' )
+      m.template '_comment.liquid', File.join( theme_path, 'templates', '_comment.liquid' )
     end
   end
 end

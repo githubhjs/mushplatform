@@ -1,4 +1,6 @@
 enabled: true
 title:   <%= class_name.underscore.humanize.titleize %>
 author:  Rain Liu
-description: This is the description... All light and fluffy.
+version: 1.0
+homepage: http://mushplatform.org
+description: 

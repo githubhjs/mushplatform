@@ -7,7 +7,7 @@
 a { color:#137c0f; text-decoration:none; position:relative;}
 li{ list-style:none;}
 a:hover {}
-body { background:#7f0909 url(http://public.blogbus.com/blogbus/skin/50175/bodybg.jpg) repeat-x; font:12px Verdana, Arial, Helvetica, sans-serif; color:#7d7d7d; line-height:1.5; }
+body { background:#7f0909 url(../../images/successed/bodybg.jpg) repeat-x; font:12px Verdana, Arial, Helvetica, sans-serif; color:#7d7d7d; line-height:1.5; }
 table { font-size:inherit; font:100%; }
 table, th, td {}
 th, td {}
@@ -46,8 +46,8 @@ input.button:hover { }
 
 
 
-#index, #detail { margin:auto; width:1003px; background: url(http://public.blogbus.com/blogbus/skin/50175/top1.jpg) no-repeat;}
-#container {background: url(http://public.blogbus.com/blogbus/skin/50175/top2.jpg) no-repeat 502px 0; zoom:1; }
+#index, #detail { margin:auto; width:1003px; background: url(../../images/successed/top1.jpg) no-repeat;}
+#container {background: url(../../images/successed/top2.jpg) no-repeat 502px 0; zoom:1; }
 
 #header { height:295px; overflow:hidden;text-align:center; padding:0 60px; }
 #header a {}
@@ -62,17 +62,17 @@ input.button:hover { }
 .innerBottom {}
 
 #outerContent { float:right; width:689px; overflow:hidden;}
-#content { padding:0px 30px 20px 30px; background:url(http://public.blogbus.com/blogbus/skin/50175/bg.jpg) repeat-y; margin-top:90px; font-size:12px;}
+#content { padding:0px 30px 20px 30px; background:url(../../images/successed/bg.jpg) repeat-y; margin-top:90px; font-size:12px;}
 #content a {}
 #content a:hover {}
 #content h2 {}
 #content h3 { }
 .contentTop {}
-.contentBottom { background:url(http://public.blogbus.com/blogbus/skin/50175/contentbottom.jpg) no-repeat; height:17px;}
+.contentBottom { background:url(../../images/successed/contentbottom.jpg) no-repeat; height:17px;}
 
 #posts {}
-#posts li { margin-bottom:4em; background:url(http://public.blogbus.com/blogbus/skin/50175/dottod.jpg) repeat-x bottom; padding-bottom:30px;}
-#posts h2 {background:url(http://public.blogbus.com/blogbus/skin/50175/h2bg.gif) no-repeat; line-height:26px; font-size:14px; color:#fff; text-align:left; padding-left:50px; padding-top:2px;}
+#posts li { margin-bottom:4em; background:url(../../images/successed/dottod.jpg) repeat-x bottom; padding-bottom:30px;}
+#posts h2 {background:url(../../images/successed/h2bg.gif) no-repeat; line-height:26px; font-size:14px; color:#fff; text-align:left; padding-left:50px; padding-top:2px;}
 #posts h2 a { }
 #posts h2 a:hover {}
 #posts h2 .category {}
@@ -150,8 +150,8 @@ background:url(http://public.blogbus.com/blogbus/skin/50175/bgsider.png) no-repe
 
 #sidebar h2 {font-size:12px; color:#fff;padding:19px 0 10px 28px; height:16px; width:127px;
 background-repeat:no-repeat;
-	background-image:url(http://public.blogbus.com/blogbus/skin/50175/bgsider.png) !important;background-image: none;
-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://public.blogbus.com/blogbus/skin/50175/bgsider.png", sizingMethod="scale"); overflow:hidden;
+	background-image:url(../../images/successed/bgsider.png) !important;background-image: none;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../images/successed/bgsider.png", sizingMethod="scale"); overflow:hidden;
 }
 #sidebar h3 {}
 #sidebar li { list-style:none; margin-left:1px; }
@@ -171,8 +171,8 @@ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://public.blo
 #profile .about { padding:0 6px; }
 
 #calendar {background-repeat:no-repeat; width:193px; height:152px;
-	background-image:url(http://public.blogbus.com/blogbus/skin/50175/rilibg.png) !important;background-image: none;
-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://public.blogbus.com/blogbus/skin/50175/rilibg.png", sizingMethod="scale"); overflow:hidden;
+	background-image:url(../../images/successed/rilibg.png) !important;background-image: none;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../images/successed/rilibg.png", sizingMethod="scale"); overflow:hidden;
 padding:47px 30px 42px 24px; color:#000;font-size:12px;}
 #calendar h2 { display:none; }
 #calendar table { width:100%; }
@@ -191,12 +191,12 @@ padding:47px 30px 42px 24px; color:#000;font-size:12px;}
 .week td.d6 {}
 .day td {}
 #calendar .day td a { font-weight:bold;color:#f00}
-.day td.today {color:#fff; background:url(http://public.blogbus.com/blogbus/skin/50175/toady.jpg) no-repeat 1px 0px;}
+.day td.today {color:#fff; background:url(../../images/successed/toady.jpg) no-repeat 1px 0px;}
 .day td.today a {color:#fff; text-decoration: line-through; font-weight:100;}
 #meta li{ border:0;}
 #search form { padding:6px 10px 10px; }
 #search .textField { width:123px; background:#ebebeb; border:1px solid #5f5862;}
-#search .button { background: url(http://public.blogbus.com/blogbus/skin/50175/searchbut.jpg); width:29px; height:21px; text-indent:-9999px; cursor:pointer; margin-left:1px;}
+#search .button { background: url(../../images/successed/searchbut.jpg); width:29px; height:21px; text-indent:-9999px; cursor:pointer; margin-left:1px;}
 
 #tags .more { text-align:left; font-size:12px;padding-top:10px;}
 #tags .more a { color:#e6e6e6; text-decoration:underline;}

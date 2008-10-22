@@ -1,5 +1,5 @@
 enabled: true
-title:   <%= class_name.underscore.humanize.titleize %>
+title:   橙色模板
 author:  
 version: 1.0
 homepage: http://mushplatform.org

@@ -3,8 +3,8 @@
 {% for entry in entries %}
 <li>
   <div class="postHeader">
-    <h3>{{ entry.created_at | timelong }}</h3>
     <h2>{{ entry | entry_link }}</h2>
+    <h3>{{ entry.created_at | timelong }}</h3>
     <div class="tags">Tag：</div>
   </div>
   <div class="clear"></div>

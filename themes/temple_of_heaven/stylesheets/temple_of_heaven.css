@@ -380,7 +380,7 @@ word-wrap:break-word;
 color:#887f54; 
 }
 
-#sidebar h3 {
+#sidebar h2 {
 color:#000;
 font-weight:400;
 padding:0 6px 0 0px; 
@@ -390,12 +390,12 @@ font-size:14px;
 font-weight:bold;
 }
 
-* html #sidebar h3 {
+* html #sidebar h2 {
 font-size:14px;
 font-weight:bold;
 }
 
-*+html #sidebar h3 {
+*+html #sidebar h2 {
 font-size:14px;
 font-weight:bold;
 }

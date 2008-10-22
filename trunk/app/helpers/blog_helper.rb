@@ -20,6 +20,9 @@ module BlogHelper
     sidebar_infos.join('   ')
   end
 
+  def display_blog_tags(blog)
+    blog.tag_list.map{|tag| "<a href='/tags/#{tag.id}/articles' title='#{tag.name}'>#{tag.name}</a>"}.join(" ")
+  end
   def parse_year_of_date(date_str)
     date = parse_date_from_str(date_str)
     date ? date.year : ''

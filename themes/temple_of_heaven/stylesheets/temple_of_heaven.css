@@ -336,6 +336,7 @@ background:#fff;
 border:1px solid #cabea9; 
 border-right:1px solid #e3d7c3;
 border-bottom:1px solid #e3d7c3; 
+margin-top: 3px;
 padding:1px; 
 background:#fff; 
 }
@@ -346,7 +347,7 @@ background:#fff;
 }
 
 #commentForm .submit input, #commentForm .submit input:focus, #commentForm .submit input.focus {
-padding:1px 10px;
+padding:3px 10px;
 _padding:2px 10px 0;
 background:#fff; 
 letter-spacing:2px;
@@ -379,35 +380,35 @@ word-wrap:break-word;
 color:#887f54; 
 }
 
-#sidebar h2 {
+#sidebar h3 {
 color:#000;
 font-weight:400;
-padding:0 6px 0 10px; 
+padding:0 6px 0 0px; 
 letter-spacing:2px;
-background:url(../../images/temple_of_heaven/sideh2-r.gif) right 2px no-repeat; 
 display:inline; 
+font-size:14px;
+font-weight:bold;
 }
 
-* html #sidebar h2 {
-background:url(../../images/temple_of_heaven/sideh2-r.gif) right bottom no-repeat; 
+* html #sidebar h3 {
+font-size:14px;
+font-weight:bold;
 }
 
-*+html #sidebar h2 {
-background:url(../../images/temple_of_heaven/sideh2-r.gif) right bottom no-repeat; 
+*+html #sidebar h3 {
+font-size:14px;
+font-weight:bold;
 }
 
 #sidebar .module {
 padding:10px;
 margin:0 0 10px; 
-background:url(../../images/temple_of_heaven/sideh2-l.gif) 12px 14px no-repeat; 
 } 
 
 *+html #sidebar .module {
-background:url(../../images/temple_of_heaven/sideh2-l.gif) 12px 12px no-repeat; 
 }
 
 * html #sidebar .module {
-background:url(../../images/temple_of_heaven/sideh2-l.gif) 12px 12px no-repeat; 
 }
 
 #sidebar #search.module, #sidebar #meta.module, #sidebar #blogLink.module {
@@ -461,7 +462,7 @@ border-left:1px solid #e3d7c3;
 color:#836B00; 
 }
 
-#sidebar #search .textField {
+#sidebar .textField {
 width:140px; 
 border:1px solid #cabea9; 
 border-right:1px solid #e3d7c3;

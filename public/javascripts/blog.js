@@ -1,12 +1,11 @@
 function submit_comment(){
-    form = $('commentform');
-    if(form['comment[body]'].value != '' && form['comment[body]'].value.length >= 5 && form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
+    form = $('comment_form');
+    if(form['comment[body]'].value != '' && form['comment[body]'].value.length >= 5 ) //&& form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
     {
         ajax_submit(form)
         this.disabled=true;
-        Element.hide('preview');
     }else{
-        alert("标题或者内容字数不够!");
+        alert("内容字数不够!");
     }
     return false;
 }

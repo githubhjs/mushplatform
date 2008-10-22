@@ -50,7 +50,7 @@ module ControllerExtend
   end
   
   def parse_template(template,options)
-    Liquid::Template.file_system = Liquid::LocalFileSystem.new(template)
+    Liquid::Template.file_system = Liquid::LocalFileSystem.new(current_theme.view_path)
     Liquid::Template.parse(IO.read(template)).render(options)
   end
   

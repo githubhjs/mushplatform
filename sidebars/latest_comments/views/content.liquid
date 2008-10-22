@@ -1,8 +1,10 @@
+<div class="module">
 <h3 class='sidebar-header'>最新评论</h3>
 <div class='sidebar-content'>
 <ul>
 {% for entry in entries %}
-   <li><a href="/blogs/{{entry.blog_id}}/comments" title="查看更多评论">{{entry.title}}</a></li>
+   <li><span class="author">{{entry.author}}：</span><a href="/blogs/{{entry.blog_id}}/comments" title="查看更多评论">{{entry|comment_body_extract}}</a></li>
 {% endfor %}
 </ul>
+</div>
 </div>

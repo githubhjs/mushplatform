@@ -20,11 +20,8 @@ class ThemeGenerator < Rails::Generator::NamedBase
       # layouts
       m.template 'layout.liquid', File.join( theme_path, 'templates', 'layout.liquid' )
       # entries
-      m.template 'entries/_entry.liquid', File.join( theme_path, 'templates', '_entry.liquid' )
-      m.template 'entries/article.liquid', File.join( theme_path, 'templates', 'article.liquid' )
-      m.template 'entries/comment.liquid', File.join( theme_path, 'templates', 'comment.liquid' )
-      m.template 'entries/entries.liquid', File.join( theme_path, 'templates', 'entries.liquid' )
-      m.template 'entries/entry.liquid', File.join( theme_path, 'templates', 'entry.liquid' )
+      m.template 'entries.liquid', File.join( theme_path, 'templates', 'entries.liquid' )
+      m.template 'entry.liquid', File.join( theme_path, 'templates', 'entry.liquid' )
     end
   end
 end

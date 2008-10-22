@@ -1,9 +1,19 @@
 module BlogHelper
     
   def entry_permalink(entry)
-    link_to entry['title'], "/blogs/#{entry['id']}", :title => entry['title']
+    "/blogs/#{entry['id']}"
   end
-
+  
+  def entry_link(entry)
+    link_to entry['title'], entry_permalink(entry), :title => entry['title']
+  end
+  
+  def comment_body_extract(comment)
+    body = comment['body'].substr(0, 15)
+    body = "#{body} ..." if body.size > 30
+    body
+  end
+  
   def display_sidebar(user)
     sidebar_infos = SidebarUsers.user_sidebars.map{|bar|
       Sidebar.find(bar.sidebar_id)}.compact.map{|sidebar|sidebar.get_content(sidebar_options())}
@@ -25,9 +35,7 @@ module BlogHelper
     dates[2] = '01'
     Date.parse(dates.join('-'))
   end
-  def timelong(time)
-      time ? time.strftime('%m/%d/%y %H:%M:%S') : "No Time"      
-  end   
+
 #  
 #  def gravatar_tag(email, options={})
 #    options.update(:gravatar_id => Digest::MD5.hexdigest(email.strip))

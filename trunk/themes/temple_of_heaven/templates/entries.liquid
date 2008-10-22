@@ -4,7 +4,7 @@
 <li>
   <div class="postHeader">
     <h3>{{ entry.created_at | timelong }}</h3>
-    <h2>{{ entry | entry_permalink }}</h2>
+    <h2>{{ entry | entry_link }}</h2>
   </div>
   <div class="clear"></div>
   <div class="postBody">
@@ -12,7 +12,7 @@
   </div>
   <div class="clear"></div>
   <div class="postFooter">
-    <div class="menubar"><span class="author"><a href="http://home.blogbus.com/profile/new-skin">New-Skin</a></span> 发表于<span class="time">16:59:06</span> | <a href="http://new-skin147.blogbus.com/logs/27751424.html" class="readmore">阅读全文</a> | <a href="http://new-skin147.blogbus.com/logs/27751424.html#cmt_form" class="cmt">评论 <span class="count">0</span></a> |  <a href="http://www.blogbus.com/user/?mm=Post&amp;aa=Edit&amp;blogid=4364395&amp;id=27751424" class="edit">编辑</a> | <a href="javascript:void(0)" onclick='window.open("http://pindao.blogbus.com/digsys?id=27751424&amp;code=dd0890fe140566fe0b41ea4884e4e185&amp;url=http%3A%2F%2Fnew-skin147.blogbus.com%2Flogs%2F27751424.html&amp;t=BlogBus%E4%B9%8B%E5%95%86%E4%B8%9A%E9%80%BB%E8%BE%91%EF%BC%9A%E5%8F%91%E5%8A%A8%E4%BA%94%E7%99%BE%E4%B8%87%E5%8D%9A%E5%AE%A2%E7%9A%84%E2%80%9C%E7%A4%BE%E4%BC%9A%E8%BF%90%E5%8A%A8%E2%80%9D")' class="dig">推荐 <span id="dc27751424" class="count"></span></a></div>
+    <div class="menubar"><span class="author"><a href="">{{entry.author}}</a></span> 发表于<span class="time">{{entry.created_at|timelong}}</span> | <a href="{{entry|entry_permalink}}" class="readmore">阅读全文</a> 
   </div>
 </li>
 {% endfor %}

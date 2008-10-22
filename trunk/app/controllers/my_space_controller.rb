@@ -19,8 +19,8 @@ class MySpaceController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at desc")
-    render_liquid({:template => 'article',:layout => true},{'article' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => request.path.gsub(/\/page\/\d+/,'')}})
+    @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at")
+    render_liquid({:template => 'entry',:layout => true},{'entry' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => "#{request.path.gsub(/\/comments\/page\/\d+/,'')}/comments"}})
   end
 
   def create_comment
@@ -31,7 +31,7 @@ class MySpaceController < ApplicationController
       @comment.user_id = user.id
       @comment.blog_user_id = current_blog_user.id
       if @comment.save
-        content = parse_liquid('comment',{'comment' => @comment })
+        content = parse_liquid('_comment',{'comment' => @comment })
         render :update do |page|
           page.insert_html :bottom, 'comments',content
         end

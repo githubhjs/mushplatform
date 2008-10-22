@@ -1,6 +1,8 @@
+<div class="module">
 <h3 class='sidebar-header'>标签</h3>
 <div class='sidebar-content'>
 {% for entry in entries %}
    <a href="/tags/{{entry.id}}/articles" title="{{entry.name}}">{{entry.name}}</a>
 {% endfor %}
+</div>
 </div>

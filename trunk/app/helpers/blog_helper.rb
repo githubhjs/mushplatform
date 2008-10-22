@@ -9,8 +9,8 @@ module BlogHelper
   end
   
   def comment_body_extract(comment)
-    body = comment['body'].substr(0, 15)
-    body = "#{body} ..." if body.size > 30
+    body = comment['body'].substr(0, 12)
+    body = "#{body} ..." if body.size > 24
     body
   end
   

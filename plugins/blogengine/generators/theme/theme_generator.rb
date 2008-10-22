@@ -12,7 +12,7 @@ class ThemeGenerator < Rails::Generator::NamedBase
       m.directory File.join( theme_path, "templates" )
       # Default files...
       # about
-      m.template 'about.markdown', File.join( theme_path, 'about.markdown')
+      m.template 'about.yml', File.join( theme_path, 'about.yml')
       # image
       m.file 'preview.png', File.join( theme_path, '', 'preview.png' )
       # stylesheet

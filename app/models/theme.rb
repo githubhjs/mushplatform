@@ -11,7 +11,7 @@ class Theme
   
   def them_info
     @info ||= begin
-      File.exist?("#{@path}/theme.yml") ?  (YAML::load(File.open(@path+'/theme.yml')) || {}) : {}
+      File.exist?("#{@path}/about.yml") ?  (YAML::load(File.open(@path+'/about.yml')) || {}) : {}
     rescue Exception => e
       {}
     end  
@@ -92,7 +92,7 @@ class Theme
 
   def self.search_theme_directory   
     Dir.glob("#{themes_root}/*").select do |theme_path|  
-      File.readable?("#{theme_path}/about.markdown")  
+      File.readable?("#{theme_path}/about.yml")  
     end.compact  
   end
   

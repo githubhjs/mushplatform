@@ -1,0 +1,144 @@
+/*-----------------------------------------------------------------------------------------------
+Rain and Tears Stylesheet
+
+date: 2008-2-28
+author: [XiaoMing]
+-----------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------
+Global
+-----------------------------------------------------------------------------------------------*/
+* {margin:0;padding:0;}
+
+a {text-decoration:none; color:#F7B551;}
+a:hover {text-decoration:underline;color:#639AB0;}
+a img {text-decoration:none;border:0;}
+
+.l {float:left;}
+.m {text-align:center;}
+.r {float:right;}
+
+ul, ol{list-style-type:none;}
+
+.clear {clear:both;font-size:0;line-height:0;height:0px;}
+
+table {border-collapse:collapse;}
+table td {vertical-align:top;}
+
+h1, h2, h3, h4 {font-size:12px;}
+
+/*-----------------------------------------------------------------------------------------------
+Main Container
+-----------------------------------------------------------------------------------------------*/
+body {color:#444;font-family:Verdana, Arial,sans-serif,"宋体";font-size:12px;line-height:1.6em;background:#ebf3d6;  min-width:1000px;}
+.no-rain {background:url(../../images/flaybird/side-mid.gif) center 8px repeat-y;}
+.rain {background:url(../../images/flaybird/side-mid-2.gif) center 8px repeat-y;}
+
+#index, #detail {min-height:800px;background:url(../../images/flaybird/bottom.png) center bottom repeat-x;_background:url(../../images/flaybird/bottom.gif) center bottom repeat-x;padding:0 0 50px;}
+
+#container {margin:0 auto; text-align:left; width:960px;position:relative; }
+.um-open {background:url(../../images/flaybird/side-top.gif) 30px 8px no-repeat;}
+.um-close {background:url(../../images/flaybird/side-top-2.gif) 30px 8px no-repeat;}
+#innerContainer { }
+/*-----------------------------------------------------------------------------------------------
+Header
+-----------------------------------------------------------------------------------------------*/
+#header {float:right;width:620px;padding:20px 0 0;zoom:1;background:url(../../images/flaybird/header-top.gif) center top no-repeat #F7FAEF;margin:20px 0 30px;text-align:center; }
+#header .blogName{font-size:24px;line-height:1.4em; background:#F7FAEF;padding:0 20px;letter-spacing:2px; }
+#header .description {background:url(../../images/flaybird/header-bottom.gif) center bottom no-repeat #F7FAEF;padding:0 20px 20px;color:#b0c282; }
+#header .blogName a {background:url(../../images/flaybird/side-top-2.gif) -9999px top no-repeat;}
+#header .blogName a:hover {}
+
+/*-----------------------------------------------------------------------------------------------
+Content
+-----------------------------------------------------------------------------------------------*/
+#outerContent {width:620px;float:right;background:#fff;margin:0 0 30px;}
+#content .contentTop {height:19px;background:url(../../images/flaybird/content-top.gif) center top no-repeat; }
+#content .contentBottom {height:19px;background:url(../../images/flaybird/content-bottom.gif) center bottom no-repeat;}
+
+#noPosts {padding:0 20px;}
+.pageNavi {padding:0 20px;}
+.pageNavi span, .pageNavi a {padding:3px 8px;background:#F7FAEF;  }
+.context {margin:0 0 10px;color:#6299AF; }
+
+#posts {padding:0 20px;background:url(../../images/flaybird/side-mid-2.gif) -9999px top no-repeat;}
+#posts li {margin:0 0 50px; }
+
+#posts .postHeader {padding:0 0 0 30px;background:url(../../images/flaybird/post-header-bg.gif) left top no-repeat;  }
+#posts .postHeader h2 {font-size:18px;background:url(../../images/flaybird/post-h2-bg.gif) left bottom repeat-x;padding:0 0 3px;color:#6299AF;line-height:1.4em;}
+#posts .postHeader h2 .category {font-weight:400;font-size:12px;}
+#posts .postHeader h3 {color:#b0c282;font-weight:400;}
+
+#posts .postBody {word-wrap:break-word;margin:10px 0; }
+#posts .postBody li{margin:0; list-style-position:inside;}
+#posts .postBody ul li {list-style-type:disc;}
+#posts .postBody ol li {list-style-type:decimal;}
+#posts .postBody .cc-lisence {font-size:12px;background:#F7FAEF;padding:5px;text-align:center;color:#b0c282; }
+#posts .postBody .cc-lisence br { display:none; }
+#posts .postBody p, #posts .postBody ul, #posts .postBody ol {margin:15px 0;}
+#posts .postBody table {}
+#posts .postBody .addfav{margin:15px 0 0;font-size:12px;}
+#posts .postBody .addfav br {display:none;}
+
+#posts .postFooter {color:#b0c282; }
+#posts .postFooter .tb_url input {width:450px;color:#aaa;border:0; }
+#posts .postFooter .menubar {padding:5px;background:url(../../images/flaybird/post-footer.gif) left top no-repeat;margin:5px 0 0; }
+
+/*-----------------------------------------------------------------------------------------------
+Comment & Trackback
+-----------------------------------------------------------------------------------------------*/
+#trackbacks, #comments, #commentForm {padding:0 20px; }
+#trackbacks h2, #comments h2, #commentForm h2 {font-size:16px;background:url(../../images/flaybird/post-h2-bg.gif) left bottom repeat-x;padding:0 0 3px;color:#6299AF;margin:0 0 10px; }
+#trackbacks li, #comments li {word-wrap:break-word;margin:0 0 30px; }
+#trackbacks .desc {}
+
+#comments .cmtBody {background:url(../../images/flaybird/comment-top.gif) left top no-repeat #ebf3d6; padding:5px 10px; }
+#comments .menubar {background:url(../../images/flaybird/comment-bottom.gif) left bottom no-repeat #f7faef;padding:5px 10px;color:#92a562;}
+#comments .menubar .author {background:url(../../images/flaybird/author.gif) left 1px no-repeat;padding:10px 0 0; }
+#comments .reCmtBody {background:#ebf3d6; padding:0 10px 5px 30px; color:#6299AF;}
+#comments .reCmtBody .content {}
+
+.cmtPagenav {padding:0 20px;margin:0 0 15px; }
+.cmtPagenav span, .cmtPagenav a {padding:3px 8px;background:#F7FAEF;  }
+
+#commentForm div {margin:3px 0;}
+#commentForm label{display:block;}
+#commentForm textarea, #commentForm .submit {}
+#commentForm textarea {border:1px solid #dbe6bf;border-right:1px solid #fff;border-bottom:1px solid #fff;  background:#F7FAEF;padding:2px;width:570px;overflow:auto;}
+#commentForm input {border:1px solid #dbe6bf;border-right:1px solid #fff;border-bottom:1px solid #fff;  background:#F7FAEF;padding:2px;}
+#commentForm .submit .button {padding:1px 6px 1px 18px;_padding:2px 6px 0 18px;background:url(../../images/flaybird/submit.gif) 3px 3px no-repeat #F7B551; letter-spacing:3px; color:#fff;border:2px solid #F7C538;}
+
+/*-----------------------------------------------------------------------------------------------
+Sidebar
+-----------------------------------------------------------------------------------------------*/
+#outerSidebar{width:200px;word-wrap:break-word;/*padding:0 20px;position:absolute;top:270px;left:35px; */padding:140px 20px 0;float:left;margin:0 0 0 35px;color:#639AB0;_display:inline;}
+#umbrella {width:200px;height:160px;display:block;position:absolute;left:55px;top:100px;zoom:1;background:url(../../images/flaybird/no-bg.gif); }
+#sidebar h2 {background:url(../../images/flaybird/side-h2.gif) no-repeat; padding:5px;margin:0 0 8px;letter-spacing:2px; text-align:center}
+#sidebar .module {padding:0;margin:0 0 30px; } 
+#sidebar #custom {overflow:hidden;margin:0 0 30px;width:190px;padding:0 5px; }
+#sidebar .modBody {padding:0 5px; }
+
+#sidebar li {line-height:1.8em;}
+#sidebar #meta li{padding:0;background:none; line-height:2em;}
+#sidebar #search {text-align:center; }
+#sidebar #search .button {margin:5px auto 0; padding:1px 6px 1px 18px;_padding:2px 6px 0 18px;background:url(../../images/flaybird/search.gif) 3px 3px no-repeat #F7B551; letter-spacing:3px; color:#fff;border:2px solid #F7C538;}
+#sidebar #search .textField {width:180px;border:1px solid #dbe6bf;border-right:1px solid #fff;border-bottom:1px solid #fff;  background:#F7FAEF;padding:2px;margin:0 auto;  }
+#sidebar #login form div{margin:0 0 5px;}
+
+#sidebar #tags li {display:inline;margin:0 10px 0 0; }
+
+#sidebar #calendar {}
+#sidebar #calendar .modBody {padding:0;}
+#sidebar #calendar h2, #sidebar #search h2 {display:none; }
+#sidebar #calendar table {width:200px;text-align:center;}
+#sidebar #calendar table td {padding:2px;width:28px;height:24px;}
+#sidebar #calendar table .calendarHead td {background:url(../../images/flaybird/side-h2.gif) no-repeat; padding:5px;width:190px;font-weight:700;}
+#sidebar #calendar table .week {color:#F7B551;}
+#sidebar #calendar table .day a{font-weight:700;}
+#sidebar #calendar table .today {background:url(../../images/flaybird/today.gif) left top no-repeat; font-weight:700;color:#fff;}
+#sidebar #calendar table .today a {color:#fff;}
+
+/*-----------------------------------------------------------------------------------------------
+Footer
+-----------------------------------------------------------------------------------------------*/
+#footer {color:#B0D2DD;padding:60px 0 0; text-align:center;}

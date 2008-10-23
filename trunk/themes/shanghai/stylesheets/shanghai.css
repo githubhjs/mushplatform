@@ -1,0 +1,442 @@
+/*-----------------------------------------------------------------------------------------------
+Shanghai Sunrise Stylesheet
+
+version: 1.0
+date: 2008-01-02
+author: [rainliu]
+-----------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------
+Global
+-----------------------------------------------------------------------------------------------*/
+* {
+margin:0;
+padding:0;
+}
+
+a {
+text-decoration:none;
+color:#fff;
+}
+
+a:hover {
+color:#9CE;
+background:url(/images/shanghai/dotline.gif) left bottom repeat-x;
+}
+
+a img {
+text-decoration:none;
+border:0;
+}
+
+.l {
+float:left;
+}
+
+.m {
+text-align:center
+}
+
+.r {
+float:right;
+}
+
+ul, ol{
+list-style-type:none;
+}
+
+.clear {
+clear:both;
+font-size:0;
+line-height:0;
+height:0px;
+}
+
+table {
+border-collapse:collapse;
+}
+
+table td {
+vertical-align:top;
+}
+
+h1, h2, h3, h4 {
+font-size:12px;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Main Container
+-----------------------------------------------------------------------------------------------*/
+body {
+color:#bcd;
+font-family:Georgia,serif,"瀹嬩綋";
+font-size:12px;
+line-height:1.6em;
+background:url(/images/shanghai/bg02.jpg) left top repeat-y #525973;
+}
+
+#wrapper {
+}
+
+#index, #detail {
+}
+
+#container {
+text-align:left;
+background:url(/images/shanghai/bg01.jpg) left top repeat-x;
+position:relative;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Header
+-----------------------------------------------------------------------------------------------*/
+#header {
+background:url(/images/shanghai/shanghai01.jpg) left top no-repeat;
+height:130px;
+padding:50px 0 0 380px;
+vertical-align:middle;
+}
+
+#header .blogName{
+font-size:30px;
+line-height:1.4em;
+font-family:"Times New Roman",serif;
+color:#81BE41;
+font-variant:small-caps;
+}
+
+#header .description {
+color:#fff;
+margin:6px 0 0;
+}
+
+#header .blogName a {
+color:#81BE41;
+}
+
+#header .blogName a:hover {
+
+}
+
+
+/*-----------------------------------------------------------------------------------------------
+Content
+-----------------------------------------------------------------------------------------------*/
+#content {
+margin:0 20px 0 380px;
+position:relative;
+}
+
+#posts {
+}
+
+.pageNavi {
+}
+
+.context {
+text-align:right;
+margin:0 0 20px;
+}
+
+#posts li {
+margin:0 0 30px;
+}
+
+#posts li li{
+margin:0;
+}
+
+#posts .postHeader {
+}
+
+#posts .postHeader h2 {
+font-size:16px;
+color:#81BE41;
+margin:5px 0;
+padding-left:10px;
+border-left:5px solid #81be41;
+}
+
+#posts .postHeader h2 a{
+color:#81be41;
+}
+
+#posts .postHeader h3 {
+font-weight:normal;
+font-family:verdana,sans-serif;
+letter-spacing:10px;
+font-size:9px;
+display:block;
+margin-left:15px;
+}
+
+#posts .tags {
+margin:0 0 0 15px;
+}
+
+#posts .postBody {
+word-wrap:break-word;
+margin:20px 0;
+}
+
+#posts .postBody p {
+margin:15px 0;
+}
+
+#posts .postBody ul li{
+background:none;
+}
+
+#posts .postBody table {
+}
+
+#posts .postFooter {
+}
+
+#posts .postFooter .tb_url input {
+width:450px;
+background:#789;
+color:#000;
+border:1px solid #456;
+}
+
+#posts a{
+color:#bcd;
+}
+
+#posts a:hover {
+color:#fff;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Comment & Trackback
+-----------------------------------------------------------------------------------------------*/
+#trackbacks, #comments, #commentForm {
+}
+
+#trackbacks h2, #comments h2, #commentForm h2 {
+font-size:14px;
+color:#fff;
+margin:5px 0 10px;
+padding-left:10px;
+border-left:5px solid #81be41;
+}
+
+#trackbacks li {
+word-wrap:break-word;
+background:#485569;
+padding:10px 10px 10px 15px;
+margin:0 0 20px;
+}
+
+#comments li {
+word-wrap:break-word;
+padding:10px 10px 10px 15px;
+margin:0 0 20px;
+}
+
+#comments li.color1 {
+}
+
+#comments li.color2 {
+background:#485569;
+}
+
+
+#trackbacks .desc {
+}
+
+#comments .cmtBody {
+}
+
+#comments .menubar {
+margin:10px 0 0;
+}
+
+#comments .reCmtBody {
+background:#2C3D59;
+padding:5px;
+}
+
+#comments .reCmtBody .content {
+}
+
+#commentForm div {
+margin:3px 0;
+}
+
+#commentForm label{
+display:block;
+}
+
+#commentForm textarea, #commentForm .submit {
+}
+
+#commentForm textarea {
+overflow:auto;
+width:400px;
+border:1px solid #456;
+padding:1px;
+background:#789;
+}
+
+#commentForm input {
+border:1px solid #456;
+padding:1px;
+background:#789;
+}
+
+#commentForm input:focus, #commentForm input.focus, #commentForm textarea:focus, #commentForm textarea.focus {
+border:1px solid #789;
+background:#abc;
+}
+
+#commentForm .submit input, #commentForm .submit input:focus, #commentForm .submit input.focus {
+padding:1px 6px;
+_padding:2px 6px 0;
+background:#789;
+color:#000;
+border:1px solid #456;
+height:20px;
+width:44px;
+margin:0 20px 0 0;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Sidebar
+-----------------------------------------------------------------------------------------------*/
+#sidebar{
+position:absolute;
+top:180px;
+left:0;
+width:360px;
+padding-top:100px;
+background:url(/images/shanghai/Shanghai02.jpg) no-repeat left top;
+word-wrap:break-word;
+height:300px;
+}
+
+#sidebar a {
+color:#8ab;
+}
+#sidebar a:hover {
+color:#9ce;
+}
+
+#sidebar h2 {
+font-size:9pt;
+line-height:1.2em;
+margin:5px 0;
+padding:1px 1px 1px 5px;
+border-left:3px solid #789;
+background:#525973;
+font-weight:bold;
+color:#fff;
+}
+
+#sidebar .module {
+width:180px;
+margin:0 0 10px 170px;
+}
+
+#sidebar #custom {
+overflow:hidden;
+width:180px;
+margin:0 0 10px 170px;
+}
+
+#sidebar li {
+line-height:1.8em;
+background:url(image/side-li-bg.gif) left 6px no-repeat;
+}
+
+
+#sidebar #meta li{
+padding:0;
+background:none;
+line-height:2em;
+}
+
+#sidebar .button {
+padding:1px 6px;
+_padding:2px 6px 0;
+color:#000;
+height:20px;
+width:44px;
+border:1px solid #789;
+background:#525973;
+font-size:11px;
+}
+
+#sidebar .textField, #sidebar #login #username, #sidebar #login #password {
+width:100px;
+border:1px solid #789;
+background:#525973;
+}
+
+#sidebar #login form div{
+margin:0 0 5px;
+}
+
+#sidebar #login #username, #sidebar #login #password {
+margin:0 0 0 10px;
+}
+
+#sidebar #calendar {
+font-size:10px;
+}
+
+#sidebar #calendar h2 {
+display:none;
+}
+
+#sidebar #calendar table {
+width:100%;
+text-align:center;
+}
+
+#sidebar #calendar .calendarHead td {
+font-size:11px;
+}
+
+#sidebar #calendar table td {
+font-size:9px;
+text-align:center;
+}
+
+#sidebar #calendar table .week {
+border-top:2px solid #525973;
+padding:auto 2px;
+}
+
+#sidebar #calendar table .day a{
+display:block;
+padding:2px 0;
+border:1px solid #525973;
+}
+
+#sidebar #calender table .day a:hover {
+background:#9ab;
+color:#fff;
+}
+
+#sidebar #calendar table .today a{
+display:block;
+padding:2px 0;
+background:#CBD2E2;
+color:#2D3C59;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Footer
+-----------------------------------------------------------------------------------------------*/
+#footer {
+margin:20px 20px 0 380px;
+color:#2c3d59;
+font-size:10px;
+}
+
+#content #posts li .postBody ul,ol { margin:0; padding:0; margin-left:20px; }
+#content #posts li .postBody li { margin:0; padding:0; padding:0 2px;list-style-position:inside; }
+#content #posts li .postBody ul li { list-style:disc; }
+#content #posts li .postBody ol li { list-style:decimal; }

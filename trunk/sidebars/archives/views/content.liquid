@@ -3,7 +3,7 @@
 <div class='sidebar-content'>
 <ul>
 {% for entry in entries %}
-   <li><a href="/articles/{{entry.month|parse_year_of_date}}/{{entry.month|parse_month_of_date}}" title="{{entry.month}}">{{entry.month}}({{entry.count}})</a></li>
+   <li><a href="/archive/{{entry.month|parse_year_of_date}}/{{entry.month|parse_month_of_date}}" title="{{entry.month}}">{{entry.month}}({{entry.count}})</a></li>
 {% endfor %}
 </ul>
 </div>

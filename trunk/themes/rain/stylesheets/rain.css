@@ -37,8 +37,6 @@ body {color:#444;font-family:Verdana, Arial,sans-serif,"宋体";font-size:12px;l
 #index, #detail {min-height:800px;background:url(../../images/rain/bottom.png) center bottom repeat-x;_background:url(../../images/rain/bottom.gif) center bottom repeat-x;padding:0 0 50px;}
 
 #container {margin:0 auto; text-align:left; width:960px;position:relative; }
-.um-open {background:url(../../images/rain/side-top.gif) 30px 8px no-repeat;}
-.um-close {background:url(../../images/rain/side-top-2.gif) 30px 8px no-repeat;}
 #innerContainer { }
 /*-----------------------------------------------------------------------------------------------
 Header
@@ -111,7 +109,7 @@ Comment & Trackback
 /*-----------------------------------------------------------------------------------------------
 Sidebar
 -----------------------------------------------------------------------------------------------*/
-#outerSidebar{width:200px;word-wrap:break-word;/*padding:0 20px;position:absolute;top:270px;left:35px; */padding:140px 20px 0;float:left;margin:0 0 0 35px;color:#639AB0;_display:inline;}
+#outerSidebar{width:200px;word-wrap:break-word;/*padding:0 20px;position:absolute;top:270px;left:35px; */padding:0px 20px 0;float:left;margin:0px 0 0 35px;color:#639AB0;_display:inline;}
 #sidebar h2 {background:url(../../images/rain/side-h2.gif) no-repeat; padding:5px;margin:0 0 8px;letter-spacing:2px; text-align:center}
 #sidebar .module {padding:0;margin:0 0 30px; } 
 #sidebar #custom {overflow:hidden;margin:0 0 30px;width:190px;padding:0 5px; }

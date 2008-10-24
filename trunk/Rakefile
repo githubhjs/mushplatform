@@ -161,9 +161,9 @@ namespace :data do
             )
             SidebarUser.create_default_sidebars(u.id) unless SidebarUser.find_by_user_id(u.id)
           end
+          STDOUT.puts "##{u.id} #{u.user_name}"
+          STDOUT.flush
         end
-        STDOUT.puts "##{u.id} #{u.user_name}"
-        STDOUT.flush
       }
     end
     

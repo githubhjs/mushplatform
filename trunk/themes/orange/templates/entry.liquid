@@ -30,13 +30,13 @@
   <h2 id="respond">发表评论</h2><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
 {% if if_login %}
 {% else%}
-  <p>(<span class='author'>(你还没有登陆，可以<a href="/login?forward=/entrys/{{entry.id}}">登陆</a>后再来评论)</span>)</br>
-         <input type="text" name="user[user_name]" class='styled' size=22>
-    <label>用户名</label>
+  <p>
+    <label>用户名(您还没有登录)</label>
+    <input type="text" name="user[user_name]" class='styled' size=22>
   </p>
-<p>
-         <input type="password" name="user[password]" class='styled' size=22>
+  <p>
     <label>密 码</label>
+    <input type="password" name="user[password]" class='styled' size=22>
   </p>
 {% endif %}
   <p>

@@ -27,7 +27,8 @@ class SidebarUser < ActiveRecord::Base
      SidebarUser.create(:sidebar_id => 'latest_article', :bar_name => "最新文章", :description => "最新文章列表", :user_id => user_id, :bar_index => 3)
      SidebarUser.create(:sidebar_id => 'latest_comments', :bar_name => "最新评论", :description => "显示最新的评论", :user_id => user_id, :bar_index => 4)
      SidebarUser.create(:sidebar_id => 'archives', :bar_name => "归档列表", :description => "按照日期归档文章", :user_id => user_id, :bar_index => 5)
-     SidebarUser.create(:sidebar_id => 'static', :bar_name => "友情链接", :description => "自由添加任意内容", :user_id => user_id, :bar_index => 6)
+     SidebarUser.create(:sidebar_id => 'static', :bar_name => "友情链接", :description => "自由添加任意内容", :user_id => user_id, :bar_index => 6, 
+                        :settings => {'header' => "友情链接", 'content' => "<ul>\n<li>\n<a href='http://www.ccmw.net'>客户世界</a>\n</li>\n</ul>"})
      SidebarUser.create(:sidebar_id => 'rss', :bar_name => "Rss", :description => "此功能可以让别人方便订阅您的博客", :user_id => user_id, :bar_index => 7)
   end  
 end

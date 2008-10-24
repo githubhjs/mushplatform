@@ -3,7 +3,7 @@
 <div class='sidebar-content'>
 <ul>
 {% for entry in entries %}
-   <li><span class="author">{{entry.author}}：</span><a href="/blogs/{{entry.blog_id}}/comments" title="查看更多评论">{{entry|comment_body_extract}}</a></li>
+   <li><span class="author">{{entry.author}}：</span><a href="/entry/{{entry.blog_id}}/comments" title="查看更多评论">{{entry|comment_body_extract}}</a></li>
 {% endfor %}
 </ul>
 </div>

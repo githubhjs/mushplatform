@@ -1,7 +1,7 @@
 module BlogHelper
     
   def entry_permalink(entry)
-    "/blogs/#{entry['id']}"
+    "/entry/#{entry['id']}"
   end
   
   def entry_link(entry)
@@ -21,7 +21,8 @@ module BlogHelper
   end
 
   def display_blog_tags(blog)
-    blog.tag_list.map{|tag| "<a href='/tags/#{tag.id}/articles' title='#{tag.name}'>#{tag.name}</a>"}.join(" ")
+    blog = Blog.find(blog['id'])
+    blog.tag_list.map{|tag| "<a href='/tag/#{tag}/articles' title='#{tag}'>#{tag}</a>"}.join(" ")
   end
   def parse_year_of_date(date_str)
     date = parse_date_from_str(date_str)

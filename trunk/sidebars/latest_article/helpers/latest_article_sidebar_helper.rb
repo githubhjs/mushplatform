@@ -4,7 +4,7 @@ module LatestArticleSidebarHelper
 
   def self.get_context(option = {})
     Blog.find(:all,:conditions => "published = #{Blog::Published_Blogs} and user_id=#{option[:user_id]}",
-    :order => "updated_at desc", :limte => Default_Latest_Article_Perpage)
+    :order => "updated_at desc", :limit => Default_Latest_Article_Perpage)
   end
 
   def self.get_edit_context(options = {})

@@ -139,26 +139,39 @@ namespace :data do
     task :users => :environment do
       STDOUT.puts "Migrate users ..."
       SUser.find(:all, :order => "id").each{|su|
-        if su.login == 'admin'
-          u = MUser.find(1)
-          u.update_attributes(
-            :email => su.email,
-            :hashed_password => su.salted_password,
-            :salt => su.salt,
-            :created_at => su.created_at,
-            :theme_name => 'default'
-          )
-        else
-          u = MUser.create(
-            :id => su.id,
-            :user_name => su.login,
-            :email => su.email,
-            :hashed_password => su.salted_password,
-            :salt => su.salt,
-            :created_at => su.created_at,
-            :theme_name => 'default'
-          )
+        unless MUser.find(su.id)
+          if su.login == 'admin'
+            u = MUser.find(1)
+            u.update_attributes(
+              :email => su.email,
+              :hashed_password => su.salted_password,
+              :salt => su.salt,
+              :created_at => su.created_at,
+              :theme_name => 'default'
+            )
+          else
+            u = MUser.create(
+              :id => su.id,
+              :user_name => su.login,
+              :email => su.email,
+              :hashed_password => su.salted_password,
+              :salt => su.salt,
+              :created_at => su.created_at,
+              :theme_name => 'default'
+            )
+            SidebarUser.create_default_sidebars(u.id) unless SidebarUser.find_by_user_id(u.id)
+          end
         end
+        STDOUT.puts "##{u.id} #{u.user_name}"
+        STDOUT.flush
+      }
+    end
+    
+    desc "Add default sidebars"
+    task :sidebars => :environment do
+      STDOUT.puts "Add sidebars ..."
+      User.find(:all, :order => "id").each{|u|
+        SidebarUser.create_default_sidebars(u.id) unless SidebarUser.find_by_user_id(u.id)
         STDOUT.puts "##{u.id} #{u.user_name}"
         STDOUT.flush
       }

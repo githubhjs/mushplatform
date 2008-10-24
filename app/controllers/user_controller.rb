@@ -11,14 +11,15 @@ class UserController < ApplicationController
     @profile = UserProfile.new(params[:profile])
     return if generate_blank
     if @user.save  
+      SidebarUser.create_default_sidebars(@user.id)
       @profile.user_id = @user.id
       if @profile.save  
         flash[:notice] = 'UserProfile was successfully created.'
-        render :template => 'login'
+        render :template => 'user/login'
         return true
       end
     end
-    render :template => "/signup/index"
+    render :template => "user/signup"
     return true
   end
   

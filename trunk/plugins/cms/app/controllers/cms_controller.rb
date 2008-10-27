@@ -17,7 +17,9 @@ class CmsController < ApplicationController
         channel_layout, content = recognize_other(path)
       end
     end
-    render :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content, 'page' => params[:page]) : 'Page Not Found'
+    mimetype = "text/html"
+    mimetype = channel.mimetype if channel and channel.mimetype
+    render :content_type => mimetype, :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content, 'page' => params[:page]) : 'Page Not Found'
   end
   
   def recognize_channel(path)

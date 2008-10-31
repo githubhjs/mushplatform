@@ -1,6 +1,7 @@
 # Blogengine
 module BlogEngine
-  
+  require File.dirname(__FILE__) +'/scriptlets'
+    
   def self.copy_themes_to_public
     public_path = RAILS_ROOT + "/public"
     #     public_path = "/home/liuikai/team/mushplatform/public"

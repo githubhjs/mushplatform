@@ -193,7 +193,7 @@ namespace :data do
               end
               b = Blog.create(
                 :title => entry.subject,
-                :author => "<a href='http://#{entry.blog_user.username}.ccmw.net'>#{entry.blog_user.username}</a>",
+                :author => entry.blog_user.username,
                 :published => 1,
                 :excerpt => excerpt,
                 :body => text,
@@ -222,6 +222,19 @@ namespace :data do
               STDOUT.flush
             end
           end
+        }   
+      end
+    end
+
+    desc "Migrate blog author"
+    task :blogs_author => :environment do
+      entries = Blog.find(:all)
+      if entries != nil
+        entries.each { |entry|
+          user = User.find(entry.user_id)
+          entry.update_attribute('author', user.user_name) if user
+          STDOUT.puts "##{entry.id} #{entry.author}"
+          STDOUT.flush
         }   
       end
     end

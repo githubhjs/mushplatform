@@ -1,7 +1,18 @@
 module BlogHelper
+
+  def list_blog_entries(args = {})
+    order = args.delete(:order) || 'created_at DESC'
+    per_page = args.delete(:per_page) || 20
+    offset = args.delete(:offset) || 0
+    page = args.delete(:page) || 1
+    will_args = args
     
+    entries = Blog.publised_blogs.paginate :page => page, :order => order, :per_page => per_page, :offset => offset
+    { 'entries' => entries, 'will_paginate_options' => will_args }
+  end
+  
   def entry_permalink(entry)
-    "/entry/#{entry['id']}"
+    "http://#{entry['author']}.ccmw.net/entry/#{entry['id']}"
   end
   
   def entry_link(entry)

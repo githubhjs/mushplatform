@@ -12,7 +12,7 @@ module BlogHelper
   end
   
   def entry_permalink(entry)
-    "http://#{entry['author']}.ccmw.net/entry/#{entry['id']}"
+    "/entry/#{entry['id']}"
   end
   
   def entry_link(entry)

@@ -21,6 +21,9 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
 
   def render(context)
     return '' if scriptlet_type.name.nil?
+    cache_key = "#{self.name}_#{params.to_yaml.hash}"
+    content = CACHE.get(cache_key)
+    return content if content
     begin
       # params is passed by scriplet string in template,
       # and page is passed by cms_controller, combined 
@@ -40,11 +43,14 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
     else
       tmplt = template
     end
+    
     if tmplt
-      Liquid::Template.parse(tmplt).render vars.merge(context.scopes[0])
+      content = Liquid::Template.parse(tmplt).render vars.merge(context.scopes[0])
     else
-      Liquid::Template.parse(vars.to_s).render context.scopes[0]
+      content = Liquid::Template.parse(vars.to_s).render context.scopes[0]
     end
+    CACHE.add(cache_key, content, 60)
+    content
   end
 
 end

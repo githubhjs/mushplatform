@@ -23,7 +23,7 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
     return '' if scriptlet_type.name.nil?
     cache_key = "#{self.name}_#{params.to_yaml.hash}"
     content = CACHE.get(cache_key)
-    return content if content
+    return content if content and (ENV['RAILS_ENV'] == 'production')
     begin
       # params is passed by scriplet string in template,
       # and page is passed by cms_controller, combined 
@@ -49,7 +49,7 @@ class Scriptlet < ActiveRecord::Base #< Liquid::Variable
     else
       content = Liquid::Template.parse(vars.to_s).render context.scopes[0]
     end
-    CACHE.add(cache_key, content, 60)
+    CACHE.add(cache_key, content, 600)
     content
   end
 

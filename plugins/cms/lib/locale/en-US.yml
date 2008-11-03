@@ -1,6 +1,10 @@
 en-US:
   text:
     menu: 
+      cms: "CMS"
+      channels: "Channels"
+      templates: "Templates"
+      assets: "Assets"
       articles: "Articles"
       new: "New"
-
+      

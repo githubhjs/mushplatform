@@ -15,9 +15,9 @@ module AdminHelper
   <li><a href='/admin/channels' id='cms'>#{I18n.t 'text.menu.cms'} &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
       <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
               <li><a href='/admin/channels'>#{I18n.t 'text.menu.channels'}</a></li>
-              <li><a href='/admin/templates'>Templates</a></li>
-              <li><a href='/admin/assets'>Assets</a></li>
-              <li><a href='/admin/articles?standalone=true'>Aritcles</a></li>
+              <li><a href='/admin/templates'>#{I18n.t 'text.menu.templates'}</a></li>
+              <li><a href='/admin/assets'>#{I18n.t 'text.menu.assets'}</a></li>
+              <li><a href='/admin/articles?standalone=true'>#{I18n.t 'text.menu.articles'}</a></li>
       </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
   </li>"
       

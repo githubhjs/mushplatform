@@ -20,7 +20,7 @@ module Mush
         @extensions = sort_by(extensions, :priority) if extensions.size > 1
         extensions.each {|extension| results << extension.execute(params)}
       rescue Exception => e
-        #raise e.message
+        raise e.message
       end
       results.join(' ')
     end

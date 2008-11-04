@@ -8,3 +8,30 @@ zh-CN:
 
     article:
       category: "分类"
+
+    category:
+      manage_categories: "分类管理"
+      all_categories: "所有分类"
+      save_category: "保存分类"
+
+      name: "名称"
+      category: "分类"
+
+    tag:
+      manage_tags: "关键词管理"
+      all_tags: "所有关键词"
+      save_tag: "保存关键词"
+
+      name: "名称"
+      category: "分类"
+      position: "位置"
+
+    link:
+      manage_links: "文字链接管理"
+      all_links: "所有文字链接"
+      save_link: "保存文字链接"
+
+      name: "名称"
+      category: "分类"
+      url: "链接"
+      image: "图片"

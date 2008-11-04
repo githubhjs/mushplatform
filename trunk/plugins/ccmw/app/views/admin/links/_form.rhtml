@@ -3,11 +3,11 @@
 <input type="hidden" name="id" value="<%= @link.id %>">
 <table class="form-table">
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="category">Category</label></th>
+    <th scope="row" valign="top"><label for="category"><%=  t 'text.link.category' %></label></th>
     <td><%= combobox_field 'link', 'category', link_categories %></td>
   </tr>
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="link_name">Name</label></th>
+    <th scope="row" valign="top"><label for="link_name"><%=  t 'text.link.name' %></label></th>
     <td>
         <%= text_field 'link', 'name' %>
         <script src="/plugin_assets/ccmw/javascripts/colorpicker.js" type="text/javascript"></script>
@@ -16,11 +16,11 @@
     </td>
   </tr>
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="link_url">URL</label></th>
+    <th scope="row" valign="top"><label for="link_url"><%=  t 'text.link.url' %></label></th>
     <td><%= text_field 'link', 'url' %></td>
   </tr>
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="link_image">Image</label></th>
+    <th scope="row" valign="top"><label for="link_image"><%=  t 'text.link.image' %></label></th>
     <td><%= file_field 'link', 'uploaded_data' %></td>
   </tr>
   <tr class="form-field">
@@ -29,6 +29,6 @@
   </tr>  
 </table>
 <p class="submit">
-  <input type="submit" class="button" name="submit" value="Save Link" />
-  or <%= link_to 'Cancel', links_path, :class => 'cancel' %>
+  <input type="submit" class="button" name="submit" value="<%=  t 'text.link.save_link' %>" />
+  or <%= link_to (t 'text.cancel'), links_path, :class => 'cancel' %>
 </p>

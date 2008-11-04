@@ -108,12 +108,11 @@ module CcmwHelper
     view_categories = {}
     acs = ArticleCategory.find(:all)
     for ac in acs
-      article_categories = {}
-      if view_categories[ac.name]
-        view_category =  view_categories[ac.name]
+      if view_categories[ac.category]
+        view_category =  view_categories[ac.category]
       else
         view_category = ViewCategory.new(ac.category)
-        view_categories[ac.name] = view_category
+        view_categories[ac.category] = view_category
       end
       view_category.article_categries << ac
     end

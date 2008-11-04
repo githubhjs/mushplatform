@@ -8,3 +8,23 @@ en-US:
       articles: "Articles"
       new: "New"
       
+    article:
+      manage_articles: "Manage Aritcles"
+      all_articles: "All Articles"
+      save_article: "Save Article"
+
+      title: "Title"
+      display_title: "Display Title"
+      sub_title: "Sub Title"
+      permalink: "Permalink"
+      author: "Author"
+      source: "Source"
+      tags: "Tags"
+      channel: "Channel"
+      status: "Status"
+      excerpt: "Excerpt"
+      body: "Body"
+      audit: "Audited"
+      top: "Top"
+      sticky: "Sticky"
+

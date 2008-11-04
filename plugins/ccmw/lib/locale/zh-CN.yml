@@ -5,3 +5,6 @@ zh-CN:
       categories: "分类管理"
       tags: "关键词管理"
       links: "文字链接管理"
+
+    article:
+      category: "分类"

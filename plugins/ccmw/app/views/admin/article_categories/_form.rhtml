@@ -3,17 +3,17 @@
 <input type="hidden" name="id" value="<%= @article_category.id %>">
 <table class="form-table">
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="category">Category</label></th>
+    <th scope="row" valign="top"><label for="category"><%= t 'text.category.category' %></label></th>
     <td><%= combobox_field 'article_category', 'category', categories %></td>
   </tr>
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="article_category_name">Name</label></th>
+    <th scope="row" valign="top"><label for="article_category_name"><%= t 'text.category.name' %></label></th>
     <td>
         <%= text_field 'article_category', 'name' %>
     </td>
   </tr>
 </table>
 <p class="submit">
-  <input type="submit" class="button" name="submit" value="Save Tag" />
-  or <%= link_to 'Cancel', article_categories_path, :class => 'cancel' %>
+  <input type="submit" class="button" name="submit" value="<%= t 'text.category.save_category' %>" />
+  or <%= link_to (t 'text.cancel'), article_categories_path, :class => 'cancel' %>
 </p>

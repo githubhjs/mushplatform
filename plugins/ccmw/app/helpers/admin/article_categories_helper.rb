@@ -10,6 +10,6 @@ module Admin::ArticleCategoriesHelper
       "<li><a href='?category=#{tag}' #{style}>#{tag}</a></li>"
     }.join(' | ')
     style = "class='current'" if selected.nil? or selected == ''
-    (["<li><a href='?category=' #{style}>All Categories</a></li> | "] << all_categories).flatten
+    (["<li><a href='?category=' #{style}>#{I18n.t 'text.category.all_categories'}</a></li> | "] << all_categories).flatten
   end
 end

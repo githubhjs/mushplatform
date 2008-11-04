@@ -10,6 +10,6 @@ module Admin::LinksHelper
       "<li><a href='?category=#{link}' #{style}>#{link}</a></li>"
     }.join(' | ')
     style = "class='current'" if selected.nil? or selected == ''
-    (["<li><a href='?category=' #{style}>All links</a></li> | "] << categories).flatten
+    (["<li><a href='?category=' #{style}>#{t 'text.link.all_links'}</a></li> | "] << categories).flatten
   end
 end

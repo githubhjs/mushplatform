@@ -1,10 +1,10 @@
 <script>set_current_channel('ccmw')</script>
-<h2>Manage Tags (<%= link_to 'add new', :controller => 'tags', :action => 'new' %>)</h2>
+<h2><%= t 'text.tag.manage_tags' %> (<%= link_to (t 'text.add'), :controller => 'tags', :action => 'new' %>)</h2>
 <% form_tag :controller => 'admin/tags', :action => 'update' do -%>
 
 <ul class="subsubsub">
   <li><a class="current"><%= @tag.name %></a></li> |
-    <li><a class="current"><%= link_to 'Cancel', tags_path, :class => 'cancel' %></a></li>
+    <li><a class="current"><%= link_to (t 'text.cancel'), tags_path, :class => 'cancel' %></a></li>
 </ul>
 
 <%= render :partial => 'form' %>

@@ -3,19 +3,19 @@
 <input type="hidden" name="id" value="<%= @tag.id %>">
 <table class="form-table">
   <tr class="form-field">
-    <th scope="row" valign="top"><label for="category">Category</label></th>
+    <th scope="row" valign="top"><label for="category"><%= t 'text.tag.category' %></label></th>
     <td><%= combobox_field 'tag', 'category', tag_categories %></td>
   </tr>
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="tag_name">Name</label></th>
+    <th scope="row" valign="top"><label for="tag_name"><%= t 'text.tag.name' %></label></th>
     <td><%= text_field 'tag', 'name' %></td>
   </tr>
   <tr class="form-field form-required">
-    <th scope="row" valign="top"><label for="tag_position">Position</label></th>
+    <th scope="row" valign="top"><label for="tag_position"><%= t 'text.tag.position' %></label></th>
     <td><%= text_field 'tag', 'position' %></td>
   </tr>
 </table>
 <p class="submit">
-  <input type="submit" class="button" name="submit" value="Save Tag" />
-  or <%= link_to 'Cancel', tags_path, :class => 'cancel' %>
+  <input type="submit" class="button" name="submit" value="<%= t 'text.tag.save_tag' %>" />
+  or <%= link_to (t 'text.cancel'), tags_path, :class => 'cancel' %>
 </p>

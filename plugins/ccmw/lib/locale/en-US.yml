@@ -8,3 +8,30 @@ en-US:
 
     article:
       category: "Category"
+
+    category:
+      manage_categories: "Manage Categories"
+      all_categories: "All Categories"
+      save_category: "Save Category"
+
+      name: "Name"
+      category: "Category"
+
+    tag:
+      manage_tags: "Manage Tags"
+      all_tags: "All Tags"
+      save_tag: "Save Tag"
+
+      name: "Name"
+      category: "Category"
+      position: "Position"
+
+    link:
+      manage_links: "Manage Links"
+      all_links: "All Links"
+      save_link: "Save Link"
+
+      name: "Name"
+      category: "Category"
+      url: "URL"
+      image: "Image"

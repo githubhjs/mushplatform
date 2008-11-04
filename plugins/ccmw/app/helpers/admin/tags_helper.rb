@@ -10,6 +10,6 @@ module Admin::TagsHelper
       "<li><a href='?category=#{tag}' #{style}>#{tag}</a></li>"
     }.join(' | ')
     style = "class='current'" if selected.nil? or selected == ''
-    (["<li><a href='?category=' #{style}>All tags</a></li> | "] << categories).flatten
+    (["<li><a href='?category=' #{style}>#{t 'text.tag.all_tags'}</a></li> | "] << categories).flatten
   end
 end

@@ -1,9 +1,9 @@
 <% form_remote_tag :url => '/admin/articles/create', :before => fckeditor_before_js('body','') do -%>
-<h2>Manage Articles - <%= @channel.name %> </h2>
+<h2><%= t 'text.article.manage_articles' %> - <%= @channel.name %> </h2>
 
 <ul class="subsubsub">
-  <li><a class="current">Add New</a></li> | 
-  <li><a class="current"><%= link_to_remote 'Cancel', :url => {:action => 'index', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''}, :class => 'cancel' %></a></li>
+  <li><a class="current"><%= t 'text.add' %></a></li> | 
+  <li><a class="current"><%= link_to_remote (t 'text.cancel'), :url => {:action => 'index', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''}, :class => 'cancel' %></a></li>
 </ul>
 
 <%= render :partial => 'form' %>

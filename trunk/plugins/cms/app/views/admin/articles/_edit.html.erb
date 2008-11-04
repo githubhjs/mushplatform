@@ -1,5 +1,5 @@
 <% form_remote_tag :url => 'articles/update', :before => fckeditor_before_js('body','') do -%>
-<h2>Manage Articles - <%= @channel.name %> </h2>
+<h2><%= t 'text.article.manage_articles' %> - <%= @channel.name %> </h2>
 
 <ul class="subsubsub">
   <li><a class="current"><%= @article.title %></a></li> | 

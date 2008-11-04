@@ -5,3 +5,6 @@ en-US:
       categories: "Categories"
       tags: "Tags"
       links: "Links"
+
+    article:
+      category: "Category"

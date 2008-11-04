@@ -95,9 +95,9 @@ module CcmwHelper
   
   def add_article_extra_attributes(article)
     output = ""
-    output << "<tr class=\"form-field\"><th scope=\"row\" valign=\"top\"><label for=\"article_status\">Category</label></th><td>"
+    output << "<tr class=\"form-field\"><th scope=\"row\" valign=\"top\"><label for=\"article_status\">#{I18n.t 'text.article.category'}</label></th><td>"
     output << "<select name=\"article[category_id]\" id=\"article_category\">"
-    output << "<option>Selete Category</option>"
+    output << "<option>#{I18n.t 'text.select'}</option>"
     output << option_groups_from_collection_for_select(view_categories, :article_categries, :name, :id, :name, article.category_id)
     output << "</select>"
     output << "</td></tr>"

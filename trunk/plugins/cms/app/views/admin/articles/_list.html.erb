@@ -3,22 +3,22 @@
     <input type="hidden" name="channel_id" value="<%= @channel.id %>" />
     <input type="hidden" name="standalone" value="<%= @standalone %>" />
 
-    <h2>Manage Articles - <%= @channel.name %> (<%= link_to_remote 'add new', :url => {:controller => 'admin/articles', :action => 'new', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''} %>)</h2>
+    <h2><%= t 'text.article.manage_articles' %> - <%= @channel.name %> (<%= link_to_remote (t 'text.add'), :url => {:controller => 'admin/articles', :action => 'new', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''} %>)</h2>
 
     <ul class="subsubsub">
-    <li><a href='' class="current">All Articles</a> | </li><li><a href=''>Images</a></li> | </li><li><a href=''>Stylesheets</a></li> | </li><li><a href=''>Javascripts</a></li></ul>
+    <li><a href='' class="current"><%= t 'text.article.all_articles' %></a></ul>
 
 
     <p id="post-search">
       <input type="text" id="post-search-input" name="s" value="" />
-      <input type="submit" value="Search Assets" class="button" />
+      <input type="submit" value="<%= t 'text.search' %>" class="button" />
     </p>
 
     <div class="tablenav">
 
     <div class="alignleft">
-    <input type="submit" value="Delete" name="deleteit" class="button-secondary delete" />
-    <select name='m'>
+    <input type="submit" value="<%= t 'text.delete' %>" name="deleteit" class="button-secondary delete" />
+    <!--select name='m'>
     <option selected="selected" value='0'>Show all dates</option>
     <option value='200807'>July 2008</option>
     </select>
@@ -27,7 +27,7 @@
       <option value='0'>View all categories</option>
       <option value="1">Uncategorized</option>
     </select>
-    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" />
+    <input type="submit" id="post-query-submit" value="Filter" class="button-secondary" /-->
 
     </div>
 
@@ -42,10 +42,10 @@
 
       <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
       <th scope="col">No.</th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Status</th>
-      <th scope="col">Date</th>
+      <th scope="col"><%= t 'text.article.title' %></th>
+      <th scope="col"><%= t 'text.article.author' %></th>
+      <th scope="col"><%= t 'text.article.status' %></th>
+      <th scope="col"><%= t 'text.date' %></th>
 
       </tr>
       </thead>
@@ -57,7 +57,7 @@
           <td><strong><%= link_to_remote article.title, :url => {:controller => 'admin/articles', :action => 'edit', :id => article.id, :standalone => @standalone ? @standalone : ''} %></strong></td>
           <td><%= article.author %></td>
           <td><%= article.status %></td>
-          <td><abbr title="<%= article.created_at %>"><%= article.created_at %></abbr></td>
+          <td><abbr title="<%= article.created_at %>"><%= timelong(article.created_at) %></abbr></td>
         </tr>
         <% end -%>
       </tbody>
@@ -68,7 +68,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-      <%= will_paginate(@articles, :renderer => 'RemoteLinkRenderer', :params => {:channel_id => @channel.id}) %>
+      <%= will_paginate(@articles, {:prev_label => (t 'text.previous'), :next_label => (t 'text.next'), :renderer => 'RemoteLinkRenderer', :params => {:channel_id => @channel.id }}) %>
     </div>
 
     <br class="clear" />

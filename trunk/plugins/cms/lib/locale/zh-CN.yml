@@ -7,3 +7,23 @@ zh-CN:
       assets: "资源管理"
       articles: "文章管理"
       new: "新建文章"
+
+    article:
+      manage_articles: "文章管理"
+      all_articles: "所有文章"
+      save_article: "保存文章"
+      
+      title: "标题"
+      display_title: "显示标题"
+      sub_title: "副标题"
+      permalink: "永久链接"
+      author: "作者"
+      source: "来源"
+      tags: "关键字"
+      channel: "频道"
+      status: "状态"
+      excerpt: "摘要"
+      body: "内容"
+      audit: "通过审核"
+      top: "置顶"
+      sticky: "焦点"

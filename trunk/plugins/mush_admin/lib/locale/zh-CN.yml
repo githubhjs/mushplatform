@@ -1,5 +1,21 @@
 zh-CN:
   text:
+    manage: "管理"
+    add: "新建"
+    save: "保存"
+    cancel: "返回"
+    or: "or"
+    select: "选择"
+    delete: "删除"
+    all: "所有"
+    search: "搜索"
+    true: "是"
+    false: "否"
+    date: "日期"
+    previous: "上一页"
+    next: "下一页"
+    
+
     menu: 
       home: "控制面板"
       scriptlets: "代码块管理"    

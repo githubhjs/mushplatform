@@ -4,23 +4,26 @@
 module AdminHelper
   
   class << self
-    def add_mainmenu
+    def add_mainmenu_cms
       menu = "
-  <li><a href='/admin/articles?standalone=true' id='articles'>#{I18n.t 'text.menu.articles'} &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
-      <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-              <li><a href='/admin/articles/new?standalone=true'>#{I18n.t 'text.menu.new'}</a></li>
-              <li><a href='/admin/articles?standalone=true'>#{I18n.t 'text.menu.articles'}</a></li>
-      </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-  </li>
-  <li><a href='/admin/channels' id='cms'>#{I18n.t 'text.menu.cms'} &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
-      <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-              <li><a href='/admin/channels'>#{I18n.t 'text.menu.channels'}</a></li>
-              <li><a href='/admin/templates'>#{I18n.t 'text.menu.templates'}</a></li>
-              <li><a href='/admin/assets'>#{I18n.t 'text.menu.assets'}</a></li>
-              <li><a href='/admin/articles?standalone=true'>#{I18n.t 'text.menu.articles'}</a></li>
-      </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-  </li>"
-      
+        <li><a href='/admin/channels' id='cms'>#{I18n.t 'text.menu.cms'} &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
+                    <li><a href='/admin/channels'>#{I18n.t 'text.menu.channels'}</a></li>
+                    <li><a href='/admin/templates'>#{I18n.t 'text.menu.templates'}</a></li>
+                    <li><a href='/admin/assets'>#{I18n.t 'text.menu.assets'}</a></li>
+                    <li><a href='/admin/articles?standalone=true'>#{I18n.t 'text.menu.articles'}</a></li>
+            </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+        </li>"
+    end  
+
+    def add_mainmenu_articles
+      menu = "
+        <li><a href='/admin/articles?standalone=true' id='articles'>#{I18n.t 'text.menu.articles'} &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
+                    <li><a href='/admin/articles/new?standalone=true'>#{I18n.t 'text.menu.new'}</a></li>
+                    <li><a href='/admin/articles?standalone=true'>#{I18n.t 'text.menu.articles'}</a></li>
+            </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+        </li>"
     end  
     
     def add_submenu

@@ -7,13 +7,42 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   def set_locale
-      e = request.env['HTTP_ACCEPT_LANGUAGE']
       # update session if passed
       session[:locale] = params[:locale] if params[:locale]
+      session[:locale] = accepted_languages
       # set locale based on session or default
       I18n.locale = session[:locale] || I18n.default_locale
   end
 
+  ##
+  # Returns the languages accepted by the visitors, sorted by quality
+  # (order of preference).
+  ##
+  def accepted_languages()
+    # no language accepted
+    return [] if request.env["HTTP_ACCEPT_LANGUAGE"].nil?
+    
+    # parse Accept-Language
+    accepted = request.env["HTTP_ACCEPT_LANGUAGE"].split(",")
+    accepted = accepted.map { |l| l.strip.split(";") }
+    accepted = accepted.map { |l|
+      if (l.size == 2)
+        # quality present
+        #[ l[0].split("-")[0].downcase, l[1].sub(/^q=/, "").to_f ]
+      else
+        # no quality specified =&gt; quality == 1
+        #[ l[0].split("-")[0].downcase, 1.0 ]
+        ll = l[0].split("-")
+        if (ll.size > 1)
+          [ll[0], ll[1].upcase]
+        else
+          []
+        end
+      end
+    }
+    accepted[0].join("-")
+  end
+  
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '753e9f8530306cea8709833fd5983953'

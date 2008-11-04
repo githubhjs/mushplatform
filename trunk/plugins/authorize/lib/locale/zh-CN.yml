@@ -1,0 +1,7 @@
+zh-CN:
+  text:
+    menu: 
+      authorize: "用户管理"
+      roles: "角色管理"
+      groups: "组管理"
+      users: "用户管理"  

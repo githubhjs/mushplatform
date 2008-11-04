@@ -82,15 +82,15 @@ module CcmwHelper
   end
   
   def add_mainmenu
-    <<menu
-<li><a href="/admin/article_categories" id="ccmw">CCMW &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
-    <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-            <li><a href="/admin/article_categories">Categories</a></li>
-            <li><a href="/admin/tags">Tags</a></li>
-            <li><a href="/admin/links">Links</a></li>
-    </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-</li>
-menu
+    menu="
+      <li><a href='/admin/article_categories' id='ccmw'>#{I18n.t 'text.menu.ccmw'} &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+          <!--[if lte IE 6]><table><tr><td><![endif]--><ul>
+                  <li><a href='/admin/article_categories'>#{I18n.t 'text.menu.categories'}</a></li>
+                  <li><a href='/admin/tags'>#{I18n.t 'text.menu.tags'}</a></li>
+                  <li><a href='/admin/links'>#{I18n.t 'text.menu.links'}</a></li>
+          </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+      </li>"
+    menu
   end
   
   def add_article_extra_attributes(article)

@@ -1,0 +1,7 @@
+en-US:
+  text:
+    menu: 
+      authorize: "Authorize"
+      roles: "Roles"
+      groups: "Groups"
+      users: "Users"

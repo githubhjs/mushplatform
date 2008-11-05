@@ -1,0 +1,508 @@
+* {
+margin:0;
+padding:0;
+}
+
+a {
+text-decoration:none; 
+color:#70b7a0;
+}
+
+a:hover {
+color:#FF9900;
+}
+
+a img {
+text-decoration:none;
+border:0;
+}
+
+.l {
+float:left;
+}
+
+.m {
+text-align:center
+}
+
+.r {
+float:right;
+}
+
+ul, ol{
+list-style-type:none;
+}
+
+.clear {
+clear:both;
+font-size:0;
+line-height:0;
+height:0px; 
+}
+
+table {
+border-collapse:collapse;
+}
+
+table td {
+vertical-align:top;
+}
+
+h1, h2, h3, h4 {
+font-size:12px;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Main Container
+-----------------------------------------------------------------------------------------------*/
+body {
+color:#555;
+font-family:Verdana, san-serif, "宋体";
+font-size:12px;
+line-height:1.7em;
+background:url(../../images/greenbud/bg.gif) left top repeat-x #f3f3f3 fixed; 
+padding:30px 0; 
+}
+
+#wrapper {
+}
+
+#index, #detail {
+}
+
+#container {
+margin:0 auto;  
+text-align:left; 
+width:80%; 
+padding:0 5%; 
+background:url(../../images/greenbud/container-bg.gif) left top repeat-x #fff; 
+border:1px solid #e8e8e8;
+border-bottom:5px solid #A9E1C6; 
+}
+
+/*-----------------------------------------------------------------------------------------------
+Header
+-----------------------------------------------------------------------------------------------*/
+#header {
+min-height:100px; 
+_height:100px;
+padding:50px 20% 0 0;
+position:relative; 
+}
+
+#header .blogName{
+font-size:24px;
+line-height:1.4em; 
+font-family:"Microsoft Yahei", "华文细黑", "宋体";
+font-weight:400;
+float:left; 
+padding:0 20px 0 0;
+border-right:1px solid #ccc; 
+margin:0 20px 0 0; 
+display:inline; 
+}
+
+#header .description {
+padding:1em 0; 
+}
+
+#header .blogName a {
+}
+
+#header .blogName a:hover {
+}
+
+.header-top {
+position:absolute; 
+top:-30px;
+right:-2%;
+width:250px;
+height:179px; 
+background:url(../../images/greenbud/bigsprout.gif) no-repeat; 
+}
+
+
+/*-----------------------------------------------------------------------------------------------
+Content
+-----------------------------------------------------------------------------------------------*/
+#content {
+width:70%;
+float:right; 
+}
+
+#posts {
+}
+
+#noPosts {
+}
+
+.pageNavi {
+color:#999; 
+background:#e7fcea; 
+padding:0 5px; 
+}
+
+.pageNavi a {
+margin:0 3px; 
+}
+
+.pageNavi span {
+margin:0 10px; 
+}
+
+.context {
+margin:0 0 20px; 
+}
+
+#posts li {
+margin:0 0 50px; 
+}
+
+#posts li li{
+margin:0; 
+}
+
+#posts .postHeader {
+}
+
+#posts .postHeader h2 {
+font-size:16px;
+font-weight:400;
+letter-spacing:1px;
+color:#FF9900;
+font-family:"Microsoft Yahei", "华文细黑", "宋体";
+}
+
+#posts .postHeader h2 a {
+color:#FF9900; 
+width:100%; 
+}
+#posts .postHeader h2 a:hover {
+color:#70b7a0; 
+}
+
+#posts .postHeader h2 .category {
+}
+
+#posts .postHeader h3 {
+color:#ccc; 
+font-weight:400;
+font-size:14px;
+}
+
+#posts .postBody {
+word-wrap:break-word;
+margin:20px 0; 
+}
+
+#posts .postBody p {
+margin:15px 0; 
+}
+
+#posts .postBody li {
+background:none; 
+line-height:1.8em; 
+margin:0; 
+}
+
+#posts .tags a{
+margin:0 10px 0 0;
+}
+
+#posts .postFooter {
+border-top:1px dashed #70b7a0;
+padding:5px 0 0; 
+color:#bbb; 
+}
+
+#detail #posts .postFooter {
+border-top:1px dashed #70b7a0;
+}
+
+#posts .postFooter .tb_url input {
+width:450px;
+color:#aaa; 
+border:0; 
+}
+
+#posts .postFooter .menubar {
+}
+
+/*-----------------------------------------------------------------------------------------------
+Comment & Trackback
+-----------------------------------------------------------------------------------------------*/
+#trackbacks, #comments, #commentForm {
+margin:10px 0 20px; 
+}
+
+#trackbacks h2, #comments h2, #commentForm h2 {
+font-size:16px;
+font-weight:400;
+letter-spacing:2px;
+margin:0 0 10px; 
+color:#FF9900;
+font-family:"Microsoft Yahei", "华文细黑", "宋体";
+}
+
+#trackbacks li, #comments li {
+word-wrap:break-word;
+margin:0 0 30px; 
+}
+
+#comments li {
+}
+
+#trackbacks .desc {
+}
+
+#comments .cmtBody {
+}
+
+#comments .menubar {
+margin:5px 0 0;
+padding:3px 0 0;
+border-top:1px dashed #ccc; 
+}
+
+#comments .reCmtBody {
+padding:5px 15px; 
+color:#999; 
+}
+
+#comments .reCmtBody .content {
+}
+
+.cmtPagenav {
+margin:-20px 0 20px; 
+background:#e7fcea; 
+padding:0 5px; 
+}
+
+#commentForm form {
+background:#e7fcea;
+padding:10px; 
+}
+
+#commentForm div {
+margin:3px 0; 
+}
+
+#commentForm label{
+display:block; 
+}
+
+#commentForm textarea, #commentForm .submit {
+}
+
+#commentForm textarea {
+overflow:auto;
+width:95%; 
+border:1px dashed #70b7a0; 
+padding:3px; 
+background:#fff;
+}
+
+#commentForm input {
+border:1px dashed #70b7a0;
+padding:3px; 
+background:#fff; 
+}
+
+#commentForm input:focus, #commentForm input.focus, #commentForm textarea:focus, #commentForm textarea.focus {
+border:1px dashed #FF9900; 
+background:#fff; 
+}
+
+#commentForm .submit input, #commentForm .submit input:focus, #commentForm .submit input.focus {
+padding:1px 10px;
+_padding:2px 10px 0;
+background:#FF9900; 
+color:#fff;
+border:3px solid #f7b551;  
+margin:0 20px 0 0; 
+letter-spacing:2px;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Sidebar
+-----------------------------------------------------------------------------------------------*/
+#sidebar{
+word-wrap:break-word;
+width:25%; 
+float:left; 
+color:#888; 
+}
+
+#sidebar h2 {
+font-weight:bold;
+font-size:14px;
+font-family:"Microsoft Yahei", "华文细黑", "宋体";
+letter-spacing:2px;
+margin:0 0 10px; 
+color:#333; 
+padding:0 0 0 0px; 
+}
+
+#sidebar #nPosts h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -125px no-repeat; 
+}
+
+#sidebar #nComments h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -150px no-repeat; 
+}
+
+#sidebar #login h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -50px no-repeat; 
+}
+
+#sidebar #tags h2 {
+background:url(../../images/greenbud/h2-bg.gif) left top no-repeat; 
+}
+
+#sidebar #cats h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -102px no-repeat; 
+}
+
+#sidebar #profile h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -175px no-repeat; 
+}
+
+#sidebar #search h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -25px no-repeat; 
+}
+
+#sidebar #archives h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -75px no-repeat; 
+}
+
+#sidebar #links h2 {
+background:url(../../images/greenbud/h2-bg.gif) left -200px no-repeat; 
+}
+
+#sidebar .module {
+padding:15px; 
+margin:0 0 20px; 
+border:1px solid #eee; 
+background:#f8f8f8; 
+} 
+
+#sidebar #custom {
+overflow:hidden;
+margin:0 0 20px; 
+width:100%; 
+}
+
+#sidebar #profile a img {
+padding:3px;
+border:1px solid #ddd; 
+background:#fff; 
+}
+
+#sidebar #profile a:hover img {
+background:#E7FCEA;
+border:1px solid #A9E1C6; 
+}
+
+#sidebar .modBody {
+}
+
+#sidebar li {
+line-height:1.8em; 
+}
+
+#sidebar #tags li{
+display:inline; 
+white-space:normal;
+margin:0 10px 0 0; 
+}
+
+#sidebar #tags .count {
+display:none; 
+}
+
+#sidebar #meta li{
+padding:0;
+background:none; 
+line-height:2em; 
+}
+
+#sidebar .button {
+padding:1px 6px;
+_padding:2px 6px 0;
+background:#FF9900; 
+color:#fff;
+border:3px solid #f7b551;  
+letter-spacing:2px;
+}
+
+#sidebar .textField {
+width:50%; 
+border:1px dashed #70b7a0;
+padding:3px; 
+}
+
+#sidebar #calendar {
+background:url(../../images/greenbud/calendar-bg.gif) left top no-repeat #E7FCEA; 
+border:0; 
+}
+
+#sidebar #calendar h2 {
+display:none; 
+}
+
+#sidebar #calendar table {
+width:100%;
+text-align:center;
+margin:30px 0 0; 
+}
+
+#sidebar #calendar .modBody {
+border:0; 
+}
+
+#sidebar #calendar table .calendarHead td {
+
+}
+
+#sidebar #calendar table td {
+background:url(../../images/greenbud/calendar-td-bg.gif) left bottom repeat-x; 
+padding:3px 0; 
+}
+
+#sidebar #calendar table .week {
+color:#A9E1C6;
+}
+
+#sidebar #calendar table .day {
+}
+
+#sidebar #calendar table .day a{
+color:#000;
+font-weight:700;
+}
+
+#sidebar #calendar table .today {
+color:#FF9900; 
+font-weight:700;
+font-size:14px;
+}
+
+/*-----------------------------------------------------------------------------------------------
+Footer
+-----------------------------------------------------------------------------------------------*/
+#footer {
+color:#ccc; 
+margin:50px 0 0; 
+padding:80px 0 20px; 
+background:url(../../images/greenbud/pop.gif) center top no-repeat; 
+text-align:center; 
+}
+
+#footer a {
+color:#aaa; 
+}
+
+#content #posts li .postBody ul,ol { margin:0; padding:0; margin-left:20px; }
+#content #posts li .postBody li { margin:0; padding:0; padding:0 2px;list-style-position:inside; }
+#content #posts li .postBody ul li { list-style:disc; }
+#content #posts li .postBody ol li { list-style:decimal; }

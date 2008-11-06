@@ -1,4 +1,19 @@
-module SignupHelper
+module UserHelper
+  
+  def group_name(group)
+    case group
+    when "user"
+      "普通用户"
+    when "silver"
+      "银卡用户"
+    when "gold"
+      "金卡用户"
+    when "vendor"
+      "企业供应商"
+    when "customer"
+      "企业用户"
+    end
+  end
   
   def generate_company_nature_radio(selected_value)
     other = (selected_value.to_s == UserProfile::Company_Nature_Other.to_s) ? false : true

@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
     
   #  map.resources :friends
-  map.resources :signup, :collection => {:select => :get}
+  map.connect   "/user/select",:controller => 'user',:action => 'select'
+  map.connect   "/user/signup",:controller => 'user',:action => 'signup'
   map.connect   "/user/login",:controller => 'user',:action => 'login'
   map.connect   "/user/login_bar",:controller => 'user',:action => 'login_bar'
-  map.connect   "/user/signup",:controller => 'user',:action => 'signup'
   map.connect   "/user/logout",:controller => 'user',:action => 'logout'
   map.connect   "/manage",:controller => 'manage/blogs',:action => 'index'
   map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"

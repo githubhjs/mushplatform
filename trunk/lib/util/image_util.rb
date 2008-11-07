@@ -1,7 +1,7 @@
 require 'rubygems'
-#require 'RMagick'
+require 'RMagick'
 require 'net/http'
-#require 'base64' 
+require 'base64' 
 require 'fileutils'
 module ImageUtil
   

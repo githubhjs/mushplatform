@@ -10,8 +10,6 @@ ENV['HOME'] = '/home'
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
-require 'cached_model'
-require File.join(File.dirname(__FILE__), '../vendor/plugins/acts_as_taggable_on_steroids/lib/acts_as_taggable')
 
 if RUBY_PLATFORM =~ /java/
    require 'rubygems'
@@ -79,7 +77,7 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
   config.plugins = [:engines, :liquid, :fckeditor, :core, :authorize, :cms, :all]
 end
-
+require File.join(File.dirname(__FILE__), '../vendor/plugins/acts_as_taggable_on_steroids/lib/acts_as_taggable')
 USER_SALT="shadowfox"
 
 memcache_options = {  

@@ -1,6 +1,6 @@
 class Manage::UserProfilesController < Manage::ManageController
   
-  helper :signup
+#  helper :signup
   
   # GET /user_profiles
   # GET /user_profiles.xml

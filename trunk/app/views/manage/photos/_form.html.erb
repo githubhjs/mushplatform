@@ -1,0 +1,17 @@
+<div class="blog_write_center">
+  <%form_for @photo,:html => {:name => 'message_form'} do |f|  %>
+    <p><b>标题：</b>
+      <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>
+    </p>
+    <p><b>图片：</b>
+      <%= file_field :orignal_image %>
+    </p>
+    <p><b>标签：                                                                                                                                                                                                             </b>
+      <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>
+    </p>
+    <p><b>描述：</b>
+    </p>
+    <%= f.text_area :content,:class => "text",:cols => "50" ,:rows => "5"  %>
+    <input class="submit"  type="submit" value="发 布" />
+  <%end%>
+</div>

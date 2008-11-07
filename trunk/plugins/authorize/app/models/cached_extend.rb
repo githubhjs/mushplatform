@@ -1,3 +1,4 @@
+require 'cached_model'
 module CachedExtend
   
   def self.included(base) # :nodoc:

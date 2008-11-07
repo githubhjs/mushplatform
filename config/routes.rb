@@ -1,7 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :photos
-
-    
+      
   #  map.resources :friends
   map.connect   "/user/select",:controller => 'user',:action => 'select'
   map.connect   "/user/signup",:controller => 'user',:action => 'signup'
@@ -44,6 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.namespace :manage do |manage|
     manage.resources :blog_configs
+    manage.resources :photos
     manage.resources :categories,:collection => {:ajax_new => :get},:member => {:delete => :get,:ajax_update => :get}
     manage.resources :comments
     manage.resources :sidebars,:member => {:active => :get,:remove => :get,:lower => :get,:higher => :get}

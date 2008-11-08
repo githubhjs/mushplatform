@@ -21,6 +21,7 @@ en-US:
       source: "Source"
       tags: "Tags"
       channel: "Channel"
+      group: "Group"
       status: "Status"
       excerpt: "Excerpt"
       body: "Body"

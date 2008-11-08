@@ -26,6 +26,12 @@ module CmsHelper
     page = args.delete(:page) || 1
     will_args = args
     conditions = "channel_id = #{channel_id}"
+
+    group = args.delete(:group)
+    if group
+      group_id = Group.find_by_group_name(group).id
+      conditions += " and group_id = #{group_id}"
+    end
     
     channel = Channel.find(channel_id)
     articles = Article.paginate :page => page, :order => order, :per_page => per_page,
@@ -122,6 +128,10 @@ module CmsHelper
   
   def channels_select
     channels.collect {|p| [ p.name, p.id ] }
+  end
+  
+  def groups_select
+    Group.find(:all).collect {|p| [ p.group_name, p.id ] }
   end
   
   def channels(channel_list = [], channel = nil, prefix = '')

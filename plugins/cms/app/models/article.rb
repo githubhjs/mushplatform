@@ -3,6 +3,7 @@ class Article < CachedModel
 
   has_many :contents, :dependent => :destroy
   belongs_to :channel
+  belongs_to :group
   acts_as_taggable
 
   named_scope :by_channel, lambda {|id| {:conditions => "channel_id = #{id}", :order => "created_at DESC"}}

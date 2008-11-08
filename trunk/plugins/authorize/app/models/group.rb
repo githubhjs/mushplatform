@@ -106,7 +106,7 @@ class Group < CachedModel
   
   #this method should find from cache
   def self.find_by_group_name(g_name)
-    find(:first,:conditions=>"group_name=#{g_name}")
+    find(:first,:conditions=>"group_name='#{g_name}'")
   end
   
   def should_inherit_groups

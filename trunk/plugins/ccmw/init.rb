@@ -7,5 +7,11 @@ end
 Tag.class_eval do
   def to_liquid
      self.attributes.stringify_keys
-  end  
+  end
+  
+  def before_save
+    if category == null
+      category = ''
+    end
+  end
 end

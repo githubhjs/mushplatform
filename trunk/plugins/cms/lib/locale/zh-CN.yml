@@ -21,6 +21,7 @@ zh-CN:
       source: "来源"
       tags: "关键字"
       channel: "频道"
+      group: "所属组"
       status: "状态"
       excerpt: "摘要"
       body: "内容"

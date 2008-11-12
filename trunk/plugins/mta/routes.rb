@@ -1,0 +1,6 @@
+map.connect '/mta/dashboard', :controller => 'mta', :action => 'dashboard'
+map.connect '/mta/newsletters', :controller => 'mta', :action => 'newsletters'
+map.connect '/mta/events', :controller => 'mta', :action => 'events'
+map.connect '/mta/files', :controller => 'mta', :action => 'files'
+map.connect '/mta/login', :controller => 'mta', :action => 'login'
+map.connect '/mta/logout', :controller => 'mta', :action => 'logout'

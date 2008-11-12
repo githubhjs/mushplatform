@@ -1,0 +1,19 @@
+<h1>Files</h1>
+<%= render :partial => 'files', :object => @files %>
+
+<h1>Upload File</h1>
+<% form_tag('/mta/create_file', :multipart => true ) do %>
+  <table class="form-table">
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="file">Name</label></th>
+      <td><%= text_field :mfile, :name %></td>
+    </tr>    
+    <tr class="form-field">
+      <th scope="row" valign="top"><label for="file">File</label></th>
+      <td><%= file_field :mfile, :uploaded_data %></td>
+    </tr>
+  </table>
+  <p class="submit">
+    <%= submit_tag 'Save' %>
+  </p>
+<% end %>

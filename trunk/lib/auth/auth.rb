@@ -15,6 +15,10 @@ module Auth
     session[:user]
   end 
   
+  def is_blog_admin?
+    current_user && current_user.user_name == request.subdomains.first
+  end
+
   def is_space_admin?
     unless  current_user && current_user.user_name == request.subdomains.first
       flash[:warning]='Please login to continue'

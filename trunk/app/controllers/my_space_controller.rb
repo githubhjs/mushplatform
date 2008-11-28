@@ -14,7 +14,8 @@ class MySpaceController < ApplicationController
   
   def index
     entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions =>generate_conditions)
-    render_liquid({:template => 'entries',:layout => true},{'entries' => entries, 'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
+    blog_owner = is_blog_admin? ? current_user : nil
+    render_liquid({:template => 'entries',:layout => true},{'entries' => entries,'blog_owner' => blog_owner,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
   end
 
   def show
@@ -94,7 +95,7 @@ class MySpaceController < ApplicationController
     end
     #如果是按照tag管理
     unless params[:tag].blank?
-      tag = Tag.find_by_name(params[:tag])
+      tag = Tag.find(params[:tag])
       conditions << "id in (select taggable_id from taggings where tag_id=#{tag.id})"
     end
     conditions.join(' and  ')

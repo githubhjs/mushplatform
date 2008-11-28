@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   before_filter :set_locale
 
+  helper_method :is_blog_admin?
+
   def set_locale
       # update session if passed
       session[:locale] = params[:locale] if params[:locale]

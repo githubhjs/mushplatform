@@ -51,6 +51,13 @@ module BlogHelper
     Date.parse(dates.join('-'))
   end
 
+#  def is_blog_admin?
+#    session[:user] && session[:user].user_name == request.subdomains.first
+#  end
+#
+  def display_edit_link(blog)
+#    is_blog_admin? ?  "|<a href='/manage/blogs/#{blog.id}/edit'>编辑</a>" :  ''
+  end
 #  
 #  def gravatar_tag(email, options={})
 #    options.update(:gravatar_id => Digest::MD5.hexdigest(email.strip))

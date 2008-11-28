@@ -3,7 +3,7 @@
 <div class='sidebar-content'>
 <ul>
 {% for entry in entries %}
-   <li><a href="/category/{{entry.id}}" title="{{entry.name}}">{{entry.name}}</a></li>
+   <li><a href="/category/{{entry.id}}" title="{{entry.name}}">{{entry.name}}({{entry.blog_count}})</a></li>
 {% endfor %}
 </ul>
 </div>

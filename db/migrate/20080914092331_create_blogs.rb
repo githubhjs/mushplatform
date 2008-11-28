@@ -9,7 +9,7 @@ class CreateBlogs < ActiveRecord::Migration
       t.datetime :created_at,:updated_at
       t.integer  :if_top,:category_id,:default => 0
       t.integer  :user_id,:null => false
-      t.integer  :comment_count,:default => 0
+      t.integer  :comment_count,:view_count,:default => 0
     end
   end
 

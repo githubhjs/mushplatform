@@ -4,7 +4,7 @@
   <div class="postHeader">
     <h2>{{ entry | entry_link }}</h2>
     <h3>{{ entry.created_at | timelong }}</h3>
-    <div class="tags">Tag：</div>
+    <div class="tags">Tag：{{entry|display_blog_tags}}</div>
   </div>
   <div class="clear"></div>
   <div class="postBody">
@@ -18,7 +18,7 @@
 <div class="postsBottom"></div>
 </ul>
 
-<ul id="comments"><h2>评论</h2>
+<ul id="comments"><h2>评论({{entry.comment_count}})</h2>
 {% for comment in comments %}
 {% include 'comment' %}
 {% endfor %}
@@ -26,7 +26,7 @@
 <div class="pageNavi">{{ comments | will_paginate }}</div>
 
 <div id="commentForm">
-<form name="comment_form" id="comment_form" method="post" action="/blogs/{{entry.id}}/comments/create">
+<form name="comment_form" id="comment_form" method="post" action="/entry/{{entry.id}}/comments/create">
   <h2 id="respond">发表评论</h2><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
 {% if if_login %}
 {% else%}

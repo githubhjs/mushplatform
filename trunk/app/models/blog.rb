@@ -6,7 +6,7 @@ class Blog < ActiveRecord::Base
   acts_as_taggable
 
   attr_accessor :tag_names
-
+  before_create :before_create_tell_category
   #validates_length_of :title,:in => 5..120,:too_short => "名字不能少于5个字符",:too_long => "标题不能大于120个字符"
   
   #validates_length_of :body,:minimum => 20,:too_short => "内容不能少于20个字符"
@@ -35,8 +35,18 @@ class Blog < ActiveRecord::Base
     false
   end
   
+  def before_create_tell_category
+    if  !self.category_id.blank?  && self.category_id > 0
+      Category.add_blog_count(self.category_id)
+    end
+  end
+
   def is_sticky?
     self.if_top == Const::YES
+  end
+
+  def add_view_count
+    Blog.connection.execute("update blogs set view_count = view_count+1 where id=#{self.id}")
   end
 
   def is_published?

@@ -10,4 +10,8 @@ class Category < ActiveRecord::Base
     self.attributes.stringify_keys
   end
 
+  def self.add_blog_count(id)
+    self.connection.execute("update categories set blog_count = blog_count +1 where id=#{id}")
+  end
+
 end

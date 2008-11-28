@@ -27,7 +27,6 @@ class Manage::CommentsController < Manage::ManageController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
@@ -43,7 +42,6 @@ class Manage::CommentsController < Manage::ManageController
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
-
     respond_to do |format|
       if @comment.save
         flash[:notice] = 'Comment was successfully created.'

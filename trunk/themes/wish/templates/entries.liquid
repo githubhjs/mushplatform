@@ -7,8 +7,6 @@
       <h2>{{ entry | entry_link }}</h2>
      </div>
      <div class="postBody">
-       <p><strong>《21世纪经济报道》记者杨琳桦 2008-8-14</strong></p>
-     <div class="entryHeader">作者：<span class="author"><a href="">{{entry.author}}</a></span>&nbsp;&nbsp;</div>
      <div class="entryBody">
       {{ entry.body }}  
      </div>
@@ -20,8 +18,9 @@
       <div class="menubar">
         <span class="author"><a href="">{{entry.author}}</a></span>
         发表于<span class="time">{{ entry.created_at | timelong }}</span> |
-        <a href="{{entry|entry_permalink}}" class="readmore">阅读全文</a> |
-        <a href="{{entry|entry_permalink}}" class="cmt">评论 <span class="count">{{entry.comment_count}}</span></a>
+        <a href="{{entry|entry_permalink}}" class="readmore">阅读全文({{entry.view_count}})</a> |
+        <a href="{{entry|entry_permalink}}" class="cmt">评论 <span class="count">({{entry.comment_count}})</span></a>
+        {{entry|display_edit_link}}
       </div>
       <div class="line"> </div>
     </div>

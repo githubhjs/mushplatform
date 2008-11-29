@@ -7,7 +7,7 @@ class Photo < ActiveRecord::Base
   
   Upload_Image_Path = "/upload/pic"
   
-  attr_accessor :uploaded_data,:user_id
+  attr_accessor :uploaded_data
   
   validates_presence_of :orignal_link,:mid_link,:thumbnail_link
   
@@ -18,12 +18,13 @@ class Photo < ActiveRecord::Base
   named_scope :user_photos, lambda { |user_id|
     { :conditions => { :user_id => user_id } }
   }
-  
+  named_scope :latest_photos, lambda { |user_id|
+    { :conditions => { :user_id => user_id },:order => "id desc" }
+  }
   def upload_image
     unless self.uploaded_data.blank?
       begin
         image = Magick::Image::read_inline(Base64.b64encode(self.uploaded_data.read)).first
-        debugger
         if image
           generate_orignal_image(image,self.uploaded_data.original_filename)
           generate_mid_image(image,self.uploaded_data.original_filename)
@@ -53,7 +54,7 @@ class Photo < ActiveRecord::Base
   end
   
   def generate_thumb_image(orignal_image,original_filename)
-    if orignal_image && thumb_image = ImageUtil.resize_image(orignal_image, Mid_Size)
+    if orignal_image && thumb_image = ImageUtil.resize_image(orignal_image, Thumbnail_Size)
       img_path,img_url = get_image_path_and_url(original_filename,'thumb')
       thumb_image.write(img_path)
       self.thumbnail_link = img_url
@@ -79,5 +80,9 @@ class Photo < ActiveRecord::Base
   def get_image_name
     @orig_name ||=  Time.now.to_i.to_s + rand(10000).to_s
   end
+
+   def to_liquid
+    self.attributes.stringify_keys
+  end   
   
 end

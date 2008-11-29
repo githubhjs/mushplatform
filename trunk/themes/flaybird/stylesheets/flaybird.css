@@ -124,3 +124,35 @@ h1.blogName { text-align:right; margin:100px 115px 0 0; font-size:35px; line-hei
 
 .reCmtBody { margin:5px 0; padding:10px; background:#f0f0f0; }
 .reCmtBody .time { font-size:10px; }
+
+table.admin {
+margin-bottom:20px;
+width:100%;
+}
+div.picture_full {
+text-align:center;
+}
+div.picture_thumb {
+float:left;
+height:170px;
+margin:0 12px;
+overflow:hidden;
+text-align:center;
+width:142px;
+}
+span.thumb_box {
+border:1px solid #CCCCCC;
+display:table-cell;
+height:95px;
+text-align:center;
+vertical-align:middle;
+width:130px;
+}
+
+div#main {
+border:1px solid;
+margin:3px 0 0 5px;
+overflow:hidden;
+padding:5px 12px;
+width:714px;
+}

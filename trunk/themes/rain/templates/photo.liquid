@@ -1,0 +1,36 @@
+<h3>{{ photo.title}}</h3>
+    <div style="width: 70%;" class="clearfix">
+      {% if per_photo %}
+      <div class="picture_thumb">
+        <div>
+         <span class="thumb_box">
+          <a href="/photos/{{ per_photo.id}}"><img  src="{{ per_photo.mid_link}}"></a>
+        </span>
+        </div>
+        <ul>
+          <li>{{ per_photo.title}}</li>
+          <li><a href="/photos/{{ per_photo.id}}">上一个</a></li>
+        </ul>
+      </div>
+      {%endif%}
+      {% if next_photo %}
+      <div class="picture_thumb">
+        <div>
+         <span class="thumb_box">
+          <a href="/photos/{{ next_photo.id}}"><img  src="{{ next_photo.mid_link}}"></a>
+        </span>
+        </div>
+        <ul>
+          <li>{{ next_photo.title}}</li>
+          <li><a href="/photos/{{ next_photo.id}}">下一个</a></li>
+        </ul>
+      </div>
+      {%endif%}
+    </div>
+    <div class="picture_full">
+      <img class="magplus" title="点击查看原始大小图片" src="{{ photo.orignal_link}}" width="700" height="525">
+      <ul>
+        <li><strong>图片描述</strong></li>
+        <li>{{ photo.description}}</li>
+      </ul>
+    </div>

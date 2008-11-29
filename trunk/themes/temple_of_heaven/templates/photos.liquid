@@ -1,0 +1,19 @@
+<div id="main">
+  <h3>博客相册</h3>
+  <hr>
+  <div style="width:70%;">
+    {% for photo in photos %}
+      <div class="picture_thumb">
+        <div>
+          <span class="thumb_box">
+            <a href="/photos/{{photo.id}}"><img  src="{{photo.mid_link}}"></a>
+          </span>
+        </div>
+        <ul>
+          <li>{{photo.title}}</li>
+        </ul>
+      </div>
+    {%endfor%}
+  </div>
+  <div></div>
+</div>

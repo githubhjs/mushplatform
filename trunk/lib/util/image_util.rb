@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'RMagick'
 require 'net/http'
-require 'base64' 
+require 'base64'
 require 'fileutils'
 module ImageUtil
   
@@ -35,7 +35,6 @@ module ImageUtil
         #new_cols,new_rows = new_image.columns,new_image.rows
         #return new_image.border(cols-new_cols,rows-new_rows,'white')
       end
-           
     end
     
     

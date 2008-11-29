@@ -5,7 +5,7 @@ class Manage::PhotosController < Manage::ManageController
   Photo_Perpage = 20
 
   def index
-    @photos = Photo.paginate(:page => params[:page],:per_page => Photo_Perpage)
+    @photos = Photo.user_photos(current_user.id).paginate(:page => params[:page],:per_page => Photo_Perpage)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @photos }

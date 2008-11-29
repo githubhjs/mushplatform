@@ -33,8 +33,9 @@ module BlogHelper
 
   def display_blog_tags(blog)
     blog = Blog.find(blog['id'])
-    blog.tag_list.map{|tag| "<a href='/tag/#{tag}/articles' title='#{tag}'>#{tag}</a>"}.join(" ")
+    blog.tag_list.map{|tag| "<a href='/tag/#{tag}' title='#{tag}'>#{tag}</a>"}.join(" ")
   end
+
   def parse_year_of_date(date_str)
     date = parse_date_from_str(date_str)
     date ? date.year : ''

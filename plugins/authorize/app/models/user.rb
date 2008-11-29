@@ -73,6 +73,10 @@ class User < CachedModel
     Notifications.deliver_forgot_password(self.email, self.user_name, new_pass)
   end
 
+  def to_liquid
+    self.attributes.stringify_keys
+  end
+
   protected
 
   def self.encrypt(pass, salt)
@@ -90,10 +94,6 @@ class User < CachedModel
     newpass = ""
     1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
     return newpass
-  end
-
-  def to_liquid
-    self.attributes.stringify_keys
   end
   
 end

@@ -471,3 +471,34 @@ textarea {
 #content #posts li .postBody li { margin:0; padding:0; padding:0 2px;list-style-position:inside; }
 #content #posts li .postBody ul li { list-style:disc; }
 #content #posts li .postBody ol li { list-style:decimal; }
+table.admin {
+margin-bottom:20px;
+width:100%;
+}
+div.picture_full {
+text-align:center;
+}
+div.picture_thumb {
+float:left;
+height:170px;
+margin:0 12px;
+overflow:hidden;
+text-align:center;
+width:142px;
+}
+span.thumb_box {
+border:1px solid #CCCCCC;
+display:table-cell;
+height:95px;
+text-align:center;
+vertical-align:middle;
+width:130px;
+}
+
+div#main {
+border:1px solid;
+margin:3px 0 0 5px;
+overflow:hidden;
+padding:5px 12px;
+width:714px;
+}

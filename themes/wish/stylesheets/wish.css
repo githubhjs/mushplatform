@@ -112,3 +112,35 @@ body { background:#c0c0c0; font-family:Verdana, Arial,sans-serif;font-size:12px;
 
 
 .line { background: url(../../images/wish/line.jpg); height:1px; width:536px; margin-bottom:10px;}
+
+table.admin {
+margin-bottom:20px;
+width:100%;
+}
+div.picture_full {
+text-align:center;
+}
+div.picture_thumb {
+float:left;
+height:170px;
+margin:0 12px;
+overflow:hidden;
+text-align:center;
+width:142px;
+}
+span.thumb_box {
+border:1px solid #CCCCCC;
+display:table-cell;
+height:95px;
+text-align:center;
+vertical-align:middle;
+width:130px;
+}
+
+div#main {
+border:1px solid;
+margin:3px 0 0 5px;
+overflow:hidden;
+padding:5px 12px;
+width:714px;
+}

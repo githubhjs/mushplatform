@@ -26,7 +26,7 @@ function add_category(){
         onLoading:function(){
             Element.show("onload_img");
         }
-        });
+    });
 }
 
 function update_category(category_id){
@@ -72,7 +72,8 @@ function select_all(parent_id){
 function submit_category_form(catgory_form){
     Element.show("onload_img");
     new Ajax.Request('/manage/categories',
-    {   method:post,
+    {
+        method:post,
         asynchronous:true,
         evalScripts:true,
         parameters:Form.serialize(catgory_form)   
@@ -99,11 +100,11 @@ function validate_user_emial(_input){
 }
 
 function validate_form(_form){
-   if(validate_email($('user_email').value) && $('user_profile_city').value != ''){
-       _form.submit();
-   }else{
-       alert("请完善必填内容");
-   }
+    if(validate_email($('user_email').value) && $('user_profile_city').value != ''){
+        _form.submit();
+    }else{
+        alert("请完善必填内容");
+    }
 }
 
 function post_sidebar_form(_from,bar_id){
@@ -113,9 +114,89 @@ function post_sidebar_form(_from,bar_id){
         asynchronous:true,
         evalScripts:true,
         onComplete:function(){
-          Element.hide('onload_img');
-          Element.hide('edit_'+bar_id);
+            Element.hide('onload_img');
+            Element.hide('edit_'+bar_id);
         },
         parameters:Form.serialize(_from)
-        })
+    })
 }
+function addAttachmentDiv(ele,max_size){
+    if(!$A(['jpg','bmp','png','gif','rar','zip','tar','gz','jar','war', 'bz2']).any(function(extName){
+        return new RegExp('\\.'+extName+'$','i').test(ele.value);
+    })){
+        alert("如果您上传图片，请上传JPG、BMP、PNG或者GIF格式的图片\n如果您上传附件，请先压缩再上传");
+        return false;
+    }
+    multiple_upload_attachment_counter++;
+    var div=new Element("div").update("<ul><li>文件: "+ele.value+" <a href='#' onclick='removeAttachmentDiv(this, \""+ele.id+"\");return false;'>删除</a></li><li>注解: <textarea name='attachments[][remark]' style='width:300px;height:80px;'></textarea></li></ul>");
+    var new_input=new Element("input",{
+        type:"file",
+        name:ele.name,
+        id:ele.id,
+        disabled:multiple_upload_attachment_counter>=max_size
+        });
+    Event.observe(new_input,'change',function(){
+        addAttachmentDiv(new_input,max_size);
+    });
+    ele.insert({
+        before:new_input,
+        after:div
+    });
+    ele.id=ele.id+multiple_upload_attachment_counter;
+    ele.name="attachments[][uploaded_data]";
+    div.appendChild(ele.hide().remove());
+}
+function removeAttachmentDiv(link,eleId){
+    multiple_upload_attachment_counter--;
+    link.parentNode.parentNode.parentNode.remove();
+    $(eleId).disabled=false;
+}
+function multiple_upload_picture(ele,max_size,tags){
+    Event.observe(ele,'change',function(){
+        addPictureDiv(ele,max_size,tags);
+    });
+    if(multiple_upload_picture_counter>=max_size)ele.disabled=true;
+}
+function addPictureDiv(ele,max_size,tags){
+    if(!$A(['jpg','bmp','png','gif']).any(function(extName){
+        return new RegExp('\\.'+extName+'$','i').test(ele.value);
+    })){
+        alert("您上传的图片格式不支持，请您上传JPG、BMP、PNG或者GIF格式的图片");
+        return false;
+    }
+    multiple_upload_picture_counter++;
+    var file_name=ele.value;
+    try{
+        file_name=ele.value.match(/(.*)[\/\\]([^\/\\]+)\.\w+$/)[2];
+    }catch(e){}
+    var tag_select="";
+    if(tags.length>0){
+        var tag_select="<select onchange='Element.previous($(this)).value = this.value;'><option value=''>选择已有标签</option>";
+        for(var i=0;i<tags.length;i++)
+            tag_select+="<option value='"+tags[i]+"'>"+tags[i]+"</option>";
+        tag_select+="</select>";
+    }
+    var div=new Element("div").update("<ul><li>文件: "+ele.value+" <a href='#' onclick='removePictureDiv(this, \""+ele.id+"\");return false;'>删除</a></li><li>标签: <input type='text' name='pictures[][tag_list]' class='text'/>"+tag_select+" 小贴士: 多个标签可用半角逗号分开</li><li>名称: <input type='text' name='pictures[][title]' value='"+file_name+"' size='50' class='text'/></li><li>描述: <textarea name='pictures[][description]' style='width:400px;height:80px;'></textarea></li></ul>");
+    var new_input=new Element("input",{
+        type:"file",
+        name:ele.name,
+        id:ele.id,
+        disabled:multiple_upload_picture_counter>=max_size
+        });
+    Event.observe(new_input,'change',function(){
+        addPictureDiv(new_input,max_size,tags);
+    });
+    ele.insert({
+        before:new_input,
+        after:div
+    });
+    ele.id=ele.id+multiple_upload_picture_counter;
+    ele.name="pictures[][uploaded_data]";
+    div.appendChild(ele.hide().remove());
+}
+function removePictureDiv(link,eleId){
+    multiple_upload_picture_counter--;
+    link.parentNode.parentNode.parentNode.remove();
+    $(eleId).disabled=false;
+}
+

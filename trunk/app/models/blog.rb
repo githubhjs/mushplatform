@@ -34,7 +34,6 @@ class Blog < ActiveRecord::Base
     end
     false
   end
-  
   def before_create_tell_category
     if  !self.category_id.blank?  && self.category_id > 0
       Category.add_blog_count(self.category_id)

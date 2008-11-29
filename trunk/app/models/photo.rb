@@ -7,22 +7,30 @@ class Photo < ActiveRecord::Base
   
   Upload_Image_Path = "/upload/pic"
   
-  attr_accessor :orignal_image,:user_id
+  attr_accessor :uploaded_data,:user_id
   
   validates_presence_of :orignal_link,:mid_link,:thumbnail_link
   
+  acts_as_taggable
+
   before_save :upload_image
+
+  named_scope :user_photos, lambda { |user_id|
+    { :conditions => { :user_id => user_id } }
+  }
   
   def upload_image
-    unless self.orignal_image.blank?
+    unless self.uploaded_data.blank?
       begin
-        image = Magick::Image::read_inline(Base64.b64encode(self.orignal_image.read)).first
+        image = Magick::Image::read_inline(Base64.b64encode(self.uploaded_data.read)).first
+        debugger
         if image
-          generate_orignal_image(image,self.orignal_image.original_filename)
-          generate_mid_image(image,self.orignal_image.original_filename)
-          generate_thumb_image(image,self.orignal_image.original_filename)
+          generate_orignal_image(image,self.uploaded_data.original_filename)
+          generate_mid_image(image,self.uploaded_data.original_filename)
+          generate_thumb_image(image,self.uploaded_data.original_filename)
         end
       rescue Exception => e
+        puts e.message
       end
     end
   end
@@ -46,7 +54,7 @@ class Photo < ActiveRecord::Base
   
   def generate_thumb_image(orignal_image,original_filename)
     if orignal_image && thumb_image = ImageUtil.resize_image(orignal_image, Mid_Size)
-      img_path,img_url = get_image_path_and_url(original_filename,'mid')
+      img_path,img_url = get_image_path_and_url(original_filename,'thumb')
       thumb_image.write(img_path)
       self.thumbnail_link = img_url
     end 
@@ -54,7 +62,8 @@ class Photo < ActiveRecord::Base
   
   
   def get_image_path_and_url(orignal_name,type='')
-    img_path,img_name = "#{Rails_Root}#{get_img_dir}",generate_image_name(orignal_name,type)
+    debugger
+    img_path,img_name = "#{RAILS_ROOT}/public/#{get_img_dir}",generate_image_name(orignal_name,type)
     FileUtils.makedirs(img_path) unless File.directory?(img_path)
     ["#{img_path}/#{img_name}","#{get_img_dir}/#{img_name}"]
   end

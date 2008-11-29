@@ -1,3 +1,85 @@
+<div class="m_l L">
+  <div class="face L">
+    <img class="border" src="/images/pic_big_none.gif"/>
+    <!--ul>
+      <li>日志数：20</li>
+      <li>评论数：15</li>
+      <li>访问量：50</li>
+      <li>总积分：20</li>
+    </ul-->
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+  </div>
+  <!--div class="visitor">
+    <div class="tit border"><h6>最近访客</h6></div>
+    <div class="v_m">
+      <div class="v_info L">
+        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
+        <p class="L">昵称：<a href="">xiao-fox</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
+      </div>
+      <div class="v_info L">
+        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
+        <p class="L">昵称：<a href="">pawa</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
+      </div>
+      <div class="v_info L">
+        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
+        <p class="L">昵称：<a href="">qing qing cao</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment">
+    <div class="tit border"><h6>未读评论<span style="color:#999;">（3）</span></h6></div>
+    <div class="comment_m">
+      <p><a href=""><b>allein：</b></a><a href="">休假的时间得好好珍惜</a></p>
+      <p><a href=""><b>wangjing:</b></a><a href="">很久没有休假了吧</a></p>
+      <p><a href=""><b>admin:</b></a><a href="">出趟海吧，打一网渔！</a></p>
+    </div>
+  </div-->
+
+</div><!--m_l-->
+<div class="m_r">
+  <!--person_menu-->
+  <%=  render :partial => "/manage/photos/photo_menu"%>
+  <!--person_menu-->
+  <div class="blog_write_m L">
+    <h3><a href="/album">博客相册</a> → <%= @photo.title %></h3>
+    <div style="width: 100%;" class="clearfix">
+      <% if @per_photo %>
+      <div class="picture_thumb">
+        <div>
+         <span class="thumb_box">
+          <a href="/manage/photos/<%= @per_photo.id %>"><img  src="<%= @per_photo.mid_link %>"></a>
+        </span>
+        </div>
+        <ul>
+          <li><%= @per_photo.title %></li>
+          <li><a href="/manage/photos/<%= @per_photo.id %>">上一个</a></li>
+        </ul>
+      </div>
+      <%end%>
+      <% if @next_photo %>
+      <div class="picture_thumb">
+        <div>
+         <span class="thumb_box">
+          <a href="/manage/photos/<%= @next_photo.id %>"><img  src="<%= @next_photo.mid_link %>"></a>
+        </span>
+        </div>
+        <ul>
+          <li><%= @next_photo.title %></li>
+          <li><a href="/manage/photos/<%= @next_photo.id %>">下一个</a></li>
+        </ul>
+      </div>
+      <%end%>
+    </div>
+    <div class="picture_full">
+      <img class="magplus" title="点击查看原始大小图片" src="<%= @photo.orignal_link %>" width="700" height="525">
+      <ul>
+        <li><strong>图片描述</strong></li>
+        <li><%= @photo.description %></li>
+      </ul>
+    </div>
+  </div>
+</div><!--m_r-->

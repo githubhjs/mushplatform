@@ -1,0 +1,12 @@
+<div class="module">
+<h2 class='sidebar-header'>最新照片</h2>
+<div class='sidebar-content'>
+<ul>
+{% for entry in entries %}
+   <li>
+      <a href="/photos/{{entry.id}}" title="点开查看大图"><img src="{{entry.thumbnail_link}}"></a>
+   </li>
+{% endfor %}
+</ul>
+</div>
+</div>

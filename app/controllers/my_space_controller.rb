@@ -9,6 +9,8 @@ class MySpaceController < ApplicationController
   Rss_Blog_Perppage = 20
 
   Comment_Count_PerPage = 50
+
+  Photo_PerPage = 20
   
   helper_method :current_blog_user  
   
@@ -56,6 +58,19 @@ class MySpaceController < ApplicationController
     @blogs = Blog.publised_blogs.find(:all,:conditions => "user_id=#{current_blog_user.id}",:limit => Rss_Blog_Perppage)
     @user = current_blog_user
     render :content_type => "application/xml",:template => "/my_space/rss",:layout => 'rss'
+  end
+
+
+  def photos
+    @photos = Photo.user_photos(current_blog_user.id).paginate(:page => params[:page],:per_page => Photo_PerPage)
+    render_liquid({:template => 'photos',:layout => true},{'photos' => @photos,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1}})
+  end
+
+  def photo
+    @photo = Photo.find(params[:id])
+    @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id}",:order => "id")
+    @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id}",:order => "id")
+    render_liquid({:template => 'photo',:layout => true},{'photo' => @photo,'next_photo' => @next_photo,'per_photo' => @per_photo} )
   end
 
   protected

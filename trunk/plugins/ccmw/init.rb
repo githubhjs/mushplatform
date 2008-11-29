@@ -6,12 +6,12 @@ end
 
 Tag.class_eval do
   def to_liquid
-     self.attributes.stringify_keys
+    self.attributes.stringify_keys
   end
   
   def before_save
-    if category == null
-      category = ''
+    if self.respond_to?(:category)
+      category = '' if category.blank?
     end
   end
 end

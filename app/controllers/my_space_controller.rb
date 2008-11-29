@@ -95,7 +95,8 @@ class MySpaceController < ApplicationController
     end
     #如果是按照tag管理
     unless params[:tag].blank?
-      tag = Tag.find(params[:tag])
+      tag_id = params[:tag].strip
+      tag = tag_id =~ /^\d+&/  ? Tag.find(tag_id)  : Tag.find_by_name(tag_id)
       conditions << "id in (select taggable_id from taggings where tag_id=#{tag.id})"
     end
     conditions.join(' and  ')

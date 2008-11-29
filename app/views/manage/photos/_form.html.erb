@@ -1,10 +1,10 @@
 <div class="blog_write_center">
-  <%form_for @photo,:html => {:name => 'message_form'} do |f|  %>
+  <%form_for "/manage/photos",:html => {:name => 'message_form'} do |f|  %>
     <p><b>标题：</b>
       <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>
     </p>
     <p><b>图片：</b>
-      <%= file_field :orignal_image %>
+      <%= file_field:photo,:orignal_image %>
     </p>
     <p><b>标签：                                                                                                                                                                                                             </b>
       <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>

@@ -31,6 +31,9 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/entry/:id/comments',:action => 'show'
     my_space.connect '/entry/:id/comments/page/:page',:action => 'show'
     my_space.connect '/entry/:id/comments/create',:action => 'create_comment'
+    my_space.connect '/photos',:action => 'photos'
+    my_space.connect '/photos/page/:page',:action => 'photos'
+    my_space.connect '/photos/:id',:action => 'photo'
     my_space.connect '/rss',:action => 'rss'
   end
   

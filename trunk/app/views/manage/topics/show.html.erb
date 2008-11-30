@@ -1,0 +1,93 @@
+<div class="m_l L">
+  <div class="face L">
+    <img class="border" src="/images/pic_big_none.gif"/>
+    <!--ul>
+      <li>日志数：20</li>
+      <li>评论数：15</li>
+      <li>访问量：50</li>
+      <li>总积分：20</li>
+    </ul-->
+
+  </div>
+  <!--div class="visitor">
+    <div class="tit border"><h6>最近访客</h6></div>
+    <div class="v_m">
+      <div class="v_info L">
+        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
+        <p class="L">昵称：<a href="">xiao-fox</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
+      </div>
+      <div class="v_info L">
+        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
+        <p class="L">昵称：<a href="">pawa</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
+      </div>
+      <div class="v_info L">
+        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
+        <p class="L">昵称：<a href="">qing qing cao</a></p>
+        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment">
+    <div class="tit border"><h6>未读评论<span style="color:#999;">（3）</span></h6></div>
+    <div class="comment_m">
+      <p><a href=""><b>allein：</b></a><a href="">休假的时间得好好珍惜</a></p>
+      <p><a href=""><b>wangjing:</b></a><a href="">很久没有休假了吧</a></p>
+      <p><a href=""><b>admin:</b></a><a href="">出趟海吧，打一网渔！</a></p>
+    </div>
+  </div-->
+</div><!--m_l-->
+
+<div class="m_r">
+  <!--person_menu-->
+  <%=  render :partial => "/manage/user_groups/group_menu" %>
+  <!--person_menu-->
+  <div class="qun_m L">
+    <div class="clear li_m">
+      <div class="m_b L">
+        <div class="L width_l">
+          <img src="<%= @user_group.icon %>"/>
+          <h3><%= @user_group.title %></h3>
+          <p>分类：<%= @user_group.category %></p>
+          <p>人数：<%= @user_group.member_count %></p>
+          <p class="info">简介：<%= h @user_group.description %></p>
+        </div>
+        <div class="R width_r">
+          <% if @user_group.is_in_group?(current_user) %>
+            <% unless @user_group.is_group_admin?(current_user) %>
+              <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/quit">退出该群组</a></p>
+            <%end%>
+            <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/new_topic">新建话题</a></p>
+          <%else%>
+            <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/join">加入该群</a></p>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <div class="clear li_m" style="margin-top: 0px;">
+      <h6 class="tit">
+        主题：<font class="L"><%= @topic.title %></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;">共有<%= @topic.comment_count %>个回复</font>
+      </h6>
+      <div class="content_b">
+        <% @topic_comments.each_with_index do |topic_comment,index| %>
+          <div class="L">
+            <a href=""><img src="<%= user_icon(current_user.id) %>"></a>
+            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= topic_comment.user_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> 2007-11-19 15:36</font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;"><%= index + 1 %>楼</font></h6>
+            <p><%= topic_comment.content %></p>
+          </div>
+        <%end%>
+      </div>
+      <div class="page_b clear">
+        <%= will_paginate @topic_comments %>
+      </div><!--page_b-->
+      <% form_for :topic_comment,:url => "/manage/topics/#{@topic.id}/comments"  do |f|%>
+        <h6 class="reply"><b>回复主题：</b></h6>
+        <textarea name="topic_comment[content]" cols="60" rows="5"></textarea>
+        <input type="hidden" name="topic_comment[topic_id]" value="<%= @topic.id %>">
+        <input style="margin-top: 5px; height: 22px; width: 70px; font-size: 12px;" name="reply" value="回  复" type="submit">
+      <%end%>
+    </div>
+  </div>
+</div><!--m_r-->

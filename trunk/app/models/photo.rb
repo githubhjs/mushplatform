@@ -31,7 +31,7 @@ class Photo < ActiveRecord::Base
           generate_thumb_image(image,self.uploaded_data.original_filename)
         end
       rescue Exception => e
-        puts e.message
+#        puts e.message
       end
     end
   end
@@ -63,7 +63,7 @@ class Photo < ActiveRecord::Base
   
   
   def get_image_path_and_url(orignal_name,type='')
-    debugger
+
     img_path,img_name = "#{RAILS_ROOT}/public/#{get_img_dir}",generate_image_name(orignal_name,type)
     FileUtils.makedirs(img_path) unless File.directory?(img_path)
     ["#{img_path}/#{img_name}","#{get_img_dir}/#{img_name}"]

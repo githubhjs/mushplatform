@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-      
+        
   #  map.resources :friends
   map.connect   "/user/select",:controller => 'user',:action => 'select'
   map.connect   "/user/signup",:controller => 'user',:action => 'signup'
@@ -53,6 +53,11 @@ ActionController::Routing::Routes.draw do |map|
     manage.resources :blogs,:member => {:delete => :get,:sticky => :get},
       :collection => {:drafts => :get,:batch_publish => :post}
     manage.resources :user_profiles
+    manage.resources :user_groups,:member => {:new_topic => :get,:join => :get,:quit => :get,:create_topic => :post},
+      :collection => {:all => :get,:search => :post}
+    manage.resources :topic_comments
+    manage.resources :group_members
+    manage.resources :topics,:member => {:comments => :post}
   end
 
 

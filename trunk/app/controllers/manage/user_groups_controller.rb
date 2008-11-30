@@ -17,7 +17,16 @@ class Manage::UserGroupsController < Manage::ManageController
   end
 
   def all
-    @user_groups = UserGroup.paginate(:page => params[:page]||1,:per_page => Group_Perpage )
+    conditons = unless params[:keyword].blank?
+      ["title like ? or description like ?","%#{params[:keyword]}%","%#{params[:keyword]}%"]
+    else
+      ''
+    end
+    @user_groups = UserGroup.paginate(:page => params[:page]||1,:per_page => Group_Perpage ,:conditions => conditons)
+  end
+
+  def search
+    redirect_to :action => :all,:keyword => params[:keyword]
   end
 
   # GET /user_groups/1

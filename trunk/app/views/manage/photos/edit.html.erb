@@ -50,7 +50,7 @@
     <% form_for :photo,:url => "/manage/photos/#{@photo.id}",:html => {:method => :put} do |f| %>
       <table class="admin">
         <tbody>
-          <tr><td>标签</td>
+          <!--tr><td>标签</td>
             <td>
               <input class="text" id="photo_tag_list" name="photo[tag_list]" size="30" value="me" type="text">
               <select id="tag_select" name="tag_select" onchange="$('photo_tag_list').value = this.value;">
@@ -58,7 +58,7 @@
                 <option value="me">me</option>
               </select> 小贴士: 多个标签可用半角逗号分开
             </td>
-          </tr>
+          </tr-->
           <tr><td>名称: </td>
             <td><%= f.text_field(:title) %></td>
           </tr>

@@ -176,7 +176,8 @@ function addPictureDiv(ele,max_size,tags){
             tag_select+="<option value='"+tags[i]+"'>"+tags[i]+"</option>";
         tag_select+="</select>";
     }
-    var div=new Element("div").update("<ul><li>文件: "+ele.value+" <a href='#' onclick='removePictureDiv(this, \""+ele.id+"\");return false;'>删除</a></li><li>标签: <input type='text' name='pictures[][tag_list]' class='text'/>"+tag_select+" 小贴士: 多个标签可用半角逗号分开</li><li>名称: <input type='text' name='pictures[][title]' value='"+file_name+"' size='50' class='text'/></li><li>描述: <textarea name='pictures[][description]' style='width:400px;height:80px;'></textarea></li></ul>");
+    //var div=new Element("div").update("<ul><li>文件: "+ele.value+" <a href='#' onclick='removePictureDiv(this, \""+ele.id+"\");return false;'>删除</a></li><li>标签: <input type='text' name='pictures[][tag_list]' class='text'/>"+tag_select+" 小贴士: 多个标签可用半角逗号分开</li><li>名称: <input type='text' name='pictures[][title]' value='"+file_name+"' size='50' class='text'/></li><li>描述: <textarea name='pictures[][description]' style='width:400px;height:80px;'></textarea></li></ul>");
+    var div=new Element("div").update("<ul><li>文件: "+ele.value+" <a href='#' onclick='removePictureDiv(this, \""+ele.id+"\");return false;'>删除</a></li><li>名称: <input type='text' name='pictures[][title]' value='"+file_name+"' size='50' class='text'/></li><li>描述: <textarea name='pictures[][description]' style='width:400px;height:80px;'></textarea></li></ul>");
     var new_input=new Element("input",{
         type:"file",
         name:ele.name,

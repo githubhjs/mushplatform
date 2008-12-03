@@ -45,7 +45,7 @@
   <%=  render :partial => "/manage/user_groups/group_menu" %>
   <!--person_menu-->
   <div class="qun_m L">
-    <div class="clear li_m">
+    <!--div class="clear li_m">
       <div class="m_b L">
         <div class="L width_l">
           <img src="<%= @user_group.icon %>"/>
@@ -65,16 +65,25 @@
           <%end%>
         </div>
       </div>
+    </div-->
+    <div class="qun_name" style="width:805px;">
+       <h2><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>"><%= @user_group.title %></a></h2>
+       <p><a href="/manage/user_groups/<%= @user_group.id %>">返回群组首页</a></p>
     </div>
     <div class="clear li_m" style="margin-top: 0px;">
       <h6 class="tit">
-        主题：<font class="L"><%= @topic.title %></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;">共有<%= @topic.comment_count %>个回复</font>
+        <font class="L"><%= @topic.title %></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;">共有<%= @topic.comment_count %>个回复</font>
       </h6>
       <div class="content_b">
+          <div class="L">
+            <a href=""><img src="<%= user_icon(@topic.user_id) %>"></a>
+            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= @topic.user_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> <%= timelong @topic.created_at %></font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;">楼主</font></h6>
+            <p><%= @topic.description %></p>
+          </div>
         <% @topic_comments.each_with_index do |topic_comment,index| %>
           <div class="L">
             <a href=""><img src="<%= user_icon(current_user.id) %>"></a>
-            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= topic_comment.user_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> 2007-11-19 15:36</font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;"><%= index + 1 %>楼</font></h6>
+            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= topic_comment.user_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> <%= timelong topic_comment.created_at %></font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;"><%= index + 1 %>楼</font></h6>
             <p><%= topic_comment.content %></p>
           </div>
         <%end%>
@@ -85,7 +94,7 @@
       <% form_for :topic_comment,:url => "/manage/topics/#{@topic.id}/comments"  do |f|%>
         <h6 class="reply"><b>回复主题：</b></h6>
         <textarea name="topic_comment[content]" cols="60" rows="5"></textarea>
-        <input type="hidden" name="topic_comment[topic_id]" value="<%= @topic.id %>">
+        <input type="hidden" name="topic_comment[topic_id]" value="<%= @topic.id %>"><br/>
         <input style="margin-top: 5px; height: 22px; width: 70px; font-size: 12px;" name="reply" value="回  复" type="submit">
       <%end%>
     </div>

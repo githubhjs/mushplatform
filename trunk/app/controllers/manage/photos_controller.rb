@@ -1,6 +1,5 @@
 class Manage::PhotosController < Manage::ManageController
-  # GET /photos
-  # GET /photos.xml
+  skip_before_filter :verify_authenticity_token  
 
   Photo_Perpage = 20
 
@@ -16,8 +15,8 @@ class Manage::PhotosController < Manage::ManageController
   # GET /photos/1.xml
   def show
     @photo = Photo.find(params[:id])
-    @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id}",:order => "id")
-    @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id}",:order => "id")
+    @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id} and user_id=#{current_user.id}",:order => "id")
+    @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id} and user_id=#{current_user.id}",:order => "id")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @photo }
@@ -78,7 +77,7 @@ class Manage::PhotosController < Manage::ManageController
     @photo.destroy
 
     respond_to do |format|
-      format.html { redirect_to(photos_url) }
+      format.html { redirect_to("/manage/photos") }
       format.xml  { head :ok }
     end
   end

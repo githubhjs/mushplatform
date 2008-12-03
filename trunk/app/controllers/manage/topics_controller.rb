@@ -21,7 +21,7 @@ class Manage::TopicsController < Manage::ManageController
   # GET /topics/1.xml
   def show
     @topic = Topic.find(params[:id])
-    @user_group = UserGroup.find(@topic.id)
+    @user_group = UserGroup.find(@topic.user_group_id)
     @topic_comments = TopicComment.paginate(:page => params[:page]||1,:per_page => TopicComment_Perpage,
       :conditions => "topic_id=#{@topic.id}",:order => 'id desc')
     @topic_comment = TopicComment.new

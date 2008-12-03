@@ -408,4 +408,11 @@ height:95px;
 text-align:center;
 vertical-align:middle;
 width:130px;
+padding:10px;
+}
+.thumb_action {
+ padding: 3px;   
+}
+.thumb_action p{
+ padding: 3px;   
 }

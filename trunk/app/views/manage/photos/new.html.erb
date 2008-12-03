@@ -35,24 +35,29 @@
     <div class="comment_m">
       <p><a href=""><b>allein：</b></a><a href="">休假的时间得好好珍惜</a></p>
       <p><a href=""><b>wangjing:</b></a><a href="">很久没有休假了吧</a></p>
-      <p><a href=""><b>admin:</b></a><a href="">出趟海吧，打一网渔！</a></p>
+      <p><a href=""><b>manage:</b></a><a href="">出趟海吧，打一网渔！</a></p>
     </div>
   </div-->
-
 </div><!--m_l-->
 
 <div class="m_r">
+
   <!--person_menu-->
-<%=  render :partial => "/manage/photos/photo_menu"%>
-<!--person_menu-->
-  <div class="blog_write_m L">
-    <h2>上传照片</h2>
-    <div class="blog_write_top clear"></div>
-    <div class="blog_write_center">
-      <%= render :partial => "/manage/photos/form"%>
-    </div>
-    <div class="blog_write_bottom"></div>
+  <%=  render :partial => "/manage/photos/photo_menu" %>
+  <!--person_menu-->
+  <div class="m">
+    <h3>博客相册</h3>
+    <% form_for :photo,:url => "/manage/photos",:html => {:id => "picture_form",:multipart => true} do |f| %>
+      <fieldset class="fieldsetclass">
+        <ul>
+          <li><label>新增图片</label> <input id="picture_upload" type="file" class="txt"></li>
+          <li><input class="button" id="submit_button" name="button" value="提 交" type="submit"></li>
+        </ul>
+       </fieldset>
+    <%end%>
+    <script type="text/javascript">
+      var multiple_upload_picture_counter = 0;
+      multiple_upload_picture($("picture_upload"), 5, [""]);
+    </script>
   </div>
-
 </div><!--m_r-->
-

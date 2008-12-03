@@ -47,10 +47,9 @@
   <!--person_menu-->
   <div class="qun_m L">
     <%= render :partial => '/manage/user_groups/search' ,:locals => {:info => "创建群组",:info_class => 'qun_mine'}%>
-    <div class="clear li_m">
-      <div class="clear li_m">
+      <div class="clear li_m" >
         <% form_for :group,:url => "/manage/user_groups", :html => {:multipart => true} do |f| %>
-        <table class="qun_add">
+        <table class="qun_add" style="width:780px;">
           <tbody>
             <tr>
               <td>群名称：</td>
@@ -82,6 +81,5 @@
         </table>
         <%end%>
       </div>
-    </div>
   </div>
 </div><!--m_r-->

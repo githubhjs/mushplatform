@@ -5,9 +5,13 @@ class UserGroup < ActiveRecord::Base
 
   attr_accessor :uploaded_data
 
-  named_scope :user_groups, lambda { |user_id|
-    { :conditions => { :user_id => user_id } }
-  }
+#  named_scope :user_groups, lambda { |user_id|
+#    { :conditions => { :user_id => user_id } }
+#  }
+
+  def self.user_groups(user)
+    UserGroup.find_by_sql("select g.* from user_groups g inner join group_members gu on (g.id=gu.group_id and gu.user_id=#{user.id})")
+  end
 
   def is_group_admin?(user)
     self.user_id == user.id
@@ -26,7 +30,7 @@ class UserGroup < ActiveRecord::Base
   end
   
   def self.join(group_id,user)
-    if GroupMember.ceate({:group_id => group_id,:user_id => user.id,:user_name => user.uesr_nmae})
+    if GroupMember.create({:group_id => group_id,:user_id => user.id, :user_name => user.user_name})
      UserGroup.add_member_count(self.id,1)
     end
   end

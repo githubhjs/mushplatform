@@ -1,0 +1,22 @@
+      <div class="R">
+        <div class="qun_top R">
+        <input class="txt" name="search" type="text" value="搜索群组..." size="19" maxlength="19">
+        <input class="button" name="button" type="button" value="搜 索">
+        </div>
+        <div class="qun_tuijian R">
+
+            <div class="tit"><h6>推荐群组</h6></div>
+
+            <% for group in @groups  %>
+            <div class="border L">
+                <div class="v_tuijian L">
+                    <a href="qun_view1.html"><img src="<%= group.icon %>"/></a>
+                    <p class="qun_tit"><a class="red_underline" href="qun_view1.html"><%= group.title %></a></p>
+                    <p>分类：<%= group.category %></p>
+                    <p>人数：<%= group.member_count %></p>
+                    <!--p>主题：118</p-->
+                </div> 
+            </div>
+            <% end %>
+          </div>
+      </div>

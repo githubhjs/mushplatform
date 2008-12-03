@@ -47,23 +47,7 @@
   <!--person_menu-->
   <div class="m">
     <h3>博客相册</h3>
-    <% form_for :photo,:url => "/manage/photos",:html => {:id => "picture_form",:multipart => true} do |f| %>
-      <fieldset class="fieldsetclass">
-        <ul>
-          <li><label>新增图片</label> <input id="picture_upload" type="file"></li>
-          <li><input class="pic_submit" id="submit_button" name="commit" value="提交" type="submit"></li>
-        </ul>
-       </fieldset>
-    <%end%>
-    <script type="text/javascript">
-      var multiple_upload_picture_counter = 0;
-      multiple_upload_picture($("picture_upload"), 5, ["me"]);
-    </script>
-    <div id="favorite_tag_list">
-      <span><strong>全部</strong></span>
-      <span><a href="/manage/pictures/tag?tag=me">me</a> [1]</span>
-    </div>
-    <hr>
+
     <div style="width: 100%;">
       <%for photo in @photos do %>
       <div class="picture_thumb">
@@ -72,10 +56,10 @@
             <a href="/manage/photos/<%= photo.id %>"><img  src="<%= photo.mid_link %>"></a>
           </span>
         </div>
-        <ul>
-           <li><%= photo.title %></li>
-           <li><a href="/manage/photos/<%= photo.id %>/edit">编辑</a> <a href="/manage/photos/<%= photo.id %>" onclick="if (confirm('你确定要删除这个图片？')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">删除</a></li>
-        </ul>
+        <div class="thumb_action">
+           <p><%= photo.title %></p>
+           <p><a href="/manage/photos/<%= photo.id %>/edit">编辑</a> <a href="/manage/photos/<%= photo.id %>" onclick="if (confirm('你确定要删除这个图片？')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">删除</a></p>
+        </div>
       </div>
       <%end%>
     </div>

@@ -5,7 +5,7 @@ class CreateTopicComments < ActiveRecord::Migration
       t.integer :topic_id,:null => false
       t.integer :user_id,:null => false
       t.string  :user_name,:null => false
-      t.string  :title,:null => false
+      #t.string  :title,:null => false
       t.text    :content
       t.timestamps
     end

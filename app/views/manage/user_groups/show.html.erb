@@ -1,44 +1,33 @@
-<div class="m_l L">
-  <div class="face L">
-    <img class="border" src="/images/pic_big_none.gif"/>
-    <!--ul>
-      <li>日志数：20</li>
-      <li>评论数：15</li>
-      <li>访问量：50</li>
-      <li>总积分：20</li>
-    </ul-->
-
-  </div>
-  <!--div class="visitor">
-    <div class="tit border"><h6>最近访客</h6></div>
-    <div class="v_m">
-      <div class="v_info L">
-        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
-        <p class="L">昵称：<a href="">xiao-fox</a></p>
-        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
-      </div>
-      <div class="v_info L">
-        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
-        <p class="L">昵称：<a href="">pawa</a></p>
-        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
-      </div>
-      <div class="v_info L">
-        <a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
-        <p class="L">昵称：<a href="">qing qing cao</a></p>
-        <p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
-      </div>
+<div class="m_l L">			
+    <div class="face L">
+        <img class="border" src="<%= @user_group.icon %> "/>
+        <p><font style="color:#de363a;font-weight:bold;">公告：</font><%= @user_group.description %></p>
     </div>
-  </div>
 
-  <div class="comment">
-    <div class="tit border"><h6>未读评论<span style="color:#999;">（3）</span></h6></div>
-    <div class="comment_m">
-      <p><a href=""><b>allein：</b></a><a href="">休假的时间得好好珍惜</a></p>
-      <p><a href=""><b>wangjing:</b></a><a href="">很久没有休假了吧</a></p>
-      <p><a href=""><b>admin:</b></a><a href="">出趟海吧，打一网渔！</a></p>
-    </div>
-  </div-->
-</div><!--m_l-->
+    <!--div class="qun_main">
+        <div class="tit border"><h6><font class="L">最新加入</font><font class="R" style="font-weight:normal;padding-right:5px;"><a class="grey" href="">所有成员</a></font></h6>
+        </div>
+
+        <div class="user_pic">
+            <div class="pic_b">
+                <a href=""><img src="images/pic_visitor.gif"/></a><p><a href="">pawa</a></p>
+            </div>
+            <div class="pic_b">
+
+                <a href=""><img src="images/pic_visitor.gif"/></a><p><a href="">pawa</a></p>
+            </div>
+            <div class="pic_b">
+                <a href=""><img src="images/pic_visitor.gif"/></a><p><a href="">pawa</a></p>
+            </div>
+            <div class="pic_b">
+                <a href=""><img src="images/pic_visitor.gif"/></a><p><a href="">pawa</a></p>
+
+            </div>
+
+        </div>				
+    </div-->
+</div> <!--m_l-->
+
 
 <div class="m_r">
 
@@ -46,7 +35,7 @@
   <%=  render :partial => "/manage/user_groups/group_menu" %>
   <!--person_menu-->
   <div class="qun_m L">
-    <div class="clear li_m">
+    <!--div class="clear li_m">
       <div class="m_b L">
         <div class="L width_l">
           <img src="<%= @user_group.icon %>"/>
@@ -66,8 +55,13 @@
           <%end%>
         </div>
       </div>    
-    </div>
+    </div-->
+
     <div class="clear L">
+        <div class="qun_name">
+           <h2><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>"><%= @user_group.title %></a></h2>
+           <p><a href="/manage/user_groups/<%= @user_group.id %>/join"><b>+ 加入该群组</b></a></p>
+        </div>    
         <table cellspacing="0" class="new">
         <tr>
           <td class="tit" width="373" align="left"><b>&nbsp;主题</b></td>
@@ -78,7 +72,7 @@
           </td>
         </tr>
         <% for topic in @topics do  %>
-        <tr class="lst">
+        <tr>
           <td align="left">&nbsp;<a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
           <td><p><a href=""><%= topic.user_name %></a></p>
           <p><%= topic.comment_count %></p></td>
@@ -98,5 +92,7 @@
       <div class="page_b clear" style="width:460px;">
         <%= will_paginate @topics, {:prev_label => '上一页', :next_label => '下一页'} %>
       </div><!--page_b-->
+
+      <%= render :partial => "recommend_groups" %>
   </div>
 </div>

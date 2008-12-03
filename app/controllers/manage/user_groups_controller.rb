@@ -8,7 +8,7 @@ class Manage::UserGroupsController < Manage::ManageController
   # GET /user_groups
   # GET /user_groups.xml
   def index
-    @user_groups = UserGroup.user_groups(current_user.id).paginate(:page => params[:page]||1,
+    @user_groups = UserGroup.user_groups(current_user).paginate(:page => params[:page]||1,
       :per_page => All_Group_Perpage,:order => 'id desc' )
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +35,7 @@ class Manage::UserGroupsController < Manage::ManageController
     @user_group = UserGroup.find(params[:id])
     @topics = Topic.paginate(:page => params[:page]||1,:per_page => Topic_Perpage,:conditions => "user_group_id=#{@user_group.id}",
       :order => "id desc")
+    @groups = UserGroup.find(:all, :limit => 5)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user_group }
@@ -70,7 +71,7 @@ class Manage::UserGroupsController < Manage::ManageController
   end
   
   def quit
-    UserGroup.remove_member(params[:id].current_user)
+    UserGroup.remove_member(params[:id],current_user)
     
     redirect_to "/manage/user_groups/#{params[:id]}"
   end
@@ -90,6 +91,7 @@ class Manage::UserGroupsController < Manage::ManageController
       if @user_group.save
         @user_group.upload_icon
         @user_group.save
+        UserGroup.join(@user_group.id,current_user)
         flash[:notice] = 'UserGroup was successfully created.'
         format.html { redirect_to(:action => :index) }
         format.xml  { render :xml => @user_group, :status => :created, :location => @user_group }

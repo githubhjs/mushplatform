@@ -1,4 +1,6 @@
-class FriendsController < ApplicationController
+class Manage::FriendsController <  Manage::ManageController
+  helper_method :current_user
+  
   # GET /friends
   # GET /friends.xml
   def index

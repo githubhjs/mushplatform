@@ -16,6 +16,10 @@ class User < CachedModel
   attr_protected :id, :salt
 
   attr_accessor :password, :password_confirmation,:theme,:blog_config
+  
+  has_and_belongs_to_many :friends, :class_name => "User", :join_table => "friends", 
+                          :foreign_key => 'user_id', :association_foreign_key => 'friend_id'
+                           
 
   def self.authenticate(user_name, pass)
     u=find(:first, :conditions=>["user_name = ?", user_name])

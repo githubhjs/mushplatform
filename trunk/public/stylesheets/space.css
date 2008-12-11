@@ -282,8 +282,8 @@ bottom:10px;}
 
 /*好友*/
 .my_friend{float:right;color:#de363a;background:url(../images/ico_my_friend.gif) no-repeat 0px 0;text-align:right;line-height:23px;text-indent:30px;}
-.friend_m_b{border:1px solid #ccc;background-color:#fff;padding:10px;margin-bottom:10px;}
-.friend_m_b .friend_b{margin:15px 0 20px 0;width:258px;float:left;}
+.friend_m_b{border:1px solid #ccc;background-color:#fff;padding:10px;margin-bottom:10px;width:760px;}
+.friend_m_b .friend_b{margin:15px 0 20px 0;width:252px;float:left;}
 .friend_m_b .friend_b img{width:58px;height:58px;border:1px solid #ccc;margin:0 8px;}
 .friend_m_b .friend_b p{width:160px;line-height:17px;height:17px;overflow:hidden;}
 .friend_m_b .friend_b li{float:left;width:70px;line-height:25px;}

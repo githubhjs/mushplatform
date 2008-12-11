@@ -58,7 +58,7 @@ ActionController::Routing::Routes.draw do |map|
     manage.resources :topic_comments
     manage.resources :group_members
     manage.resources :topics,:member => {:comments => :post}
-    manage.resources :friends
+    manage.resources :friends, :collection => {:search => :any}
   end
 
 

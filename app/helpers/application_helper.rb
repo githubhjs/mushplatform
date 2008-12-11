@@ -11,7 +11,7 @@ module ApplicationHelper
 
   def user_icon(user_id)
     profile = UserProfile.find_by_user_id(user_id)
-    profile ? profile.photo : '/images/default_usr_icon.gif'
+    profile ? (profile.photo.empty? ? '/images/default_usr_icon.gif' : profile.photo) : '/images/default_usr_icon.gif'
   end
   
 end

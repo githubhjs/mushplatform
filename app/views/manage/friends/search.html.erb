@@ -36,13 +36,21 @@
 			
 			<div class="qun_m L">
 				<div class="qun_top">
-				<h2 class="my_friend">我的好友</h2>
+                <form action="search" method="post">
+				<input class="txt" name="query" type="text" value="搜索好友..." size="20" maxlength="20" onclick="if(this.value==this.defaultValue) this.value=''">
+				<input class="button" name="button" type="submit" value="搜 索">
+                </form>
+
+                <h2 class="my_friend">搜索好友</h2>
 				</div>
 				
+                
+                <% if @friends and @friends.length > 0 -%>
 				<div class="clear li_m">
 					<div class="friend_m_b L">
 						
-                        <% for user in @friends -%>
+                        <% for profile in @friends -%>
+                        <% user = profile.user %>
 						<div class="friend_b L">
 							<a href=""><img class="L" src="<%= user_icon(user.id) %>"/></a>
                             <p class="L"><a href=""><%= user.user_name %> </a></p>
@@ -51,12 +59,13 @@
 								<!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
 								<li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
 							</ul>
-							<p><font style="font-weight:bold;color:#999;">&times;</font>&nbsp;<%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete', :class => 'grey' %></p>
+                            <p><font style="font-weight:bold;color:#999;">&times;</font>&nbsp;<%= link_to '加为好友', {:action => 'create', :id => user.id}, :method => 'post', :class => 'grey' %></p>
 						</div>
                         <% end -%>
 						
 					</div>
 				</div>
+                <% end -%>
 				
 			</div>
 		

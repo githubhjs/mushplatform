@@ -63,7 +63,7 @@
   <tr>
     <td colspan="2"><div class="line"></div></td>
   </tr>
-  <% if @group == "silver" or @group == "gold" %>
+  <%# if @group == "silver" or @group == "gold" %>
   <tr>
     <td colspan="2">
       <font style="color:#16309f;">如果您愿意向我们提供更详细的个人资料，我们将在资料审核后升级您的会员资格为“好客俱乐部银卡会员”【免费】，向您提供会员刊物《客户世界》的赠阅服务。</br>
@@ -175,9 +175,9 @@
                       <%= @profile.introduction%>
           </textarea></td>
         </tr>
-      <%end%>
-      <% end -%>
-      <% if @group == "gold" %>
+      <% end%>
+      <%#end -%>
+      <%# if @group == "gold" %>
       <tr>
         <td colspan="2"><div class="line"></div></td>
       </tr>
@@ -189,7 +189,7 @@
       <tr>
         <td colspan="2" align="center"></td>
       </tr>
-      <% end -%>
+      <%#end -%>
       <tr>
         <td colspan="2" align="center">
           <input class="button" name="提交" type="submit" value="提交信息" />

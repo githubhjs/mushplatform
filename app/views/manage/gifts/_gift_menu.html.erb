@@ -3,15 +3,11 @@
   <div class="p_m2">
     <div class="m2_bg">
       <ul class="L">
-        <% if action_name =='index' %>
-          <li class="hot">赠送礼物</li>
-        <%else%>
-          <li class="hot"><a href="/manage/messages">赠送礼物</a></li>
-        <%end%>
+          <li class="hot"><a href="/manage/gifts/send_for">赠送礼物</a></li>
         <%if action_name != "index"%>
           <li>收到的礼物</li>
         <%else%>
-          <li><a href="/manage/messages/new">收到的礼物</a></li>
+          <li><a href="/manage/gifts/receive">收到的礼物</a></li>
         <%end%>
       </ul>
     </div>

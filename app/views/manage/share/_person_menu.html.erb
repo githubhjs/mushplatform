@@ -39,6 +39,12 @@
         <%else%>
             <li><a href="/manage/messages">公告</a></li>
         <%end%>
+        <li class="border"></li>
+        <% if params[:controller] == 'manage/gifts' %>
+            <li class="hot">礼物</li>
+        <%else%>
+            <li><a href="/manage/gifts">礼物</a></li>
+        <%end%>
         <!--li class="border"></li>
         <li><a href="">交易</a></li>
         <li class="border"></li-->

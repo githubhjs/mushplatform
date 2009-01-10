@@ -4,7 +4,7 @@ class Manage::GiftsController < Manage::ManageController
   Gifts_Per_Page = 30
   def index
     @gifts = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
-    render :template => "/manage/gifts/index"   
+    render :template => "/manage/gifts/index"
     return
   end
 
@@ -80,4 +80,37 @@ class Manage::GiftsController < Manage::ManageController
       format.xml  { head :ok }
     end
   end
+  def send_for
+    # friends
+    # gifts
+    @firends = current_user.friends
+    @gifts = Gift.find(:all)
+    respond_to do |format|
+      format.html
+    end
+  end
+  def send_to
+    friend_name = params[:friend_name].to_s
+    gift_id = params[:gift_id]
+    post = params[:post]
+    send_mode = params[:quiet]
+    
+    gift_user =  GiftUser.new
+    gift_user.friend_id = (User.find :first, :conditions => "user_name = '#{friend_name}'").id
+    gift_user.user_id = current_user.id
+    gift_user.gift_id = gift_id
+    gift_user.post = post
+    gift_user.send_mode = send_mode
+    
+    gift_user.save!
+    
+    @notice = "send gift success! "
+    render :action => "success"
+  end
+  def receive
+    @gifts = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}")
+    render :template => "/manage/gifts/receive_gift"
+    return
+  end
+
 end

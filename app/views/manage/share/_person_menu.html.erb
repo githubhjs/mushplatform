@@ -45,6 +45,12 @@
         <%else%>
             <li><a href="/manage/gifts">礼物</a></li>
         <%end%>
+        <li class="border"></li>
+        <% if params[:controller] == 'manage/votes' %>
+            <li class="hot">投票</li>
+        <%else%>
+            <li><a href="/manage/votes/new">投票</a></li>
+        <%end%>
         <!--li class="border"></li>
         <li><a href="">交易</a></li>
         <li class="border"></li-->

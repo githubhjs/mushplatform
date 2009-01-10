@@ -65,7 +65,7 @@ ActionController::Routing::Routes.draw do |map|
     manage.resources :group_members
     manage.resources :topics,:member => {:comments => :post}
     manage.resources :friends, :collection => {:search => :any}
-    manage.resources :gifts, :collection => {:send_for => :get, :receive => :get}
+    manage.resources :gifts, :collection => {:send_for => :get, :receive => :get, :send_to => :post}
   end
 
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081210161500) do
+ActiveRecord::Schema.define(:version => 20090110060728) do
 
   create_table "area", :force => true do |t|
     t.integer "areaid",                 :null => false
@@ -23,8 +23,13 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
     t.string  "area",      :null => false
   end
 
+  create_table "article_categories", :force => true do |t|
+    t.string "name"
+    t.string "category"
+  end
+
   create_table "articles", :force => true do |t|
-    t.string   "title",           :null => false
+    t.string   "title",                              :null => false
     t.string   "display_title"
     t.string   "sub_title"
     t.string   "permalink"
@@ -32,11 +37,16 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
     t.string   "source"
     t.text     "excerpt"
     t.string   "redirect_url"
-    t.integer  "status"
+    t.boolean  "status",          :default => true
     t.integer  "channel_id"
     t.string   "cached_tag_list"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "top",             :default => false
+    t.boolean  "sticky",          :default => false
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "category_id"
   end
 
   add_index "articles", ["channel_id"], :name => "index_articles_on_channel_id"
@@ -131,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
     t.integer  "channels_count",      :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "mimetype"
   end
 
   add_index "channels", ["name"], :name => "index_channels_on_name"
@@ -181,6 +192,21 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
     t.integer "crawler_pid", :default => 0
   end
 
+  create_table "files", :force => true do |t|
+    t.string   "name",         :null => false
+    t.string   "type"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "path"
+    t.string   "category"
+    t.integer  "parent_id"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "friends", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -189,6 +215,20 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
   end
 
   add_index "friends", ["user_id", "friend_id"], :name => "index_friends_on_user_id_and_friend_id", :unique => true
+
+  create_table "gift_users", :force => true do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
+    t.integer "gift_id"
+    t.string  "post"
+    t.integer "send_mode"
+  end
+
+  create_table "gifts", :force => true do |t|
+    t.string  "name"
+    t.integer "type", :default => 0
+    t.string  "icon"
+  end
 
   create_table "group_members", :force => true do |t|
     t.integer  "group_id",   :null => false
@@ -214,6 +254,19 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
     t.integer "inherit_group_id", :default => 0
     t.text    "description"
   end
+
+  create_table "links", :force => true do |t|
+    t.string  "name"
+    t.string  "url"
+    t.string  "category"
+    t.text    "memo"
+    t.string  "filename"
+    t.integer "size"
+    t.string  "content_type"
+  end
+
+  add_index "links", ["category"], :name => "index_links_on_category"
+  add_index "links", ["name"], :name => "index_links_on_name"
 
   create_table "messages", :force => true do |t|
     t.datetime "created_at"
@@ -256,6 +309,11 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
   create_table "provinces", :force => true do |t|
     t.integer "provinceid", :null => false
     t.string  "province"
+  end
+
+  create_table "regards", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|
@@ -307,8 +365,14 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
   add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.string  "category"
+    t.text    "top"
+    t.text    "bottom"
+    t.integer "position"
   end
+
+  add_index "tags", ["category"], :name => "index_tags_on_category"
 
   create_table "templates", :force => true do |t|
     t.string   "name",       :null => false
@@ -380,6 +444,12 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
     t.string   "city",           :limit => 125,                :null => false
   end
 
+  create_table "user_votes", :force => true do |t|
+    t.integer  "voter_id"
+    t.integer  "vote_value"
+    t.datetime "created_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "user_name",                       :null => false
     t.string   "hashed_password",                 :null => false
@@ -394,6 +464,24 @@ ActiveRecord::Schema.define(:version => 20081210161500) do
 
   create_table "vocations", :force => true do |t|
     t.string "vocation_name", :null => false
+  end
+
+  create_table "vote_options", :force => true do |t|
+    t.integer "voter_id"
+    t.integer "title"
+    t.integer "value"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id",                      :null => false
+    t.string   "title"
+    t.integer  "multi_selcect", :default => 1
+    t.integer  "sex_limit",     :default => 0
+    t.integer  "roll_limt",     :default => 0
+    t.datetime "expire_time"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

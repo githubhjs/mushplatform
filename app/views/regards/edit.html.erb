@@ -1,0 +1,12 @@
+<h1>Editing regard</h1>
+
+<% form_for(@regard) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @regard %> |
+<%= link_to 'Back', regards_path %>

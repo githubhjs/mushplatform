@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :regards
+
+  map.resources :votes
+
+  map.resources :gifts
+
         
   #  map.resources :friends
   map.connect   "/user/select",:controller => 'user',:action => 'select'

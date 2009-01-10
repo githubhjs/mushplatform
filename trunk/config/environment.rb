@@ -74,7 +74,7 @@ Rails::Initializer.run do |config|
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
   # Activate observers that should always be running
-  # config.active_record.observers = :cacher, :garbage_collector
+  config.active_record.observers = :footstep_observer
   config.plugins = [:engines, :liquid, :fckeditor, :core, :authorize, :cms, :all]
 end
 require File.join(File.dirname(__FILE__), '../vendor/plugins/acts_as_taggable_on_steroids/lib/acts_as_taggable')

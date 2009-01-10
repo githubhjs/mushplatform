@@ -1,4 +1,5 @@
 class Blog < ActiveRecord::Base
+  include BlogHelper
 
   belongs_to :category
   has_many   :comments
@@ -73,7 +74,11 @@ class Blog < ActiveRecord::Base
   
   def to_liquid
     self.attributes.stringify_keys
-  end    
+  end
+
+  def footstep
+    Footstep.create(:user_id => user_id, :app => "BLOG", :content => "创建了一篇博客#{entry_link(self)}")
+  end
   
 end
 Tag.class_eval do 

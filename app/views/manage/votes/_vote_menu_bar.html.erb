@@ -1,0 +1,30 @@
+<div class="person_menu">
+  <%=  render :partial => "/manage/share/person_menu"%>
+  <div class="p_m2">
+    <div class="m2_bg">
+      <ul class="L">
+        <% if action_name =~ /new|create/ %>
+          <li class="hot">创建投票</li>
+        <%else%>
+          <li class="hot"><a href="/manage/votes/new">创建投票</a></li>
+        <%end%>
+        <%if action_name =~  /index/%>
+          <li>我的投票</li>
+        <%else%>
+          <li><a href="/manage/votes">我的投票</a></li>
+        <%end%>
+        <%if action_name =~  /friend_votes/%>
+          <li>好友的投票</li>
+        <%else%>
+          <li><a href="/manage/votes/friend_votes">好友的</a></li>
+        <%end%>
+        <%if action_name =~  /random_votes/%>
+          <li>随便看看</li>
+        <%else%>
+          <li><a href="/manage/votes/random_votes">随便看看</a></li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+  <div class="shadow"></div>
+</div>

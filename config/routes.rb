@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :regards     
+       
   #  map.resources :friends
   map.connect   "/user/select",:controller => 'user',:action => 'select'
   map.connect   "/user/signup",:controller => 'user',:action => 'signup'
@@ -62,6 +62,7 @@ ActionController::Routing::Routes.draw do |map|
     manage.resources :friends, :collection => {:search => :any}
     manage.resources :gifts, :collection => {:send_for => :get, :receive => :get, :send_to => :post}
     manage.resources :votes,:collection => {:friend_votes => :get,:random_votes => :get},:member => {:post_vote => :post}
+    manage.resources :regards,:collection => {:send_for => :get, :receive => :get, :send_to => :post}
   end
 
 

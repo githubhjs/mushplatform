@@ -80,10 +80,6 @@ class Manage::UserProfilesController < Manage::ManageController
       end
     end
   end
-  
-  def upload_image
-    
-  end
 
   # DELETE /user_profiles/1
   # DELETE /user_profiles/1.xml

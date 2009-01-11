@@ -14,7 +14,6 @@ class VotesController < ApplicationController
   # GET /votes/1.xml
   def show
     @vote = Vote.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @vote }

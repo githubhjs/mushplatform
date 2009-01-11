@@ -35,11 +35,26 @@ class Manage::VotesController < Manage::ManageController
   # GET /votes/1.xml
   def show
     @vote = Vote.find(params[:id])
-
+    @vote_options = VoteOption.find(:all,:conditions => "voter_id=#{@vote.id}")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @vote }
     end
+  end
+  
+  def post_vote
+    if params[:vote_values].blank?
+      flash[:notice] = '请至少选择一个候选项'
+      @vote = Vote.find(params[:id])
+      @vote_options = VoteOption.find(:all,:conditions => "voter_id=#{@vote.id}")
+      render :action => :show
+      return false;
+    end
+    vote_id,user_id = params[:id],current_user.id
+    params[:vote_values].each do |vote_value|
+      UserVote.create(:voter_id => user_id,:vote_value => vote_value,:vote_id => vote_id)
+    end
+    redirect_to :action => :show
   end
 
   # GET /votes/new

@@ -84,7 +84,7 @@ class Manage::GiftsController < Manage::ManageController
     # friends
     # gifts
     @firends = current_user.friends
-    @gifts = Gift.find(:all)
+    @gifts = Gift.paginate(:page => params[:page]||1,:per_page => 10)
     respond_to do |format|
       format.html
     end

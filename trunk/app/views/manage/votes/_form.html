@@ -1,0 +1,44 @@
+<div class="blog_write_center">
+  <%= error_messages_for :vote %>
+  <%  form_for :vote,:url => "/manage/votes" do |f|  %>
+    <p><b>主题：</b>
+      <%= f.text_field :title,:size => '50',:maxlength => '50' ,:class => "title" %>
+      <a id="show_description" href="#" onclick="Element.hide('show_description');Element.show('vote_description');Element.show('hidden_description');return false;">添加投票说明<img src="/images/shangsanjiao.gif"></a>
+      <a id="hidden_description" href="#" style="display:none" onclick="Element.hide('hidden_description');Element.hide('vote_description');Element.show('show_description');return false;">隐藏投票说明<img src="/images/xiasanjiao.gif"></a>
+    </p>
+    <p id="vote_description" style="display:none;"><b>描述：</b>
+      <%= f.text_area  :description,:size => '40x2'%>
+    </p>
+    <% (1..10).each do |i| %>
+          <p><b>候选项<%=i%>：</b>
+<input name="vote[vote_options][]" value="" size="50">
+      </p>
+    <%end%>
+    <p>
+      <b>可投选项：</b>
+      <select name="vote[multi_selcect]">
+        <option value="1">单选</option>
+        <% (2..20).each do |i| %>
+          <option value="<%= i %>">最多可选<%= i %>项</option>
+        <%end%>
+      </select>
+    </p>
+    <p>
+      <b>投票限制：</b>
+      <select name="vote[sex_limit]">
+        <%= generate_sex_limit_options(@vote.sex_limit.to_s) %>
+      </select>
+    </p>
+    <p>
+      <b>截止时间：</b>
+      <%= calendar_date_select_tag 'vote[expire_time]',@vote.expire_time,:time => :mixed  %>
+    </p>
+    <p>
+      <b>隐私权限：</b>
+      <select name="vote[roll_limt]">
+        <%= generate_roll_limt_options(@vote.roll_limt) %>
+      </select>
+    </p>
+    <input class="submit"  type="submit" value="发起投票" />
+  <%end%>
+</div>

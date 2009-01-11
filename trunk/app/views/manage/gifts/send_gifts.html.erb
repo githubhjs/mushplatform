@@ -36,24 +36,24 @@
 <div class="m_r">
 
   <!--person_menu-->
-  <%=  render :partial => "/manage/regards/regard_menu" %>
+  <%=  render :partial => "/manage/gifts/gift_menu" %>
   <!--person_menu-->
+
   <div class="manage_m L">
-    <h2>好友的问候</h2>
-    <table cellpadding="0" cellspacing="0" id = "comment_table">
+    <h2>送出的礼物</h2>
+    <table cellpadding="0" cellspacing="0">
       <tr>
-        <td class="tit" width="283">内容</td>
-        <td class="tit" width="110">发送好友</td>
+        <td class="tit">内容</td>
+        <td class="tit">发送好友</td>
       </tr>
-      <%for reagard_user in @user_reagrds do %>
-        <tr id="t_<%= reagard_user.id %>">
-          <td><img src="/images/regard_imgs/<%=  reagard_user.regard.icon %>"></td>
+      <%for gift_user in @gift_user do %>
+        <tr>
+          <td class="a_tit m_border"><img src="/images/gifts_imgs/<%= gift_user.gift.icon  %>"></td>
           <td>
-             <%= reagard_user.friend.user_name %>
+            <%= gift_user.friend.user_name %>
           </td>
         </tr>
       <%end%>
     </table>
-
   </div>
 </div><!--m_r-->

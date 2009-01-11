@@ -107,9 +107,14 @@ class Manage::RegardsController < Manage::ManageController
   end
   
   def receive
-    @regards = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "user_id = #{current_user.id}")
+    @user_reagrds = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "friend_id = #{current_user.id}")
     render :template => "/manage/regards/receive_regard"
     return
   end
-  
+
+  def send_regards
+    @user_reagrds = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "user_id = #{current_user.id}")
+    render :template => "/manage/regards/receive_regard"
+    return
+  end
 end

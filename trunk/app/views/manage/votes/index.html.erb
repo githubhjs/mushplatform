@@ -7,7 +7,6 @@
       <li>访问量：50</li>
       <li>总积分：20</li>
     </ul-->
-
   </div>
   <!--div class="visitor">
     <div class="tit border"><h6>最近访客</h6></div>
@@ -39,13 +38,10 @@
     </div>
   </div-->
 </div><!--m_l-->
-
 <div class="m_r">
-
   <!--person_menu-->
   <%=  render :partial => "/manage/votes/vote_menu_bar" %>
   <!--person_menu-->
-
   <div class="manage_m L">
     <h2>我的投票</h2>
     <%if @votes.blank?%>
@@ -56,12 +52,17 @@
           <td class="tit" width="87">主题</td>
           <td class="tit" width="110">到期时间</td>
           <td class="tit" width="110">投票人数</td>
+          <td class="tit" width="110">参加</td>
         </tr>
         <%for vote in @votes do %>
           <tr>
-            <td><a href="/manage/votes/<%= vote.id   %>"><%= h vote.title %></a></td>
+            <td><%= h vote.title %></td>
             <td><%= vote.expire_time.strftime('%m/%d/%y %H:%M:%S') %></td>
             <td><%= vote.member_count %></td>
+            <td><% if vote.permite_vote?(current_user) %>
+                <a href="/manage/votes/<%= vote.id   %>">参加投票</a>
+              <%end%>
+            </td>
           </tr>
         <%end%>
       </table>

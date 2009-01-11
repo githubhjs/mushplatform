@@ -15,30 +15,30 @@
       </p>
     <%end%>
     <p>
-        <b>可投选项：</b>
-        <select name="vote[multi_selcect]">
-          <option value="1">单选</option>
-          <% (2..20).each do |i| %>
-            <option value="<%= i %>">最多可选<%= i %>项</option>
-          <%end%>
-        </select>
-      </p>
-      <p>
-        <b>投票限制：</b>
-        <select name="vote[sex_limit]">
-          <%= generate_sex_limit_options(@vote.sex_limit.to_s) %>
-        </select>
-      </p>
-      <p>
+      <b>可投选项：</b>
+      <select name="vote[multi_selcect]">
+        <option value="1">单选</option>
+        <% (2..20).each do |i| %>
+          <option value="<%= i %>">最多可选<%= i %>项</option>
+        <%end%>
+      </select>
+    </p>
+    <p>
+      <b>投票限制：</b>
+      <select name="vote[sex_limit]">
+        <%= generate_sex_limit_options(@vote.sex_limit.to_s) %>
+      </select>
+    </p>
+    <p>
       <b>截止时间：</b>
-        <%= calendar_date_select_tag 'vote[expire_time]',@vote.expire_time,:time => :mixed  %>
-      </p>
-      <p>
+      <%= calendar_date_select_tag 'vote[expire_time]',@vote.expire_time,:time => :mixed  %>
+    </p>
+    <p>
       <b>隐私权限：</b>
-        <select name="vote[roll_limt]">
-          <%= generate_roll_limt_options(@vote.roll_limt) %>
-        </select>
-      </p>
-    <input class="submit"  type="submit" value="发 布" />
+      <select name="vote[roll_limt]">
+        <%= generate_roll_limt_options(@vote.roll_limt) %>
+      </select>
+    </p>
+    <input class="submit"  type="submit" value="发起投票" />
   <%end%>
 </div>

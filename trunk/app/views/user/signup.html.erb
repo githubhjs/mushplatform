@@ -20,20 +20,20 @@
         <%= u_field.text_field(:user_name, :class => "InpTxt" )%>
         &nbsp;<font style="color:#de363a;">*</font> 用户名应是字母、数字和“_”，长度在5-16字符间非中文字符
       </td>
-  
+
     </tr>
 
     <tr>
       <td align="right">登陆密码：</td>
       <td>
         <%= u_field.password_field(:password, :class => "InpTxt")%>
-        &nbsp;<font style="color:#de363a;">*</font> 长度不能小于6个字符，只限数字（0-9）和英文（a-z），注意区分大小写</td>
-  
+      &nbsp;<font style="color:#de363a;">*</font> 长度不能小于6个字符，只限数字（0-9）和英文（a-z），注意区分大小写</td>
+
     </tr>
     <tr>
       <td align="right">确认密码：</td>
       <td>
-      <%= u_field.password_field(:password_confirmation, :class => "InpTxt")%>
+        <%= u_field.password_field(:password_confirmation, :class => "InpTxt")%>
       &nbsp;<font style="color:#de363a;">*</font> 确保和密码相同 </td>
     </tr>
     <tr>
@@ -46,9 +46,9 @@
     <tr>
       <td align="right">提示问题答案：</td>
       <td>
-        <%= u_field.text_field(:pwd_anwser, :class => "InpTxt")%>      
+        <%= u_field.text_field(:pwd_anwser, :class => "InpTxt")%>
       &nbsp;<font style="color:#de363a;">*</font> 提示问题答案，如：张三</td>
-  
+
     </tr>
     <tr>
       <td align="right">电子邮箱：</td>
@@ -83,6 +83,13 @@
       <font style="color:#de363a;">*</font> 请尽量用中文填写，以方便交流</td>
     </tr>
     <tr>
+      <td align="right">性别：</td>
+      <td>
+        <%= generate_sex_radio(@profile.sex) %>
+        <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
+      </td>
+    </tr>
+    <tr>
       <td align="right">公司名称：</td>
       <td>
         <%= p_field.text_field(:company_name, :class => "InpTxt")%>&nbsp;
@@ -90,119 +97,118 @@
       </td>
     </tr>
     <tr>
+      <td align="right">公司性质：</td>
+      <td>
+        <%= generate_company_nature_radio(@profile.company_nature)%>
+      </td>
+    </tr>
+    <tr>
       <td align="right">个人照片：</td>
       <td>
         <input type="text" class="InpTxt" id="user_photo" name="profile[photo]" value="" size="10" maxlength="" />&nbsp;<input class="button" name="提交" type="submit" value="上传照片" />
       </td>
-  
     </tr>
     <tr>
-      <td align="right">公司性质：</td>
+      <td align="right">所属行业：</td>
       <td>
-        <%= generate_company_nature_radio(@profile.company_nature)%>
-        </td>
-      </tr>
-      <tr>
-        <td align="right">所属行业：</td>
-        <td>
-          <select name="profile[vocation_id]" >
-            <%= generate_vocations_select(@profile.vocation_id)%>
-            </select>
-            <font style="color:#de363a;">【供应商和用户请选择行业分类】</font> 
-          </td> 
-        </tr>
-        <tr>
-          <td align="right">职位：</td>
-          <td>
-            <%= p_field.text_field(:position, :class => "InpTxt")%>
-          </td>
-  
-        </tr>
-        <tr>
-          <td align="right">联系电话：</td>
-          <td>
-            <%= p_field.text_field(:tel, :class => "InpTxt")%>&nbsp;
-          <font style="color:#de363a;">*</font> 区号+电话号码 如：021-65006500</td> 
-        </tr>
-        <tr>
-          <td align="right">手机：</td>
-          <td>
-          <%= p_field.text_field(:mobile, :class => "InpTxt")%>  
-        </tr>
-        <tr>
-          <td align="right">传真：</td>
-          <td>
-            <%= p_field.text_field(:fax, :class => "InpTxt")%>
-          </td> 
-        </tr>
-        <tr>
-          <td align="right">通讯地址：</td>
-          <td>
-            <%= p_field.text_field(:adress, :size => 50)%>
-            &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料
-          </td>
-        </tr>
-        <tr>
-          <td align="right">邮政编码：</td>  
-          <td>
-            <%= p_field.text_field(:zipcode, :class => "InpTxt")%>
-          &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料</td>
-  
-        </tr>
-        <tr>
-          <td align="right">企业网站：</td>
-          <td>
-            <%= p_field.text_field(:web_site, :class => "InpTxt")%>
-          </td>
-  
-        </tr>
-        <tr>
-          <td align="right">感兴趣：</td>
-          <td><input class="like" name="like " type="checkbox" value="呼叫中心" />呼叫中心&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />客户管理&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />数据营销&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />服务外包&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />其他
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" class="tit_bg"><div class="ico">个人自述</div></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>250字以内，展示个人风采，推荐将您的资历详细罗列</td>
-        </tr>
-        <tr>
-          <td align="right">个人简介：</td>
-          <td>  
-            <textarea name="profile[introduction]" class="txt" rows="4" cols="50">
-                      <%= @profile.introduction%>
-          </textarea></td>
-        </tr>
-      <% end%>
-      <%#end -%>
-      <%# if @group == "gold" %>
-      <tr>
-        <td colspan="2"><div class="line"></div></td>
-      </tr>
-      <tr>
-      <td colspan="2">
-      <font style="color:#16309f;">您可以申请成为“好客俱乐部金卡会员”【付费】，会员回报<a class="underline" href="http://www.ccmw.net/minisites/members/members.html">[http://www.ccmw.net/minisites/members/members.html]</a></br>请在此提交申请，我们的会员服务专员将第一时间与您进行联络</font>
+        <select name="profile[vocation_id]" >
+          <%= generate_vocations_select(@profile.vocation_id)%>
+        </select>
+        <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
       </td>
-      </tr>	
-      <tr>
-        <td colspan="2" align="center"></td>
-      </tr>
-      <%#end -%>
-      <tr>
-        <td colspan="2" align="center">
-          <input class="button" name="提交" type="submit" value="提交信息" />
-          <input class="button" name="重写" type="reset" value="重新填写" />
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2"></td>
-      </tr>
-      </table>
-      </div>
-      <div>
-  
-      </div>
-    <%end%>
-    </div><!--class:m_l-->
+    </tr>
+    <tr>
+      <td align="right">职位：</td>
+      <td>
+        <%= p_field.text_field(:position, :class => "InpTxt")%>
+      </td>
+
+    </tr>
+    <tr>
+      <td align="right">联系电话：</td>
+      <td>
+        <%= p_field.text_field(:tel, :class => "InpTxt")%>&nbsp;
+      <font style="color:#de363a;">*</font> 区号+电话号码 如：021-65006500</td>
+    </tr>
+    <tr>
+      <td align="right">手机：</td>
+      <td>
+      <%= p_field.text_field(:mobile, :class => "InpTxt")%>
+    </tr>
+    <tr>
+      <td align="right">传真：</td>
+      <td>
+        <%= p_field.text_field(:fax, :class => "InpTxt")%>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">通讯地址：</td>
+      <td>
+        <%= p_field.text_field(:adress, :size => 50)%>
+        &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料
+      </td>
+    </tr>
+    <tr>
+      <td align="right">邮政编码：</td>
+      <td>
+        <%= p_field.text_field(:zipcode, :class => "InpTxt")%>
+      &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料</td>
+
+    </tr>
+    <tr>
+      <td align="right">企业网站：</td>
+      <td>
+        <%= p_field.text_field(:web_site, :class => "InpTxt")%>
+      </td>
+
+    </tr>
+    <tr>
+      <td align="right">感兴趣：</td>
+      <td><input class="like" name="like " type="checkbox" value="呼叫中心" />呼叫中心&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />客户管理&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />数据营销&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />服务外包&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />其他
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="tit_bg"><div class="ico">个人自述</div></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>250字以内，展示个人风采，推荐将您的资历详细罗列</td>
+    </tr>
+    <tr>
+      <td align="right">个人简介：</td>
+      <td>
+        <textarea name="profile[introduction]" class="txt" rows="4" cols="50">
+    <%= @profile.introduction%>
+      </textarea></td>
+    </tr>
+  <% end%>
+  <%#end -%>
+  <%# if @group == "gold" %>
+  <tr>
+    <td colspan="2"><div class="line"></div></td>
+  </tr>
+  <tr>
+  <td colspan="2">
+  <font style="color:#16309f;">您可以申请成为“好客俱乐部金卡会员”【付费】，会员回报<a class="underline" href="http://www.ccmw.net/minisites/members/members.html">[http://www.ccmw.net/minisites/members/members.html]</a></br>请在此提交申请，我们的会员服务专员将第一时间与您进行联络</font>
+  </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"></td>
+  </tr>
+  <%#end -%>
+  <tr>
+    <td colspan="2" align="center">
+      <input class="button" name="提交" type="submit" value="提交信息" />
+      <input class="button" name="重写" type="reset" value="重新填写" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+  </table>
+  </div>
+  <div>
+
+  </div>
+<%end%>
+</div><!--class:m_l-->

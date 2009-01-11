@@ -52,6 +52,8 @@ class ApplicationController < ActionController::Base
    
   include Auth
  
+  helper_method :current_user
+
   protected
   def redirect_to_stored
     if return_to = session[:return_to]

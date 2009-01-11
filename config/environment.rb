@@ -76,6 +76,7 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   config.active_record.observers = :footstep_observer
   config.plugins = [:engines, :liquid, :fckeditor, :core, :authorize, :cms, :all]
+  config.gem "calendar_date_select"
 end
 require File.join(File.dirname(__FILE__), '../vendor/plugins/acts_as_taggable_on_steroids/lib/acts_as_taggable')
 USER_SALT="shadowfox"

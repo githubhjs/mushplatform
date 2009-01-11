@@ -1,7 +1,7 @@
 class CreateVotes < ActiveRecord::Migration
   
   def self.up
-    create_table :votes do |t|
+    create_table :votes, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.integer  :user_id,:null => false
       t.string   :title
       t.integer  :multi_selcect,:default => 1

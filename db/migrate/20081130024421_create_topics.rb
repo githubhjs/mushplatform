@@ -1,6 +1,6 @@
 class CreateTopics < ActiveRecord::Migration
   def self.up
-    create_table :topics do |t|
+    create_table :topics, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.string  :title,:user_name,:null => false
       t.integer  :user_id,:user_group_id,:admin_id,:null => false
       t.integer :view_count,:comment_count,:default => 0

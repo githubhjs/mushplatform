@@ -1,7 +1,7 @@
 class CreateTopicComments < ActiveRecord::Migration
   
   def self.up
-    create_table :topic_comments do |t|
+    create_table :topic_comments, :force => true, :options => "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
       t.integer :topic_id,:null => false
       t.integer :user_id,:null => false
       t.string  :user_name,:null => false

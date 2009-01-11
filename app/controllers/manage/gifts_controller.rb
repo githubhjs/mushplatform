@@ -106,10 +106,16 @@ class Manage::GiftsController < Manage::ManageController
     @notice = "send gift success! "
     render :action => "success"
   end
+
   def receive
-    @gifts = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}")
+    @gift_user = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "friend_id = #{current_user.id}")
     render :template => "/manage/gifts/receive_gift"
     return
   end
 
+  def send_gifts
+    @gift_user = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}")
+    render :template => "/manage/gifts/receive_gift"
+    return
+  end
 end

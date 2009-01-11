@@ -1,20 +1,27 @@
 <div class="blog_write_center">
-  <%= error_messages_for :vote %>
-  <%  form_for :vote,:url => "/manage/votes" do |f|  %>
-    <p><b>主题：</b>
-      <%= f.text_field :title,:size => '50',:maxlength => '50' ,:class => "title" %>
+  <p><%= error_messages_for :vote %>
+    <%  form_for :vote,:url => "/manage/votes" do |f|  %>
+  </p>
+  <p><b>主题：</b>
+    <%= f.text_field :title,:size => '50',:maxlength => '50' ,:class => "title" %>
       <a id="show_description" href="#" onclick="Element.hide('show_description');Element.show('vote_description');Element.show('hidden_description');return false;">添加投票说明<img src="/images/shangsanjiao.gif"></a>
       <a id="hidden_description" href="#" style="display:none" onclick="Element.hide('hidden_description');Element.hide('vote_description');Element.show('show_description');return false;">隐藏投票说明<img src="/images/xiasanjiao.gif"></a>
     </p>
-    <p id="vote_description" style="display:none;"><b>描述：</b>
+<p id="vote_description" style="display:none;"><b>描述：</b>
       <%= f.text_area  :description,:size => '40x2'%>
     </p>
-    <% (1..10).each do |i| %>
-      <p><b>候选项<%=i%>：</b>
-        <input name="vote[vote_options][]" value="" size="50">
+    <table width="95%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td bgcolor="#999999">&nbsp;</td>
+  </tr>
+</table>
+
+<% (1..10).each do |i| %>
+  <p><b>候选项<%=i%>：</b>
+<input name="vote[vote_options][]" value="" size="50">
       </p>
     <%end%>
-    <p>
+<p>
       <b>可投选项：</b>
       <select name="vote[multi_selcect]">
         <option value="1">单选</option>

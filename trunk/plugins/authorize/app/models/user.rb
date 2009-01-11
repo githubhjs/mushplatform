@@ -34,9 +34,14 @@ class User < CachedModel
   def blog_config=(confg)
     @blog_config = confg
   end
+  
   def authorizations
     @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten
     @auth
+  end
+  
+  def is_friend_with?(other)
+    @friend ||= Freind.find(:first,:condition => "user_id=#{self.id} and friend_id=#{other.id}")
   end
   
   def groups

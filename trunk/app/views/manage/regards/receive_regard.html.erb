@@ -36,32 +36,24 @@
 <div class="m_r">
 
   <!--person_menu-->
-<%=  render :partial => "/manage/gifts/gift_menu" %>
-<!--person_menu-->
-
+  <%=  render :partial => "/manage/regards/regard_menu" %>
+  <!--person_menu-->
   <div class="manage_m L">
     <h2>礼物管理</h2>
     <table cellpadding="0" cellspacing="0" id = "comment_table">
       <tr>
-        <td class="tit" width="87">name</td>
         <td class="tit" width="283">内容</td>
         <td class="tit" width="110">发送好友</td>
-        <td class="tit">管理</td>
       </tr>
-      <%for gift in @gifts do %>
-        <tr id="t_<%= gift.id %>">
-          <td class="a_tit m_border"><a href="#"><%= h gift.name_zh %></a></td>
-          <td class="a_tit m_border"><%= h gift.icon %></td>
-          <td class="m_border">&nbsp;
-          </td>
-          <td class="m_border">
-            <a href="/manage/messages/<%= gift.id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
-            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/messages/#{gift.id}/delete") %>
+      <%for reagard_user in @user_reagrds do %>
+        <tr id="t_<%= reagard_user.id %>">
+          <td><img src="/images/regard_imgs/<%=  reagard_user.regard.icon %>"></td>
+          <td>
+             <%= reagard_user.friend.user_name %>
           </td>
         </tr>
       <%end%>
     </table>
-    <%= will_paginate @messages, {:prev_label => '上一页', :next_label => '下一页'} %>
-    
+
   </div>
 </div><!--m_r-->

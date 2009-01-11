@@ -134,7 +134,7 @@ function addAttachmentDiv(ele,max_size){
         name:ele.name,
         id:ele.id,
         disabled:multiple_upload_attachment_counter>=max_size
-        });
+    });
     Event.observe(new_input,'change',function(){
         addAttachmentDiv(new_input,max_size);
     });
@@ -183,7 +183,7 @@ function addPictureDiv(ele,max_size,tags){
         name:ele.name,
         id:ele.id,
         disabled:multiple_upload_picture_counter>=max_size
-        });
+    });
     Event.observe(new_input,'change',function(){
         addPictureDiv(new_input,max_size,tags);
     });
@@ -195,9 +195,46 @@ function addPictureDiv(ele,max_size,tags){
     ele.name="pictures[][uploaded_data]";
     div.appendChild(ele.hide().remove());
 }
+
 function removePictureDiv(link,eleId){
     multiple_upload_picture_counter--;
     link.parentNode.parentNode.parentNode.remove();
-    $(eleId).disabled=false;
+    $(ely6eId).disabled=false;
 }
+
+function inputOnclick(thisobj)
+{
+    var options = document.vote_form["vote_values[]"];
+    var selectnum = 0;
+    for(var i=0 ; i<options.length ; i++)
+    {
+        if(options[i].checked == true)
+        {
+            selectnum++;
+        }
+    }
+    if(selectnum > vote_limit)
+    {
+        thisobj.checked = false;
+        alert("根据发起人的设置，本投票最多只能选择" + vote_limit + "个选项!\n\n如果你确定要投票给此选项，请先去除一个已选择项。");
+    }
+}
+
+function validate_vote_form(){
+    var options = document.vote_form["vote_values[]"];
+    var flag = false;
+    for(var i=0 ; i<options.length ; i++)
+    {
+        if(options[i].checked == true)
+        {
+            flag = true;
+        }
+    }
+    if(!flag){
+        alert("请至少选择一个候选项");
+        return false;
+    }
+    return true;
+}
+
 

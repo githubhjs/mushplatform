@@ -237,4 +237,11 @@ function validate_vote_form(){
     return true;
 }
 
-
+function select_friend(){
+    $('friend_name').value = $('selected_friend').value;
+    $('friend_list').hide();
+}
+function change_friend(radio){
+    friend_input = $('selected_friend');
+    friend_input.value = radio.value;
+}

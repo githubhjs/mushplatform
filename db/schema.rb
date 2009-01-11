@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090110060728) do
+ActiveRecord::Schema.define(:version => 20090110153356) do
 
   create_table "area", :force => true do |t|
     t.integer "areaid",                 :null => false
@@ -225,9 +225,9 @@ ActiveRecord::Schema.define(:version => 20090110060728) do
   end
 
   create_table "gifts", :force => true do |t|
-    t.string  "name"
-    t.integer "type", :default => 0
-    t.string  "icon"
+    t.string "name"
+    t.string "icon"
+    t.string "name_zh", :limit => 125
   end
 
   create_table "group_members", :force => true do |t|
@@ -469,7 +469,6 @@ ActiveRecord::Schema.define(:version => 20090110060728) do
   create_table "vote_options", :force => true do |t|
     t.integer "voter_id"
     t.integer "title"
-    t.integer "value"
   end
 
   create_table "votes", :force => true do |t|

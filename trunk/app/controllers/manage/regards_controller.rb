@@ -1,9 +1,11 @@
-class RegardsController < ApplicationController
+class Manage::RegardsController < Manage::ManageController
+
+  Regard_Per_Page = 20
+  
   # GET /regards
   # GET /regards.xml
   def index
     @regards = Regard.find(:all)
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @regards }
@@ -58,7 +60,6 @@ class RegardsController < ApplicationController
   # PUT /regards/1.xml
   def update
     @regard = Regard.find(params[:id])
-
     respond_to do |format|
       if @regard.update_attributes(params[:regard])
         flash[:notice] = 'Regard was successfully updated.'
@@ -76,10 +77,39 @@ class RegardsController < ApplicationController
   def destroy
     @regard = Regard.find(params[:id])
     @regard.destroy
-
     respond_to do |format|
       format.html { redirect_to(regards_url) }
       format.xml  { head :ok }
     end
   end
+
+  def send_for
+    @firends = current_user.friends
+    @regards = Regard.paginate(:page => params[:page]||1,:per_page => 20)
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def send_to
+    friend_name = params[:friend_name].to_s
+    post = params[:post]
+    send_mode = params[:quiet]
+    regard_user =  RegardUser.new
+    regard_user.friend_id = (User.find :first, :conditions => "user_name = '#{friend_name}'").id
+    regard_user.user_id = current_user.id
+    regard_user.regard_id = params[:regard_id]
+    regard_user.post = post
+    regard_user.send_mode = send_mode
+    regard_user.save!
+    @notice = "send regard success! "
+    render :action => "success"
+  end
+  
+  def receive
+    @regards = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "user_id = #{current_user.id}")
+    render :template => "/manage/regards/receive_regard"
+    return
+  end
+  
 end

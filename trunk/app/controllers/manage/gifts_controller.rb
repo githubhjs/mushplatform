@@ -80,11 +80,10 @@ class Manage::GiftsController < Manage::ManageController
       format.xml  { head :ok }
     end
   end
+
   def send_for
-    # friends
-    # gifts
     @firends = current_user.friends
-    @gifts = Gift.paginate(:page => params[:page]||1,:per_page => 10)
+    @gifts = Gift.paginate(:page => params[:page]||1,:per_page => 12)
     respond_to do |format|
       format.html
     end

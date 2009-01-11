@@ -30,4 +30,13 @@ module ApplicationHelper
     radio_boxes <<  (radio_button_tag('user_auth[]',Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
     radio_boxes.join('')
   end
+
+  def generate_sex_radio_for_search(select_value = Const::Sex_Unknown )
+    select_value ||= Const::Sex_Unknown
+    radio_boxes = []
+    radio_boxes <<  (radio_button_tag('sex',Const::Sex_Man,select_value == Const::Sex_Man) + '男')
+    radio_boxes <<  (radio_button_tag('sex',Const::Sex_Woman,select_value == Const::Sex_Man) + '女')
+    radio_boxes <<  (radio_button_tag('sex',Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
+    radio_boxes.join('')
+  end
 end

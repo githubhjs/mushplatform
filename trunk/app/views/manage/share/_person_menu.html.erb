@@ -43,13 +43,19 @@
         <% if params[:controller] == 'manage/gifts' %>
             <li class="hot">礼物</li>
         <%else%>
-            <li><a href="/manage/gifts">礼物</a></li>
+            <li><a href="/manage/gifts/send_for">礼物</a></li>
         <%end%>
         <li class="border"></li>
         <% if params[:controller] == 'manage/votes' %>
             <li class="hot">投票</li>
         <%else%>
             <li><a href="/manage/votes/new">投票</a></li>
+        <%end%>
+        <li class="border"></li>
+        <% if params[:controller] == 'manage/regards' %>
+            <li class="hot">打招呼</li>
+        <%else%>
+            <li><a href="/manage/regards/send_for">打招呼</a></li>
         <%end%>
         <!--li class="border"></li>
         <li><a href="">交易</a></li>

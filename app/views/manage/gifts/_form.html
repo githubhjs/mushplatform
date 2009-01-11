@@ -1,3 +1,15 @@
+﻿<style type="text/css">
+<!--
+.clear{/*<清除左右浮动>*/
+	clear:both;/*<清除左右浮动>*/
+	width:1px;/*<隐藏宽度>*/
+	font-size:1px;/*<隐藏字体>*/
+	height:0;/*<隐藏高度>*/
+	line-height:0;/*<隐藏行高>*/
+	visibility:hidden;/*<隐藏元素>*/
+}
+-->
+</style>
 <script>
     function select_friend(){
         $('friend_name').value = $('selected_friend').value;
@@ -21,18 +33,22 @@
         <p><b>选择好友：</b></p>
         <% for friend in @firends %>
             <% fri = User.find(friend.friend_id) %>
+            <div class="sgt_on" style="width:300px;">请选择发送对象</div>
+					<div id="allfriend"  style="width:300px;height:100px; overflow:scroll; overflow-x:hidden;"></div>
+			
             <input type="radio" value="<%= fri.user_name%>" name="gift_id" onclick="change_friend(this)"/><%=fri.user_name%>
         <%end%>
            <input type='hidden' name="selected_friend_name" id="selected_friend" value="">
             <p>
               <input type='button' name="确认" onclick="select_friend();" value="确认">
-          </p>
+          </p>          
         </div>
     </div>
     <div>
       <p><b><br />
       选择礼物：</b><font style="color:#999;"></font>      </p>
-    <%for gift in @gifts do %>
+      <div class="l" style="width: 700px; padding:10px; border:1px solid #ccc" >
+      <%for gift in @gifts do %>
         <div class="l" style="width: 110px; height: 50px;">
           <div class="l" style="margin-top: 25px;">
             <input type="radio" value="<%=gift.id%>" name="gift_id"/>
@@ -41,9 +57,13 @@
             <img align="absmiddle" title="<%=gift.name_zh%>" alt="巧克力" src="/images/gifts_imgs/<%=gift.icon%>"/>
           </div>
         </div>
-      <%end%>
+      <%end%> 
+      <div class="clear"></div>
+      <div style=" width:100%; height:22px; text-align:right; " ><strong>1</strong> <a href="#">2</a></div>     
+      </div>
     </div>
-    <div style="padding-left: 20px ! important;">
+    <div class="clear"></div>
+    <div>
       <p><b><br />
       附言：</b><font style="color:#999;"></font>      </p>
       <%= f.text_area :post,:class => "text",:cols => "20" ,:rows => "3"  %>
@@ -57,9 +77,11 @@
       <input type="checkbox" value="1" name="quiet"/>
       匿名赠送
       <span class="c9"> (不让接收礼物的人知道是你送的)</span>
-    </div>
-    <div>
-      <input class="submit"  type="submit" value="发 布" />
-    </div>
+    </div><br />
+  <div>
+    <input class="submit"  type="submit" value="　发 布　" />
+      <br />
+      <br />
+  </div>
   <%end%>
 </div>

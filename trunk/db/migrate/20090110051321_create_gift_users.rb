@@ -6,6 +6,7 @@ class CreateGiftUsers < ActiveRecord::Migration
       t.integer :gift_id
       t.string :post
       t.integer :send_mode
+      t.timestamps
     end
   end
 

@@ -33,15 +33,12 @@
         <p><b>选择好友：</b></p>
         <% for friend in @firends %>
             <% fri = User.find(friend.friend_id) %>
-            <div class="sgt_on" style="width:300px;">请选择发送对象</div>
-					<div id="allfriend"  style="width:300px;height:100px; overflow:scroll; overflow-x:hidden;"></div>
-			
-            <input type="radio" value="<%= fri.user_name%>" name="gift_id" onclick="change_friend(this)"/><%=fri.user_name%>
+            <input type="radio" value="<%= fri.user_name%>" name="regard_id" onclick="change_friend(this)"/><%=fri.user_name%>
         <%end%>
            <input type='hidden' name="selected_friend_name" id="selected_friend" value="">
             <p>
               <input type='button' name="确认" onclick="select_friend();" value="确认">
-          </p>          
+          </p>
         </div>
     </div>
     <div>

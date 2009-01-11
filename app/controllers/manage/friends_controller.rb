@@ -10,11 +10,18 @@ class Manage::FriendsController <  Manage::ManageController
   end
   
   def search
-    if params[:query]
+#    if params[:query]
       @friends = UserProfile.find_all_by_real_name(params[:query])
-    else
-      @friends = []
+#    end
+
+    if @friends.length == 0
+      users = User.find_all_by_user_name(params[:query])
+
+      for user in users
+        @friends << UserProfile.new(:real_name => user.user_name, :user_id => user.id)
+      end
     end
+
     respond_to do |format|
       format.html # index.html.erb
     end

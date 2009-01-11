@@ -26,6 +26,7 @@ class Manage::FriendsController <  Manage::ManageController
     user = User.find(params[:id])
     begin
       current_user.friends << user
+      user.friends << current_user
     rescue
     end
 
@@ -40,6 +41,7 @@ class Manage::FriendsController <  Manage::ManageController
     user = User.find(params[:id])
     begin
       current_user.friends.delete(user)
+      user.friends.delete(current_user)
     rescue
     end
 

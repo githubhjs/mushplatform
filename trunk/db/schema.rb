@@ -9,13 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090110153356) do
-
-  create_table "area", :force => true do |t|
-    t.integer "areaid",                 :null => false
-    t.string  "area",     :limit => 20, :null => false
-    t.integer "fatherid",               :null => false
-  end
+ActiveRecord::Schema.define(:version => 20090111084033) do
 
   create_table "areas", :force => true do |t|
     t.integer "areaid",    :null => false
@@ -29,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   end
 
   create_table "articles", :force => true do |t|
-    t.string   "title",                              :null => false
+    t.string   "title",           :default => "",    :null => false
     t.string   "display_title"
     t.string   "sub_title"
     t.string   "permalink"
@@ -45,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.boolean  "top",             :default => false
     t.boolean  "sticky",          :default => false
     t.integer  "user_id"
-    t.integer  "group_id"
     t.integer  "category_id"
   end
 
@@ -53,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   add_index "articles", ["permalink"], :name => "index_articles_on_permalink"
 
   create_table "assets", :force => true do |t|
-    t.string   "name",         :null => false
+    t.string   "name",         :default => "", :null => false
     t.string   "type"
     t.string   "content_type"
     t.string   "filename"
@@ -67,28 +60,10 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.datetime "updated_at"
   end
 
-  create_table "blog_articles", :force => true do |t|
-    t.string   "title"
-    t.string   "author"
-    t.string   "keywords"
-    t.string   "text_filter"
-    t.string   "permalink"
-    t.text     "body"
-    t.text     "body_html"
-    t.text     "extended"
-    t.text     "excerpt"
-    t.text     "extended_html"
-    t.integer  "allow_comments"
-    t.integer  "allow_pings"
-    t.integer  "published",      :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "blog_configs", :force => true do |t|
-    t.integer "user_id",                                :null => false
+    t.integer "user_id",         :default => 0,         :null => false
     t.string  "blog_name"
-    t.integer "blog_perpage",    :default => 20
+    t.integer "blog_perpage",    :default => 5
     t.integer "comment_perpage", :default => 50
     t.string  "theme_name",      :default => "default"
     t.string  "announcement"
@@ -112,9 +87,8 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.datetime "updated_at"
     t.integer  "if_top",         :default => 0
     t.integer  "category_id",    :default => 0
-    t.integer  "user_id",                       :null => false
+    t.integer  "user_id",        :default => 0, :null => false
     t.integer  "comment_count",  :default => 0
-    t.integer  "view_count",     :default => 0
   end
 
   create_table "callers", :force => true do |t|
@@ -124,12 +98,11 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
 
   create_table "categories", :force => true do |t|
     t.string  "name"
-    t.integer "user_id",                   :null => false
-    t.integer "blog_count", :default => 0
+    t.integer "user_id", :default => 0, :null => false
   end
 
   create_table "channels", :force => true do |t|
-    t.string   "name",                               :null => false
+    t.string   "name",                :default => "", :null => false
     t.string   "permalink"
     t.text     "body"
     t.integer  "lft"
@@ -149,18 +122,13 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   add_index "channels", ["permalink"], :name => "index_channels_on_permalink"
 
   create_table "cities", :force => true do |t|
+    t.integer "city_id",   :null => false
     t.integer "father_id", :null => false
     t.string  "city"
-    t.integer "city_id",   :null => false
-  end
-
-  create_table "city", :force => true do |t|
-    t.integer "cityid",                 :null => false
-    t.string  "city",     :limit => 20, :null => false
-    t.integer "fatherid",               :null => false
   end
 
   create_table "comments", :force => true do |t|
+    t.integer  "blog_id",      :default => 0, :null => false
     t.string   "title"
     t.string   "author"
     t.string   "email"
@@ -171,8 +139,7 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",      :default => 0
-    t.integer  "blog_id",                     :null => false
+    t.integer  "user_id",      :default => 0, :null => false
     t.integer  "blog_user_id"
   end
 
@@ -180,7 +147,7 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.string   "title"
     t.text     "body"
     t.integer  "page",       :default => 1
-    t.integer  "article_id",                :null => false
+    t.integer  "article_id", :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -190,6 +157,18 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   create_table "craw_jobs", :force => true do |t|
     t.integer "site_id",     :default => 0
     t.integer "crawler_pid", :default => 0
+  end
+
+  create_table "crawler_sites", :force => true do |t|
+    t.string   "site_name"
+    t.string   "site_url"
+    t.integer  "status",           :default => 0
+    t.integer  "state",            :default => 0
+    t.integer  "time_out",         :default => 120
+    t.datetime "last_finish_time", :default => '2009-01-11 16:52:45'
+    t.integer  "craw_freq",        :default => 86400
+    t.integer  "request_freq",     :default => 1
+    t.integer  "craw_now"
   end
 
   create_table "files", :force => true do |t|
@@ -203,6 +182,14 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.integer  "size"
     t.integer  "width"
     t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "footsteps", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "app"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -225,9 +212,10 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   end
 
   create_table "gifts", :force => true do |t|
-    t.string "name"
-    t.string "icon"
-    t.string "name_zh", :limit => 125
+    t.string  "name_zh"
+    t.string  "name_en"
+    t.integer "type",    :default => 0
+    t.string  "icon"
   end
 
   create_table "group_members", :force => true do |t|
@@ -253,16 +241,14 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.integer "status",           :default => 0, :null => false
     t.integer "inherit_group_id", :default => 0
     t.text    "description"
+    t.string  "theme_name"
   end
 
   create_table "links", :force => true do |t|
-    t.string  "name"
-    t.string  "url"
-    t.string  "category"
-    t.text    "memo"
-    t.string  "filename"
-    t.integer "size"
-    t.string  "content_type"
+    t.string "name"
+    t.string "url"
+    t.string "category"
+    t.text   "memo"
   end
 
   add_index "links", ["category"], :name => "index_links_on_category"
@@ -271,9 +257,9 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   create_table "messages", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",      :limit => 125, :null => false
-    t.string   "content",                   :null => false
-    t.integer  "user_id",                   :null => false
+    t.string   "title",      :default => "", :null => false
+    t.string   "content",    :default => "", :null => false
+    t.integer  "user_id",    :default => 0,  :null => false
   end
 
   create_table "mush_crawlers", :force => true do |t|
@@ -284,26 +270,21 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   end
 
   create_table "personal_sidebars", :force => true do |t|
-    t.string  "title",       :null => false
-    t.text    "template",    :null => false
+    t.string  "title",       :default => "", :null => false
+    t.text    "template",                    :null => false
     t.text    "description"
-    t.integer "bar_index"
+    t.integer "bar_index",   :default => 0
   end
 
   create_table "photos", :force => true do |t|
     t.string  "title"
-    t.string  "tag_list",       :limit => 124
+    t.string  "tags"
     t.text    "description"
-    t.string  "orignal_link",                                 :null => false
-    t.string  "mid_link",                                     :null => false
-    t.string  "thumbnail_link",                               :null => false
-    t.integer "shared",                        :default => 1
-    t.integer "user_id",                       :default => 0
-  end
-
-  create_table "province", :force => true do |t|
-    t.integer "provinceid",               :null => false
-    t.string  "province",   :limit => 20, :null => false
+    t.string  "orignal_link",                  :null => false
+    t.string  "mid_link",                      :null => false
+    t.string  "thumbnail_link",                :null => false
+    t.integer "shared",         :default => 1
+    t.integer "user_id",        :default => 0
   end
 
   create_table "provinces", :force => true do |t|
@@ -317,10 +298,10 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string  "role_name",                  :null => false
-    t.string  "e_name",                     :null => false
+    t.string  "role_name",   :default => "", :null => false
+    t.string  "e_name",      :default => "", :null => false
     t.text    "description"
-    t.integer "status",      :default => 0, :null => false
+    t.integer "status",      :default => 0,  :null => false
   end
 
   create_table "scriptlets", :force => true do |t|
@@ -334,24 +315,12 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   end
 
   create_table "sidebars", :force => true do |t|
-    t.string  "bar_name",                   :null => false
-    t.integer "user_id",                    :null => false
+    t.string  "bar_name",    :default => "", :null => false
+    t.integer "user_id",     :default => 0,  :null => false
     t.integer "bar_index"
     t.text    "description"
     t.text    "settings"
-    t.string  "sidebar_id",  :limit => 125, :null => false
-  end
-
-  create_table "sites", :force => true do |t|
-    t.string   "site_name"
-    t.string   "site_url"
-    t.integer  "status",           :default => 0
-    t.integer  "state",            :default => 0
-    t.integer  "time_out",         :default => 120
-    t.datetime "last_finish_time", :default => '2008-09-13 01:09:23'
-    t.integer  "craw_freq",        :default => 86400
-    t.integer  "request_freq",     :default => 1
-    t.integer  "craw_now"
+    t.string  "sidebar_id",  :default => "", :null => false
   end
 
   create_table "taggings", :force => true do |t|
@@ -375,7 +344,7 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   add_index "tags", ["category"], :name => "index_tags_on_category"
 
   create_table "templates", :force => true do |t|
-    t.string   "name",       :null => false
+    t.string   "name",       :default => "", :null => false
     t.string   "category"
     t.text     "body"
     t.datetime "created_at"
@@ -399,14 +368,14 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
   create_table "topics", :force => true do |t|
     t.string   "title",                        :null => false
     t.string   "user_name",                    :null => false
-    t.integer  "user_id"
-    t.integer  "view_count"
+    t.integer  "user_id",                      :null => false
+    t.integer  "user_group_id",                :null => false
+    t.integer  "admin_id",                     :null => false
+    t.integer  "view_count",    :default => 0
     t.integer  "comment_count", :default => 0
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_group_id",                :null => false
-    t.integer  "admin_id",                     :null => false
   end
 
   create_table "user_groups", :force => true do |t|
@@ -417,14 +386,16 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.string   "icon"
     t.string   "category"
     t.integer  "topic_count",  :default => 0
-    t.integer  "member_count", :default => 0
+    t.integer  "member_count", :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "user_profiles", :force => true do |t|
     t.string   "real_name"
-    t.integer  "user_id",                                      :null => false
+    t.integer  "user_id",        :default => 0,  :null => false
+    t.integer  "sex",            :default => 0,  :null => false
+    t.string   "city",           :default => "", :null => false
     t.string   "photo"
     t.text     "adress"
     t.text     "introduction"
@@ -440,21 +411,20 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
     t.integer  "interested"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sex",                           :default => 0
-    t.string   "city",           :limit => 125,                :null => false
   end
 
   create_table "user_votes", :force => true do |t|
     t.integer  "voter_id"
     t.integer  "vote_value"
     t.datetime "created_at"
+    t.integer  "vote_id",    :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "user_name",                       :null => false
-    t.string   "hashed_password",                 :null => false
-    t.string   "email",                           :null => false
-    t.string   "salt",                            :null => false
+    t.string   "user_name",       :default => "", :null => false
+    t.string   "hashed_password", :default => "", :null => false
+    t.string   "email",           :default => "", :null => false
+    t.string   "salt",            :default => "", :null => false
     t.datetime "created_at"
     t.integer  "status",          :default => 0,  :null => false
     t.string   "pwd_question",    :default => ""
@@ -468,7 +438,8 @@ ActiveRecord::Schema.define(:version => 20090110153356) do
 
   create_table "vote_options", :force => true do |t|
     t.integer "voter_id"
-    t.integer "title"
+    t.string  "title"
+    t.integer "value"
   end
 
   create_table "votes", :force => true do |t|

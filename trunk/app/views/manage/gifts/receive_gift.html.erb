@@ -36,8 +36,8 @@
 <div class="m_r">
 
   <!--person_menu-->
-<%=  render :partial => "/manage/gifts/gift_menu" %>
-<!--person_menu-->
+  <%=  render :partial => "/manage/gifts/gift_menu" %>
+  <!--person_menu-->
 
   <div class="manage_m L">
     <h2>礼物管理</h2>
@@ -46,7 +46,6 @@
         <td class="tit" width="87">name</td>
         <td class="tit" width="283">内容</td>
         <td class="tit" width="110">发送好友</td>
-        <td class="tit">管理</td>
       </tr>
       <%for gift in @gifts do %>
         <tr id="t_<%= gift.id %>">
@@ -54,14 +53,8 @@
           <td class="a_tit m_border"><%= h gift.icon %></td>
           <td class="m_border">&nbsp;
           </td>
-          <td class="m_border">
-            <a href="/manage/messages/<%= gift.id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
-            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/messages/#{gift.id}/delete") %>
-          </td>
         </tr>
       <%end%>
     </table>
-    <%= will_paginate @messages, {:prev_label => '上一页', :next_label => '下一页'} %>
-    
   </div>
 </div><!--m_r-->

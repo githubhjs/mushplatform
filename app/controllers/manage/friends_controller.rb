@@ -27,6 +27,13 @@ class Manage::FriendsController <  Manage::ManageController
     end
   end
 
+  def invite
+    
+  end
+
+  def post_invite
+
+  end
   # POST /friends
   # POST /friends.xml
   def create

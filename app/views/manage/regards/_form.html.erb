@@ -1,14 +1,21 @@
 ﻿<style type="text/css">
-<!--
-.clear{/*<清除左右浮动>*/
-	clear:both;/*<清除左右浮动>*/
-	width:1px;/*<隐藏宽度>*/
-	font-size:1px;/*<隐藏字体>*/
-	height:0;/*<隐藏高度>*/
-	line-height:0;/*<隐藏行高>*/
-	visibility:hidden;/*<隐藏元素>*/
-}
--->
+  <!--
+  .clear{/*<清除左右浮动>*/
+    clear:both;/*<清除左右浮动>*/
+    width:1px;/*<隐藏宽度>*/
+    font-size:1px;/*<隐藏字体>*/
+    height:0;/*<隐藏高度>*/
+    line-height:0;/*<隐藏行高>*/
+    visibility:hidden;/*<隐藏元素>*/
+  }
+  .main { width:320px; height:160px; border:1px solid #98b1c8; padding:1px;background-color:#FFFAF0; }
+  .bt{ width:100%; height:22px; line-height:22px; background:#e0ebf9;size:12px; border-bottom:1px solid #98b1c8;}
+  .name{width:98%;height:110px; margin:0 auto; overflow:auto; }
+  .name ul{ width:300px; margin:0 auto;}
+  .name li{ float:left; display:block; width:95px; height:25px; line-height:25px; list-style:none;border-bottom:1px dotted  #ccc;}
+  .sel{width:100%;height:25px; text-align:left;}
+
+  -->
 </style>
 <div class="blog_write_center">
   <%form_for :regard,:url => "/manage/regards/send_to" do |f|  %>
@@ -19,17 +26,7 @@
         <input type="text" id="friend_name" name="friend_name" value=""><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
       </p>
       </div>
-      <div style="display:none;position:absolute;z-index:500px;margin-left:100px;background:red;" id="friend_list">
-        <p><b>选择好友：</b></p>
-        <% for friend in @firends %>
-            <% fri = User.find(friend.friend_id) %>
-            <input type="radio" value="<%= fri.user_name%>" name="regard_id" onclick="change_friend(this)"/><%=fri.user_name%>
-        <%end%>
-           <input type='hidden' name="selected_friend_name" id="selected_friend" value="">
-            <p>
-              <input type='button' name="确认" onclick="select_friend();" value="确认">
-          </p>
-        </div>
+      <%= render :partial => "/manage/gifts/friend_list" %>
     </div>
     <div>
       <p><b><br />

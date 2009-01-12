@@ -1,7 +1,16 @@
-<style>
-  .main { width:320px; height:160px; border:1px solid #98b1c8; padding:1px; }
-  .bt{ width:100%; height:22px; text-align:left; line-height:22px; background:#e0ebf9;size:12px; border-bottom:1px solid #98b1c8;}
-  .name{width:98%;height:110px; margin:0 auto; text-align:center;overflow:auto;}
-  .sel{width:100%;height:25px; text-align:left; }
-  .STYLE1 {width: 100%; height: 22px; text-align: left; line-height: 22px; background: #e0ebf9; size: 12px; border-bottom: 1px solid #98b1c8; font-size: 12px; }
-</style>
+<div class="main" style="display:none;position:absolute;z-index:500px;" id="friend_list">
+  <div class="bt">&nbsp;请选择发送对象</div>
+  <div class="name">
+    <ul>
+      <% for friend in @firends %>
+        <% fri = User.find(friend.friend_id) %>
+        <li><input type="radio" value="<%= fri.user_name%>" name="regard_id" onclick="change_friend(this)"/><%=fri.user_name%></li>
+      <%end%>
+    </ul>
+    <input type='hidden' name="selected_friend_name" id="selected_friend" value="">
+  </div>
+  <div class="sel">&nbsp;
+    <input type='button' name="确认" onclick="select_friend();" value="确认">
+    <input type='button' name="确认" onclick="Element.hide('friend_list')" value="取消">
+  </div>
+</div>

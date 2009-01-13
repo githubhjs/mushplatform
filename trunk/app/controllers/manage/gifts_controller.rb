@@ -1,7 +1,8 @@
 class Manage::GiftsController < Manage::ManageController
   # GET /gifts
   # GET /gifts.xml
-  Gifts_Per_Page = 30
+  Gifts_Per_Page = 17
+  
   def index
     @gifts = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
     render :template => "/manage/gifts/index"
@@ -39,7 +40,6 @@ class Manage::GiftsController < Manage::ManageController
   # POST /gifts.xml
   def create
     @gift = Gift.new(params[:gift])
-
     respond_to do |format|
       if @gift.save
         flash[:notice] = 'Gift was successfully created.'
@@ -52,11 +52,17 @@ class Manage::GiftsController < Manage::ManageController
     end
   end
 
+  def gift_list
+    @gifts = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
+    render :update do |page|
+      page.replace_html :gift_list,:partial => '/manage/gifts/gift_list',:locals => {:gifts => @gifts}
+    end
+  end
+
   # PUT /gifts/1
   # PUT /gifts/1.xml
   def update
     @gift = Gift.find(params[:id])
-
     respond_to do |format|
       if @gift.update_attributes(params[:gift])
         flash[:notice] = 'Gift was successfully updated.'
@@ -83,7 +89,7 @@ class Manage::GiftsController < Manage::ManageController
 
   def send_for
     @firends = current_user.friends
-    @gifts = Gift.paginate(:page => params[:page]||1,:per_page => 12)
+    @gifts   = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
     respond_to do |format|
       format.html
     end

@@ -34,6 +34,10 @@ class User < CachedModel
   def blog_config=(confg)
     @blog_config = confg
   end
+
+  def space_url
+    "http://#{self.user_name}.#{Domain_Name}"
+  end
   
   def authorizations
     @auth ||= self.groups.map{|g|g.own_and_inherint_roles}.flatten

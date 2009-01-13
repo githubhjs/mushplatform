@@ -86,24 +86,29 @@ class Manage::RegardsController < Manage::ManageController
   def send_for
     @firends = current_user.friends
     @regards = Regard.paginate(:page => params[:page]||1,:per_page => 20)
+    @regard_user = RegardUser.new
     respond_to do |format|
       format.html
     end
   end
   
   def send_to
-    friend_name = params[:friend_name].to_s
-    post = params[:post]
-    send_mode = params[:quiet]
-    regard_user =  RegardUser.new
-    regard_user.friend_id = (User.find :first, :conditions => "user_name = '#{friend_name}'").id
-    regard_user.user_id = current_user.id
-    regard_user.regard_id = params[:regard_id]
-    regard_user.post = post
-    regard_user.send_mode = send_mode
-    regard_user.save!
-    @notice = "send regard success! "
-    render :action => "success"
+    @regard_user =  RegardUser.new(params[:regard_user])
+    @regard_user.user_id = current_user.id
+    unless (friend_name  = params[:regard_user][:friend_name]).blank?
+      debugger
+      usr = User.find_by_user_name(friend_name)
+      @regard_user.friend_id = usr.id if usr
+    end
+    if @regard_user.save
+      @notice = "礼品赠送成功! "
+      render :action => "success"
+    else
+      @firends = current_user.friends
+      @regards   = Regard.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page)
+      flash[:notice] = @regard_user.errors.full_messages.join(';')
+      render :action => :send_for
+    end
   end
   
   def receive

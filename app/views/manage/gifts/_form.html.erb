@@ -18,12 +18,13 @@
   -->
 </style>
 <div class="blog_write_center">
-  <%form_for :gift,:url => "/manage/gifts/send_to" do |f|  %>
+  <div><%= flash[:notice] %></div>
+  <%form_for :gift_user,:url => "/manage/gifts/send_to" do |f|  %>
     <div>
       <div>
         <p><b><br />
           赠送给：</b><font style="color:red;"></font>
-          <input type="text" id="friend_name" name="friend_name" value=""><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
+          <input type="text" id="friend_name" name="gift_user[friend_name]" value=""><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
         </p>
       </div>
       <%= render :partial => "/manage/gifts/friend_list" %>
@@ -38,12 +39,12 @@
       <%= f.text_area :post,:class => "text",:cols => "20" ,:rows => "3"  %>
     </div>
     <div style="padding-left: 0px ! important;">
-      <input type="checkbox" value="0" name="quiet"/>
+      <input type="radio" value="0" name="gift_user[send_mode]" checked/>
       悄悄地送
       <span class="c9"> (不让其他人知道是你送的)</span>
     </div>
     <div style="padding-left: 0px ! important;">
-      <input type="checkbox" value="1" name="quiet"/>
+      <input type="radio" value="1" name="gift_user[send_mode]"/>
       匿名赠送
       <span class="c9"> (不让接收礼物的人知道是你送的)</span>
     </div><br />

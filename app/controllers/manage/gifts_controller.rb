@@ -90,27 +90,24 @@ class Manage::GiftsController < Manage::ManageController
   def send_for
     @firends = current_user.friends
     @gifts   = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
+    @gift_user =  GiftUser.new
     respond_to do |format|
       format.html
     end
   end
+  
   def send_to
-    friend_name = params[:friend_name].to_s
-    gift_id = params[:gift_id]
-    post = params[:post]
-    send_mode = params[:quiet]
-    
-    gift_user =  GiftUser.new
-    gift_user.friend_id = (User.find :first, :conditions => "user_name = '#{friend_name}'").id
-    gift_user.user_id = current_user.id
-    gift_user.gift_id = gift_id
-    gift_user.post = post
-    gift_user.send_mode = send_mode
-    
-    gift_user.save!
-    
-    @notice = "send gift success! "
-    render :action => "success"
+    @gift_user =  GiftUser.new(params[:gift_user])
+    @gift_user.user_id = current_user.id
+    if @gift_user.save
+      @notice = "礼品赠送成功! "
+      render :action => "success"
+    else
+      @firends = current_user.friends
+      @gifts   = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
+      flash[:notice] = @gift_user.errors.full_messages.join(';')
+      render :action => :send_for
+    end
   end
 
   def receive

@@ -49,7 +49,7 @@
         <tr id="t_<%= reagard_user.id %>">
           <td><img src="/images/regard_imgs/<%=  reagard_user.regard.icon %>"></td>
           <td>
-             <%= reagard_user.friend.user_name %>
+             <a href="<%= gift_user.friend.space_url %>" target="_blank"><%= gift_user.friend.user_name %></a>
           </td>
         </tr>
       <%end%>

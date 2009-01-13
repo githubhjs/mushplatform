@@ -18,13 +18,14 @@
   -->
 </style>
 <div class="blog_write_center">
-  <%form_for :regard,:url => "/manage/regards/send_to" do |f|  %>
+  <div><%= flash[:notice] %></div>
+  <%form_for :regard_user,:url => "/manage/regards/send_to" do |f|  %>
     <div>
       <div>
-      <p><b><br />
-        赠送给：</b><font style="color:red;"></font>
-        <input type="text" id="friend_name" name="friend_name" value=""><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
-      </p>
+        <p><b><br />
+          赠送给：</b><font style="color:red;"></font>
+          <input type="text" id="friend_name" name="regard_user[friend_name]"><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
+        </p>
       </div>
       <%= render :partial => "/manage/gifts/friend_list" %>
     </div>
@@ -32,17 +33,17 @@
       <p><b><br />
       请选择动作：</b><font style="color:#999;"></font>      </p>
       <div class="l" style="width: 450px; padding:10px; border:1px solid #ccc" >
-      <%for regard in @regards do %>
-        <div class="l" style="width:40px;">
-          <div class="l" style="margin-top: 25px;">
-            <input type="radio" value="<%=regard.id%>" name="regard_id"/>
+        <%for regard in @regards do %>
+          <div class="l" style="width:40px;">
+            <div class="l" style="margin-top: 25px;">
+              <input type="radio" value="<%=regard.id%>" name="regard_user[regard_id]" <% if @regard_user.regard_id && @regard_user.regard_id == regard.id %>checked<%end%>/>
+            </div>
+            <div id="regarditem_<%=regard.id%>" class="l" style="margin-left: 2px;">
+              <img align="absmiddle" title="<%=regard.name_zh%>" alt="<%= regard.name_zh %>" src="/images/regard_imgs/<%=regard.icon%>"/>
+            </div>
           </div>
-          <div id="regarditem_<%=regard.id%>" class="l" style="margin-left: 2px;">
-            <img align="absmiddle" title="<%=regard.name_zh%>" alt="<%= regard.name_zh %>" src="/images/regard_imgs/<%=regard.icon%>"/>
-          </div>
-        </div>
-      <%end%> 
-      <div class="clear"></div>
+        <%end%>
+        <div class="clear"></div>
       </div>
     </div>
     <div class="clear"></div>
@@ -52,19 +53,19 @@
       <%= f.text_area :post,:class => "text",:cols => "20" ,:rows => "3"  %>
     </div>
     <div style="padding-left: 0px ! important;">
-      <input type="checkbox" value="0" name="quiet"/>
+      <input type="radio" value="0" name="regard_user[send_mode]" checked/>
       悄悄地送
       <span class="c9"> (不让其他人知道是你送的)</span>
     </div>
     <div style="padding-left: 0px ! important;">
-      <input type="checkbox" value="1" name="quiet"/>
+      <input type="radio" value="1" name="regard_user[send_mode]"/>
       匿名赠送
       <span class="c9"> (不让接收礼物的人知道是你送的)</span>
     </div><br />
-  <div>
-    <input class="submit"  type="submit" value="　发 布　" />
+    <div>
+      <input class="submit"  type="submit" value="　发 布　" />
       <br />
       <br />
-  </div>
+    </div>
   <%end%>
 </div>

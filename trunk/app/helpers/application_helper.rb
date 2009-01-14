@@ -9,9 +9,9 @@ module ApplicationHelper
     
   end
 
-  def user_icon(user_id)
+  def user_icon(user_id,size = 'small')
     profile = UserProfile.find_by_user_id(user_id)
-    profile ? (profile.photo.empty? ? '/images/default_usr_icon.gif' : profile.photo) : '/images/default_usr_icon.gif'
+    profile ? (profile.avatar.blank? ? '/images/default_usr_icon.gif' : url_for_file_column(profile, 'avatar', size)) : '/images/default_usr_icon.gif'
   end
 
   def get_area_select_options

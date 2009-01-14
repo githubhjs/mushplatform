@@ -20,10 +20,11 @@ class AddUserProfilesIconMeta < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :user_profiles, :size
-    remove_column :user_profiles, :content_type
-    remove_column :user_profiles, :filename
-
-    drop_table :thumbnails
+    remove_column :user_profiles, :avatar
+#    remove_column :user_profiles, :size
+#    remove_column :user_profiles, :content_type
+#    remove_column :user_profiles, :filename
+#
+#    drop_table :thumbnails
   end
 end

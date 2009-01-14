@@ -64,7 +64,7 @@
           </td>
           <td class="m_border">
             <a href="/manage/messages/<%= message .id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
-            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/messages/#{message.id}/delete") %>
+            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('确定要删除嘛？')) do_delete(this)",:title => '删除',:href => "/manage/messages/#{message.id}/delete") %>
           </td>
         </tr>
       <%end%>

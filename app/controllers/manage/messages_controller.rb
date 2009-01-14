@@ -7,9 +7,8 @@ class Manage::MessagesController < Manage::ManageController
   
   def index
     @messages = Message.paginate(:page => params[:page]||1,:per_page => Messages_Per_Page,
-      :conditions => "user_id=#{current_user.id}")
+      :conditions => "user_id=#{current_user.id}", :order => "id desc")
     render :template => "/manage/messages/index"
-    return 
   end
 
   # GET /messages/1
@@ -46,11 +45,10 @@ class Manage::MessagesController < Manage::ManageController
     @message.user_id = current_user.id
     if @message.save
       flash[:notice] = 'Message was successfully created.'
-      redirect_to :action => index
+      redirect_to :action => :index
     else
       render :action => "new" 
     end
-    return 
   end
 
   # PUT /messages/1

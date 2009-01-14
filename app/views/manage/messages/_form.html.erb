@@ -3,7 +3,7 @@
     <p><b>标题：</b><font style="color:red;"><%= @message.errors.on(:title) %></font>
       <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>
     </p>
-    <p><b>内容：</b><font style="color:#999;">（不能少于10个字）</font>
+    <p><b>内容：</b><font style="color:#999;"></font>
     <font style="color:red;"><%= @message.errors.on(:content) %></font>
     </p>
     <%= f.text_area :content,:class => "text",:cols => "50" ,:rows => "5"  %>

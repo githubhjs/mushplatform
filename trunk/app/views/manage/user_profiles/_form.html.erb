@@ -1,4 +1,4 @@
-<%  form_tag "/manage/user_profiles/#{@user_profile.id}",:method => :put,:name => 'user_date_form' do  %>
+<%  form_tag "/manage/user_profiles/#{@user_profile.id}",:method => :put,:name => 'user_date_form', :multipart => true do  %>
   <div class="person_date_m L">
   <h2>个人资料</h2>
   <table cellpadding="0" cellspacing="1">
@@ -7,12 +7,11 @@
   </tr>
   <tr>
     <td class="tit" width="103">当前头像：</td>
-    <td width="638"><div class="face"><img src="/images/pic_big_none.gif"/></div></td>
+    <td width="638"><div class="face"><%= image_tag(@user_profile.public_filename) if @user_profile.filename %></div></td>
   </tr>
   <tr>
   <td class="tit" >上传头像：</td>
-  <td><input name="liulan" type="file" size="30" name="photo" maxlength="30" />
-    <input name="upload" type="button" value="上 传" />
+  <td><input name="liulan" type="file" size="30" name="uploaded_data" maxlength="30" />
   </br>接受jpg、png、gif格式图片</td>
   </tr>
   <tr><td> </td><td></td></tr>

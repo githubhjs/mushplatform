@@ -1,7 +1,9 @@
 require "util/image_util"
 class UserProfile < ActiveRecord::Base
-  
   belongs_to :user
+  has_attachment :storage => :file_system, :path_prefix => 'publipc/assets/avatar',
+                 :content_type => :image, :resize_to => [120,120],
+                 :thumbnails => { :small => [50, 50] }
 
   Company_Nature_Other      =  3
   Company_Nature_User       =  2

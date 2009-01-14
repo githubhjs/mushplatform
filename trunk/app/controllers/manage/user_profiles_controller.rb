@@ -6,7 +6,7 @@ class Manage::UserProfilesController < Manage::ManageController
   # GET /user_profiles.xml
   def index
     @user = current_user
-    @user_profile = @user.user_profile || UserProfile.new
+    @user_profile = @user.user_profile || UserProfile.create(:user_id => @user.id, :real_name => @user.user_name)
     render :template => "/manage/user_profiles/edit"
   end
 
@@ -51,10 +51,11 @@ class Manage::UserProfilesController < Manage::ManageController
   # POST /user_profiles.xml
   def create
     @user_profile = UserProfile.new(params[:user_profile])
+    @user_profile.user_icon = params[:user_photo]
     respond_to do |format|
       if @user_profile.save
         flash[:notice] = 'UserProfile was successfully created.'
-        format.html { redirect_to(@user_profile) }
+        format.html { redirect_to :action => :edit }
         format.xml  { render :xml => @user_profile, :status => :created, :location => @user_profile }
       else
         format.html { render :action => "new" }

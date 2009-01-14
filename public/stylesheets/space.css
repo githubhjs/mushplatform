@@ -39,9 +39,9 @@ solid #4d4c4c;position:relative;}
 .person_info{width:650px;}
 .person .p_top{margin:10px 0;width:100%;}
 .person .m_l{width:165px;}
-.person .face{margin-bottom:10px;}
+.person .face{margin-bottom:10px;border:1px solid #ccc;padding:1px;}
 .person .face p{width:167px;}
-.person .face img{width:165px;height:200px;}
+.person .face img{width:120px;height:120px;}
 
 .person .visitor,.comment{width:165px;margin-bottom:10px;float:left;}
 .person .visitor .tit,.comment .tit{padding:0 1px 1px 1px;width:163px;}
@@ -153,8 +153,8 @@ bottom:10px;}
 .person_date_m table .top{background-color:#f4f4f3;padding-left:10px;font-weight:bold;}
 .person_date_m table span{font-weight:normal;color:#de363a;}
 .person_date_m table .tit{font-weight:bold;text-align:right;}
-.person_date_m table .face img{width:63px;height:78px;}
-.person_date_m table .face{border:1px solid #ccc;padding:1px;width:63px;height:78px;}
+/*.person_date_m table .face img{width:63px;height:78px;}*/
+.person_date_m table .face{border:1px solid #ccc;padding:1px;width:50px;height:50px;}
 .person_date_m table input{height:20px;}
 .person_date_m .button{height:22px;line-height:18px;padding:0 3px;margin:10px 10px;cursor:hand;}
 
@@ -183,8 +183,8 @@ bottom:10px;}
 .person_date_m table .top{background-color:#f4f4f3;padding-left:10px;font-weight:bold;}
 .person_date_m table span{font-weight:normal;color:#de363a;}
 .person_date_m table .tit{font-weight:bold;text-align:right;}
-.person_date_m table .face img{width:63px;height:78px;}
-.person_date_m table .face{border:1px solid #ccc;padding:1px;width:63px;height:78px;}
+.person_date_m table .face img{width:50px;height:50px;}
+.person_date_m table .face{border:1px solid #ccc;padding:1px;width:50px;height:50px;}
 .person_date_m table input{height:20px;}
 .person_date_m .button{height:22px;line-height:18px;padding:0 3px;margin:10px 10px;cursor:hand;}
 

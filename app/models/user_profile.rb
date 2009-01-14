@@ -1,9 +1,11 @@
 require "util/image_util"
 class UserProfile < ActiveRecord::Base
   belongs_to :user
-  has_attachment :storage => :file_system, :path_prefix => 'public/assets/avatar',
-                 :content_type => :image, :resize_to => [120,120],
-                 :thumbnails => { :small => [50, 50] }
+#  has_attachment :storage => :file_system, :path_prefix => 'public/assets/avatar',
+#                 :content_type => :image, :processor => 'Rmagick', :thumbnail_class => :thumbnail,
+#                 :thumbnails => { :normal => '120x120>', :small => '50x50>' }
+  file_column :avatar, :store_dir => 'public/assets/avatar', :base_url => 'assets/avatar',
+              :magick => { :versions => { "normal" => "120x120", "small" => "50x50>" } }
 
   Company_Nature_Other      =  3
   Company_Nature_User       =  2

@@ -215,7 +215,12 @@ module FileColumn # :nodoc:
       @dir = File.join(tmp_base_dir, @tmp_dir)      
       FileUtils.mkdir(@dir)
       
-      @filename = FileColumn::sanitize_filename(file.original_filename)
+      # @filename = FileColumn::sanitize_filename(file.original_filename)
+      content_type = get_content_type((file.content_type.chomp if file.content_type))
+      if content_type and options[:mime_extensions][content_type]
+        @filename = "#{@tmp_dir}.#{options[:mime_extensions][content_type]}"
+      end
+
       local_file_path = File.join(tmp_base_dir,@tmp_dir,@filename)
       
       # stored uploaded file into local_file_path
@@ -233,7 +238,7 @@ module FileColumn # :nodoc:
       if options[:fix_file_extensions]
         # try to determine correct file extension and fix
         # if necessary
-        content_type = get_content_type((file.content_type.chomp if file.content_type))
+        # content_type = get_content_type((file.content_type.chomp if file.content_type))
         if content_type and options[:mime_extensions][content_type]
           @filename = correct_extension(@filename,options[:mime_extensions][content_type])
         end

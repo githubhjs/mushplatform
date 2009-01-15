@@ -1,63 +1,33 @@
-<div class="m_l L">			
-			<div class="face L">
-				<img class="border" src="/images/pic_big_none.gif"/>
-				<!--p><font style="float:left;"><a class="red_underline" href="">[更改头像]</a></font><font style="float:right;"><a class="red_underline" href="">[编辑我的资料]</a></font></p-->
-			</div>
-			
-			<!--div class="visitor">
-
-				<div class="tit border"><h6>最新会员</h6></div>
-				<div class="v_m">
-					<div class="v_info L">
-						<a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
-						<p class="L">昵称：<a href="">xiao-fox</a></p>
-						<p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
-					</div> 
-					<div class="v_info L">
-
-						<a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
-						<p class="L">昵称：<a href="">pawa</a></p>
-						<p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
-					</div> 
-					<div class="v_info L">
-						<a href=""><img class="L" src="/images/pic_visitor.gif"/></a>
-						<p class="L">昵称：<a href="">qing qing cao</a></p>
-
-						<p class="L"><a href=""><img class="add" src="/images/ico_add.gif"/></a><a href="">加为好友</a></p>
-					</div> 
-				</div>
-			</div-->
-			
-		</div> <!--m_l-->
+<%=  render :partial => "/manage/share/left" %>
 		
-		<div class="m_r">
-		
-			 <%=  render :partial => "/manage/friends/friends_menu" %>
-			
-			<div class="qun_m L">
-				<div class="qun_top">
-				<h2 class="my_friend">我的好友</h2>
-				</div>
-				
-				<div class="clear li_m">
-					<div class="friend_m_b L">
-						
-                        <% for user in @friends -%>
-						<div class="friend_b L">
-							<a href=""><img class="L" src="<%= user_icon(user.id) %>"/></a>
-                            <p class="L"><a href=""><%= user.user_name %> </a></p>
+<div class="m_r">
 
-							<ul class="L">
-								<!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
-								<li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
-							</ul>
-							<p><font style="font-weight:bold;color:#999;">&times;</font>&nbsp;<%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete', :class => 'grey' %></p>
-						</div>
-                        <% end -%>
-						
-					</div>
-				</div>
-				
-			</div>
-		
-		</div><!--m_r-->
+     <%=  render :partial => "/manage/friends/friends_menu" %>
+
+    <div class="qun_m L">
+        <div class="qun_top">
+        <h2 class="my_friend">我的好友</h2>
+        </div>
+
+        <div class="clear li_m">
+            <div class="friend_m_b L">
+
+                <% for user in @friends -%>
+                <div class="friend_b L">
+                    <a href=""><img class="L" src="<%= user_icon(user.id) %>"/></a>
+                    <p class="L"><a href=""><%= user.user_name %> </a></p>
+
+                    <ul class="L">
+                        <!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
+                        <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
+                    </ul>
+                    <p><font style="font-weight:bold;color:#999;">&times;</font>&nbsp;<%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete', :class => 'grey' %></p>
+                </div>
+                <% end -%>
+
+            </div>
+        </div>
+
+    </div>
+
+</div><!--m_r-->

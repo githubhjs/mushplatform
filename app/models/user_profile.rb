@@ -4,7 +4,7 @@ class UserProfile < ActiveRecord::Base
 #  has_attachment :storage => :file_system, :path_prefix => 'public/assets/avatar',
 #                 :content_type => :image, :processor => 'Rmagick', :thumbnail_class => :thumbnail,
 #                 :thumbnails => { :normal => '120x120>', :small => '50x50>' }
-  file_column :avatar, :store_dir => 'assets/avatar',
+  file_column :avatar, :store_dir => 'assets/avatar', :base_url => 'assets/avatar',
               :magick => { :versions => { :normal => { :size => "120x120>", :crop => "1:1"},
                                           :small => { :size => "50x50>", :crop => "1:1" }
                                         }

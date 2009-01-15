@@ -11,7 +11,7 @@
   </tr>
   <tr>
   <td class="tit" >上传头像：</td>
-  <td><%= file_column_field 'user_profile', 'avatar' %> <%= submit_tag '上传头像' %><br/>接受jpg、png、gif格式图片，尺寸为120x120</td>
+  <td><%= file_column_field 'user_profile', 'avatar' %> <%= submit_tag '上传头像' %><br/>格式：jpg,png,gif &nbsp;&nbsp; 尺寸：120x120 (超出自动剪裁)</td>
   </tr>
   <tr><td> </td><td></td></tr>
   <tr>
@@ -143,6 +143,6 @@
   <%end%>
   </table>
   <input class="button" name="save" type="button" value="保 存" onclick="validate_form(document.user_date_form)"/>
-  <input class="button" name="reset" type="button" value="重 置" />
+  <input class="button" name="reset" type="reset" value="重 置" />
   </div>
 <%  end %> 

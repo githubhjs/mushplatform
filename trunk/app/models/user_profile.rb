@@ -5,7 +5,10 @@ class UserProfile < ActiveRecord::Base
 #                 :content_type => :image, :processor => 'Rmagick', :thumbnail_class => :thumbnail,
 #                 :thumbnails => { :normal => '120x120>', :small => '50x50>' }
   file_column :avatar, :store_dir => 'public/assets/avatar', :base_url => 'assets/avatar',
-              :magick => { :versions => { "normal" => "120x120", "small" => "50x50>" } }
+              :magick => { :versions => { :normal => { :size => "120x120>", :crop => "1:1"},
+                                          :small => { :size => "50x50>", :crop => "1:1" }
+                                        }
+                         }
 
   Company_Nature_Other      =  3
   Company_Nature_User       =  2

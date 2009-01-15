@@ -20,6 +20,9 @@ module FileColumn # :nodoc:
   def self.init_options(defaults, model, attr)
     options = defaults.dup
     options[:store_dir] ||= File.join(options[:root_path], model, attr)
+    unless FileUtils.pwd().index('public')
+      options[:store_dir] = "public/#{options[:store_dir]}"
+    end
     unless options[:store_dir].is_a?(Symbol)
       options[:tmp_base_dir] ||= File.join(options[:store_dir], "tmp")
     end
@@ -401,7 +404,8 @@ module FileColumn # :nodoc:
     
     def relative_path_prefix
       raise RuntimeError.new("Trying to access file_column, but primary key got lost.") if @instance.id.to_s.empty?
-      @instance.id.to_s
+      # change the dir rules, every 2000 ids into one dir to enhance linux file system efficiency
+      (@instance.id / 2000).to_s
     end
   end
     

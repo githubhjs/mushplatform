@@ -104,7 +104,7 @@ module FileColumn # :nodoc:
             end
           end
         end
-        #File.chmod options[:permissions], dest_path
+        File.chmod options[:permissions], dest_path
       end
     end
   end

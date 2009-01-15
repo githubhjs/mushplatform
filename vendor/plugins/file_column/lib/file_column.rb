@@ -233,12 +233,12 @@ module FileColumn # :nodoc:
       else
         raise ArgumentError.new("Do not know how to handle #{file.inspect}")
       end
-      #File.chmod(options[:permissions], local_file_path)
+      File.chmod(options[:permissions], local_file_path)
       
       if options[:fix_file_extensions]
         # try to determine correct file extension and fix
         # if necessary
-        # content_type = get_content_type((file.content_type.chomp if file.content_type))
+        #content_type = get_content_type((file.content_type.chomp if file.content_type))
         if content_type and options[:mime_extensions][content_type]
           @filename = correct_extension(@filename,options[:mime_extensions][content_type])
         end

@@ -80,7 +80,7 @@ EDiaryEditor = {
 				<div id='EDiaryEditorToolBar' style='position: relative; width: 621px; height: 69px; background-image: url(images/editor/toolbar_bg.gif);'>\
 					<div id='EDiaryEditorFontFamilyMenu' title='字体' style='position: absolute; left: 80px; top: 12px; width: 92px; height: 18px; line-height: 20px; padding-left: 4px; cursor: pointer;' action='Family' unselectable='on'>字体</div>\
 					<div id='EDiaryEditorFontSizeMenu' title='字号' style='position: absolute; left: 177px; top: 12px; width: 66px; height: 18px; line-height: 20px; padding-left: 4px; cursor: pointer;' action='Size' unselectable='on'>字号</div>\
-					<div id='EDiaryEditorFontStyleMenu' title='段落' style='position: absolute; left: 245px; top: 12px; width: 66px; height: 18px; line-height: 20px; padding-left: 4px; cursor: pointer;' action='Style' unselectable='on'>段落</div>\
+					<div id='EDiaryEditorFontStyleMenu' title='标题' style='position: absolute; left: 245px; top: 12px; width: 66px; height: 18px; line-height: 20px; padding-left: 4px; cursor: pointer;' action='Style' unselectable='on'>标题</div>\
 				</div>\
 				<div style='width: 621px; height: 25px; background-image: url(images/editor/title_bg.gif);'>\
 				</div>\
@@ -162,13 +162,13 @@ EDiaryEditor = {
 
             ],
             Style: [
-                {t: "div",n:"取消段落", s: "14"},     
-                {t: "H1",n:"段落1", s: "32"},
-                {t: "H2",n:"段落2", s: "24"},
-                {t: "H3",n:"段落3", s: "18"},
-                {t: "H4",n:"段落4", s: "16"},
-                {t: "H5",n:"段落5", s: "12"},
-                {t: "H6",n:"段落6", s: "10"}
+                {t: "div",n:"取消标题", s: "14"},
+                {t: "H1",n:"标题1", s: "32"},
+                {t: "H2",n:"标题2", s: "24"},
+                {t: "H3",n:"标题3", s: "18"},
+                {t: "H4",n:"标题4", s: "16"},
+                {t: "H5",n:"标题5", s: "12"},
+                {t: "H6",n:"标题6", s: "10"}
             ]
         };
 
@@ -793,7 +793,7 @@ EDiaryEditor = {
 			scrollbar-track-color: #f4f4f0;\
 			scrollbar-darkshadow-color: #ebebe4;\
 			word-wrap: break-word;\
-			font-family: '����', 'Courier New';\
+			font-family: '宋体', 'Courier New';\
 		}\
 		p {\
 			margin: 0px;\
@@ -962,9 +962,9 @@ EDiaryEditor = {
             var oChild	= oBody.childNodes;
             for(var i = 0; i < oChild.length; i++){
                 if(oChild[i].tagName){
-                    oChild[i].innerHTML	= oChild[i].innerHTML.split('&nbsp;').join('');
-                    oChild[i].innerHTML	= oChild[i].innerHTML.replace(/(^[ |��|��]*)|([ |��|��]*$)/g, "");
-                    oChild[i].innerHTML	= oChild[i].innerHTML.split('').join('&nbsp;');
+                    //oChild[i].innerHTML	= oChild[i].innerHTML.split('&nbsp;').join('');
+                    //oChild[i].innerHTML	= oChild[i].innerHTML.replace(/(^[ |��|��]*)|([ |��|��]*$)/g, "");
+                    //oChild[i].innerHTML	= oChild[i].innerHTML.split('').join('&nbsp;');
                     if(!oChild[i].style.textIndent){
                         oChild[i].style.textIndent='0em';
                     }else{
@@ -972,7 +972,7 @@ EDiaryEditor = {
                     }
                 }else{
                     //oBody.innerHTML = '<div style="text-indent:2em;">' + oBody.innerHTML.replace(/(^[ |��]*)|([ |��]*$)/g, ""); + '</div>';
-                    oBody.innerHTML = oBody.innerHTML.replace(/(^[ |��]*)|([ |��]*$)/g, "");            
+                    //oBody.innerHTML = oBody.innerHTML.replace(/(^[ |��]*)|([ |��]*$)/g, "");
                 }
             }
         }

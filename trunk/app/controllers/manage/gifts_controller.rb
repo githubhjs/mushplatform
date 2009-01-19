@@ -97,17 +97,23 @@ class Manage::GiftsController < Manage::ManageController
   end
   
   def send_to
-    @gift_user =  GiftUser.new(params[:gift_user])
-    @gift_user.user_id = current_user.id
-    if @gift_user.save
-      @notice = "礼品赠送成功! "
-      render :action => "success"
-    else
+    if params[:friend_name].blank?
+      @notice = "清选要赠送的择礼物"
       @firends = current_user.friends
       @gifts   = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
-      flash[:notice] = @gift_user.errors.full_messages.join(';')
+      @gift_user =  GiftUser.new(params[:gift_user])
       render :action => :send_for
     end
+    params[:friend_name].split(',').each do |f_name|
+      if f_user = User.find_by_user_name(f_name)
+        @gift_user =  GiftUser.new(params[:gift_user])
+        @gift_user.user_id = current_user.id
+        @gift_user.friend_id = f_user.id
+        @gift_user.save
+      end
+    end
+    @notice = "礼品赠送成功! "
+    render :action => "success"
   end
 
   def receive

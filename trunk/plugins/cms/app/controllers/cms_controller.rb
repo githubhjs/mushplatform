@@ -4,22 +4,22 @@ class CmsController < ApplicationController
   def dispatch
     path = params[:path]
     if path.index('content')
-      channel_layout, content = recognize_content(path)
+      channel_layout, content, title = recognize_content(path)
     elsif path.index('article')
-      channel_layout, content = recognize_article(path)
+      channel_layout, content, title = recognize_article(path)
     elsif path.length == 0 or path.index('channel')
-      channel_layout, content = recognize_channel(path)
+      channel_layout, content, title = recognize_channel(path)
     else
       channel = Channel.find_by_permalink("/#{path[0]}")
       if channel
-        channel_layout, content = recognize_channel(path)
+        channel_layout, content, title = recognize_channel(path)
       else
-        channel_layout, content = recognize_other(path)
+        channel_layout, content, title = recognize_other(path)
       end
     end
     mimetype = "text/html"
     mimetype = channel.mimetype if channel and channel.mimetype
-    render :content_type => mimetype, :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content, 'page' => params[:page]) : 'Page Not Found'
+    render :content_type => mimetype, :text => channel_layout ? Liquid::Template.parse(channel_layout).render('content' => content, 'page' => params[:page], 'title' => title) : 'Page Not Found'
   end
   
   def recognize_channel(path)
@@ -34,7 +34,7 @@ class CmsController < ApplicationController
     else
       channel_layout = channel.body
     end
-    return channel_layout, content
+    return channel_layout, content, channel.name
   end
 
   def recognize_article(path)
@@ -54,8 +54,8 @@ class CmsController < ApplicationController
       # template to render 'Article Not Found'
 #      channel_layout, content = recognize_channel(path[0, 1])
 #      content = 'Article Not Found'
-      channel_layout, content = recognize_channel([])
-      return channel_layout, content
+      channel_layout, content, title = recognize_channel([])
+      return channel_layout, content, title
     end
     channel = article.channel
 #    if channel.template_id
@@ -71,7 +71,7 @@ class CmsController < ApplicationController
     channel_layout = channel.template.body
     #content = Liquid::Template.parse(channel.article_template.body).render('channel' => channel, 'article' => article, 'content' => article_content, 'contents' => contents)
     content = Liquid::Template.parse(find_template(channel,'article')).render('channel' => channel, 'article' => article, 'content' => article_content, 'contents' => contents)
-    return channel_layout, content
+    return channel_layout, content, article.title
   end
 
   def recognize_content(path)
@@ -87,15 +87,15 @@ class CmsController < ApplicationController
     rescue
       # if couldn't find article, using channel's 
       # template to render 'Article Not Found'
-      channel_layout, content = recognize_channel(path[0, 1])
+      channel_layout, content, title = recognize_channel(path[0, 1])
       content = 'Article Not Found'
-      return channel_layout, content
+      return channel_layout, content, title
     end
     channel = article.channel
     contents = list_contents(article)
     channel_layout = "{{content}}"
     content = Liquid::Template.parse(channel.content_template.body).render('channel' => channel, 'article' => article, 'contents' => contents)
-    return channel_layout, content
+    return channel_layout, content, article.title
   end
 
   def recognize_other(path)
@@ -110,7 +110,7 @@ class CmsController < ApplicationController
     else
       channel_layout = channel.body
     end
-    return channel_layout, content
+    return channel_layout, content, dynamics
   end
   
   def recognize_permalink(path)

@@ -238,9 +238,16 @@ function validate_vote_form(){
 }
 
 function select_friend(){
-    $('friend_name').value = $('selected_friend').value;
+    friend_name = $('friend_name');
+    selected_friend = $('selected_friend')
+    if(friend_name.value == ''){
+        friend_name.value += selected_friend.value;
+    }else{
+        friend_name.value += (','+selected_friend.value);
+    }
     $('friend_list').hide();
 }
+
 function change_friend(radio){
     friend_input = $('selected_friend');
     friend_input.value = radio.value;

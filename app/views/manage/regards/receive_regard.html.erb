@@ -12,11 +12,11 @@
         <td class="tit" width="283">内容</td>
         <td class="tit" width="110">发送好友</td>
       </tr>
-      <%for reagard_user in @user_reagrds do %>
-        <tr id="t_<%= reagard_user.id %>">
-          <td><img src="/images/regard_imgs/<%=  reagard_user.regard.icon %>"></td>
+      <%for regard_user in @user_reagrds do %>
+        <tr id="t_<%= regard_user.id %>">
+          <td><img src="/images/regard_imgs/<%=  regard_user.regard.icon %>"></td>
           <td>
-             <a href="<%= gift_user.friend.space_url %>" target="_blank"><%= gift_user.friend.user_name %></a>
+             <a href="<%= regard_user.friend.space_url %>" target="_blank"><%= regard_user.friend.user_name %></a>
           </td>
         </tr>
       <%end%>

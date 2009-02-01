@@ -23,8 +23,8 @@
     <div>
       <div>
         <p><b><br />
-          赠送给：</b><font style="color:red;"></font>
-          <input type="text" id="friend_name" name="regard_user[friend_name]"><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
+          问候：</b><font style="color:red;"></font>
+          <input type="text" id="friend_name" name="friend_name" value="<%= params[:friend_name] %>"><img src="/images/xx_xx1.gif" align="absmiddle" onclick="Element.show('friend_list');"></img><br/>
         </p>
       </div>
       <%= render :partial => "/manage/gifts/friend_list" %>

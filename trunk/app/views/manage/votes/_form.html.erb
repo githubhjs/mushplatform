@@ -18,10 +18,19 @@
 
 <% (1..10).each do |i| %>
   <p><b>候选项<%=i%>：</b>
-<input name="vote[vote_options][]" value="" size="50">
+  <input name="vote[vote_options][]" value="" size="50">
+  <% if i == 10  %><input type="button" value="更多候选项" onclick="Element.toggle('more_options')"> <%end%>
       </p>
     <%end%>
-<p>
+   <p>
+<div id="more_options" style="display:none;">
+<% (11..20).each do |i| %>
+  <p><b>候选项<%=i%>：</b>
+  <input name="vote[vote_options][]" value="" size="50">
+      </p>
+    <%end%>
+</div>
+   <p>
       <b>可投选项：</b>
       <select name="vote[multi_selcect]">
         <option value="1">单选</option>

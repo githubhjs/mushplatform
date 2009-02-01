@@ -103,6 +103,7 @@ class Manage::GiftsController < Manage::ManageController
       @gifts   = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
       @gift_user =  GiftUser.new(params[:gift_user])
       render :action => :send_for
+      return
     end
     params[:friend_name].split(',').each do |f_name|
       if f_user = User.find_by_user_name(f_name)

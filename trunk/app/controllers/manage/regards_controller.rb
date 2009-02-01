@@ -92,23 +92,25 @@ class Manage::RegardsController < Manage::ManageController
     end
   end
   
-  def send_to
-    @regard_user =  RegardUser.new(params[:regard_user])
-    @regard_user.user_id = current_user.id
-    unless (friend_name  = params[:regard_user][:friend_name]).blank?
-      debugger
-      usr = User.find_by_user_name(friend_name)
-      @regard_user.friend_id = usr.id if usr
-    end
-    if @regard_user.save
-      @notice = "礼品赠送成功! "
-      render :action => "success"
-    else
+   def send_to
+    if params[:friend_name].blank? || params[:regard_user][:regard_id].blank?
       @firends = current_user.friends
       @regards   = Regard.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page)
-      flash[:notice] = @regard_user.errors.full_messages.join(';')
+      @regard_user =  RegardUser.new(params[:regard_user])
+      flash[:notice] = params[:friend_name].blank? ? "请选择至少一个好友" : "请选择招呼"
       render :action => :send_for
+      return
     end
+    params[:friend_name].split(',').each do |f_name|
+      if f_user = User.find_by_user_name(f_name)
+        @regard_user =  RegardUser.new(params[:regard_user])
+        @regard_user.user_id = current_user.id
+        @regard_user.friend_id = f_user.id
+        @regard_user.save
+      end
+    end
+    @notice = "问候成功! "
+    render :action => "success"
   end
   
   def receive

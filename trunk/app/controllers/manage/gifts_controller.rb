@@ -114,7 +114,7 @@ class Manage::GiftsController < Manage::ManageController
       end
     end
     @notice = "礼品赠送成功! "
-    render :action => "success"
+    redirect_to :action => :send_gifts
   end
 
   def receive
@@ -125,7 +125,8 @@ class Manage::GiftsController < Manage::ManageController
 
   def send_gifts
     @gift_user = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}")
-    render :template => "/manage/gifts/receive_gift"
+    render :template => "/manage/gifts/send_gifts"
     return
   end
+  
 end

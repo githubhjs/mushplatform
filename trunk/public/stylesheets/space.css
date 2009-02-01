@@ -317,7 +317,7 @@ solid #4d4c4c;position:relative;}
   list-style: square;
 }
 
-.pagination {}
+.pagination { width:95%; margin:20px auto; text-align:center; clear:both;}
 .pagination .current {font-weight:bold;}
 
 
@@ -407,3 +407,28 @@ padding:10px;
 .thumb_action p{
  padding: 3px;   
 }
+
+.photo{width:95%; margin:0 auto; color:#464646; clear:both;}
+.photo img{ display:block; width:100px; height:100px; margin:5px auto; background:#FFFFFF; border:1px solid #c3d7f4; padding:5px; clear:both;}
+.photo li{ width:150px; text-align:center; display:block; float:left; margin-bottom:20px;}
+.photo p{ width:130px; height:25px; line-height:25px; overflow:hidden;}
+
+.list{ width:90%; margin:0 auto;color:#464646; line-height:25px;}
+.list li{ display:block;width:100%; height:25px;overflow: hidden; text-overflow:ellipsis }
+
+.box{ width:100%; border:1px solid #ccc; background:#fff7f7; padding:1px;}
+.title1{ width:100%; height:25px;text-align:right; color:#e56366; font-size:14px; font-weight:bold;}
+
+.title2{ width:100%; height:25px; background:url(../images/title2.gif) repeat-x 0 0;}
+.title2 p{ display:inline; float:left; width:250px; height:25px; line-height:25px; color:#000; size:12px; font-weight:bold; padding-left:5px;}
+.title2 span{ float:right; margin-right:5px;}
+.more{ float:right;}
+
+.height12{width:50%; height:12px;clear:both; }
+.height20{width:50%; height:20px;clear:both; }
+
+.left{ float:left; width:45%; padding-left:20px;}
+.right{ float:right; width:45%;padding-right:20px;}
+.btbt{ width:100%; height:25px; border-bottom:1px dotted #de363a; color:#de363a; font-size:13px; font-weight:bold; background:#ffe2e3; padding-left:10px;}
+
+.pic img{ width:724px;}

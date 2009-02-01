@@ -5,24 +5,25 @@
   <!--person_menu-->
   <%=  render :partial => "/manage/photos/photo_menu" %>
   <!--person_menu-->
-  <div class="m">
-    <h3>博客相册</h3>
-
-    <div style="width: 100%;">
-      <%for photo in @photos do %>
-      <div class="picture_thumb">
-        <div>
-          <span class="thumb_box">
+  <div style="width: 100%;">
+    <div class="title1">相册列表</div>
+    <div class="box">
+      <div class="height12"></div>
+      <div class="photo">
+        <ul>
+          <%for photo in @photos do %>
+          <li>
             <a href="/manage/photos/<%= photo.id %>"><img  src="<%= photo.mid_link %>"></a>
-          </span>
-        </div>
-        <div class="thumb_action">
-           <p><%= photo.title %></p>
+            <p><%= photo.title %></p>
            <p><a href="/manage/photos/<%= photo.id %>/edit">编辑</a> <a href="/manage/photos/<%= photo.id %>" onclick="if (confirm('你确定要删除这个图片？')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">删除</a></p>
-        </div>
+          </li>
+          <%end%>
+        </ul>
       </div>
-      <%end%>
+      <div class="height12"></div>
     </div>
-    <div></div>
+    <div class="pagination">
+      <%= will_paginate @photos,{:prev_label => '上一页', :next_label => '下一页'} %>
+    </div>
   </div>
 </div><!--m_r-->

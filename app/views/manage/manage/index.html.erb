@@ -1,55 +1,20 @@
 <%=  render :partial => "/manage/share/left" %>
-
 <div class="m_r">
-
   <div class="person_menu">
-    <div class="p_m1">
-      <div class="m1_bg">
-        <ul class="L">
-          <li class="hot">我的空间</li>
-          <li class="border"></li>
-          <li><a href="/manage/blogs">博客</a></li>
-          <li class="border"></li>
-          <li><a href="">相册</a></li>
-          <li class="border"></li>
-          <li><a href="">活动</a></li>
-          <li class="border"></li>
-          <li><a href="">公告</a></li>
-          <li class="border"></li>
-          <li><a href="">交易</a></li>
-          <li class="border"></li>
-        </ul>
-        <P class="R"><a href="">安全退出</a></P>
-      </div>
-    </div>
-    <div class="p_m2">
-      <div class="m2_bg">
-        <ul class="L">
-          <li><a href="">我的资料</a></li>
-          <li><a href="">我的积分</a></li>
-          <li><a href="">好友</a></li>
-          <li><a href="">圈子</a></li>
-          <li><a href="">小纸条</a></li>
-
-        </ul>
-      </div>
-    </div>
+    <%=  render :partial => "/manage/share/person_menu"%>
     <div class="shadow"></div>
-  </div><!--person_menu-->
-
+  </div>
   <div class="user_b L" >
     <div class="user_info">
-      <h4>用户名：pawa</h4>
       <ul class="L">
-        <li><a class="red_underline" href="">发表日志</a> （10）</li>
+        <li><a class="red_underline" href="/manage/blogs">发表日志</a> （10）</li>
         <li><a class="red_underline" href="">参与评论</a> （8）</li>
-        <li><a class="red_underline" href="">发布信息</a>（5）</li>
-        <li><a class="red_underline" href="">参与活动</a> （12）</li>
-        <li><a class="red_underline" href="">新收纸条</a>（3）</li>
-        <li><a class="red_underline" href="">我的积分</a> （30）</li>
+        <li><a class="red_underline" href="">发布公告</a>（5）</li>
+        <li><a class="red_underline" href="">参与投票</a> （12）</li>
+        <li><a class="red_underline" href="">收到礼物</a>（3）</li>
+        <li><a class="red_underline" href="">收到问候</a> （30）</li>
       </ul>
     </div>
-
     <div class="Guestbook clear">
       <div class="tit border"><h6>留言板</h6></div>
       <form>
@@ -116,7 +81,6 @@
             <li><a href=""><img class="rss" src="images/ico_rss.gif"/></a><a href="">订阅</a></li>
           </ul>
         </div>
-
         <div class="friend_b L">
           <a href=""><img class="L" src="images/pic_friend.gif"/></a>
           <p class="L">昵称：<a href="">qing qing cao</a></p>
@@ -128,7 +92,5 @@
 
       </div>
     </div>
-
   </div>
-
 </div><!--m_r-->

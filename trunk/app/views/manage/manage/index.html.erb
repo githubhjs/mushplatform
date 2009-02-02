@@ -7,12 +7,12 @@
   <div class="user_b L" >
     <div class="user_info">
       <ul class="L">
-        <li><a class="red_underline" href="/manage/blogs">发表日志</a> （10）</li>
-        <li><a class="red_underline" href="">参与评论</a> （8）</li>
-        <li><a class="red_underline" href="">发布公告</a>（5）</li>
-        <li><a class="red_underline" href="">参与投票</a> （12）</li>
-        <li><a class="red_underline" href="">收到礼物</a>（3）</li>
-        <li><a class="red_underline" href="">收到问候</a> （30）</li>
+        <li><a class="red_underline" href="/manage/blogs">发表日志</a> （<%= current_user.blogs.count %>）</li>
+        <li><a class="red_underline" href="">参与评论</a> （<%= current_user.comments.count %>）</li>
+        <li><a class="red_underline" href="">发布公告</a>（<%= current_user.messages.count %>）</li>
+        <li><a class="red_underline" href="">参与投票</a> （<%= current_user.user_votes.count %>）</li>
+        <li><a class="red_underline" href="">收到礼物</a>（<%= current_user.receive_regards.count %>）</li>
+        <li><a class="red_underline" href="">收到问候</a> （<%= current_user.receive_gifts.count %>）</li>
       </ul>
     </div>
     <div class="Guestbook clear">
@@ -24,63 +24,24 @@
             <div class="list">
               <div class="btbt">好友动态</div>
               <ul>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-            <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li></ul></div>
-
+                <li><a href="" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
+              </ul>
+            </div>
           </div>
           <div class="right">
             <div class="list">
               <div class="btbt">最新回复</div>
               <ul>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-
-                <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-            <li><a href="file:///C:/Documents%20and%20Settings/IBM/%E6%A1%8C%E9%9D%A2/add/Gift.htm#" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li></ul></div>
+                <li><a href="" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
+              </ul>
+            </div>
           </div>
           <div class="height12"></div>
           <div class="height12"></div>
         </div>
         <div class="height12"></div>
-
-        <input name="category_id" type="hidden"> <!--select name="category_id"  onchange="window.location.href='/manage/blogs?category_id=' + this.options[this.options.selectedIndex].value">
-
-      </select--></div>
-      <!--
-      <div class="tit border"><h6>留言板</h6></div>
-      <form>
-        <textarea name="guestbook" cols="62" rows="5"></textarea>
-        <input class="button" name="submit" type="button" value="发表留言">
-      </form>
-      <div class="line"></div>
-      <div class="txt_b">
-        <P><font class="L">2008-09-05 <a href="">pawa</a></font><font class="R"><a class="red_underline" href="">删除</a></font></P>
-        <P class="clear"><a href="">能有个假期真好啊！</a></P>
+        <input name="category_id" type="hidden">
       </div>
-      <div class="txt_b">
-        <P><font class="L">2008-09-05 <a href="">xiao-fox</a></font><font class="R"><a class="red_underline" href="">删除</a></font></P>
-        <P class="clear"><a href="">不错了，我好就都没有歇假了，你就知足吧！</a></P>
-      </div>
-      <div class="txt_b">
-        <P><font class="L">2008-09-05 <a href="">pawa</a></font><font class="R"><a class="red_underline" href="">删除</a></font></P>
-        <P class="clear"><a href="">能有个假期真好啊！</a></P>
-      </div>
-      <div class="txt_b">
-        <P><font class="L">2008-09-05 <a href="">xiao-fox</a></font><font class="R"><a class="red_underline" href="">删除</a></font></P>
-        <P class="clear"><a href="">不错了，我好就都没有歇假了，你就知足吧！</a></P>
-      </div>
-    --->
     </div>
   </div>
 
@@ -103,7 +64,7 @@
             <p class="L"><a href=""><%= user.user_name %> </a></p>
             <ul class="L">
               <!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
-                <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
+                  <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
             </ul>
             <p><font style="font-weight:bold;color:#999;">&times;</font>&nbsp;<%= link_to '删除好友', {:controller => 'manage/friends',:action => 'destroy', :id => user.id}, :method => 'delete', :class => 'grey' %></p>
           </div>

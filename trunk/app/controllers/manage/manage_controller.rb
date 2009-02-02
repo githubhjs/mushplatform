@@ -10,7 +10,6 @@ class Manage::ManageController < ApplicationController
   
   def index
     @friends = current_user.friends.find(:all,:limit => Latest_Friend_Count,:order => 'friends.created_at desc')
-    
   end
   
 end

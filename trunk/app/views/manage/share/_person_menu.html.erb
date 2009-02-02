@@ -1,71 +1,77 @@
 <div class="p_m1">
-    <div class="m1_bg">
-      <ul class="L">
-        <% if params[:controller] == 'manage/user_profiles' %>
-          <li class="hot">我的空间</li>
-        <%else%>
-          <li><a href="/manage/user_profiles"> 我的空间 </a></li>
-       <%end%>
-        <li class="border"></li>
-        <% if params[:controller] =~ /blogs|categories|comments|themes|blog_configs/%>
-           <li class="hot">博客</li>
-        <%else%>
-           <li class="hot"><a href="/manage/blogs">博客</a></li>
-        <%end%>
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/photos' %>
-            <li class="hot">相册</li>
-        <%else%>
-            <li><a href="/manage/photos">相册</a></li>
-        <%end%>
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/friends' %>
-            <li class="hot">好友</li>
-        <%else%>
-            <li><a href="/manage/friends">好友</a></li>
-        <%end%>
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/user_groups' %>
-            <li class="hot">群组</li>
-        <%else%>
-            <li><a href="/manage/user_groups">群组</a></li>
-        <%end%>
-        <!--
+  <div class="m1_bg">
+    <ul class="L">
+      <% if params[:controller] == 'manage/manage' %>
+        <li class="hot">首页</li>
+      <%else%>
+        <li><a href="/manage">首页</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] =~ /blogs|categories|comments|themes|blog_configs/%>
+        <li class="hot">博客</li>
+      <%else%>
+        <li class="hot"><a href="/manage/blogs">博客</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/photos' %>
+        <li class="hot">相册</li>
+      <%else%>
+        <li><a href="/manage/photos">相册</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/friends' %>
+        <li class="hot">好友</li>
+      <%else%>
+        <li><a href="/manage/friends">好友</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/user_groups' %>
+        <li class="hot">群组</li>
+      <%else%>
+        <li><a href="/manage/user_groups">群组</a></li>
+      <%end%>
+      <!--
         <li class="border"></li>
         <li><a href="">活动</a></li-->
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/messages' %>
-            <li class="hot">公告</li>
-        <%else%>
-            <li><a href="/manage/messages">公告</a></li>
-        <%end%>
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/gifts' %>
-            <li class="hot">礼物</li>
-        <%else%>
-            <li><a href="/manage/gifts/send_for">礼物</a></li>
-        <%end%>
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/votes' %>
-            <li class="hot">投票</li>
-        <%else%>
-            <li><a href="/manage/votes/new">投票</a></li>
-        <%end%>
-        <li class="border"></li>
-        <% if params[:controller] == 'manage/regards' %>
-            <li class="hot">打招呼</li>
-        <%else%>
-            <li><a href="/manage/regards/send_for">打招呼</a></li>
-        <%end%>
-        <!--li class="border"></li>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/messages' %>
+        <li class="hot">公告</li>
+      <%else%>
+        <li><a href="/manage/messages">公告</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/gifts' %>
+        <li class="hot">礼物</li>
+      <%else%>
+        <li><a href="/manage/gifts/send_for">礼物</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/votes' %>
+        <li class="hot">投票</li>
+      <%else%>
+        <li><a href="/manage/votes/new">投票</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/regards' %>
+        <li class="hot">打招呼</li>
+      <%else%>
+        <li><a href="/manage/regards/send_for">打招呼</a></li>
+      <%end%>
+      <li class="border"></li>
+      <% if params[:controller] == 'manage/user_profiles' %>
+        <li class="hot">详细资料</li>
+      <%else%>
+        <li><a href="/manage/user_profiles">详细资料</a></li>
+      <%end%>
+      <!--li class="border"></li>
         <li><a href="">交易</a></li>
         <li class="border"></li-->
         <%# if params[:controller] == 'manage/blog_configs' %>
-          <!--li class="hot">系统设置</li-->
-        <%#else%>
-          <!--li><a href="/manage/blog_configs">系统设置</a></li-->
-       <%#end%>
-      </ul>
-      <P class="R"><a href="/user/logout">安全退出</a></P>
-    </div>
+      <!--li class="hot">系统设置</li-->
+      <%#else%>
+      <!--li><a href="/manage/blog_configs">系统设置</a></li-->
+      <%#end%>
+    </ul>
+    <P class="R"><a href="/user/logout">安全退出</a></P>
   </div>
+</div>

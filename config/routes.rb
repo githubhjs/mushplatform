@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect   "/user/login",:controller => 'user',:action => 'login'
   map.connect   "/user/login_bar",:controller => 'user',:action => 'login_bar'
   map.connect   "/user/logout",:controller => 'user',:action => 'logout'
-  map.connect   "/manage",:controller => 'manage/blogs',:action => 'index'
+#  map.connect   "/manage",:controller => 'manage/blogs',:action => 'index'
   map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"
   map.connect   "/front/editors/upload_editor_image",:controller => 'front/editors',:action => "upload_editor_image"
   map.connect   "/front/editors/upload_editor_attach",:controller => 'front/editors',:action => "upload_editor_attach"
@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
     theme.connect    "/manage/themes/preview",:action => "preview"
     theme.connect    "/manage/themes/switchto",:action => "switchto"
   end
-  
+  map.connect "/manage",:controller => "manage/manage",:action => 'index'
   map.namespace :manage do |manage|
     manage.resources :blog_configs
     manage.resources :photos

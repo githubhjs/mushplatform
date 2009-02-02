@@ -2,8 +2,17 @@ require 'digest/sha1'
 
 class User < CachedModel
   
-  has_one :user_profile
-    
+  has_one  :user_profile
+  has_many :blogs
+  has_many :messages
+  has_many :receive_regards,:class_name => 'RegardUser',:foreign_key => 'friend_id'
+  has_many :send_regards,:class_name => 'RegardUser',:foreign_key => 'user_id'
+  has_many :receive_gifts,:class_name => 'GiftUser',:foreign_key => 'friend_id'
+  has_many :receive_gifts,:class_name => 'GiftUser',:foreign_key => 'user_id'
+  has_many :comments
+  has_many :user_votes,:foreign_key => 'voter_id'
+  has_many :votes
+  
   validates_length_of :user_name, :within => 5..40
   validates_length_of :password, :within => 6..40
   validates_presence_of :user_name, :email, :password, :password_confirmation, :salt

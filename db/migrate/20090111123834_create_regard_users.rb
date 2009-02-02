@@ -7,7 +7,7 @@ class CreateRegardUsers < ActiveRecord::Migration
       t.integer :regard_id
       t.string  :post
       t.integer :send_mode
-      t.timestamps
+      t.datetime :created_at
     end
   end
 

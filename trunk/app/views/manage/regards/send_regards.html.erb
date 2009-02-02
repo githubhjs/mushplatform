@@ -1,26 +1,22 @@
 <%=  render :partial => "/manage/share/left" %>
-
 <div class="m_r">
-
   <!--person_menu-->
   <%=  render :partial => "/manage/regards/regard_menu" %>
   <!--person_menu-->
-  <div class="manage_m L">
-    <h2>对好友的问候</h2>
-    <table cellpadding="0" cellspacing="0" id = "comment_table">
-      <tr>
-        <td class="tit" width="283">内容</td>
-        <td class="tit" width="110">接受好友</td>
-      </tr>
-      <%for reagard_user in @user_reagrds do %>
-        <tr id="t_<%= reagard_user.id %>">
-          <td><img src="/images/regard_imgs/<%=  reagard_user.regard.icon %>"></td>
-          <td>
-             <%= reagard_user.friend.user_name %>
-          </td>
-        </tr>
-      <%end%>
-    </table>
-
+  <div style="width: 100%;">
+    <div class="title1">对好友的问候</div>
+    <div class="box">
+      <div class="height12"></div>
+      <div class="list">
+        <ul>
+          <%for regard_user in @user_reagrds do %>
+            <li style="height:40px;">
+              于<%= regard_user.created_at.strftime('%y-%m-%d %H:%M') %><img src="/images/regard_imgs/<%=  regard_user.regard.icon %>"><a href="<%= regard_user.friend.space_url %>" target="_blank"><strong><%= regard_user.friend.user_name %></strong></a> ，<%= regard_user.post %>。
+            </li>
+          <%  end %>
+        </ul>
+      </div>
+    <div class="height12"></div></div>
+    <div class="height12"></div>
   </div>
 </div><!--m_r-->

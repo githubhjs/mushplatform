@@ -409,7 +409,7 @@ padding:10px;
 }
 
 .photo{width:95%; margin:0 auto; color:#464646; clear:both;}
-.photo img{ display:block; width:100px; height:100px; margin:5px auto; background:#FFFFFF; border:1px solid #c3d7f4; padding:5px; clear:both;}
+.photo img{ display:block; width:100px; height:75px; margin:5px auto; background:#FFFFFF; border:1px solid #c3d7f4; padding:5px; clear:both;}
 .photo li{ width:150px; text-align:center; display:block; float:left; margin-bottom:20px;}
 .photo p{ width:130px; height:25px; line-height:25px; overflow:hidden;}
 

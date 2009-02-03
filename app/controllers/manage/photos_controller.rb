@@ -3,11 +3,23 @@ class Manage::PhotosController < Manage::ManageController
 
   Photo_Perpage = 20
 
+  Friend_Latest_Photos_Count = 10
+  Max_Friend_Count = 10
+
   def index
-    @photos = Photo.user_photos(current_user.id).paginate(:page => params[:page],:per_page => Photo_Perpage)
+    @photos = current_user.photos.paginate(:page => params[:page],:per_page => Photo_Perpage)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @photos }
+    end
+  end
+
+  def friend_photos
+    friends = current_user.friends.find(:all,:limit => Max_Friend_Count)
+    @photos = if friends.blank?
+      []
+    else
+      Photo.find(:all,:conditions => "user_id in (#{friends.map(&:friend_id).join(',')})",:order => "created_at desc")
     end
   end
 

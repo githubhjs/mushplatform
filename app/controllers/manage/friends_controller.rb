@@ -7,7 +7,7 @@ class Manage::FriendsController <  Manage::ManageController
       format.html # index.html.erb
     end
   end
-  
+    
   def search
 #    if params[:query]
       @friends = UserProfile.find_all_by_real_name(params[:query])

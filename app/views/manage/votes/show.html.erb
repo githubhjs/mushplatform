@@ -7,6 +7,7 @@
   <div class="blog_write_m L">
     <h2>参加投票</h2>
     <div class="blog_write_top clear"></div>
+    <div><%= flash[:notice] %></div>
     <div class="blog_write_center">
       <%form_tag "/manage/votes/#{@vote.id}/post_vote",:name => "vote_form",:onsubmit => "return validate_vote_form();" do %>
       <div class="blog_write_center">

@@ -8,11 +8,10 @@
     <div class="user_info">
       <ul class="L">
         <li><a class="red_underline" href="/manage/blogs">发表日志</a> （<%= current_user.blogs.count %>）</li>
-        <li><a class="red_underline" href="">参与评论</a> （<%= current_user.comments.count %>）</li>
-        <li><a class="red_underline" href="">发布公告</a>（<%= current_user.messages.count %>）</li>
-        <li><a class="red_underline" href="">参与投票</a> （<%= current_user.user_votes.count %>）</li>
-        <li><a class="red_underline" href="">收到礼物</a>（<%= current_user.receive_regards.count %>）</li>
-        <li><a class="red_underline" href="">收到问候</a> （<%= current_user.receive_gifts.count %>）</li>
+        <li><a class="red_underline" href="/manage/messages">发布公告</a>（<%= current_user.messages.count %>）</li>
+        <li><a class="red_underline" href="/manage/votes">参与投票</a> （<%= current_user.user_votes.count %>）</li>
+        <li><a class="red_underline" href="/manage/gifts/receive">收到的礼物</a>（<%= current_user.receive_regards.count %>）</li>
+        <li><a class="red_underline" href="/manage/regards/receive">好友的问候</a> （<%= current_user.receive_gifts.count %>）</li>
       </ul>
     </div>
     <div class="Guestbook clear">
@@ -28,14 +27,14 @@
               </ul>
             </div>
           </div>
-          <div class="right">
+          <!--div class="right">
             <div class="list">
               <div class="btbt">最新回复</div>
               <ul>
                 <li><a href="" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
               </ul>
             </div>
-          </div>
+          </div-->
           <div class="height12"></div>
           <div class="height12"></div>
         </div>
@@ -56,7 +55,7 @@
       </div>
     </div>
     <div class="friend">
-      <div class="tit L"><h6 class="L"><font class="L">我的好友(30)</font><font class="R"><a class="red_underline" href="">全部好友</a></font></h6></div>
+      <div class="tit L"><h6 class="L"><font class="L">我的好友(<%= current_user.friends.count %>)</font><font class="R"><a class="red_underline" href="">全部好友</a></font></h6></div>
       <div class="friend_m border">
         <% for user in @friends -%>
           <div class="friend_b L">

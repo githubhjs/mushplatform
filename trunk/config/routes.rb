@@ -46,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/manage",:controller => "manage/manage",:action => 'index'
   map.namespace :manage do |manage|
     manage.resources :blog_configs
-    manage.resources :photos
+    manage.resources :photos,:collection => {:friend_photos => :get}
     manage.resources :categories,:collection => {:ajax_new => :get},:member => {:delete => :get,:ajax_update => :get}
     manage.resources :comments
     manage.resources :sidebars,:member => {:active => :get,:remove => :get,:lower => :get,:higher => :get}

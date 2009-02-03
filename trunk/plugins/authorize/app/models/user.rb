@@ -12,6 +12,7 @@ class User < CachedModel
   has_many :comments
   has_many :user_votes,:foreign_key => 'voter_id'
   has_many :votes
+  has_many :photos
   
   validates_length_of :user_name, :within => 5..40
   validates_length_of :password, :within => 6..40

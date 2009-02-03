@@ -1,0 +1,34 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+  <!--person_menu-->
+  <%=  render :partial => "/manage/votes/vote_menu_bar" %>
+  <!--person_menu-->
+  <div class="manage_m L">
+    <h2>随便看看</h2>
+    <%if @votes.blank?%>
+      无投票
+    <%else%>
+      <table cellpadding="0" cellspacing="0" id = "comment_table">
+        <tr>
+          <td class="tit" width="87">主题</td>
+          <td class="tit" width="110">到期时间</td>
+          <td class="tit" width="110">投票人数</td>
+          <td class="tit" width="110">参加</td>
+        </tr>
+        <%for vote in @votes do %>
+          <tr>
+            <td><%= h vote.title %></td>
+            <td><%= vote.expire_time.strftime('%m/%d/%y %H:%M:%S') %></td>
+            <td><%= vote.member_count %></td>
+            <td><% if vote.permite_vote?(current_user) %>
+                <a href="/manage/votes/<%= vote.id   %>">参加投票</a>
+              <%end%>
+            </td>
+          </tr>
+        <%end%>
+      </table>
+      <%= will_paginate @votes, {:prev_label => '上一页', :next_label => '下一页'} %>
+    <%end%>
+  </div>
+</div><!--m_r-->

@@ -17,7 +17,6 @@ class Manage::VotesController < Manage::ManageController
 
   def random_votes
     @votes = Vote.paginate(:page => params[:page]||1,:per_page => Rand_Vote_Perpage,:order => 'id')
-    render :action => :index
   end
 
   def friend_votes
@@ -26,9 +25,8 @@ class Manage::VotesController < Manage::ManageController
       []
     else
       Vote.paginate(:page => params[:page]||1,:per_page => Vote_PerPage,
-        :conditions => "user_id in (#{friends.map(&:id).join(',')})")
+        :conditions => "user_id in (#{friends.map(&:friend_id).join(',')})")
     end
-    render :action => :index
   end
 
   # GET /votes/1
@@ -43,8 +41,9 @@ class Manage::VotesController < Manage::ManageController
   end
   
   def post_vote
-    if params[:vote_values].blank?
-      flash[:notice] = '请至少选择一个候选项'
+    flash[:notice] = '每个用户只能投票一次'  if UserVote.find_by_voter_id(current_user.id)
+    flash[:notice] = '请至少选择一个候选项' if params[:vote_values].blank?
+    unless flash[:notice].blank?
       @vote = Vote.find(params[:id])
       @vote_options = VoteOption.find(:all,:conditions => "voter_id=#{@vote.id}")
       render :action => :show

@@ -7,6 +7,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.string   :orignal_link,:mid_link,:thumbnail_link, :null => false
       t.integer  :shared,:default => Photo::Shared_Yes
       t.integer  :user_id,:default => 0
+      t.datetime :created_at
     end
   end
 

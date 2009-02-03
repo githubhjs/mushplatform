@@ -1,0 +1,14 @@
+update regards set name_zh='踩一踩',name_en='cyc' where icon='cyc.gif';
+update regards set name_zh='顶一下',name_en='dianyx' where icon='dianyx.gif";
+update regards set name_zh='动一下',name_en='dyx' where icon='dyx.gif';
+update regards set name_zh='打招呼',name_en='dzh' where icon='dzh.gif';
+update regards set name_zh='握个手',name_en='wgs' where icon='wgs.gif';
+update regards set name_zh='摸一下',name_en='myx' where icon='myx.gif';
+update regards set name_zh='拥抱',name_en='yb' where icon='yb.gif';
+update regards set name_zh='飞吻',name_en='fw' where icon='fw.gif';
+update regards set name_zh='给一拳',name_en='gyq' where icon='gyq.gif';
+update regards set name_zh='挠痒痒',name_en='nyy' where icon='nyy.gif';
+update regards set name_zh='微笑',name_en='wx' where icon='wx.gif';
+update regards set name_zh='捏捏脚',name_en='nnj' where icon='nnj.gif';
+update regards set name_zh='咬一口',name_en='yyk' where icon='yyk.gif';
+update regards set name_zh='依偎',name_en='yw' where icon='yw.gif';

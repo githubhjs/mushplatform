@@ -3,6 +3,8 @@ class MySpaceController < ApplicationController
   skip_before_filter :verify_authenticity_token,:only => [:create_comment]  
   
   include ControllerExtend
+
+  layout current_theme.sns_layout
   
   Blog_Count_PerPage =   20
 
@@ -20,6 +22,12 @@ class MySpaceController < ApplicationController
     render_liquid({:template => 'entries',:layout => true},{'entries' => entries,'blog_owner' => blog_owner,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
   end
 
+  def sns_index
+    
+  end
+  
+  protected :sns_index
+  
   def show
     @blog = Blog.find(params[:id])
     @blog.add_view_count

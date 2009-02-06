@@ -21,6 +21,14 @@ class Theme
     them_info['title']||@name
   end
 
+  def theme_type
+    them_info['theme_type'] || 'default'
+  end
+  
+  def is_sns_theme?
+    theme_type == 'sns'
+  end
+
   def description
     them_info['description'] || @name
   end
@@ -44,8 +52,9 @@ class Theme
   def view_path
     "#{self.path}/templates"
   end
-  def layout #模板文件,在layouts文件里，叫default.html.erb  
-     "/layouts/default"
+
+  def sns_layout #模板文件,在layouts文件里，叫default.html.erb
+     "#{self.path}/layout/layout"
   end  
 
   def icon
@@ -68,8 +77,8 @@ class Theme
   end  
       
   def self.theme_from_path(path) #查找指定(path)的Theme  
-    name = path.scan(/[-\w]+$/i).flatten.first  
-    self.new(name, path)  
+    them_name = path.scan(/[-\w]+$/i).flatten.first
+    self.new(them_name, path)
   end  
       
   def self.find_all_theme  

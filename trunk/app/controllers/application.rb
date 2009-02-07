@@ -1,12 +1,11 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 require 'auth/auth'
+require 'util/date_util'
 class ApplicationController < ActionController::Base
   
   helper :all # include all helpers, all the time
   before_filter :set_locale
-
-  helper_method :is_blog_admin?
 
   def set_locale
       # update session if passed
@@ -53,7 +52,9 @@ class ApplicationController < ActionController::Base
   include Auth
  
   helper_method :current_user
-
+  helper_method :is_blog_admin?
+  helper_method :is_friend_with_blog_admin?
+  
   protected
   def redirect_to_stored
     if return_to = session[:return_to]

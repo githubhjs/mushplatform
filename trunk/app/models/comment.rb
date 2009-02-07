@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
 
   belongs_to :blog
+  belongs_to :user
 
   #validates_length_of :title,:in => 1..120,:too_short => "名字不能少于1个字符",:too_long => "标题不能大于120个字符"
   validates_length_of :body,:minimum => 5,:too_short => "内容不能少于5个字符"

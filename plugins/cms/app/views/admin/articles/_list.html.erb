@@ -1,5 +1,5 @@
 
-    <% form_remote_tag(:url => '/admin/articles/destroy', :html => {:id => 'posts-filter'}) do %>
+    <% form_remote_tag(:url => "/admin/articles/destroy?page=#{params[:page]}", :html => {:id => 'posts-filter'}) do %>
     <input type="hidden" name="channel_id" value="<%= @channel.id %>" />
     <input type="hidden" name="standalone" value="<%= @standalone %>" />
 
@@ -54,7 +54,7 @@
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= article.id %>" /></th>
           <td><%= article.id %></td>
-          <td><strong><%= link_to_remote article.title, :url => {:controller => 'admin/articles', :action => 'edit', :id => article.id, :standalone => @standalone ? @standalone : ''} %></strong></td>
+          <td><strong><%= link_to_remote article.title, :url => {:controller => 'admin/articles', :action => 'edit', :id => article.id, :standalone => @standalone ? @standalone : '', :page => params[:page]} %></strong></td>
           <td><%= article.author %></td>
           <td><%= article.status %></td>
           <td><abbr title="<%= article.created_at %>"><%= timelong(article.created_at) %></abbr></td>
@@ -68,7 +68,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-      <%= will_paginate(@articles, {:prev_label => (t 'text.previous'), :next_label => (t 'text.next'), :renderer => 'RemoteLinkRenderer', :params => {:channel_id => @channel.id }}) %>
+      <%= will_paginate(@articles, {:page_url => '/admin/articles',:prev_label => (t 'text.previous'), :next_label => (t 'text.next'), :renderer => 'RemoteLinkRenderer', :params => {:channel_id => @channel.id }}) %>
     </div>
 
     <br class="clear" />

@@ -15,6 +15,10 @@ module ControllerExtend
     end
   end
   
+  def theme_layout
+    current_theme.sns_layout
+  end
+
   def parse_liquid(template,options)
     parse_template("#{current_theme.view_path}/#{template}.liquid",options)
   end
@@ -55,7 +59,7 @@ module ControllerExtend
   end
   
   # Retrieves the current set theme
-  def current_theme(passed_theme=nil)
+  def current_theme(passed_theme = nil)
     theme_name = unless passed_theme .blank?
       passed_theme
     else
@@ -71,5 +75,12 @@ module ControllerExtend
   
   def current_blog_user
     User.find_by_user_name(request.subdomains.first)
-  end   
+  end
+  
+  def setup_theme
+    if current_theme.is_sns_theme?
+      self.view_paths = ::ActionController::Base.view_paths.dup.unshift(current_theme.sns_theme_view)
+    end
+  end
+  
 end

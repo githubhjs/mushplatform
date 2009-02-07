@@ -1,5 +1,5 @@
 module Crawler
-  require File.dirname(__FILE__) +'/extensions' if (enable = false)
+  require File.dirname(__FILE__) +'/extensions'
   
   def self.init
   end

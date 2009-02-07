@@ -16,7 +16,15 @@ module Auth
   end 
   
   def is_blog_admin?
-    current_user #&& current_user.user_name == request.subdomains.first
+    current_user && current_user.user_name == request.subdomains.first
+  end
+
+  def is_friend_with_blog_admin?
+    !is_blog_admin? && blog_owner.is_friend_with?(current_user)
+  end
+
+  def blog_owner
+    @blog_owner ||= User.find_by_user_name(request.subdomains.first)
   end
 
   def is_space_admin?

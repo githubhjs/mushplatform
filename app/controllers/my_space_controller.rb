@@ -4,37 +4,72 @@ class MySpaceController < ApplicationController
   
   include ControllerExtend
 
-  layout current_theme.sns_layout
+  layout :theme_layout
   
-  Blog_Count_PerPage =   20
-
+  Blog_Count_PerPage =   2
   Rss_Blog_Perppage = 20
-
   Comment_Count_PerPage = 50
-
   Photo_PerPage = 20
-  
+  Latest_Votes_Count = 5
+  Latest_Blogs_Count = 5
+  Latest_Photos_Count = 4
+  Latest_Groups_Count = 5
+  Latest_Friends_Count = 6
+  Hot_Blog_Count = 10
+  Latest_Messages_Count = 20
+  Latest_Friends_Count  = 24
   helper_method :current_blog_user  
-  
+
+  before_filter :setup_theme
+ 
   def index
+    unless current_theme.is_sns_theme?
+      general_blog_index
+    else
+      sns_index
+    end
+    return 
+  end
+
+  def general_blog_index
     entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions =>generate_conditions)
     blog_owner = is_blog_admin? ? current_user : nil
     render_liquid({:template => 'entries',:layout => true},{'entries' => entries,'blog_owner' => blog_owner,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
   end
 
   def sns_index
-    
+    @votes        =  current_blog_user.votes.find(:all,:limit => Latest_Votes_Count,:order => 'id desc')
+    @blogs        =  current_blog_user.blogs.find(:all,:limit => Latest_Blogs_Count,:order => 'id desc')
+    @photos       =  current_blog_user.photos.find(:all,:limit => Latest_Photos_Count,:order => 'id desc')
+    @message      =  current_blog_user.messages.find(:first,:order => 'id desc')
+    @friends      = current_user.friends.find(:all,:limit => Latest_Friends_Count,:order => 'id desc')
+    @user_groups  =  current_blog_user.user_groups.find(:all,:limit => Latest_Groups_Count,:order => 'id desc')
+    render :template => 'index'
   end
   
-  protected :sns_index
+  def blogs
+    @categories = current_blog_user.categories
+    @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc")
+    @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions => generate_conditions)
+    render :template => 'blogs'
+  end
+
+  protected :sns_index,:general_blog_index
   
   def show
     @blog = Blog.find(params[:id])
     @blog.add_view_count
     @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at")
-    render_liquid({:template => 'entry',:layout => true},{'entry' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => "#{request.path.gsub(/\/comments\/page\/\d+/,'')}/comments"}})
+    unless current_theme.is_sns_theme?
+      render_liquid({:template => 'entry',:layout => true},{'entry' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => "#{request.path.gsub(/\/comments\/page\/\d+/,'')}/comments"}})
+    else
+      @categories = current_blog_user.categories
+      @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc")
+      render :template => 'blog'
+    end
+    return 
   end
-
+  
   def create_comment
     if user = (current_user || (params[:user] && User.authenticate(params[:user][:user_name],params[:user][:password])))
       @comment = Comment.new(params[:comment])
@@ -44,9 +79,15 @@ class MySpaceController < ApplicationController
       @comment.blog_user_id = current_blog_user.id
       if @comment.save
         Blog.connection.execute("update blogs set comment_count = comment_count + 1 where id=#{@comment.blog_id}")
-        content = parse_liquid('_comment',{'comment' => @comment })
-        render :update do |page|
-          page.insert_html :bottom, 'comments',content
+        unless current_theme.is_sns_theme?
+          content = parse_liquid('_comment',{'comment' => @comment })
+          render :update do |page|
+            page.insert_html :bottom, 'comments',content
+          end
+        else
+          render :update do |page|
+            page.insert_html :bottom, 'comments',:partial => "/share/comment",:locals => {:comment => @comment }
+          end
         end
       else
         render :update do |page|
@@ -70,17 +111,37 @@ class MySpaceController < ApplicationController
 
 
   def photos
-    @photos = Photo.user_photos(current_blog_user.id).paginate(:page => params[:page],:per_page => Photo_PerPage)
-    render_liquid({:template => 'photos',:layout => true},{'photos' => @photos,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1}})
+    @photos = Photo.user_photos(current_blog_user.id).paginate(:page => params[:page],:per_page => Photo_PerPage,:order => "id desc")
+    unless current_theme.is_sns_theme?
+      render_liquid({:template => 'photos',:layout => true},{'photos' => @photos,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1}})
+    else
+      render :template => "photos"
+    end
+    return
   end
 
   def photo
     @photo = Photo.find(params[:id])
     @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id}",:order => "id")
     @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id}",:order => "id")
-    render_liquid({:template => 'photo',:layout => true},{'photo' => @photo,'next_photo' => @next_photo,'per_photo' => @per_photo} )
+    unless current_theme.is_sns_theme?
+      render :content_type => "application/xml",:template => "/my_space/rss",:layout => 'rss'
+    else
+      @photos =  current_blog_user.photos.find(:all,:limit => Latest_Photos_Count,:order => 'id desc')
+      render :template => 'photo'
+    end
+    return
   end
 
+  def messages
+    @messages = current_blog_user.messages.paginate(:page => params[:page],:per_page => Latest_Messages_Count,:order => "id desc")
+    render :template => 'messages'
+  end
+
+  def friends
+    @friends = current_blog_user.friends.paginate(:page => params[:page],:per_page => Latest_Friends_Count,:order => "friends.created_at desc")
+    render :template => 'friends'
+  end
   protected
   
   def keep_params

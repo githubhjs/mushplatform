@@ -41,6 +41,10 @@ class Theme
     "#{RAILS_ROOT}/themes/#{self.name}"
   end
 
+  def sns_theme_view
+    "#{path}/views"
+  end
+
   def liquid_layout
     "#{self.path}/templates/layout"
   end
@@ -54,7 +58,7 @@ class Theme
   end
 
   def sns_layout #模板文件,在layouts文件里，叫default.html.erb
-     "#{self.path}/layout/layout"
+     "/layout/layout"
   end  
 
   def icon
@@ -75,7 +79,7 @@ class Theme
   def self.theme_path(name) #指定(name)theme的path  
     "#{themes_root}/#{name}"
   end  
-      
+  
   def self.theme_from_path(path) #查找指定(path)的Theme  
     them_name = path.scan(/[-\w]+$/i).flatten.first
     self.new(them_name, path)

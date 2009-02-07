@@ -48,6 +48,7 @@ class Admin::ArticlesController < ApplicationController
   # GET /articles/1/edit
   def edit
     @standalone = params[:standalone]
+    @page = params[:page]
     @article = Article.find(params[:id])
     @channel = @article.channel
     respond_to do |format|

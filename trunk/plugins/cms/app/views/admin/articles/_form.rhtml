@@ -132,5 +132,5 @@ function getPartial(input_id){
 </table>
 <p class="submit">
   <input type="submit" class="button" name="submit" value="<%= t 'text.article.save_article' %>" />
-  or <%= link_to_remote (t 'text.cancel'), :url => {:action => 'index', :channel_id => @channel.id, :standalone => @standalone ? @standalone : ''}, :class => 'cancel' %>
+  or <%= link_to_remote (t 'text.cancel'), :url => {:action => 'index', :channel_id => @channel.id, :standalone => @standalone ? @standalone : '', :page => @page}, :class => 'cancel' %>
 </p>

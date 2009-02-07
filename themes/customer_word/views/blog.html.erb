@@ -1,0 +1,74 @@
+<div class="main">
+  <div class="left">
+    <%= render :partial => "/share/blog_categories" %>
+    <div class="height12"></div>
+    <%= render :partial => "/share/hot_blogs" %>
+    <div class="height12"></div>
+  </div>
+  <div class="right2">
+    <div class="box2">
+      <div class="title2">
+        <p>阅读全文</p>
+      <span><img src="/images/customer_word/tu_xrz.gif" align="absmiddle"></span></div>
+      <div class="height20"></div>
+      <div class="height20"></div>
+      <div class="blog">
+        <dl>
+          <dt class="f14b"><%= @blog.title %></dt>
+          <dd>发表于<strong><%= DateUtil.timelong_for_with_ling(@blog.created_at) %></strong> | 阅读(<a href="#"><%= @blog.view_count %></a>) | 评论(<a href="/entry/<%= @blog.id %>"><%= @blog.comment_count %></a>)) </dd>
+        </dl>
+        <div class="height12"></div>
+        <p>
+          <%= @blog.body %>
+        </p>
+        <div class="box">
+          <div class="title2"><p>最新评论</p></div>
+          <div class="height20"></div>
+          <div class="message" id="comments">
+            <%for comment in @comments %>
+              <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user.id) %>"></a>
+              <dl>
+                <dt><a href="<%= comment.user.space_url %>"><%= comment.user.user_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+                <dd><%= comment.body %></dd>
+              </dl>
+              <div class="height12"></div>
+            <%end%>
+          </div>
+          <%= will_paginate @comments,{:prev_label => "<<上一页",:next_label => '下一页>>'} %>
+          <div class="height12"></div>
+          <div class="saying">
+            <div class="saying_bt"><strong>我来说两句</strong><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
+             <div><img src="/images/spinner.gif"  id="comment_loading" style ="display:none"></div>
+            </div>
+            <div class="height12"></div>
+            <form name="comment_form" id="comment_form" method="post" action="/entry/<%= @blog.id %>/comments/create">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                  <tr>
+                    <td width="14%" align="right">标题：</td>
+                    <td width="86%"><input name="comment[title]"  type="text"></td>
+                  </tr>
+                  <tr>
+                    <td valign="top" align="right">内容：</td>
+                    <td><textarea name="comment[body]" class="styled" rows='4' cols='30'></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <input type="hidden" name="comment[blog_id]" value="<%= @blog.id %>">
+                    <td align="right">&nbsp;</td>
+                    <td>
+                       <input type="button" style="height: 22px;" name="button" class="green"   value="评论" id="form-submit-button" onclick="submit_comment()">
+                    </td>
+                  </tr>
+              </tbody>
+              </table>
+            </form>
+          </div>
+          <div class="height20"></div>
+        </div>
+      </div>
+      <div class="height20"></div>
+      <div class="height20"></div>
+    </div>
+  </div>
+</div>

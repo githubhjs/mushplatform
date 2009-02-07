@@ -1,0 +1,17 @@
+<div class="box">
+  <div class="title1"><p>我的群组</p><a href="#"><img src="/images/customer_word/more1.gif" alt="更多"></a></div>
+  <div class="height20"></div>
+  <div class="vip">
+    <%for user_group in @user_groups%>
+      <a href="#"><img src="<%= user_group.icon %>"></a>
+      <dl>
+        <dt><a href="#"><%= user_group.title %></a> <span>[<%= user_group.member_count %>人]</span></dt>
+        <dd><%= user_group.description %><br>
+          <p><a href="#"><img src="/images/customer_word/btn_join.gif"></a></p>
+        </dd>
+      </dl>
+      <div class="height12"></div>
+    <%end%>
+  </div>
+  <div class="height12"></div>
+</div>

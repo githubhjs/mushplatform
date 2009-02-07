@@ -1,0 +1,14 @@
+<div class="box">
+  <div class="title2"><p><a href="/photos">我的相册</a></p><div class="more"><a href="/photos" title="更多"><img src="/images/customer_word/more2.gif" alt="更多"></a></div></div>
+  <div class="height20"></div>
+  <div class="photo">
+    <ul>
+      <% for photo in @photos %>
+      <li><a href="/photos/<%= photo.id %>"><img src="<%= photo.mid_link %>" ></a>
+      <p><a href="/photos/<%= photo.id %>"><%= photo.title %></a></p>
+      </li>
+      <%end%>
+    </ul>
+  </div>
+  <div class="height20"></div>
+</div>

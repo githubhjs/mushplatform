@@ -1,0 +1,45 @@
+<div class="main">
+  <div class="left">
+    <%= render :partial => "/share/blog_categories" %>
+    <div class="height12"></div>
+    <%= render :partial => "/share/hot_blogs" %>
+    <div class="height12"></div>
+  </div>
+<div class="right2">
+  <div class="box2">
+    <div class="title2">
+      <p>我的日志</p>
+      <% if is_blog_admin?  %>
+       <span><img src="/images/customer_word/tu_xrz.gif" align="absmiddle"> <a href="/manage/blogs/new"><strong>我要写日志</strong></a></span>
+      <%end%>
+    </div>
+    <div class="tabs6">
+      <ul>
+        <li class="tabs66"><a href="/blogs" title="全部照片"><span>全部日志</span></a></li>
+      </ul>
+    </div>
+    <div class="height20"></div>
+    <div class="height20"></div>
+    <%for blog in @blogs%>
+      <div class="blog">
+        <dl>
+          <dt><a href="/entry/<%= blog.id %>"><%= blog.title %></a></dt>
+          <dd>发表于<strong><%= DateUtil.timelong_for_with_ling(blog.created_at) %></strong> | 阅读(<a href="#"><%= blog.view_count %></a>) | 评论(<a href="/entry/<%= blog.id %>"><%= blog.comment_count %></a>)) </dd>
+        </dl>
+        <div class="height12"></div>
+        <p>
+          <%= blog.body[0,100] %>...
+          <br>
+        &gt;&gt;<a href="/entry/<%= blog.id %>">查看全文</a></p>
+      </div>
+      <div class="height20"></div>
+    <%end%>
+    <div class="height20"></div>
+    <div class="scott">
+      <%= will_paginate @blogs,{:prev_label => "<<上一页",:next_label => '下一页>>'} %>
+    </div>
+    <div class="height20"></div>
+    <div class="height20"></div>
+  </div>
+</div>
+</div>

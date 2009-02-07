@@ -36,6 +36,10 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/photos/page/:page',:action => 'photos'
     my_space.connect '/photos/:id',:action => 'photo'
     my_space.connect '/rss',:action => 'rss'
+    my_space.connect '/blogs',:action => 'blogs'
+    my_space.connect '/blogs/category/:category_id',:action => 'blogs'
+    my_space.connect '/messages',:action => 'messages'
+    my_space.connect '/friends',:action => 'friends'
   end
   
   map.with_options :controller => "manage/themes" do |theme|

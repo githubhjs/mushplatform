@@ -1,6 +1,6 @@
 <div class="main">
   <div class="left">
-    <%=  render :partial => '/share/myinfo'%>
+    <%=  render :partial => '/share/myinfo' %>
     <div class="height12"></div>
   </div>
   <div class="right2">
@@ -12,8 +12,7 @@
       <div class="saying">
         <div class="saying_bt"><strong>关于我</strong></div>
         <div class="height12"></div>
-
-      <img src="/images/ourword/photo_tu.gif"></div>
+      <img src="<%=  user_icon(current_blog_user.id) %>"></div>
       <div class="height20"></div>
       <div class="saying">
         <div class="saying_bt"><strong>基本资料</strong></div>

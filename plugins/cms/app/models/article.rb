@@ -34,6 +34,18 @@ class Article < CachedModel
   
   def to_liquid
      atts = self.attributes.stringify_keys
+     excerpt = atts['excerpt']
+     if excerpt.empty?
+       excerpt = body.gsub(/<.+?>/,'').substr(0,170)
+       atts['excerpt'] = excerpt
+     end
      atts
-  end   
+  end
+
+  def normal_word(str)
+     str.gsub!(/\\&[a-zA-Z]{1,10};/,'')
+     str.gsub!(/<[^>]*>/,'')
+     str.gsub!(/[(\/>)<]/,'')
+  end
+
 end

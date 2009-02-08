@@ -18,6 +18,9 @@ class MySpaceController < ApplicationController
   Hot_Blog_Count = 10
   Latest_Messages_Count = 20
   Latest_Friends_Count  = 24
+  Latest_Votes_Count = 20
+  Latest_Groups_Count = 10
+  
   helper_method :current_blog_user  
 
   before_filter :setup_theme
@@ -42,14 +45,14 @@ class MySpaceController < ApplicationController
     @blogs        =  current_blog_user.blogs.find(:all,:limit => Latest_Blogs_Count,:order => 'id desc')
     @photos       =  current_blog_user.photos.find(:all,:limit => Latest_Photos_Count,:order => 'id desc')
     @message      =  current_blog_user.messages.find(:first,:order => 'id desc')
-    @friends      = current_user.friends.find(:all,:limit => Latest_Friends_Count,:order => 'id desc')
+    @friends      =  current_blog_user.friends.find(:all,:limit => Latest_Friends_Count,:order => 'id desc')
     @user_groups  =  current_blog_user.user_groups.find(:all,:limit => Latest_Groups_Count,:order => 'id desc')
     render :template => 'index'
   end
   
   def blogs
     @categories = current_blog_user.categories
-    @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc")
+    @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc",:conditions => "user_id=#{current_blog_user.id}")
     @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions => generate_conditions)
     render :template => 'blogs'
   end
@@ -142,6 +145,37 @@ class MySpaceController < ApplicationController
     @friends = current_blog_user.friends.paginate(:page => params[:page],:per_page => Latest_Friends_Count,:order => "friends.created_at desc")
     render :template => 'friends'
   end
+
+  def votes
+    @votes = current_blog_user.votes.paginate(:page => params[:page],:per_page => Latest_Votes_Count,:order => "id desc")
+    render :template => 'votes'
+  end
+
+  def vote
+    @vote = Vote.find(params[:id])
+    @user_voters = @vote.user_votes.find(:all,:limit => 20,:order => 'id desc')
+    @vote_options = VoteOption.find(:all,:conditions => "voter_id=#{@vote.id}")
+    render :template => 'vote'
+  end
+
+  def groups
+    @user_groups  = current_blog_user.user_groups.paginate(:page => params[:page],:per_page => Latest_Groups_Count,:order => "id desc")
+    render :template => 'user_groups'
+  end
+
+  def search
+    unless params[:keyword].blank?
+      @categories = current_blog_user.categories
+      @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc",:conditions => "user_id=#{current_blog_user.id}")
+      conditions = ["user_id=#{current_blog_user.id} and (title like ? or keywords like ? or  body like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%","%#{params[:keyword]}%"]
+      @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => 50, :conditions => conditions)
+      render :template => 'blogs'
+    else
+      redirect_to :action => 'index'
+    end
+    return 
+  end
+  
   protected
   
   def keep_params

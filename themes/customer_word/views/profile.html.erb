@@ -34,12 +34,6 @@
               <td align="right"><strong>地址：</strong></td>
               <td><%= current_blog_user.user_profile.adress %></td>
             </tr>
-            <tr>
-              <td valign="top" align="right"><strong>自我介绍：</strong></td>
-              <td>
-                <%= current_blog_user.user_profile.introduction %>
-              </td>
-            </tr>
         </tbody></table>
       </div>
       <div class="height20"></div>
@@ -61,20 +55,10 @@
               <td width="89%"><%= current_blog_user.user_profile.vocation_name %></td>
             </tr>
             <tr>
-              <td align="right"><strong>故乡：</strong></td>
-              <td>江苏省 南通市 通州市</td>
-            </tr>
-            <tr>
-              <td align="right"><strong>现居住地：</strong></td>
-              <td>北京市 昌平区</td>
-            </tr>
-            <tr>
-              <td align="right"><strong>血型：</strong></td>
-              <td>o</td>
-            </tr>
-            <tr>
               <td valign="top" align="right"><strong>自我介绍：</strong></td>
-              <td>身边的鱼走过来祝贺我寻找到真爱。我淡淡的点头，对他们嘴角的嘲讽视若不见。在他们眼里，我是为了一块石头而放弃生命的傻瓜。鱼总是这样，向往着真爱，却在一口食物面前成为爱的唾弃者。</td>
+              <td>
+                <%= current_blog_user.user_profile.introduction %>
+              </td>
             </tr>
         </tbody></table>
       </div>

@@ -1,6 +1,10 @@
 require "util/image_util"
 class UserProfile < ActiveRecord::Base
+
   belongs_to :user
+
+  has_one :vocation
+
 #  has_attachment :storage => :file_system, :path_prefix => 'public/assets/avatar',
 #                 :content_type => :image, :processor => 'Rmagick', :thumbnail_class => :thumbnail,
 #                 :thumbnails => { :normal => '120x120>', :small => '50x50>' }
@@ -29,6 +33,10 @@ class UserProfile < ActiveRecord::Base
     end
   rescue Exception => e
     return false
+  end
+
+  def vocation_name
+    vocation_id ? self.vocation.vocation_name : ''
   end
  
   def generate_image_url_and_path(original_img_name)

@@ -6,6 +6,7 @@ class Vote < ActiveRecord::Base
   validates_presence_of :title,:message => '主题不能为空'
 
   attr_accessor :vote_options
+  has_many :user_votes
 
   before_create :before_create_by_business
 

@@ -40,6 +40,10 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/blogs/category/:category_id',:action => 'blogs'
     my_space.connect '/messages',:action => 'messages'
     my_space.connect '/friends',:action => 'friends'
+    my_space.connect '/votes',:action => 'votes'
+    my_space.connect '/votes/:id',:action => 'vote'
+    my_space.connect '/groups',:action => 'groups'
+    my_space.connect '/search',:action => 'search'
   end
   
   map.with_options :controller => "manage/themes" do |theme|

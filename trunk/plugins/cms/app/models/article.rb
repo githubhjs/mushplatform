@@ -35,7 +35,7 @@ class Article < CachedModel
   def to_liquid
      atts = self.attributes.stringify_keys
      excerpt = atts['excerpt']
-     unless excerpt or excerpt.empty?
+     if excerpt.nil? or excerpt.empty?
        excerpt = body.gsub(/<.+?>/,'').substr(0,170)
        atts['excerpt'] = excerpt
      end

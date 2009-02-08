@@ -294,3 +294,24 @@ DIV.scott SPAN.disabled {
 .gift_btn{ width:498px; height:30px; text-align:center;margin:0 auto; padding-top:10px;}
 
 .gift_b{ width:506px; height:11px; background:url(../../images/customer_word/gift_b.gif) no-repeat 0 0;}
+
+ProgressBar {
+    position: relative;
+    width: 100px;    /* 宽度 */
+    border: 1px solid #B1D632;
+    padding: 1px;
+}
+.ProgressBar div {
+    display: block;
+    position: relative;
+    background: #B1D632;
+    color: #333333;
+    height: 15px; /* 高度 */
+    line-height: 15px;  /* 必须和高度一致，文本才能垂直居中 */
+}
+.ProgressBar div span {
+    position: absolute;
+    width: 100px; /* 宽度 */
+    text-align: center;
+    font-weight: bold;
+}

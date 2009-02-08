@@ -5,10 +5,20 @@
     <title>客户世界-空间</title>
     <link href="/stylesheets/customer_word/customer_word.css" rel="stylesheet" type="text/css" />
     <script>if (top.location != self.location) {top.location=self.location;}</script><script type="text/javascript" src="Temple%20of%20Heaven_files/resize.js"></script>
-<script src="/javascripts/prototype.js" type="text/javascript"></script>
-<script src="/javascripts/blog.js" type="text/javascript"></script></head>
-  </head>
-  <body>
+    <script src="/javascripts/prototype.js" type="text/javascript"></script>
+    <script src="/javascripts/blog.js" type="text/javascript"></script>
+    <script>
+      function submit_search(){
+        var _form = document.search_form;
+        if(_form.keyword.value != ''){
+          _form.submit();
+        }else{
+          alert('请输入查询关键字');
+        }
+      }
+     </script>
+   </head>
+   <body>
     <div class="ding">
       <a href="#"><img src="/images/customer_word/logo.gif" alt="客户世界" /></a>
       <p><a href="#">主页</a> | <a href="#">博客</a> | <a href="#">新闻</a> | <a href="#">文库</a> | <a href="#">供应商</a> | <a href="#">专家</a> | <a href="#">期刊</a> | <a href="#">论坛</a></p>
@@ -29,24 +39,26 @@
               <li class="<%= action_name =~ /blogs|show/ ? 'n_index' : 'n_photo' %>"><a href="/blogs" title="日志"><span>日志</span></a></li>
               <li class="<%= action_name =~  /photo/  ? 'n_index' : 'n_photo' %>"><a href="/photos" title="相册"><span>相册</span></a></li>
               <li class="<%= action_name =~  /friends/  ? 'n_index' : 'n_photo' %>"><a href="/friends" title="好友"><span>好友</span></a></li>
-              <li class="n_vip"><a href="/groups" title="群组"><span>群组</span></a></li>
+              <li class="<%= action_name =~  /group/  ? 'n_index' : 'n_photo' %>"><a href="/groups" title="群组"><span>群组</span></a></li>
               <li class="<%= action_name =~  /messages/  ? 'n_index' : 'n_photo' %>"><a href="/messages" title="公告"><span>公告</span></a></li>
-              <li class="n_Vote"><a href="/votes" title="投票"><span>投票</span></a></li>
+              <li class="<%= action_name =~  /vote/  ? 'n_index' : 'n_photo' %>"><a href="/votes" title="投票"><span>投票</span></a></li>
             </ul>
           </div>
           <div class="keyword">
-            <select name="select" id="select">
-              <option>日志</option>
-              <option>相册</option>
-            </select>
-            <input type="text" />
-            <img src="/images/customer_word/soso.gif" alt="搜索" align="absmiddle" /></div>
+            <% form_tag '/search',:name => 'search_form' do %>
+              <select name="select" id="select">
+                <option>日志</option>
+              </select>
+              <input type="text" name="keyword" va="<%= params[:keyword] %>" />
+              <a href="#" onclick="submit_search();return false;"><img src="/images/customer_word/soso.gif" alt="搜索" align="absmiddle" /></a>
+            <%end%>
+          </div>
         </div>
         <div class="dh_c"></div>
       </div>
     </div>
     <div class="height12"></div>
-     <%= yield %>
+    <%= yield %>
     <div class="height12"></div>
     <div class="foot">
       <div class="foot_a"></div>

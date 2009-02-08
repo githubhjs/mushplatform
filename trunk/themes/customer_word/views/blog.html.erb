@@ -26,12 +26,16 @@
           <div class="height20"></div>
           <div class="message" id="comments">
             <%for comment in @comments %>
-              <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user.id) %>"></a>
+              <% if comment.user %>
+                <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user.id) %>"></a>
+              <%else%>
+                <img src="<%= user_icon %>">
+              <%end%>
               <dl>
                 <% if comment.user %>
-                <dt><a href="<%= comment.user.space_url %>"><%= comment.user.user_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+                  <dt><a href="<%= comment.user.space_url %>"><%= comment.user.user_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
                 <%else%>
-                <dt><span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+                  <dt>访客 <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
                 <%end%>
                 <dd><%= comment.body %></dd>
               </dl>
@@ -42,7 +46,7 @@
           <div class="height12"></div>
           <div class="saying">
             <div class="saying_bt"><strong>我来说两句</strong><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
-             <div><img src="/images/spinner.gif"  id="comment_loading" style ="display:none"></div>
+              <div><img src="/images/spinner.gif"  id="comment_loading" style ="display:none"></div>
             </div>
             <div class="height12"></div>
             <form name="comment_form" id="comment_form" method="post" action="/entry/<%= @blog.id %>/comments/create">
@@ -61,10 +65,10 @@
                     <input type="hidden" name="comment[blog_id]" value="<%= @blog.id %>">
                     <td align="right">&nbsp;</td>
                     <td>
-                       <input type="button" style="height: 22px;" name="button" class="green"   value="评论" id="form-submit-button" onclick="submit_comment()">
+                      <input type="button" style="height: 22px;" name="button" class="green"   value="评论" id="form-submit-button" onclick="submit_comment()">
                     </td>
                   </tr>
-              </tbody>
+                </tbody>
               </table>
             </form>
           </div>

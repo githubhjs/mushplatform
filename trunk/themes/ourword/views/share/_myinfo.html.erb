@@ -4,20 +4,20 @@
   <div class="myphoto"><img src="/images/customer_word/myphoto.gif" alt="我的形象"><p>风亦菲</p></div>
   <div class="tool">
     <ul>
-      <li><img src="/images/customer_word/t_03.gif" align="absmiddle"> <a href="#">修改头像</a></li>
-      <li><img src="/images/customer_word/t_06.gif" align="absmiddle"> <a href="#">个人信息</a></li>
-      <li><img src="/images/customer_word/t_10.gif" align="absmiddle"> <a href="#">给我留言</a></li>
-      <li><img src="/images/customer_word/t_12.gif" align="absmiddle"> <a href="#">加为好友</a></li>
-      <li><img src="/images/customer_word/t_16.gif" align="absmiddle"> <a href="#">赠我礼物</a></li>
-      <li><img src="/images/customer_word/t_18.gif" align="absmiddle"> <a href="#">给我招呼</a></li>
+      <% if is_blog_admin? %>
+        <li><img src="/images/customer_word/t_03.gif" align="absmiddle"> <a href="/manage/user_profiles">修改头像</a></li>
+      <%end%>
+      <li><img src="/images/customer_word/t_06.gif" align="absmiddle"> <a href="/profile">个人信息</a></li>
     </ul>
   </div>
   <div class="height12"></div>
-  <div class="info">
-    <strong>昵称：</strong><%= current_blog_user.user_name %><br>
-    <strong>性别：</strong><%= display_blog_admin_sex %><br>
-    <strong>城市：</strong><%= current_blog_user.user_profile.city %><br>
-    <strong>自我介绍：</strong><%= current_blog_user.user_profile.introduction %><br>
-  </div>
-  <div class="height12"></div>
+  <%  unless action_name == 'profile' %>
+    <div class="info">
+      <strong>昵称：</strong><%= current_blog_user.user_name %><br>
+      <strong>性别：</strong><%= display_blog_admin_sex %><br>
+      <strong>城市：</strong><%= current_blog_user.user_profile.city %><br>
+      <strong>自我介绍：</strong><%= current_blog_user.user_profile.introduction %><br>
+    </div>
+    <div class="height12"></div>
+  <%end%>
 </div>

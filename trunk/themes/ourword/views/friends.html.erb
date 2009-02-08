@@ -1,0 +1,33 @@
+<div class="main">
+  <div class="left">
+    <%=  render :partial => "/share/myinfo" %>
+    <div class="height12"></div>
+  </div>
+  <div class="right2">
+    <div class="box2">
+      <div class="title2"><p>我的好友</p></div>
+      <div class="tabs6">
+        <ul>
+          <li class="tabs66"><a href="/friends" title="全部好友"><span>全部好友</span></a></li>
+        </ul>
+      </div>
+      <div class="height20"></div>
+      <div class="height20"></div>
+      <div class="friend2">
+        <ul>
+          <% for friend in @friends %>
+          <li><div class="friendpic"><a href="<%= friend.space_url %>"><img src="<%= user_icon(friend.id) %>"></a></div>
+            <p><a href="<%= friend.space_url %>"><%= friend.user_name %></a></p>
+            </li>
+            <%end%>
+          </ul>
+        </div>
+        <div class="height20"></div>
+        <div class="scott">
+          <%= will_paginate @friends,{:prev_label => "<<上一页",:next_label => '下一页>>'} %>
+        </div>
+        <div class="height20"></div>
+        <div class="height20"></div>
+      </div>
+    </div>
+  </div>

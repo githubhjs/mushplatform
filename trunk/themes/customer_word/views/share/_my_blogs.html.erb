@@ -13,7 +13,7 @@
       </dl>
       <div class="height12"></div>
       <p>
-        <%= blog.body[0,100] %>...
+        <%= (blog.body||'')[0,100] %>...
         <br>
       &gt;&gt;<a href="/entry/<%= blog.id %>">查看全文</a></p>
     </div>

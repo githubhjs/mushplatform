@@ -133,9 +133,9 @@ DIV.scott SPAN.disabled {
 
 .main{ width:960px; margin:0 auto;}
 .left{ float:left; width:220px; margin-right:16px; }
-.center{ float:left; width:472px; margin-right:16px;}
+.center{ float:left;width:460px;; margin-right:16px;}
 .right{ float:left; width:232px;}
-.right2{ float:left; width:720px;}
+.right2{ float:left; width:710px;}
 
 .foot{width:960px; height:74px; margin:0 auto; background:url(../../images/ourword/foot_b.gif) repeat-x 0 0;}
 .foot_a{ float:left;width:10px; height:74px; background:url(../../images/ourword/foot_a.gif) no-repeat;}

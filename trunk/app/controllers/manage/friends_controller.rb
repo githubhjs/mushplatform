@@ -42,7 +42,6 @@ class Manage::FriendsController <  Manage::ManageController
       user.friends << current_user
     rescue
     end
-
     respond_to do |format|
       format.html { redirect_to '/manage/friends' }
     end

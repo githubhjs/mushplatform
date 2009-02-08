@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/votes/:id',:action => 'vote'
     my_space.connect '/groups',:action => 'groups'
     my_space.connect '/search',:action => 'search'
+    my_space.connect '/profile',:action => 'profile'
   end
   
   map.with_options :controller => "manage/themes" do |theme|

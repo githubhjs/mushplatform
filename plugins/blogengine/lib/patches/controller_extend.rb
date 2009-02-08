@@ -65,7 +65,7 @@ module ControllerExtend
     else
       current_blog_user ? current_blog_user.blog_config.theme_name : ''
     end
-    @curent_theme = Theme.find(theme_name)
+    Theme.find(theme_name)
   end
 
   def current_theme_name

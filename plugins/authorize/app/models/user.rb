@@ -15,6 +15,8 @@ class User < CachedModel
   has_many :photos
   has_many :user_groups
   has_many :categories
+#  has_one  :blog_config
+  
   validates_length_of :user_name, :within => 5..40
   validates_length_of :password, :within => 6..40
   validates_presence_of :user_name, :email, :password, :password_confirmation, :salt

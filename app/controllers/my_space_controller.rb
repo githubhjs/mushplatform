@@ -100,7 +100,7 @@ class MySpaceController < ApplicationController
       end
     else
       render :update do |page|
-        page.replace_html 'erro_info', "用户名或者密码不对"
+        page.replace_html 'erro_info', "没有登陆或者用户名或和密码不对"
         page['erro_info'].show
       end
     end

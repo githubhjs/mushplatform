@@ -30,8 +30,7 @@ class UserProfile < ActiveRecord::Base
   rescue Exception => e
     return false
   end
-  
-  private
+ 
   def generate_image_url_and_path(original_img_name)
     rand_dir,img_name = generate_local_dir,generate_image_name(original_img_name)
     file_path = "#{RAILS_ROOT}/public/images/#{rand_dir}"

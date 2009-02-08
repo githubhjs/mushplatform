@@ -58,7 +58,11 @@ class User < CachedModel
   end
   
   def is_friend_with?(other)
-    @friend ||= Freind.find(:first,:condition => "user_id=#{self.id} and friend_id=#{other.id}")
+   if other
+     @friend ||= Friend.find(:first,:condition => "user_id=#{self.id} and friend_id=#{other.id}")
+   else
+     nil
+   end  
   end
   
   def groups

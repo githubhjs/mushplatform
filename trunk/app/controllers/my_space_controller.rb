@@ -176,6 +176,10 @@ class MySpaceController < ApplicationController
     return 
   end
   
+  def profile
+    render :template => 'profile'
+  end
+
   protected
   
   def keep_params

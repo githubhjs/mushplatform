@@ -79,7 +79,7 @@ class CcidCrawler
     unless doc.nil?
       title, content = "", ""
       title = iconv.iconv(doc.search("//h1[@class='titel']").inner_html)
-      content_doc = doc.search("//td[@background='http://image.ccidnet.com/home/nav/homepage/wz_left_2.gif']/table")[3]
+      content_doc = doc.search("//td[@background='http://www.ccidnet.com/images/homepage/wz_left_2.gif']/table")[3]
 
       next_page = content_doc.search("//p/span/a{#class=content01}")
 

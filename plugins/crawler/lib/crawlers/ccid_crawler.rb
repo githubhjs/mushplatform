@@ -59,7 +59,7 @@ class CcidCrawler
           article.channel_id = @channel_id
           article.title = title
 
-          author_doc = doc.search("//td[@background='http://image.ccidnet.com/home/nav/homepage/wz_left_2.gif']/table")[2]
+          author_doc = doc.search("//td[@background='http://image.ccidnet.com/homepage/wz_left_2.gif']/table")[2]
           article.author = iconv.iconv(author_doc.search("//span")[3].inner_html)
           #CrawLogger.logger(article.author)
           article.save
@@ -114,8 +114,12 @@ class CcidCrawler
   end
 end
 puts "Begin to fetch"
-url = ARGV[0]
-channel_id = ARGV[1]
+#url = ARGV[0]
+#channel_id = ARGV[1]
+
+url = "http://news.ccidnet.com/col/5405/20071227.html"
+channel_id = 11
+
 crawler = CcidCrawler.new(url, channel_id)
 crawler.fetch
 CrawLogger.logger("Finish to crawler")

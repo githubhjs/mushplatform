@@ -3,7 +3,7 @@ class Photo < ActiveRecord::Base
   
   Shared_Yes,Shared_No = 1,0
   
-  Mid_Size,Thumbnail_Size = "100x100","50x50"
+  Mid_Size,Thumbnail_Size,Max_Size = "100x100","50x50","700x525"
   
   Upload_Image_Path = "/upload/pic"
   
@@ -26,9 +26,10 @@ class Photo < ActiveRecord::Base
       begin
         image = Magick::Image::read_inline(Base64.b64encode(self.uploaded_data.read)).first
         if image
-          generate_orignal_image(image,self.uploaded_data.original_filename)
-          generate_mid_image(image,self.uploaded_data.original_filename)
-          generate_thumb_image(image,self.uploaded_data.original_filename)
+          generate_image(image,self.uploaded_data.original_filename,:orignal_link)
+          generate_image(image,self.uploaded_data.original_filename,:max_link,'max',Max_Size)
+          generate_image(image,self.uploaded_data.original_filename,:mid_link,'mid',Mid_Size)
+          generate_image(image,self.uploaded_data.original_filename,:thumbnail_link,'thum',Thumbnail_Size)
         end
       rescue Exception => e
 #        puts e.message
@@ -36,31 +37,14 @@ class Photo < ActiveRecord::Base
     end
   end
   
-  def generate_orignal_image(orignal_image,original_filename)
-    if orignal_image
-      img_path,img_url = get_image_path_and_url(original_filename)
-      orignal_image.write(img_path)
-      self.orignal_link = img_url
-    end
-    
-  end
-  
-  def generate_mid_image(orignal_image,original_filename)
-    if orignal_image && mid_image = ImageUtil.resize_image(orignal_image, Mid_Size)
-      img_path,img_url = get_image_path_and_url(original_filename,'mid')
-      mid_image.write(img_path)
-      self.mid_link = img_url
-    end
-  end
-  
-  def generate_thumb_image(orignal_image,original_filename)
-    if orignal_image && thumb_image = ImageUtil.resize_image(orignal_image, Thumbnail_Size)
-      img_path,img_url = get_image_path_and_url(original_filename,'thumb')
-      thumb_image.write(img_path)
-      self.thumbnail_link = img_url
+   
+  def generate_image(orignal_image,original_filename,column_name,img_type,resize = nil)
+    if orignal_image && (resize_img = resize.blank? ? orignal_image  : ImageUtil.resize_image(orignal_image,resize ))
+      img_path,img_url = get_image_path_and_url(original_filename,img_type)
+      resize_img.write(img_path)
+      self.send("#{column_name}=",img_url)
     end 
   end
-  
   
   def get_image_path_and_url(orignal_name,type='')
 

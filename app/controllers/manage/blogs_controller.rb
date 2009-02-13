@@ -51,7 +51,7 @@ class Manage::BlogsController < Manage::ManageController
     respond_to do |format|
       if @blog.save
         flash[:notice] = 'Blog was successfully created.'
-        format.html { redirect_to "/manage/blogs" }
+        format.html { redirect_to  params[:publish].blank? ?  "/manage/blogs/drafts " : "/manage/blogs" }
         format.xml  { render :xml => @blog, :status => :created, :location => @blog }
       else
         format.html { render :action => "new" }

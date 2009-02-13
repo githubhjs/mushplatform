@@ -1,7 +1,5 @@
 <%=  render :partial => "/manage/share/left" %>
-
 <div class="m_r">
-
   <!--person_menu-->
   <%=  render :partial => "/manage/photos/photo_menu" %>
   <!--person_menu-->
@@ -13,11 +11,12 @@
           <li><label>新增图片</label> <input id="picture_upload" type="file" class="txt"></li>
           <li><input class="button" id="submit_button" name="button" value="提 交" type="submit"></li>
         </ul>
-       </fieldset>
+      </fieldset>
     <%end%>
     <script type="text/javascript">
+      var json_tags = <%= @tags %>;
       var multiple_upload_picture_counter = 0;
-      multiple_upload_picture($("picture_upload"), 5, [""]);
+      multiple_upload_picture($("picture_upload"), 5,json_tags);
     </script>
   </div>
 </div><!--m_r-->

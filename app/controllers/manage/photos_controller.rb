@@ -38,7 +38,10 @@ class Manage::PhotosController < Manage::ManageController
   # GET /photos/new
   # GET /photos/new.xml
   def new
+    debugger
     @photo = Photo.new
+    @tags = current_user.photos.tag_counts.map(&:name).to_json
+    puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @photo }
@@ -48,6 +51,7 @@ class Manage::PhotosController < Manage::ManageController
   # GET /photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
+    @tags = current_user.photos.tag_counts.map(&:name).to_json
   end
 
   # POST /photos

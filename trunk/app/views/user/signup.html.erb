@@ -85,7 +85,7 @@
     <tr>
       <td align="right">性别：</td>
       <td>
-        <%= generate_sex_radio(@profile.sex) %>
+        <%= generate_sex_radio('user_profile[sex]',@profile.sex) %>
         <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
       </td>
     </tr>
@@ -111,7 +111,7 @@
     <tr>
       <td align="right">所属行业：</td>
       <td>
-        <select name="profile[vocation_id]" >
+        <select name="user_profile[vocation_id]" >
           <%= generate_vocations_select(@profile.vocation_id)%>
         </select>
         <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
@@ -164,7 +164,8 @@
     </tr>
     <tr>
       <td align="right">感兴趣：</td>
-      <td><input class="like" name="like " type="checkbox" value="呼叫中心" />呼叫中心&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />客户管理&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />数据营销&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />服务外包&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />其他
+      <td>
+        <%= generate_intrested_radio("user_profile[interested] ",@user_profile.interested) %>
       </td>
     </tr>
     <tr>
@@ -177,7 +178,7 @@
     <tr>
       <td align="right">个人简介：</td>
       <td>
-        <textarea name="profile[introduction]" class="txt" rows="4" cols="50">
+        <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50">
     <%= @profile.introduction%>
       </textarea></td>
     </tr>

@@ -34,7 +34,6 @@ class Manage::UserProfilesController < Manage::ManageController
   # GET /user_profiles/new.xml
   def new
     @user_profile = UserProfile.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user_profile }
@@ -54,7 +53,7 @@ class Manage::UserProfilesController < Manage::ManageController
     respond_to do |format|
       if @user_profile.save
         flash[:notice] = 'UserProfile was successfully created.'
-        format.html { redirect_to :action => :edit }
+        format.html { redirect_to :action => :index }
         format.xml  { render :xml => @user_profile, :status => :created, :location => @user_profile }
       else
         format.html { render :action => "new" }
@@ -68,13 +67,14 @@ class Manage::UserProfilesController < Manage::ManageController
   def update
     @user_profile = UserProfile.find(params[:id])
     @user = User.find(@user_profile.user_id)
-    @user.email = params[:user_email]
     respond_to do |format|
-      if @user_profile.update_attributes(params[:user_profile]) && @user.save
+      if @user_profile.update_attributes(params[:user_profile])
+        debugger
         flash[:notice] = 'UserProfile was successfully updated.'
-        format.html { redirect_to(@user_profile) }
+        format.html { redirect_to :action => :index }
         format.xml  { head :ok }
       else
+        debugger
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user_profile.errors, :status => :unprocessable_entity }
       end

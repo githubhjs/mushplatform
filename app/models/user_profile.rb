@@ -17,6 +17,8 @@ class UserProfile < ActiveRecord::Base
   Company_Nature_Other      =  3
   Company_Nature_User       =  2
   Company_Nature_Suppliers  =  1
+
+  Intrested_Call_Center,Intrested_Client_Manage,Intrested_Data_Buy,Intrested_Server_Buy,Intrested_Other = 1,2,3,4,5
   
   attr_accessor :user_icon
     

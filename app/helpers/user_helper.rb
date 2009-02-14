@@ -18,11 +18,11 @@ module UserHelper
   def generate_company_nature_radio(selected_value)
     other = (selected_value.to_s == UserProfile::Company_Nature_Other.to_s) ? false : true
     options = []
-    options << radio_button_tag('profile[company_nature]',
+    options << radio_button_tag('user_profile[company_nature]',
       UserProfile::Company_Nature_Other.to_s,other) + "其他&nbsp;&nbsp;&nbsp;"
-    options << radio_button_tag('profile[company_nature]',
+    options << radio_button_tag('user_profile[company_nature]',
       UserProfile::Company_Nature_Suppliers.to_s,selected_value.to_s == UserProfile::Company_Nature_Suppliers.to_s) + "供应商&nbsp;&nbsp;&nbsp;"
-    options << radio_button_tag('profile[company_nature]',
+    options << radio_button_tag('user_profile[company_nature]',
       UserProfile::Company_Nature_User.to_s,selected_value.to_s == UserProfile::Company_Nature_User.to_s) + "用户商&nbsp;&nbsp;&nbsp;"
   end
   

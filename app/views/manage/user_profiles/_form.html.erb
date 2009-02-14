@@ -37,7 +37,7 @@
     <tr>
       <td class="tit" ><span>&lowast;</span> 性别：</td>
       <td>
-        <%= generate_sex_radio(@user_profile.sex) %>
+        <%= generate_sex_radio('user_profile[sex]',@user_profile.sex) %>
         <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
       </td>
     </tr>
@@ -68,9 +68,9 @@
       <td class="top" colspan="2">详细资料 - <span>本栏目为非必填资料，完整填写本栏目的用户将得到100个积分。</span></td>
     </tr>
     <tr>
-      <td class="tit">行业分类：</td>
+      <td class="tit">所属行业：</td>
       <td>
-        <select name="profile[vocation_id]" >
+        <select name="user_profile[vocation_id]" >
           <%= generate_vocations_select(@user_profile.vocation_id)%>
         </select>
         <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
@@ -123,7 +123,8 @@
     </tr>
     <tr>
       <td class="tit">感兴趣：</td>
-      <td><input class="like" name="like " type="checkbox" value="呼叫中心" />呼叫中心&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />客户管理&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />数据营销&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />服务外包&nbsp;&nbsp;&nbsp;<input class="like" name="like " type="checkbox" value="呼叫中心" />其他
+      <td>
+        <%= generate_intrested_radio("user_profile[interested] ",@user_profile.interested) %>
       </td>
     </tr>
     <tr>
@@ -136,7 +137,7 @@
     <tr>
       <td class="tit">个人简介：</td>
       <td>
-        <textarea name="profile[introduction]" class="txt" rows="4" cols="50">
+        <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50">
            <%= @user_profile.introduction%>
          </textarea>
       </td>

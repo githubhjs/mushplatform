@@ -27,12 +27,23 @@ module ApplicationHelper
     options_for_select(options, select_value.blank? ? nil : select_value.to_s)
   end
 
-  def generate_sex_radio(select_value)
+  def generate_intrested_radio(attr_name,select_value)
+    select_value ||= UserProfile::Intrested_Call_Center
+    radio_boxes = []
+    radio_boxes <<  (radio_button_tag(attr_name,UserProfile::Intrested_Call_Center,select_value == UserProfile::Intrested_Call_Center) + '呼叫中心')
+    radio_boxes <<  (radio_button_tag(attr_name,UserProfile::Intrested_Client_Manage,select_value == UserProfile::Intrested_Client_Manage) + '客户管理')
+    radio_boxes <<  (radio_button_tag(attr_name,UserProfile::Intrested_Data_Buy,select_value == UserProfile::Intrested_Data_Buy) + '数据营销')
+    radio_boxes <<  (radio_button_tag(attr_name,UserProfile::Intrested_Server_Buy,select_value == UserProfile::Intrested_Server_Buy) + '服务外包')
+    radio_boxes <<  (radio_button_tag(attr_name,UserProfile::Intrested_Other,select_value == UserProfile::Intrested_Other) + '其他')
+    radio_boxes.join('')
+  end
+  
+  def generate_sex_radio(attr_name,select_value)
     select_value ||= Const::Sex_Unknown
     radio_boxes = []
-    radio_boxes <<  (radio_button_tag('user_auth[]',Const::Sex_Man,select_value == Const::Sex_Man) + '男')
-    radio_boxes <<  (radio_button_tag('user_auth[]',Const::Sex_Woman,select_value == Const::Sex_Man) + '女')
-    radio_boxes <<  (radio_button_tag('user_auth[]',Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
+    radio_boxes <<  (radio_button_tag(attr_name,Const::Sex_Man,select_value == Const::Sex_Man) + '男')
+    radio_boxes <<  (radio_button_tag(attr_name,Const::Sex_Woman,select_value == Const::Sex_Woman) + '女')
+    radio_boxes <<  (radio_button_tag(attr_name,Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
     radio_boxes.join('')
   end
 
@@ -44,4 +55,5 @@ module ApplicationHelper
     radio_boxes <<  (radio_button_tag('sex',Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
     radio_boxes.join('')
   end
+  
 end

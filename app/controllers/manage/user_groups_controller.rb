@@ -65,6 +65,24 @@ class Manage::UserGroupsController < Manage::ManageController
     redirect_to "/manage/user_groups/#{@topic.user_group_id}"
   end
 
+  def friend_groups
+    frind_ids = current_user.friends.map(&:friend_id)
+    @user_groups = unless frind_ids.blank?
+      UserGroup.paginate(:page => params[:page]||1,:per_page => All_Group_Perpage,:order => 'id desc',:conditions => "id in (select  group_id from group_members where user_id in (#{frind_ids.join(',')}))")
+    else
+      []
+    end
+  end
+
+  def friend_create_groups
+    frind_ids = current_user.friends.map(&:friend_id)
+    @user_groups = unless frind_ids.blank?
+      UserGroup.paginate(:page => params[:page]||1,:per_page => All_Group_Perpage,:order => 'id desc',:conditions => "user_id in (#{frind_ids.join(',')})")
+    else
+      []
+    end
+  end
+
   def join
     UserGroup.join(params[:id],current_user)
     redirect_to "/manage/user_groups/#{params[:id]}"

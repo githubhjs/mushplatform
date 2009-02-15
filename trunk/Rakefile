@@ -30,7 +30,7 @@ namespace :data do
       STDOUT.puts "Migrate articles ..."
       
       # articles
-      SArticle.find(:all, :conditions => "", :offset => (SArticle.count - 20000), :limit => 20000 ).each{|sa|
+      SArticle.find(:all, :conditions => "", :offset => (SArticle.count - 10000), :limit => 10000 ).each{|sa|
         unless Article.find_by_title(sa.title)
           a = Article.create(
             :id => sa.id,
@@ -107,15 +107,17 @@ namespace :data do
       STDOUT.puts "Migrate tags ..."
       STag.find(:all, :conditions => "parent_id is NULL", :order => "id").each{|st|
         st.children.find(:all, :order => "id").each{|stc|
-          t = Tag.create(
-            :id => stc.id,
-            :name => stc.name,
-            :top => stc.top,
-            :bottom => stc.bottom,
-            :category => st.name
-          )
-          STDOUT.puts "##{stc.id} ##{t.id} #{t.name}"
-          STDOUT.flush
+          unless Tag.find_by_name(stc.name)
+            t = Tag.create(
+              :id => stc.id,
+              :name => stc.name,
+              :top => stc.top,
+              :bottom => stc.bottom,
+              :category => st.name
+            )
+            STDOUT.puts "##{stc.id} ##{t.id} #{t.name}"
+            STDOUT.flush
+          end
         }
       }
     end
@@ -125,15 +127,17 @@ namespace :data do
       STDOUT.puts "Migrate links ..."
       SLinkword.find(:all, :conditions => "parent_id is NULL", :order => "id").each{|sl|
         sl.children.find(:all, :order => "id").each{|slc|
-          l = Link.create(
-            :id => slc.id,
-            :name => slc.name,
-            :url => slc.url,
-            :memo => slc.memo,
-            :category => sl.name
-          )
-          STDOUT.puts "##{l.id} #{l.name}"
-          STDOUT.flush
+          unless Link.find_by_name(slc.name)
+            l = Link.create(
+              :id => slc.id,
+              :name => slc.name,
+              :url => slc.url,
+              :memo => slc.memo,
+              :category => sl.name
+            )
+            STDOUT.puts "##{l.id} #{l.name}"
+            STDOUT.flush
+          end
         }
       }
     end 
@@ -142,7 +146,7 @@ namespace :data do
     task :users => :environment do
       STDOUT.puts "Migrate users ..."
       SUser.find(:all, :order => "id").each{|su|
-        unless MUser.find(su.id)
+        unless MUser.find_by_user_name(su.login)
           if su.login == 'admin'
             u = MUser.find(1)
             u.update_attributes(
@@ -165,6 +169,9 @@ namespace :data do
             SidebarUser.create_default_sidebars(u.id) unless SidebarUser.find_by_user_id(u.id)
           end
           STDOUT.puts "##{u.id} #{u.user_name}"
+          STDOUT.flush
+        else
+          STDOUT.puts "##{su.id} #{su.login} exist, ignore"
           STDOUT.flush
         end
       }
@@ -200,6 +207,7 @@ namespace :data do
                 :published => 1,
                 :excerpt => excerpt,
                 :body => text,
+                :hits => entry.hits,
                 :created_at => Time.at(entry.postdate),
                 :category_id => entry.blog_category_mapping[entry.cid],
                 :user_id => user.id

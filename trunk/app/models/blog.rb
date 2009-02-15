@@ -83,6 +83,8 @@ class Blog < ActiveRecord::Base
 end
 Tag.class_eval do 
   def to_liquid
-    self.attributes.stringify_keys
+    atts = self.attributes.stringify_keys
+    atts['author'] = User.find(user_id).user_name unless author
+    atts
   end    
 end

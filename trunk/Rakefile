@@ -117,6 +117,9 @@ namespace :data do
             )
             STDOUT.puts "##{stc.id} ##{t.id} #{t.name}"
             STDOUT.flush
+          else
+            STDOUT.puts "##{stc.id} #{stc.name} exist, ignore"
+            STDOUT.flush
           end
         }
       }
@@ -136,6 +139,9 @@ namespace :data do
               :category => sl.name
             )
             STDOUT.puts "##{l.id} #{l.name}"
+            STDOUT.flush
+          else
+            STDOUT.puts "##{slc.id} #{slc.name} exist, ignore"
             STDOUT.flush
           end
         }

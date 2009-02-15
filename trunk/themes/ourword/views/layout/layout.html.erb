@@ -22,9 +22,7 @@
     <div class="ding">
       <a href="#"><img src="/images/ourword/logo.gif" alt="客户世界" /></a>
       <p><a href="#">主页</a> | <a href="#">博客</a> | <a href="#">新闻</a> | <a href="#">文库</a> | <a href="#">供应商</a> | <a href="#">专家</a> | <a href="#">期刊</a> | <a href="#">论坛</a>
-      <% if is_blog_admin? %>
         | <a href="<%= "#{current_user.space_url}/manage"   %>">后台管理</a>
-      <%end%>
       </p>
     </div>
     <div class="clear"></div>

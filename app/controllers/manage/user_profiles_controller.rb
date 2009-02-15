@@ -69,12 +69,10 @@ class Manage::UserProfilesController < Manage::ManageController
     @user = User.find(@user_profile.user_id)
     respond_to do |format|
       if @user_profile.update_attributes(params[:user_profile])
-        debugger
         flash[:notice] = 'UserProfile was successfully updated.'
         format.html { redirect_to :action => :index }
         format.xml  { head :ok }
       else
-        debugger
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user_profile.errors, :status => :unprocessable_entity }
       end

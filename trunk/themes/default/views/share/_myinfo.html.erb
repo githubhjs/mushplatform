@@ -17,9 +17,9 @@
   <%  unless action_name == 'profile' %>
     <div class="info">
       <strong>昵称：</strong><%= current_blog_user.user_name %><br>
-      <strong>性别：</strong><%= display_blog_admin_sex current_blog_user.user_profile %><br>
+      <strong>性别：</strong><%= display_blog_admin_sex if current_blog_user.user_profile %><br>
       <strong>城市：</strong><%= current_blog_user.user_profile.city if current_blog_user.user_profile %><br>
-      <strong>自我介绍：</strong><%= current_blog_user.user_profile.introduction current_blog_user.user_profile  %><br>
+      <strong>自我介绍：</strong><%= current_blog_user.user_profile.introduction if current_blog_user.user_profile  %><br>
     </div>
     <div class="height12"></div>
   <%end%>

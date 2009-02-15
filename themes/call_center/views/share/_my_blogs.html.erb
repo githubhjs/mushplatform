@@ -1,0 +1,22 @@
+<div class="box">
+  <div class="title2"><p><a href="/blogs">我的日志</a></p>
+   <div class="more">
+     <a href="/blogs"><img src="/images/call_center/more2.gif" alt="更多"></a>
+    </div>
+  </div>
+  <div class="height20"></div>
+  <%for blog in @blogs%>
+    <div class="blog">
+      <dl>
+        <dt><a href="/entry/<%= blog.id %>"><%= blog.title %></a></dt>
+        <dd>发表于<strong><%= DateUtil.timelong_for_with_ling(blog.created_at) %></strong> | 阅读(<a href="/entry/<%= blog.id %>"><%= blog.view_count %></a>) | 评论(<a href="/entry/<%= blog.id %>"><%= blog.comment_count %></a>)) </dd>
+      </dl>
+      <div class="height12"></div>
+      <p>
+       <%= (blog.body||"")[0,100] %>...
+        <br>
+      &gt;&gt;<a href="/entry/<%= blog.id %>">查看全文</a></p>
+    </div>
+    <div class="height20"></div>
+  <%end%>
+</div>

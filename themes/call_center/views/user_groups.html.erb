@@ -1,0 +1,48 @@
+<div class="main">
+  <div class="left">
+    <%= render :partial => "/share/myinfo" %>
+    <div class="height12"></div>
+  </div>
+  <div class="right2">
+    <div class="box2">
+      <div class="title2">
+      <p>群组</p>
+      <% if is_blog_admin? %>
+      <span><img src="/images/call_center/tu_xrz.gif" align="absmiddle"> <a href="/manage/user_groups/new"><strong>我创建群组</strong></a></span>
+      <%end%>
+      </div>
+      <div class="tabs6">
+        <ul>
+          <li class="tabs66"><a href="/groups" title="我创建的群"><span>我创建的群</span></a></li>
+        </ul>
+      </div>
+      <div class="height12"></div>
+      <div class="vip2">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody><tr>
+              <td>
+                <ul>
+                  <% for user_group in @user_groups %>
+                  <li>
+                    <div class="vip2_pic img"><img src="<%= user_group.icon %>" alt="群组图片"></div>
+                    <dl>
+                      <dt><%= user_group.title %>[<%= user_group.member_count %>人]</dt>
+                      <dd><%= user_group.description %></dd>
+                    </dl>
+                    <% if is_friend_with_blog_admin? %>
+                     <div class="vip2_btn"><a href="/manage/user_groups/<%= user_group.id %>/join"><img src="/images/call_center/btn_join.gif" alt="加入此群"></a></div>
+                    <%end%>
+                  </li>
+                  <%end%>
+              </ul></td>
+            </tr>
+        </tbody></table>
+      </div>
+      <div class="height20"></div>
+      <div class="scott">
+      <%= will_paginate @user_groups,{:prev_label => "<<上一页",:next_label => '下一页>>'} %>
+    </div>
+      <div class="height20"></div>
+    </div>
+  </div>
+</div>

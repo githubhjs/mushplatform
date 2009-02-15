@@ -1,0 +1,33 @@
+<div class="main">
+  <div class="left">
+    <%= render :partial => '/share/my_photos' %>
+    <div class="height12"></div>
+  </div>
+  <div class="right2">
+    <div class="box2">
+      <div class="title2"><p>我的相册</p>
+      <% if is_blog_admin? %>
+       <span><img src="/images/call_center/tu_sczp.gif"> <a href="/manage/photos/new"><strong>上传照片</strong></a></span>
+      <%end%>
+      </div>
+      <div class="height20"></div>
+      <div class="height20"></div>
+      <div class="photo_info">
+        <span class="f14b"><%= @photo.title %></span><br>
+        发表于<%= DateUtil.timelong_for_with_ling(@photo.created_at) %><br>
+        <div class="next">
+          <% if @per_photo %>
+          <div class="next_a"><a href="/photos/<%= @per_photo.id %>"><img src="/images/call_center/btn_up.gif" alt="上一张"></a></div>
+         <%end%>
+          <div class="next_b"><img src="/images/call_center/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/call_center/tu_ckyt.gif" align="absmiddle"> <a href="/images/call_center/pic2.jpg">查看原图</a> &nbsp;&nbsp;<img src="/images/call_center/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
+          <%if @next_photo%>
+          <div class="next_c"><a href="/photos/<%= @next_photo.id %>"><img src="/images/call_center/btn_down.gif" alt="下一张"></a></div>
+          <%end%>
+        </div>
+        <div class="pic"><a href="<%=  @next_photo ? "/photos/#{@next_photo.id}" : '#' %>"><img src="<%= @photo.orignal_link %>" alt="下一张"></a></div>
+        <div class="height20"></div>  
+      </div>
+      <div class="height20"></div>
+    </div>
+  </div>
+</div>

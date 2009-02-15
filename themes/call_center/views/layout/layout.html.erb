@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>客户世界-空间</title>
+    <link href="/stylesheets/call_center/call_center.css" rel="stylesheet" type="text/css" />
+    <script>if (top.location != self.location) {top.location=self.location;}</script><script type="text/javascript" src="Temple%20of%20Heaven_files/resize.js"></script>
+    <script src="/javascripts/prototype.js" type="text/javascript"></script>
+    <script src="/javascripts/blog.js" type="text/javascript"></script>
+    <script>
+      function submit_search(){
+        var _form = document.search_form;
+        if(_form.keyword.value != ''){
+          _form.submit();
+        }else{
+          alert('请输入查询关键字');
+        }
+      }
+     </script>
+   </head>
+   <body>
+    <div class="ding">
+      <a href="#"><img src="/images/call_center/logo.gif" alt="客户世界" /></a>
+      <p><a href="#">主页</a> | <a href="#">博客</a> | <a href="#">新闻</a> | <a href="#">文库</a> | <a href="#">供应商</a> | <a href="#">专家</a> | <a href="#">期刊</a> | <a href="#">论坛</a></p>
+    </div>
+    <div class="clear"></div>
+    <div class="header">
+      <div class="top">
+        <div class="top_bt"><h2><%= current_blog_user.blog_config.blog_name %></h2>
+             <p><span class="f14b"><%= current_blog_user.blog_config.announcement %></span></p>
+        </div>
+      </div>
+      <div id="dh" class="m_index">
+        <div class="dh_a"></div>
+        <div class="dh_b">
+          <div class="nav">
+            <ul>
+              <li  class="<%= action_name == 'index' ? 'n_index' : 'n_photo' %>">
+                <a  href="/" title="我的空间"><span>我的空间</span></a>
+              </li>
+              <li class="<%= action_name =~ /blogs|show/ ? 'n_index' : 'n_photo' %>"><a href="/blogs" title="日志"><span>日志</span></a></li>
+              <li class="<%= action_name =~  /photo/  ? 'n_index' : 'n_photo' %>"><a href="/photos" title="相册"><span>相册</span></a></li>
+              <li class="<%= action_name =~  /friends/  ? 'n_index' : 'n_photo' %>"><a href="/friends" title="好友"><span>好友</span></a></li>
+              <li class="<%= action_name =~  /group/  ? 'n_index' : 'n_photo' %>"><a href="/groups" title="群组"><span>群组</span></a></li>
+              <li class="<%= action_name =~  /messages/  ? 'n_index' : 'n_photo' %>"><a href="/messages" title="公告"><span>公告</span></a></li>
+              <li class="<%= action_name =~  /vote/  ? 'n_index' : 'n_photo' %>"><a href="/votes" title="投票"><span>投票</span></a></li>
+            </ul>
+          </div>
+          <div class="keyword">
+            <% form_tag '/search',:name => 'search_form' do %>
+              <select name="select" id="select">
+                <option>日志</option>
+              </select>
+              <input type="text" name="keyword" va="<%= params[:keyword] %>" />
+              <a href="#" onclick="submit_search();return false;"><img src="/images/call_center/soso.gif" alt="搜索" align="absmiddle" /></a>
+            <%end%>
+          </div>
+        </div>
+        <div class="dh_c"></div>
+      </div>
+    </div>
+    <div class="height12"></div>
+    <%= yield %>
+    <div class="height12"></div>
+    <div class="foot">
+      <div class="foot_a"></div>
+      <div class="copyright">
+        <A href="http://www.ccmw.net/minisites/ccminfo/gsjj.htm"
+           target=_blank>关于我们</A> &nbsp;|&nbsp; <A
+          href="http://www.ccmw.net/minisites/ccminfo/adver.htm" target=_blank>广告服务</A>
+
+        &nbsp;|&nbsp; <A href="http://www.ccmw.net/minisites/ccminfo/copyright.htm"
+                         target=_blank>版权说明</A> &nbsp;|&nbsp; <A
+          href="http://liukai.ccmw.com:3000/sitemap" target=_blank>网站地图</A> &nbsp;|&nbsp;
+        <A href="http://www.ccmw.net/minisites/ccminfo/yszc.htm" target=_blank>隐私政策</A>
+        &nbsp;|&nbsp; <A href="mailto:caojian@ccmworld.net">欢迎赐稿</A> &nbsp;|&nbsp; <A
+          href="http://liukai.ccmw.com:3000/manage/index.html">网站首页</A><BR>
+
+        Copyright
+        2002-2009 CCMworld Group All rights reserved.<BR>
+        <A href="http://www.ccmw.net/"
+           target=_blank>客户世界机构</A> 版权所有 京ICP备05038078号
+      </div>
+      <div class="foot_c"></div>
+    </div>
+  </body>
+</html>

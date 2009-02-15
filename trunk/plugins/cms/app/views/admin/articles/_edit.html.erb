@@ -1,5 +1,5 @@
 <% form_remote_tag :url => 'articles/update', :before => fckeditor_before_js('body','') do -%>
-<input type="hidden" name="page" value="<%= @page %>">
+<input type="hidden" name="page" value="<%= @page.empty? ? "1" : @page %>">
 <h2><%= t 'text.article.manage_articles' %> - <%= @channel.name %> </h2>
 
 <ul class="subsubsub">

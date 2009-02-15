@@ -364,9 +364,11 @@ module FileColumn # :nodoc:
       # this creates a short moment, where neither the old nor
       # the new files exist but we can't do much about this as
       # filesystems aren't transactional.
-      FileUtils.rm_rf @dir
+      #FileUtils.rm_rf @dir
 
-      FileUtils.mv local_dir, @dir
+      #FileUtils.mv local_dir, @dir
+      FileUtils.cp_r "#{local_dir}/.", @dir
+      FileUtils.rm_rf local_dir
 
       @just_uploaded = just_uploaded
     end

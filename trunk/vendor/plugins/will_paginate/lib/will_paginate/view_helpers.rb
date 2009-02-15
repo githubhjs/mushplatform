@@ -205,7 +205,8 @@ module WillPaginate
       @template   = template
 
       # reset values in case we're re-using this instance
-      @total_pages = @param_name = @url_string = nil
+      #@total_pages = @param_name = @url_string = nil
+      @total_pages = @param_name = nil
     end
 
     # Process it! This method returns the complete HTML string which contains
@@ -298,7 +299,7 @@ module WillPaginate
     # and <tt>:params</tt> option into account.
     def url_for(page)
       page_one = page == 1
-      unless @url_string and !page_one
+      #unless @url_string and !page_one
         @url_params = {}
         # page links should preserve GET parameters
         stringified_merge @url_params, @template.params if @template.request.get?
@@ -314,6 +315,9 @@ module WillPaginate
         end
 
         url = @template.url_for(@url_params)
+        if @url_string
+          url = "#{@url_string}?#{url.split('?')[1]}"
+        end
         return url if page_one
         
         if complex
@@ -329,7 +333,7 @@ module WillPaginate
             end
           end
         end
-      end
+      #end
       # finally!
       @url_string.sub '@', page.to_s
     end

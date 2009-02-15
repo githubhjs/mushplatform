@@ -81,7 +81,7 @@ module CmsHelper
 
   def article_link(article)
     title = (article['display_title'] and article['display_title'].length > 0) ? title = article['display_title'] : title = article['title']
-    link_to title, article_permalink(article), :title => article['title']
+    link_to title, article_permalink(article), :title => article['title'], :target => '_blank'
   end
   
   def article_content_link(article)
@@ -117,7 +117,7 @@ module CmsHelper
     tags_link = ""
     article = Article.find(article['id'])
     article.tags.each{|tag|
-      tags_link << "#{link_to(tag['name'], tag_permalink(tag), :title => tag['name'])} "
+      tags_link << "#{link_to(tag['name'], tag_permalink(tag), :title => tag['name'], :target => '_blank')} "
     }
     tags_link
   end

@@ -1,0 +1,15 @@
+<div class="box">
+  <div class="title1"><p>我的好友</p><a href="/friends"><img src="/images/call_center/more1.gif" alt="更多"></a></div>
+  <div class="height20"></div>
+  <div class="friend">
+    <ul>
+      <%for friend in @friends%>
+        <li>
+          <p><a href="<%= friend.space_url %>"><img src="<%= user_icon(friend.id) %>"></a></p>
+          <p><a href="<%= friend.space_url %>"><%= friend.user_name %></a></p>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+  <div class="height20"></div>
+</div>

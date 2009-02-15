@@ -1,0 +1,68 @@
+<div class="main">
+  <div class="left">
+    <%=  render :partial => '/share/myinfo' %>
+    <div class="height12"></div>
+  </div>
+  <div class="right2">
+    <div class="box2">
+      <div class="title2">
+        <p>我的个人档案</p>
+      </div>
+      <div class="height20"></div>
+      <div class="saying">
+        <div class="saying_bt"><strong>关于我</strong></div>
+        <div class="height12"></div>
+      <img src="<%=  user_icon(current_blog_user.id) %>"></div>
+      <div class="height20"></div>
+      <div class="saying">
+        <div class="saying_bt"><strong>基本资料</strong></div>
+        <div class="height12"></div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody><tr>
+              <td width="11%" align="right"><strong>昵称：</strong></td>
+              <td width="89%"><%= current_blog_user.user_name %></td>
+            </tr>
+            <tr>
+              <td valign="top" align="right"><strong>性别：</strong></td>
+              <td><%= display_blog_admin_sex %></td>
+            </tr>
+            <tr>
+              <td align="right"><strong>城市：</strong></td>
+              <td><%= current_blog_user.user_profile.city %></td>
+            </tr>
+            <tr>
+              <td align="right"><strong>地址：</strong></td>
+              <td><%= current_blog_user.user_profile.adress %></td>
+            </tr>
+        </tbody></table>
+      </div>
+      <div class="height20"></div>
+      <div class="saying">
+        <div class="saying_bt"><strong>详细信息</strong></div>
+        <div class="height12"></div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td width="11%" align="right"><strong>公司名称：</strong></td>
+              <td width="89%"><%= current_blog_user.user_profile.company_name %></td>
+            </tr>
+            <tr>
+              <td valign="top" align="right"><strong>职位：</strong></td>
+              <td><%= current_blog_user.user_profile.position %></td>
+            </tr>
+            <tr>
+              <td width="11%" align="right"><strong>行业分类：</strong></td>
+              <td width="89%"><%= current_blog_user.user_profile.vocation_name %></td>
+            </tr>
+            <tr>
+              <td valign="top" align="right"><strong>自我介绍：</strong></td>
+              <td>
+                <%= current_blog_user.user_profile.introduction %>
+              </td>
+            </tr>
+        </tbody></table>
+      </div>
+      <div class="height20"></div>
+    </div>
+  </div>
+</div>

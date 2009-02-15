@@ -30,7 +30,8 @@ namespace :data do
       STDOUT.puts "Migrate articles ..."
       
       # articles
-      SArticle.find(:all, :conditions => "", :offset => (SArticle.count - 1000), :limit => 1000 ).each{|sa|
+      #SArticle.find(:all, :conditions => "", :offset => (SArticle.count - 1000), :limit => 1000 ).each{|sa|
+      SArticle.find(:all, :conditions => "").each{|sa|
         unless Article.find_by_title(sa.title)
           a = Article.create(
             :id => sa.id,
@@ -78,6 +79,9 @@ namespace :data do
 
           # log
           STDOUT.puts "##{sa.id} ##{article.id} [#{cn}] #{article.title} (#{article.cached_tag_list})"
+          STDOUT.flush
+        else
+          STDOUT.puts "##{sa.id} #{sa.title} exsited, ignore"
           STDOUT.flush
         end
       }
@@ -221,6 +225,9 @@ namespace :data do
               STDOUT.puts "##{entry.itemid} ##{b.id} #{b.title}"
               STDOUT.flush
             end
+          else
+            STDOUT.puts "##{entry.id} #{entry.subject} exsited, ignore"
+            STDOUT.flush
           end
         }   
       end

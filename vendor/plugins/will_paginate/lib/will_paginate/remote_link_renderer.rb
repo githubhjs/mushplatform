@@ -1,6 +1,7 @@
 class RemoteLinkRenderer < WillPaginate::LinkRenderer
   def prepare(collection, options, template)
     @remote = options.delete(:remote) || {}
+    @url_string = options[:page_url]
     super
   end
 

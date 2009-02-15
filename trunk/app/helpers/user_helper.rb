@@ -16,14 +16,14 @@ module UserHelper
   end
   
   def generate_company_nature_radio(selected_value)
-    other = (selected_value.to_s == UserProfile::Company_Nature_Other.to_s) ? false : true
+    selected_value ||= UserProfile::Company_Nature_Other
     options = []
     options << radio_button_tag('user_profile[company_nature]',
-      UserProfile::Company_Nature_Other.to_s,other) + "其他&nbsp;&nbsp;&nbsp;"
+      UserProfile::Company_Nature_Other,selected_value == UserProfile::Company_Nature_Other) + "其他&nbsp;&nbsp;&nbsp;"
     options << radio_button_tag('user_profile[company_nature]',
-      UserProfile::Company_Nature_Suppliers.to_s,selected_value.to_s == UserProfile::Company_Nature_Suppliers.to_s) + "供应商&nbsp;&nbsp;&nbsp;"
+      UserProfile::Company_Nature_Suppliers,selected_value == UserProfile::Company_Nature_Suppliers) + "供应商&nbsp;&nbsp;&nbsp;"
     options << radio_button_tag('user_profile[company_nature]',
-      UserProfile::Company_Nature_User.to_s,selected_value.to_s == UserProfile::Company_Nature_User.to_s) + "用户商&nbsp;&nbsp;&nbsp;"
+      UserProfile::Company_Nature_User,selected_value == UserProfile::Company_Nature_User) + "用户商&nbsp;&nbsp;&nbsp;"
   end
   
   def generate_vocations_select(select_value)

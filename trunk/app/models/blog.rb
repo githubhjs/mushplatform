@@ -73,7 +73,9 @@ class Blog < ActiveRecord::Base
   end
   
   def to_liquid
-    self.attributes.stringify_keys
+    atts = attributes.stringify_keys
+    atts['author'] = User.find(user_id).user_name unless author
+    atts
   end
 
   def footstep
@@ -83,8 +85,6 @@ class Blog < ActiveRecord::Base
 end
 Tag.class_eval do 
   def to_liquid
-    atts = self.attributes.stringify_keys
-    atts['author'] = User.find(user_id).user_name unless author
-    atts
+    self.attributes.stringify_keys
   end    
 end

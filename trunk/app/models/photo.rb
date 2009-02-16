@@ -26,13 +26,13 @@ class Photo < ActiveRecord::Base
       begin
         image = Magick::Image::read_inline(Base64.b64encode(self.uploaded_data.read)).first
         if image
-          generate_image(image,self.uploaded_data.original_filename,:orignal_link)
+          generate_image(image,self.uploaded_data.original_filename,:orignal_link,'orignal')
           generate_image(image,self.uploaded_data.original_filename,:max_link,'max',Max_Size)
           generate_image(image,self.uploaded_data.original_filename,:mid_link,'mid',Mid_Size)
           generate_image(image,self.uploaded_data.original_filename,:thumbnail_link,'thum',Thumbnail_Size)
         end
       rescue Exception => e
-#        puts e.message
+##        puts e.message
       end
     end
   end

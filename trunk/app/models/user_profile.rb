@@ -3,7 +3,7 @@ class UserProfile < ActiveRecord::Base
 
   belongs_to :user
 
-  has_one :vocation
+  belongs_to :vocation
 
 #  has_attachment :storage => :file_system, :path_prefix => 'public/assets/avatar',
 #                 :content_type => :image, :processor => 'Rmagick', :thumbnail_class => :thumbnail,
@@ -38,7 +38,7 @@ class UserProfile < ActiveRecord::Base
   end
 
   def vocation_name
-    vocation_id ? self.vocation.vocation_name : ''
+    (self.vocation_id && self.vocation_id > 0 &&  self.vocation)  ? self.vocation.vocation_name : ''
   end
  
   def generate_image_url_and_path(original_img_name)

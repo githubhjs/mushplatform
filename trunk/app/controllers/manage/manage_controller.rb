@@ -7,7 +7,8 @@ class Manage::ManageController < ApplicationController
   layout "space"
 
   before_filter :is_space_admin?
-  
+
+
   def index
     @friends = current_user.friends.find(:all,:limit => Latest_Friend_Count,:order => 'friends.created_at desc')
   end

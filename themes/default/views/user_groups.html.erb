@@ -8,7 +8,7 @@
       <div class="title2">
       <p>群组</p>
       <% if is_blog_admin? %>
-      <span><img src="/images/customer_word/tu_xrz.gif" align="absmiddle"> <a href="/manage/user_groups/new"><strong>我创建群组</strong></a></span>
+      <span><img src="/images/default/tu_xrz.gif" align="absmiddle"> <a href="/manage/user_groups/new"><strong>我创建群组</strong></a></span>
       <%end%>
       </div>
       <div class="tabs6">
@@ -30,7 +30,7 @@
                       <dd><%= user_group.description %></dd>
                     </dl>
                     <% if is_friend_with_blog_admin? %>
-                     <div class="vip2_btn"><a href="/manage/user_groups/<%= user_group.id %>/join"><img src="/images/customer_word/btn_join.gif" alt="加入此群"></a></div>
+                     <div class="vip2_btn"><a href="/manage/user_groups/<%= user_group.id %>/join"><img src="/images/default/btn_join.gif" alt="加入此群"></a></div>
                     <%end%>
                   </li>
                   <%end%>

@@ -7,7 +7,7 @@
     <div class="box2">
       <div class="title2"><p>我的相册</p>
       <% if is_blog_admin? %>
-       <span><img src="/images/customer_word/tu_sczp.gif"> <a href="/manage/photos/new"><strong>上传照片</strong></a></span>
+       <span><img src="/images/default/tu_sczp.gif"> <a href="/manage/photos/new"><strong>上传照片</strong></a></span>
       <%end%>
       </div>
       <div class="height20"></div>
@@ -17,11 +17,11 @@
         发表于<%= DateUtil.timelong_for_with_ling(@photo.created_at) %><br>
         <div class="next">
           <% if @per_photo %>
-          <div class="next_a"><a href="/photos/<%= @per_photo.id %>"><img src="/images/customer_word/btn_up.gif" alt="上一张"></a></div>
+          <div class="next_a"><a href="/photos/<%= @per_photo.id %>"><img src="/images/default/btn_up.gif" alt="上一张"></a></div>
          <%end%>
-          <div class="next_b"><img src="/images/customer_word/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/customer_word/tu_ckyt.gif" align="absmiddle"> <a href="<%= @photo.orignal_link %>" target="_blank" >查看原图</a> &nbsp;&nbsp;<img src="/images/customer_word/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
+          <div class="next_b"><img src="/images/default/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/default/tu_ckyt.gif" align="absmiddle"> <a href="<%= @photo.orignal_link %>" target="_blank" >查看原图</a> &nbsp;&nbsp;<img src="/images/default/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
           <%if @next_photo%>
-          <div class="next_c"><a href="/photos/<%= @next_photo.id %>"><img src="/images/customer_word/btn_down.gif" alt="下一张"></a></div>
+          <div class="next_c"><a href="/photos/<%= @next_photo.id %>"><img src="/images/default/btn_down.gif" alt="下一张"></a></div>
           <%end%>
         </div>
         <div class="pic"><a href="<%=  @next_photo ? "/photos/#{@next_photo.id}" : '#' %>"><img src="<%= @photo.max_link||@photo.orignal_link %>" alt="下一张"></a></div>

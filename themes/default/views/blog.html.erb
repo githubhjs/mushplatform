@@ -9,7 +9,7 @@
     <div class="box2">
       <div class="title2">
         <p>阅读全文</p>
-      <span><img src="/images/customer_word/tu_xrz.gif" align="absmiddle"></span></div>
+      <span><img src="/images/default/tu_xrz.gif" align="absmiddle"></span></div>
       <div class="height20"></div>
       <div class="height20"></div>
       <div class="blog">
@@ -52,6 +52,16 @@
             <form name="comment_form" id="comment_form" method="post" action="/entry/<%= @blog.id %>/comments/create">
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tbody>
+                 <% unless current_user %>
+                    <tr>
+                      <td width="14%" align="right">用户名：</td>
+                      <td width="86%"><input type="text" name="user[user_name]"></td>
+                    </tr>
+                    <tr>
+                      <td width="14%" align="right">密 码：</td>
+                      <td width="86%"><input type="password" name="user[password]"></td>
+                    </tr>
+                  <%end%>
                   <tr>
                     <td width="14%" align="right">标题：</td>
                     <td width="86%"><input name="comment[title]"  type="text"></td>

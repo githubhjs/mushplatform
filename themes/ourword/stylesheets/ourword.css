@@ -222,7 +222,7 @@ DIV.scott SPAN.disabled {
 .next_a{ float:left; width:100px; height:30px; text-align:right;}
 .next_b{ float:left; width:440px; height:30px; text-align:center}
 .next_c{ float:right; width:100px; height:30px;}
-.pic img{ width:650px;}
+.pic img{}
 
 .message{ width:90%; margin:0 auto; color:#464646;}
 .message img{ float:left; width:48px;}

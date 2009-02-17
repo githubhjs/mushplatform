@@ -6,7 +6,7 @@ module Manage::BlogsHelper
   end
 
   def generate_categories_options_for_list(select_value)
-    options = [['全部日志分类','0']] + Category.find(:all).map{|category|[category.name,"#{category.id}"]}
+    options = [['全部日志分类','0']] + current_user.categories.map{|category|[category.name,"#{category.id}"]}
     options_for_select(options, select_value.blank? ? nil : select_value.to_s)
   end
   

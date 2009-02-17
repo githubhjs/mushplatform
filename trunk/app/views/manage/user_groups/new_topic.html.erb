@@ -20,7 +20,12 @@
             </tr>
             <tr>
               <td>话题描述：</td>
-              <td><textarea name="topic[description]" cols="50" rows="5"><%= @topic.description %></textarea><br>公告字数不得超过200个字。</td>
+              <td>
+                  <SPAN style="COLOR: #ff0000"></SPAN>
+                  <input type="hidden" id="topic_description" name="topic[description]" value="<%= h(@topic.description)%>"></input>
+                  <SPAN style="COLOR: #ff0000"></SPAN>
+                  <iframe id="myEditor" src="/editor/editor.htm?id=topic_description" frameborder="0" scrolling="no" width="450" height="200"></iframe>
+                </td>
             </tr>
             <tr>
               <td></td>

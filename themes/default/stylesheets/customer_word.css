@@ -12,7 +12,7 @@ a:hover   {line-height:22px;color:#ff0000;text-decoration:underline;}
 .clear{clear:both;width:1px;font-size:1px;height:0;line-height:0;visibility:hidden;}
 
 /*<公共颜色定义>*/
-.red{ color:red;}
+.red{ color:red;}.message dl
 .darkred{ color:darkred;}
 .salmon{ color:salmon;}
 
@@ -226,8 +226,8 @@ DIV.scott SPAN.disabled {
 
 .message{ width:90%; margin:0 auto; color:#464646;}
 .message img{ float:left; width:48px;}
-.message dl{ float:right; width:87%; overflow:hidden; line-height:20px;}
-.message dt{ width:98%; height:22px; overflow:hidden; color:#94979e;}
+.message dl{ float:right; width:87%;line-height:20px;}
+.message dt{ width:98%; height:22px;color:#94979e;}
 .message p{ display:block; clear:both; width:90%; text-align:right; margin:12px auto;}
 
 .saying{ width:90%; margin:0 auto; color:#464646;}

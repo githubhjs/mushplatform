@@ -17,8 +17,6 @@ function ajax_submit(_from){
         evalScripts:true,
         onComplete:function(request){
             Element.hide('comment_loading');
-            _from['comment[body]'].value='';
-            _from['comment[title]'].value='';
         },
         onLoading:function(request){
             Element.show('comment_loading');

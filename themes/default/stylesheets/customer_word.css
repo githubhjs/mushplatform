@@ -195,7 +195,7 @@ DIV.scott SPAN.disabled {
 .blog{ width:90%; margin:0 auto; color:#464646;}
 .blog dl{ float:left; width:100%;}
 .blog dt{ width:100%; height:22px; size:14px; font-weight:bold;overflow:hidden;}
-.blog dd{ width:100%; height:25px; line-height:25px; border-bottom:1px dotted #076c97;}
+.blog dd{ width:100%; line-height:25px; border-bottom:1px dotted #076c97;}
 .blog p{ line-height:25px; text-indent:24px; size:13px;}
 .blog img{ width:80%; margin:5px;}
 

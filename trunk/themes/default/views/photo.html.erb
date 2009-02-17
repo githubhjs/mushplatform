@@ -19,12 +19,12 @@
           <% if @per_photo %>
           <div class="next_a"><a href="/photos/<%= @per_photo.id %>"><img src="/images/customer_word/btn_up.gif" alt="上一张"></a></div>
          <%end%>
-          <div class="next_b"><img src="/images/customer_word/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/customer_word/tu_ckyt.gif" align="absmiddle"> <a href="/images/customer_word/pic2.jpg">查看原图</a> &nbsp;&nbsp;<img src="/images/customer_word/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
+          <div class="next_b"><img src="/images/customer_word/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/customer_word/tu_ckyt.gif" align="absmiddle"> <a href="<%= @photo.orignal_link %>" target="_blank" >查看原图</a> &nbsp;&nbsp;<img src="/images/customer_word/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
           <%if @next_photo%>
           <div class="next_c"><a href="/photos/<%= @next_photo.id %>"><img src="/images/customer_word/btn_down.gif" alt="下一张"></a></div>
           <%end%>
         </div>
-        <div class="pic"><a href="<%=  @next_photo ? "/photos/#{@next_photo.id}" : '#' %>"><img src="<%= @photo.orignal_link %>" alt="下一张"></a></div>
+        <div class="pic"><a href="<%=  @next_photo ? "/photos/#{@next_photo.id}" : '#' %>"><img src="<%= @photo.max_link||@photo.orignal_link %>" alt="下一张"></a></div>
         <div class="height20"></div>  
       </div>
       <div class="height20"></div>

@@ -209,7 +209,8 @@ namespace :data do
    
     desc "Migrate blog"
     task :blogs => :environment do
-      entries = SBlogEntry.find(:all, :conditions => "", :offset => (SBlogEntry.count - 5000), :limit => 5000 )
+      #entries = SBlogEntry.find(:all, :conditions => "", :offset => (SBlogEntry.count - 5000), :limit => 5000 )
+      entries = SBlogEntry.find(:all)
       if entries != nil
         entries.each { |entry|
           blog = Blog.find_by_title(entry.subject)
@@ -253,7 +254,7 @@ namespace :data do
               STDOUT.flush
             end
           else
-            blog.update(:hits => entry.hits)
+            blog.update_attributes(:hits => entry.hits)
             STDOUT.puts "##{entry.id} #{entry.subject} update hits #{entry.hits}"
             STDOUT.flush
           end

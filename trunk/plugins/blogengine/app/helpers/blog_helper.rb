@@ -15,6 +15,10 @@ module BlogHelper
     "/entry/#{entry['id']}"
   end
   
+  def login?
+    current_user
+  end
+  
   def entry_link(entry)
     link_to entry['title'], entry_permalink(entry), :title => entry['title']
   end

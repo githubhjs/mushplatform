@@ -1,0 +1,14 @@
+<div class="box">
+  <div class="title1">
+    <p>统计</p>
+  <a href="#"><img src="images/more1.gif" alt="更多"></a></div>
+  <div class="height20"></div>
+  <div class="statistics">
+    <p>创建：<span class="gray"><%= DateUtil.timelong_for_with_ling(@created_at) %></span><br>
+      文章数：<span class="gray"><%= @blogs_count|| 0 %></span><br>
+      评论数：<span class="gray"><%= @comments_count|| 0 %></span><br>
+      访问数： <span class="gray"><%= @hits_count||0 %></span>
+     </p>
+  </div>
+  <div class="height20"></div>
+</div>

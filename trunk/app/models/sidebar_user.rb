@@ -22,6 +22,7 @@ class SidebarUser < ActiveRecord::Base
   end
   
   def self.create_default_sidebars(user_id)
+     SidebarUser.create(:sidebar_id => 'blog_base_info', :bar_name => "统计信息", :description => "显示统计信息", :user_id => user_id, :bar_index => 0)
      SidebarUser.create(:sidebar_id => 'category', :bar_name => "日志分类", :description => "显示日志分类", :user_id => user_id, :bar_index => 1)
      SidebarUser.create(:sidebar_id => 'search', :bar_name => "搜索", :description => "搜索日志", :user_id => user_id, :bar_index => 2)
      SidebarUser.create(:sidebar_id => 'latest_article', :bar_name => "最新文章", :description => "最新文章列表", :user_id => user_id, :bar_index => 3)

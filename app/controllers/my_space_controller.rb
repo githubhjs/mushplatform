@@ -1,7 +1,7 @@
 class MySpaceController < ApplicationController
   
   skip_before_filter :verify_authenticity_token,:only => [:create_comment]  
-  
+ 
   include ControllerExtend
 
   layout :theme_layout
@@ -42,18 +42,20 @@ class MySpaceController < ApplicationController
 
   def sns_index
     @votes        =  current_blog_user.votes.find(:all,:limit => Latest_Votes_Count,:order => 'id desc')
-    @blogs        =  current_blog_user.blogs.find(:all,:limit => Latest_Blogs_Count,:order => 'id desc')
+    @blogs        =  current_blog_user.blogs.find(:all,:limit => Latest_Blogs_Count,:conditions => "published = #{Blog::Published_Blogs}",:order => 'if_top desc,id desc')
     @photos       =  current_blog_user.photos.find(:all,:limit => Latest_Photos_Count,:order => 'id desc')
     @message      =  current_blog_user.messages.find(:first,:order => 'id desc')
     @friends      =  current_blog_user.friends.find(:all,:limit => Latest_Friends_Count,:order => 'id desc')
     @user_groups  =  current_blog_user.user_groups.find(:all,:limit => Latest_Groups_Count,:order => 'id desc')
+    stat_info()
     render :template => 'index'
   end
   
   def blogs
     @categories = current_blog_user.categories
     @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc",:conditions => "user_id=#{current_blog_user.id}")
-    @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions => generate_conditions)
+    @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions => generate_conditions,:order => 'if_top desc,id desc')
+    stat_info()
     render :template => 'blogs'
   end
 
@@ -64,8 +66,9 @@ class MySpaceController < ApplicationController
     @blog.add_view_count
     @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at")
     unless current_theme.is_sns_theme?
-      render_liquid({:template => 'entry',:layout => true},{'entry' => @blog,'if_login' => current_user ? true : false,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => "#{request.path.gsub(/\/comments\/page\/\d+/,'')}/comments"}})
+      render_liquid({:template => 'entry',:layout => true},{'entry' => @blog,'if_login' => current_user,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => "#{request.path.gsub(/\/comments\/page\/\d+/,'')}/comments"}})
     else
+      stat_info
       @categories = current_blog_user.categories
       @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc")
       render :template => 'blog'
@@ -182,6 +185,13 @@ class MySpaceController < ApplicationController
 
   protected
   
+  def stat_info
+    @blogs_count     = Blog.count('id', :conditions => "user_id = #{current_blog_user.id} and published = #{Blog::Published_Blogs}")
+    @comments_count  = Comment.count('id', :conditions => "blog_user_id = #{current_blog_user.id}")
+    @hits_count      = Blog.sum('view_count', :conditions => "user_id = #{current_blog_user.id}")
+    @created_at      = current_blog_user.created_at
+  end
+
   def keep_params
     orignal_params = {}
     #    [:month,:date,:year,:keyword,:category_id,:tag].each do |attr|
@@ -191,6 +201,7 @@ class MySpaceController < ApplicationController
     orignal_params[:path]  = request.path.gsub(/\/page\/\d+/,'')
     orignal_params
   end
+
 
 
   def generate_conditions

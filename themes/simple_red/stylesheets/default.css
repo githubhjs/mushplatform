@@ -62,18 +62,18 @@ textarea {
 #index {
 	margin: 0 auto;
 	padding: 0 0 20px;
-	background: url(../../images/default/main.jpg) center top repeat-y;
+	background: url(../../images/simple_red/main.jpg) center top repeat-y;
 }
 #detail {
 	margin: 0 auto;
 	padding: 0 0 20px;
-	background: url(../../images/default/main.jpg) center top repeat-y;
+	background: url(../../images/simple_red/main.jpg) center top repeat-y;
 }
 #container {
 	width: 782px;
 	margin: 0 auto;
 	padding: 0 4px;
-	background: url(../../images/default/innerContainer1.jpg) top center no-repeat;
+	background: url(../../images/simple_red/innerContainer1.jpg) top center no-repeat;
 }
 #header {
 	width: 782px;
@@ -368,7 +368,7 @@ textarea {
 	margin: 30px auto 0;
 	padding-top: 30px;
 	text-align: center;
-	background: url(../../images/default/footer.jpg) left bottom no-repeat;
+	background: url(../../images/simple_red/footer.jpg) left bottom no-repeat;
 }
 .copyright {
 	color: #FFF;

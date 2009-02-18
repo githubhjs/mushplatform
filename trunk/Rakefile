@@ -212,8 +212,8 @@ namespace :data do
       entries = SBlogEntry.find(:all, :conditions => "", :offset => (SBlogEntry.count - 5000), :limit => 5000 )
       if entries != nil
         entries.each { |entry|
-          #puts entry.subject
-          unless Blog.find_by_title(entry.subject)
+          blog = Blog.find_by_title(entry.subject)
+          unless blog
             user = User.find_by_user_name(entry.blog_user.username) if entry.blog_user
             if user
               if entry.text
@@ -253,7 +253,8 @@ namespace :data do
               STDOUT.flush
             end
           else
-            STDOUT.puts "##{entry.id} #{entry.subject} exsited, ignore"
+            blog.update(:hits => entry.hits)
+            STDOUT.puts "##{entry.id} #{entry.subject} update hits #{entry.hits}"
             STDOUT.flush
           end
         }   

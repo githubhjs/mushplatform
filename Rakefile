@@ -192,6 +192,20 @@ namespace :data do
         STDOUT.flush
       }
     end
+
+    desc "Add base info sidebars"
+    task :sidebars => :environment do
+      STDOUT.puts "Add base info sidebars ..."
+      User.find(:all, :order => "id").each{|u|
+        SidebarUser.create(:sidebar_id => 'blog_base_info',
+                           :bar_name => "统计信息",
+                           :description => "显示统计信息",
+                           :user_id => u.id,
+                           :bar_index => 0)
+        STDOUT.puts "##{u.id} #{u.user_name}"
+        STDOUT.flush
+      }
+    end
    
     desc "Migrate blog"
     task :blogs => :environment do

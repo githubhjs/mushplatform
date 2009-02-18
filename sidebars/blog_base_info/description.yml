@@ -1,4 +1,4 @@
-title:   Blog Base Info
-description: This is the description... All light and fluffy.
+title:   统计信息
+description: 显示统计信息
 sidebar_id: blog_base_info
-enable: false
+enable: true

@@ -198,10 +198,10 @@ namespace :data do
       STDOUT.puts "Add base info sidebars ..."
       User.find(:all, :order => "id").each{|u|
         SidebarUser.create(:sidebar_id => 'blog_base_info',
-                           :bar_name => "统计信息",
-                           :description => "显示统计信息",
+                           :bar_name => "博客基本信息",
+                           :description => "博客基本信息",
                            :user_id => u.id,
-                           :bar_index => 0)
+                           :bar_index => 5)
         STDOUT.puts "##{u.id} #{u.user_name}"
         STDOUT.flush
       }

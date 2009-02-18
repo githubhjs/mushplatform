@@ -194,7 +194,7 @@ namespace :data do
     end
 
     desc "Add base info sidebars"
-    task :sidebars => :environment do
+    task :baseinfo_sidebars => :environment do
       STDOUT.puts "Add base info sidebars ..."
       User.find(:all, :order => "id").each{|u|
         SidebarUser.create(:sidebar_id => 'blog_base_info',

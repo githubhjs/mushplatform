@@ -88,6 +88,7 @@ module CcmwHelper
                   <li><a href='/admin/article_categories'>#{I18n.t 'text.menu.categories'}</a></li>
                   <li><a href='/admin/tags'>#{I18n.t 'text.menu.tags'}</a></li>
                   <li><a href='/admin/links'>#{I18n.t 'text.menu.links'}</a></li>
+                  <li><a href='/admin/blogs'>#{I18n.t 'text.menu.blogs'}</a></li>
           </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
       </li>"
     menu

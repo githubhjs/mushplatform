@@ -5,6 +5,7 @@ zh-CN:
       categories: "分类管理"
       tags: "关键词管理"
       links: "文字链接管理"
+      blogs: "博客管理"
 
     article:
       category: "分类"
@@ -35,3 +36,11 @@ zh-CN:
       category: "分类"
       url: "链接"
       image: "图片"
+
+    blogs:
+      manage_blogs: "博客管理"
+      all_blogs: "未审核博客"
+      audit: "审核"
+
+      title: "标题"
+      author: "作者"

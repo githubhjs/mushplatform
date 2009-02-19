@@ -9,7 +9,7 @@ module ControllerExtend
       content = parse_template(template,local_assigns)
       home = "http://#{request.host_with_port}"
       render :text => parse_template(layout,{'content' => content,'sidebar_content' => generate_sidebar_content,
-          'blog_name' => current_blog_user.blog_config.blog_name,'announcement' => current_blog_user.blog_config.announcement, 'home' => home})
+          'blog_name' => current_blog_user.blog_config.blog_name,'announcement' => current_blog_user.blog_config.announcement, 'home' => home,'if_login' => current_user})
     else
       render :text =>  parse_template(template,local_assigns)
     end

@@ -269,7 +269,7 @@ namespace :data do
         users.each { |user|
           suser = SBlogUser.find_by_username(user.user_name)
           if suser
-            bc = BlogConfig.find_user_id(user.id)
+            bc = BlogConfig.find_by_user_id(user.id)
             bc = BlogConfig.create( :user_id => user.id) unless bc
             bc.update_attributes(:view_count => suser.views)
             STDOUT.puts "##{user.id} #{user.user_name} update views #{bc.view_count}"

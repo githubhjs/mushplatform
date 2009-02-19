@@ -5,6 +5,7 @@ en-US:
       categories: "Categories"
       tags: "Tags"
       links: "Links"
+      blogs: "Blogs"
 
     article:
       category: "Category"
@@ -35,3 +36,11 @@ en-US:
       category: "Category"
       url: "URL"
       image: "Image"
+
+    blogs:
+      manage_blogs: "Manage Blogs"
+      all_blogs: "All Blogs"
+      audit: "Audit"
+
+      title: "Title"
+      author: "Author"

@@ -1,0 +1,50 @@
+    <script>set_current_channel('ccmw')</script>
+    <% form_tag('/admin/blogs/update', :id => 'posts-filter' ) do %>
+    <h2><%= t 'text.blogs.manage_blogs' %> </h2>
+
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="<%= t 'text.search' %>" class="button" />
+    </p>
+
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="button" value="<%= t 'text.blogs.audit' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/update';$('posts-filter').submit();" />
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col"><%= t 'text.blogs.title' %></th>
+      <th scope="col"><%= t 'text.blogs.author' %></th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <% for blog in @blogs -%>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= blog.id %>" /></th>
+          <td><strong><%= link_to blog.title, "http://#{blog.author}.ccmw.net/entry/#{blog.id}", {:class =>'tow=title'} %></strong></td>
+          <td><a href='http://#{blog.author}.ccmw.net'><%= blog.author %></a></td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <% end  %>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+      <%= will_paginate @blogs, :prev_label => (t 'text.previous'), :next_label => (t 'text.next') %>
+    </div>
+
+    <br class="clear" />

@@ -1,4 +1,5 @@
 module BlogBaseInfoSidebarHelper
+
     def self.get_context(option = {})
       values = {}
       values['blogs_count'] = Blog.count('id', :conditions => "user_id = #{option[:user_id]}")
@@ -11,4 +12,5 @@ module BlogBaseInfoSidebarHelper
     def self.get_edit_context(options = {})
       {}
     end
+
 end

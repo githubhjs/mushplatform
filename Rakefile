@@ -262,6 +262,22 @@ namespace :data do
       end
     end
 
+    desc "Migrate blog views"
+    task :views => :environment do
+      users = User.find(:all, :order => "id")
+      if users != nil
+        users.each { |user|
+          suser = SBlogUser.find_by_username(user.user_name)
+          if suser
+            bc = BlogConfig.find_user_id(user.id)
+            bc.update_attributes(:view_count => suser.views)
+            STDOUT.puts "##{user.id} #{user.user_name} update views #{bc.view_count}"
+            STDOUT.flush
+          end
+        }
+      end
+    end
+
     desc "Migrate blog author"
     task :blogs_author => :environment do
       entries = Blog.find(:all)

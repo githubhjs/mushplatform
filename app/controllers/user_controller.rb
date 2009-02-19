@@ -13,6 +13,7 @@ class UserController < ApplicationController
     return if generate_blank
     if @user.save  
       SidebarUser.create_default_sidebars(@user.id)
+      BlogConfig.find_or_create_by_user_id(@user.id)
       @profile.user_id = @user.id
       if @profile.save  
         flash[:notice] = 'UserProfile was successfully created.'

@@ -228,7 +228,7 @@ namespace :data do
                 :published => 1,
                 :excerpt => excerpt,
                 :body => text,
-                :hits => entry.hits,
+                :view_count => entry.hits,
                 :created_at => Time.at(entry.postdate),
                 :category_id => entry.blog_category_mapping[entry.cid],
                 :user_id => user.id
@@ -254,7 +254,7 @@ namespace :data do
               STDOUT.flush
             end
           else
-            blog.update_attributes(:hits => entry.hits)
+            blog.update_attributes(:view_count => entry.hits)
             STDOUT.puts "##{entry.id} #{entry.subject} update hits #{entry.hits}"
             STDOUT.flush
           end

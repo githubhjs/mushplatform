@@ -5,9 +5,13 @@ module BlogHelper
     per_page = args.delete(:per_page) || 20
     offset = args.delete(:offset) || 0
     page = args.delete(:page) || 1
+    collected = args.delete(:collected) || true
     will_args = args
     
-    entries = Blog.publised_blogs.paginate :page => page, :order => order, :per_page => per_page, :offset => offset
+    conditions = ""
+    conditions = "collected = 1" if collected
+
+    entries = Blog.publised_blogs.paginate :page => page, :order => order, :per_page => per_page, :offset => offset, :conditiosn => conditions
     { 'entries' => entries, 'will_paginate_options' => will_args }
   end
   

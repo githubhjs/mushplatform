@@ -26,6 +26,7 @@ class MySpaceController < ApplicationController
   before_filter :setup_theme
  
   def index
+    BlogConfig.add_view_count(current_blog_user.id)
     unless current_theme.is_sns_theme?
       general_blog_index
     else
@@ -62,6 +63,7 @@ class MySpaceController < ApplicationController
   protected :sns_index,:general_blog_index
   
   def show
+    BlogConfig.add_view_count(current_blog_user.id)
     @blog = Blog.find(params[:id])
     @blog.add_view_count
     @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at")
@@ -188,7 +190,12 @@ class MySpaceController < ApplicationController
   def stat_info
     @blogs_count     = Blog.count('id', :conditions => "user_id = #{current_blog_user.id} and published = #{Blog::Published_Blogs}")
     @comments_count  = Comment.count('id', :conditions => "blog_user_id = #{current_blog_user.id}")
-    @hits_count      = Blog.sum('view_count', :conditions => "user_id = #{current_blog_user.id}")
+    blog_config = BlogConfig.find_by_user_id(current_blog_user.id)
+    if blog_config
+      @hits_count = blog_config.view_count
+    else
+      @hits_count = Blog.sum('view_count', :conditions => "user_id = #{current_blog_user.id}")
+    end
     @created_at      = current_blog_user.created_at
   end
 

@@ -11,7 +11,7 @@ module BlogHelper
     conditions = ""
     conditions = "collected = 1" if collected
 
-    entries = Blog.publised_blogs.paginate :page => page, :order => order, :per_page => per_page, :offset => offset, :conditiosn => conditions
+    entries = Blog.publised_blogs.paginate :page => page, :order => order, :per_page => per_page, :offset => offset, :conditions => conditions
     { 'entries' => entries, 'will_paginate_options' => will_args }
   end
   

@@ -91,8 +91,9 @@ class FckeditorController < ActionController::Base
         puts "#{ftype} is invalid MIME type"
         raise "#{ftype} is invalid MIME type"
       else
-#        filename = @new_file.original_filename
-        filename = "#{now.to_i}.#{now.usec}.#{Process.pid}"
+        filename = @new_file.original_filename
+        ext = $2 if filename =~ regexp
+        filename = "#{now.to_i}.#{now.usec}.#{Process.pid}.#{ext}"
         path = current_directory_path + "/" + filename
         File.open(path,"wb",0664) do |fp|
           FileUtils.copy_stream(@new_file, fp)
@@ -154,4 +155,25 @@ class FckeditorController < ActionController::Base
     end
     path
   end
+
+
+  private
+    # regular expressions to try for identifying extensions
+    EXT_REGEXPS = [
+      /^(.+)\.([^.]+\.[^.]+)$/, # matches "something.tar.gz"
+      /^(.+)\.([^.]+)$/ # matches "something.jpg"
+    ]
+
+    def split_extension(filename,fallback=nil)
+      EXT_REGEXPS.each do |regexp|
+        if filename =~ regexp
+          base,ext = $1, $2
+          return [base, ext] if options[:extensions].include?(ext.downcase)
+        end
+      end
+      if fallback and filename =~ EXT_REGEXPS.last
+        return [$1, $2]
+      end
+      [filename, ""]
+    end
 end

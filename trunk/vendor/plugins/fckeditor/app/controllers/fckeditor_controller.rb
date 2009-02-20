@@ -92,7 +92,8 @@ class FckeditorController < ActionController::Base
         raise "#{ftype} is invalid MIME type"
       else
         filename = @new_file.original_filename
-        ext = $2 if filename =~ regexp
+        ext = $2 if filename =~ /^(.+)\.([^.]+)$/
+        now = Time.now
         filename = "#{now.to_i}.#{now.usec}.#{Process.pid}.#{ext}"
         path = current_directory_path + "/" + filename
         File.open(path,"wb",0664) do |fp|

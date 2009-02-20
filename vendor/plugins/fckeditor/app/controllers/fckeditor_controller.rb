@@ -91,7 +91,8 @@ class FckeditorController < ActionController::Base
         puts "#{ftype} is invalid MIME type"
         raise "#{ftype} is invalid MIME type"
       else
-        filename = @new_file.original_filename
+#        filename = @new_file.original_filename
+        filename = "#{now.to_i}.#{now.usec}.#{Process.pid}"
         path = current_directory_path + "/" + filename
         File.open(path,"wb",0664) do |fp|
           FileUtils.copy_stream(@new_file, fp)

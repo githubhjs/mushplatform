@@ -29,7 +29,7 @@
               <p>
                 <font style="font-weight:bold;color:#999;">&times;</font>&nbsp;
                 <% if current_user.is_friend_with?(user) %>
-                 <%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete', :class => 'grey' %>
+                 <%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete',:confirm => "确定要删除吗?", :class => 'grey' %>
                  <%else%>
                  <%= link_to '加为好友', {:action => 'create', :id => user.id}, :method => 'post', :class => 'grey' %>
                 <%end%>

@@ -6,7 +6,7 @@ class MySpaceController < ApplicationController
 
   layout :theme_layout
   
-  Blog_Count_PerPage =   20
+  Blog_Count_PerPage =   10
   Rss_Blog_Perppage = 20
   Comment_Count_PerPage = 50
   Photo_PerPage = 20

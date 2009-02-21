@@ -3,7 +3,6 @@
  {% for entry in entries %}
    <li>
      <div class="postHeader">
-       <h3>{{ entry.created_at | timelong }}</h3>
       <h2>{{ entry | entry_link }}</h2>
      </div>
      <div class="postBody">
@@ -20,7 +19,7 @@
         发表于<span class="time">{{ entry.created_at | timelong }}</span> |
         <a href="{{entry|entry_permalink}}" class="readmore">阅读全文({{entry.view_count}})</a> |
         <a href="{{entry|entry_permalink}}" class="cmt">评论 <span class="count">({{entry.comment_count}})</span></a>
-        {%if blog_owner %}
+         {%if blog_owner %}
            |<a href="manage/blogs/{{entry.id}}/edit">编辑</a>
          {%endif%}
       </div>

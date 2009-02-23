@@ -1,4 +1,5 @@
 class Blog < ActiveRecord::Base
+  
   include BlogHelper
 
   belongs_to :category

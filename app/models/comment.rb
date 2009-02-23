@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
 
+  include BlogHelper
+
   belongs_to :blog
   belongs_to :user
 
@@ -11,7 +13,7 @@ class Comment < ActiveRecord::Base
   }
 
   def realtitle
-    if title and title.length == 0
+    if title.blank?
       (!body.blank? and body.length >= 12) ? body.substr(0,12) : body
     else
       title
@@ -24,5 +26,13 @@ class Comment < ActiveRecord::Base
     atts['title'] = realtitle
     atts
   end
-  
+
+  def footstep_link
+    "<a href='/entry/#{blog.id}'>#{realtitle}</a>"
+  end
+
+ def footstep
+    Footstep.create(:user_id => self.user_id, :app => "COMMENT", :content => "发表了一个评论#{footstep_link}")
+ end
+ 
 end

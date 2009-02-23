@@ -49,4 +49,7 @@ class Vote < ActiveRecord::Base
   def member_count
     @member_count ||= (UserVote.count(:conditions => "vote_id=#{self.id}")||0)
   end
+
+  
+
 end

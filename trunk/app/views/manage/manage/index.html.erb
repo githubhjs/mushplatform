@@ -18,15 +18,21 @@
       <div style="width: 90%;">
         <div class="box">
           <div class="height12"></div>
-          <div class="height12"></div>
-          <div class="left">
+          <div class="midd">
+            <div class="btbt">好友动态</div>
             <div class="list">
-              <div class="btbt">好友动态</div>
               <ul>
-                <!--li><a href="" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li-->
+               <% for footsetp in  @footsteps %>
+                 <li><p><a href="<%= footsetp.user.space_url %>" target="_blank"><strong><%= footsetp.user.user_name %></strong></a> <%= footsetp.content %></p>
+                   <span>[<%= DateUtil.timelong_for_with_ling(footsetp.created_at) %>]</span>
+                </li>
+                <%end%>
+                <li><p><a href="#"><strong>廖多多</strong></a> 上传了7张新照片<br><img class="L" src="index2.files/1234691206.870314.14841.gif"><img class="L" src="index2.files/1234691206.870314.14841.gif"><img class="L" src="index2.files/1234691206.870314.14841.gif"><img class="L" src="index2.files/1234691206.870314.14841.gif"><a href="#"><strong>查看全部&gt;&gt;</strong></a></p>
+                <span>[2009-02-21 17:32]</span></li>
               </ul>
             </div>
           </div>
+
           <!--div class="right">
             <div class="list">
               <div class="btbt">最新回复</div>
@@ -63,8 +69,8 @@
             <p class="L"><a href=""><%= user.user_name %> </a></p>
             <ul class="L">
               <!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
-                  <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
-            </ul>  
+                    <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
+            </ul>
           </div>
         <% end -%>
       </div>

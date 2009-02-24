@@ -6,7 +6,7 @@
     <a href="<%= user_vote.user.space_url %>"><img src="<%= user_icon(user_vote.user.id) %>"></a>
     <dl>
       <dt>
-        <a href="<%= user_vote.user.space_url %>"><%= user_vote.user.user_name %></a>
+        <a href="<%= user_vote.user.space_url %>"><%= user_vote.user.real_name %></a>
         <span><%= DateUtil.timelong_for_with_ling(user_vote.created_at) %></span>
       </dt>
     </dl>

@@ -35,7 +35,7 @@
               <%end%>
               <dl>
                 <% if comment.user %>
-                  <dt><a href="<%= comment.user.space_url %>"><%= comment.user.user_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+                  <dt><a href="<%= comment.user.space_url %>"><%= comment.user.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
                 <%else%>
                   <dt>访客 <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
                 <%end%>

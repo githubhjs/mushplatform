@@ -105,4 +105,4 @@ class String
     end
     r
   end
-
+end

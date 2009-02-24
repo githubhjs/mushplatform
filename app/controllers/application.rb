@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
         end
       end
     }
-    accepted[0].join("-")
+    accepted[0].join("-") if accepted[0]
   end
   
   # See ActionController::RequestForgeryProtection for details

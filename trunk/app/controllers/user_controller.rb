@@ -56,7 +56,8 @@ class UserController < ApplicationController
     if params['page'] == 'index'
       redirect_to :controller => 'user', :action => 'login_bar'
     else
-      redirect_to :controller => 'user', :action => 'login'
+      redirect_to "http://www.#{Domain_Name}"
+#      redirect_to :controller => 'user', :action => 'login'
     end
   end
   

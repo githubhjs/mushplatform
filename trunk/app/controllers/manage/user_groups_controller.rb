@@ -35,7 +35,7 @@ class Manage::UserGroupsController < Manage::ManageController
     @user_group = UserGroup.find(params[:id])
     @topics = Topic.paginate(:page => params[:page]||1,:per_page => Topic_Perpage,:conditions => "user_group_id=#{@user_group.id}",
       :order => "id desc")
-    @groups = UserGroup.find(:all, :limit => 5)
+    @recomment_groups = UserGroup.find(:all, :limit => 6,:order => 'topic_count desc,member_count desc')
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user_group }

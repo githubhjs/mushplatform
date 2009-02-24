@@ -1,22 +1,30 @@
-      <div class="R">
-        <div class="qun_top R">
-        <input class="txt" name="search" type="text" value="搜索群组..." size="19" maxlength="19">
-        <input class="button" name="button" type="button" value="搜 索">
+<div class="R">
+  <div class="qun_top R">
+    <div class="qun_top">
+      <% form_tag "/manage/user_groups/search",:onsubmit => "return this.keyword.value != this.keyword.defaultValue && this.keyword.value != ''" do %>
+        <input class="txt" name="keyword" type="text" value="搜索群组..." size="20" maxlength="20" onclick="if(this.value==this.defaultValue) this.value=''">
+        <input class="button" name="button" type="submit" value="搜 索">
+      <%end%>
+    </div>
+  </div>
+  <div class="qun_tuijian R">
+
+    <div class="tit"><h6>推荐群组</h6></div>
+
+    <% for group in @recomment_groups  %>
+      <div class="border L">
+        <div class="v_tuijian L">
+          <a href="qun_view1.html"><img src="<%= group.icon %>"/></a>
+          <p class="qun_tit"><a class="red_underline" href="/manage/user_groups/<%= group.id %>"><%= group.title %></a></p>
+          <p>分类：<%= group.category %></p>
+          <p>人数：<%= group.member_count %></p>
+          <% unless @user_group.is_in_group?(current_user) %>
+            <p><a href="/manage/user_groups/<%= @user_group.id %>/join"><b>+ 加入该群组</b></a></p>
+          <%else%>
+            <p><a href="/manage/user_groups/<%= @user_group.id %>/new_topic"><b>+创建话题</b></a></p>
+          <%end%>
         </div>
-        <div class="qun_tuijian R">
-
-            <div class="tit"><h6>推荐群组</h6></div>
-
-            <% for group in @groups  %>
-            <div class="border L">
-                <div class="v_tuijian L">
-                    <a href="qun_view1.html"><img src="<%= group.icon %>"/></a>
-                    <p class="qun_tit"><a class="red_underline" href="qun_view1.html"><%= group.title %></a></p>
-                    <p>分类：<%= group.category %></p>
-                    <p>人数：<%= group.member_count %></p>
-                    <!--p>主题：118</p-->
-                </div> 
-            </div>
-            <% end %>
-          </div>
       </div>
+    <% end %>
+  </div>
+</div>

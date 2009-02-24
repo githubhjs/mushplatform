@@ -3,9 +3,9 @@
     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
     xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
-	<title><%=h @user.blog_config.blog_name || "#{@user.user_name}的博客" %></title>
+	<title><%=h @user.blog_config.blog_name || "#{@user.real_name}的博客" %></title>
 	<link>http://<%=request.domain%>/rss</link>
-	<description><%=h @user.user_name %>的博客</description>
+	<description><%=h @user.real_name %>的博客</description>
         <pubDate><%=h timelong(Time.now)%></pubDate>
         <language>CN</language>
     <%= yield %>

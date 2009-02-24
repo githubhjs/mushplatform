@@ -4,7 +4,7 @@
     <ul>
       <% for friend in @firends %>
         <% fri = User.find(friend.friend_id) %>
-        <li><input type="radio" value="<%= fri.user_name%>" name="user_id" onclick="change_friend(this)"/><%=fri.user_name%></li>
+        <li><input type="radio" value="<%= fri.user_name%>" name="user_id" onclick="change_friend(this)"/><%=fri.real_name%></li>
       <%end%>
     </ul>
     <input type='hidden' name="selected_friend_name" id="selected_friend" value="">

@@ -6,6 +6,8 @@ class Manage::ManageController < ApplicationController
 
   Latest_Friend_FootStep = 20
 
+  Lates_Photo_Count = 7
+
   layout "space"
 
   before_filter :is_space_admin?
@@ -13,11 +15,16 @@ class Manage::ManageController < ApplicationController
 
   def index
     @friends = current_user.friends.find(:all,:limit => Latest_Friend_Count,:order => 'friends.created_at desc')
+    @photos = if @friends.blank?
+      []
+    else
+      Photo.find(:all,:limit => Lates_Photo_Count,:order => 'created_at desc')
+    end
     @footsteps = if @friends.blank?
       []
     else
       Footstep.find(:all,:limit => Latest_Friend_FootStep,:order => 'created_at desc,app',
-    :conditions => "user_id in (#{current_user.friends.map(&:friend_id).join(',')})")
+      :conditions => "user_id in (#{current_user.friends.map(&:friend_id).join(',')})")
     end
       
   end

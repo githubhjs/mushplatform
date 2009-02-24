@@ -11,7 +11,7 @@
         <ul>
           <%for regard_user in @user_reagrds do %>
             <li style="height:40px;">
-              于<%= regard_user.created_at.strftime('%y-%m-%d %H:%M') %><img src="/images/regard_imgs/<%=  regard_user.regard.icon %>"><a href="<%= regard_user.friend.space_url %>" target="_blank"><strong><%= regard_user.friend.user_name %></strong></a> ，<%= regard_user.post %>。
+              于<%= regard_user.created_at.strftime('%y-%m-%d %H:%M') %><img src="/images/regard_imgs/<%=  regard_user.regard.icon %>"><a href="<%= regard_user.friend.space_url %>" target="_blank"><strong><%= regard_user.friend.real_name %></strong></a> ，<%= regard_user.post %>。
             </li>
           <%  end %>
         </ul>

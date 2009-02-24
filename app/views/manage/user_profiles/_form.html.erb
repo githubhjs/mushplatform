@@ -19,7 +19,7 @@
   </tr>
   <tr>
     <td class="tit" >用户名：</td>
-    <td style="font-size:14px;"><b><%= @user.user_name %></b></td>
+    <td style="font-size:14px;"><b><%= @user.real_name %></b></td>
   </tr>
   <tr>
     <td class="tit" ><span>&lowast;</span> 注册邮箱：</td>
@@ -137,9 +137,7 @@
     <tr>
       <td class="tit">个人简介：</td>
       <td>
-        <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50">
-           <%= @user_profile.introduction%>
-         </textarea>
+        <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50"><%= @user_profile.introduction%></textarea>
       </td>
     </tr>
   <%end%>

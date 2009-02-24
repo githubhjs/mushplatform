@@ -23,9 +23,18 @@
             <div class="list">
               <ul>
                <% for footsetp in  @footsteps %>
-                 <li><p><a href="<%= footsetp.user.space_url %>" target="_blank"><strong><%= footsetp.user.user_name %></strong></a> <%= footsetp.content %></p>
+                 <li><p><a href="<%= footsetp.user.space_url %>" target="_blank"><strong><%= footsetp.user.real_name %></strong></a> <%= footsetp.content %></p>
                    <span>[<%= DateUtil.timelong_for_with_ling(footsetp.created_at) %>]</span>
                 </li>
+                <%end%>
+                <%  unless @photos.blank? %>
+                <li>
+                  <p>好友最新照片<br>
+                    <% for photo in @photos %>
+                      <a href="/photos/<%= photo.id %>"><img  src="<%= photo.thumbnail_link %>"></a>
+                    <%end%>
+                  </p>
+		         </li>
                 <%end%>
               </ul>
             </div>
@@ -64,7 +73,7 @@
         <% for user in @friends -%>
           <div class="friend_b L">
             <a href=""><img class="L" src="<%= user_icon(user.id) %>"/></a>
-            <p class="L"><a href=""><%= user.user_name %> </a></p>
+            <p class="L"><a href=""><%= user.real_name %> </a></p>
             <ul class="L">
               <!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
                     <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->

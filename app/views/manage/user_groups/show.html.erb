@@ -31,7 +31,11 @@
     <div class="clear L">
         <div class="qun_name">
            <h2><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>"><%= @user_group.title %></a></h2>
-           <p><a href="/manage/user_groups/<%= @user_group.id %>/join"><b>+ 加入该群组</b></a></p>
+           <% unless @user_group.is_in_group?(current_user) %>
+            <p><a href="/manage/user_groups/<%= @user_group.id %>/join"><b>+ 加入该群组</b></a></p>
+           <%else%>
+            <p><a href="/manage/user_groups/<%= @user_group.id %>/new_topic"><b>+创建话题</b></a></p>
+           <%end%>
         </div>    
         <table cellspacing="0" class="new">
         <tr>
@@ -45,12 +49,12 @@
         <% for topic in @topics do  %>
         <tr>
           <td align="left">&nbsp;<a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
-          <td><p><a href=""><%= topic.user_name %></a></p>
+          <td><p><a href=""><%= topic.real_name %></a></p>
           <p><%= topic.comment_count %></p></td>
           <td>
             <% if topic.comment_count > 0 %>
             <% last_comment = topic.last_comment %>
-          <p><a href=""  target="_blank"><%= ( last_comment.user_name) %></a></p>
+          <p><a href=""  target="_blank"><%= ( last_comment.real_name) %></a></p>
           <p><%= last_comment.created_at.strftime("%m-%d %H:%M") %></p>
           <%else%>
            <p>无</p>

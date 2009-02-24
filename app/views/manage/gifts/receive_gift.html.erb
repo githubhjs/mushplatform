@@ -11,7 +11,7 @@
 <ul>
   <%for gift_user in @gift_user do %>
     <li style="height:75px;">
-      <a href="<%= gift_user.friend.space_url %>" target="_blank"><strong><%= gift_user.friend.user_name %></strong></a> <%= gift_user.created_at.strftime('%y-%m-%d %H:%M') %> 赠送<img src="/images/gifts_imgs/<%= gift_user.gift.icon  %>">给我，<%= gift_user.post %>。
+      <%= gift_user.created_at.strftime('%y-%m-%d %H:%M') %> <a href="<%= gift_user.friend.space_url %>" target="_blank"><strong><%= gift_user.friend.real_name %></strong></a>  赠送<img src="/images/gifts_imgs/<%= gift_user.gift.icon  %>">给我，<%= gift_user.post %>。
     </li>
   <%  end %>
 </ul>

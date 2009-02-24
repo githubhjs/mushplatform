@@ -2,14 +2,14 @@
 <div class="postsTop"></div>
 <li>
   <div class="postHeader">
-    <h3>{{ entry.created_at | timelong }}</h3>
     <h2>{{ entry | entry_link }}</h2>
+    <div class="tags">Tag：{{entry|display_blog_tags}}</div>
   </div>
   <div class="clear"></div>
   <div class="postBody">
     {{ entry.body }}
   </div>
-  <div class="tags">Tag：{{entry|display_blog_tags}}</div>
+  <div class="clear"></div>
   <div class="postFooter">
     <div class="menubar"><span class="author"><a href="">{{entry.author}}</a></span> 发表于<span class="time">{{entry.created_at|timelong}}</span>
   </div>
@@ -25,7 +25,7 @@
 <div class="pageNavi">{{ comments | will_paginate }}</div>
 
 <div id="commentForm">
-<form name="comment_form" id="comment_form" method="post" action="/blogs/{{entry.id}}/comments/create">
+<form name="comment_form" id="comment_form" method="post" action="/entry/{{entry.id}}/comments/create">
   <h2 id="respond">发表评论</h2><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
 {% if if_login %}
 {% else%}
@@ -44,7 +44,7 @@
       <input type="hidden" name="comment[blog_id]" value="{{entry.id}}">
   </p>
   <p>
-    <input type="button"  value="评论" id="form-submit-button" onclick="submit_comment()"> 
+    <input type="button"  value="评论" id="form-submit-button" onclick="submit_comment()">
     <img src="/images/spinner.gif" id="comment_loading" style ="display:none" >
   </p>
 </form>

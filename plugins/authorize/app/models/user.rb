@@ -49,6 +49,10 @@ class User < CachedModel
     @blog_config = confg
   end
 
+  def real_name
+    self.user_profile && !self.user_profile.real_name.blank? ? self.user_profile.real_name : self.user_name
+  end
+
   def space_url
     "http://#{self.user_name}.#{Domain_Name}"
   end

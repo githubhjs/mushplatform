@@ -6,7 +6,7 @@
       <%for friend in @friends%>
         <li>
           <p><a href="<%= friend.space_url %>"><img src="<%= user_icon(friend.id) %>"></a></p>
-          <p><a href="<%= friend.space_url %>"><%= friend.user_name %></a></p>
+          <p><a href="<%= friend.space_url %>"><%= friend.real_name %></a></p>
         </li>
       <%end%>
     </ul>

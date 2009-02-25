@@ -37,13 +37,13 @@
       <div class="content_b">
           <div class="L">
             <a href=""><img src="<%= user_icon(@topic.user_id) %>"></a>
-            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= @topic.real_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> <%= timelong @topic.created_at %></font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;">楼主</font></h6>
+            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= @topic.user.real_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> <%= timelong @topic.created_at %></font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;">楼主</font></h6>
             <p><%= @topic.description %></p>
           </div>
         <% @topic_comments.each_with_index do |topic_comment,index| %>
           <div class="L">
             <a href=""><img src="<%= user_icon(current_user.id) %>"></a>
-            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= topic_comment.real_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> <%= timelong topic_comment.created_at %></font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;"><%= index + 1 %>楼</font></h6>
+            <h6 class="floor"><font class="L" style="font-weight: normal;"><%= topic_comment.user.real_name %><font style="color: rgb(204, 204, 204); font-weight: normal;"> <%= timelong topic_comment.created_at %></font></font><font class="R" style="color: rgb(102, 102, 102); font-weight: normal;"><%= index + 1 %>楼</font></h6>
             <p><%= topic_comment.content %></p>
           </div>
         <%end%>

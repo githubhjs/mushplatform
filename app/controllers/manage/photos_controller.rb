@@ -1,10 +1,23 @@
 class Manage::PhotosController < Manage::ManageController
+
   skip_before_filter :verify_authenticity_token  
+
+  before_filter :own_photo?,:only => [:show,:edit,:update,:destroy]
+
 
   Photo_Perpage = 20
 
   Friend_Latest_Photos_Count = 10
   Max_Friend_Count = 10
+
+  def own_photo?
+    @photo = Blog.find(params[:id])
+    if @photo.user_id != blog_owner.id
+      render :text => "此博客不存在"
+      return false
+    end
+    return true
+  end
 
   def index
     @photos = current_user.photos.paginate(:page => params[:page],:per_page => Photo_Perpage)
@@ -26,7 +39,7 @@ class Manage::PhotosController < Manage::ManageController
   # GET /photos/1
   # GET /photos/1.xml
   def show
-    @photo = Photo.find(params[:id])
+#    @photo = Photo.find(params[:id])
     @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id} and user_id=#{current_user.id}",:order => "id")
     @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id} and user_id=#{current_user.id}",:order => "id")
     respond_to do |format|
@@ -48,7 +61,7 @@ class Manage::PhotosController < Manage::ManageController
 
   # GET /photos/1/edit
   def edit
-    @photo = Photo.find(params[:id])
+#    @photo = Photo.find(params[:id])
     @tags = current_user.photos.tag_counts.map(&:name).to_json
   end
 
@@ -71,7 +84,7 @@ class Manage::PhotosController < Manage::ManageController
   # PUT /photos/1
   # PUT /photos/1.xml
   def update
-    @photo = Photo.find(params[:id])
+#    @photo = Photo.find(params[:id])
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
         flash[:notice] = 'Photo was successfully updated.'
@@ -87,9 +100,8 @@ class Manage::PhotosController < Manage::ManageController
   # DELETE /photos/1
   # DELETE /photos/1.xml
   def destroy
-    @photo = Photo.find(params[:id])
+#    @photo = Photo.find(params[:id])
     @photo.destroy
-
     respond_to do |format|
       format.html { redirect_to("/manage/photos") }
       format.xml  { head :ok }

@@ -1,13 +1,22 @@
 class Manage::BlogsController < Manage::ManageController
   # GET /blogs
   # GET /blogs.xml
-
-#  before_filter :is_space_admin?
+  
+  before_filter :own_blog?,:only => [:show,:edit,:update,:delete]
   
   skip_before_filter :verify_authenticity_token,:only => [:create,:update,:batch_publish]
   
   Blog_Per_Page = 10
-    
+
+  def own_blog?
+    @blog = Blog.find(params[:id])
+    if @blog.user_id != blog_owner.id
+      render :text => "此博客不存在"
+      return false
+    end
+    return true
+  end
+
   def index
     @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page,
       :conditions => generate_conditions,:include => [:category])
@@ -20,7 +29,6 @@ class Manage::BlogsController < Manage::ManageController
   # GET /blogs/1
   # GET /blogs/1.xml
   def show
-    @blog = Blog.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @blog }
@@ -39,7 +47,7 @@ class Manage::BlogsController < Manage::ManageController
 
   # GET /blogs/1/edit
   def edit
-    @blog = Blog.find(params[:id])
+#    @blog = Blog.find(params[:id])
   end
 
   # POST /blogs
@@ -63,7 +71,7 @@ class Manage::BlogsController < Manage::ManageController
   # PUT /blogs/1
   # PUT /blogs/1.xml
   def update
-    @blog = Blog.find(params[:id])
+#    @blog = Blog.find(params[:id])
     @blog.published = params[:publish].blank?  ? Blog::Drafted_Blogs : Blog::Published_Blogs
     respond_to do |format|
       if @blog.update_attributes(params[:blog])

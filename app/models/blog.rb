@@ -3,6 +3,7 @@ class Blog < ActiveRecord::Base
   include BlogHelper
 
   belongs_to :category
+  belongs_to :user
   has_many   :comments
   Drafted_Blogs ,Published_Blogs = 0,1
   acts_as_taggable
@@ -77,6 +78,12 @@ class Blog < ActiveRecord::Base
     atts = attributes.stringify_keys
     atts['author'] = User.find(user_id).user_name unless author
     atts
+  end
+
+  
+
+  def footstep_link
+    "<a href='#{self.user.space_url}/entry/#{self.id}'>#{self.title}</a>"
   end
 
   def footstep

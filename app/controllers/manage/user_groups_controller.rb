@@ -5,8 +5,20 @@ class Manage::UserGroupsController < Manage::ManageController
   Topic_Perpage = 20
   helper_method :current_user
 
+  before_filter :own_group,:only => [:edit,:update,:destroy]
+  
   # GET /user_groups
   # GET /user_groups.xml
+  
+  def own_group?
+    @user_group = UserGroup.find(params[:id])
+    if @user_group.user_id != blog_owner.id
+      render :text => "此博客不存在"
+      return false
+    end
+    return true
+  end
+
   def index
     @user_groups = UserGroup.user_groups(current_user).paginate(:page => params[:page]||1,
       :per_page => All_Group_Perpage,:order => 'id desc' )
@@ -96,7 +108,7 @@ class Manage::UserGroupsController < Manage::ManageController
 
   # GET /user_groups/1/edit
   def edit
-    @user_group = UserGroup.find(params[:id])
+#    @user_group = UserGroup.find(params[:id])
   end
 
   # POST /user_groups
@@ -123,7 +135,7 @@ class Manage::UserGroupsController < Manage::ManageController
   # PUT /user_groups/1
   # PUT /user_groups/1.xml
   def update
-    @user_group = UserGroup.find(params[:id])
+#    @user_group = UserGroup.find(params[:id])
 
     respond_to do |format|
       if @user_group.update_attributes(params[:user_group])
@@ -140,7 +152,7 @@ class Manage::UserGroupsController < Manage::ManageController
   # DELETE /user_groups/1
   # DELETE /user_groups/1.xml
   def destroy
-    @user_group = UserGroup.find(params[:id])
+#    @user_group = UserGroup.find(params[:id])
     @user_group.destroy
 
     respond_to do |format|

@@ -13,6 +13,8 @@ class Photo < ActiveRecord::Base
   
   acts_as_taggable
 
+  belongs_to :user
+
   before_save :upload_image
 
   named_scope :user_photos, lambda { |user_id|

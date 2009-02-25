@@ -2,6 +2,7 @@ class Manage::BlogConfigsController < Manage::ManageController
     
   # GET /blog_configs
   # GET /blog_configs.xml
+     
   def index
     @blog_config = BlogConfig.find_or_create_by_user_id(current_user.id)
     render :template  => '/manage/blog_configs/edit'

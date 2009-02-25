@@ -68,7 +68,7 @@ class Admin::ArticlesController < ApplicationController
         #@article.contents.create(:body => params[:body])
         Content.create(:title => @article.title, :body => params[:body], :article_id => @article.id) 
         flash[:notice] = 'Article was successfully created.'
-        format.html { redirect_to(@article) }
+        format.html { redirect_to "/admin/articles?standalone=true" }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
         format.js { 
           @channel, @articles = find_articles(params[:article][:channel_id])
@@ -95,7 +95,7 @@ class Admin::ArticlesController < ApplicationController
       @article = Article.find(params[:id])
       if @article.update_attributes(params[:article])
         flash[:notice] = 'Article was successfully updated.'
-        format.html { redirect_to(@article) }
+        format.html { redirect_to "/admin/articles?standalone=true" }
         format.xml  { head :ok }
         format.js { 
           @channel, @articles = find_articles(params[:article][:channel_id])

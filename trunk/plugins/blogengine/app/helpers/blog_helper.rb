@@ -15,6 +15,11 @@ module BlogHelper
     { 'entries' => entries, 'will_paginate_options' => will_args }
   end
   
+  def blog_author(user_id)
+    user = User.find(user_id)
+    user.user_name
+  end
+
   def entry_permalink(entry)
     "/entry/#{entry['id']}"
   end

@@ -32,8 +32,8 @@
         <% for blog in @blogs -%>
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= blog.id %>" /></th>
-          <td><strong><%= link_to blog.title, "http://#{blog.author}.ccmw.net/entry/#{blog.id}", {:class =>'tow=title'} %></strong></td>
-          <td><a href='http://#{blog.author}.ccmw.net'><%= blog.author %></a></td>
+          <td><strong><%= link_to blog.title, "http://#{blog_author(blog.user_id)}.ccmw.net/entry/#{blog.id}", {:class =>'tow=title'} %></strong></td>
+          <td><a href='http://#{blog_author(blog.user_id)}.ccmw.net'><%= blog_author(blog.user_id) %></a></td>
         </tr>
         <% end -%>
       </tbody>

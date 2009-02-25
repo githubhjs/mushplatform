@@ -16,7 +16,8 @@ class CcidfinanceCrawler
   
   def fetch
     # crawl first page
-    parse_latest_update_pages("http://news.ccidnet.com/col/952/952.html")
+#    parse_latest_update_pages("http://news.ccidnet.com/col/952/952.html")
+    parse_latest_update_pages("http://news.ccidnet.com/col/952/20071231.html")
     return true
   end  
  
@@ -33,7 +34,11 @@ class CcidfinanceCrawler
       }    
       next_page = doc.search("//a[@class='content']")
       if next_page
-        parse_latest_update_pages("http://news.ccidnet.com#{next_page.last.attributes['href']}")
+        #parse_latest_update_pages("http://news.ccidnet.com#{next_page.last.attributes['href']}")
+        
+        if iconv.iconv(next_page.first.inner_html) != "下一页&gt;&gt;"
+          parse_latest_update_pages("http://news.ccidnet.com#{next_page.first.attributes['href']}")
+        end
       end
     end
   end

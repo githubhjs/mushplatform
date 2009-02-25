@@ -125,7 +125,9 @@ function getPartial(input_id){
   <tr class="form-field">
     <th scope="row" valign="top"><label for="body"><%= t 'text.article.body' %></label></th>
     <td>
-        <%= fckeditor_textarea( "body", @article.body, :ajax => true, :width => '100%', :height => '400px', :toolbarSet => 'Simple' ) %> 
+<input type="hidden" style="display: none" value="CustomConfigurationsPath=/javascripts/fckcustom.js" id="body___Config"/>
+        <%= fckeditor_textarea( "body", @article.body, :width => '100%', :height => '400px', :toolbarSet => 'Simple' ) %> 
+<script>var oFCKeditor = new FCKeditor('body', '100%', '400px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
         <%#= text_area_tag 'body', @article.body, :rows => 20, :cols => 65 %>
     </td>
   </tr>

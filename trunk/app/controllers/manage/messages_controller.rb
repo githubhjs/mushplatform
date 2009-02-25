@@ -1,10 +1,21 @@
 class Manage::MessagesController < Manage::ManageController
   
   Messages_Per_Page = 30
+
+  before_filter :own_message?,:only => [:show,:edit,:update,:delete]
+
+  def own_message?
+    @message = Message.find(params[:id])
+    if @message.user_id != blog_owner.id
+      render :text => "此博客不存在"
+      return false
+    end
+    return true
+  end
+
   
   # GET /messages
   # GET /messages.xml
-  
   def index
     @messages = Message.paginate(:page => params[:page]||1,:per_page => Messages_Per_Page,
       :conditions => "user_id=#{current_user.id}", :order => "id desc")
@@ -14,7 +25,7 @@ class Manage::MessagesController < Manage::ManageController
   # GET /messages/1
   # GET /messages/1.xml
   def show
-    @message = Message.find(params[:id])
+#    @message = Message.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +46,7 @@ class Manage::MessagesController < Manage::ManageController
 
   # GET /messages/1/edit
   def edit
-    @message = Message.find(params[:id])
+#    @message = Message.find(params[:id])
   end
 
   # POST /messages
@@ -54,7 +65,7 @@ class Manage::MessagesController < Manage::ManageController
   # PUT /messages/1
   # PUT /messages/1.xml
   def update
-    @message = Message.find(params[:id])
+#    @message = Message.find(params[:id])
     if @message.update_attributes(params[:message])
       flash[:notice] = 'Message was successfully updated.'
       redirect_to :action => :index
@@ -78,7 +89,7 @@ class Manage::MessagesController < Manage::ManageController
   # DELETE /messages/1
   # DELETE /messages/1.xml
   def destroy
-    @message = Message.find(params[:id])
+#    @message = Message.find(params[:id])
     @message.destroy
 
     respond_to do |format|

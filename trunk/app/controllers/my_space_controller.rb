@@ -63,9 +63,13 @@ class MySpaceController < ApplicationController
   protected :sns_index,:general_blog_index
   
   def show
-    BlogConfig.add_view_count(current_blog_user.id)
     @blog = Blog.find(params[:id])
+    if @blog.user_id != current_blog_user.id
+      render :text => '此文章不存在'
+      return
+    end
     @blog.add_view_count
+    BlogConfig.add_view_count(current_blog_user.id)
     @comments = @blog.comments.paginate(:page => params[:page]||1,:per_page => Comment_Count_PerPage,:order => "created_at")
     unless current_theme.is_sns_theme?
       render_liquid({:template => 'entry',:layout => true},{'entry' => @blog,'if_login' => current_user,'comments' => @comments ,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页',:page => params[:page]||1,:path => "#{request.path.gsub(/\/comments\/page\/\d+/,'')}/comments"}})
@@ -130,6 +134,10 @@ class MySpaceController < ApplicationController
 
   def photo
     @photo = Photo.find(params[:id])
+    if @photo.user_id != current_blog_user.id
+      render :text => '此图片不存在'
+      return
+    end
     @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id}",:order => "id")
     @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id}",:order => "id")
     unless current_theme.is_sns_theme?

@@ -11,7 +11,7 @@ class Manage::PhotosController < Manage::ManageController
   Max_Friend_Count = 10
 
   def own_photo?
-    @photo = Blog.find(params[:id])
+    @photo = Photo.find(params[:id])
     if @photo.user_id != blog_owner.id
       render :text => "此博客不存在"
       return false

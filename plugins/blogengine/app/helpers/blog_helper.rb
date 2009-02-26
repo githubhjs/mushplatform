@@ -1,3 +1,4 @@
+require 'util/html_util'
 module BlogHelper
 
   def list_blog_entries(args = {})
@@ -57,6 +58,10 @@ module BlogHelper
   def parse_month_of_date(date_str)
     date = parse_date_from_str(date_str)
     date ? date.month : ''
+  end
+
+  def filter_html(content)
+    content.blank? ? '' : "#{HtmlUtil.sanitize(content[0..100])}..."
   end
 
   def parse_date_from_str(date_str)

@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 require 'util/date_util'
+require 'util/html_util'
 module ApplicationHelper
   
   def timelong(time)

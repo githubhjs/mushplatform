@@ -72,4 +72,4 @@ module HtmlUtil
     end
   end
 end
-puts HtmlUtil.sanitize("<a>asfdasfdasfd</a><div>adsfsaasfdasfd</div>")
+#puts HtmlUtil.sanitize("<a>asfdasfdasfd</a><div>adsfsaasfdasfd</div>")

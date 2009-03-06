@@ -36,14 +36,14 @@ class CcidCrawler
         article_title = iconv.iconv(a.inner_html)
         parse_article(article_page, article_title)
       }    
-      next_page = doc.search("//a[@class='content']")
-      if next_page
+#      next_page = doc.search("//a[@class='content']")
+#      if next_page
         #parse_latest_update_pages("http://news.ccidnet.com#{next_page.last.attributes['href']}")
         
-        if iconv.iconv(next_page.first.inner_html) != "下一页&gt;&gt;"
-          parse_latest_update_pages("http://news.ccidnet.com#{next_page.first.attributes['href']}")
-        end
-      end
+#        if iconv.iconv(next_page.first.inner_html) != "下一页&gt;&gt;"
+#          parse_latest_update_pages("http://news.ccidnet.com#{next_page.first.attributes['href']}")
+#        end
+#      end
     end
   end
   
@@ -59,8 +59,9 @@ class CcidCrawler
           article.channel_id = @channel_id
           article.title = title
 
-          author_doc = doc.search("//td[@background='http://www.ccidnet.com/images/homepage/wz_left_2.gif']/table")[2]
-          article.author = iconv.iconv(author_doc.search("//span")[3].inner_html)
+          #author_doc = doc.search("//td[@background='http://www.ccidnet.com/images/homepage/wz_left_2.gif']/table")[2]
+          author_doc = doc.search("//span[@class='b']")[2]
+          article.author = iconv.iconv(author_doc.inner_html)
           #CrawLogger.logger(article.author)
           article.save
           CrawLogger.logger("Fetched article ##{article.id} #{article.title}")
@@ -79,7 +80,8 @@ class CcidCrawler
     unless doc.nil?
       title, content = "", ""
       title = iconv.iconv(doc.search("//h1[@class='titel']").inner_html)
-      content_doc = doc.search("//td[@background='http://www.ccidnet.com/images/homepage/wz_left_2.gif']/table")[3]
+      #content_doc = doc.search("//td[@background='http://www.ccidnet.com/images/homepage/wz_left_2.gif']/table")[3]
+      content_doc = doc.search("//table[@class='p11']")
 
       next_page = content_doc.search("//p/span/a{#class=content01}")
 
@@ -114,11 +116,11 @@ class CcidCrawler
   end
 end
 puts "Begin to fetch"
-#url = ARGV[0]
-#channel_id = ARGV[1]
+url = ARGV[0]
+channel_id = ARGV[1]
 
-url = "http://news.ccidnet.com/col/5405/20071227.html"
-channel_id = 11
+#url = "http://news.ccidnet.com/col/945/945.html"
+#channel_id = 7
 
 crawler = CcidCrawler.new(url, channel_id)
 crawler.fetch

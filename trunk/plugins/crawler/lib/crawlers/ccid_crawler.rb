@@ -48,14 +48,14 @@ class CcidCrawler
   end
   
   def parse_article(article_page,title)
-    article = Article.find_by_source(article_page)
+    article = Article.find_by_source_url(article_page)
     iconv = Iconv.new("UTF-8//IGNORE","GBK//IGNORE")
     doc =  hpricot_doc(article_page)
     unless doc.nil?
       begin
         unless article
           article = Article.new 
-          article.source= article_page
+          article.source_url= article_page
           article.channel_id = @channel_id
           article.title = title
 

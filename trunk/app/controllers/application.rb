@@ -3,7 +3,7 @@
 require 'auth/auth'
 require 'util/date_util'
 class ApplicationController < ActionController::Base
-  @@page_cache_directory = "#{RAILS_ROOT}/public/caches/" + request.subdomains + request.domain + "/"
+  #@@page_cache_directory = "#{RAILS_ROOT}/public/caches/" + request.subdomains + request.domain + "/"
   
   helper :all # include all helpers, all the time
   before_filter :set_locale

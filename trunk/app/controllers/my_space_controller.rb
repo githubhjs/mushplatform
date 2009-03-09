@@ -1,4 +1,5 @@
 class MySpaceController < ApplicationController
+  caches_page :index, :show
   
   skip_before_filter :verify_authenticity_token,:only => [:create_comment]  
  
@@ -251,3 +252,26 @@ class MySpaceController < ApplicationController
   end
   
 end
+
+
+#实现subdomain page cache功能.
+#module ActionController::Caching::Pages
+#  def cache_page(content = nil, options = {})
+#    return unless perform_caching && caching_allowed
+#    subdomain = ''
+#    #TODO: 需要确认 .com.cn 等域名(3段)不加www的情况下是不是 request.subdomains.first.blank?
+#    #顶级域名不写子目录,??? rewrite rule如何写呢?
+#    unless request.subdomains.first.blank? or request.subdomains.first=='www'
+#      subdomain += request.subdomains.first || ''
+#      subdomain = '/' + subdomain unless subdomain.blank?
+#    end
+#    path = subdomain+url_for(options.merge(:only_path => true, :skip_relative_url_root => true, :format => params[:format]))
+#
+#    #self.class.cache_page调用到的page_cache_file是private方法不懂如何重写,
+#    #此处不加文件名的话不满足name = ((path.empty? || path == "/") ? "/index" : URI.unescape(path))
+#    #则cache到".ext"文件中,会有问题.
+#    path += "index"+ page_cache_extension if path[-1..-1]=='/'
+#
+#    self.class.cache_page(content || response.body, path)
+#  end
+#end

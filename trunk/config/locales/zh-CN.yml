@@ -1,0 +1,10 @@
+activerecord:
+    models:
+      user: '用户'
+    attributes:
+      user:
+        user_name: '昵称'
+        email: '邮件'
+        password: '密码'
+        
+

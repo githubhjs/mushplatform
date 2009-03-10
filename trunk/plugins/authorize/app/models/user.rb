@@ -2,7 +2,9 @@ require 'digest/sha1'
 
 class User < CachedModel
   
-  has_one  :user_profile
+  include CachedExtend
+
+#  has_one  :user_profile
   has_many :blogs
   has_many :messages
   has_many :receive_regards,:class_name => 'RegardUser',:foreign_key => 'friend_id'
@@ -12,18 +14,19 @@ class User < CachedModel
   has_many :comments
   has_many :user_votes,:foreign_key => 'voter_id'
   has_many :votes
-  has_many :photos
+  has_many :photo
   has_many :user_groups
   has_many :categories
   has_many :footsteps
 #  has_one  :blog_config
   
-  validates_length_of :user_name, :within => 5..40
-  validates_length_of :password, :within => 6..40
-  validates_presence_of :user_name, :email, :password, :password_confirmation, :salt
-  validates_uniqueness_of :user_name, :email
-  validates_confirmation_of :password
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "电子邮件格式不正确"  
+  validates_size_of :user_name, :within => 3..60,:too_long => "不能多于60个字符", :too_short => "不能少于3个字符"
+  validates_length_of :password, :within => 6..40,:too_long => "不能多于40个字符", :too_short => "不能少于6个字符"
+  validates_presence_of  :password_confirmation, :salt,:message => "不能为空"
+  validates_uniqueness_of  :user_name,:message => "已经被占用"
+  validates_uniqueness_of  :email,:message => "已经被占用"
+  validates_confirmation_of :password,:message => "密码不一致"
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "格式不正确"  
   
   Status_Valid,Status_Invalid = 0,1
   
@@ -39,14 +42,38 @@ class User < CachedModel
     return nil if u.nil?
     return u if User.encrypt(pass, u.salt)==u.hashed_password
     nil
-  end  
- 
-  def blog_config
-    @blog_config ||= BlogConfig.find_or_create_by_user_id(self.id)
+  end
+#
+#  def find_by_user_id
+#    if config =  Cache.get("record_blog_config_uid#{self.id}")
+#      config
+#    elsif !(config = BlogConfig.find_by_user_id(self.id)).blank?
+#      Cache.put("record_blog_config_uid#{self.id}",config)
+#      config
+#    else
+#      config = BlogConfig.create(:user_id => self.id)
+#      config
+#    end
+#  end
+
+  def blog_config  
+    @blog_config ||= (BlogConfig.find_by_user_id(self.id) || BlogConfig.create(:user_id => self.id))
   end
   
   def blog_config=(confg)
     @blog_config = confg
+  end
+
+  def user_profile
+    u_profile = if profile = Cache.get("record_user_profile_uid#{self.id}")
+      profile
+    elsif !(profile = UserProfile.find_by_user_id(self.id)).blank?
+      Cache.put("record_user_profile_uid#{self.id}", profile)
+      profile
+    else
+      nil
+    end
+    u_profile
   end
 
   def real_name

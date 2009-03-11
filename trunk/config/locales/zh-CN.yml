@@ -1,5 +1,29 @@
 "zh-CN":
-  activerecord:
+  active_record:
+    error:
+      header_message: ["无法保存 {{object_name}}: 1 错误", "无法保存 {{object_name}}: {{count}} 错误."]
+      message: "请检查以下字段:"
+    error_messages:
+      inclusion: "不包含于列表中"
+      exclusion: "不能用"
+      invalid: "不合法"
+      confirmation: "与确认值不匹配"
+      accepted: "必须接受"
+      empty: "不能留空"
+      blank: "不能为空字符"
+      too_long: "过长 (不能超过 {{count}} 个字符)"
+      too_short: "过短 (不能少于 {{count}} 个字符)"
+      wrong_length: "长度非法 (必须为 {{count}} 个字符)"
+      taken: "不可用"
+      not_a_number: "不是数字"
+      greater_than: "必须大于 {{count}}"
+      greater_than_or_equal_to: "必须大于或等于 {{count}}"
+      equal_to: "必须等于 {{count}}"
+      less_than: "必须小于 {{count}}"
+      less_than_or_equal_to: "必须小于或等于 {{count}}"
+      odd: "必须为单数"
+      even: "必须为双数"
+  
     models:
       user: '用户'
     attributes:

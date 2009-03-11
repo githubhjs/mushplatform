@@ -20,13 +20,12 @@ class User < CachedModel
   has_many :footsteps
 #  has_one  :blog_config
   
-  validates_size_of :user_name, :within => 3..60,:too_long => "不能多于60个字符", :too_short => "不能少于3个字符"
-  validates_length_of :password, :within => 6..40,:too_long => "不能多于40个字符", :too_short => "不能少于6个字符"
-  validates_presence_of  :password_confirmation, :salt,:message => "不能为空"
-  validates_uniqueness_of  :user_name,:message => "已经被占用"
-  validates_uniqueness_of  :email,:message => "已经被占用"
-  validates_confirmation_of :password,:message => "密码不一致"
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "格式不正确"  
+  validates_size_of :user_name, :within => 3..60
+  validates_length_of :password, :within => 6..40  
+  validates_uniqueness_of  :user_name
+  validates_uniqueness_of  :email
+  validates_confirmation_of :password
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   
   Status_Valid,Status_Invalid = 0,1
   

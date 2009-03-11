@@ -1,4 +1,5 @@
-activerecord:
+zh-CN:
+ activerecord:
     models:
       user: '用户'
     attributes:

@@ -60,8 +60,8 @@ module BlogHelper
     date ? date.month : ''
   end
 
-  def filter_html(content)
-    content.blank? ? '' : "#{HtmlUtil.sanitize(content[0..100])}..."
+  def filter_html(blog)
+    StringUtil.truncate_u(HtmlUtil.sanitize(blog['body']||""),100,'...')
   end
 
   def parse_date_from_str(date_str)

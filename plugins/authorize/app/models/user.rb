@@ -14,7 +14,7 @@ class User < CachedModel
   has_many :comments
   has_many :user_votes,:foreign_key => 'voter_id'
   has_many :votes
-  has_many :photo
+  has_many :photos
   has_many :user_groups
   has_many :categories
   has_many :footsteps

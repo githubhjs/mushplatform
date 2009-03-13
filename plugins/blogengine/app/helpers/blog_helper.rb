@@ -1,4 +1,5 @@
 require 'util/html_util'
+require 'util/string_util'
 module BlogHelper
 
   def list_blog_entries(args = {})

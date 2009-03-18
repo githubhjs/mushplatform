@@ -6,7 +6,7 @@ ENV['HOME'] = '/home'
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+#RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
@@ -59,6 +59,11 @@ Rails::Initializer.run do |config|
     :session_domain => '.ccmw.net',
     :session_key => '_mushplatform_session',
     :secret      => '6d420a423d1249c80b5a6ab34523f907a41c910d54b0a3aa8aee41d18debeed8275d1374de6f0879a60c5e944cda227519b2e2a47e8daf020208544e8cf03ffb'
+  }
+
+  config.i18n.default_locale = :"zh-CN"
+  Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')].each { |f|
+    config.i18n.load_path += f
   }
 
   #config.action_controller.asset_host = "http://www.ccmw.com"

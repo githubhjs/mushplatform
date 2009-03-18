@@ -1,6 +1,6 @@
 module Admin::TagsHelper
   def tag_categories
-    tags = Tag.find_by_sql("select distinct category from tags")
+    tags = Tag.find_by_sql("select distinct category from tags where category is not null and category != ''")
     tags.collect{|tag| tag.category }.sort
   end
   

@@ -11,12 +11,6 @@ ENV['HOME'] = '/home'
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
 
-if RUBY_PLATFORM =~ /java/
-   require 'rubygems'
-   require 'jdbc_adapter'
-   RAILS_CONNECTION_ADAPTERS = %w(jdbc)
-end
-
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -62,9 +56,7 @@ Rails::Initializer.run do |config|
   }
 
   config.i18n.default_locale = :"zh-CN"
-  Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')].each { |f|
-    config.i18n.load_path += f
-  }
+  config.i18n.load_path += Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')]
 
   #config.action_controller.asset_host = "http://www.ccmw.com"
   config.action_controller.page_cache_directory = RAILS_ROOT+"/public/cache/"

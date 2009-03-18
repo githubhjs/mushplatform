@@ -55,8 +55,8 @@ Rails::Initializer.run do |config|
     :secret      => '6d420a423d1249c80b5a6ab34523f907a41c910d54b0a3aa8aee41d18debeed8275d1374de6f0879a60c5e944cda227519b2e2a47e8daf020208544e8cf03ffb'
   }
 
-  config.i18n.default_locale = :"zh-CN"
-  config.i18n.load_path += Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')]
+#  config.i18n.default_locale = :zh-CN
+#  config.i18n.load_path += Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')]
 
   #config.action_controller.asset_host = "http://www.ccmw.com"
   config.action_controller.page_cache_directory = RAILS_ROOT+"/public/cache/"

@@ -57,12 +57,12 @@ module CmsHelper
 
   def tag_top(tag)
     t = Tag.find_by_name(tag)
-    { 'tag_top' => t.top }
+    t.top
   end
 
   def tag_bottom(tag)
     t = Tag.find_by_name(tag)
-    { 'tag_bottom' => t.bottom }
+    t.bottom
   end
   
   def list_tags(args ={})

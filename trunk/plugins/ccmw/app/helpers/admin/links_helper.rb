@@ -1,6 +1,6 @@
 module Admin::LinksHelper
   def link_categories
-    links = Link.find_by_sql("select distinct category from links")
+    links = Link.find_by_sql("select distinct category from links where category is not null and category != ''")
     links.collect{|link| link.category }.sort
   end
   

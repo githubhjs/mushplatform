@@ -25,7 +25,7 @@
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top">&nbsp;</th>
-    <td><%#= image_tag(@link.public_filename) if @link.public_filename %><%= @link.public_filename %></td>
+    <td><%= image_tag(@link.public_filename) if @link.filename %></td>
   </tr>  
 </table>
 <p class="submit">

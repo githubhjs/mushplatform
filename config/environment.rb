@@ -76,7 +76,7 @@ Rails::Initializer.run do |config|
 end
 require File.join(File.dirname(__FILE__), '../vendor/plugins/acts_as_taggable_on_steroids/lib/acts_as_taggable')
 USER_SALT="shadowfox"
-Domain_Name = 'ccmw.com'
+Domain_Name = 'ccmw.net'
 memcache_options = {  
    :c_threshold => 10_000,  
    :compression => true,  

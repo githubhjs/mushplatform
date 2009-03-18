@@ -53,7 +53,17 @@ module CmsHelper
     end
     permalink = "/tags/#{tags}"
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
-  end  
+  end
+
+  def tag_top(tag)
+    tag = Tag.find_by_name('tag')
+    { 'tag_top' => tag.top }
+  end
+
+  def tag_bottom(tag)
+    tag = Tag.find_by_name('tag')
+    { 'tag_bottom' => tag.bottom }
+  end
   
   def list_tags(args ={})
     tags = []

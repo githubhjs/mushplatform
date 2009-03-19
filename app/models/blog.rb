@@ -1,3 +1,5 @@
+require 'util/html_util'
+require 'util/string_util'
 class Blog < ActiveRecord::Base
   
   include BlogHelper
@@ -80,6 +82,9 @@ class Blog < ActiveRecord::Base
     atts
   end
 
+  def body_for_list
+    StringUtil.truncate_u(HtmlUtil.sanitize(self.body||""),100,'...')
+  end
   
 
   def footstep_link

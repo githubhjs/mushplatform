@@ -22,18 +22,20 @@
               <td width="11%" align="right"><strong>昵称：</strong></td>
               <td width="89%"><%= current_blog_user.real_name %></td>
             </tr>
+          <% if prolfile = current_blog_user.user_profile %>
             <tr>
               <td valign="top" align="right"><strong>性别：</strong></td>
-              <td><%= display_blog_admin_sex %></td>
+              <td><%= display_blog_admin_sex prolfile %></td>
             </tr>
             <tr>
               <td align="right"><strong>城市：</strong></td>
-              <td><%= current_blog_user.user_profile.city %></td>
+              <td><%= prolfile.city %></td>
             </tr>
             <tr>
               <td align="right"><strong>地址：</strong></td>
-              <td><%= current_blog_user.user_profile.adress %></td>
+              <td><%= prolfile.adress %></td>
             </tr>
+            <%end%>
         </tbody></table>
       </div>
       <div class="height20"></div>

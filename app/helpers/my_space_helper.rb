@@ -1,7 +1,7 @@
 module MySpaceHelper
 
-  def display_blog_admin_sex
-    profile = current_blog_user.user_profile
+  def display_blog_admin_sex(profile = nil)
+    profile ||= current_blog_user.user_profile
     if profile
       case profile.sex
       when Const::Sex_Unknown

@@ -23,7 +23,7 @@ class MySpaceController < ApplicationController
   Latest_Groups_Count = 10
   
   helper_method :current_blog_user  
-
+  before_filter :subdomain_exist?
   before_filter :setup_theme
  
   def index
@@ -196,6 +196,14 @@ class MySpaceController < ApplicationController
 
   protected
   
+  def subdomain_exist?
+    unless current_blog_user
+      render :template => "/my_space/none_user"
+      return false
+    end
+    return true
+  end
+
   def stat_info
     @blogs_count     = Blog.count('id', :conditions => "user_id = #{current_blog_user.id} and published = #{Blog::Published_Blogs}")
     @comments_count  = Comment.count('id', :conditions => "blog_user_id = #{current_blog_user.id}")

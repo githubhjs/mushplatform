@@ -7,7 +7,7 @@ class AddIndexes < ActiveRecord::Migration
     add_index "comments", :blog_id
     add_index "blog_configs", :user_id
     add_index "scriptlets", :name
-    add_index "article", :category_id
+    add_index "articles", :category_id
   end
 
   def self.down
@@ -18,6 +18,6 @@ class AddIndexes < ActiveRecord::Migration
     remove_index "comments", :blog_id
     remove_index "blog_configs", :user_id
     remove_index "scriptlets", :name
-    remove_index "article", :category_id
+    remove_index "articles", :category_id
   end
 end

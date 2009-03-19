@@ -198,7 +198,7 @@ class MySpaceController < ApplicationController
   
   def subdomain_exist?
     unless current_blog_user
-      render :template => "/my_space/none_user"
+      render :template => "/my_space/none_user",:layout => false
       return false
     end
     return true

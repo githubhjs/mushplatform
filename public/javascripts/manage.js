@@ -2,31 +2,73 @@ function display_category_input(obj_id){
     toggle_element(obj_id);
 }
 
+
+//function add_category(){
+//    var category_input = $("add_ctegory_input");
+//    if(category_input.value == ""){
+//        alert("请输入类别名");
+//    }
+//    var url = "/manage/categories/ajax_new?category_name=" + category_input.value ;
+//    var regx = /^\d+$/
+//    new Ajax.Request(url,{
+//        method:'get',
+//        onComplete:function(response) {
+//            if(regx.test(response.responseText)){
+//                update_category_options(category_input.value,response.responseText);
+//                new Effect.Highlight("blog_category_id");
+//                category_input.value = ""
+//                Element.hide("ajax_category_form");
+//                Element.hide("onload_img");
+//            }else{
+//                alert(response.responseText);
+//                Element.hide("onload_img");
+//            }
+//        },
+//        onLoading:function(){
+//            Element.show("onload_img");
+//        }
+//    });
+//}
+
 function add_category(){
-    var category_input = $("add_ctegory_input");
+    var category_input = $('add_ctegory_input');
     if(category_input.value == ""){
         alert("请输入类别名");
+        return;
     }
     var url = "/manage/categories/ajax_new?category_name=" + category_input.value ;
-    var regx = /^\d+$/
-    new Ajax.Request(url,{
-        method:'get',
-        onComplete:function(response) {
-            if(regx.test(response.responseText)){
-                update_category_options(category_input.value,response.responseText);
-                new Effect.Highlight("blog_category_id");
-                category_input.value = ""
-                Element.hide("ajax_category_form");
-                Element.hide("onload_img");
-            }else{
-                alert(response.responseText);
-                Element.hide("onload_img");
+    add_select_entry('ajax_category_form',category_input,'blog_category_id',url)
+}
+
+function add_album(){
+    var album_input = $('add_album_input');
+    if(album_input.value == ""){
+        alert("请输入类别名");
+        return;
+    }
+    var url = "/manage/photos/ajax_create_alubm?title=" + album_input.value ;
+    add_select_entry('ajax_album_form',album_input,'photo_album_id',url);
+}
+
+function add_select_entry(form_id,category_input,select_id,url){
+        var regx = /^\d+$/
+        new Ajax.Request(url,{
+            method:'get',
+            onComplete:function(response) {
+                if(regx.test(response.responseText)){
+                    update_category_options(select_id,category_input.value,response.responseText);
+                    category_input.value = ""
+                    Element.hide(form_id);
+                    Element.hide("onload_img");
+                }else{
+                    alert(response.responseText);
+                    Element.hide("onload_img");
+                }
+            },
+            onLoading:function(){
+                Element.show("onload_img");
             }
-        },
-        onLoading:function(){
-            Element.show("onload_img");
-        }
-    });
+        });
 }
 
 function update_category(category_id){
@@ -42,14 +84,15 @@ function update_category(category_id){
     });
 }
 
-function update_category_options(text,value){
-    var caegory_select = $("blog_category_id");
+function update_category_options(selec_id,text,value){
+    var caegory_select = $(selec_id);
     add_item_to_select(caegory_select,text,value);
 }
 
 function add_item_to_select(objSelect, objItemText, objItemValue) {        
     var varItem = new Option(objItemText, objItemValue);
     objSelect.options.add(varItem);
+    varItem.selected = true;
 }
 
 function toggle_element(obj_id)
@@ -245,10 +288,33 @@ function select_friend(){
     }else{
         friend_name.value += (','+selected_friend.value);
     }
+    friend_name.value = friend_name.value.replace(',,',',').replace(/,$/,'').replace(/^,/,'');
+    selected_friend.value = ''
     $('friend_list').hide();
 }
 
-function change_friend(radio){
+function change_friend(checkbox){
     friend_input = $('selected_friend');
-    friend_input.value = radio.value;
+    if(checkbox.checked){
+        if(friend_input.value == ''){
+            friend_input.value +=  checkbox.value;
+        }else{
+            friend_input.value +=( ',' + checkbox.value);
+        }
+    }else{
+        friend_name = $('friend_name');
+        re=new RegExp(",?"+checkbox.value,"gi")
+        friend_input.value = friend_input.value.replace(re,'');
+        friend_name.value = friend_name.value.replace(re,'');
+    }
+}
+
+function submitSearchForm(){    
+    var _from = document.search_form;
+    var keyword = _from["keywords"];
+    if(keyword.value  == '' || keyword.value == keyword.defaultValue){
+        alert("请输入关查询关键字");
+        return false;
+    }
+    return true;
 }

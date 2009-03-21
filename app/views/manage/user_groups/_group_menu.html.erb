@@ -1,16 +1,18 @@
-<div class="person_menu">
-  <%=  render :partial => "/manage/share/person_menu"%>
-  <div class="p_m2">
-    <div class="m2_bg">
-      <ul class="L">
-        <li><a href="/manage/user_groups/new">创建群组</a></li>
-        <li><a href="/manage/user_groups">我的群组</a></li>
-        <li><a href="/manage/topics">群组最新动态</a></li>
-        <li><a href="/manage/user_groups/friend_groups">好友参加的群组</a></li>
-        <li><a href="/manage/user_groups/friend_create_groups">好友创建的群组</a></li>
-        <li><a href="/manage/user_groups/all">全部群组</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="shadow"></div>
+<div class="dbt">
+  <p><a href="/manage/user_groups"><img src="/images/new/tbqz.png" align="absmiddle"></a>群组</p>
+  <span>
+    <% form_tag "/manage/user_groups/search",:onsubmit => "return this.keyword.value != this.keyword.defaultValue && this.keyword.value != ''" do %>
+      <input class="txt" name="keyword" type="text" value="搜索群组..." size="20" maxlength="20" onclick="if(this.value==this.defaultValue) this.value=''">
+      <input class="button" name="button" type="submit" value="搜 索">
+    <%end%>
+  &nbsp;&nbsp;&nbsp;<img src="/images/new/tb_cjzj.gif" align="absmiddle"> <a href="/manage/user_groups/new"><strong>创建群组</strong></a></span>
+</div>
+<div class="tabs6">
+  <ul>
+    <li <% if action_name == 'index' %> class="tabs66" <%end%>><a href="/manage/user_groups" title="我的群组"><span>我的群组</span></a></li>
+    <li<% if controller_name == 'topics' %> class="tabs66" <%end%> ><a href="/manage/topics" title="群组最新动态"><span>群组最新动态</span></a></li>
+    <li <%if action_name == 'friend_groups' %> class="tabs66" <%end%>><a href="/manage/user_groups/friend_groups" title="好友参加的群组"><span>好友参加的群组</span></a></li>
+    <li <%if action_name == 'friend_create_groups' %> class="tabs66" <%end%>><a href="/manage/user_groups/friend_create_groups" title="好友创建的群组"><span>好友创建的群组</span></a></li>
+    <li <%if action_name == 'all' %> class="tabs66" <%end%>><a href="/manage/user_groups/all" title="全部群组"><span>全部群组</span></a></li>
+  </ul>
 </div>

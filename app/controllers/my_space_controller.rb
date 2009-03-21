@@ -25,6 +25,8 @@ class MySpaceController < ApplicationController
   helper_method :current_blog_user  
   before_filter :subdomain_exist?
   before_filter :setup_theme
+
+  before_filter :set_visite
  
   def index
     BlogConfig.add_view_count(current_blog_user.id)
@@ -196,6 +198,16 @@ class MySpaceController < ApplicationController
 
   protected
   
+
+  def set_visite
+    return true if current_user.nil? || current_user.id == current_blog_user.id#if 本人，直接返回，否则记录足迹
+    if current_user && session["visite_info_#{current_blog_user.id}"].blank?
+      current_user.visite(current_blog_user.id)
+      session["visite_info_#{current_blog_user.id}"] = 'yes'
+    end    
+  end
+
+
   def subdomain_exist?
     unless current_blog_user
       render :template => "/my_space/none_user",:layout => false
@@ -203,6 +215,7 @@ class MySpaceController < ApplicationController
     end
     return true
   end
+
 
   def stat_info
     @blogs_count     = Blog.count('id', :conditions => "user_id = #{current_blog_user.id} and published = #{Blog::Published_Blogs}")

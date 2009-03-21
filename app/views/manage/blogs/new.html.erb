@@ -1,14 +1,9 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-<!--person_menu-->
-<%=  render :partial => "/manage/share/blog_menu" %>
-<!--person_menu-->
-  <div class="blog_write_m L">
-    <h2>写新日志</h2>
-    <div class="blog_write_top clear"></div>
-     <%= render :partial => "/manage/blogs/form",:locals => {:method_name => :post} %>
-    <div class="blog_write_bottom clear"></div>
+<div class="right2">
+  <div class="dbt">
+    <p><a href="/manage/blogs"><img src="/images/new/documents_32.png" align="absmiddle"></a>日志</p>
+    <%= render :partial => "/manage/blogs/search" %>
   </div>
-</div><!--m_r-->
-
+  <%= render :partial => "/manage/blogs/blog_menu" %>
+  <div class="height20"></div>
+  <%= render :partial => "/manage/blogs/form",:locals =>{:method_name => "post"} %>
+</div>

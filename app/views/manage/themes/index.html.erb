@@ -1,31 +1,57 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-  
-  <!--person_menu-->
-<%=  render :partial => "/manage/share/blog_menu" %>
-  <!--person_menu-->
-  <div class="templet_m L">
-    <h2>模板设置</h2>
-    <div class="main_b L">
-      <%if @active%>
-      <div class="big_pic">
-        <h4>当前使用的模板</h4>
-        <img src="<%= @active.icon %>"/>
-        <p class="name"><%= @active.title %></p>
-      </div>
-      <%end%>
-      <% for theme in @themes do %>
-          <div class="pic_li">
-            <img src="<%= theme.icon %>"/>
-            <h6><%= theme.title %></h6>
-            <p>
-              <!--<a href="/manage/themes/preview?theme_name=<%= theme.name %>">浏览范例blog</a> |-->
-              <a href="/manage/themes/switchto?theme_name=<%= theme.name %>">使用此模板</a>
-            </p>
-          </div>
-        <%end%>
-      </div>  
-    </div>
-  
-  </div><!--m_r-->
+<div class="right2">
+  <div class="dbt">
+   <p><a href=""><img src="/images/new/applications_32.png" align="absmiddle"></a> 风格设置</p><span></span>
+  </div>  
+  <%= render :partial => "/manage/themes/setting_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <table width="100%" bgcolor="#d5d5d5" border="0" cellpadding="0" cellspacing="1">
+      <tbody><tr>
+          <td bgcolor="#ece9d8" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><strong>当前使用：</strong></span></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#f8f8f8" height="200">
+            <img src="<%= @active.icon %>"><br>
+          <span class="darkred f14"><strong><%= @active.title %></strong></span></td>
+        </tr>
+    </tbody></table>
+    <div class="height12xhx"></div>
+    <div class="height12"></div>
+    <table width="100%" bgcolor="#ece9d8" border="0" cellpadding="0" cellspacing="1">
+      <tbody><tr>
+          <td bgcolor="#f8f8f8" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><strong>其它模板：</strong></span></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#ffffff" height="30"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <% size = @themes.size %>
+                <%(0..(size/3-1)).each do |point|%>
+                <tr>
+                  <%(0..2).each do |fix|%>
+                   <%theme = @themes[3*point+fix]%>
+                  <td width="237" align="center" height="220"><img src="<%= theme.icon %>" width="200" height="150"><br><%= theme.title %><br/>
+                  <a href="/manage/themes/switchto?theme_name=<%= theme.name %>" >使用此模板</a></td>
+                  <%end%>
+                </tr>
+                <%end%>
+                <% if (other_size = size%3) > 0
+                    vl  = size/3
+                  %>
+                  <tr>
+                  <%(0..(other_size-1)).each do |fix|%>
+                   <%theme = @themes[3*vl+fix]%>
+                  <td width="237" align="center" height="220"><img src="<%= theme.icon %>" width="200" height="150"><br><%= theme.title %><br/>
+                  <a href="/manage/themes/switchto?theme_name=<%= theme.name %>" >使用此模板</a></td>
+                  <%end%>
+                </tr>
+                <%end%>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="height12xhx"></div>
+  </div>
+  <div class="height20"></div>
+</div>

@@ -1,0 +1,30 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+<%=  render :partial => "/manage/share/blog_menu" %>
+<!--person_menu-->
+
+  <div class="manage_m L">
+    <h2>分类管理</h2>
+    <% remote_form_for :category, @category, :url => "/manage/categories" do |f| %>
+    <p class="L">输入新类别名称：
+        <%=   f.text_field :name %>
+        <%=   f.submit("增加",:class => "sbumit")%>
+       <span  id="notice_text"></span>
+       <span  id='onload_img' style='display:none;'><img src='/images/spinner.gif' /></span>
+    </p>
+    <%end%>
+    <table cellpadding="0" cellspacing="0" id = "category_table">
+      <tr>
+        <td class="tit" width="283">名称</td>
+        <td class="tit" width="87">文章数量</td>
+        <td class="tit" width="110">管理</td>
+      </tr>
+      <%for category in @categories do %>
+        <%= render :partial => "/manage/categories/success_tr" ,:locals => {:category => category} %>
+      <%end%>
+    </table>
+  </div>
+</div><!--m_r-->

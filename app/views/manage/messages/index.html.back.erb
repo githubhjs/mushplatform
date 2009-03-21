@@ -1,0 +1,34 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+<%=  render :partial => "/manage/messages/message_menu" %>
+<!--person_menu-->
+
+  <div class="manage_m L">
+    <h2>公告管理</h2>
+    <table cellpadding="0" cellspacing="0" id = "comment_table">
+      <tr>
+        <td class="tit" width="87">标题</td>
+        <td class="tit" width="283">内容</td>
+        <td class="tit" width="110">发布时间</td>
+        <td class="tit">管理</td>
+      </tr>
+      <%for message in @messages do %>
+        <tr id="t_<%= message.id %>">
+          <td class="a_tit m_border"><a href="#"><%= h message.title %></a></td>
+          <td class="a_tit m_border"><%= h message.content %></td>
+          <td class="m_border">
+            <%= timelong(message.created_at) %>
+          </td>
+          <td class="m_border">
+            <a href="/manage/messages/<%= message .id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
+            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('确定要删除嘛？')) do_delete(this)",:title => '删除',:href => "/manage/messages/#{message.id}/delete") %>
+          </td>
+        </tr>
+      <%end%>
+    </table>
+    <%= will_paginate @messages, {:prev_label => '上一页', :next_label => '下一页'} %>
+  </div>
+</div><!--m_r-->

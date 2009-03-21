@@ -45,6 +45,10 @@ class Blog < ActiveRecord::Base
     end
   end
 
+  def body_for_list
+    StringUtil.truncate_u(HtmlUtil.sanitize(self.body||""),100,'...')
+  end
+
   def is_sticky?
     self.if_top == Const::YES
   end

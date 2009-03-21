@@ -20,26 +20,33 @@ class Manage::PhotosController < Manage::ManageController
   end
 
   def index
-    @photos = current_user.photos.paginate(:page => params[:page],:per_page => Photo_Perpage)
+    conditions =  params[:album_id].blank? ? '' : "album_id=#{params[:album_id]}"
+    @photos = current_user.photos.paginate(:page => params[:page],:per_page => Photo_Perpage,:conditions => conditions,:order => "id desc")
+    @albums = current_user.albums
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @photos }
     end
   end
-
+  
   def friend_photos
     friends = current_user.friends.find(:all,:limit => Max_Friend_Count)
     @photos = if friends.blank?
       []
     else
-      Photo.find(:all,:conditions => "user_id in (#{friends.map(&:friend_id).join(',')})",:order => "created_at desc")
+      conditions = ["user_id in (#{friends.map(&:friend_id).join(',')})"]
+      conditions << "album_id=#{params[:album_id]}" unless params[:album_id].blank?
+      Photo.paginate(:page => params[:page],:per_page => Photo_Perpage,:conditions => conditions.join(' and '),:order => "id desc")
     end
+    @albums = current_user.albums
+    render :action => :index
+    return 
   end
 
   # GET /photos/1
   # GET /photos/1.xml
   def show
-#    @photo = Photo.find(params[:id])
+    @photo = Photo.find(params[:id])
     @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id} and user_id=#{current_user.id}",:order => "id")
     @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id} and user_id=#{current_user.id}",:order => "id")
     respond_to do |format|
@@ -73,14 +80,26 @@ class Manage::PhotosController < Manage::ManageController
         photo = Photo.new(picture)
         photo.user_id = current_user.id
         photo.upload_image
+        photo.album_id =  params[:album_id]||0
         photo.save
       end
     else
       flash[:notice] = "请选择要上传的照片"
     end
-    redirect_to :action => :index
+    redirect_to "/manage/photos?album_id=#{params[:album_id]}"
   end
-
+  
+  def ajax_create_alubm
+    @album = Album.new
+    unless params[:title].blank?
+      @album.title = params[:title]
+      @album.user_id = current_user.id
+      render :text =>  @album.save ? @album.id : @album.errors.full_messages.join(';')
+    else
+      render :text => "请输入类相册名称"
+    end
+    return true
+  end
   # PUT /photos/1
   # PUT /photos/1.xml
   def update

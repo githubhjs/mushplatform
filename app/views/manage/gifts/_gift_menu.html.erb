@@ -1,13 +1,7 @@
-<div class="person_menu">
-  <%=  render :partial => "/manage/share/person_menu"%>
-  <div class="p_m2">
-    <div class="m2_bg">
-      <ul class="L">
-          <li class="hot"><a href="/manage/gifts/send_for">赠送礼物</a></li>
-          <li><a href="/manage/gifts/receive">收到的礼物</a></li>
-          <li><a href="/manage/gifts/send_gifts">送出的礼物</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="shadow"></div>
+<div class="tabs6">
+  <ul>
+    <li <% if action_name == 'send_for' %> class="tabs66" <%end%>><a href="/manage/gifts/send_for" title="赠送礼物"><span>赠送礼物</span></a></li>
+    <li <% if action_name == 'receive' %> class="tabs66" <%end%>><a href="/manage/gifts/receive" title="收到的礼物"><span>收到的礼物</span></a></li>
+    <li <% if action_name == 'send_gifts' %> class="tabs66" <%end%>><a href="/manage/gifts/send_gifts" title="送出的礼物"><span>送出的礼物</span></a></li>
+  </ul>
 </div>

@@ -1,0 +1,6 @@
+<% form_tag "/manage/blogs/search" ,:name => 'search_form',:onsubmit => "return submitSearchForm();" do |f| %>
+<span>
+  <input name="keywords" id="textfield" value="搜索日志" type="text" onclick="if(this.value==this.defaultValue) this.value=''">&nbsp;&nbsp;
+  <input type="submit" value="搜索">
+</span>
+<%end%>

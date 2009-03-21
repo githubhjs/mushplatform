@@ -1,0 +1,63 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+<%=  render :partial => "/manage/share/blog_menu" %>
+<!--person_menu-->
+
+  <div class="manage_m L" style="padding: 0 0px 20px 5px;width:380px;">
+    <h2  style="width:380px">可选择的条目</h2>
+    <table cellpadding="0" cellspacing="0" id = "available"  style="width:380px">
+      <tr >
+        <td class="tit" width="87">条目名称</td>
+        <td class="tit" width="283">描述</td>
+        <td class="tit" width="87">管理</td>
+      </tr>
+      <%for sidebar in @sidebars do %>
+        <% if sidebar.enable? %>
+        <tr>
+          <td class="m_border"><a href="#"><%= sidebar.title %></a></td>
+          <td class="a_tit m_border"><%=  sidebar.description %></td>
+          <td class="m_border">
+              <a href="/manage/sidebars/<%= sidebar.sidebar_id %>/active">添加</a>
+          </td>
+        </tr>
+        <% end  %>
+      <%end%>
+    </table>
+  </div>    
+  <div class="manage_m R" style="padding: 0 5px 20px 0px;width:380px;">
+    <h2 style="width:380px">已激活的条目</h2>
+    <table cellpadding="0" cellspacing="0" id = "active" style="width:380px">
+      <tr>
+        <td class="tit" width="87">条目名称</td>
+        <td class="tit" width="87">描述</td>
+        <td class="tit" width="87">管理</td>
+      </tr>
+      <%for sidebar_user in @sidebar_users do %>
+        <tr>
+          <td ><a href="#" onclick="Element.toggle('edit_<%=  sidebar_user.id %>');return false;"><%= sidebar_user.bar_name %></a></td>
+          <td ><%=  sidebar_user.description %></td>
+          <td >
+            <a href="#" title="编辑" onclick="Element.toggle('edit_<%=  sidebar_user.id %>');return false;"><img alt="编辑" src="/images/btn_edit.png"></a>
+            <a title="移除" href="/manage/sidebars/<%= sidebar_user.id %>/remove"><img src="/images/btn_delete.png" title ='移除'></a>
+            <% if @min_bar_index < sidebar_user.bar_index %>
+              <a href="/manage/sidebars/<%= sidebar_user.id %>/higher"><img alt="Icon_digg" src="/images/icon_digg.gif" title="上移"></a>
+            <%end%>
+            <% if @max_bar_index > sidebar_user.bar_index %>
+              <a href="/manage/sidebars/<%= sidebar_user.id %>/lower"><img alt="Icon_bury" src="/images/icon_bury.gif" title="下移"></a>
+            <%end%>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='3' class="m_border">
+            <div id="edit_<%= sidebar_user.id %>" style="display:none">
+            <%= display_sidebar_setting_info(@user.id,sidebar_user.id) %> 
+            </div> &nbsp;
+          </td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div><!--m_r-->

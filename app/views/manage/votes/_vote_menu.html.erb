@@ -1,0 +1,9 @@
+<div class="dbt"><p><a href="/manage/votes"><img src="/images/new/vote.png" align="absmiddle"></a> 投票</p><span></span></div>
+<div class="tabs6">
+  <ul>
+    <li <% if action_name =~ /new|create/ %> class="tabs66"<%end%>><a href="/manage/votes/new" title="发起投票"><span>发起投票</span></a></li>
+    <li <% if action_name == 'index' %> class="tabs66"<%end%>><a href="/manage/votes" title="我的投票"><span>我的投票</span></a></li>
+    <li <% if action_name == 'friend_votes' %> class="tabs66"<%end%>><a href="/manage/votes/friend_votes" title="好友的投票"><span>好友的投票</span></a></li>
+    <li <% if action_name == 'random_votes' %> class="tabs66"<%end%>><a href="/manage/votes/random_votes" title="随便看看"><span>随便看看</span></a></li>
+  </ul>
+</div>

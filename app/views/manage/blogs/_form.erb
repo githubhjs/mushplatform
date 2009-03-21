@@ -1,44 +1,46 @@
-<div class="blog_write_center">
-  <%form_for :blog,:url => "/manage/blogs/#{@blog.id}",:html => {:name => 'blog_form' ,:method => method_name} do |f|  %>
-    <p><b>标题：</b>
-      <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %> <span><%= @blog.errors.on(:title) %></span>
-    </p>
-    <p><b>类别：</b>
+<%form_for :blog,:url => "/manage/blogs/#{@blog.id}",:html => {:name => 'blog_form' ,:method => method_name} do |f|  %>
+  <div class="w90_bd">
+    <strong>标题：</strong>
+    <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %> <span><%= @blog.errors.on(:title) %></span>
+    <br>
+    <strong>类别：</strong>
+    <label>
       <select name="blog[category_id]" id="blog_category_id">
         <%= generate_categories_options(@blog.category_id) %>
       </select>
-    <a class="grey_underline" href="javascript:void(0);" onclick="display_category_input('ajax_category_form');return false;">+&nbsp;添加分类</a>
-    </p>
+    </label>
+    <a class="grey_underline" href="javascript:void(0);" onclick="display_category_input('ajax_category_form');return false;">+&nbsp;添加分类</a><br>
     <p id="ajax_category_form" style="display:none;">
-        <b>名字：</b>
-        <input type ="text" name="category_name" value="" id="add_ctegory_input"><input type="button" value="增加" onclick="add_category()"><span  id='onload_img' style='display:none;'><img src='/images/spinner.gif' /></span>
+      <b>名字：</b>
+      <input type ="text" name="category_name" value="" id="add_ctegory_input"><input type="button" value="增加" onclick="add_category()"><span  id='onload_img' style='display:none;'><img src='/images/spinner.gif' /></span>
     </p>
-    <p></p>
-    <p><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+    <div style="width: 621px; height: 456px;">
       <SPAN style="COLOR: #ff0000"></SPAN>
       <input type="hidden" id="blog_body" name="blog[body]" value="<%= h(@blog.body)%>"></input>
       <SPAN style="COLOR: #ff0000"></SPAN>
-      <iframe id="myEditor" src="/editor/editor.htm?id=blog_body" frameborder="0" scrolling="no" width="550" height="220"></iframe>
-    </p>
-    <p><b>标签：</b><input class="tag" name="blog[tag_names]" type="text" value="<%=( params[:blog]||{})[:tag_names] || @blog.tag_names %>" size="85" maxlength="85">&nbsp;&nbsp;&nbsp;
-    </p>
-    <p>比如:精彩生活 技术研究  日记(多个标签请用空格隔开)</p>
-    <p></p>
-    <table>
-      <tr>
-        <td>
-          <input name="blog[allow_comments]" type="checkbox" value="<%=Const::YES%>" <%= @blog.allow_comments == Const::YES ? 'checked': '' %>>
-        </td><td><b>允许评论</b>&nbsp;&nbsp;</td>
-        <td><input name="blog[allow_pings]" type="checkbox" value="<%= Const::YES %>" <%= @blog.allow_pings == Const::YES ? 'checked': ''%> >
-        </td><td><b>允许引用</b>&nbsp;&nbsp;</td>
-        <td>
-          <input name="blog[if_top]" type="checkbox" value="Const::YES" <%= @blog.if_top == Const::YES ? 'checked': ''%>>
-        </td><td><b>置顶</b>&nbsp;&nbsp;</td>
-      </tr>
-    </table>
+      <iframe id="myEditor" src="/editor/editor.htm?id=blog_body" frameborder="0" scrolling="no" width="800" height="480"></iframe>
+    </div><br>
+    <strong>标签：</strong>
+    <label></label>
+    <input class="tag" name="blog[tag_names]" type="text" value="<%=( params[:blog]||{})[:tag_names] || @blog.tag_names %>" size="85" maxlength="85">
+    <br>
+    <span class="gray">比如：精彩生活 技术研究 日记(多个标签请用空格隔开)</span><br>
+    <label>
+      <input name="checkbox" id="checkbox" type="checkbox">
+    </label>
+    允许评论
+    <label>
+      <input name="blog[allow_pings]" type="checkbox" value="<%= Const::YES %>" <%= @blog.allow_pings == Const::YES ? 'checked': ''%> >
+    </label>
+    允许引用
+    <label>
+      <input name="blog[if_top]" type="checkbox" value="Const::YES" <%= @blog.if_top == Const::YES ? 'checked': ''%>>
+    </label>
+    置顶<br>    
     <input class="submit" name="publish"   type="submit"   value="提   交"  />
     <% if @blog.new_record? || !@blog.is_published? %>
-     <input class="save"   name="to_draft"   type="submit"  value="存为草稿" />
+      <input class="save"   name="to_draft"   type="submit"  value="存为草稿" />
     <% end %>
-  <% end  %>
-</div>
+    <div class="height20"></div>
+  </div>
+<%end%>

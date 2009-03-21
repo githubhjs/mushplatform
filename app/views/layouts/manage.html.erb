@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>客户世界-中国客户管理人的门户网站</title>    
+    <link href="/stylesheets/manage.css?rand=<%= rand 10 %>" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/prototype.js" type="text/javascript"></script>
+    <script src="/javascripts/effects.js" type="text/javascript"></script>
+    <script src="/javascripts/dragdrop.js" type="text/javascript"></script>
+    <script src="/javascripts/controls.js" type="text/javascript"></script>
+    <script src="/javascripts/dhtmlwindow.js" type="text/javascript"></script>
+    <script src="/javascripts/manage.js?rand=<%= rand 10 %>" type="text/javascript"></script>
+    <script src="/javascripts/application.js" type="text/javascript"></script>
+    <script src="/javascripts/calendar_date_select/calendar_date_select.js" type="text/javascript"></script>
+    <script src="/javascripts/calendar_date_select/format_db.js" type="text/javascript"></script>
+    <link href="/stylesheets/calendar_date_select/default.css" media="screen" rel="stylesheet" type="text/css" />
+
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="ding">
+        <p><a href="#">主页</a> | <a href="#">博客</a> | <a href="#">新闻</a> | <a href="#">文库</a> | <a href="#">供应商</a> | <a href="#">专家</a> | <a href="#">期刊</a> | <a href="#">论坛</a></p>
+      </div>
+    </div>
+    <div id="dh">
+      <div class="user">欢迎：<%= current_user.real_name %></div>
+      <div class="nav">
+        <ul>
+          <li ><a  href="/manage" title="我的首页"><span>我的首页</span></a></li>
+          <li ><a href="/manage/friends" title="好友"><span>好友</span></a></li>
+          <li ><a href="/manage/user_groups" title="群组"><span>群组</span></a></li>
+          <li ><a href="/manage/messages" title="公告"><span>公告</span></a></li>
+          <li ><a href="/manage/user_profiles" title="我的资料"><span>我的资料</span></a></li>
+          <li ><a href="/manage/themes" title="风格设置"><span>风格设置</span></a></li>
+        </ul>
+      </div>
+      <div class="close"><img src="/images/new/close.jpg" align="absmiddle" /> <a href="/user/logout">安全退出</a></div>
+    </div>
+    <div class="box">
+      <div class="left">
+        <img src="/images/new/gndh.jpg" />
+        <div class="cdh">
+          <ul>
+            <li><a href="/manage/blogs"><img src="/images/new/documents_32.png" align="absmiddle" />&nbsp;日志</a></li>
+            <li><a href="/manage/photos"><img src="/images/new/pictures_32.png" align="absmiddle" />&nbsp;相册</a></li>
+            <li><a href="/manage/regards/send_for"><img src="/images/new/chat_32.png" align="absmiddle" />&nbsp;打招呼</a></li>
+            <li><a href="/manage/gifts/send_for"><img src="/images/new/gift.png" align="absmiddle" />&nbsp;礼物</a></li>
+            <li><a href="/manage/votes"><img src="/images/new/vote.png" align="absmiddle" />&nbsp;投票</a></li>
+          </ul>
+        </div>
+      </div>
+      <%= yield  %>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="foot">
+      <div class="copyright">
+        <A href="http://www.ccmw.net/minisites/ccminfo/gsjj.htm"
+        target=_blank>关于我们</A> &nbsp;|&nbsp; <A
+          href="http://www.ccmw.net/minisites/ccminfo/adver.htm" target=_blank>广告服务</A>
+        &nbsp;|&nbsp; <A href="http://www.ccmw.net/minisites/ccminfo/copyright.htm"
+                         target=_blank>版权说明</A> &nbsp;|&nbsp; <A
+          href="http://liukai.ccmw.com:3000/sitemap" target=_blank>网站地图</A> &nbsp;|&nbsp;
+
+        <A href="http://www.ccmw.net/minisites/ccminfo/yszc.htm" target=_blank>隐私政策</A>
+        &nbsp;|&nbsp; <A href="mailto:caojian@ccmworld.net">欢迎赐稿</A> &nbsp;|&nbsp; <A
+          href="http://liukai.ccmw.com:3000/manage/index.html">网站首页</A><BR>
+        Copyright
+        2002-2009 CCMworld Group All rights reserved.<BR>
+        <A href="http://www.ccmw.net/"
+           target=_blank>客户世界机构</A> 版权所有 京ICP备05038078号
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,86 +1,108 @@
-<%=  render :partial => "/manage/share/left" %>
-<div class="m_r">
-  <div class="person_menu">
-    <%=  render :partial => "/manage/share/person_menu"%>
-    <div class="shadow"></div>
+<div class="center">
+  <div class="height20"></div>
+  <%= render :partial => "/manage/share/my_info" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 最新动态</p><span><a href="#">所有动态</a></span></div>
+    <div class="height20"></div>
+    <table width="475" border="0" cellpadding="0" cellspacing="0">
+      <tbody><tr>
+          <td width="79" align="right"><a href="/manage/blogs" class="cblack">发表日志</a>:&nbsp;</td>
+          <td class="gray" width="79">&nbsp;<%= current_user.blogs.count %>篇</td>
+          <td width="79" align="right"><a href="/manage/messages" class="cblack">发布公告</a>:&nbsp;</td>
+          <td class="gray" width="79">&nbsp;<%= current_user.messages.count %>条</td>
+          <td width="79" align="right"><a href="/manage/votes" class="cblack">参与投票</a>:&nbsp;</td>
+          <td class="gray" width="80">&nbsp;<%= current_user.user_votes.count %>条</td>
+        </tr>
+        <tr>
+          <td width="79" align="right"><a href="/manage/gifts/receive" class="cblack">收到的礼物</a>:&nbsp;</td>
+          <td class="gray" width="79">&nbsp;<%= current_user.receive_regards.count %>件(<a href="#" class="cred"><%= @new_gifts_count %>件新</a>)</td>
+          <td width="79" align="right"><a href="/manage/regards/receive" class="cblack">好友的问候</a>:&nbsp;</td>
+          <td class="gray" width="79">&nbsp;<%= current_user.receive_gifts.count %>句(<a href="#" class="cred"><%= @new_regards_count %>句新</a>)</td>
+          <td width="79" align="right">&nbsp;</td>
+          <td class="gray" width="80">&nbsp;</td>
+        </tr>
+    </tbody></table>
   </div>
-  <div class="user_b L" >
-    <div class="user_info">
-      <ul class="L">
-        <li><a class="red_underline" href="/manage/blogs">发表日志</a> （<%= current_user.blogs.count %>）</li>
-        <li><a class="red_underline" href="/manage/messages">发布公告</a>（<%= current_user.messages.count %>）</li>
-        <li><a class="red_underline" href="/manage/votes">参与投票</a> （<%= current_user.user_votes.count %>）</li>
-        <li><a class="red_underline" href="/manage/gifts/receive">收到的礼物</a>（<%= current_user.receive_regards.count %>）</li>
-        <li><a class="red_underline" href="/manage/regards/receive">好友的问候</a> （<%= current_user.receive_gifts.count %>）</li>
+  <div class="height20"></div>
+
+  <div class="w90">
+    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 好友动态</p><span><a href="#">查看全部</a></span></div>
+    <div class="height20"></div>
+    <div class="list">
+      <ul>
+        <% for footsetp in  @footsteps %>
+          <li><p><a href="<%= footsetp.user.space_url %>" target="_blank"><strong><%= footsetp.user.real_name %></strong></a> <%= footsetp.content %></p>
+            <span>[<%= DateUtil.timelong_for_with_ling(footsetp.created_at) %>]</span>
+          </li>
+        <%end%>
+        <%  unless @photos.blank? %>
+          <li>
+            <p>好友最新照片<br>
+              <% for photo in @photos %>
+                <a href="/photos/<%= photo.id %>"><img  src="<%= photo.thumbnail_link %>"></a>
+              <%end%>
+            </p>
+          </li>
+        <%end%>
       </ul>
     </div>
-    <div class="Guestbook clear">
-      <div style="width: 90%;">
-        <div class="box">
-          <div class="height12"></div>
-          <div class="midd">
-            <div class="btbt">好友动态</div>
-            <div class="list">
-              <ul>
-               <% for footsetp in  @footsteps %>
-                 <li><p><a href="<%= footsetp.user.space_url %>" target="_blank"><strong><%= footsetp.user.real_name %></strong></a> <%= footsetp.content %></p>
-                   <span>[<%= DateUtil.timelong_for_with_ling(footsetp.created_at) %>]</span>
-                </li>
-                <%end%>
-                <%  unless @photos.blank? %>
-                <li>
-                  <p>好友最新照片<br>
-                    <% for photo in @photos %>
-                      <a href="/photos/<%= photo.id %>"><img  src="<%= photo.thumbnail_link %>"></a>
-                    <%end%>
-                  </p>
-		         </li>
-                <%end%>
-              </ul>
-            </div>
-          </div>
-
-          <!--div class="right">
-            <div class="list">
-              <div class="btbt">最新回复</div>
-              <ul>
-                <li><a href="" target="_blank"><strong>龙华剑</strong></a> 2009-01-01 15:09 赠送了一个<img src="index_files/lw10.gif" width="22" height="22">给我，祝贺元旦快。 </li>
-              </ul>
-            </div>
-          </div-->
-          <div class="height12"></div>
-          <div class="height12"></div>
-        </div>
-        <div class="height12"></div>
-        <input name="category_id" type="hidden">
-      </div>
+  </div>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 相册</p><span><a href="/manage/photos/new">上传照片</a></span></div>
+    <div class="height20"></div>
+    <div class="photo2b">
+      <ul>
+        <%for pic in @my_photos%>
+          <li>
+            <a href="/manage/photos/<%= pic.id %>"><img src="<%= pic.mid_link %>"></a>
+            <p><a href="/manage/photos/<%= pic.id %>"><%= pic.title %></a></p>
+            浏览：<a href="#">80</a><br>
+          </li>
+        <%end%>
+      </ul>
     </div>
   </div>
+  <div class="height20"></div>
+  <div class="w90">
 
-  <div class="R">
-    <div class="p_search">
-      <div class="tit"><h6>查找好友</h6></div>
-      <div class="border">
-        <form action="/manage/friends/search" method="post">
-          <input class="txt" name="query" type="text" value="搜索好友..." size="20" maxlength="20" onclick="if(this.value==this.defaultValue) this.value=''">
-          <input class="button" name="button" type="submit" value="搜 索">
-        </form>
+    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 日志</p><span><a href="/manage/blogs/new">新写日志</a></span></div>
+    <div class="height20"></div>
+    <% for blog in @blogs %>
+      <div class="blog">
+        <dl>
+          <dt><a href="/entry/<%= blog.id %>"><%= h blog.title %></a></dt>
+          <dd>发表于<strong><%= DateUtil.timelong_for_with_ling(blog.created_at) %></strong> | 阅读(<a href="/entry/<%= blog.id %>"><%= blog.view_count %></a>) | 评论(<a href="/entry/<%= blog.id %>"><%= blog.comment_count %></a>) | 收藏(<a href="#">1</a>) </dd>
+        </dl>
+        <p><%= blog.body_for_list %><br>
+        <a href="/entry/<%= blog.id %>">查看全文</a> &gt;&gt;</p>
       </div>
-    </div>
-    <div class="friend">
-      <div class="tit L"><h6 class="L"><font class="L">我的好友(<%= current_user.friends.count %>)</font><font class="R"><a class="red_underline" href="">全部好友</a></font></h6></div>
-      <div class="friend_m border">
-        <% for user in @friends -%>
-          <div class="friend_b L">
-            <a href=""><img class="L" src="<%= user_icon(user.id) %>"/></a>
-            <p class="L"><a href=""><%= user.real_name %> </a></p>
-            <ul class="L">
-              <!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
-                    <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
-            </ul>
-          </div>
-        <% end -%>
-      </div>
+      <div class="height12"></div>
+    <%end%>
+  </div>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle">收到的礼物</p><span><a href="/manage/gifts/receive">查看全部</a></span></div>
+    <div class="height20"></div>
+    <div class="lwlw">
+      <ul>
+        <% for gift_user in @gifts %>
+          <% sender = gift_user.friend %>
+          <li>
+            <img src="/images/gifts_imgs/<%= gift_user.gift.icon  %>">
+            <p style="overflow: hidden; width: 95px; height: 22px;">好友<a href="<%= sender.space_url %>"><%= sender.real_name %></a>赠送</p>
+            <span><%= gift_user.created_at.strftime('%y-%m-%d %H:%M') %></span>
+          </li>
+        <%end%>
+      </ul>
     </div>
   </div>
-</div><!--m_r-->
+  <div class="height20"></div> 
+  <div class="height20"></div>
+</div>
+<div class="right">
+  <%= render :partial => "/manage/share/visitores" %>
+  <%= render :partial => "/manage/share/friends" %>
+</div>
+

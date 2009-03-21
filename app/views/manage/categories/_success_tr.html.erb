@@ -1,6 +1,6 @@
-<tr id="t_<%= category.id %>">
+<tr id="t_<%= category.id %>" class="ouout" onmouseover="this.className='onon'" onmouseout="this.className='ouout'" bgcolor="#ffffff">
   <%= render :partial => "/manage/categories/category_td" ,:locals => {:category => category} %>
 </tr>
-<tr id="t_<%= category.id %>_edit" style="display:none;background-color:#ffff99">
+<tr id="t_<%= category.id %>_edit"  class="ouout" onmouseover="this.className='onon'" onmouseout="this.className='ouout'" bgcolor="#ffffff" style="display:none;background-color:#ffff99">
  <%= render :partial => "/manage/categories/category_td_edit" ,:locals => {:category => category} %>
 </tr>

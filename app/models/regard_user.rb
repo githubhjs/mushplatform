@@ -27,4 +27,8 @@ class RegardUser < ActiveRecord::Base
     @owner ||= User.find(self.user_id)
   end
 
+  def model_desc
+
+  end
+
 end

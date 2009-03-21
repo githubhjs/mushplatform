@@ -1,66 +1,41 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-
-  <!--person_menu-->
-<%=  render :partial => "/manage/share/blog_menu" %>
-<!--person_menu-->
-
-  <div class="manage_m L">
-    <h2>日志管理</h2>
-    <p class="L">分类：
-      <select name="category_id"  onchange="window.location.href='/manage/blogs?category_id=' + this.options[this.options.selectedIndex].value">
-        <%= generate_categories_options_for_list(params[:category_id]) %>
-      </select>
-      <span style="">
-        <%= display_publish_notice %>
-      </span>
-    </p>
-    
-    
-    <table cellpadding="0" cellspacing="0" id = "blog_table">
-      <form action ="/manage/blogs/batch_publish" method ="post">
-      <tr>
-        <% if action_name == "drafts"  %>
-        <td class="tit" width="37"><input type="checkbox" name="ifcheckd"  id="ifchecked" onclick="select_all('blog_table')"></td>
-        <%end%>
-        <td class="tit" width="37">显示</td>
-        <td class="tit" width="283">标题</td>
-        <td class="tit" width="87">分类</td>
-        <td class="tit" width="110">日期</td>
-        <td class="tit" width="50">回复</td>
-        <td class="tit" width="110">管理</td>
-      </tr>
-      <%for blog in @blogs do %>
-        <tr id="t_<%= blog.id %>">
-          <%if action_name == 'drafts'%>
-          <td class="m_border"><input name="blog_ids[]" type="checkbox" value="<%= blog.id %>" /></td>
-          <%end%>
-          <td class="m_border"><img src="/images/ico_add3.gif"/></td>
-          <td class="a_tit m_border"><a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><%= blog.title %></a></td>
-          <td class="m_border"><%= display_category_name(blog) %></td>
-          <td class="m_border"><%= timelong(blog.created_at) %></td>
-          <td class="m_border"><%= blog.comment_count %></td>
-          <td class="m_border">
-            <a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><img alt="编辑" src="/images/btn_edit.png"></a>
+<div class="right2">
+  <div class="dbt">
+    <p><a href="/manage/blogs"><img src="/images/new/documents_32.png" align="absmiddle"></a>日志</p>
+    <%= render :partial => "/manage/blogs/search" %>
+  </div>
+  <%= render :partial => "/manage/blogs/blog_menu" %>
+  <div class="w90">
+    <div class="dbt2">
+      <strong><% if params[:category_id].blank? %>全部日志<%else%><a href="/manage/blogs">全部日志</a><%end%></strong>
+      <%  for category in @categories %>
+        ┊<strong><%if params[:category_id] && params[:category_id] == "#{category.id}"%><%= category.name %><%else%><a href="/manage/blogs?category_id=<%= category.id %>"><%= category.name %></a><%end%></strong>
+      <%end%>
+    </div>
+    <div class="height20"></div>
+    <div class="w90">
+      <div class="height20"></div>
+      <% for blog in @blogs %>
+        <div class="blog">
+          <dl>
+            <dt><a href="/entry/<%= blog.id %>"><%= h blog.title %></a></dt>
+            <a href="/manage/blogs/<%=blog.id  %>/edit" title="编辑"><img src="/images/new/119.gif"></a>
             <%unless blog.is_sticky? %>
-              <%= link_to_remote('<img alt="置顶" src="/images/btn_sticky.png" >',:url =>"/manage/blogs/#{blog.id}/sticky",:method => :get,:html => {:title => "置顶",:id => "d_a_#{blog.id}"})%>
+              <%= link_to_remote('<img alt="置顶" src="/images/new/120.gif" >',:url =>"/manage/blogs/#{blog.id}/sticky",:method => :get,:html => {:title => "置顶",:id => "d_a_#{blog.id}"})%>
             <%else%>
               <%= link_to_remote('<img alt="取消置顶" src="/images/btn_unsticky.png" >',:method => :get,:url => "/manage/blogs/#{blog.id}/sticky",:html => {:title => "取消置顶",:id => "d_a_#{blog.id}"})%>
             <%end%>
-            <%= link_to_function('<img alt="删除" src="/images/btn_delete.png">', "if (confirm('Really?')) do_delete(this)",:title => '删除',:href => "/manage/blogs/#{blog.id}/delete") %>
-          </td>
-        </tr>
+            <%= link_to_function('<img alt="删除" src="/images/new/121.gif">', "if (confirm('真的要删除吗?')) do_delete(this)",:title => '删除',:href => "/manage/blogs/#{blog.id}/delete") %>
+            <dd>发表于<strong><%= DateUtil.timelong_for_with_ling(blog.created_at) %></strong> | 阅读(<a href="/entry/<%= blog.id %>"><%= blog.view_count %></a>) | 评论(<a href="/entry/<%= blog.id %>"><%= blog.comment_count %></a>) | 收藏(<a href="#">1</a>) </dd>
+          </dl>
+          <p><%= blog.body_for_list %><br>
+          <a href="/entry/<%= blog.id %>">查看全文</a> &gt;&gt;</p>
+        </div>
+        <div class="height20"></div>
       <%end%>
-    </table>
-    <%= will_paginate @blogs, {:prev_label => '上一页', :next_label => '下一页'} %>
-    <input type="hidden" name="category_id" value="<%= params[:category_id] %>">
-    <% if action_name == "drafts" %>
-      <input class="delete" name="publish" type="submit" value="发 布" />
-    <% end %>
-    </form>
-     <!--select name="category_id"  onchange="window.location.href='/manage/blogs?category_id=' + this.options[this.options.selectedIndex].value">
-        <%#= generate_categories_options_for_list(params[:category_id]) %>
-    </select-->      
+    </div>
+    <div class="height20"></div>
+    <div class="jogger">
+      <%= will_paginate @blogs, {:prev_label => '上一页', :next_label => '下一页'} %>
+    </div>
   </div>
-</div><!--m_r-->
+</div>

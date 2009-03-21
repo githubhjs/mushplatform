@@ -1,7 +1,7 @@
 class Manage::GiftsController < Manage::ManageController
   # GET /gifts
   # GET /gifts.xml
-  Gifts_Per_Page = 17
+  Gifts_Per_Page = 12
   
   def index
     @gifts = Gift.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page)
@@ -118,13 +118,13 @@ class Manage::GiftsController < Manage::ManageController
   end
 
   def receive
-    @gift_user = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "friend_id = #{current_user.id}")
+    @gift_users = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "friend_id = #{current_user.id}",:order => 'id desc')
     render :template => "/manage/gifts/receive_gift"
     return
   end
 
   def send_gifts
-    @gift_user = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}")
+    @gift_users = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}",:order => "id desc")
     render :template => "/manage/gifts/send_gifts"
     return
   end

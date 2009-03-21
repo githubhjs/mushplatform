@@ -58,6 +58,10 @@ class Photo < ActiveRecord::Base
   def generate_image_name(img_url,type = '')
     get_image_name + type + ImageUtil::extract_image_format(img_url)
   end
+
+  def album_titlte
+    self.album_id > 0 ? self.class.find(self.album_id).title : "默认相册"
+  end
   
   def get_img_dir
     "/upload/pic/#{self.user_id}"

@@ -1,148 +1,174 @@
 <%  form_tag "/manage/user_profiles/#{@user_profile.id}",:method => :put,:name => 'user_date_form', :multipart => true do  %>
-  <div class="person_date_m L">
-  <h2>个人资料</h2>
-  <table cellpadding="0" cellspacing="1">
-  <tr>
-    <td class="top" colspan="2">我的头像</td>
-  </tr>
-  <tr>
-    <td class="tit" width="103">当前头像：</td>
-    <td width="638"><div class="face"><%= image_tag user_icon(@user_profile.user_id) %><%#= image_tag(@user_profile.public_filename) if @user_profile.filename %></div></td>
-  </tr>
-  <tr>
-  <td class="tit" >上传头像：</td>
-  <td><%= file_column_field 'user_profile', 'avatar' %> <%= submit_tag '上传头像' %><br/>格式：jpg,png,gif &nbsp;&nbsp; 尺寸：120x120 (超出自动剪裁)</td>
-  </tr>
-  <tr><td> </td><td></td></tr>
-  <tr>
-    <td class="top" colspan="2">基本资料 -<span> 本栏目为必填资料，本栏目资料不完整将不能完成注册。</span></td>
-  </tr>
-  <tr>
-    <td class="tit" >用户名：</td>
-    <td style="font-size:14px;"><b><%= @user.real_name %></b></td>
-  </tr>
-  <tr>
-    <td class="tit" ><span>&lowast;</span> 注册邮箱：</td>
-    <td><input name="user_email" type="text" size="50" maxlength="50" value="<%=  @user.email %>"  onblur="validate_user_emial(this)" id="user_email"/>
-      <font style="color:#de363a;display:none" id="emial_error" >【请输入正确格式电子邮件】</font>
-    </td>
-  </tr>
-  <% fields_for :user_profile, @user_profile do |p_field| %>
-    <tr>
-      <td class="tit">真实姓名：</td>
-      <td>
-        <%= p_field.text_field(:real_name, :class => "InpTxt")%>&nbsp;
-      <font style="color:#de363a;">*</font> 请尽量用中文填写，以方便交流</td>
-    </tr>
-    <tr>
-      <td class="tit" ><span>&lowast;</span> 性别：</td>
-      <td>
-        <%= generate_sex_radio('user_profile[sex]',@user_profile.sex) %>
-        <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
-      </td>
-    </tr>
-    <tr>
-      <td class="tit">公司名称：</td>
-      <td>
-        <%= p_field.text_field(:company_name, :class => "InpTxt")%>&nbsp;
-        <font style="color:#de363a;">*</font>
-      </td>
-    </tr>
+  <div class="w90">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tbody><tr>
+          <td colspan="3" bgcolor="#f8f8f8" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><strong>我的头像：</strong></span></td>
+        </tr>
+        <tr>
+          <td width="11%" align="right" height="79">当前头像：</td>
+          <td width="2%">&nbsp;</td>
+          <td class="txtx" width="87%"><%= image_tag user_icon(@user_profile.user_id) %></td>
+        </tr>
+        <tr>
+          <td align="right">上传头像：</td>
+          <td>&nbsp;</td>
+          <td class="txtx"><%= file_column_field 'user_profile', 'avatar' %> <%= submit_tag '上传头像' %>
+          <br>格式：jpg,png,gif 尺寸：120x120 (超出自动剪裁)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="height12xhx"></div>
+    <div class="height12"></div>
+    <% fields_for :user_profile, @user_profile do |p_field| %>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr>
+            <td colspan="3" bgcolor="#f8f8f8" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><strong>基本资料：</strong></span> <span class="red">- 本栏目为必填资料，本栏目资料不完整将不能完成注册。</span></td>
+          </tr>
+          <tr>
+            <td width="11%" align="right" height="30">用户名：</td>
+            <td width="2%">&nbsp;</td>
+            <td class="txtx" width="87%"><%= @user.real_name %></td>
+          </tr>
+          <tr>
+            <td align="right" height="30"><span class="red">*</span> 注册邮箱：</td>
+            <td>&nbsp;</td>
+            <td class="txtx">
+              <input name="user_email" type="text" size="50" maxlength="50" value="<%=  @user.email %>"  onblur="validate_user_emial(this)" id="user_email"/>
+              <input name="user_email" type="text" size="50" maxlength="50" value="<%=  @user.email %>"  onblur="validate_user_emial(this)" id="user_email"/>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" height="30">真实姓名：</td>
+            <td>&nbsp;</td>
+            <td class="txtx"><%= p_field.text_field(:real_name, :class => "InpTxt")%>&nbsp;
+            <span class="red">* </span>请尽量用中文填写，以方便交流</td>
+          </tr>
+          <tr>
 
-    <tr>
-      <td class="tit">公司性质：</td>
-      <td>
-        <%= generate_company_nature_radio(@user_profile.company_nature)%>
-      </td>
-    </tr>
-    <tr>
-      <td class="tit" ><span>&lowast;</span> 城市：</td>
-      <td>
-        <%= p_field.text_field(:city, :class => "InpTxt")%>&nbsp;
-        <font style="color:#de363a;display:none" id="city_error" >【请选填写城市】</font>
-      </td>
-    </tr>
-    <tr><td> </td><td></td></tr>
+            <td align="right" height="30"> 性别：</td>
+            <td>&nbsp;</td>
+            <td class="txtx">
+              <%= generate_sex_radio('user_profile[sex]',@user_profile.sex) %>
+              <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
+            </td>
+          </tr>
 
-    <tr>
-      <td class="top" colspan="2">详细资料 - <span>本栏目为非必填资料，完整填写本栏目的用户将得到100个积分。</span></td>
-    </tr>
-    <tr>
-      <td class="tit">所属行业：</td>
-      <td>
-        <select name="user_profile[vocation_id]" >
-          <%= generate_vocations_select(@user_profile.vocation_id)%>
-        </select>
-        <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
-      </td>
-    </tr>
-    <tr>
-      <td class="tit">职位：</td>
-      <td>
-        <%= p_field.text_field(:position, :class => "InpTxt")%>
-      </td>
+          <tr>
+            <td align="right" height="30">公司名称：</td>
+            <td>&nbsp;</td>
+            <td class="txtx"><%= p_field.text_field(:company_name, :class => "InpTxt")%>&nbsp;<font style="color:#de363a;">*</font></td>
+          </tr>
+          <tr>
+            <td align="right" height="30">公司性质：</td>
+            <td>&nbsp;</td>
+            <td class="txtx">
+              <%= generate_company_nature_radio(@user_profile.company_nature)%>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" height="30">城市：</td>
+            <td>&nbsp;</td>
+            <td class="txtx">
+              <%= p_field.text_field(:city, :class => "InpTxt")%>&nbsp;
+              <font style="color:#de363a;display:none" id="city_error" >【请选填写城市】</font>
+            </td>
+          </tr>        
+      </tbody>
+    </table>
+    <div class="height12xhx"></div>
+    <div class="height12"></div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tbody><tr>
+          <td colspan="3" bgcolor="#f8f8f8" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><strong>详细资料：</strong></span> <span class="red">- 本栏目为非必填资料，完整填写本栏目的用户将得到100个积分。</span></td>
+        </tr>
+        <tr>
+          <td align="right" height="30">所属行业：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <select name="user_profile[vocation_id]" >
+              <%= generate_vocations_select(@user_profile.vocation_id)%>
+            </select>
+            <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" height="30">职位：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= p_field.text_field(:position, :class => "InpTxt")%>
+          </td>
+        </tr>
+        <tr>
 
-    </tr>
-    <tr>
-      <td class="tit">联系电话：</td>
-      <td>
-        <%= p_field.text_field(:tel, :class => "InpTxt")%>&nbsp;
-      <font style="color:#de363a;">*</font> 区号+电话号码 如：021-65006500</td>
-    </tr>
-    <tr>
-      <td class="tit">手机：</td>
-      <td>
-      <%= p_field.text_field(:mobile, :class => "InpTxt")%>
-    </tr>
-    <tr>
-      <td class="tit">传真：</td>
-      <td>
-        <%= p_field.text_field(:fax, :class => "InpTxt")%>
-      </td>
-    </tr>
-    <tr>
-      <td class="tit">通讯地址：</td>
-      <td>
-        <%= p_field.text_field(:adress, :size => 50)%>
-        &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料
-      </td>
-    </tr>
-    <tr>
-      <td class="tit">邮政编码：</td>
-      <td>
-        <%= p_field.text_field(:zipcode, :class => "InpTxt")%>
-      &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料</td>
+          <td align="right" height="30"> 联系电话：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= p_field.text_field(:tel, :class => "InpTxt")%>&nbsp;
+            <font style="color:#de363a;">*</font> 区号+电话号码 如：021-65006500
+          </td>
+        </tr>
+        <tr>
+          <td align="right" height="30">手机：</td>
+          <td>&nbsp;</td>
+          <td class="txtx"><%= p_field.text_field(:mobile, :class => "InpTxt")%></td>
+        </tr>
+        <tr>
+          <td align="right" height="30">传真：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= p_field.text_field(:fax, :class => "InpTxt")%>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" height="30">通讯地址：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= p_field.text_field(:adress, :size => 50)%>
+            &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料
+          </td>
+        </tr>
+        <tr>
+          <td align="right" height="30">邮编：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= p_field.text_field(:zipcode, :class => "InpTxt")%>
+            &nbsp;<font style="color:#de363a;">*</font> 地址邮编便于邮寄资料
+          </td>
+        </tr>
+        <tr>
+          <td align="right" height="30">企业网站：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= p_field.text_field(:web_site, :class => "InpTxt")%>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" height="30">感兴趣：</td>
+          <td>&nbsp;</td>
+          <td class="txtx">
+            <%= generate_intrested_radio("user_profile[interested]",@user_profile.interested) %>
+          </td>
+        </tr>
 
-    </tr>
-    <tr>
-      <td class="tit">企业网站：</td>
-      <td>
-        <%= p_field.text_field(:web_site, :class => "InpTxt")%>
-      </td>
-
-    </tr>
-    <tr>
-      <td class="tit">感兴趣：</td>
-      <td>
-        <%= generate_intrested_radio("user_profile[interested]",@user_profile.interested) %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="tit_bg"><div class="ico">个人自述</div></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>250字以内，展示个人风采，推荐将您的资历详细罗列</td>
-    </tr>
-    <tr>
-      <td class="tit">个人简介：</td>
-      <td>
-        <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50"><%= @user_profile.introduction%></textarea>
-      </td>
-    </tr>
-  <%end%>
-  </table>
+    </tbody></table>
+    <div class="height12xhx"></div>
+    <div class="height12"></div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tbody><tr>
+          <td colspan="3" bgcolor="#f8f8f8" height="25">&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><strong>个人自述：</strong></span> <span class="red">- 250字以内，展示个人风采，推荐将您的资历详细罗列。</span></td>
+        </tr>
+        <tr>
+          <td width="11%" align="right" height="30">个人简介：</td>
+          <td width="2%">&nbsp;</td>
+          <td class="txtx" width="87%">
+            <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50"><%= @user_profile.introduction%></textarea>
+          </td>
+        </tr>
+    </tbody></table>
+  <%  end %>
+  <div class="height12xhx"></div>
+  <div class="height12"></div>
   <input class="button" name="save" type="button" value="保 存" onclick="validate_form(document.user_date_form)"/>
   <input class="button" name="reset" type="reset" value="重 置" />
-  </div>
-<%  end %> 
+</div>
+<%  end %>

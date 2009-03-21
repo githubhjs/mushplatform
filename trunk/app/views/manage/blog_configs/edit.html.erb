@@ -13,22 +13,22 @@
           <img src='/images/icon_error_lrg.gif'><font color='red'><%= category.errors.full_messages.join(';') %></font>
         <%end%>
       </div>
-      <p><b>博客名称：</b><font style="color:red;"><%= @blog_config.errors.on(:blog_name) %></font>
+      <p><span>博客名称：</span><font style="color:red;"><%= @blog_config.errors.on(:blog_name) %></font>
         <%= f.text_field :blog_name,:size => '65',:maxlength => '65' ,:class => "title" %>
       </p>
-      <p><b>个人签名：</b><font style="color:red;"><%= @blog_config.errors.on(:announcement) %></font>
+      <p><span>个人签名：</span><font style="color:red;"><%= @blog_config.errors.on(:announcement) %></font>
         <%= f.text_field :announcement,:size => '65',:maxlength => '65' ,:class => "title" %>
       </p>
-      <p><b>博客皮肤：</b>
+      <p><span>博客皮肤：</span>
         <select name="blog_config[theme_name]">
           <%= generate_theme_options(@blog_config.theme_name) %>
         </select>
       </p>
-      <p><b>每页文章数:</b>
+      <p><span>每页文章数：</span>
         <font style="color:red;"><%= @blog_config.errors.on(:blog_perpage) %></font>
         <%= f.text_field :blog_perpage %>
       </p>
-      <p><b>每页评论数:</b>
+      <p><span>每页评论数：</span>
         <font style="color:red;"><%= @blog_config.errors.on(:comment_perpage) %></font>
         <%= f.text_field :comment_perpage %>
       </p>

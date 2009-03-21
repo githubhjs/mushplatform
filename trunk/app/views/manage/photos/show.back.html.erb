@@ -1,0 +1,56 @@
+<%=  render :partial => "/manage/share/left" %>
+<div class="m_r">
+  <!--person_menu-->
+  <%=  render :partial => "/manage/photos/photo_menu"%>
+  <!--person_menu-->
+  <div class="m">
+    <h3>博客相册</h3>
+    <div style="width: 100%; text-align: center;">
+      <div class="title1">博客相册</div>
+      <div class="box">
+        <div class="height12"></div>
+        <div class="height12"></div>
+        <table width="90%" align="center" bgcolor="#ffd7ce" border="0" cellpadding="0" cellspacing="0">
+          <tbody><tr>
+              <td width="3%" height="180">&nbsp;</td>
+              <td width="51%" align="left">
+                <div><strong>&nbsp;图片名称：</strong><%= @photo.title %></div>
+                <div><strong>&nbsp;图片标签：</strong><%= @photo.tag_list.join(',') %></div>
+                <div><strong>&nbsp;创建时间：</strong><%= DateUtil.timelong_for_with_ling @photo.created_at %></div>
+                <div><strong>&nbsp;更新时间：</strong><%= DateUtil.timelong_for_with_ling @photo.updated_at %></div>
+                <div><strong>&nbsp;图片描述：</strong><%= @photo.description %></div>
+                
+              </td>
+              <% if @next_photo %>
+                <td width="23%" align="right">
+                  <div class="photo">
+                    <ul>
+                      <li> <a href="/manage/photos/<%= @next_photo.id %>"><img  src="<%= @next_photo.mid_link %>"></a>
+                        <p><a href="/manage/photos/<%= @next_photo.id %>"><strong>下一张</strong></a>
+                      </p></li>
+                    </ul>
+                  </div>
+                </td>
+              <%end%>
+              <% if  @per_photo %>
+                <td width="23%" align="right"><div class="photo">
+                    <ul>
+                      <li> <a href="/manage/photos/<%= @per_photo.id %>"><img  src="<%= @per_photo.mid_link %>"></a>
+                        <p><a href="/manage/photos/<%= @per_photo.id %>"><strong>上一张</strong></a>
+                      </p></li>
+                    </ul>
+                  </div>
+                </td>
+              <%end%>
+            </tr>
+        </tbody></table>
+        <div class="height12"></div>
+        <div class="pic">
+          <a alt="点击查看原始大小图片" href="<%= @photo.orignal_link %>" target="_blank"><img class="magplus" title="点击查看原始大小图片" src="<%= @photo.max_link||@photo.orignal_link %>"></a>
+        </div>
+        <div class="height12"></div>
+        <div class="height12"></div>
+      </div>
+    </div>
+  </div>
+</div><!--m_r-->

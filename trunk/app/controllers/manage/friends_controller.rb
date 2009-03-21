@@ -1,28 +1,32 @@
 class Manage::FriendsController <  Manage::ManageController
+
   helper_method :current_user
   
+  PerPage = 32
+
   def index
-    @friends = current_user.friends
+    @friends = current_user.friends.paginate(:page => params[:page]||1,:per_page => PerPage,:order => "id desc")
     respond_to do |format|
       format.html # index.html.erb
     end
   end
     
   def search
-    unless params[:query].blank?
-      @friends = UserProfile.find(:all,:conditions => ["real_name like ?","%#{params[:query]}%"])
+    unless params[:keywords].blank?
+      @friends = UserProfile.find(:all,:conditions => ["real_name like ?","%#{params[:keywords]}%"])
       if @friends.length == 0
-        users = User.find(:all,:conditions => ["user_name like ?","%#{params[:query]}%"])
+        users = User.find(:all,:conditions => ["user_name like ?","%#{params[:keywords]}%"])
         for user in users
           @friends << UserProfile.new(:real_name => user.user_name, :user_id => user.id)
         end
       end
     else
       @friends=[]
-    end
-    respond_to do |format|
-      format.html # index.html.erb
-    end
+    end    
+  end
+
+  def visitores
+    @visitores = current_user.visitors.paginate(:page => params[:page]||1,:per_page => 20,:order => 'id desc')
   end
 
   def invite

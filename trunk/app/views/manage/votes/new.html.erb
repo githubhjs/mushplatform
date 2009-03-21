@@ -1,17 +1,8 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-  <!--person_menu-->
-<%=  render :partial => "/manage/votes/vote_menu_bar"%>
-<!--person_menu-->
-  <div class="blog_write_m L">
-    <h2>发起投票</h2>
-    <div class="blog_write_top clear"></div>
-    <div class="blog_write_center">
-      <%= render :partial => "/manage/votes/form" %>
-    </div>
-    <div class="blog_write_bottom"></div>
+<div class="right2">
+  <%=  render :partial => "/manage/votes/vote_menu"%>
+  <div class="height20"></div>
+  <div class="w90_bd">
+    <%= render :partial => "/manage/votes/form" %>
   </div>
-
-</div><!--m_r-->
-
+  <div class="height20"></div>
+</div>

@@ -26,7 +26,7 @@ module ApplicationHelper
   def genreate_degree_options(select_value)
     options = [["选择类型",'0'],["专科",'1'],["本科",'2'],["研究生",'3'],["博士",'4'],['其他','5']]
     options_for_select(options, select_value.blank? ? nil : select_value.to_s)
-  end
+  end  
 
   def generate_intrested_radio(attr_name,select_value)
     select_value ||= UserProfile::Intrested_Call_Center

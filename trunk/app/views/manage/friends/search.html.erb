@@ -1,44 +1,28 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-  <%=  render :partial => "/manage/friends/friends_menu" %>
-
-  <div class="qun_m L">
-    <div class="qun_top">
-      <form action="search" method="post">
-        <input class="txt" name="query" type="text" value="搜索好友..." size="20" maxlength="20" onclick="if(this.value==this.defaultValue) this.value=''">
-        <input class="button" name="button" type="submit" value="搜 索">
-      </form>
-
-      <h2 class="my_friend">搜索好友</h2>
+<div class="right2">
+  <%= render :partial => "/manage/friends/friends_menu" %>
+  <div class="w90">
+    <div class="height20"></div>
+    <div class="friend">
+      <ul>
+        <% for user_profile in @friends -%>
+          <%user = user_profile.user %>
+          <li>
+            <p><a href="<%= user.space_url %>" target="_blank"><img src="<%= user_icon(user.id) %>"/></a></p>
+            <p style="overflow: hidden; width: 78px; height: 22px;"><a href="<%= user.space_url %>" target="_blank"><%= user.real_name %> </a></p>
+            <span>
+              <% if current_user.is_friend_with?(user) %>
+                <%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete',:confirm => "确定要删除吗?", :class => 'grey' %>
+              <%else%>
+                <%= link_to '加为好友', {:action => 'create', :id => user.id}, :method => 'post', :class => 'grey' %>
+              <%end%>
+            </span>
+          </li>
+        <%end%>
+      </ul>
     </div>
-
-
-    <% if @friends and @friends.length > 0 -%>
-      <div class="clear li_m">
-        <div class="friend_m_b L">
-          <% for profile in @friends -%>
-            <% user = profile.user %>
-            <div class="friend_b L">
-              <a href=""><img class="L" src="<%= user_icon(user.id) %>"/></a>
-              <p class="L"><a href=""><%= user.real_name %> </a></p>
-              <ul class="L">
-                <!--li><a href=""><img class="rss" src="/images/ico_message.gif"/></a><a href="">发纸条</a></li>
-                <li><a href=""><img class="rss" src="/images/ico_rss.gif"/></a><a href="">订阅</a></li-->
-              </ul>
-              <p>
-                <font style="font-weight:bold;color:#999;">&times;</font>&nbsp;
-                <% if current_user.is_friend_with?(user) %>
-                 <%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete',:confirm => "确定要删除吗?", :class => 'grey' %>
-                 <%else%>
-                 <%= link_to '加为好友', {:action => 'create', :id => user.id}, :method => 'post', :class => 'grey' %>
-                <%end%>
-               </p>
-            </div>
-          <% end -%>
-        </div>
-      </div>
-    <% end -%>
+    <div class="height20"></div>
+    <div class="jogger">
+      
+    </div>
   </div>
-
-</div><!--m_r-->
+</div>

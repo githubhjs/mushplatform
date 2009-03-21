@@ -108,19 +108,18 @@ class Manage::RegardsController < Manage::ManageController
         @regard_user.friend_id = f_user.id
         @regard_user.save
       end
-    end
-    @notice = "问候成功! "
-    render :action => "success"
+    end    
+    redirect_to :action => send_regards
   end
   
   def receive
-    @user_reagrds = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "friend_id = #{current_user.id}")
+    @user_reagrds = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "friend_id = #{current_user.id}",:order => "id desc")
     render :template => "/manage/regards/receive_regard"
     return
   end
 
   def send_regards
-    @user_reagrds = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "user_id = #{current_user.id}")
+    @user_reagrds = RegardUser.paginate(:page => params[:page]||1,:per_page => Regard_Per_Page, :conditions => "user_id = #{current_user.id}",:order => "id desc ")
     render :template => "/manage/regards/send_regards"
     return
   end

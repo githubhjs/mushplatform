@@ -1,0 +1,31 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+  
+  <!--person_menu-->
+<%=  render :partial => "/manage/share/blog_menu" %>
+  <!--person_menu-->
+  <div class="templet_m L">
+    <h2>模板设置</h2>
+    <div class="main_b L">
+      <%if @active%>
+      <div class="big_pic">
+        <h4>当前使用的模板</h4>
+        <img src="<%= @active.icon %>"/>
+        <p class="name"><%= @active.title %></p>
+      </div>
+      <%end%>
+      <% for theme in @themes do %>
+          <div class="pic_li">
+            <img src="<%= theme.icon %>"/>
+            <h6><%= theme.title %></h6>
+            <p>
+              <!--<a href="/manage/themes/preview?theme_name=<%= theme.name %>">浏览范例blog</a> |-->
+              <a href="/manage/themes/switchto?theme_name=<%= theme.name %>">使用此模板</a>
+            </p>
+          </div>
+        <%end%>
+      </div>  
+    </div>
+  
+  </div><!--m_r-->

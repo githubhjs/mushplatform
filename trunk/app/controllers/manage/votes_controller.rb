@@ -17,6 +17,8 @@ class Manage::VotesController < Manage::ManageController
 
   def random_votes
     @votes = Vote.paginate(:page => params[:page]||1,:per_page => Rand_Vote_Perpage,:order => 'id')
+   render :action => :index
+   return true
   end
 
   def friend_votes
@@ -27,6 +29,8 @@ class Manage::VotesController < Manage::ManageController
       Vote.paginate(:page => params[:page]||1,:per_page => Vote_PerPage,
         :conditions => "user_id in (#{friends.map(&:friend_id).join(',')})")
     end
+    render :action => :index
+   return true
   end
 
   # GET /votes/1
@@ -60,7 +64,6 @@ class Manage::VotesController < Manage::ManageController
   # GET /votes/new.xml
   def new
     @vote = Vote.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @vote }

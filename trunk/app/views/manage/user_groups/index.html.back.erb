@@ -1,0 +1,36 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+  <%=  render :partial => "/manage/user_groups/group_menu" %>
+  <!--person_menu-->
+  <div class="qun_m L">
+    <%= render :partial => '/manage/user_groups/search' ,:locals => {:info => "我的群组",:info_class => 'qun_mine'}%>
+    <div class="clear li_m">
+      <% for group in @user_groups %>
+      <div class="m_b L">
+        <div class="L width_l">
+          <a href="/manage/user_groups/<%= group.id %>"><img src="<%= group.icon %>"/></a>
+          <h3><a class="red_underline" href="/manage/user_groups/<%= group.id %>"><%= group.title %></a></h3>
+          <p>分类：<%= group.category %></p>
+          <p>人数：<%= group.member_count %></p>
+          <p class="info">简介：<%= h group.description %></p>
+        </div>
+        <div class="R width_r">
+          <p><a class="red_underline" href="/manage/user_groups/<%= group.id %>">浏览此群组</a></p>
+          <% if group.is_in_group?(current_user) %>
+            <% unless group.is_group_admin?(current_user) %>
+            <p><a class="red_underline" href="/manage/user_groups/<%= group.id %>/quit">退出该群组</a></p>
+            <%end%>
+            <p><a class="red_underline" href="/manage/user_groups/<%= group.id %>/new_topic">新建话题</a></p>
+          <%else%>
+           <p><a class="red_underline" href="/manage/user_groups/<%= group.id %>/join">加入该群</a></p>
+          <%end%>
+        </div>
+      </div>
+      <%end%>
+      <%= will_paginate @user_groups, {:prev_label => '上一页', :next_label => '下一页'} %>
+    </div>
+  </div>
+</div><!--m_r-->

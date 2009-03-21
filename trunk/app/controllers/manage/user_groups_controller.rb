@@ -35,6 +35,8 @@ class Manage::UserGroupsController < Manage::ManageController
       ''
     end
     @user_groups = UserGroup.paginate(:page => params[:page]||1,:per_page => Group_Perpage ,:conditions => conditons)
+    render :action => :index
+    return true
   end
 
   def search
@@ -84,6 +86,8 @@ class Manage::UserGroupsController < Manage::ManageController
     else
       []
     end
+    render :action => :index
+    return true
   end
 
   def friend_create_groups
@@ -93,6 +97,8 @@ class Manage::UserGroupsController < Manage::ManageController
     else
       []
     end
+    render :action => :index
+    return true
   end
 
   def join

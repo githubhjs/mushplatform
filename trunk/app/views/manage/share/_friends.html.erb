@@ -1,0 +1,15 @@
+<div class="w100">
+  <div class="title2"><p>我的好友</p><span><a href="/manage/friends">好友管理</a></span></div>
+  <div class="height20"></div>
+  <div class="friend3">
+    <ul>
+     <% for  friend in @friends %>
+      <li>
+        <p><a href="<%= friend.space_url %>" target="_blank"><img src="<%= user_icon(friend.id) %>"></a></p>
+        <p style="overflow: hidden; width: 78px; height: 22px;"><a href="<%= friend.space_url %>" target="_blank"><%= friend.real_name %></a></p>
+      </li>
+      <%end%>
+    </ul>
+  </div>
+  <div class="height20"></div>
+</div>

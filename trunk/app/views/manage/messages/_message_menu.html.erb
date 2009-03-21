@@ -1,20 +1,9 @@
-<div class="person_menu">
-  <%=  render :partial => "/manage/share/person_menu"%>
-  <div class="p_m2">
-    <div class="m2_bg">
-      <ul class="L">
-        <% if action_name =='index' %>
-          <li class="hot">公告管理</li>
-        <%else%>
-          <li class="hot"><a href="/manage/messages">公告管理</a></li>
-        <%end%>
-        <%if action_name != "index"%>
-          <li>发布公告</li>
-        <%else%>
-          <li><a href="/manage/messages/new">发布公告</a></li>
-        <%end%>
-      </ul>
-    </div>
-  </div>
-  <div class="shadow"></div>
+<div class="dbt">
+  <p><a href="#"><img src="/images/new/png-0003.png" width="36" align="absmiddle" height="36"></a>公告</p>
+</div>
+<div class="tabs6">
+  <ul>
+    <li <% if action_name == 'index' %> class="tabs66"<%end%>><a href="/manage/messages" title="公告管理"><span>公告管理</span></a></li>
+    <li <% if action_name != 'index' %> class="tabs66"<%end%>><a href="/manage/messages/new" title="发布公告"><span>发布公告</span></a></li>
+  </ul>
 </div>

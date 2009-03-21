@@ -1,0 +1,51 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+  <!--person_menu-->
+  <%=  render :partial => "/manage/votes/vote_menu_bar"%>
+  <!--person_menu-->
+  <div class="blog_write_m L">
+    <h2>参加投票</h2>
+    <div class="blog_write_top clear"></div>
+    <div><%= flash[:notice] %></div>
+    <div class="blog_write_center">
+      <%form_tag "/manage/votes/#{@vote.id}/post_vote",:name => "vote_form",:onsubmit => "return validate_vote_form();" do %>
+      <div class="blog_write_center">
+        <p>
+          <b>发起时间：</b>
+          <%= @vote.created_at.strftime('%m/%d/%y %H:%M')  %>
+        </p>
+        <p>
+          <b>截止时间：</b>
+          <%= @vote.expire_time.strftime('%m/%d/%y %H:%M')  %>
+        </p>
+        <p><b>主题：</b>
+        <%= @vote.title %>(最多可选<%= @vote.multi_selcect  %>项)
+        </p>
+        <p><b>投票人数：</b>
+        <%= @vote.member_count %>
+        </p>
+        <%unless @vote.description.blank?%>
+            <p><b>描述：</b>
+              <%= @vote.description %>
+            </p>
+          <%end%>
+        <input type="hidden" name="vote_id" value="<%= @vote.id %>">
+        <% @vote_options.each do |vote_option| %>
+          <p>
+            <%= vote_option.title %>(<%= "#{vote_option.vote_rate(@vote.member_count)}%" %>)
+            <input type="checkbox" name="vote_values[]" value="<%= vote_option.id %>" onclick="inputOnclick(this)">
+          </p>
+        <%end%>
+        <input class="submit"  type="submit" value="投票" />
+      </div>
+      <%end%>
+    </div>
+    <div class="blog_write_bottom"></div>
+  </div>
+
+</div><!--m_r-->
+<script>
+  var vote_limit = <%= @vote.multi_selcect %>
+</script>
+

@@ -1,56 +1,42 @@
-<%=  render :partial => "/manage/share/left" %>
-<div class="m_r">
-  <!--person_menu-->
-  <%=  render :partial => "/manage/photos/photo_menu"%>
-  <!--person_menu-->
-  <div class="m">
-    <h3>博客相册</h3>
-    <div style="width: 100%; text-align: center;">
-      <div class="title1">博客相册</div>
-      <div class="box">
-        <div class="height12"></div>
-        <div class="height12"></div>
-        <table width="90%" align="center" bgcolor="#ffd7ce" border="0" cellpadding="0" cellspacing="0">
-          <tbody><tr>
-              <td width="3%" height="180">&nbsp;</td>
-              <td width="51%" align="left">
-                <div><strong>&nbsp;图片名称：</strong><%= @photo.title %></div>
-                <div><strong>&nbsp;图片标签：</strong><%= @photo.tag_list.join(',') %></div>
-                <div><strong>&nbsp;创建时间：</strong><%= DateUtil.timelong_for_with_ling @photo.created_at %></div>
-                <div><strong>&nbsp;更新时间：</strong><%= DateUtil.timelong_for_with_ling @photo.updated_at %></div>
-                <div><strong>&nbsp;图片描述：</strong><%= @photo.description %></div>
-                
-              </td>
-              <% if @next_photo %>
-                <td width="23%" align="right">
-                  <div class="photo">
-                    <ul>
-                      <li> <a href="/manage/photos/<%= @next_photo.id %>"><img  src="<%= @next_photo.mid_link %>"></a>
-                        <p><a href="/manage/photos/<%= @next_photo.id %>"><strong>下一张</strong></a>
-                      </p></li>
-                    </ul>
-                  </div>
-                </td>
-              <%end%>
-              <% if  @per_photo %>
-                <td width="23%" align="right"><div class="photo">
-                    <ul>
-                      <li> <a href="/manage/photos/<%= @per_photo.id %>"><img  src="<%= @per_photo.mid_link %>"></a>
-                        <p><a href="/manage/photos/<%= @per_photo.id %>"><strong>上一张</strong></a>
-                      </p></li>
-                    </ul>
-                  </div>
-                </td>
-              <%end%>
-            </tr>
-        </tbody></table>
-        <div class="height12"></div>
-        <div class="pic">
-          <a alt="点击查看原始大小图片" href="<%= @photo.orignal_link %>" target="_blank"><img class="magplus" title="点击查看原始大小图片" src="<%= @photo.max_link||@photo.orignal_link %>"></a>
-        </div>
-        <div class="height12"></div>
-        <div class="height12"></div>
-      </div>
-    </div>
+<div class="right2">
+  <div class="dbt">
+    <p><a href="/manage/photos/new"><img src="/images/new/pictures_32.png" align="absmiddle"></a>上传照片</p>
+    <span>
+      <img src="/images/new/tb_sczp.gif" align="absmiddle"> <a href="/manage/photos/new"><strong>上传照片</strong></a>
+    </span>
   </div>
-</div><!--m_r-->
+  <%= render :partial => '/manage/photos/photo_menu' %>
+  <div class="height20"></div>
+  <div class="w90">
+    <!--div class="photo">
+      <ul>
+        <li><a href="#"><img src="images/friend_tu.gif"></a></li>
+        <li><a href="#"><img src="images/photo_tu2.gif"></a></li>
+        <li><a href="#"><img style="border-color: rgb(140, 182, 244); background: rgb(204, 235, 251) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" src="images/pic1.gif"></a></li>
+        <li><a href="#"><img src="images/friend_tu.gif"></a></li>
+        <li><a href="#"><img src="images/photo_tu2.gif"></a></li>
+      </ul>
+    </div-->
+    <div class="height20"></div>
+    <div class="photo_info">      
+      <span class="f14b black"><%= @photo.title %></span> <a href="/manage/photos/<%= @photo.id %>/edit">修改</a><br>
+      <strong>上传时间：</strong><%= DateUtil.timelong_for_with_ling(@photo.created_at) %> | 浏览(<a href="#">82</a>) | 评论(<a href="#">0</a>) | 收藏(<a href="#">0</a>)<br>
+      <strong>照片描述：</strong><%= @photo.description %> <a href="#">修改</a><br>
+      <div class="next">
+        <% if @per_photo %>
+          <div class="next_a"><a href="/manage/photos/<%= @per_photo.id %>"><img src="/images/call_center/btn_up.gif" alt="上一张"></a></div>
+        <%end%>
+        <div class="next_b"><img src="/images/call_center/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/call_center/tu_ckyt.gif" align="absmiddle"> <a href="<%= @photo.orignal_link %>" target="_blank" >查看原图</a> &nbsp;&nbsp;<img src="/images/call_center/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
+        <%if @next_photo%>
+          <div class="next_c"><a href="/manage/photos/<%= @next_photo.id %>"><img src="/images/call_center/btn_down.gif" alt="下一张"></a></div>
+        <%end%>
+      </div>
+      <div class="pic"><a href="<%=  @next_photo ? "/photos/#{@next_photo.id}" : '#' %>">
+        <img src="<%= @photo.max_link || @photo.orignal_link %>" alt="下一张"></a>
+      </div>
+      <div class="height20"></div>
+    </div>
+    <div class="height20"></div>
+  </div>
+  <div class="height20"></div>
+</div>

@@ -1,13 +1,7 @@
-<div class="person_menu">
-  <%=  render :partial => "/manage/share/person_menu"%>
-  <div class="p_m2">
-    <div class="m2_bg">
-      <ul class="L">
-        <li class="hot"><a href="/manage/regards/send_for">问候好友</a></li>
-        <li><a href="/manage/regards/receive">好友的问候</a></li>
-        <li><a href="/manage/regards/send_regards">对好友的问候</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="shadow"></div>
+<div class="tabs6">
+  <ul>
+    <li <% if action_name == 'send_for' %> class="tabs66" <%end%>><a href="/manage/regards/send_for" title="打招呼"><span>打招呼</span></a></li>
+    <li <% if action_name == 'receive' %> class="tabs66" <%end%>><a href="/manage/regards/receive" title="好友的问候"><span>好友的问候</span></a></li>
+    <li <% if action_name == 'send_regards' %> class="tabs66" <%end%>><a href="/manage/regards/send_regards" title="对好友的问候"><span>对好友的问候</span></a></li>
+  </ul>
 </div>

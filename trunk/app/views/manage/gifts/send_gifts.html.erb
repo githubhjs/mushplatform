@@ -1,22 +1,27 @@
-<%=  render :partial => "/manage/share/left" %>
-<div class="m_r">
-  <!--person_menu-->
-  <%=  render :partial => "/manage/gifts/gift_menu" %>
-  <!--person_menu-->
-<div style="width:100%;">
-<div class="title1">我送出的礼物</div>
-<div class="box">
-<div class="height12"></div>
-<div class="list">
-<ul>
- <%for gift_user in @gift_user do %>
-    <li style="height:75px;">
-      我赠送<img src="/images/gifts_imgs/<%= gift_user.gift.icon  %>">给<a href="<%= gift_user.friend.space_url %>" target="_blank"><strong><%= gift_user.friend.real_name %></strong></a> <%= gift_user.created_at.strftime('%y-%m-%d %H:%M') %>，<%= gift_user.post %>。
-    </li>
- <% end %>
-</ul>
+<div class="right2">
+  <div class="dbt"><p><a href="/manage/gifts/send_for"><img src="/images/new/gift.png" align="absmiddle"></a> 礼物</p><span></span></div>
+  <%= render :partial => "/manage/gifts/gift_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="lwlw">
+      你共送出了<%= @gift_users.total_entries %>件礼物
+      <div class="height20"></div>
+      <ul>
+        <% for gift_usr in @gift_users %>
+          <% sender = gift_usr.friend %>
+          <li>
+            <img src="/images/gifts_imgs/<%= gift_usr.gift.icon  %>">
+            <p style="overflow: hidden; width: 95px; height: 22px;">赠送给好友<a href="<%= sender.space_url %>"><%= sender.real_name %></a></p>
+            <span><%= gift_usr.created_at.strftime('%y-%m-%d %H:%M') %></span>
+          </li>
+        <%end%>
+      </ul>
+      <div class="height20"></div>
+      <div class="jogger">
+        <%= will_paginate @gift_users, {:prev_label => '上一页', :next_label => '下一页'} %>
+      </div>
+    </div>
+    <div class="height20"></div>
+  </div>
+  <div class="height20"></div>
 </div>
-<div class="height12"></div>
-</div>
-</div>
-</div><!--m_r-->

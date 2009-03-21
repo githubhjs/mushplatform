@@ -1,20 +1,17 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-<!--person_menu-->
-<%=  render :partial => "/manage/share/blog_menu" %>
-<!--person_menu-->
-  <div class="blog_write_m L">
-    <h2>博客设置</h2>
-    <div class="blog_write_top clear"></div>
-    <%form_for :blog_config,:url => "/manage/blog_configs/#{@blog_config.id}",:html => {:name => 'message_form' ,:method => :put} do |f|  %>
-    <div class="blog_write_center">
+<div class="right2">
+  <div class="dbt">
+    <p><a href=""><img src="/images/new/applications_32.png" align="absmiddle"></a> 风格设置</p><span></span>
+  </div>
+  <%= render :partial => "/manage/themes/setting_menu" %>
+  <div class="height20"></div>
+  <%form_for :blog_config,:url => "/manage/blog_configs/#{@blog_config.id}",:html => {:name => 'message_form' ,:method => :put} do |f|  %>
+    <div class="w90">
       <div style="padding-left:100px;">
         <% if flash[:success] %>
-        <span><img src='/images/icon_success_lrg.gif'>保存成功</span>
+          <span><img src='/images/icon_success_lrg.gif'>保存成功</span>
         <%elsif flash[:error]%>
-         <img src='/images/icon_error_lrg.gif'><font color='red'><%= category.errors.full_messages.join(';') %></font>
-       <%end%>
+          <img src='/images/icon_error_lrg.gif'><font color='red'><%= category.errors.full_messages.join(';') %></font>
+        <%end%>
       </div>
       <p><b>博客名称：</b><font style="color:red;"><%= @blog_config.errors.on(:blog_name) %></font>
         <%= f.text_field :blog_name,:size => '65',:maxlength => '65' ,:class => "title" %>
@@ -31,14 +28,13 @@
         <font style="color:red;"><%= @blog_config.errors.on(:blog_perpage) %></font>
         <%= f.text_field :blog_perpage %>
       </p>
-       <p><b>每页评论数:</b>
+      <p><b>每页评论数:</b>
         <font style="color:red;"><%= @blog_config.errors.on(:comment_perpage) %></font>
         <%= f.text_field :comment_perpage %>
       </p>
       <input class="submit"  type="submit" value="保 存" />
+      <div class="height12xhx"></div>
     </div>
-    <%end%>
-    <div class="blog_write_bottom"></div>
-  </div>
-</div><!--m_r-->
-
+  <%end%>
+  <div class="height20"></div>
+</div>

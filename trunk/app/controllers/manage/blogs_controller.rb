@@ -9,7 +9,7 @@ class Manage::BlogsController < Manage::ManageController
   Blog_Per_Page = 10
 
   def own_blog?
-    @blog = Blog.find(params[:id])
+    @blog = Blog.find(params[:id])    
     if @blog.user_id != blog_owner.id
       render :text => "此博客不存在"
       return false
@@ -20,6 +20,7 @@ class Manage::BlogsController < Manage::ManageController
   def index
     @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page,
       :conditions => generate_conditions,:include => [:category])
+    @categories = current_user.categories.find(:all,:limit => 10,:order => "blog_count desc")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @blogs }
@@ -124,9 +125,21 @@ class Manage::BlogsController < Manage::ManageController
     end
   end
   
+  def search
+    if params[:keywords].blank?
+      redirect_to :action => :index
+      return true
+    end
+    @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:conditions => ["title like ? or body like ?", "%#{params[:keyword]}%","%#{params[:keyword]}%"])
+    @categories = current_user.categories.find(:all,:limit => 10,:order => "blog_count desc")
+    render :template => "/manage/blogs/index"
+    return true
+  end
+
   def drafts
     @blogs = Blog.draft_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page,
       :conditions => generate_conditions,:include => [:category])
+    @categories = current_user.categories.find(:all,:limit => 10,:order => "blog_count desc")
     render :template => "/manage/blogs/index"
     return true
   end

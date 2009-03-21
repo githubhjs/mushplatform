@@ -10,7 +10,7 @@ class User < CachedModel
   has_many :receive_regards,:class_name => 'RegardUser',:foreign_key => 'friend_id'
   has_many :send_regards,:class_name => 'RegardUser',:foreign_key => 'user_id'
   has_many :receive_gifts,:class_name => 'GiftUser',:foreign_key => 'friend_id'
-  has_many :receive_gifts,:class_name => 'GiftUser',:foreign_key => 'user_id'
+  has_many :send_gifts,:class_name => 'GiftUser',:foreign_key => 'user_id'
   has_many :comments
   has_many :user_votes,:foreign_key => 'voter_id'
   has_many :votes
@@ -18,6 +18,8 @@ class User < CachedModel
   has_many :user_groups
   has_many :categories
   has_many :footsteps
+  has_many :albums
+  has_many :visitors
 #  has_one  :blog_config
   
   validates_size_of :user_name, :within => 3..60
@@ -42,6 +44,13 @@ class User < CachedModel
     return u if User.encrypt(pass, u.salt)==u.hashed_password
     nil
   end
+
+  def visite(user_id)
+    if user_id != self.id  && Visitor.find(:first,:conditions => "visitor_id=#{self.id} and user_id=#{user_id} and created_at >= '#{Date.today.strftime('%Y-%m-%d %H:%M')}'").blank?      
+      Visitor.create(:visitor_real_name => self.real_name,:visitor_name => self.user_name,:visitor_id => self.id,:user_id => user_id)
+    end
+  end
+
 #
 #  def find_by_user_id
 #    if config =  Cache.get("record_blog_config_uid#{self.id}")
@@ -64,15 +73,16 @@ class User < CachedModel
   end
 
   def user_profile
-    u_profile = if profile = Cache.get("record_user_profile_uid#{self.id}")
-      profile
-    elsif !(profile = UserProfile.find_by_user_id(self.id)).blank?
-      Cache.put("record_user_profile_uid#{self.id}", profile)
-      profile
-    else
-      nil
-    end
-    u_profile
+    UserProfile.find_by_user_id(self.id)
+#    u_profile = if profile = Cache.get("record_user_profile_uid#{self.id}")
+#      profile
+#    elsif !(profile = UserProfile.find_by_user_id(self.id)).blank?
+#      Cache.put("record_user_profile_uid#{self.id}", profile)
+#      profile
+#    else
+#      nil
+#    end
+#    u_profile
   end
 
   def real_name

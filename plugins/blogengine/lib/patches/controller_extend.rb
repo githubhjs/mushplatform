@@ -74,7 +74,11 @@ module ControllerExtend
   end
   
   def current_blog_user
-    User.find_by_user_name(request.subdomains.first)
+    if session[:pre_subdomains].blank? || session[:pre_subdomains] != request.subdomains.first
+      session[:current_blog_user]  =  User.find_by_user_name(request.subdomains.first)
+      session[:pre_subdomains]     = request.subdomains.first
+    end
+    session[:current_blog_user]
   end
   
   def setup_theme

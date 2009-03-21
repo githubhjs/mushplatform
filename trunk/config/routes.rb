@@ -55,20 +55,20 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/manage",:controller => "manage/manage",:action => 'index'
   map.namespace :manage do |manage|
     manage.resources :blog_configs
-    manage.resources :photos,:collection => {:friend_photos => :get}
+    manage.resources :photos,:collection => {:friend_photos => :get,:ajax_create_alubm => :get}
     manage.resources :categories,:collection => {:ajax_new => :get},:member => {:delete => :get,:ajax_update => :get}
     manage.resources :comments
     manage.resources :sidebars,:member => {:active => :get,:remove => :get,:lower => :get,:higher => :get}
     manage.resources :messages,:member => { :delete => :get }
     manage.resources :blogs,:member => {:delete => :get,:sticky => :get},
-                     :collection => {:drafts => :get,:batch_publish => :post}
+                     :collection => {:drafts => :get,:batch_publish => :post,:search => :post}
     manage.resources :user_profiles
     manage.resources :user_groups,:member => {:new_topic => :get,:join => :get,:quit => :get,:create_topic => :post},
                      :collection => {:all => :get,:search => :post,:friend_groups => :get,:friend_create_groups => :get}
     manage.resources :topic_comments
     manage.resources :group_members
     manage.resources :topics,:member => {:comments => :post}
-    manage.resources :friends, :collection => {:search => :any}
+    manage.resources :friends, :collection => {:search => :any,:visitores => :get}
     manage.resources :gifts, :collection => {:send_for => :get, :receive => :get, :send_to => :post,:send_gifts => :get,:gift_list => :get}
     manage.resources :votes,:collection => {:friend_votes => :get,:random_votes => :get},:member => {:post_vote => :post}
     manage.resources :regards,:collection => {:send_for => :get, :receive => :get, :send_to => :post,:send_regards => :get}

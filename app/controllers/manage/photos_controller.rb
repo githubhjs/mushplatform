@@ -37,10 +37,7 @@ class Manage::PhotosController < Manage::ManageController
       conditions = ["user_id in (#{friends.map(&:friend_id).join(',')})"]
       conditions << "album_id=#{params[:album_id]}" unless params[:album_id].blank?
       Photo.paginate(:page => params[:page],:per_page => Photo_Perpage,:conditions => conditions.join(' and '),:order => "id desc")
-    end
-    @albums = current_user.albums
-    render :action => :index
-    return 
+    end    
   end
 
   # GET /photos/1

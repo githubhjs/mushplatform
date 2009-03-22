@@ -1,6 +1,6 @@
 <div class="tabs6">
   <ul>
-    <li <% if  action_name =~ /new|create|edit|update/ %> class="tabs66"<%end%>><a href="/manage/blogs" title="我的日志"><span>写日志</span></a></li>
+    <li <% if  action_name =~ /new|create|edit|update/ %> class="tabs66"<%end%>><a href="/manage/blogs/new" title="我的日志"><span>写日志</span></a></li>
     <li <% if  action_name == 'index' && controller_name =~ /blogs/ %> class="tabs66"<%end%>><a href="/manage/blogs" title="我的日志"><span>全部日志</span></a></li>
     <li <% if  action_name == 'drafts' %> class="tabs66"<%end%>><a href="/manage/blogs/drafts" title="草稿箱"><span>草稿箱</span></a></li>
     <li <% if  params[:controller] =~ /categories/ %> class="tabs66"<%end%>><a href="/manage/categories" title="分类管理"><span>分类管理</span></a></li>

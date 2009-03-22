@@ -318,3 +318,14 @@ function submitSearchForm(){
     }
     return true;
 }
+
+function addVoteOption(){
+    voteOptionCount += 1;
+    var moreOption = $("vote_option_add").innerHTML.replace(/__id__/g,currentOptionId);
+    Element.insert("more_options",moreOption);
+}
+
+function currentOptionId(){
+    var _id =  'add_option_'+ voteOptionCount;
+    return _id
+}

@@ -1,5 +1,5 @@
 <div class="dbt">
-  <p><a href="/manage/friends"><img src="/images/new/group_32.png" align="absmiddle"></a>好友</p>  
+  <p><a href="/manage/friends"><img src="/images/new/group_32.png" align="absmiddle"></a>好友</p>
   <% form_tag "/manage/friends/search" ,:name => 'search_form',:onsubmit => "return submitSearchForm();" do |f| %>
     <span>
       <input name="keywords" id="textfield" value="搜索好友" type="text" onclick="if(this.value==this.defaultValue) this.value=''">&nbsp;&nbsp;
@@ -11,5 +11,7 @@
   <ul>
     <li <%if action_name =~ /index|search/%>class="tabs66"<%end%>><a href="/manage/friends" title="我的好友"><span>我的好友</span></a></li>
     <li <%if action_name == 'visitores'%>class="tabs66"<%end%>><a href="/manage/friends/visitores" title="最近来访"><span>最近来访</span></a></li>
+    <li <%if action_name == 'send_invites'%>class="tabs66"<%end%>><a href="/manage/friends/send_invites" title="我发出的邀请"><span>我发出的邀请</span></a></li>
+    <li <%if action_name == 'receiv_invites'%>class="tabs66"<%end%>><a href="/manage/friends/receiv_invites" title="我收到的邀请"><span>我收到的邀请</span></a></li>
   </ul>
 </div>

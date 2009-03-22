@@ -29,24 +29,43 @@ class Manage::FriendsController <  Manage::ManageController
     @visitores = current_user.visitors.paginate(:page => params[:page]||1,:per_page => 20,:order => 'id desc')
   end
 
+  def receiv_invites
+    @invites = current_user.receive_invites.find(:all,:order => "id desc")
+  end
+
+  def send_invites
+    @invites = current_user.send_invites.find(:all,:order => "status,id desc")
+  end
+  
   def invite
-    
+    return if params[:user_id].blank?
+    current_user.invite(params[:user_id])
+    render :update do |page|
+      page.replace_html("serach_result_#{params[:user_id]}","<front class='cred'>邀请成功</front>")
+    end
   end
 
-  def post_invite
-
+  def cancle_invite
+    Visite.delete_all("visitor_id=#{current_user.id} and user_id=#{params[:user_id]}")
   end
+
+  def accept
+    invite = current_user.receive_invites.find(:first,:conditions => "invitor_id=#{params[:user_id]}")
+    invite.accept if invite
+    redirect_to :action => :receiv_invites
+  end
+  
   # POST /friends
   # POST /friends.xml
   def create
-    user = User.find(params[:id])
+    debugger
     begin
-      current_user.friends << user
-      user.friends << current_user
+      current_user.invite(params[:id])
     rescue
     end
-    respond_to do |format|
-      format.html { redirect_to '/manage/friends' }
+    current_user.invite(params[:id])
+    render :update do |page|
+      page.replace_html("serach_result_#{params[:id]}","<front class='cred'>邀请成功</front>")
     end
   end
 

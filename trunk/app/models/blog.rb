@@ -90,13 +90,13 @@ class Blog < ActiveRecord::Base
     StringUtil.truncate_u(HtmlUtil.sanitize(self.body||""),100,'...')
   end
   
-
+  
   def footstep_link
     "<a href='#{self.user.space_url}/entry/#{self.id}'>#{self.title}</a>"
   end
 
   def footstep
-    Footstep.create(:user_id => user_id, :app => "BLOG", :content => "创建了一篇博客#{entry_link(self)}")
+    Footstep.create(:user_id => user_id, :app => "BLOG", :content => "创建了一篇博客#{footstep_link}")
   end
   
 end

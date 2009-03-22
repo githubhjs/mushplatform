@@ -56,9 +56,8 @@
       <ul>
         <%for pic in @my_photos%>
           <li>
-            <a href="/manage/photos/<%= pic.id %>"><img src="<%= pic.mid_link %>"></a>
-            <p><a href="/manage/photos/<%= pic.id %>"><%= pic.title %></a></p>
-            浏览：<a href="#">80</a><br>
+            <a href="<%= pic.user.space_url %>/photos/<%= pic.id %>" target="_blank"><img src="<%= pic.mid_link %>"></a>
+            <p><a href="<%= pic.user.space_url %>/photos/<%= pic.id %>"><%= pic.title %></a></p>
           </li>
         <%end%>
       </ul>

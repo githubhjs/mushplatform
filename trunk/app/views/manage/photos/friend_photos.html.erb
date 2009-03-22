@@ -13,7 +13,7 @@
       <ul>
         <% for pic in @photos %>
           <li><a href="<%= pic.user.space_url %>/photos/<%= pic.id %>" target="_blank"><img  src="<%= pic.mid_link %>"></a>
-            <p><%= pic.title %></p>
+            <p><a href="<%= pic.user.space_url %>/photos/<%= pic.id %>"><%= pic.title %></a></p>
           </li>
         <%end%>
       </ul>

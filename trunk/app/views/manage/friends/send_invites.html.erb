@@ -4,17 +4,17 @@
     <div class="height20"></div>
     <div class="friend">
       <ul>
-        <% for user_profile in @friends -%>
-          <%user = user_profile.user %>
+        <% for invite in @invites -%>
+          <%user = invite.user%>
           <li>
             <p><a href="<%= user.space_url %>" target="_blank"><img src="<%= user_icon(user.id) %>"/></a></p>
             <p style="overflow: hidden; width: 78px; height: 22px;"><a href="<%= user.space_url %>" target="_blank"><%= user.real_name %> </a></p>
-            <span id="serach_result_<%= user.id %>">
-              <% if current_user.is_friend_with?(user) %>
-                <%= link_to '删除好友', {:action => 'destroy', :id => user.id}, :method => 'delete',:confirm => "确定要删除吗?", :class => 'grey' %>
+            <span>
+              <% unless invite.accept? %>
+                <%= link_to('取消邀请',{:action => 'cancle_invite', :id => invite.invitor_id,:user_id => user.id},:confirm => "确认要取消邀请?", :class => 'grey') %>
               <%else%>
-               <%= link_to_remote '加为好友',{:url => "/manage/friends/#{current_user.id}/invite?user_id=#{user.id}",:method => 'get' },:class => 'grey' %>
-              <%end%>              
+                <front>邀请已被接受</front>
+              <%end%>
             </span>
           </li>
         <%end%>

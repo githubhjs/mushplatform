@@ -20,6 +20,8 @@ class User < CachedModel
   has_many :footsteps
   has_many :albums
   has_many :visitors
+  has_many :receive_invites ,:class_name => "Invite",:foreign_key => 'user_id'
+  has_many :send_invites ,:class_name => "Invite",:foreign_key => 'invitor_id'
 #  has_one  :blog_config
   
   validates_size_of :user_name, :within => 3..60
@@ -48,6 +50,15 @@ class User < CachedModel
   def visite(user_id)
     if user_id != self.id  && Visitor.find(:first,:conditions => "visitor_id=#{self.id} and user_id=#{user_id} and created_at >= '#{Date.today.strftime('%Y-%m-%d %H:%M')}'").blank?      
       Visitor.create(:visitor_real_name => self.real_name,:visitor_name => self.user_name,:visitor_id => self.id,:user_id => user_id)
+    end
+  end
+
+  
+  def invite(user_id)    
+    return true if Invite.find(:first,:conditions => "invitor_id=#{self.id} and user_id=#{user_id}")
+    invite  = Invite.new(:invitor_real_name => self.real_name,:invitor_name => self.user_name,:invitor_id => self.id,:user_id => user_id)
+    if invite.save
+      Friend.create(:user_id => self.id,:friend_id => user_id)
     end
   end
 

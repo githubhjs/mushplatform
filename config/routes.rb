@@ -68,7 +68,8 @@ ActionController::Routing::Routes.draw do |map|
     manage.resources :topic_comments
     manage.resources :group_members
     manage.resources :topics,:member => {:comments => :post}
-    manage.resources :friends, :collection => {:search => :any,:visitores => :get}
+    manage.resources :friends, :collection => {:search => :any,:visitores => :get,:receiv_invites => :get,:send_invites => :get},
+      :member => {:invite => :get,:cancle_invite => :get,:accept => :get}
     manage.resources :gifts, :collection => {:send_for => :get, :receive => :get, :send_to => :post,:send_gifts => :get,:gift_list => :get}
     manage.resources :votes,:collection => {:friend_votes => :get,:random_votes => :get},:member => {:post_vote => :post}
     manage.resources :regards,:collection => {:send_for => :get, :receive => :get, :send_to => :post,:send_regards => :get}

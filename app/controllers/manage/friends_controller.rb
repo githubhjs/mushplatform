@@ -3,6 +3,7 @@ class Manage::FriendsController <  Manage::ManageController
   helper_method :current_user
   
   PerPage = 32
+  Perpage_Friend_FootStep = 30
 
   def index
     @friends = current_user.friends.paginate(:page => params[:page]||1,:per_page => PerPage,:order => "id desc")
@@ -53,6 +54,16 @@ class Manage::FriendsController <  Manage::ManageController
     invite = current_user.receive_invites.find(:first,:conditions => "invitor_id=#{params[:user_id]}")
     invite.accept if invite
     redirect_to :action => :receiv_invites
+  end
+  
+  def footsteps
+    @friends = current_user.friends.find(:all,:limit => Latest_Friend_Count,:order => 'friends.created_at desc')
+    @footsteps = if @friends.blank?
+      []
+    else
+      Footstep.paginate(:page => params[:page]||1,:per_page => Perpage_Friend_FootStep,:order => 'created_at desc,app',
+        :conditions => "user_id in (#{current_user.friends.map(&:friend_id).join(',')})")
+    end
   end
   
   # POST /friends

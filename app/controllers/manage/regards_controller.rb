@@ -109,7 +109,8 @@ class Manage::RegardsController < Manage::ManageController
         @regard_user.save
       end
     end    
-    redirect_to :action => send_regards
+    redirect_to :action => :send_regards
+    return
   end
   
   def receive

@@ -20,6 +20,10 @@ module ApplicationHelper
     end 
   end
 
+  def box_css
+     controller_name ==  'manage'  ?  'box'  :  'box2'
+  end
+
   def get_area_select_options
     Province.find(:all,:order=>'province').collect{|item|[item.province,item.provinceid]}.insert(0,["请选择..",nil])
   end

@@ -16,18 +16,21 @@
         </tr>
         <tr>
           <td width="79" align="right"><a href="/manage/gifts/receive" class="cblack">收到的礼物</a>:&nbsp;</td>
-          <td class="gray" width="79">&nbsp;<%= current_user.receive_regards.count %>件(<a href="#" class="cred"><%= @new_gifts_count %>件新</a>)</td>
+          <td class="gray" width="79">&nbsp;<%= current_user.receive_regards.count %>件(<a href="/manage/gifts/receive" class="cred"><%= @new_gifts_count %>件新</a>)</td>
           <td width="79" align="right"><a href="/manage/regards/receive" class="cblack">好友的问候</a>:&nbsp;</td>
-          <td class="gray" width="79">&nbsp;<%= current_user.receive_gifts.count %>句(<a href="#" class="cred"><%= @new_regards_count %>句新</a>)</td>
+          <td class="gray" width="79">&nbsp;<%= current_user.receive_gifts.count %>句(<a href="/manage/regards/receive" class="cred"><%= @new_regards_count %>句新</a>)</td>
           <td width="79" align="right">&nbsp;</td>
           <td class="gray" width="80">&nbsp;</td>
         </tr>
-    </tbody></table>
+    </tbody>
+   </table>
   </div>
   <div class="height20"></div>
 
   <div class="w90">
-    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 好友动态</p><span><a href="#">查看全部</a></span></div>
+    <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 好友动态</p>
+     <span><% unless @footsteps.blank? %><a href="/manage/friends/footsteps">查看全部</a><%end%></span>
+    </div>
     <div class="height20"></div>
     <div class="list">
       <ul>
@@ -87,7 +90,7 @@
     <div class="lwlw">
       <ul>
         <% for gift_user in @gifts %>
-          <% sender = gift_user.friend %>
+          <% sender = gift_user.user %>
           <li>
             <img src="/images/gifts_imgs/<%= gift_user.gift.icon  %>">
             <p style="overflow: hidden; width: 95px; height: 22px;">好友<a href="<%= sender.space_url %>"><%= sender.real_name %></a>赠送</p>

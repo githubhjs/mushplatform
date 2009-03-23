@@ -13,8 +13,9 @@
     <div class="height12xhx"></div>
     <div class="height12"></div>
     <div class="photo_info">
-
-      <p class="f14b black"> <%= @vote.title %><span class="gray">(最多可选<%= @vote.multi_selcect  %>项)</span></p>
+      <p class="f14b black"> <%= @vote.title %><span class="gray">(最多可选<%= @vote.multi_selcect  %>项)</span>
+       <span><% unless flash[:notice].blank? %><img src="/images/icon_error_lrg.gif"><%end%><%= flash[:notice] %></span>
+      </p>
       <br>
       <%= h @vote.description %>
       <br>

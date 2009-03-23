@@ -7,7 +7,7 @@ class Vote < ActiveRecord::Base
 
   attr_accessor :vote_options
   has_many :user_votes
-
+  belongs_to :user
   before_create :before_create_by_business
 
   def before_create_by_business

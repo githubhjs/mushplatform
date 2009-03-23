@@ -45,7 +45,7 @@ class Manage::VotesController < Manage::ManageController
   end
   
   def post_vote
-    flash[:notice] = '每个用户只能投票一次'  if UserVote.find_by_voter_id(current_user.id)
+    flash[:notice] = '每个用户只能投票一次'  if UserVote.find(:first,:conditions => "voter_id=#{current_user.id} and vote_id=#{params[:id]}")
     flash[:notice] = '请至少选择一个候选项' if params[:vote_values].blank?
     unless flash[:notice].blank?
       @vote = Vote.find(params[:id])

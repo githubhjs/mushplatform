@@ -28,7 +28,7 @@ class Comment < ActiveRecord::Base
   end
 
   def footstep_link
-    "<a href='#{self.user.space_url}/entry/#{blog.id}'>#{realtitle}</a>"
+    "<a href='#{self.blog.user.space_url}/entry/#{blog.id}'>#{realtitle}</a>"
   end
 
  def footstep

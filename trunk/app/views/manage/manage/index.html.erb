@@ -40,7 +40,7 @@
           <li>
             <p>好友最新照片<br>
               <% for photo in @photos %>
-                <a href="/photos/<%= photo.id %>"><img  src="<%= photo.thumbnail_link %>"></a>
+                <a href="<%= photo.user.space_url %>/photos/<%= photo.id %>"><img  src="<%= photo.thumbnail_link %>"></a>
               <%end%>
             </p>
           </li>

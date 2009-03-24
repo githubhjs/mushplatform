@@ -1,0 +1,42 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+  <%=  render :partial => "/manage/user_groups/group_menu" %>
+  <!--person_menu-->
+  <div class="qun_m L">
+    <%= render :partial => '/manage/user_groups/search' ,:locals => {:info => "新建话题",:info_class => 'qun_mine'}%>
+    <div class="clear li_m">
+      <div class="clear li_m">
+        <% form_for :group,:url => "/manage/user_groups/#{params[:id]}/create_topic" do |f| %>
+        <table class="qun_add">
+          <tbody>
+            <tr>
+              <td>话题名称：</td>
+              <td>
+                <input name="topic[title]" size="50" maxlength="50" type="text" value="<%= @topic.title %>">
+              </td>
+            </tr>
+            <tr>
+              <td>话题描述：</td>
+              <td>
+                  <SPAN style="COLOR: #ff0000"></SPAN>
+                  <input type="hidden" id="topic_description" name="topic[description]" value="<%= h(@topic.description)%>"></input>
+                  <SPAN style="COLOR: #ff0000"></SPAN>
+                  <iframe id="myEditor" src="/editor/editor.htm?id=topic_description" frameborder="0" scrolling="no" width="450" height="200"></iframe>
+                </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><input style="margin-top: 5px; height: 22px; width: 70px; font-size: 12px;" name="" value="创 建" type="submit"></td>
+            </tr>
+            <input type="hidden" name="topic[user_group_id]" value="<%= params[:id] %>">
+            <input type="hidden" name="topic[admin_id]" value="<%= @user_group.user_id %>">
+          </tbody>
+        </table>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div><!--m_r-->

@@ -1,0 +1,19 @@
+<div class="dbt">
+  <p><img src="/images/new/tbqz.png" align="absmiddle"><%= @user_group.title %><br>
+  </p>
+  <span>分类：<%= @user_group.category %> 人数：<%= @user_group.member_count %>人
+    <% if @user_group.is_in_group?(current_user) %>
+      <% unless @user_group.is_group_admin?(current_user) %>
+        <a class="red_underline" href="/manage/user_groups/<%= group.id %>/quit">退出该群组</a>
+      <%end%>
+    <%end%>
+  </span>
+</div>
+<div class="tabs6">
+  <ul>
+    <li class="tabs66"><a href="/manage/user_groups" title="我的群组"><span>群组首页</span></a></li>
+    <li><a href="/manage/user_groups/<%= @user_group.id %>" title="群组最新动态"><span>话题区</span></a></li>
+    <li><a href="/manage/user_groups/<%= @user_group.id %>/photos" title="好友参加的群组"><span>相册区</span></a></li>
+    <li><a href="/manage/user_groups/<%= @user_group.id %>/members" title="好友创建的群组"><span>成员</span></a></li>
+  </ul>
+</div>

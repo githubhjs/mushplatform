@@ -11,7 +11,9 @@
           <% sender = gift_usr.friend %>
           <li>
             <img src="/images/gifts_imgs/<%= gift_usr.gift.icon  %>">
-            <p style="overflow: hidden; width: 95px; height: 22px;">赠送给好友<a href="<%= sender.space_url %>"><%= sender.real_name %></a></p>
+            <p style="width: 120px; height: 22px;">赠给
+            <a href="<%= sender.space_url %>"><%= sender.real_name %></a>
+            </p>
             <span><%= gift_usr.created_at.strftime('%y-%m-%d %H:%M') %></span>
           </li>
         <%end%>

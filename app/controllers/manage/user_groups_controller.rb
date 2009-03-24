@@ -20,7 +20,7 @@ class Manage::UserGroupsController < Manage::ManageController
   end
 
   def index
-    @user_groups = UserGroup.user_groups(current_user).paginate(:page => params[:page]||1,
+    @user_groups = UserGroup.paginate(:page => params[:page]||1,:conditions => "user_id=#{current_user.id}",
       :per_page => All_Group_Perpage,:order => 'id desc' )
     respond_to do |format|
       format.html # index.html.erb
@@ -34,7 +34,7 @@ class Manage::UserGroupsController < Manage::ManageController
     else
       ''
     end
-    @user_groups = UserGroup.paginate(:page => params[:page]||1,:per_page => Group_Perpage ,:conditions => conditons)
+    @user_groups = UserGroup.paginate(:page => params[:page]||1,:per_page => Group_Perpage ,:conditions => conditons,:order => "id desc")
     render :action => :index
     return true
   end

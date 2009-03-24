@@ -1,73 +1,83 @@
-<%=  render :partial => "/manage/share/left" %>
+<div class="right2">
 
-<div class="m_r">
+  <div class="height20"></div>
+  <div class="center">
+    <div class="height20"></div>
+    <div class="w90">
 
-  <!--person_menu-->
-  <%=  render :partial => "/manage/user_groups/group_menu" %>
-  <!--person_menu-->
-  <div class="qun_m L">
-    <!--div class="clear li_m">
-      <div class="m_b L">
-        <div class="L width_l">
-          <img src="<%= @user_group.icon %>"/>
-          <h3><%= @user_group.title %></h3>
-          <p>分类：<%= @user_group.category %></p>
-          <p>人数：<%= @user_group.member_count %></p>
-          <p class="info">简介：<%= h @user_group.description %></p>
-        </div>
-        <div class="R width_r">
-          <% if @user_group.is_in_group?(current_user) %>
-            <% unless @user_group.is_group_admin?(current_user) %>
-              <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/quit">退出该群组</a></p>
+      <div class="title1">
+        <p><img src="/images/new/xjt.jpg" align="absmiddle"> 群话题区</p>
+       <span><a href="/manage/user_groups/<%= @user_group.id %>/topics">所有话题</a></span></div>
+      <div class="height20"></div>
+      <table class="lanhui" width="100%" bgcolor="#cecccf" border="0" cellpadding="0" cellspacing="1">
+        <tbody><tr bgcolor="#f3f3f3">
+            <td width="57%" align="center"><strong>话题</strong></td>
+            <td width="15%" align="center"><strong>作者</strong></td>
+            <td width="13%" align="center"><strong>评</strong></td>
+            <td width="15%" align="center"><strong>回复时间</strong></td>
+          </tr>
+          <% for topic in @topics do  %>
+              <tr class="ouout" onmouseover="this.className='onon'" onmouseout="this.className='ouout'" bgcolor="#ffffff">
+                <td align="center"><a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
+                <td align="center"><a href="<%= topic.user.space_url %>"><%= topic.user.real_name %></a></td>
+                <td align="center"><%= topic.comment_count %></td>
+                <td align="center">
+                  <% if topic.comment_count > 0 %>
+                    <% last_comment = topic.last_comment %>
+                    <%= last_comment.created_at.strftime("%m-%d %H:%M") %>
+                  <%else%>
+                    无
+                  <%end%>
+                </td>
+              </tr>
             <%end%>
-            <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/new_topic">新建话题</a></p>
-          <%else%>
-            <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/join">加入该群</a></p>
-          <%end%>
-        </div>
-      </div>    
-    </div-->
+          </tbody>
+        </table>
 
-    <div class="clear L">
-        <div class="qun_name">
-           <h2><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>"><%= @user_group.title %></a></h2>
-           <% unless @user_group.is_in_group?(current_user) %>
-            <p><a href="/manage/user_groups/<%= @user_group.id %>/join"><b>+ 加入该群组</b></a></p>
-           <%else%>
-            <p><a href="/manage/user_groups/<%= @user_group.id %>/new_topic"><b>+创建话题</b></a></p>
-           <%end%>
-        </div>    
-        <table cellspacing="0" class="new">
-        <tr>
-          <td class="tit" width="373" align="left"><b>&nbsp;主题</b></td>
-          <td class="tit" width="102"><p>作者</p>
-          <p><font style="color:#666">回复数</font></p></td>
-          <td class="tit" width="102"><p>最后发言</p>
-            <p><font style="color:#666">发言时间</font></p>
-          </td>
-        </tr>
-        <% for topic in @topics do  %>
-        <tr>
-          <td align="left">&nbsp;<a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
-          <td><p><a href=""><%= topic.user.real_name %></a></p>
-          <p><%= topic.comment_count %></p></td>
-          <td>
-            <% if topic.comment_count > 0 %>
-            <% last_comment = topic.last_comment %>
-          <p><a href=""  target="_blank"><%= ( last_comment.user.real_name) %></a></p>
-          <p><%= last_comment.created_at.strftime("%m-%d %H:%M") %></p>
-          <%else%>
-           <p>无</p>
-          <%end%>
-          </td>
-        </tr>
-        <%end%>
-      </table>
       </div>
-      <div class="page_b clear" style="width:460px;">
-        <%= will_paginate @topics, {:prev_label => '上一页', :next_label => '下一页'} %>
-      </div><!--page_b-->
+      <div class="height20"></div>
+      <div class="w90">
+        <div class="title1"><p><img src="/images/new/xjt.jpg" align="absmiddle"> 相册</p><span><a href="#">上传照片</a></span></div>
+        <div class="height20"></div>
+        <div class="photo2b">
+          <ul>
+            <li><a href="#"><img src="/images/new/tu_xc1.jpg"></a>
+              <p><a href="#">雪白的心雪白的心雪</a></p>
+              阅读：<a href="#">80</a> | 评论：<a href="#">32</a><br>
+            </li>
+            <li><a href="#"><img src="/images/new/tu_xc2.jpg"></a>
+              <p><a href="#">雪白的心雪白的心雪</a></p>
 
-      <%= render :partial => "recommend_groups" %>
+              阅读：<a href="#">80</a> | 评论：<a href="#">32</a><br>
+            </li>
+            <li><a href="#"><img src="/images/new/tu_xc3.jpg"></a>
+              <p><a href="#">雪白的心雪白的心雪</a></p>
+              阅读：<a href="#">80</a> | 评论：<a href="#">32</a><br>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="height20"></div>
+      <div class="height20"></div>
+    </div>
+    <div class="right">
+      <%= render :partial => "/manage/user_groups/recommend_groups" %>
+      <div class="w100">
+        <div class="title2">
+          <p>群组成员</p>
+        <span><a href="#">成员管理</a></span></div>
+        <div class="height20"></div>
+        <div class="friend3">
+          <ul>
+            <li><p><a href="#"><img src="/images/new/friend_tu.gif"></a></p><p style="overflow: hidden; width: 78px; height: 22px;"><a href="">太阳皇族</a></p></li>
+            <li><p><a href="#"><img src="/images/new/photo_tu2.gif"></a></p><p style="overflow: hidden; width: 78px; height: 22px;"><a href="">双子座</a></p></li>
+          </ul>
+        </div>
+        <div class="height20"></div>
+      </div>
+    </div>
+    <div class="clear"></div>
   </div>
-</div>
+

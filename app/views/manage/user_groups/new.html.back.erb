@@ -1,0 +1,45 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+  <%=  render :partial => "/manage/user_groups/group_menu" %>
+  <!--person_menu-->
+  <div class="qun_m L">
+    <%= render :partial => '/manage/user_groups/search' ,:locals => {:info => "创建群组",:info_class => 'qun_mine'}%>
+      <div class="clear li_m" >
+        <% form_for :group,:url => "/manage/user_groups", :html => {:multipart => true} do |f| %>
+        <table class="qun_add" style="width:780px;">
+          <tbody>
+            <tr>
+              <td>群名称：</td>
+              <td>
+                <input name="user_group[title]" size="50" maxlength="50" type="text" value="<%= @user_group.title %>">
+              </td>
+            </tr>
+            <tr>
+              <td>群类别：</td>
+              <td>
+                <input name="user_group[category]" size="50" maxlength="50" type="text" value="<%= @user_group.category %>">
+              </td>
+            </tr>
+            <tr>
+              <td>群公告：</td>
+              <td><textarea name="user_group[description]" cols="50" rows="5"><%= @user_group.description %></textarea><br>公告字数不得超过200个字。</td>
+            </tr>
+            <tr>
+              <td>群图标：</td>
+              <td>
+                <input type="file" name="user_group[uploaded_data]">
+               </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><input style="margin-top: 5px; height: 22px; width: 70px; font-size: 12px;" name="" value="创 建" type="submit"></td>
+            </tr>
+          </tbody>
+        </table>
+        <%end%>
+      </div>
+  </div>
+</div><!--m_r-->

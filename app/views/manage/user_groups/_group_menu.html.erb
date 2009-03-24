@@ -9,7 +9,7 @@
 </div>
 <div class="tabs6">
   <ul>
-    <li <% if action_name == 'index' %> class="tabs66" <%end%>><a href="/manage/user_groups" title="我的群组"><span>我的群组</span></a></li>
+    <li <%if action_name =~ /index|new|show|create|edit|update/ and controller_name != 'topics' %> class="tabs66" <%end%>><a href="/manage/user_groups" title="我的群组"><span>我的群组</span></a></li>
     <li<% if controller_name == 'topics' %> class="tabs66" <%end%> ><a href="/manage/topics" title="群组最新动态"><span>群组最新动态</span></a></li>
     <li <%if action_name == 'friend_groups' %> class="tabs66" <%end%>><a href="/manage/user_groups/friend_groups" title="好友参加的群组"><span>好友参加的群组</span></a></li>
     <li <%if action_name == 'friend_create_groups' %> class="tabs66" <%end%>><a href="/manage/user_groups/friend_create_groups" title="好友创建的群组"><span>好友创建的群组</span></a></li>

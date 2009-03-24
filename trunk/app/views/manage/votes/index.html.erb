@@ -7,7 +7,7 @@
     <% for vote in @votes %>
     <div class="blog">
       <dl>
-        <dt><%= h vote.title %></dt>
+        <dt><a href="/manage/votes/<%= vote.id   %>"><%= h vote.title %></a></dt>
         <% if current_user.id == vote.user_id %>
           <%= link_to image_tag("/images/new/121.gif"),"/manage/votes/#{vote.id}/destroy", :confirm => '确认要删除吗？', :method => :delete %>
         <%end%>

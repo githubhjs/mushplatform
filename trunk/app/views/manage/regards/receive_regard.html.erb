@@ -3,20 +3,20 @@
   <%= render :partial => "/manage/regards/regard_menu" %>
   <div class="height20"></div>
   <% unless @user_reagrds.blank? %>
-  <div class="w90">
-    <div class="height20"></div>
-    <div class="list">
-      <ul>
-        <%for regard_usr in @user_reagrds do %>
-          <li><p><a href="<%=  regard_usr.friend.space_url %>" target="_blank"><%=  regard_usr.friend.real_name %></a> %><img src="/images/regard_imgs/<%=   regard_usr.regard.icon %>"><%=  regard_usr.regard.name_zh %> 我 &nbsp;&nbsp;附言: <%= regard_usr.post %></p> <span><%=  regard_usr.created_at.strftime('%y-%m-%d %H:%M') %></span></li>
-        <%end%>
-      </ul>
+    <div class="w90">
+      <div class="height20"></div>
+      <div class="list">
+        <ul>
+          <%for regard_usr in @user_reagrds do %>
+            <li><p><a href="<%=  regard_usr.friend.space_url %>" target="_blank"><%=  regard_usr.friend.real_name %></a> %><img src="/images/regard_imgs/<%=   regard_usr.regard.icon %>"><%=  regard_usr.regard.name_zh %> 我 &nbsp;&nbsp;附言: <%= regard_usr.post %></p> <span><%=  regard_usr.created_at.strftime('%y-%m-%d %H:%M') %></span></li>
+          <%end%>
+        </ul>
+      </div>
+      <div class="height20"></div>
+      <div class="jogger">
+        <%= will_paginate @user_reagrds, {:prev_label => '上一页', :next_label => '下一页'} %>
+      </div>
     </div>
-    <div class="height20"></div>
-    <div class="jogger">
-      <%= will_paginate @user_reagrds, {:prev_label => '上一页', :next_label => '下一页'} %>
-    </div>
-  </div>
   <%else%>
     暂时没有好友的问候
   <%end%>

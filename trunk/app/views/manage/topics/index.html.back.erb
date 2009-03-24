@@ -1,0 +1,42 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+  <%=  render :partial => "/manage/user_groups/group_menu" %>
+  <!--person_menu-->
+  <div class="qun_m L">
+    <%= render :partial => '/manage/user_groups/search' ,:locals => {:info => "群组最新动态",:info_class => 'qun_news'}%>
+    <div class="clear L">
+      <table cellspacing="0" class="new">
+        <tr>
+          <td class="tit" width="373" align="left"><b>&nbsp;主题</b></td>
+          <td class="tit" width="102"><p>作者</p>
+          <p><font style="color:#666">回复数</font></p></td>
+          <td class="tit" width="102"><p>最后发言</p>
+            <p><font style="color:#666">发言时间</font></p>
+          </td>
+        </tr>
+        <% for topic in @topics do  %>
+            <tr class="lst">
+              <td align="left">&nbsp;<a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
+              <td><p><a href=""><%= topic.user.real_name %></a></p>
+              <p><%= topic.comment_count %></p></td>
+              <td>
+                <% if topic.comment_count > 0 %>
+                  <% last_comment = topic.last_comment %>
+                  <p><a href=""  target="_blank"><%= ( last_comment.user.real_name) %></a></p>
+                  <p><%= last_comment.created_at.strftime("%m-%d %H:%M") %></p>
+                <%else%>
+                  <p>无</p>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+      <div class="page_b clear" style="width:460px;">
+        <%= will_paginate @topics, {:prev_label => '上一页', :next_label => '下一页'} %>
+      </div><!--page_b-->
+    </div>
+  </div>

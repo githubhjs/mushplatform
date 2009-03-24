@@ -1,0 +1,73 @@
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+
+  <!--person_menu-->
+  <%=  render :partial => "/manage/user_groups/group_menu" %>
+  <!--person_menu-->
+  <div class="qun_m L">
+    <!--div class="clear li_m">
+      <div class="m_b L">
+        <div class="L width_l">
+          <img src="<%= @user_group.icon %>"/>
+          <h3><%= @user_group.title %></h3>
+          <p>分类：<%= @user_group.category %></p>
+          <p>人数：<%= @user_group.member_count %></p>
+          <p class="info">简介：<%= h @user_group.description %></p>
+        </div>
+        <div class="R width_r">
+          <% if @user_group.is_in_group?(current_user) %>
+            <% unless @user_group.is_group_admin?(current_user) %>
+              <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/quit">退出该群组</a></p>
+            <%end%>
+            <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/new_topic">新建话题</a></p>
+          <%else%>
+            <p><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>/join">加入该群</a></p>
+          <%end%>
+        </div>
+      </div>    
+    </div-->
+
+    <div class="clear L">
+        <div class="qun_name">
+           <h2><a class="red_underline" href="/manage/user_groups/<%= @user_group.id %>"><%= @user_group.title %></a></h2>
+           <% unless @user_group.is_in_group?(current_user) %>
+            <p><a href="/manage/user_groups/<%= @user_group.id %>/join"><b>+ 加入该群组</b></a></p>
+           <%else%>
+            <p><a href="/manage/user_groups/<%= @user_group.id %>/new_topic"><b>+创建话题</b></a></p>
+           <%end%>
+        </div>    
+        <table cellspacing="0" class="new">
+        <tr>
+          <td class="tit" width="373" align="left"><b>&nbsp;主题</b></td>
+          <td class="tit" width="102"><p>作者</p>
+          <p><font style="color:#666">回复数</font></p></td>
+          <td class="tit" width="102"><p>最后发言</p>
+            <p><font style="color:#666">发言时间</font></p>
+          </td>
+        </tr>
+        <% for topic in @topics do  %>
+        <tr>
+          <td align="left">&nbsp;<a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
+          <td><p><a href=""><%= topic.user.real_name %></a></p>
+          <p><%= topic.comment_count %></p></td>
+          <td>
+            <% if topic.comment_count > 0 %>
+            <% last_comment = topic.last_comment %>
+          <p><a href=""  target="_blank"><%= ( last_comment.user.real_name) %></a></p>
+          <p><%= last_comment.created_at.strftime("%m-%d %H:%M") %></p>
+          <%else%>
+           <p>无</p>
+          <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </table>
+      </div>
+      <div class="page_b clear" style="width:460px;">
+        <%= will_paginate @topics, {:prev_label => '上一页', :next_label => '下一页'} %>
+      </div><!--page_b-->
+
+      <%= render :partial => "recommend_groups" %>
+  </div>
+</div>

@@ -8,7 +8,7 @@ class Manage::VotesController < Manage::ManageController
   # GET /votes
   # GET /votes.xml
   def index
-    @votes = Vote.paginate(:page => params[:page]||1,:per_page => Vote_PerPage,:conditions => "user_id =#{current_user.id}")
+    @votes = Vote.paginate(:page => params[:page]||1,:per_page => Vote_PerPage,:conditions => "user_id =#{current_user.id}",:order => "id desc")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @votes }
@@ -16,13 +16,13 @@ class Manage::VotesController < Manage::ManageController
   end
 
   def random_votes
-    @votes = Vote.paginate(:page => params[:page]||1,:per_page => Rand_Vote_Perpage,:order => 'id')
+    @votes = Vote.paginate(:page => params[:page]||1,:per_page => Rand_Vote_Perpage,:order => 'id desc')
    render :action => :index
    return true
   end
 
   def friend_votes
-    friends = Friend.find(:all,:conditions => "user_id=#{current_user.id}",:limit => Max_Friend_Count)
+    friends = Friend.find(:all,:conditions => "user_id=#{current_user.id}",:limit => Max_Friend_Count,:order => "id desc")
     @votes = if friends.blank?
       []
     else

@@ -220,6 +220,12 @@ h22{float:left;font-size:12px;font-weight:bold;color:#333;}
 .group_wen{ float:left;  width:68%; line-height:16px; height:101px;}
 .group_into{ float:right;  width:10%; line-height:16px; height:101px;}
 
+.group2{width:97%; color:#464646; padding:10px;}
+.group2_tu{ float:left;  width:119px; }
+.group2_tu img{ width:100px; height:141px; border:1px dotted #b3d5e3; padding:5px; }
+.group2_wen{ float:left;  width:45%; line-height:16px;}
+.group2_into{ float:right;  width:10%; line-height:16px; height:101px;}
+
 .photo_info{width:90%; margin:0 auto; color:#464646;}
 .next{width:650px; height:35px; margin:0 auto;background:#edf7fd;border-top:1px dotted #000; padding-top:5px}
 .next_a{ float:left; width:100px; height:30px; text-align:right;}
@@ -248,7 +254,7 @@ h22{float:left;font-size:12px;font-weight:bold;color:#333;}
 
 .lwlw{ width:90%; margin:0 auto; line-height:20px; color:#8b939e;}
 .lwlw ul{ width:100%;}
-.lwlw li{float:left; display:block;width:105px;height:120px;overflow:hidden;text-align:center; margin-bottom:12px;}
+.lwlw li{float:left; display:block;width:120px;height:120px;overflow:hidden;text-align:center; margin-bottom:12px;}
 .lwlw li img{width:70px;height:70px;}
 .lwlw li p{line-height:22px;}
 

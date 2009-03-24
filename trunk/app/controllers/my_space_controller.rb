@@ -143,8 +143,8 @@ class MySpaceController < ApplicationController
     end
     @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id}",:order => "id")
     @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id}",:order => "id")
-    unless current_theme.is_sns_theme?
-      render :content_type => "application/xml",:template => "/my_space/rss",:layout => 'rss'
+    unless current_theme.is_sns_theme?      
+      render_liquid({:template => 'photo',:layout => true},{'photo' => @photo,'if_login' => current_user ? true : false})
     else
       @photos =  current_blog_user.photos.find(:all,:limit => Latest_Photos_Count,:order => 'id desc')
       render :template => 'photo'

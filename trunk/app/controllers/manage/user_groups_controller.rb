@@ -3,6 +3,7 @@ class Manage::UserGroupsController < Manage::ManageController
   Group_Perpage = 10
   All_Group_Perpage = 15
   Topic_Perpage = 20
+  Photo_Perpage = 20
   helper_method :current_user
 
   before_filter :own_group,:only => [:edit,:update,:destroy]
@@ -43,17 +44,31 @@ class Manage::UserGroupsController < Manage::ManageController
     redirect_to :action => :all,:keyword => params[:keyword]
   end
 
+
   # GET /user_groups/1
   # GET /user_groups/1.xml
   def show
     @user_group = UserGroup.find(params[:id])
     @topics = Topic.paginate(:page => params[:page]||1,:per_page => Topic_Perpage,:conditions => "user_group_id=#{@user_group.id}",
       :order => "id desc")
-    @recomment_groups = UserGroup.find(:all, :limit => 6,:order => 'topic_count desc,member_count desc')
+    @recomment_groups = UserGroup.find(:all, :limit => 4,:order => 'topic_count desc,member_count desc')
+    @group_members = GroupMember.find(:all,:limit => 8,:order => "id desc",:conditions => "group_id=#{@user_group.id}",:include => [:user])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user_group }
     end
+  end
+  
+  def topics
+    @user_group = UserGroup.find(params[:id])
+    @topics = Topic.paginate(:page => params[:page]||1,:per_page => Topic_Perpage,:conditions => "user_group_id=#{params[:id]}",
+      :order => "id desc")
+  end
+  
+  def members
+    @user_group = UserGroup.find(params[:id])  
+    @group_members = GroupMember.paginate(:page => params[:page]||1,:per_page => Topic_Perpage,:conditions => "group_id=#{params[:id]}",
+      :order => "id desc",:include => [:user])
   end
 
   # GET /user_groups/new
@@ -65,6 +80,33 @@ class Manage::UserGroupsController < Manage::ManageController
       format.xml  { render :xml => @user_group }
     end
   end
+  
+  def new_photo
+    @user_group = UserGroup.find(params[:id])
+    @tags = Photo.tag_counts.map(&:name).to_json
+  end
+
+   def create_photo
+    unless params[:pictures].blank?
+      params[:pictures].each do |picture|
+        photo = Photo.new(picture)
+        photo.user_id = current_user.id
+        photo.upload_image
+        photo.group_id =  params[:group_id]||0
+        photo.album_id =  params[:album_id]||0
+        photo.save
+      end
+    else
+      flash[:notice] = "请选择要上传的照片"
+    end
+    redirect_to "/manage/user_groups/#{params[:id]}/photos"
+  end
+
+
+   def photos
+     @user_group = UserGroup.find(params[:id])
+     @photos = Photo.paginate(:page => params[:page]||1,:per_page => Photo_Perpage,:conditions => "group_id=#{@user_group.id}",:order => "id desc")
+   end
 
   def new_topic
     @topic = Topic.new()

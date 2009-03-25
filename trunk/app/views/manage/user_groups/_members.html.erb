@@ -1,0 +1,21 @@
+<div class="w100">
+  <div class="title2">
+    <p>群组成员</p>
+  <span><a href="/manage/user_groups/<%= @user_group.id %>/members">成员管理</a></span></div>
+  <div class="height20"></div>
+  <div class="friend3">
+    <ul>
+      <% for group_member in @group_members %>
+        <% user = group_member.user %>
+        <li>
+          <p><a href="<%= user.space_url %>"><img src="<%= user_icon(user.id) %>"></a></p>
+          <p style="overflow: hidden; width: 78px; height: 22px;">
+            <a href="<%= user.space_url %>"><%= user.real_name %></a>
+            <%= link_to('删除',"/manage/user_groups/#{@user_group.id}/delete_member?user_id=#{user.id}", :method => 'get',:confirm => "确定要删除吗?", :class => 'grey') %>
+          </p>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+  <div class="height20"></div>
+</div>

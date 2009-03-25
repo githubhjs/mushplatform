@@ -1,0 +1,24 @@
+<div class="right2">
+  <%= render :partial => "/manage/user_groups/per_group_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1">
+      <p><img src="/images/new/xjt.jpg" align="absmiddle"> 群组相册</p>
+    </div>
+    <div class="height20"></div>
+    <div class="photo2b">
+      <div class="height20"></div>
+      <ul>
+        <% for pic in @photos %>
+          <li><a href="/manage/photos/<%= pic.id %>"><img  src="<%= pic.mid_link %>"></a>
+            <p><%= pic.title %></p>
+            <a href="/manage/photos/<%= pic.id %>/edit">编辑</a> <a href="/manage/photos/<%= pic.id %>" onclick="if (confirm('你确定要删除这个图片？')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">删除</a><br>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="height20"></div>
+  </div>
+  <div class="clear"></div>
+</div>
+

@@ -1,16 +1,9 @@
-<%=  render :partial => "/manage/share/left" %>
-
-<div class="m_r">
-<!--person_menu-->
-<%=  render :partial => "/manage/messages/message_menu"%>
-<!--person_menu-->
- <div class="blog_write_m L">
-    <h2>发布公告</h2>
-    <div class="blog_write_top clear"></div>
-    <div class="blog_write_center">
-      <%= render :partial => "/manage/messages/form",:locals => {:method_name => :put} %>
-    </div>
-    <div class="blog_write_bottom"></div>
+<div class="right2">
+  <%= render :partial => "/manage/messages/message_menu" %>
+  <div class="height20"></div>
+  <div class="height20"></div>
+  <div class="w90">
+    <%= render :partial => "/manage/messages/form",:locals => {:method_name => :put} %>
+    <div class="height20"></div>
   </div>
-</div><!--m_r-->
-
+</div>

@@ -1,0 +1,35 @@
+<div class="right2">
+  <%= render :partial => "/manage/user_groups/per_group_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1">
+      <p><img src="/images/new/xjt.jpg" align="absmiddle"> 群组相册</p>
+    </div>
+    <div class="height20"></div>
+    <% form_for :photo,:url => "/manage/user_groups/#{@user_group.id}/create_photo",:html => {:id => "picture_form",:multipart => true} do |f| %>
+      <strong>选择照片专辑</strong>
+      <select name="album_id" id="photo_album_id">
+        <%= generate_album_options(params[:album_id]) %>
+      </select>
+      <a class="grey_underline" href="javascript:void(0);" onclick="Element.toggle('ajax_album_form');return false;">+&nbsp;创建专辑</a><br>
+      <ul>
+        <li id="ajax_album_form" style="display:none;">
+          <input type ="text" name="title" value="" id="add_album_input">
+          <input type="button" value="增加" onclick="add_album()">
+          <span  id='onload_img' style='display:none;'><img src='/images/spinner.gif' /></span>
+        </li>
+      </ul>
+      新增照片：
+      <input id="picture_upload" type="file" class="txt">
+      <input type="hidden" name="group_id" value="<%= @user_group.id %>">
+      <ul><li><input class="button" id="submit_button" name="button" value="上 传" type="submit"></li></ul>
+    <%end%>
+  </div>
+  <script type="text/javascript">
+    var json_tags = <%= @tags %>;
+    var multiple_upload_picture_counter = 0;
+    multiple_upload_picture($("picture_upload"), 5,json_tags);
+  </script>
+  <div class="clear"></div>
+</div>
+

@@ -4,6 +4,7 @@ class UserGroup < ActiveRecord::Base
   Group_Icon_Size = "100x140"
 
   attr_accessor :uploaded_data
+  has_many :photos,:foreign_key => :group_id
 
 #  named_scope :user_groups, lambda { |user_id|
 #    { :conditions => { :user_id => user_id } }

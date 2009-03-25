@@ -14,7 +14,7 @@
         <% @messages.each_with_index do |message,index| %>
         <tr class="ouout" onmouseover="this.className='onon'" onmouseout="this.className='ouout'" bgcolor="#ffffff">
           <td align="center"><%= index+1 %></td>
-          <td align="center"><a href="/manage/messages/<%= message.id %>"><%= h message.title %></a></td>
+          <td align="center"><a href="/manage/messages/<%= message.id %>/edit"><%= h message.title %></a></td>
           <td align="center"><%= timelong(message.created_at) %></td>
           <td align="center">
             <dl>

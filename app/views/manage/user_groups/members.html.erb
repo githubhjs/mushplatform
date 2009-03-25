@@ -1,0 +1,26 @@
+<div class="right2">
+  <%= render :partial => "/manage/user_groups/per_group_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1">
+      <p><img src="/images/new/xjt.jpg" align="absmiddle"> 成员专区</p>
+    </div>
+    <div class="height20"></div>
+    <div class="friend">
+      <ul>
+        <% for group_member in @group_members -%>
+          <%user = group_member.user%>
+          <li>
+            <p><a href="<%= user.space_url %>" target="_blank"><img src="<%= user_icon(user.id) %>"/></a></p>
+            <p style="overflow: hidden; width: 78px; height: 22px;"><a href="<%= user.space_url %>" target="_blank"><%= user.real_name %> </a></p>
+            <span>
+              <%= link_to('删除',"/manage/user_groups/#{@user_group.id}/delete_member?user_id=#{user.id}", :method => 'get',:confirm => "确定要删除吗?", :title => "删除会员",:class => 'grey') %>
+            </span>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+

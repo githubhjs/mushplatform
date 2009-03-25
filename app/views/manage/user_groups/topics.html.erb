@@ -1,0 +1,36 @@
+<div class="right2">
+  <%= render :partial => "/manage/user_groups/per_group_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1">
+      <p><img src="/images/new/xjt.jpg" align="absmiddle"> 群话题区</p>
+    <span><a href="/manage/user_groups/<%= @user_group.id %>/topics">所有话题</a></span></div>
+    <div class="height20"></div>
+    <table class="lanhui" width="100%" bgcolor="#cecccf" border="0" cellpadding="0" cellspacing="1">
+      <tbody><tr bgcolor="#f3f3f3">
+          <td width="57%" align="center"><strong>话题</strong></td>
+          <td width="15%" align="center"><strong>作者</strong></td>
+          <td width="13%" align="center"><strong>评</strong></td>
+          <td width="15%" align="center"><strong>回复时间</strong></td>
+        </tr>
+        <% for topic in @topics do  %>
+            <tr class="ouout" onmouseover="this.className='onon'" onmouseout="this.className='ouout'" bgcolor="#ffffff">
+              <td align="center"><a href="/manage/topics/<%=topic.id%>"><%= topic.title %></a></td>
+              <td align="center"><a href="<%= topic.user.space_url %>"><%= topic.user.real_name %></a></td>
+              <td align="center"><%= topic.comment_count %></td>
+              <td align="center">
+                <% if topic.comment_count > 0 %>
+                  <% last_comment = topic.last_comment %>
+                  <%= last_comment.created_at.strftime("%m-%d %H:%M") %>
+                <%else%>
+                  无
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+    <div class="clear"></div>
+  </div>
+

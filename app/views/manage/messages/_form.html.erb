@@ -1,12 +1,10 @@
-<div class="blog_write_center">
-  <%form_for :message,:url => "/manage/messages/#{@message.id}",:html => {:name => 'message_form' ,:method => method_name} do |f|  %>
-    <p><b>标题：</b><font style="color:red;"><%= @message.errors.on(:title) %></font>
-      <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>
-    </p>
-    <p><b>内容：</b><font style="color:#999;"></font>
+<%form_for :message,:url => "/manage/messages/#{@message.id}",:html => {:name => 'message_form' ,:method => method_name} do |f|  %>
+  <p><b>标题：</b><font style="color:red;"><%= @message.errors.on(:title) %></font>
+    <%= f.text_field :title,:size => '65',:maxlength => '65' ,:class => "title" %>
+  </p>
+  <p><b>内容：</b><font style="color:#999;"></font>
     <font style="color:red;"><%= @message.errors.on(:content) %></font>
-    </p>
-    <%= f.text_area :content,:class => "text",:cols => "50" ,:rows => "5"  %>
-    <input class="submit"  type="submit" value="发 布" />
-  <%end%>
-</div>
+  </p>
+  <%= f.text_area :content,:class => "text",:cols => "50" ,:rows => "5"  %>
+  <input class="submit"  type="submit" value="发 布" />
+ <%end%>

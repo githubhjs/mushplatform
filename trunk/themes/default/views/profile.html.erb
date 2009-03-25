@@ -23,47 +23,50 @@
               <td width="89%"><%= current_blog_user.real_name %></td>
             </tr>
           <% if prolfile = current_blog_user.user_profile %>
-            <tr>
-              <td valign="top" align="right"><strong>性别：</strong></td>
-              <td><%= display_blog_admin_sex prolfile %></td>
-            </tr>
-            <tr>
-              <td align="right"><strong>城市：</strong></td>
-              <td><%= prolfile.city %></td>
-            </tr>
-            <tr>
-              <td align="right"><strong>地址：</strong></td>
-              <td><%= prolfile.adress %></td>
-            </tr>
+              <tr>
+                <td valign="top" align="right"><strong>性别：</strong></td>
+                <td><%= display_blog_admin_sex prolfile %></td>
+              </tr>
+              <tr>
+                <td align="right"><strong>城市：</strong></td>
+                <td><%= prolfile.city %></td>
+              </tr>
+              <tr>
+                <td align="right"><strong>地址：</strong></td>
+                <td><%= prolfile.adress %></td>
+              </tr>
             <%end%>
         </tbody></table>
       </div>
       <div class="height20"></div>
-      <div class="saying">
-        <div class="saying_bt"><strong>详细信息</strong></div>
-        <div class="height12"></div>
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-          <tbody>
-            <tr>
-              <td width="11%" align="right"><strong>公司名称：</strong></td>
-              <td width="89%"><%= current_blog_user.user_profile.company_name %></td>
-            </tr>
-            <tr>
-              <td valign="top" align="right"><strong>职位：</strong></td>
-              <td><%= current_blog_user.user_profile.position %></td>
-            </tr>
-            <tr>
-              <td width="11%" align="right"><strong>行业分类：</strong></td>
-              <td width="89%"><%= current_blog_user.user_profile.vocation_name %></td>
-            </tr>
-            <tr>
-              <td valign="top" align="right"><strong>自我介绍：</strong></td>
-              <td>
-                <%= current_blog_user.user_profile.introduction %>
-              </td>
-            </tr>
-        </tbody></table>
-      </div>
+      <%if prolfile%>
+        <div class="saying">
+          <div class="saying_bt"><strong>详细信息</strong></div>
+          <div class="height12"></div>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td width="11%" align="right"><strong>公司名称：</strong></td>
+                <td width="89%"><%= prolfile.company_name %></td>
+              </tr>
+              <tr>
+                <td valign="top" align="right"><strong>职位：</strong></td>
+                <td><%= prolfile.position %></td>
+              </tr>
+              <tr>
+                <td width="11%" align="right"><strong>行业分类：</strong></td>
+                <td width="89%"><%= prolfile.vocation_name %></td>
+              </tr>
+              <tr>
+                <td valign="top" align="right"><strong>自我介绍：</strong></td>
+                <td>
+                  <%= prolfile.introduction %>
+                </td>
+              </tr>
+          </tbody>
+          </table>
+        </div>
+      <%end%>
       <div class="height20"></div>
     </div>
   </div>

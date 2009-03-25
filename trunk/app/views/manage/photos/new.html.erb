@@ -4,8 +4,7 @@
     <span>
       <img src="/images/new/tb_sczp.gif" align="absmiddle"> <a href="/manage/photos/new"><strong>上传照片</strong></a>      
     </span>
-  </div>
-  <%%>
+  </div>  
   <%= render :partial => '/manage/photos/photo_menu' %>
   <% form_for :photo,:url => "/manage/photos",:html => {:id => "picture_form",:multipart => true} do |f| %>
   <div class="w90_bd">

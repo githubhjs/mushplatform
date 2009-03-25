@@ -39,6 +39,7 @@
         </tbody></table>
       </div>
       <div class="height20"></div>
+      <%if prolfile%>
       <div class="saying">
         <div class="saying_bt"><strong>详细信息</strong></div>
         <div class="height12"></div>
@@ -46,24 +47,26 @@
           <tbody>
             <tr>
               <td width="11%" align="right"><strong>公司名称：</strong></td>
-              <td width="89%"><%= current_blog_user.user_profile.company_name %></td>
+              <td width="89%"><%= prolfile.company_name %></td>
             </tr>
             <tr>
               <td valign="top" align="right"><strong>职位：</strong></td>
-              <td><%= current_blog_user.user_profile.position %></td>
+              <td><%= prolfile.position %></td>
             </tr>
             <tr>
               <td width="11%" align="right"><strong>行业分类：</strong></td>
-              <td width="89%"><%= current_blog_user.user_profile.vocation_name %></td>
+              <td width="89%"><%= prolfile.vocation_name %></td>
             </tr>
             <tr>
               <td valign="top" align="right"><strong>自我介绍：</strong></td>
               <td>
-                <%= current_blog_user.user_profile.introduction %>
+                <%= prolfile.introduction %>
               </td>
             </tr>
-        </tbody></table>
+        </tbody>
+        </table>
       </div>
+      <%end%>
       <div class="height20"></div>
     </div>
   </div>

@@ -22,6 +22,7 @@ class User < CachedModel
   has_many :visitors
   has_many :receive_invites ,:class_name => "Invite",:foreign_key => 'user_id'
   has_many :send_invites ,:class_name => "Invite",:foreign_key => 'invitor_id'
+  has_many :group_members
 #  has_one  :blog_config
   
   validates_size_of :user_name, :within => 3..60

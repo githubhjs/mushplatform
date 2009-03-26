@@ -112,10 +112,10 @@ function getPartial(input_id){
         <%#= text_area_tag 'body', @article.body, :rows => 20, :cols => 65 %>
     </td>
   </tr>
-  <!--tr class="form-field">
+  <tr class="form-field">
     <th scope="row" valign="top"><label for="article_category_id"><%= t 'text.article.channel' %></label></th>
-    <td><%#= select 'article', 'channel_id', channels_select %></td>
-  </tr-->
+    <td><%= select 'article', 'channel_id', channels_select %></td>
+  </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_status"><%= t 'text.article.status' %></label></th>
     <td>

@@ -26,5 +26,17 @@ class Admin::BlogsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
+  def abandon
+    params[:id].each{|id|
+      blog = Blog.find(id.to_i)
+      blog.update_attribute(:collected, -1)
+    }
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'index' }
+      format.xml  { head :ok }
+    end
+  end
+
 end

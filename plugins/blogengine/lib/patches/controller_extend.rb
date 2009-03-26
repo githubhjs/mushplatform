@@ -83,7 +83,7 @@ module ControllerExtend
   
   def setup_theme
     if current_theme and current_theme.is_sns_theme?
-      self.view_paths = ::ActionController::Base.view_paths.dup.unshift(current_theme.sns_theme_view)
+      self.view_paths = ::ActionController::Base.view_paths.dup.unshift("#{Theme.themes_root}/#{current_theme.name}/views")
     end
   end
   

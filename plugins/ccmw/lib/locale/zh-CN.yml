@@ -41,6 +41,7 @@ zh-CN:
       manage_blogs: "博客管理"
       all_blogs: "未审核博客"
       audit: "审核"
+      abandon: "放弃"
 
       title: "标题"
       author: "作者"

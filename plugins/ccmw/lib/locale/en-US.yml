@@ -41,6 +41,7 @@ en-US:
       manage_blogs: "Manage Blogs"
       all_blogs: "All Blogs"
       audit: "Audit"
+      abandon: "Abandon"
 
       title: "Title"
       author: "Author"

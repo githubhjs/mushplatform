@@ -86,10 +86,10 @@ function getPartial(input_id){
     <th scope="row" valign="top"><label for="article_subtitle"><%= t 'text.article.sub_title' %></label></th>
     <td><%= text_field 'article', 'sub_title' %></td>
   </tr>
-  <tr class="form-field form-required">
+  <!--tr class="form-field form-required">
     <th scope="row" valign="top"><label for="article_permalink"><%= t 'text.article.permalink' %></label></th>
     <td><%= text_field 'article', 'permalink' %></td>
-  </tr>  
+  </tr-->
   <tr class="form-field form-required">
     <th scope="row" valign="top"><label for="article_author"><%= t 'text.article.author' %></label></th>
     <td><%= text_field 'article', 'author' %>&nbsp;[ <a href="javascript:add_prefix('article_author', '作者：')">作者：</a> | <a href="javascript:add_prefix('article_author', '编译：')">编译：</a> | <a href="javascript:add_prefix('article_author', '供稿：')">供稿：</a> | <a href="javascript:add_link('article_author')">链接</a> ]</td>
@@ -98,16 +98,24 @@ function getPartial(input_id){
     <th scope="row" valign="top"><label for="article_source"><%= t 'text.article.source' %></label></th>
     <td><%= text_field 'article', 'source' %>&nbsp;[ <a href="javascript:add_prefix('article_source', '摘自：')">摘自：</a> | <a href="javascript:add_prefix('article_source', '来源：')">来源：</a>  | <a href="javascript:add_prefix('article_source', '来源：<a href=\'/\'>客户世界</a>')">原创</a> | <a href="javascript:add_link('article_source')">链接</a> ]</td>
   </tr>  
+  <%= do_extensions('MushAdmin::AddArticleExtraAttributes', @article) %>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_tags"><%= t 'text.article.tags' %></label></th>
     <td><%= text_field 'article', 'tag_list' %></td>
   </tr>
   <tr class="form-field">
+    <th scope="row" valign="top"><label for="body"><%= t 'text.article.body' %></label></th>
+    <td>
+        <input type="hidden" style="display: none" value="CustomConfigurationsPath=/javascripts/fckcustom.js" id="body___Config"/>
+        <%= fckeditor_textarea( "body", @article.body, :width => '100%', :height => '400px', :toolbarSet => 'Simple' ) %>
+        <script>var oFCKeditor = new FCKeditor('body', '100%', '400px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
+        <%#= text_area_tag 'body', @article.body, :rows => 20, :cols => 65 %>
+    </td>
+  </tr>
+  <!--tr class="form-field">
     <th scope="row" valign="top"><label for="article_category_id"><%= t 'text.article.channel' %></label></th>
     <td><%= select 'article', 'channel_id', channels_select %></td>
-  </tr>  
-  <%= do_extensions('MushAdmin::AddArticleExtraAttributes', @article) %>
-  
+  </tr-->
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_status"><%= t 'text.article.status' %></label></th>
     <td>
@@ -120,15 +128,6 @@ function getPartial(input_id){
     <th scope="row" valign="top"><label for="article_excerpt"><%= t 'text.article.excerpt' %></label></th>
     <td>
         <%= text_area 'article', 'excerpt', :rows => 4, :cols => 65 %>
-    </td>
-  </tr>
-  <tr class="form-field">
-    <th scope="row" valign="top"><label for="body"><%= t 'text.article.body' %></label></th>
-    <td>
-<input type="hidden" style="display: none" value="CustomConfigurationsPath=/javascripts/fckcustom.js" id="body___Config"/>
-        <%= fckeditor_textarea( "body", @article.body, :width => '100%', :height => '400px', :toolbarSet => 'Simple' ) %> 
-<script>var oFCKeditor = new FCKeditor('body', '100%', '400px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
-        <%#= text_area_tag 'body', @article.body, :rows => 20, :cols => 65 %>
     </td>
   </tr>
 </table>

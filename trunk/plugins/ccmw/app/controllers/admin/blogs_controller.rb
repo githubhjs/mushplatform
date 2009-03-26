@@ -18,7 +18,7 @@ class Admin::BlogsController < ApplicationController
   def update
     params[:id].each{|id|
       blog = Blog.find(id.to_i)
-      blog.update_attribute(:collected, true)
+      blog.update_attribute(:collected, 1)
     }
 
     respond_to do |format|

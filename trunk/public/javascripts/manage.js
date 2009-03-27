@@ -36,7 +36,7 @@ function add_category(){
         alert("请输入类别名");
         return;
     }
-    var url = "/manage/categories/ajax_new?category_name=" + category_input.value ;
+    var url = "/manage/categories/ajax_new?category_name=" + encodeURIComponent(category_input.value) ;
     add_select_entry('ajax_category_form',category_input,'blog_category_id',url)
 }
 
@@ -46,7 +46,7 @@ function add_album(){
         alert("请输入类别名");
         return;
     }
-    var url = "/manage/photos/ajax_create_alubm?title=" + album_input.value ;
+    var url = "/manage/photos/ajax_create_alubm?title=" + encodeURIComponent(album_input.value) ;
     add_select_entry('ajax_album_form',album_input,'photo_album_id',url);
 }
 
@@ -78,7 +78,7 @@ function update_category(category_id){
     if(category_input.value == ""){
         alert("请输入类别名");
     }
-    var url = "/manage/categories/"+category_id+"/ajax_update?category_name=" + category_input.value ;
+    var url = "/manage/categories/"+category_id+"/ajax_update?category_name=" + encodeURIComponent(category_input.value) ;
     new Ajax.Request(url,{
         method:'get'
     });
@@ -291,6 +291,17 @@ function select_friend(){
     friend_name.value = friend_name.value.replace(',,',',').replace(/,$/,'').replace(/^,/,'');
     selected_friend.value = ''
     $('friend_list').hide();
+}
+
+function select_all_friends(){
+    var friend_checo_boxes = document.my_send_form.user_id;
+    var size = friend_checo_boxes.length;
+    for(var i=0;i < size;i++){
+        var box =  friend_checo_boxes[i]
+        box.checked = true;
+        change_friend(box);
+    }
+    select_friend();
 }
 
 function change_friend(checkbox){

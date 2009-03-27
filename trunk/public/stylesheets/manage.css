@@ -206,7 +206,7 @@ h22{float:left;font-size:12px;font-weight:bold;color:#333;}
 .photo p{ width:112px; height:22px; overflow:hidden;}
 
 .photo2b{width:95%; margin:0 auto; color:#464646;}
-.photo2b img{ display:block; width:100px; height:75px; margin:0 auto; background:#FFFFFF; border:1px solid #c3d7f4; padding:5px; clear:both;}
+.photo2b img{ display:block; max-width:100px;width: expression(this.width > 100 ? 100: true); max-height:75px;height: expression(this.height > 100 ? 100: true);margin:0 auto; background:#FFFFFF; border:1px solid #c3d7f4; padding:5px; clear:both;}
 .photo2b li{ width:134px; text-align:center; display:block; float:left; margin-bottom:20px;margin-left:12px;}
 .photo2b li p{ width:134px; height:22px; line-height:22px;overflow:hidden;}
 
@@ -231,7 +231,7 @@ h22{float:left;font-size:12px;font-weight:bold;color:#333;}
 .next_a{ float:left; width:100px; height:30px; text-align:right;}
 .next_b{ float:left; width:440px; height:30px; text-align:center}
 .next_c{ float:right; width:100px; height:30px;}
-.pic img{ width:650px;}
+.pic img{max-width:650px;width: expression(this.width > 650 ? 650 : true);}
 
 .message{ width:90%; margin:0 auto; color:#464646;}
 .message img{ float:left; width:48px;}

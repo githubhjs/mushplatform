@@ -4,7 +4,7 @@ class User < CachedModel
   
   include CachedExtend
 
-#  has_one  :user_profile
+  has_one  :user_profile
   has_many :blogs
   has_many :messages
   has_many :receive_regards,:class_name => 'RegardUser',:foreign_key => 'friend_id'
@@ -63,18 +63,7 @@ class User < CachedModel
     end
   end
 
-#
-#  def find_by_user_id
-#    if config =  Cache.get("record_blog_config_uid#{self.id}")
-#      config
-#    elsif !(config = BlogConfig.find_by_user_id(self.id)).blank?
-#      Cache.put("record_blog_config_uid#{self.id}",config)
-#      config
-#    else
-#      config = BlogConfig.create(:user_id => self.id)
-#      config
-#    end
-#  end
+
 
   def blog_config  
     @blog_config ||= (BlogConfig.find_by_user_id(self.id) || BlogConfig.create(:user_id => self.id))
@@ -85,16 +74,7 @@ class User < CachedModel
   end
 
   def user_profile
-    UserProfile.find_by_user_id(self.id)
-#    u_profile = if profile = Cache.get("record_user_profile_uid#{self.id}")
-#      profile
-#    elsif !(profile = UserProfile.find_by_user_id(self.id)).blank?
-#      Cache.put("record_user_profile_uid#{self.id}", profile)
-#      profile
-#    else
-#      nil
-#    end
-#    u_profile
+    @user_pfofile = UserProfile.find_by_user_id(self.id)
   end
 
   def real_name

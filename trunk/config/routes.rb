@@ -63,7 +63,8 @@ ActionController::Routing::Routes.draw do |map|
     manage.resources :blogs,:member => {:delete => :get,:sticky => :get},
                      :collection => {:drafts => :get,:batch_publish => :post,:search => :post}
     manage.resources :user_profiles
-    manage.resources :user_groups,:member => {:new_topic => :get,:join => :get,:quit => :get,:create_topic => :post,:topics => :get,:photos => :get,:members => :get,:new_photo => :get,:create_photo => :post},
+    manage.resources :user_groups,:member => {:new_topic => :get,:join => :get,:quit => :get,:create_topic => :post,:topics => :get,:photos => :get,:members => :get,:new_photo => :get,:create_photo => :post,
+    :photo => :get,:delete_photo => :get,:edit_photo => :get,:update_photo => :post},
                      :collection => {:all => :get,:search => :post,:friend_groups => :get,:friend_create_groups => :get}
     manage.resources :topic_comments
     manage.resources :group_members

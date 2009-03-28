@@ -1,13 +1,11 @@
 <div class="right2">
-  <div class="dbt">
-    <p><a href="/manage/photos/new"><img src="/images/new/pictures_32.png" align="absmiddle"></a>上传照片</p>
-    <span>
-      <img src="/images/new/tb_sczp.gif" align="absmiddle"> <a href="/manage/photos/new"><strong>上传照片</strong></a>
-    </span>
-  </div>
-  <%= render :partial => '/manage/photos/photo_menu' %>
-  <div class="w90_bd">
-    <% form_for :photo,:url => "/manage/photos/#{@photo.id}",:html => {:method => :put} do |f| %>
+  <%= render :partial => "/manage/user_groups/per_group_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1">
+      <p><img src="/images/new/xjt.jpg" align="absmiddle"> 群组相册</p>
+    </div>
+    <% form_for :photo,:url => "/manage/user_groups/#{@user_group.id}/update_photo" do |f| %>
       <table class="admin">
         <tbody>
           <tr><td>标签</td>
@@ -27,13 +25,15 @@
               <textarea cols="40" id="photo_description" name="photo[description]" rows="20" style="width: 400px; height: 80px;"><%= @photo.description %></textarea>
             </td>
           </tr>
+          <input type="hidden" name="photo_id" value="<%= @photo.id %>">
           <tr>
             <td colspan="2" style="text-align: center;"><input class="submit" id="submit_button" name="commit" value="提交" type="submit"></td>
           </tr>
         </tbody>
       </table>
     <%end%>
-    <div class="height20"></div>
+        <div class="height20"></div>
   </div>
-
+  <div class="clear"></div>
 </div>
+

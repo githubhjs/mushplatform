@@ -24,7 +24,7 @@
   <div class="w90">
     <div class="gift">
      <div><% unless flash[:notice].blank? %><img src="/images/icon_error_lrg.gif"><%end%><%= flash[:notice] %></div>
-     <%form_for :gift_user,:url => "/manage/gifts/send_to" do |f|  %>
+     <%form_for :gift_user,:url => "/manage/gifts/send_to",:html => {:name => "my_send_form"} do |f|  %>
       <div class="gift_t"><p>赠送给哪几位好友：</p></div>
       <p><input name="friend_name" id="friend_name" type="text"><a href="#" onclick="return false;" title="选择好友" ><img src="/images/xx_xx1.gif" align="absmiddle" alt="选择好友" onclick="Element.show('friend_list');"/></a></p>
       <%= render :partial => "/manage/gifts/friend_list" %>

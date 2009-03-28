@@ -1,0 +1,12 @@
+<div class="photo2b">
+  <ul>
+    <% for pic in @photos %>
+      <li><a href="/manage/user_groups/<%= @user_group.id %>/photo?photo_id=<%= pic.id %>"><img  src="<%= pic.mid_link %>"></a>
+        <p><%= pic.title %></p>
+        <a href="/manage/user_groups/<%= @user_group.id %>/edit_photo?photo_id=<%= pic.id %>">编辑</a>
+        <%= link_to "删除","/manage/user_groups/#{@user_group.id}/delete_photo?photo_id=#{pic.id}",:confirm => "确认要删除吗" %>
+        <br>
+      </li>
+    <%end%>
+  </ul>
+</div>

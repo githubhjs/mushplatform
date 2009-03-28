@@ -25,9 +25,9 @@ class Manage::ManageController < ApplicationController
       Footstep.find(:all,:limit => Latest_Friend_FootStep,:order => 'created_at desc,app',
       :conditions => "user_id in (#{current_user.friends.map(&:friend_id).join(',')})")
     end
-    @my_photos = current_user.photos.find(:all,:limit => 3,:order => 'id')
-    @blogs  = current_user.blogs.find(:all,:limit => 3,:order => 'comment_count desc,view_count desc,id')
-    @gifts  = current_user.receive_gifts.find(:all,:limit => 6,:order => 'id')
+    @my_photos = current_user.photos.find(:all,:limit => 3,:order => 'id desc')
+    @blogs  = current_user.blogs.find(:all,:limit => 3,:order => 'id desc')
+    @gifts  = current_user.receive_gifts.find(:all,:limit => 6,:order => 'id desc')
     @new_gifts_count = current_user.receive_gifts.count(:conditions => "created_at >= date_sub(now() , INTERVAL 1 day)")
     @new_regards_count = current_user.receive_gifts.count(:conditions => "created_at >= date_sub(now() , INTERVAL 1 day)")
     @visitores = current_user.visitors.find(:all,:limit => 12,:order => "id desc")

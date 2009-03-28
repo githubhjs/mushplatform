@@ -53,6 +53,7 @@ class Manage::UserGroupsController < Manage::ManageController
       :order => "id desc")
     @recomment_groups = UserGroup.find(:all, :limit => 4,:order => 'topic_count desc,member_count desc')
     @group_members = GroupMember.find(:all,:limit => 8,:order => "id desc",:conditions => "group_id=#{@user_group.id}",:include => [:user])
+    @photos = Photo.find(:all,:limit => 3,:conditions => "group_id=#{@user_group.id}",:order => "id desc")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user_group }
@@ -111,6 +112,38 @@ class Manage::UserGroupsController < Manage::ManageController
   def new_topic
     @topic = Topic.new()
     @user_group  = UserGroup.find(params[:id])
+  end
+
+  def edit_photo
+    @user_group = UserGroup.find(params[:id])
+    @photo = Photo.find(params[:photo_id])
+    @tags = Photo.tag_counts.map(&:name).to_json
+  end
+  
+  def update_photo
+    @user_group = UserGroup.find(params[:id])
+    @photo = Photo.find(params[:photo_id])
+    if @photo.update_attributes(params[:photo])
+      redirect_to :action => :photos
+    else
+      @tags = Photo.tag_counts.map(&:name).to_json
+      render :action => :edit_photo
+    end
+    return 
+  end
+  
+  def photo
+    @user_group = UserGroup.find(params[:id])
+    @photo = Photo.find(params[:photo_id])
+    @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id} and group_id=#{@user_group.id}",:order => "id")
+    @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id} and user_id=#{@user_group.id}",:order => "id")
+  end
+
+  def delete_photo
+    @user_group = UserGroup.find(params[:id])
+    Photo.delete(params[:photo_id])
+    redirect_to :action => :photos
+    return
   end
 
   def create_topic

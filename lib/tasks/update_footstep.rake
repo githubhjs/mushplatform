@@ -17,13 +17,14 @@ task :footstep  => :environment  do
         Vote
       else
       end
-      footstep.content = footstep.content.gsub(/href=(?:"|')([^'""]*)(?:"|')/) do |match|
-        path = match.scan(/(?:\/[^\/]*){2}$/).first
+      footstep.content = footstep.content.gsub(/href=["']([^'""]*)["']+/) do |match|
+        path = $1.scan(/(?:\/[^\/]*){2}$/).first
         entry_id = path.scan(/\d+/).first       
         entry = klass.find_by_id(entry_id)
         entry ? "href='#{entry.user.space_url}#{path}'" : "href='#'"
-      end
+      end      
       footstep.save
+      #      puts footstep.content
     end
     start += each_loop_count
   end

@@ -1,0 +1,31 @@
+<div class="right2">
+  <%= render :partial => "/manage/user_groups/per_group_menu" %>
+  <div class="height20"></div>
+  <div class="w90">
+    <div class="title1">
+      <p><img src="/images/new/xjt.jpg" align="absmiddle"> 群组相册</p>
+    </div>
+    <div class="height20"></div>
+    <div class="photo_info">
+      <span class="f14b black"><%= @photo.title %></span> <a href="/manage/photos/<%= @photo.id %>/edit">修改</a><br>
+      <strong>上传时间：</strong><%= DateUtil.timelong_for_with_ling(@photo.created_at) %> | 浏览(<a href="#">82</a>) | 评论(<a href="#">0</a>) | 收藏(<a href="#">0</a>)<br>
+      <strong>照片描述：</strong><%= @photo.description %> <a href="#">修改</a><br>
+      <div class="next">
+        <% if @per_photo %>
+          <div class="next_a"><a href="/manage/photos/<%= @per_photo.id %>"><img src="/images/call_center/btn_up.gif" alt="上一张"></a></div>
+        <%end%>
+        <div class="next_b"><img src="/images/call_center/tu_sc.gif" align="absmiddle"> <a href="#">收藏</a> &nbsp;&nbsp;<img src="/images/call_center/tu_ckyt.gif" align="absmiddle"> <a href="<%= @photo.orignal_link %>" target="_blank" >查看原图</a> &nbsp;&nbsp;<img src="/images/call_center/tu_jb.gif" align="absmiddle"> <a href="#">举报</a></div>
+        <%if @next_photo%>
+          <div class="next_c"><a href="/manage/photos/<%= @next_photo.id %>"><img src="/images/call_center/btn_down.gif" alt="下一张"></a></div>
+        <%end%>
+      </div>
+      <div class="pic"><a href="<%=  @next_photo ? "/photos/#{@next_photo.id}" : '#' %>">
+        <img src="<%= @photo.max_link || @photo.orignal_link %>" alt="下一张"></a>
+      </div>
+      <div class="height20"></div>
+    </div>
+    <div class="height20"></div>
+  </div>
+  <div class="clear"></div>
+</div>
+

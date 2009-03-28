@@ -1,16 +1,15 @@
-<div class="right2">
-  <div class="dbt">
-    <p><a href="/manage/photos/new"><img src="/images/new/pictures_32.png" align="absmiddle"></a>上传照片</p>
-    <span>
-      <img src="/images/new/tb_sczp.gif" align="absmiddle"> <a href="/manage/photos/new"><strong>上传照片</strong></a>
-    </span>
-  </div>
-  <%= render :partial => '/manage/photos/photo_menu' %>
-  <div class="w90_bd">
+<%=  render :partial => "/manage/share/left" %>
+
+<div class="m_r">
+  <!--person_menu-->
+  <%=  render :partial => "/manage/photos/photo_menu"%>
+  <!--person_menu-->
+  <div class="blog_write_m L">
+    <img  src="<%= @photo.mid_link %>">
     <% form_for :photo,:url => "/manage/photos/#{@photo.id}",:html => {:method => :put} do |f| %>
       <table class="admin">
         <tbody>
-          <tr><td>标签</td>
+          <!--tr><td>标签</td>
             <td>
               <input class="text" id="photo_tag_list" name="photo[tag_list]" size="30" value="me" type="text">
               <select id="tag_select" name="tag_select" onchange="$('photo_tag_list').value = this.value;">
@@ -18,13 +17,13 @@
                 <option value="me">me</option>
               </select> 小贴士: 多个标签可用半角逗号分开
             </td>
-          </tr>
+          </tr-->
           <tr><td>名称: </td>
             <td><%= f.text_field(:title) %></td>
           </tr>
           <tr><td>描述: </td>
             <td>
-              <textarea cols="40" id="photo_description" name="photo[description]" rows="20" style="width: 400px; height: 80px;"><%= @photo.description %></textarea>
+             <textarea cols="40" id="photo_description" name="photo[description]" rows="20" style="width: 400px; height: 80px;"><%= @photo.description %></textarea>
             </td>
           </tr>
           <tr>
@@ -33,7 +32,5 @@
         </tbody>
       </table>
     <%end%>
-    <div class="height20"></div>
   </div>
-
-</div>
+</div><!--m_r-->

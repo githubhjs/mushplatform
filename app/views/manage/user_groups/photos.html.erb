@@ -10,9 +10,11 @@
       <div class="height20"></div>
       <ul>
         <% for pic in @photos %>
-          <li><a href="/manage/photos/<%= pic.id %>"><img  src="<%= pic.mid_link %>"></a>
+          <li><a href="/manage/user_groups/<%= @user_group.id %>/photo?photo_id=<%= pic.id %>"><img  src="<%= pic.mid_link %>"></a>
             <p><%= pic.title %></p>
-            <a href="/manage/photos/<%= pic.id %>/edit">编辑</a> <a href="/manage/photos/<%= pic.id %>" onclick="if (confirm('你确定要删除这个图片？')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">删除</a><br>
+            <a href="/manage/user_groups/<%= @user_group.id %>/edit_photo?photo_id=<%= pic.id %>">编辑</a>
+            <%= link_to "删除","/manage/user_groups/#{@user_group.id}/delete_photo?photo_id=#{pic.id}",:confirm => "确认要删除吗" %>
+            <br>
           </li>
         <%end%>
       </ul>

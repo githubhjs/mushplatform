@@ -19,7 +19,7 @@ class Manage::BlogsController < Manage::ManageController
 
   def index
     @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Per_Page,
-      :conditions => generate_conditions,:include => [:category])
+      :conditions => generate_conditions,:include => [:category],:order => "if_top desc ,id desc")
     @categories = current_user.categories.find(:all,:limit => 10,:order => "blog_count desc")
     respond_to do |format|
       format.html # index.html.erb
@@ -53,7 +53,7 @@ class Manage::BlogsController < Manage::ManageController
 
   # POST /blogs
   # POST /blogs.xml
-  def create
+  def create    
     @blog = Blog.new(params[:blog])
     @blog.published = params[:publish].blank?  ? Blog::Drafted_Blogs : Blog::Published_Blogs
     @blog.user_id = current_user.id

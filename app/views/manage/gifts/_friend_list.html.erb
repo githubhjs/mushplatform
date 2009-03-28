@@ -7,9 +7,10 @@
         <li><input type="checkbox" value="<%= fri.user_name%>" name="user_id" onchange="change_friend(this)"/><%=fri.real_name%></li>
       <%end%>
     </ul>
-    <input type='hidden' name="selected_friend_name" id="selected_friend" value="">
+    <input type='hidden' name="selected_friend_name" id="selected_friend" value="">    
   </div>
   <div class="sel">&nbsp;
+    <input type='button' name="确认" onclick="select_all_friends();" value="全部选择">
     <input type='button' name="确认" onclick="select_friend();" value="确认">
     <input type='button' name="确认" onclick="Element.hide('friend_list')" value="取消">
   </div>

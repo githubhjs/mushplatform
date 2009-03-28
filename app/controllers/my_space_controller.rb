@@ -39,7 +39,7 @@ class MySpaceController < ApplicationController
   end
 
   def general_blog_index
-    entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions =>generate_conditions)
+    entries = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions =>generate_conditions,:order => 'if_top desc,id desc')
     blog_owner = is_blog_admin? ? current_user : nil
     render_liquid({:template => 'entries',:layout => true},{'entries' => entries,'blog_owner' => blog_owner,'will_paginate_options' => {'prev_label' => '上一页','next_label' => '下一页'}.merge(keep_params)})
   end

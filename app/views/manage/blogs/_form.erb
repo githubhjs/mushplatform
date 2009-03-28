@@ -26,18 +26,18 @@
     <br>
     <span class="gray">比如：精彩生活 技术研究 日记(多个标签请用空格隔开)</span><br>
     <label>
-      <input name="checkbox" id="checkbox" type="checkbox">
+      <input name="blog[allow_comments]" value="<%= Const::YES %>" <%= @blog.new_record? || @blog.allow_pings == Const::YES ? 'checked': ''%> type="checkbox">
     </label>
     允许评论
     <label>
-      <input name="blog[allow_pings]" type="checkbox" value="<%= Const::YES %>" <%= @blog.allow_pings == Const::YES ? 'checked': ''%> >
+      <input name="blog[allow_pings]" type="checkbox" value="<%= Const::YES %>" <%= @blog.new_record? || @blog.allow_pings == Const::YES ? 'checked': ''%> >
     </label>
     允许引用
     <label>
       <input name="blog[if_top]" type="checkbox" value="Const::YES" <%= @blog.if_top == Const::YES ? 'checked': ''%>>
     </label>
     置顶<br>    
-    <input class="submit" name="publish"   type="submit"   value="提   交"  />
+    <input class="submit"   name="publish"   type="submit"   value="提   交"  />
     <% if @blog.new_record? || !@blog.is_published? %>
       <input class="save"   name="to_draft"   type="submit"  value="存为草稿" />
     <% end %>

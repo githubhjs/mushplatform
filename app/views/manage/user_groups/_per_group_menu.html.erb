@@ -13,8 +13,8 @@
   <ul>
     <li <% if action_name == 'show' %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>" title="群组首页"><span>群组首页</span></a></li>
     <li <% if action_name == 'topics' %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>/topics" title="群组最新动态"><span>话题区</span></a></li>
-    <li <% if action_name == 'new_photo' %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>/new_photo" title="上传群组相册"><span>上传照片</span></a></li>
-    <li <% if action_name == 'photos' %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>/photos" title="群组相册"><span>相册区</span></a></li>
+    <li <% if action_name =~ /new_photo|edit_photo|update_photo|create_photo/ %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>/new_photo" title="上传群组相册"><span>上传照片</span></a></li>
+    <li <% if action_name == 'photos' || action_name == 'photo' %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>/photos" title="群组相册"><span>相册区</span></a></li>
     <li <% if action_name == 'members' %> class="tabs66" <%end%>><a href="/manage/user_groups/<%= @user_group.id %>/members" title="好友创建的群组"><span>成员</span></a></li>
   </ul>
 </div>

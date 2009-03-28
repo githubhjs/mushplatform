@@ -1,6 +1,6 @@
 <div class="tabs6">
   <ul>
-    <li <% if action_name =~ /new|create/ %>class="tabs66"<%end%>><a href="/manage/photos/new" title="我的相册"><span>上传照片</span></a></li>
+    <li <% if action_name =~ /new|create|edit|update/ %>class="tabs66"<%end%>><a href="/manage/photos/new" title="我的相册"><span>上传照片</span></a></li>
     <li <% if action_name =~ /index|show/ %>class="tabs66"<%end%>><a href="/manage/photos" title="我的相册"><span>我的相册</span></a></li>
     <li <% if action_name == 'friend_photos' %>class="tabs66"<%end%>><a href="/manage/photos/friend_photos" title="好友的相册"><span>好友的相册</span></a></li>
   </ul>

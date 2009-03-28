@@ -29,4 +29,8 @@ class GiftUser < ActiveRecord::Base
   def owner
     @owner ||= User.find(self.user_id)
   end
+
+  def mod_desc
+    self.send_mode == 0 ? '悄悄' : '匿名'
+  end
 end

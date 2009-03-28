@@ -13,7 +13,7 @@ class MySpaceController < ApplicationController
   Photo_PerPage = 20
   Latest_Votes_Count = 5
   Latest_Blogs_Count = 5
-  Latest_Photos_Count = 4
+  Latest_Photos_Count = 6
   Latest_Groups_Count = 5
   Latest_Friends_Count = 6
   Hot_Blog_Count = 10

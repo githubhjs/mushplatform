@@ -5,6 +5,8 @@ class UserProfile < ActiveRecord::Base
 
   belongs_to :vocation
 
+  after_save :reset_cache
+
 #  has_attachment :storage => :file_system, :path_prefix => 'public/assets/avatar',
 #                 :content_type => :image, :processor => 'Rmagick', :thumbnail_class => :thumbnail,
 #                 :thumbnails => { :normal => '120x120>', :small => '50x50>' }
@@ -26,7 +28,10 @@ class UserProfile < ActiveRecord::Base
   validates_length_of :sex,:minimum => 1,:too_short => "选选择性别"
  
   Image_Size = "100X100"
-  
+
+  def reset_cache
+    Cache.put(UserProfile.profile_cache_key(self.user_id),self)
+  end
   
   def user_icon=(img)
     unless img.blank?
@@ -52,7 +57,22 @@ class UserProfile < ActiveRecord::Base
     end
     return ["/images/#{rand_dir}/#{img_name}","#{file_path}/#{img_name}"]
   end
+
+  def self.find_by_user_id(user_id)
+    cache_key = profile_cache_key(user_id)
+    profile =  Cache.get(cache_key)
+    unless profile
+      profile = find(:first,:conditions => "user_id=#{user_id}") || create(:user_id => user_id,:city => '未知')
+      Cache.put(cache_key,profile)      
+    end
+    profile
+  end
   
+
+  def self.profile_cache_key(user_id)
+    "record_user_profile_uid#{user_id}"
+  end
+
   #generate a rand dir 
   def generate_local_dir
     today = Date.today

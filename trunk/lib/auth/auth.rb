@@ -29,7 +29,7 @@ module Auth
 
   def is_space_admin?
     unless  current_user && current_user.user_name == request.subdomains.first
-      flash[:warning]='Please login to continue'
+      flash[:warning]='请登陆'
       session[:return_to] = request.request_uri
       redirect_to "/user/login"
       return false

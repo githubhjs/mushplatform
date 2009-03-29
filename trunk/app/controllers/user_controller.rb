@@ -6,11 +6,11 @@ class UserController < ApplicationController
   def select
   end
   
-  def signup
+  def signup    
     @user = User.new(params[:user])
     @profile = UserProfile.new(params[:profile])
     @group = params[:group]
-    return if generate_blank
+#    return if generate_blank
     if @user.save  
       SidebarUser.create_default_sidebars(@user.id)
       BlogConfig.find_or_create_by_user_id(@user.id)
@@ -25,14 +25,16 @@ class UserController < ApplicationController
     return true
   end
   
-  def login
+  def login    
     # if get the login page, just render
-    return if generate_blank
-
+    if request.method.to_s == 'get'
+      render :layout => get_layout
+      return true
+    end
     # unless, the request is actually login
     session[:user] = params[:user].blank? ? nil : User.authenticate(params[:user][:user_name],params[:user][:password])
     if session[:user]
-      flash[:message]  = "Login successful"
+      flash[:message]  = "登陆成功"
       #redirect_to session[:return_to] || "/admin" 
       unless params[:admin].blank?
         redirect_to session[:return_to] || "/admin"
@@ -40,7 +42,7 @@ class UserController < ApplicationController
         redirect_to session[:return_to] || params[:forward] || "/"
       end
     else
-      flash[:warning] = "Login unsuccessful"
+      flash[:warning] = "登陆失败，用户名或密码不对。若有问题，请发email到mucx@ccmw.net"
       render :layout => get_layout
     end    
   end
@@ -82,15 +84,15 @@ class UserController < ApplicationController
   end
 
   # Generate a template user for certain actions on get
-  def generate_blank
-    case request.method
-    when :get
-      @user = User.new
-      render :layout => get_layout
-      return true
-    end
-    return false
-  end
+#  def generate_blank
+#    case request.method
+#    when :get
+##      @user = User.new
+#      render :layout => get_layout
+#      return true
+#    end
+#    return false
+#  end
   
   def get_layout
     params[:admin].blank? ? "site" : false

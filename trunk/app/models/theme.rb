@@ -9,7 +9,7 @@ class Theme
     @name, @path = name, path  
   end  
   
-  def them_info
+  def theme_info
     @info ||= begin
       File.exist?("#{@path}/about.yml") ?  (YAML::load(File.open(@path+'/about.yml')) || {}) : {}
     rescue Exception => e
@@ -18,11 +18,11 @@ class Theme
   end
 
   def title 
-    them_info['title']||@name
+    theme_info['title']||@name
   end
 
   def theme_type
-    them_info['theme_type'] || 'default'
+    theme_info['theme_type'] || 'default'
   end
   
   def is_sns_theme?
@@ -30,11 +30,11 @@ class Theme
   end
 
   def description
-    them_info['description'] || @name
+    theme_info['description'] || @name
   end
   
-  def enable?
-    them_info['enabled']||true
+  def enable?    
+     theme_info['enabled']    
   end
 
   def path
@@ -85,10 +85,14 @@ class Theme
     self.new(them_name, path)
   end  
       
-  def self.find_all_theme  
-    installed_themes.inject([]) do |array, path|  
-      array << theme_from_path(path)   
-    end  
+  def self.find_all_theme
+    all_themes  = []
+    installed_themes.each do |theme_path|
+      theme  = theme_from_path(theme_path)
+      debugger
+      all_themes << theme  if theme.enable?
+    end
+    all_themes
   end  
       
   def self.installed_themes 

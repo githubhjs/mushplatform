@@ -66,7 +66,7 @@ class User < CachedModel
 
 
   def blog_config  
-    @blog_config ||= (BlogConfig.find_by_user_id(self.id) || BlogConfig.create(:user_id => self.id))
+    BlogConfig.find_by_user_id(self.id)
   end
   
   def blog_config=(confg)
@@ -74,7 +74,7 @@ class User < CachedModel
   end
 
   def user_profile
-    @user_pfofile = UserProfile.find_by_user_id(self.id)
+    UserProfile.find_by_user_id(self.id)
   end
 
   def real_name

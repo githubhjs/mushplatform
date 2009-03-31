@@ -41,7 +41,8 @@
 {% endif %}
   <p>
       <label>内 容(<span class='author'>至少5个字符</span>)</label>
-      <textarea name="comment[body]" class="styled" rows=10 cols=20>{{comment.body}}</textarea>
+      <textarea name="comment[body]" id="comment_body"></textarea>
+      <script>var oFCKeditor = new FCKeditor('comment[body]', '100%', '200px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>    
       <input type="hidden" name="comment[blog_id]" value="{{entry.id}}">
   </p>
   <p>

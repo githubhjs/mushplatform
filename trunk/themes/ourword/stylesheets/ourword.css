@@ -228,7 +228,7 @@ DIV.scott SPAN.disabled {
 .message img{ float:left; width:48px;}
 .message dl{ float:right; width:87%;line-height:20px;}
 .message dt{ width:98%; height:22px;color:#94979e;}
-.message p{ display:block; clear:both; width:90%; text-align:right; margin:12px auto;}
+.message p{ display:block; clear:both; width:90%; text-align:left; margin:12px auto;}
 
 .saying{ width:90%; margin:0 auto; color:#464646;}
 .saying_bt{ width:100%; height:23px; color:#000000; line-height:23px; background:#fdecbe; border-bottom:1px dotted #fcbaad;border-top:1px dotted #fcbaad; padding-left:10px;}

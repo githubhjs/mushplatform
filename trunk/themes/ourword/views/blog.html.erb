@@ -70,7 +70,9 @@
                   </tr>
                   <tr>
                     <td valign="top" align="right">内容：</td>
-                    <td><textarea name="comment[body]" class="styled" rows='4' cols='30'></textarea>
+                    <td>
+                     <textarea name="comment[body]" id="comment_body"></textarea>
+                     <script>var oFCKeditor = new FCKeditor('comment[body]', '100%', '200px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>    
                     </td>
                   </tr>
                   <tr>

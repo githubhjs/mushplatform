@@ -1,4 +1,6 @@
 function submit_comment(){
+    var oEditor = FCKeditorAPI.GetInstance('comment[body]');
+    document.getElementById('comment_body').value = oEditor.GetXHTML();
     form = $('comment_form');
     if(form['comment[body]'].value != '' && form['comment[body]'].value.length >= 5 ) //&& form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
     {

@@ -80,6 +80,16 @@ module CcmwHelper
     }
     { 'files' => files.join('|'), 'urls' => urls.join('|'), 'texts' => texts.join('|') }
   end
+
+  def years_of_journals(args = {})
+    tgs = Tag.find_all_by_category('期刊')
+    @tags = Hash.new
+    tgs.each { |t|
+      j_name = t.name[0,4]
+      @tags[j_name] = t.id unless @tags.has_key?(j_name)
+    }
+    { 'years' => @tags.keys }
+  end
   
   def add_mainmenu
     menu="

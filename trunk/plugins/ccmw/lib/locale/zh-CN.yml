@@ -26,6 +26,8 @@ zh-CN:
       name: "名称"
       category: "分类"
       position: "位置"
+      top: "顶部描述"
+      bottom: "底部描述"
 
     link:
       manage_links: "文字链接管理"

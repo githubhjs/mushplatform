@@ -26,6 +26,8 @@ en-US:
       name: "Name"
       category: "Category"
       position: "Position"
+      top: "Top"
+      bottom: "Bottom"
 
     link:
       manage_links: "Manage Links"

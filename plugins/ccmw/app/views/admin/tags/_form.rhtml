@@ -14,6 +14,20 @@
     <th scope="row" valign="top"><label for="tag_position"><%= t 'text.tag.position' %></label></th>
     <td><%= text_field 'tag', 'position' %></td>
   </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="tag_top"><%= t 'text.tag.top' %></label></th>
+    <td>
+       <textarea name="tag[top]" id="tag_top"><%= @tag.top %></textarea>
+       <script>var oFCKeditor = new FCKeditor('tag[top]', '80%', '300px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
+    </td>
+  </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="tag_bottom"><%= t 'text.tag.bottom' %></label></th>
+    <td>
+       <textarea name="tag[bottom]" id="tag_bottom"><%= @tag.bottom %></textarea>
+       <script>var oFCKeditor = new FCKeditor('tag[bottom]', '80%', '300px', 'Simple'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
+    </td>
+  </tr>
 </table>
 <p class="submit">
   <input type="submit" class="button" name="submit" value="<%= t 'text.tag.save_tag' %>" />

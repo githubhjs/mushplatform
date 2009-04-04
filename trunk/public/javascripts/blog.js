@@ -19,6 +19,9 @@ function ajax_submit(_from){
         evalScripts:true,
         onComplete:function(request){
             Element.hide('comment_loading');
+            $('comment_body').value ='';
+            var oEditor = FCKeditorAPI.GetInstance('comment[body]');
+            oEditor.SetData('');
         },
         onLoading:function(request){
             Element.show('comment_loading');

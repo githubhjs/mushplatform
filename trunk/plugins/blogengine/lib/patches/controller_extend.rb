@@ -46,7 +46,7 @@ module ControllerExtend
   end
   
   def sidebar_options
-    options = {:user_id => current_blog_user.id}
+    options = {:user_id => current_blog_user.id,:user => current_blog_user}
     options[:year]  = params[:year]   unless params[:year].blank?
     options[:month] = params[:month]  unless params[:month].blank?
     options[:date]  = params[:date]   unless params[:month].blank?

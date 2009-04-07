@@ -63,8 +63,6 @@ class User < CachedModel
     end
   end
 
-
-
   def blog_config  
     BlogConfig.find_by_user_id(self.id)
   end

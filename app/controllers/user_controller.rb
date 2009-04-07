@@ -1,17 +1,17 @@
 class UserController < ApplicationController
   
   layout 'site'
+  
   skip_before_filter :verify_authenticity_token
   
   def select
   end
   
-  def signup    
+  def signup
     @user = User.new(params[:user])
     @profile = UserProfile.new(params[:profile])
-    @group = params[:group]
-#    return if generate_blank
-    if @user.save  
+    @group = params[:group]    
+    if request.method.to_s == 'post' &&  @user.save
       SidebarUser.create_default_sidebars(@user.id)
       BlogConfig.find_or_create_by_user_id(@user.id)
       @profile.user_id = @user.id

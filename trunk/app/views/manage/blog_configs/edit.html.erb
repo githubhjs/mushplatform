@@ -32,6 +32,10 @@
         <font style="color:red;"><%= @blog_config.errors.on(:comment_perpage) %></font>
         <%= f.text_field :comment_perpage %>
       </p>
+      <p><span>背景音乐：</span>
+        <font style="color:red;"><%= @blog_config.errors.on(:music) %></font>
+        <%= f.text_field :music %>
+      </p>
       <input class="submit"  type="submit" value="保 存" />
       <div class="height12xhx"></div>
     </div>

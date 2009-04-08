@@ -57,6 +57,7 @@ class Manage::BlogsController < Manage::ManageController
     @blog = Blog.new(params[:blog])
     @blog.published = params[:publish].blank?  ? Blog::Drafted_Blogs : Blog::Published_Blogs
     @blog.user_id = current_user.id
+    @blog.author  = current_user.real_name
     respond_to do |format|
       if @blog.save
         flash[:notice] = 'Blog was successfully created.'

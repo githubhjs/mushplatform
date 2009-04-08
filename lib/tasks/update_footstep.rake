@@ -36,19 +36,21 @@ task :update_blog_author => :environment do
   while (start < count)
     blogs = Blog.find(:all,:limit => each_loop_count, :offset => start)
     blogs.each do |blog|
-      blog.update_attribute(:author,User.find(blog.user).real_name)
+      blog.update_attribute(:author,User.find(blog.user_id).real_name)
     end
+    start += each_loop_count
   end
 end
 
-task :update_blog_author => :environment do
+task :update_comment_author => :environment do
   count = Comment.count
   start,each_loop_count = 0,200
   while (start < count)
     comments = Comment.find(:all,:limit => each_loop_count, :offset => start)
     comments.each do |comment|
-      comment.update_attribute(:author,User.find(comment.user).real_name)
+      comment.update_attribute(:author,User.find(comment.user_id).real_name)
     end
+    start += each_loop_count
   end
 end
 #      title = footstep.content.scan(/<a\s+href="[^"]*">(.*?)<\/a>/).first.first

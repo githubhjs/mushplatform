@@ -88,7 +88,7 @@ class MySpaceController < ApplicationController
   def create_comment
     if user = (current_user || (params[:user] && User.authenticate(params[:user][:user_name],params[:user][:password])))
       @comment = Comment.new(params[:comment])
-      @comment.author = user.user_name
+      @comment.author = user.real_name
       @comment.email = user.email
       @comment.user_id = user.id
       @comment.blog_user_id = current_blog_user.id

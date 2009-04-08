@@ -18,9 +18,9 @@ class MySpaceController < ApplicationController
   Latest_Friends_Count = 6
   Hot_Blog_Count = 10
   Latest_Messages_Count = 20
-  Latest_Friends_Count  = 24
-  Latest_Votes_Count = 20
-  Latest_Groups_Count = 10
+  List_Friends_Count  = 24
+  List_Votes_Count = 20
+  Groups_Count_For_List = 10
   
   helper_method :current_blog_user  
   before_filter :subdomain_exist?
@@ -158,12 +158,12 @@ class MySpaceController < ApplicationController
   end
 
   def friends
-    @friends = current_blog_user.friends.paginate(:page => params[:page],:per_page => Latest_Friends_Count,:order => "friends.created_at desc")
+    @friends = current_blog_user.friends.paginate(:page => params[:page],:per_page => List_Friends_Count,:order => "friends.created_at desc")
     render :template => 'friends'
   end
 
   def votes
-    @votes = current_blog_user.votes.paginate(:page => params[:page],:per_page => Latest_Votes_Count,:order => "id desc")
+    @votes = current_blog_user.votes.paginate(:page => params[:page],:per_page => List_Votes_Count,:order => "id desc")
     render :template => 'votes'
   end
 
@@ -175,7 +175,7 @@ class MySpaceController < ApplicationController
   end
 
   def groups
-    @user_groups  = current_blog_user.user_groups.paginate(:page => params[:page],:per_page => Latest_Groups_Count,:order => "id desc")
+    @user_groups  = current_blog_user.user_groups.paginate(:page => params[:page],:per_page => Groups_Count_For_List,:order => "id desc")
     render :template => 'user_groups'
   end
 

@@ -48,6 +48,7 @@ task :update_comment_author => :environment do
   while (start < count)
     comments = Comment.find(:all,:limit => each_loop_count, :offset => start)
     comments.each do |comment|
+      next if comment.user_id.blank? || comment.user_id <= 0
       comment.update_attribute(:author,User.find(comment.user_id).real_name)
     end
     start += each_loop_count

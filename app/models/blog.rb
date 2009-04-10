@@ -82,8 +82,10 @@ class Blog < ActiveRecord::Base
   end
   
   def to_liquid
+    user = User.find(user_id)
     atts = attributes.stringify_keys
-    atts['author'] = User.find(user_id).real_name if author.blank?
+    atts['author'] = user.real_name if author.blank?
+    atts['user_name'] = user.user_name
     atts
   end
 

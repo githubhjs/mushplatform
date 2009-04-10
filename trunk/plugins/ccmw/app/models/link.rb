@@ -6,6 +6,8 @@ class Link < CachedModel
   end  
 
   def to_liquid
-     self.attributes.stringify_keys
+     atts = attributes.stringify_keys
+     atts['image'] = public_filename if filename
+     atts
   end  
 end

@@ -52,7 +52,7 @@ module CcmwHelper
 
   def list_image_links_by_category(args = {})
     category = args.delete(:category)
-    links = Link.find(:all, :conditions => "category = #{category} and filename is not null")
+    links = Link.find(:all, :conditions => "category = '#{category}' and filename is not null")
     { 'links' => links }
   end
   

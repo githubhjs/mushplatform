@@ -49,6 +49,12 @@ module CcmwHelper
     links = Link.find_all_by_category(category)
     { 'links' => links }
   end
+
+  def list_all_links_by_category(args = {})
+    category = args.delete(:category)
+    links = Link.find(:all, :conditions => "category = #{category} and filename is not null")
+    { 'links' => links }
+  end
   
   def list_tags_by_category(args ={})
     category = args.delete(:category)

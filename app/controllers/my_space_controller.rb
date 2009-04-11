@@ -35,7 +35,7 @@ class MySpaceController < ApplicationController
     else
       sns_index
     end
-    return 
+    return  true
   end
 
   def general_blog_index
@@ -56,11 +56,12 @@ class MySpaceController < ApplicationController
   end
   
   def blogs
-    @categories = current_blog_user.categories
+    @categories = current_blog_user.categories    
     @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc",:conditions => "user_id=#{current_blog_user.id}")
     @blogs = Blog.publised_blogs.paginate(:page => params[:page]||1,:per_page => Blog_Count_PerPage, :conditions => generate_conditions,:order => 'if_top desc,id desc')
     stat_info()
     render :template => 'blogs'
+    return true
   end
 
   protected :sns_index,:general_blog_index
@@ -69,7 +70,7 @@ class MySpaceController < ApplicationController
     @blog = Blog.find(params[:id])
     if @blog.user_id != current_blog_user.id
       render :text => '此文章不存在'
-      return
+      return true
     end
     @blog.add_view_count
     BlogConfig.add_view_count(current_blog_user.id)
@@ -79,10 +80,10 @@ class MySpaceController < ApplicationController
     else
       stat_info
       @categories = current_blog_user.categories
-      @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc")
+       @hot_blogs = Blog.publised_blogs.find(:all,:limit => Hot_Blog_Count,:order => "comment_count desc, view_count desc",:conditions => "user_id=#{current_blog_user.id}")
       render :template => 'blog'
     end
-    return 
+    return true
   end
   
   def create_comment

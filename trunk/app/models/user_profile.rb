@@ -30,7 +30,7 @@ class UserProfile < ActiveRecord::Base
   Image_Size = "100X100"
 
   def reset_cache
-    Cache.put(UserProfile.profile_cache_key(self.user_id),self)
+    Cache.put(UserProfile.profile_cache_key(self.user_id),UserProfile.find_by_id(self.id))
   end
   
   def user_icon=(img)

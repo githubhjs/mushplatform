@@ -40,7 +40,7 @@ class Article < CachedModel
        excerpt = body.gsub(/<.+?>/,'').substr(0,170)
        atts['excerpt'] = excerpt
      end
-     atts['category'] = article.category.name
+     atts['category'] = category.name
      atts
   end
 

@@ -2,6 +2,7 @@ class Article < CachedModel
   #partial_updates = true
 
   has_many :contents, :dependent => :destroy
+  has_one :category, :class_name => 'ArticleCategory'
   belongs_to :channel
   belongs_to :group
   acts_as_taggable
@@ -39,6 +40,7 @@ class Article < CachedModel
        excerpt = body.gsub(/<.+?>/,'').substr(0,170)
        atts['excerpt'] = excerpt
      end
+     atts['category'] = article.category.name
      atts
   end
 

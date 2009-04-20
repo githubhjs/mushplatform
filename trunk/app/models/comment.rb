@@ -24,6 +24,7 @@ class Comment < ActiveRecord::Base
     atts = self.attributes.stringify_keys
     atts['author'] = 'guest' if self.user_id == 0
     atts['title'] = realtitle
+    atts['space_url'] = self.user.space_url
     atts
   end
 

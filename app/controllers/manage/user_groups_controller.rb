@@ -84,7 +84,7 @@ class Manage::UserGroupsController < Manage::ManageController
   
   def new_photo
     @user_group = UserGroup.find(params[:id])
-    @tags = Photo.tag_counts.map(&:name).to_json
+    @tags = current_user.photos.tag_counts({:conditions => "user_id=#{current_user.id}"}).map(&:name).to_json
   end
 
    def create_photo
@@ -117,7 +117,7 @@ class Manage::UserGroupsController < Manage::ManageController
   def edit_photo
     @user_group = UserGroup.find(params[:id])
     @photo = Photo.find(params[:photo_id])
-    @tags = Photo.tag_counts.map(&:name).to_json
+    @tags = current_user.photos.tag_counts({:conditions => "user_id=#{current_user.id}"}).map(&:name).to_json
   end
   
   def update_photo

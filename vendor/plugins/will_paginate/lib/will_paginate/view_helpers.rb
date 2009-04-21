@@ -297,7 +297,7 @@ module WillPaginate
 
     # Returns URL params for +page_link_or_span+, taking the current GET params
     # and <tt>:params</tt> option into account.
-    def url_for(page)
+    def url_for(page)      
       page_one = page == 1
       #unless @url_string and !page_one
         @url_params = {}
@@ -321,9 +321,12 @@ module WillPaginate
         return url if page_one
         
         if complex
+          debugger
           @url_string = url.sub(%r!((?:\?|&amp;)#{CGI.escape param_name}=)#{page}!, '\1@')
+          url.gsub!(/\?+$/,'')
           return url
         else
+          debugger
           @url_string = url
           @url_params[param_name] = 3
           @template.url_for(@url_params).split(//).each_with_index do |char, i|
@@ -335,7 +338,9 @@ module WillPaginate
         end
       #end
       # finally!
-      @url_string.sub '@', page.to_s
+      page_url = @url_string.sub '@', page.to_s
+      page_url.gsub!(/\?+$/,'')
+      page_url
     end
 
   private

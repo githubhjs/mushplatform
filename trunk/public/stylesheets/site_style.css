@@ -372,6 +372,7 @@ a:hover,a:active{color:#de363a;text-decoration:none;}
 .signup table{border:1px solid #cdcdcd;width:100%;margin:10px 0;text-align:left;}
 .signup table .tit_bg{background:#eee;}
 .signup table .ico{background:url(../images/ico_red.gif) no-repeat 0px 6px;text-indent:18px;font-weight:bold;}
+.signup table .ico1{background:url(../images/password_title.gif) no-repeat 0px 6px;text-indent:18px;font-weight:bold;}
 .signup table td{line-height:20px;padding:3px 5px 3px 10px;font-size:12px;}
 .signup table input{line-height:20px;height:20px;border:1px solid #cfcfcf;}
 .signup table .InpTxt{width:140px;}

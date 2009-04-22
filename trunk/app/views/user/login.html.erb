@@ -22,8 +22,12 @@
             <%= u_field.password_field(:password, :class => "InpTxt")%></td>
           </tr>
         <tr>
-          <td colspan="2" align="center">
-            <input name="vip" type="submit" value="登录" />
+          <td colspan="2" align="left">
+            <div style="text-align:left;padding-left:320px;">
+              <input name="vip" type="submit" value="登录" />
+              <a style="margin-left:5px;" href="/user/signup">注册</a><a style="margin-left:5px;" href="/user/forget_password">忘记密码</a>
+            </div>
+            
           </td>
         </tr>		
         <%end%>
@@ -31,3 +35,6 @@
     </div>
   <%end%>
 </div>
+<script>
+  document.getElementById('user_user_name').focus();
+</script>

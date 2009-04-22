@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect   "/user/login",:controller => 'user',:action => 'login'
   map.connect   "/user/login_bar",:controller => 'user',:action => 'login_bar'
   map.connect   "/user/logout",:controller => 'user',:action => 'logout'
+  map.connect   "/user/forget_password",:controller => 'user',:action => 'forgot_password'
 #  map.connect   "/manage",:controller => 'manage/blogs',:action => 'index'
   map.connect   "/manage/common/select_with_ajax",:controller => "manage/common",:action => "select_with_ajax"
   map.connect   "/front/editors/upload_editor_image",:controller => 'front/editors',:action => "upload_editor_image"

@@ -64,14 +64,20 @@ class UserController < ApplicationController
   end
   
   def forgot_password
-    u= User.find_by_email(params[:user][:email])
-    if u and u.send_new_password
-      flash[:message]  = "A new password has been sent by email."
-      redirect_to '/login'
+    if request.post?
+      if !params[:user].find{|key,value| value.blank?} &&  User.find(:first,:conditions => params[:user])
+        render :text => "密码已发送到你注册邮箱，请查收"
+        return
+      end
+      @user = User.new(params[:user])
+      flash[:warning] = "信息不对，请重新输入"
     else
-      flash[:warning]  = "Couldn't send password"
+      @user = User.new
     end
+    render :template => "/user/forget_password"
+    return
   end
+
 
   def change_password
     @user=session[:user]

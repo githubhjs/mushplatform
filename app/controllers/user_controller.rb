@@ -65,7 +65,8 @@ class UserController < ApplicationController
   
   def forgot_password
     if request.post?
-      if !params[:user].find{|key,value| value.blank?} &&  User.find(:first,:conditions => params[:user])
+      if !params[:user].find{|key,value| value.blank?} &&  user = User.find(:first,:conditions => params[:user])
+        CcmwMailer.deliver_send(user.email, user.password)
         render :text => "密码已发送到你注册邮箱，请查收"
         return
       end

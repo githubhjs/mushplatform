@@ -1,0 +1,6 @@
+:address: smtp.gmail.com
+:port: 587
+:user_name: ccmwadmin@gmail.com
+:password: ccmwadmin6776
+:authentication: :plain  
+

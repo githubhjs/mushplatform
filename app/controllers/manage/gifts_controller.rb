@@ -118,13 +118,17 @@ class Manage::GiftsController < Manage::ManageController
   end
 
   def receive
-    @gift_users = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "friend_id = #{current_user.id}",:order => 'id desc')
+    conditions = ["friend_id = #{current_user.id}"]
+    conditions << "created_at >= date_sub(now() , INTERVAL 1 day)"  unless params[:new].blank?
+    @gift_users = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => conditions.join('  and  '),:order => 'id desc')
     render :template => "/manage/gifts/receive_gift"
     return
   end
 
   def send_gifts
-    @gift_users = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => "user_id = #{current_user.id}",:order => "id desc")
+    conditions = ["user_id = #{current_user.id}"]
+    conditions << "created_at >= date_sub(now() , INTERVAL 1 day)"  unless params[:new].blank?
+    @gift_users = GiftUser.paginate(:page => params[:page]||1,:per_page => Gifts_Per_Page, :conditions => conditions.join(' and '),:order => "id desc")
     render :template => "/manage/gifts/send_gifts"
     return
   end

@@ -142,8 +142,8 @@ class MySpaceController < ApplicationController
       render :text => '此图片不存在'
       return
     end
-    @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id}",:order => "id")
-    @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id}",:order => "id")
+    @next_photo = Photo.find(:first,:conditions => "id>#{@photo.id} and user_id=#{current_blog_user.id}",:order => "id")
+    @per_photo =  Photo.find(:first,:conditions => "id<#{@photo.id} and user_id=#{current_blog_user.id}",:order => "id")
     unless current_theme.is_sns_theme?      
       render_liquid({:template => 'photo',:layout => true},{'photo' => @photo,'if_login' => current_user ? true : false})
     else

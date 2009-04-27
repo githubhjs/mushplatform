@@ -8,17 +8,17 @@
     <table width="475" border="0" cellpadding="0" cellspacing="0">
       <tbody><tr>
           <td width="79" align="right"><a href="/manage/blogs" class="cblack">发表日志</a>:&nbsp;</td>
-          <td class="gray" width="79">&nbsp;<%= current_user.blogs.count %>篇</td>
+          <td class="gray" width="79">&nbsp;<a href="/manage/blogs"><%= current_user.blogs.count %></a>篇</td>
           <td width="79" align="right"><a href="/manage/messages" class="cblack">发布公告</a>:&nbsp;</td>
-          <td class="gray" width="79">&nbsp;<%= current_user.messages.count %>条</td>
+          <td class="gray" width="79">&nbsp;<a href="/manage/messages"><%= current_user.messages.count %></a>条</td>
           <td width="79" align="right"><a href="/manage/votes" class="cblack">参与投票</a>:&nbsp;</td>
-          <td class="gray" width="80">&nbsp;<%= current_user.user_votes.count %>条</td>
+          <td class="gray" width="80">&nbsp;<a href="/manage/votes" class="cblack"><%= current_user.user_votes.count %></a>条</td>
         </tr>
         <tr>
           <td width="79" align="right"><a href="/manage/gifts/receive" class="cblack">收到的礼物</a>:&nbsp;</td>
-          <td class="gray" width="79">&nbsp;<%= current_user.receive_regards.count %>件(<a href="/manage/gifts/receive" class="cred"><%= @new_gifts_count %>件新</a>)</td>
+          <td class="gray" width="79">&nbsp;<a href="/manage/gifts/receive"><%= current_user.receive_gifts.count %></a>件(<a href="/manage/gifts/receive?new=1" class="cred"><%= @new_gifts_count %>件新</a>)</td>
           <td width="79" align="right"><a href="/manage/regards/receive" class="cblack">好友的问候</a>:&nbsp;</td>
-          <td class="gray" width="79">&nbsp;<%= current_user.receive_gifts.count %>句(<a href="/manage/regards/receive" class="cred"><%= @new_regards_count %>句新</a>)</td>
+          <td class="gray" width="79">&nbsp;<a href="/manage/regards/receive"><%= current_user.receive_regards.count %></a>句(<a href="/manage/regards/receive?new=1" class="cred"><%= @new_regards_count %>句新</a>)</td>
           <td width="79" align="right">&nbsp;</td>
           <td class="gray" width="80">&nbsp;</td>
         </tr>

@@ -1,6 +1,6 @@
 module HtmlUtil
   class << self
-    def sanitize( html, ok_tags='a href, b, br, i, p' )
+    def sanitize( html, ok_tags='' )
       # no closing tag necessary for these
       solo_tags = ["br","hr"]
 

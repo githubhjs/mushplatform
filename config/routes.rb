@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => "my_space",:conditions => { :subdomain => /^(?!www$)\w+/ } do  |my_space|
     my_space.connect "/" ,:action => 'index'
     my_space.connect '/blogs/page/:page',:action => 'blogs'
+    my_space.connect '/blogs/category/:category_id',:action => 'blogs'
     my_space.connect "/page/:page" ,:action => 'index'
     my_space.connect '/archive/:year/:month/:date',:action => 'index',
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
@@ -38,8 +39,7 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/photos/page/:page',:action => 'photos'
     my_space.connect '/photos/:id',:action => 'photo'
     my_space.connect '/rss',:action => 'rss'
-    my_space.connect '/blogs',:action => 'blogs'    
-    my_space.connect '/blogs/category/:category_id',:action => 'blogs'
+    my_space.connect '/blogs',:action => 'blogs'        
     my_space.connect '/messages',:action => 'messages'
     my_space.connect '/friends',:action => 'friends'
     my_space.connect '/votes',:action => 'votes'

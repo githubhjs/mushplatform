@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect "/" ,:action => 'index'
     my_space.connect '/blogs/page/:page',:action => 'blogs'
     my_space.connect '/blogs/category/:category_id',:action => 'blogs'
+    my_space.connect '/blogs/category/:category_id/page/:page',:action => 'blogs'
+    my_space.connect '/blogs/category/:category_id/page',:action => 'blogs'
     my_space.connect "/page/:page" ,:action => 'index'
     my_space.connect '/archive/:year/:month/:date',:action => 'index',
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }

@@ -1,6 +1,6 @@
 <div class="main">
   <div class="left">
-    <%= render :partial => "/share/blog_categories" %>
+    <%= render :partial => "/share/blog_categories",:locals => {:categories => @categories} %>
     <div class="height12"></div>
     <%= render :partial => "/share/hot_blogs" %>
     <div class="height12"></div>

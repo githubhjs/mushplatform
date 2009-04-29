@@ -27,6 +27,8 @@ ActionController::Routing::Routes.draw do |map|
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
     my_space.connect '/archive/:year/:month/page/:page',:action => 'index',
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
+    my_space.connect '/articles/:year/:month/:date',:action => 'index',
+      :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
     my_space.connect '/articles/:year/:month/:date/page/:page',:action => 'index',
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
     my_space.connect '/category/:category_id',:action => 'index'

@@ -89,12 +89,8 @@ class Admin::LinksController < ApplicationController
 
   # DELETE /Links/1
   # DELETE /Links/1.xml
-  def destroy
-    params[:id].each{|id| 
-      link = Link.find(id.to_i)
-      link.destroy
-    }
-
+  def destroy    
+    Link.connection.execute("delete from links where id in (#{params[:id].join(',')})") unless params[:id].blank?
     respond_to do |format|
       format.html { redirect_to(links_url) }
       format.xml  { head :ok }

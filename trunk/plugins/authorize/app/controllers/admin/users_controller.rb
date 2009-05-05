@@ -60,6 +60,9 @@ class Admin::UsersController < ApplicationController
   def authorize_user
     user = User.find(params[:id])
     proccess_association_groups(user)
+    unless params[:password].empty?
+      user.update_attribute(:password, params[:password])
+    end
     flash[:notice] = 'User has bean successfully authorized.'
     redirect_to :action => :index
     return true
@@ -82,7 +85,7 @@ class Admin::UsersController < ApplicationController
   end
   
   def search
-    @users = User.find_by_user_name(params[:name])
+    @users = User.paginate :page => params[:page], :order => 'created_at DESC', :conditions => "user_name = '#{params[:name]}'"
 
     respond_to do |format|
       format.html { render :template => "admin/users/index" }

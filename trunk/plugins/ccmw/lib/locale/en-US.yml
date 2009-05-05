@@ -41,7 +41,9 @@ en-US:
 
     blogs:
       manage_blogs: "Manage Blogs"
-      all_blogs: "All Blogs"
+      all_blogs: "Uncollected Blogs"
+      collected_blogs: "Collected Blogs"
+      abandon_blogs:  "Abandon Blogs"
       audit: "Audit"
       abandon: "Abandon"
 

@@ -4,8 +4,10 @@
   <div class="height20"></div>
   <div class="list">
     <ul>
-      <%for category in categories%>
+      <% if @categories %>
+      <%for category in @categories%>
       <li><a href="/blogs/category/<%= category.id %>"><%= category.name %></a> <span>[共<%= category.blog_count %>篇]</span></li>
+      <%end%>
       <%end%>
     </ul>
   </div>

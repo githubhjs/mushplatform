@@ -1,5 +1,5 @@
     <script>set_current_channel('authorize')</script>
-    <form id="posts-filter" action="" method="get">
+    <form id="posts-filter" action="/admin/users/search" method="post">
     <h2>用户管理</h2>
 
     <ul class="subsubsub">
@@ -10,7 +10,7 @@
 
 
     <p id="post-search">
-      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="text" id="post-search-input" name="name" value="" />
       <input type="submit" value="Search Users" class="button" />
     </p>
 

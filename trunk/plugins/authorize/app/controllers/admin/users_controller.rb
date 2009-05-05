@@ -81,7 +81,14 @@ class Admin::UsersController < ApplicationController
     end
   end
   
-  
+  def search
+    @users = User.find_by_user_name(params[:name])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @users }
+    end
+  end
  
   # DELETE /users/1
   # DELETE /users/1.xml

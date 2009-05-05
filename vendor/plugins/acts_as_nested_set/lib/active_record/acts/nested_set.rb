@@ -174,7 +174,7 @@ module ActiveRecord
 
         # Returns the number of nested children of this object.
         def children_count
-          return (self[right_col_name] - self[left_col_name] - 1)/2
+          return ((self[right_col_name]||0) - (self[left_col_name]||0) - 1)/2
         end
 
         # Returns a set of itself and all of its nested children

@@ -1,51 +1,77 @@
-    <script>set_current_channel('ccmw')</script>
-    <% form_tag('/admin/blogs/update', :id => 'posts-filter' ) do %>
-    <h2><%= t 'text.blogs.manage_blogs' %> </h2>
+<script>set_current_channel('ccmw');
+  function submit_search_form(){
+    var _value = $('post-search-input').value
+    if(_value == ''){
+      alert("请输入查询关键字");
+      return
+    }
+    var collected = '<%= params[:collected] %>';
+    window.location.href="/admin/blogs?search_keywords="+encodeURIComponent(_value)+"&collected="+collected;
+  }
+</script>
+<% form_tag('/admin/blogs/update', :id => 'posts-filter' ) do %>
+  <h2>
+    <%= t 'text.blogs.manage_blogs' %>
+  </h2>
+  <span>
+    <% if params[:collected].blank? || params[:collected] == '0' %>
+      <%= t 'text.blogs.all_blogs' %>|
+      <a href="/admin/blogs?collected=1"><%= t 'text.blogs.collected_blogs' %></a>|
+      <a href="/admin/blogs?collected=-1"><%= t 'text.blogs.abandon_blogs' %></a>
+    <%elsif params[:collected] == '1'%>
+      <a href="/admin/blogs?collected=0"><%= t 'text.blogs.all_blogs' %></a>|
+      <%= t 'text.blogs.collected_blogs' %>|
+      <a href="/admin/blogs?collected=-1"><%= t 'text.blogs.abandon_blogs' %></a>
+    <%else%>
+      <a href="/admin/blogs?collected=0"><%= t 'text.blogs.all_blogs' %></a>
+      <a href="/admin/blogs?collected=1"><%= t 'text.blogs.collected_blogs' %></a>|
+      <%= t 'text.blogs.abandon_blogs' %>
+    <%end%>
+  </span>
+  <p id="post-search">
+    <input type="text" id="post-search-input" name="s" value="<%= params[:search_keywords] %>" />
+    <input type="button" value="<%= t 'text.search' %>" class="button" onclick="submit_search_form()"/>
+  </p>
 
-    <p id="post-search">
-      <input type="text" id="post-search-input" name="s" value="" />
-      <input type="submit" value="<%= t 'text.search' %>" class="button" />
-    </p>
-
-    <div class="tablenav">
+  <div class="tablenav">
 
     <div class="alignleft">
-    <input type="button" value="<%= t 'text.blogs.audit' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/update';$('posts-filter').submit();" />
-    <input type="button" value="<%= t 'text.blogs.abandon' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/abandon';$('posts-filter').submit();" />
+      <input type="button" value="<%= t 'text.blogs.audit' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/update';$('posts-filter').submit();" />
+      <input type="button" value="<%= t 'text.blogs.abandon' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/abandon';$('posts-filter').submit();" />
     </div>
 
     <br class="clear" />
-    </div>
+  </div>
 
-    <br class="clear" />
+  <br class="clear" />
 
-    <table class="widefat">
-      <thead>
+  <table class="widefat">
+    <thead>
       <tr>
 
-      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
-      <th scope="col"><%= t 'text.blogs.title' %></th>
-      <th scope="col"><%= t 'text.blogs.author' %></th>
+        <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+        <th scope="col"><%= t 'text.blogs.title' %></th>
+        <th scope="col"><%= t 'text.blogs.author' %></th>
 
       </tr>
-      </thead>
-      <tbody>
-        <% for blog in @blogs -%>
+    </thead>
+    <tbody>
+      <% for blog in @blogs -%>
         <tr id='post-1' class='alternate author-self status-publish' valign="top">
           <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= blog.id %>" /></th>
           <td><strong><%= link_to blog.title, "http://#{blog_author(blog.user_id)}.ccmw.net/entry/#{blog.id}", {:class =>'tow=title'} %></strong></td>
           <td><a href='http://#{blog_author(blog.user_id)}.ccmw.net'><%= blog_author(blog.user_id) %></a></td>
         </tr>
-        <% end -%>
-      </tbody>
-    </table>
+      <% end -%>
+    </tbody>
+  </table>
 
-    <% end  %>
+<% end  %>
 
-    <div id="ajax-response"></div>
+<div id="ajax-response"></div>
 
-    <div class="tablenav">
-      <%= will_paginate @blogs, :prev_label => (t 'text.previous'), :next_label => (t 'text.next') %>
-    </div>
+<div class="tablenav">
+  <%= will_paginate @blogs, :prev_label => (t 'text.previous'), :next_label => (t 'text.next') %>
+</div>
 
-    <br class="clear" />
+<br class="clear" />

@@ -6,7 +6,11 @@ class Admin::BlogsController < ApplicationController
   # GET /Links
   # GET /Links.xml
   def index
-    @blogs = Blog.paginate(:conditions => "collected = 0", :order => "id desc", :page => params[:page]||1)
+    condition = params[:collected].blank? ? "collected = 0" : "collected = #{params[:collected]}"
+    unless params[:search_keywords].blank?
+      condition = ["#{condition} and (title like ? or body like ?)","%#{params[:search_keywords]}%","%#{params[:search_keywords]}%"]
+    end    
+    @blogs = Blog.paginate(:conditions => condition, :order => "id desc", :page => params[:page]||1)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @blogs }

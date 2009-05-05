@@ -42,6 +42,8 @@ zh-CN:
     blogs:
       manage_blogs: "博客管理"
       all_blogs: "未审核博客"
+      collected_blogs: "已审核博客"
+      abandon_blogs: "被放弃博客"
       audit: "审核"
       abandon: "放弃"
 

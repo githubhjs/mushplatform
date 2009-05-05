@@ -85,7 +85,7 @@ class Admin::UsersController < ApplicationController
     @users = User.find_by_user_name(params[:name])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :template => "index" }
       format.xml  { render :xml => @users }
     end
   end

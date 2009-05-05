@@ -129,14 +129,22 @@ class Admin::ArticlesController < ApplicationController
   protected
   def find_articles(channel_id)
     @standalone = params[:standalone]
-    if (@standalone && @standalone.length > 0) or channel_id.nil?
+    if (@standalone && @standalone.length > 0) or channel_id.blank?
       channel = Channel.find(1)
-      articles = Article.paginate :page => params[:page], :order => 'created_at DESC'
+      conditions = unless params[:search_keywords].blank?
+        ["title like ? or display_title like ? or sub_title like ?","%#{params[:search_keywords]}%","%#{params[:search_keywords]}%","%#{params[:search_keywords]}%"]
+      else
+        ""
+      end
+      articles = Article.paginate :page => params[:page], :order => 'created_at DESC',:conditions => conditions
     else 
       channel = Channel.find(channel_id)
-#      @articles = Article.by_channel(@channel.id)
-      articles = Article.paginate :page => params[:page], :order => 'created_at DESC',
-                                  :conditions => "channel_id = #{channel_id}"
+      conditions = unless params[:search_keywords].blank?
+        ["channel_id = #{channel_id} and (title like ? or display_title like ? or sub_title like like ?)","%#{params[:search_keywords]}%","%#{params[:search_keywords]}%","%#{params[:search_keywords]}%"]
+      else
+        "channel_id = #{channel_id}"
+      end
+      articles = Article.paginate :page => params[:page], :order => 'created_at DESC',:conditions => conditions
     end
     return channel, articles
   end

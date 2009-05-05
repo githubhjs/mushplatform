@@ -1,4 +1,15 @@
-
+<script>
+  function submit_search_form(){
+    var _value = $('post-search-input').value
+    if(_value == ''){
+      alert("请输入查询关键字");
+      return
+    }
+    var channel_id = '<%= params[:channel_id] %>';
+    var standalone = '<%= params[:standalone] %>';
+    window.location.href="/admin/articles?search_keywords="+encodeURIComponent(_value)+"&channel_id="+channel_id+"&standalone"+standalone
+  }
+</script>
     <% form_remote_tag(:url => "/admin/articles/destroy?page=#{params[:page]}", :html => {:id => 'posts-filter'}) do %>
     <input type="hidden" name="channel_id" value="<%= @channel.id %>" />
     <input type="hidden" name="standalone" value="<%= @standalone %>" />
@@ -10,8 +21,8 @@
 
 
     <p id="post-search">
-      <input type="text" id="post-search-input" name="s" value="" />
-      <input type="submit" value="<%= t 'text.search' %>" class="button" />
+      <input type="text" id="post-search-input" name="" value="<%= params[:search_keywords] %>" />
+      <input type="button" value="<%= t 'text.search' %>" class="button" onclick="submit_search_form()"/>
     </p>
 
     <div class="tablenav">

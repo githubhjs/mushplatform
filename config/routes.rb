@@ -22,15 +22,15 @@ ActionController::Routing::Routes.draw do |map|
     my_space.connect '/blogs/category/:category_id/page',:action => 'blogs'
     my_space.connect "/page/:page" ,:action => 'index'
     my_space.connect '/archive/:year/:month/:date',:action => 'index',
-      :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
+      :requirements => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
     my_space.connect '/archive/:year/:month',:action => 'index',
-      :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
+      :requirements => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
     my_space.connect '/archive/:year/:month/page/:page',:action => 'index',
-      :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
+      :requirements => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
     my_space.connect '/articles/:year/:month/:date',:action => 'index',
       :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/ }
     my_space.connect '/articles/:year/:month/:date/page/:page',:action => 'index',
-      :requirement => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
+      :requirements => {:year => /(?:19|20|)\d\d/,:month =>/[01]?\d/,:date => /[0-3]\d/ }
     my_space.connect '/category/:category_id',:action => 'index'
     my_space.connect '/category/:category_id/page/:page',:action => 'index'
     my_space.connect '/tag/:tag',:action => 'index'

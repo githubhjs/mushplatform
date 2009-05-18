@@ -9,6 +9,7 @@ Liquid::Template.file_system = Liquid::LocalFileSystem.new(File.dirname(__FILE__
 add_scriptlet_type('type_name' => 'show_html', 'function' => :show_html)
 add_scriptlet_type('type_name' => 'list_articles', 'function' => :list_articles)
 add_scriptlet_type('type_name' => 'list_articles_by_tags', 'function' => :list_articles_by_tags)
+add_scriptlet_type('type_name' => 'list_articles_by_search', 'function' => :list_articles_by_search)
 add_scriptlet_type('type_name' => 'list_channels', 'function' => :list_channels)
 add_scriptlet_type('type_name' => 'list_tags', 'function' => :list_tags)
 add_scriptlet('name' => 'show_html', 'type_name' => 'show_html')

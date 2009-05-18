@@ -203,6 +203,7 @@ module WillPaginate
       @collection = collection
       @options    = options
       @template   = template
+      @url_string = options[:page_url]
 
       # reset values in case we're re-using this instance
       #@total_pages = @param_name = @url_string = nil

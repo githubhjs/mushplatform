@@ -1,0 +1,305 @@
+<!doctype html public "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="utf-8">
+<head>
+  <title>CCMW.Net </title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta name="author" content="" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <script type="text/javascript" src="/plugin_assets/cms/javascripts/jsfunc.js"></script>
+  <script type="text/javascript" src="/plugin_assets/cms/javascripts/jsfunc4frm.js"></script>
+</head>
+<style>
+  body {
+color:#000;
+margin:0;
+padding:0;
+}
+body,td,p,form {
+margin:0;
+padding:0;
+}
+body,td,p,form,input,select,textarea {
+font:12px "宋体",Tahoma, sans-serif;
+}
+dl,dt,dd,ul,ul li {
+margin:0;
+padding:0;
+list-style:none;
+}
+
+
+  /*BigCol*/
+.BCTop table {
+width:99%;
+margin:0 auto;
+}
+.DataList {
+text-align:center;
+clear:right;
+}
+.ListTB {
+width:99%;
+margin:0 auto;
+border:solid #eee;
+border-width:0 1px;
+}
+.ListTB .trH {
+background:#F0F0F0;
+}
+.ListTB .tr0 td {
+background:#E5ECF9;
+}
+.ListTB .trH td {
+font-weight:bold;
+}
+.ListTB td {
+line-height:175%;
+border-bottom:1px solid #eee;
+}
+.ListTB td a,.ListTB td a:visited {
+color:#00c;
+}
+.ListTB td.Chk {
+width:32px;
+}
+.ListTB td.ID {
+width:60px;
+text-align:left;
+}
+.ListTB td.Tit,.ListTB td.Comm,.ListTB td.Name {
+text-align:left;
+}
+.ListTB td.IsPub {
+color:#000;
+}
+.ListTB td.NotPub {
+color:#f60;
+}
+.ListTB td.pTime,.ListTB td.eTime {
+width:136px;
+}
+.ListTB td.option,.ListTB td.option2 {
+color:#ccc;
+}
+#ListUser td.option {
+width:150px;
+}
+#ListUser td.option2 {
+width:160px;
+}
+#ListCate {
+border-top:1px solid #F0F0F0;
+}
+#ListCate td {
+text-align:left;
+}
+#ListCate .tit,#ListCate .btn {
+padding:0 10px;
+background:#F0F0F0;
+}
+#ListCate .tit .cate {
+color:#00f;
+}
+#ListCate .btn {
+text-align:right;
+}
+#ListCate .key {
+padding:5px 5px;
+float:left;
+}
+#ListCate .key dt {
+clear:both;
+}
+#ListCate .key dd {
+width:120px;
+float:left;
+}
+#ListCate .key a,#ListCate .key a:visited {
+color:#000;
+}
+#ListArtKey {
+border-top:1px solid #F0F0F0;
+}
+#ListArtKey .tit, #ListArtKey .btn {
+padding:0 10px;
+background:#F0F0F0;
+}
+#ListArtKey .btn {
+text-align: right;
+}
+#ListArtKey td {
+width:25%;
+}
+#ListArtKey td .InpChk {
+margin-left:5px;
+}
+#ListArtKey .tit .cate {
+color:#00f;
+}
+#ListArtKey .btns {
+text-align:center;
+}
+#ListArtKey .key {
+padding:5px 10px;
+float:left;
+}
+#ListArtKey .key dt {
+clear:both;
+}
+#ListArtKey .key dd {
+float:left;
+}
+.EditTB {
+width:99%;
+}
+.EditTB .op {
+width:140px;
+text-align:right;
+color:#009;
+}
+.EditTB .val {
+padding:0 0 1px 0;}
+.EditBtns p {
+padding:5px 0 5px 100px;
+}
+#EditArt .InpTxa {
+line-height:135%;
+}
+#EditArt .InpTxa {
+width:536px;
+}
+#EditArt #ArtCont {
+width:541px;
+}
+#TxaCont {
+height:300px;
+}
+#AddKeyTB,#EditInfoTB {
+margin-top:10px;
+}
+#EditInfoTB td{
+line-height:18px;
+}
+#AddKeyTB .SltBar,#AddKeyTB .InpTxt {
+width:180px;
+padding-left:2px;
+}
+
+  /*SmlWin*/
+#SmlWin {position:absolute;width:580px;border:1px solid #ccc;z-index:999;display:none;background:#fff;}
+#SmlFrm {width:100%;}
+
+#SWinWrap {
+width:100%;
+}
+#OpHand {
+float:left;
+padding:4px 0;
+background:#F0F0F0 url(/images/admin/scbox_tit_bg.gif) repeat-x;
+float:left;
+width:100%;
+cursor:move;
+}
+#OpHand ul {
+float:right;
+}
+#OpHand h3 {
+float:left;
+margin:0;
+padding:0 5px;
+font-size:12px;
+}
+#OpHand ul li {
+float:left;
+}
+#OpHand ul li.close {
+cursor:pointer;
+padding-right:5px;
+}
+#SWinWrap .TitBox {
+display:none;
+}
+
+#SWinWrap .TitBox .btns {
+float:right;
+padding-right:5px;
+cursor:pointer;
+}
+#SWinWrap .TxtBox {
+clear:both;
+}
+
+body.SmlWin {
+background:#fff;
+}
+.ListArtCate {
+width:100%;
+}
+.ListArtCate dt {
+clear:both;
+padding:10px 0 0 0;
+}
+.ListArtCate dt strong {
+color:#f60;
+padding-left:10px;
+}
+.ListArtCate .btns {
+text-align:right;
+}
+.ListArtCate .tit td {
+background:#f0f0f0;
+padding:3px 5px;
+}
+.ListArtCate .tit td.cate {
+color:#f60;
+}
+.ListArtCate .tit td.btns {
+color:#ccc;
+}
+.ListArtCate .data td {
+width:25%;
+}
+
+</style>
+
+
+<body class="SmlWin" onload="ReHth();">
+
+<div id="SWinWrap">
+
+  <div class="TitBox">
+    <h3>选择关键字</h3>
+  </div>
+
+  <div class="TxtBox">
+    <form name="handle_all" method="post">
+    <table class="ListTB" id="ListCate" cellspacing="0" cellpadding="0">
+    <% i = 0 %>
+    <% for tag in @tags  %>
+    <% i += 1 %>
+    <tr>
+      <td class="tit"><strong class="cate"><%= tag.category %></strong><span class="count"></span></td>
+      <td class="btn"><p><input type="checkbox" class="InpChk" name="" value="" onclick="Ca(this,'Keys<%= i %>');" />全部选中</p></td>
+    </tr>
+    <tr class="data">
+      <td colspan="2" id="Keys<%= i %>">
+        <dl class="key">
+          <% for tag in Tag.find_all_by_category(tag.category) %>
+          <dd><input type="checkbox" class="InpChk" name="id[]" value="<%= tag.id %>,<%= tag.name %>" /><%= tag.name %></dd>
+          <% end %>
+        </dl>
+      </td>
+    </tr>
+    <% end %>
+    <tr>
+      <td colspan="2" class="btns" ><input type="button" class="InpBtn" value="添加关键词" onClick="add_tags()" />&nbsp;&nbsp;<input type="button" class="InpBtn" value="取消操作" onClick="HidWin()" /></td>
+    </tr>
+    </table>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

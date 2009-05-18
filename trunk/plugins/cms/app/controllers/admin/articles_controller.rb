@@ -125,6 +125,13 @@ class Admin::ArticlesController < ApplicationController
       }
     end
   end
+
+  def tags
+    @tags = Tag.find_by_sql("select distinct category from tags where category is not null and category != ''")
+    @tags.collect{|tag| tag.category }.sort
+    #@tags = Tag.find(:all)
+    render :layout => false
+  end
   
   protected
   def find_articles(channel_id)

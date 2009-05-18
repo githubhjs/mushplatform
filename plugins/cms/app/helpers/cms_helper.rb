@@ -55,6 +55,25 @@ module CmsHelper
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
 
+  def list_articles_by_search(args = {})
+    keyword = args.delete(:dynamics)
+    order = args.delete(:order) || 'created_at DESC'
+    per_page = args.delete(:per_page) || 20
+    offset = args.delete(:offset) || 0
+    page = args.delete(:page) || 1
+    will_args = args
+    if keyword
+      conditions = "(title LIKE ? OR author LIKE ?)"
+      conditions_array = [conditions, "%#{keyword}%", "%#{keyword}%" ]
+      articles = Article.paginate :page => page, :order => order, :per_page => per_page,
+                                :conditions => conditions_array, :offset => offset
+
+      articles = [] unless articles
+    end
+    permalink = "/search/#{keyword}"
+    { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
+  end
+
   def tag_top(tag)
     t = Tag.find_by_name(tag)
     t.top if t

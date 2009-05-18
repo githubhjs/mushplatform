@@ -56,7 +56,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-      <%= will_paginate @links, :prev_label => (t 'text.previous'), :next_label => (t 'text.next'), :params => {:category => @category} %>
+      <%= will_paginate @links, :page_url => '/admin/links', :prev_label => (t 'text.previous'), :next_label => (t 'text.next'), :params => {:category => @category} %>
     </div>
 
     <br class="clear" />

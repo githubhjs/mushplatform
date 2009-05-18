@@ -66,7 +66,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-      <%= will_paginate @scriptlets %>
+      <%= will_paginate @scriptlets, :page_url => '/admin/scriptlets'%>
     </div>
 
     <br class="clear" />

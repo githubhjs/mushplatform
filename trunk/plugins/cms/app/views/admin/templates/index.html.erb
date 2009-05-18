@@ -61,7 +61,7 @@
     <div id="ajax-response"></div>
 
     <div class="tablenav">
-      <%= will_paginate @tmplts %>
+      <%= will_paginate @tmplts, {:page_url => '/admin/templates' } %>
     </div>
 
     <br class="clear" />

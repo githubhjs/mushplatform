@@ -46,7 +46,7 @@ module CcmwHelper
   
   def list_links_by_category(args = {})
     category = args.delete(:category)
-    links = Link.find_all_by_category(category)
+    links = Link.find(:all, :conditions => "category = '#{category}' and filename is null")
     { 'links' => links }
   end
 

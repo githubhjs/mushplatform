@@ -104,7 +104,7 @@ function getPartial(input_id){
   <%= do_extensions('MushAdmin::AddArticleExtraAttributes', @article) %>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_tags"><%= t 'text.article.tags' %></label></th>
-    <td><%= text_field 'article', 'tag_list', {:readonly => 'readonly'}%> &nbsp;<a href="javascript:ShowWin('/admin/articles/tags');">选择关键词</a></td>
+    <td><%= text_field 'article', 'tag_list' %> &nbsp;<a href="javascript:ShowWin('/admin/articles/tags');">选择关键词</a></td>
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="body"><%= t 'text.article.body' %></label></th>

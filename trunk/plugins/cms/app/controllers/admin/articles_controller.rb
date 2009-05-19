@@ -127,8 +127,8 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def tags
-    @tags = Tag.find_by_sql("select distinct category from tags where category is not null and category != ''")
-    @tags.collect{|tag| tag.category }.sort
+    @tags = Tag.find_by_sql("select distinct category from tags where category is not null and category != '' order by id")
+    #@tags.collect{|tag| tag.category }.sort
     #@tags = Tag.find(:all)
     render :layout => false
   end

@@ -43,20 +43,34 @@ Rails::Initializer.run do |config|
   # Make Time.zone default to the specified zone, and make Active Record store time values
   # in the database in UTC, and return them converted to the specified local zone.
   # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
-#  config.time_zone = 'UTC'
+  #  config.time_zone = 'UTC'
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_domain => '.ccmw.net',
+    :session_domain => '.ccmw.com',
     :session_key => '_mushplatform_session',
     :secret      => '6d420a423d1249c80b5a6ab34523f907a41c910d54b0a3aa8aee41d18debeed8275d1374de6f0879a60c5e944cda227519b2e2a47e8daf020208544e8cf03ffb'
   }
 
-#  config.i18n.default_locale = :zh-CN
-#  config.i18n.load_path += Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')]
+  # configure action_mailer
+#  config.action_mailer.delivery_method = :smtp
+#  config.action_mailer.smtp_settings = {
+#    :address => 'smtp.gmail.com',
+#    :port => 587,
+#    :domain => 'your.domain',
+#    :authentication => :plain,
+#    :user_name => 'ccmwadmin@gmail.com',
+#    :password => 'ccmwadmin6776'
+#  }
+#  config.action_mailer.raise_delivery_errors = true
+#  config.action_mailer.perform_deliveries = true
+#  config.action_mailer.default_charset = 'utf-8'
+  
+  #  config.i18n.default_locale = :zh-CN
+  #  config.i18n.load_path += Dir[File.join("#{RAILS_ROOT}/plugins/*/lib/",'locale','*.yml')]
 
   #config.action_controller.asset_host = "http://www.ccmw.com"
   config.action_controller.page_cache_directory = RAILS_ROOT+"/public/cache/"
@@ -74,17 +88,18 @@ Rails::Initializer.run do |config|
   config.plugins = [:engines, :liquid, :fckeditor, :core, :authorize, :cms, :all]
   config.gem "calendar_date_select"
 end
+require 'will_paginate_ex'
 require File.join(File.dirname(__FILE__), '../vendor/plugins/acts_as_taggable_on_steroids/lib/acts_as_taggable')
 USER_SALT="shadowfox"
 Domain_Name = 'ccmw.net'
 memcache_options = {  
-   :c_threshold => 10_000,  
-   :compression => true,  
-   :debug => false,  
-   :namespace => 'cached_model_demo',  
-   :readonly => false,  
-   :urlencode => false  
- }
+  :c_threshold => 10_000,
+  :compression => true,
+  :debug => false,
+  :namespace => 'cached_model_demo',
+  :readonly => false,
+  :urlencode => false
+}
 CalendarDateSelect.format = :db
 CACHE = MemCache.new memcache_options  
 CACHE.servers = 'localhost:11211'  
@@ -103,3 +118,4 @@ class String
     r
   end
 end
+   

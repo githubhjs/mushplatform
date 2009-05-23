@@ -335,3 +335,87 @@ function ColorPicker(){
   var windowRef =(windowMode)?"window.opener.":"";
   if(windowMode){cp_contents += "<HTML><HEAD><TITLE>Select Color</TITLE></HEAD>";
   cp_contents += "<BODY MARGINWIDTH=0 MARGINHEIGHT=0 LEFTMARGIN=0 TOPMARGIN=0><CENTER>";}cp_contents += "<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=0>";var use_highlight =(document.getElementById || document.all)?true:false;for(var i=0;i<total;i++){if((i % width) == 0){cp_contents += "<TR>";}if(use_highlight){var mo = 'onMouseOver="'+windowRef+'ColorPicker_highlightColor(\''+colors[i]+'\',window.document)"';}else{mo = "";}cp_contents += '<TD BGCOLOR="'+colors[i]+'"><FONT SIZE="-3"><A HREF="#" onClick="'+windowRef+'ColorPicker_pickColor(\''+colors[i]+'\','+windowRef+'window.popupWindowObjects['+cp.index+'],\''+ColorPicker_targetSelectedInputElem+'\');return false;" '+mo+' STYLE="text-decoration:none;">&nbsp;&nbsp;&nbsp;</A></FONT></TD>';if( ((i+1)>=total) ||(((i+1) % width) == 0)){cp_contents += "</TR>";}}if(document.getElementById){var width1 = Math.floor(width/2);var width2 = width = width1;cp_contents += "<TR><TD COLSPAN='"+width1+"' BGCOLOR='#ffffff' ID='colorPickerSelectedColor'>&nbsp;</TD><TD COLSPAN='"+width2+"' ALIGN='CENTER' ID='colorPickerSelectedColorValue'>#FFFFFF</TD></TR>";}cp_contents += "</TABLE>";if(windowMode){cp_contents += "</CENTER></BODY></HTML>";}cp.populate(cp_contents+"\n");cp.offsetY = 25;cp.autoHide();return cp;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function article_toggle(){
+  Element.toggle('article_url', 'article_common');
+  Element.toggle('url', 'body');
+  Element.toggle('url', 'excerpt');
+  Element.toggle('url', 'file');
+  Element.toggle('url', 'image');
+  var article_type = Ob('article_article_type');
+  if ( article_type.value == 1 ){
+    article_type.value = 2;
+  } else if ( article_type.value == 2 ){
+    article_type.value = 1;
+  }
+}
+function add_prefix(f, prefix){
+  var f_obj = document.getElementById(f);
+  f_obj.value = prefix + f_obj.value;
+  f_obj.focus();
+}
+function add_link(f, tag){
+  var link = prompt("请输入要加入的连接，例如：http://www.ccmw.net");
+  var f_obj = document.getElementById(f);
+  var f_value = f_obj.value.split('：');
+  if(f_value.length == 1){
+    f_obj.value = '<a href="'+ link +'">' + f_value + '</a>';
+  } else {
+    f_obj.value = f_value[0] + '：' + '<a href="'+ link +'">' + f_value[1] + '</a>';
+  }
+  f_obj.focus();
+}
+function add_selected_link(f,tag){
+  var selected = getPartial(f);
+  if (selected == '') {
+    alert("没有选择要增加连接的文字！");
+    return;
+  }
+  var link = prompt("请输入要加入的连接，例如：http://www.ccmw.net");
+  var f_obj = document.getElementById(f);
+  var f_value = f_obj.value.split(selected);
+  if(f_value.length == 1){
+    f_obj.value = '<a href="'+ link +'" target="_blank">' + selected + '</a>';
+  } else {
+    f_obj.value = f_value[0] + '<a href="'+ link +'" target="_blank">' + selected + '</a>' + f_value[1];
+  }
+  f_obj.focus();
+}
+
+function getPartial(input_id){
+  var isFF = false;
+  if(navigator.userAgent.toLowerCase().indexOf("firefox") > 0){
+    isFF = true;
+  }
+  var myArea = document.getElementById(input_id);
+  var selection;
+  if (isFF == true){
+    if (myArea.selectionStart!= undefined) {
+      selection = myArea.value.substr(myArea.selectionStart, myArea.selectionEnd - myArea.selectionStart);
+    }
+  }else{
+    if (window.getSelection){
+      selection = window.getSelection();
+    }else if (document.getSelection){
+      selection = document.getSelection();
+    }else if (document.selection){
+      selection = document.selection.createRange().text;
+    }
+  }
+  //alert(selection)
+  return selection;
+}

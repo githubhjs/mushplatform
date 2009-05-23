@@ -46,6 +46,7 @@ en-US:
       abandon_blogs:  "Abandon Blogs"
       audit: "Audit"
       abandon: "Abandon"
+      delete: "Delete"
 
       title: "Title"
       author: "Author"

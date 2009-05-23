@@ -10,6 +10,7 @@
   }
 </script>
 <% form_tag('/admin/blogs/update', :id => 'posts-filter' ) do %>
+  <input type="hidden" name="collected_code" value="<%= params[:collected] %>">
   <h2>
     <%= t 'text.blogs.manage_blogs' %>
   </h2>
@@ -38,6 +39,7 @@
     <div class="alignleft">
       <input type="button" value="<%= t 'text.blogs.audit' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/update';$('posts-filter').submit();" />
       <input type="button" value="<%= t 'text.blogs.abandon' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/abandon';$('posts-filter').submit();" />
+      <input type="button" value="<%= t 'text.blogs.delete' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blogs/delete';$('posts-filter').submit();" />
     </div>
 
     <br class="clear" />

@@ -43,4 +43,16 @@ class Admin::BlogsController < ApplicationController
     end
   end
 
+  def delete
+    params[:id].each{|id|
+      blog = Blog.find(id.to_i)
+      blog.destroy
+    }
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'index', :collected => params[:collected_code] }
+      format.xml  { head :ok }
+    end
+  end
+
 end

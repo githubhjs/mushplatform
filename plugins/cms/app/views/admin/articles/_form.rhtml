@@ -117,7 +117,7 @@ function getPartial(input_id){
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_category_id"><%= t 'text.article.channel' %></label></th>
-    <td><%= select 'article', 'channel_id', channels_select %></td>
+    <td><%= select 'article', 'channel_id', channels_select, {}, {:readonly => 'readonly'} %></td>
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="article_status"><%= t 'text.article.status' %></label></th>

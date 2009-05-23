@@ -46,6 +46,7 @@ zh-CN:
       abandon_blogs: "被放弃博客"
       audit: "审核"
       abandon: "放弃"
+      delete: "删除"
 
       title: "标题"
       author: "作者"

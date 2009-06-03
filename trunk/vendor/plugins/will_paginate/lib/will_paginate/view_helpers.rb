@@ -300,7 +300,7 @@ module WillPaginate
     # and <tt>:params</tt> option into account.
     def url_for(page)      
       page_one = page == 1
-      unless @url_string and !page_one
+#      unless @url_string and !page_one
         @url_params = {}
         # page links should preserve GET parameters
         stringified_merge @url_params, @template.params if @template.request.get?
@@ -335,7 +335,7 @@ module WillPaginate
             end
           end
         end
-      end
+#      end
       # finally!
       page_url = @url_string.sub '@', page.to_s
       page_url.gsub!(/\?+$/,'')

@@ -40,7 +40,7 @@
     <%end%>
     <div class="height20"></div>
     <div class="scott">
-      <%= will_paginate @blogs,{:url => '/blogs', :prev_label => "<<上一页",:next_label => '下一页>>'} %>
+      <%=url_f(will_paginate(@blogs,{:prev_label => "<<上一页",:next_label => '下一页>>'}),'/blogs') %>
     </div>
     <div class="height20"></div>
     <div class="height20"></div>

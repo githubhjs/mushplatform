@@ -19,7 +19,7 @@ module MySpaceHelper
     paginate_html.gsub!(/href=["'](\/page\/\d+)["']/) do |match|
       "href='#{url}#{$1}'"
     end
-    paginate_html.sub!(/['"](#{url}\/page)\/?["']/,'"\1/1"')
+    paginate_html.gsub!(/['"](#{url}\/page)\/?["']/,'"\1/1"')
     paginate_html
   end
   

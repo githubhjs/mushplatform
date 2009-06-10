@@ -3,7 +3,6 @@ class Article < CachedModel
 
   has_many :contents, :dependent => :destroy
   has_one :category, :class_name => 'ArticleCategory'
-  belongs_to :user, :class_name => 'User'
   belongs_to :channel
   belongs_to :group
   acts_as_taggable
@@ -42,7 +41,7 @@ class Article < CachedModel
        atts['excerpt'] = excerpt
      end
      atts['category'] = category.name if category
-     atts['editor'] = user.real_name
+     atts['editor'] = User.find(atts['user_id']).real_name
      atts
   end
 

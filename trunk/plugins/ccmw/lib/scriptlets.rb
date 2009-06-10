@@ -10,6 +10,7 @@ add_scriptlet_type('type_name' => 'list_tags_by_category', 'function' => :list_t
 add_scriptlet_type('type_name' => 'list_links_by_category', 'function' => :list_links_by_category)
 add_scriptlet_type('type_name' => 'list_image_links_by_category', 'function' => :list_image_links_by_category)
 add_scriptlet_type('type_name' => 'focus_images_from_links', 'function' => :focus_images_from_links)
+add_scriptlet_type('type_name' => 'list_journals_by_year', 'function' => :list_journals_by_year)
 add_scriptlet_type('type_name' => 'years_of_journals', 'function' => :years_of_journals)
 #add_scriptlet_type('type_name' => 'list_articles', 'function' => :list_articles)
 #add_scriptlet_type('type_name' => 'list_channels', 'function' => :list_channels)

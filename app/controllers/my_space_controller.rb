@@ -8,10 +8,10 @@ class MySpaceController < ApplicationController
 
   layout :theme_layout
   
-  Blog_Count_PerPage =   20
+  Blog_Count_PerPage =   16
   Rss_Blog_Perppage = 20
   Comment_Count_PerPage = 50
-  Photo_PerPage = 20
+  Photo_PerPage = 16
   Latest_Votes_Count = 5
   Latest_Blogs_Count = 5
   Latest_Photos_Count = 6

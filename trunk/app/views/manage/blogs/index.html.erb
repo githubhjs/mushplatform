@@ -35,7 +35,7 @@
     </div>
     <div class="height20"></div>
     <div class="jogger">
-      <%= will_paginate @blogs, {:prev_label => '上一页', :next_label => '下一页'} %>
+      <%= url_f(will_paginate(@blogs, {:prev_label => '上一页', :next_label => '下一页'}),'/manage/blogs') %>
     </div>
   </div>
 </div>

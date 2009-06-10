@@ -86,12 +86,11 @@ module CcmwHelper
     paginate = args.delete(:paginate) || "false"
     will_args = args
 
-    conditions = "category = '#{category}' "
-    conditions << "and substring(name, 1, 4) = '#{year}'" if year
+    year =  years_of_journals['years'].keys.sort.last unless year
 
     if paginate == "true"
       tags = Tag.paginate :page => page, :order => order, :per_page => per_page,
-                          :conditions => conditions
+                          :conditions => "category = '#{category}' and substring(name, 1, 4) = '#{year}'"
     else
       tags = Tag.find_all_by_category(category, :order => order)
     end

@@ -86,7 +86,7 @@ module CcmwHelper
     paginate = args.delete(:paginate) || "false"
     will_args = args
 
-    year =  years_of_journals['years'].keys.sort.last unless year
+    year =  years_of_journals['years'].last unless year
 
     if paginate == "true"
       tags = Tag.paginate :page => page, :order => order, :per_page => per_page,

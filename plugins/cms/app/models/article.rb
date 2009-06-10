@@ -3,7 +3,7 @@ class Article < CachedModel
 
   has_many :contents, :dependent => :destroy
   has_one :category, :class_name => 'ArticleCategory'
-  has_one :user, :class_name => 'User'
+  belongs_to :user
   belongs_to :channel
   belongs_to :group
   acts_as_taggable

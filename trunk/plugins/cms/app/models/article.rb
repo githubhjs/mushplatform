@@ -41,6 +41,14 @@ class Article < CachedModel
        atts['excerpt'] = excerpt
      end
      atts['category'] = category.name if category
+     if atts['user_id']
+       user = User.find(atts['user_id'])
+       if user
+         atts['editor'] = user.real_name
+       else
+         atts['editor'] = '客户世界'
+       end
+     end
      #atts['editor'] = User.find(atts['user_id']).real_name
      atts
   end

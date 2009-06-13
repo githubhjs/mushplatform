@@ -1,85 +1,85 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>2009-华为杯-耳唛天使-中国呼叫中心服务明星推介活动</title>
-<link href="/stylesheets/active.css" rel="stylesheet" type="text/css" />
-<script src="/javascripts/active/tbra-widgets.js" type="text/javascript"></script>
-<script src="/javascripts/active/jquery.js" type="text/javascript"></script>
-<script src="/javascripts/prototype.js" type="text/javascript"></script>
-<script type="text/javascript"> jQuery.noConflict(); var $j = jQuery; </script>
-</head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2009-华为杯-耳唛天使-中国呼叫中心服务明星推介活动</title>
+    <link href="/stylesheets/active.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/active/tbra-widgets.js" type="text/javascript"></script>
+    <script src="/javascripts/active/jquery.js" type="text/javascript"></script>
+    <script src="/javascripts/prototype.js" type="text/javascript"></script>
+    <script type="text/javascript"> jQuery.noConflict(); var $j = jQuery; </script>
+  </head>
 
-<body>
-<div id="hearder">
-	<div class="top"><img src="/images/active/top.jpg" alt="top-flash" /></div>
-    <div id="dh" class="m_index">
-    	<div class="nav_a"></div>
+  <body>
+    <div id="hearder">
+      <div class="top"><img src="/images/active/top.jpg" alt="top-flash" /></div>
+      <div id="dh" class="m_index">
+        <div class="nav_a"></div>
         <div class="nav_b">
-        	<div class="nav">
-               <ul>
-                  <li class="n_index"><a  href="" title="大赛首页"><span>大赛首页</span></a></li>
-                  <li class="n_news"><%= link_to_remote "大赛新闻", :url => {:controller => :active, :action => :show_news } %></li>
-                  <li class="n_plan"><a href="about.html" title="赛事安排"><span>赛事安排</span></a></li>
-                  <li class="n_gold"><a href="#" title="奖项设置"><span>奖项设置</span></a></li>
-                  <li class="n_vip"><a href="player.html" title="参赛选手"><span>参赛选手</span></a></li>
-                  <li class="n_contact"><a href="contact.html" title="联系我们"><span>联系我们</span></a></li>
-              </ul>
-               </div>
-               <div class="join"><a href="/active/entry"><img src="/images/active/btn_wycs.jpg" alt="我要参赛" /></a></div>
+          <div class="nav">
+            <ul>
+              <li class="n_index"><a  href="/active" title="大赛首页"><span>大赛首页</span></a></li>
+              <li class="n_news"><a  href="/active/news" title="大赛新闻"><span>大赛首页</span></a></li>
+              <li class="n_plan"><a href="a" title="赛事安排"><span>赛事安排</span></a></li>
+              <li class="n_gold"><a href="#" title="奖项设置"><span>奖项设置</span></a></li>
+              <li class="n_vip"><a href="player.html" title="参赛选手"><span>参赛选手</span></a></li>
+              <li class="n_contact"><a href="contact.html" title="联系我们"><span>联系我们</span></a></li>
+            </ul>
+          </div>
+          <div class="join"><a href="/active/entry"><img src="/images/active/btn_wycs.jpg" alt="我要参赛" /></a></div>
         </div>
         <div class="nav_c"></div>
-    </div>
-    <div class="soso">
-    	<div class="soso_a"></div>
-        <div class="soso_b"><img src="/images/active/tu_soso.jpg" align="absmiddle" /> 
+      </div>
+      <div class="soso">
+        <div class="soso_a"></div>
+        <div class="soso_b"><img src="/images/active/tu_soso.jpg" align="absmiddle" />
           <label>
-          <select name="select" id="select">
-            <option>团队</option>
-            <option>个人</option>
-            <option>新闻</option>
-                    </select>
+            <select name="select" id="select">
+              <option>团队</option>
+              <option>个人</option>
+              <option>新闻</option>
+            </select>
           </label>
           <label>
-          <input name="textfield" type="text" id="textfield" size="40" />
+            <input name="textfield" type="text" id="textfield" size="40" />
           <img src="/images/active/btn_soso.jpg" alt="搜索" width="53" height="22" align="absmiddle" /></label>
         </div>
         <div class="soso_c"></div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="clear"></div>
-</div>
-<div class="w960">
-	<div class="main">
-          
-          <%= yield :layout %>
-          
-          <!--在自己的页面只需要放不同的左和右-->
+    <div class="w960">
+      <div class="main">
+
+        <%= yield :layout %>
+
+        <!--在自己的页面只需要放不同的左和右-->
         <div class="clear" id="second_clear"></div>
-          <div class="link">
-        	<div class="link_t"></div>
-            <div class="link_m"><strong>友情链接站点：</strong> <a href="#">新浪科技</a> | <a href="#">比特网</a> | <a href="#">亿八佰</a> | <a href="#">CTI论坛</a> | <a href="#">CNET科技资讯网</a> | <a href="#">CIO时代</a> | <a href="#">支点网</a> | <a href="#">全球VoIP联盟</a> | <a href="#">AMT</a> | <a href="#">中国服务营销网</a> | <a href="#">中国商业智能网</a> | <a href="#">51Callcenter</a> | <a href="#">中国整合营销网</a> | <a href="#">CNCCA</a> | <a href="#">信息服务外包网</a> | <a href="#">畅享网</a> | <a href="#">通信世界</a> | <a href="#">电子商务世界</a> | <a href="#">赛迪网</a> | <a href="#">明通新闻专线</a> | <a href="#">企业档案在线</a> | <a href="#">Chinasourcing</a> | <a href="#">计世网</a> | <a href="#">IT经理世界</a> | <a href="#">IT专家网</a> | </div>
-            <div class="link_b"></div>
+        <div class="link">
+          <div class="link_t"></div>
+          <div class="link_m"><strong>友情链接站点：</strong> <a href="#">新浪科技</a> | <a href="#">比特网</a> | <a href="#">亿八佰</a> | <a href="#">CTI论坛</a> | <a href="#">CNET科技资讯网</a> | <a href="#">CIO时代</a> | <a href="#">支点网</a> | <a href="#">全球VoIP联盟</a> | <a href="#">AMT</a> | <a href="#">中国服务营销网</a> | <a href="#">中国商业智能网</a> | <a href="#">51Callcenter</a> | <a href="#">中国整合营销网</a> | <a href="#">CNCCA</a> | <a href="#">信息服务外包网</a> | <a href="#">畅享网</a> | <a href="#">通信世界</a> | <a href="#">电子商务世界</a> | <a href="#">赛迪网</a> | <a href="#">明通新闻专线</a> | <a href="#">企业档案在线</a> | <a href="#">Chinasourcing</a> | <a href="#">计世网</a> | <a href="#">IT经理世界</a> | <a href="#">IT专家网</a> | </div>
+          <div class="link_b"></div>
         </div>
         <div class="h12"></div>
+      </div>
     </div>
-</div>
-<div class="foot">
-	<p><a href="http://www.ccmw.net" target="_blank"><img src="/images/active/logo.jpg" /></a></p>
-  	<br />
-<a href="http://www.ccmw.net/minisites/ccminfo/gsjj.htm" target="_blank" class="cred">关于我们</a> | <a href="http://www.ccmw.net/minisites/ccminfo/adver.htm" target="_blank" class="cred">广告服务</a> | <a href="http://www.ccmw.net/minisites/ccminfo/copyright.htm" target="_blank" class="cred">版权说明</a> | <a href="/sitemap" target="_blank" class="cred">网站地图</a> | <a href="http://www.ccmw.net/minisites/ccminfo/yszc.htm" target="_blank" class="cred">隐私政策</a> | <a href="mailto:edit@ccmw.net" class="cred">欢迎赐稿</a> | <a href="http://www.ccmw.net" class="cred">网站首页</a><br />
-            Copyright 2002-2009 CCMworld Group All rights   reserved.<br />
-    <a href="http://www.ccmw.net" target="_blank" class="cred">客户世界机构</a> &copy; 版权所有   京ICP备05038078号<br />
-          “好客会”服务热线：400-779-7070 </div>
-</body>
-<script type="text/javascript">
-      function sP2(e) { $(e).style.visibility = 'visible'; }
-      function hP2(e) { $(e).style.visibility = 'hidden'; }
-      $j(document).ready(function(){
-         $j('input[id="button_tp"]').click(function(){
-            <%#*user_id = $j('input[id="vote"]');%>
-            <%#*url = "/vip/index";%>
-            <%#*window.location.href(url);%>
-         });
-      });
-</script>
+    <div class="foot">
+      <p><a href="http://www.ccmw.net" target="_blank"><img src="/images/active/logo.jpg" /></a></p>
+      <br />
+      <a href="http://www.ccmw.net/minisites/ccminfo/gsjj.htm" target="_blank" class="cred">关于我们</a> | <a href="http://www.ccmw.net/minisites/ccminfo/adver.htm" target="_blank" class="cred">广告服务</a> | <a href="http://www.ccmw.net/minisites/ccminfo/copyright.htm" target="_blank" class="cred">版权说明</a> | <a href="/sitemap" target="_blank" class="cred">网站地图</a> | <a href="http://www.ccmw.net/minisites/ccminfo/yszc.htm" target="_blank" class="cred">隐私政策</a> | <a href="mailto:edit@ccmw.net" class="cred">欢迎赐稿</a> | <a href="http://www.ccmw.net" class="cred">网站首页</a><br />
+      Copyright 2002-2009 CCMworld Group All rights   reserved.<br />
+      <a href="http://www.ccmw.net" target="_blank" class="cred">客户世界机构</a> &copy; 版权所有   京ICP备05038078号<br />
+    “好客会”服务热线：400-779-7070 </div>
+  </body>
+  <script type="text/javascript">
+    function sP2(e) { $(e).style.visibility = 'visible'; }
+    function hP2(e) { $(e).style.visibility = 'hidden'; }
+    $j(document).ready(function(){
+      $j('input[id="button_tp"]').click(function(){
+<%#*user_id = $j('input[id="vote"]');%>
+<%#*url = "/vip/index";%>
+<%#*window.location.href(url);%>
+    });
+  });
+  </script>
 </html>

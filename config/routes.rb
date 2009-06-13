@@ -120,9 +120,15 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
+  
+  map.connect "/active/read_more", :controller => 'active',:action => 'read_more'
+  map.connect "/active/show_news", :controller => 'active',:action => 'show_news'
+  map.connect "/active/entry", :controller => 'active',:action => 'entry'
+  map.connect "/vip/index", :controller => 'vip',:action => 'index'
+  
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
-
+  map.root :controller => "active", :action => "index"
   # See how all your routes lay out with "rake routes"
   map.from_plugin :crawler
   map.from_plugin :mush_admin

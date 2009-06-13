@@ -1,0 +1,49 @@
+<!--这个页面还没有加进去-->
+
+    	<div class="left">
+        	<div class="onebg">
+           	  <div class="bt6"><div class="name fht20 ">我的文章</div></div>
+                <div class="h12"></div>
+                <div class="w90">
+                  <% i = 1 %>
+                  <% for blog in @blogs do %>
+<% unless blog.nil? %>
+          <div class="h12"></div>
+            <div class="blog">
+                <dl>
+                <dt><a href="#"><%=blog.title%></a></dt>
+                <dd>发表于<strong><%=blog.created_at.strftime("%Y-%m-%d %H:%M:%S")%></strong> | 阅读(<a href="#">82</a>) | 评论(<a href="#">30</a>) | 收藏(<a href="#">1</a>) </dd>
+                </dl>
+                <p>
+                <%= truncate_with_more blog.body, 200, "blog_#{blog.id}" %>...... <br />
+               &gt;&gt;</p>
+              </div>
+              
+            <div class="h12"></div>
+                <%end%>
+            <% i = i +1 %>
+            <%end%>
+             <div class="pages">
+                <span class="disabled"> < </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> > </a>
+                </div>
+                </div>
+                <div class="h12"></div>
+                <div class="h12"></div>
+            </div>
+            <div class="h12"></div>
+        </div>
+        <div class="right">
+            <!--这里是登录模板-->
+            <%= render :partial => "active/login_form"  %>
+            <div class="h12"></div>
+            <div class="ad1"><img src="images/ad1.jpg" /></div>
+            <div class="h12"></div>
+            <!--这里点击榜-->
+            <%= render :partial => "active/phb"  %>
+            <div class="h12"></div>
+            <!--这里以下需要提取出去 数据统计-->
+            <%= render :partial => "active/statics" %>
+            <div class="h12"></div>
+        </div>
+
+

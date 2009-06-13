@@ -60,5 +60,20 @@ module ApplicationHelper
     radio_boxes <<  (radio_button_tag('sex',Const::Sex_Unknown,select_value == Const::Sex_Unknown) + '保密')
     radio_boxes.join('')
   end
-  
+  #截取页面显示内容
+  def truncate_with_more (text, cutoff, id) 
+        if text.length > cutoff 
+          result = text[0, cutoff] 
+          result += "<span id='text_more_link_#{id}'>&hellip;" 
+                result += "<a href='#' onclick='$(\"text_more_#{id}\").show(); $(\"text_more_link_#{id}\").hide(); return false;'>" 
+                result += "more</a></span>" 
+                result += "<span id='text_more_#{id}' style='display: none;'>" 
+                result += text[cutoff, text.length] 
+              result += "</span>" 
+        else 
+              result = text 
+        end 
+        result 
+  end 
+
 end

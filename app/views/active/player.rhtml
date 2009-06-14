@@ -6,7 +6,40 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="31%" align="center"><div class="myphoto"><img src="/images/active/mypic.jpg" alt="我的形象" /></div><br />
-          <p><a href="#"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a></p></td>
+            <p><a href="#" onclick="Element.show('vote_div');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
+              <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
+                <div class="gift_t">
+                <p>投票给李黎阳</p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
+                <% form_tag '/active/vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
+                <div class="gift_m">
+                  <div class="gift_main">
+                    <label><br>
+                    </label>
+                    <table width="90%" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>                        
+                        <tr>
+                          <td height="40">&nbsp;<span id="vote_notice"></span></td>
+                          <td align="center">
+                            <%= show_simple_captcha :label => "请输入验证码",:image_style => 'simply_red', :distortion => 'medium'  %>
+                          </td>
+                        </tr>
+                    </tbody></table>
+                  </div>
+                  <input type="hidden" name="active_vote[user_id]" value="<%= @user.user_id %>">
+                  <input type="hidden" name="active_vote[user_name]" value="<%= @user.user_name %>">
+                  <div class="gift_bd">
+                    <strong>附言</strong> <span class="huise">(可选项)</span><br>
+                    <textarea cols="45" rows="" name="active_vote[message]"></textarea>
+                    <div class="h12"></div>
+
+                  </div>
+                  <div class="gift_btn"><a href="#" onclick="post_vote();return false"><img src="/images/active/btn_qdtp.jpg" alt="确定"></a></div>
+                </div>
+                <%end%>
+                <div class="gift_b"></div>
+              </div>
+            </p>
+          </td>
           <td width="69%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="16%" align="right"><strong>姓名：</strong></td>
@@ -112,65 +145,65 @@
       <div class="message" id="comments">
         <%for comment in @comments %>
           <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id) %>"></a>
-          <dl>            
-           <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
-           <dd style="text-align:left;"><%= comment.content %></dd>
+          <dl>
+            <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+            <dd style="text-align:left"><%= comment.content %></dd>
           </dl>
           <div class="height12"></div>
-          <%end%>
-          <p>共有 <strong><%= @user.comment_count %></strong> 条留言  <a href="#">查看更多</a></p>
-        </div>
-        <div class="h12"></div>
-         <div class="saying">
-            <div class="saying_bt"><strong>我来说两句</strong><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
-              <div><img src="/images/spinner.gif"  id="comment_loading" style ="display:none"></div>
-            </div>
-            <div class="height12"></div
-            <% form_tag '/active/create_comment',:id => 'comment_form',:name => 'comment_form',:method => 'post' do  %>
-              <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                  <% unless current_user %>
-                    <tr>
-                      <td width="14%" align="right">用户名：</td>
-                      <td width="86%"><input type="text" name="user[user_name]"></td>
-                    </tr>
-                    <tr>
-                      <td width="14%" align="right">密 码：</td>
-                      <td width="86%"><input type="password" name="user[password]"></td>
-                    </tr>
-                  <%end%>
-                  <input type="hidden" name="comment[player_id]" value="<%= @user.user_id %>">
-                  <tr>
-                    <td valign="top" align="right">内容：</td>
-                    <td>
-                     <textarea name="comment[content]" id="comment_body" cols='50' rows='10'></textarea>
-                     <script>var oFCKeditor = new FCKeditor('comment[content]', '100%', '200px', 'Basic'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
-                    </td>
-                  </tr>
-                  <tr>                    
-                    <td align="right">&nbsp;</td>
-                    <td>
-                      <input type="button" style="height: 22px;" name="button" class="green"   value="评论" id="form-submit-button" onclick="submit_player_comment()">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            <%end%>
-          </div>
-        <div class="h20"></div>
+        <%end%>
+        <p>共有 <strong><%= @user.comment_count %></strong> 条留言  <a href="#">查看更多</a></p>
       </div>
+      <div class="h12"></div>
+      <div class="saying">
+        <div class="saying_bt"><strong>我来说两句</strong><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
+          <div><img src="/images/spinner.gif"  id="comment_loading" style ="display:none"></div>
+        </div>
+        <div class="height12"></div
+        <% form_tag '/active/create_comment',:id => 'comment_form',:name => 'comment_form',:method => 'post' do  %>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <% unless current_user %>
+                <tr>
+                  <td width="14%" align="right">用户名：</td>
+                  <td width="86%"><input type="text" name="user[user_name]"></td>
+                </tr>
+                <tr>
+                  <td width="14%" align="right">密 码：</td>
+                  <td width="86%"><input type="password" name="user[password]"></td>
+                </tr>
+              <%end%>
+              <input type="hidden" name="comment[player_id]" value="<%= @user.user_id %>">
+              <tr>
+                <td valign="top" align="right">内容：</td>
+                <td>
+                  <textarea name="comment[content]" id="comment_body" cols='50' rows='10'></textarea>
+                  <script>var oFCKeditor = new FCKeditor('comment[content]', '100%', '200px', 'Basic'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">&nbsp;</td>
+                <td>
+                  <input type="button" style="height: 22px;" name="button" class="green"   value="评论" id="form-submit-button" onclick="submit_player_comment()">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <%end%>
+      </div>
+      <div class="h20"></div>
     </div>
-    <div class="h12"></div>
   </div>
-  <div class="right">
-    <%= render :partial => "/active/login_form" %>
-    <div class="h12"></div>
-    <div class="ad1"><img src="/images/active/ad1.jpg" /></div>
-    <div class="h12"></div>
-    <!--这里点击榜-->
-    <%= render :partial => "active/phb"  %>
-    <!--这里以下需要提取出去 数据统计-->
-    <div class="h12"></div>
-    <%= render :partial => "active/statics"  %>
-    <div class="h12"></div>
-  </div>
+  <div class="h12"></div>
+</div>
+<div class="right">
+  <%= render :partial => "/active/login_form" %>
+  <div class="h12"></div>
+  <div class="ad1"><img src="/images/active/ad1.jpg" /></div>
+  <div class="h12"></div>
+  <!--这里点击榜-->
+  <%= render :partial => "active/phb"  %>
+  <!--这里以下需要提取出去 数据统计-->
+  <div class="h12"></div>
+  <%= render :partial => "active/statics"  %>
+  <div class="h12"></div>
+</div>

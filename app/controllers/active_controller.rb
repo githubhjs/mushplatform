@@ -77,6 +77,38 @@ class ActiveController < ApplicationController
     end
   end
 
+  def vote
+    debugger
+    error_msg = ''
+    if current_user
+      if simple_captcha_valid?
+        if ActiveVote.should_vote_agin?(request.remote_ip)
+          active_vote = ActiveVote.new(params[:active_vote])
+          active_vote.user_id = current_user.id
+          active_vote.user_name = current_user.user_name
+          active_vote.ip     = request.remote_ip
+          active_vote.save
+        else
+          error_msg = "30分钟后再来投票"
+        end
+      else
+        error_msg  = '请输入验证码'
+      end
+    else
+      error_msg  = '请登陆后再投'
+    end
+    unless error_msg.blank?
+      render :update  do |page|
+        page.replace_html "vote_notice",error_msg
+        page.alert  "投票成功，谢谢你的投票!"
+      end
+    else
+      render :update  do |page|
+        page.hidden "vot_div"
+      end
+    end
+  end
+
   def login    
     session[:user] = params[:user].blank? ? nil : User.authenticate(params[:user][:user_name],params[:user][:password])
     if session[:user]

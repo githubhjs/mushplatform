@@ -1,7 +1,7 @@
 function submit_comment(){
     var oEditor = FCKeditorAPI.GetInstance('comment[body]');
     document.getElementById('comment_body').value = oEditor.GetXHTML();
-    form = $('comment_form');
+    var form = $('comment_form');
     if(form['comment[body]'].value != '' && form['comment[body]'].value.length >= 5 ) //&& form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
     {
         ajax_submit(form)
@@ -15,13 +15,29 @@ function submit_comment(){
 function submit_player_comment(){
     var oEditor = FCKeditorAPI.GetInstance('comment[content]');
     document.getElementById('comment_body').value = oEditor.GetXHTML();
-    form = $('comment_form');
-    if(form['comment[content]'].value != '' && form['comment[content]'].value.length >= 5 ) //&& form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
+    var comment_form = $('comment_form');
+    if(comment_form['comment[content]'].value != '' && comment_form['comment[content]'].value.length >= 5 ) //&& form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
     {
-        ajax_submit(form)
+        ajax_submit(comment_form)
         this.disabled=true;
     }else{
         alert("内容字数不够!");
+    }
+    return false;
+}
+
+function post_vote(){
+    var vote_form = document.vote_form;    
+    if(vote_form['captcha'].value != ''){
+        new Ajax.Request(vote_form.action,
+        {
+            method:'post',
+            asynchronous:true,
+            evalScripts:true,                        
+            parameters:Form.serialize(vote_form)
+        });
+    }else{
+        alert('请输入验证码');
     }
     return false;
 }

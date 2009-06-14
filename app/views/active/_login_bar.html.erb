@@ -3,7 +3,7 @@
   <div class="h12" style="text-align:center"><span style="text-align:center" id="login_info"></span></div>
   <%  form_remote_tag(:url => "/active/login",:name => "login_form") do %>
     <table width="90%" border="0" cellspacing="0" cellpadding="0" class="center">
-      <% fields_for :user, @user do |u_field| %>
+      <% fields_for :user, User.new do |u_field| %>
         <tr>
           <td width="28%" height="30" align="right">用户名：</td>
           <td width="72%"><label>

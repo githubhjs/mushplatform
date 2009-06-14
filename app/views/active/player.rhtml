@@ -1,0 +1,176 @@
+<div class="left">
+  <div class="onebg">
+    <div class="bt6"><div class="name fht20 red"><%=@user.user_name%></div><span class="f14">[目前得票数：<span class="ftime25 greencao"><%= @user.vote_count %></span>票   总排名：<span class="ftime25 greencao"><%= @ranking %></span>位]</span></div>
+    <div class="h12"></div>
+    <div class="w90 gray">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="31%" align="center"><div class="myphoto"><img src="/images/active/mypic.jpg" alt="我的形象" /></div><br />
+          <p><a href="#"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a></p></td>
+          <td width="69%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="16%" align="right"><strong>姓名：</strong></td>
+                <td width="84%"><%=@user.real_name%> [<a class="csxred" href="<%= @user.space_url %>" target="_blank">进入博客</a>]</td>
+              </tr>
+              <% if prolfile = @user.user_profile %>
+                <tr>
+                  <td align="right" valign="top"><strong>性别：</strong></td>
+                  <td><%= display_blog_admin_sex prolfile %></td>
+                </tr>
+                <tr>
+                  <td align="right" valign="top"><strong>城市：</strong></td>
+                  <td><%= prolfile.city %></td>
+                </tr>
+                <tr>
+                  <td align="right"><strong>地址：</strong></td>
+                  <td><%= prolfile.adress %></td>
+                </tr>
+                <tr>
+                  <td align="right" valign="top"><strong>个人宣言：</strong></td>
+                  <td><%= prolfile.introduction %></td>
+                </tr>
+                <tr>
+                  <td align="right" valign="top">&nbsp;</td>
+                  <td><a href="<%= "#{@user.space_url}/profile" %>" class="csxred">查看更多信息</a></td>
+                </tr>
+              <%end%>
+          </table></td>
+        </tr>
+      </table>
+      <div class="h12"></div>
+    </div>
+    <div class="h12"></div>
+  </div>
+  <div class="h12"></div>
+  <div class="bt1">
+    <div class="bt1_t">
+      <div class="bt1_ta"></div>
+      <div class="bt1_tb"><img src="/images/active/tu_twbm.jpg" /></div>
+      <div class="bt1_tc"></div>
+    </div>
+    <div class="bt1_m">
+      <div class="tab-box3" id="tab_b3">
+        <div>
+          <ul class="tab-btbt3">
+            <li class="selected3"><a href="/photos" target="_blank">我的照片</a></li>
+            <li class="selected3"><a href="/blogs" target="_blank">我的文章</a></li>
+          </ul>
+          <div class="h12"></div>
+        </div>
+        <div class="tab-main3">
+          <div class="photo2">
+            <p class="f14b red" style="width:70%;"><a href="<%= @user.photo_url %>"  title="所有照片" target="_blank">共有照片<%= @user.photo_count %>张</a></p>
+            <div class="h12"></div>
+            <ul>
+              <%for photo  in @photos%>
+                <li>
+                  <a href="<%= @user.space_url %>/photos/<%= photo.id %>"  target="_blank"><img src="<%= photo.mid_link %>" /></a>
+                  <p><a class="cblack" href="<%= @user.space_url %>/photos/<%= photo.id %>" target="_blank"><%= photo.title %></a></p>
+                </li>
+              <%end%>
+            </ul>
+          </div>
+          <div class="h12"></div>
+          <div class="pages">
+          </div>
+        </div>
+        <div class="tab-main3">
+          <div class="alist2">
+            <p class="f14b red" style="width:70%;"><a href="<%= @user.blog_url %>" title="所有文章" target="_blank">共有文章<%= @user.blog_count %>篇</a></p>
+            <div class="h12"></div>
+            <%for blog in @blogs%>
+              <ul>
+                <li><a href="<%= @user.space_url %>/entry/<%= blog.id %>" target="_blank"><%= blog.title %></a><span class="fve9 huise">[<%= DateUtil.time_day_and_month(blog.created_at) %>]</span></li>
+              </ul>
+            <%end%>
+            <div class="h12"></div>
+          </div>
+          <div class="h12"></div>
+          <div class="pages">
+
+          </div>
+        </div>
+      </div>
+      <SCRIPT type="text/javascript">
+        var tabb = TB.widget.SimpleTab.decorate('tab_b3', {eventType:'mouse',currentClass:'selected3'});
+        tabb.switchTab(Math.floor(Math.random() * $text));
+      </SCRIPT>
+    </div>
+    <div class="h12"></div>
+    <div class="bt1_b"></div>
+  </div>
+  <div class="h12"></div>
+  <div class="onebg">
+    <div class="bt3">
+      <div class="bt3_a"></div>
+      <div class="bt3_b">
+      <p><img src="/images/active/tb_wjj.jpg" width="8" height="10" align="absmiddle" /> 最新留言</p><span><a class="csxred" href="/active/comments">查看全部</a></span></div>
+      <div class="bt3_c"></div>
+    </div>
+    <div class="w95">
+      <div class="h12"></div>
+      <div class="message" id="comments">
+        <%for comment in @comments %>
+          <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id) %>"></a>
+          <dl>            
+           <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+           <dd><%= comment.content %></dd>
+          </dl>
+          <div class="height12"></div>
+          <%end%>
+          <p>共有 <strong><%= @user.comment_count %></strong> 条留言  <a href="#">查看更多</a></p>
+        </div>
+        <div class="h12"></div>
+         <div class="saying">
+            <div class="saying_bt"><strong>我来说两句</strong><span class='author' style='color:red;display:none;' id='erro_info'>评论不成功</span>
+              <div><img src="/images/spinner.gif"  id="comment_loading" style ="display:none"></div>
+            </div>
+            <div class="height12"></div
+            <% form_tag '/active/create_comment',:id => 'comment_form',:name => 'comment_form',:method => 'post' do  %>
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                  <% unless current_user %>
+                    <tr>
+                      <td width="14%" align="right">用户名：</td>
+                      <td width="86%"><input type="text" name="user[user_name]"></td>
+                    </tr>
+                    <tr>
+                      <td width="14%" align="right">密 码：</td>
+                      <td width="86%"><input type="password" name="user[password]"></td>
+                    </tr>
+                  <%end%>
+                  <input type="hidden" name="comment[player_id]" value="<%= @user.user_id %>">
+                  <tr>
+                    <td valign="top" align="right">内容：</td>
+                    <td>
+                     <textarea name="comment[content]" id="comment_body" cols='50' rows='10'></textarea>
+                     <script>var oFCKeditor = new FCKeditor('comment[content]', '100%', '200px', 'Basic'); oFCKeditor.BasePath = "/javascripts/fckeditor/"; oFCKeditor.Config['CustomConfigurationsPath'] = '/javascripts/fckcustom.js'; oFCKeditor.ReplaceTextarea();</script>
+                    </td>
+                  </tr>
+                  <tr>                    
+                    <td align="right">&nbsp;</td>
+                    <td>
+                      <input type="button" style="height: 22px;" name="button" class="green"   value="评论" id="form-submit-button" onclick="submit_player_comment()">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <%end%>
+          </div>
+        <div class="h20"></div>
+      </div>
+    </div>
+    <div class="h12"></div>
+  </div>
+  <div class="right">
+    <%= render :partial => "/active/login_form" %>
+    <div class="h12"></div>
+    <div class="ad1"><img src="/images/active/ad1.jpg" /></div>
+    <div class="h12"></div>
+    <!--这里点击榜-->
+    <%= render :partial => "active/phb"  %>
+    <!--这里以下需要提取出去 数据统计-->
+    <div class="h12"></div>
+    <%= render :partial => "active/statics"  %>
+    <div class="h12"></div>
+  </div>

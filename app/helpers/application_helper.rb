@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def box_css
-     controller_name ==  'manage'  ?  'box'  :  'box2'
+    controller_name ==  'manage'  ?  'box'  :  'box2'
   end
 
   def get_area_select_options
@@ -62,18 +62,33 @@ module ApplicationHelper
   end
   #截取页面显示内容
   def truncate_with_more (text, cutoff, id) 
-        if text.length > cutoff 
-          result = text[0, cutoff] 
-          result += "<span id='text_more_link_#{id}'>&hellip;" 
-                result += "<a href='#' onclick='$(\"text_more_#{id}\").show(); $(\"text_more_link_#{id}\").hide(); return false;'>" 
-                result += "more</a></span>" 
-                result += "<span id='text_more_#{id}' style='display: none;'>" 
-                result += text[cutoff, text.length] 
-              result += "</span>" 
-        else 
-              result = text 
-        end 
-        result 
-  end 
+    if text.length > cutoff
+      result = text[0, cutoff]
+      result += "<span id='text_more_link_#{id}'>&hellip;"
+      result += "<a href='#' onclick='$(\"text_more_#{id}\").show(); $(\"text_more_link_#{id}\").hide(); return false;'>"
+      result += "more</a></span>"
+      result += "<span id='text_more_#{id}' style='display: none;'>"
+      result += text[cutoff, text.length]
+      result += "</span>"
+    else
+      result = text
+    end
+    result
+  end
+
+  def display_blog_admin_sex(profile = nil)
+    profile ||= current_blog_user.user_profile
+    if profile
+      case profile.sex
+      when Const::Sex_Unknown
+        '保密'
+      when Const::Sex_Woman
+        '女'
+      when Const::Sex_Man
+        '男'
+      end
+    end
+  end
+
 
 end

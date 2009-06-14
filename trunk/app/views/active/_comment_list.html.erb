@@ -1,0 +1,6 @@
+<a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id) %>"></a>
+<dl>
+  <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+  <dd><%= comment.content %></dd>
+</dl>
+<div class="height12"></div>

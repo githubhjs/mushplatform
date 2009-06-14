@@ -8,6 +8,10 @@ module DateUtil
     def timelong_for_with_ling(time)
       time.strftime('%y-%m-%d %H:%M') if time
     end
+
+    def time_day_and_month(time)
+      time.strftime('%m-%d') if time
+    end
   
     # format time to short style
     def timeshort(time)

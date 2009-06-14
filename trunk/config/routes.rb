@@ -119,16 +119,18 @@ ActionController::Routing::Routes.draw do |map|
   #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
   #     admin.resources :products
   #   end
-  
+
+
   map.with_options :controller => 'active' do |active|
     active.connect  '/active',:action => 'index'
     active.connect  '/active/news',        :action =>  'active_news'
     active.connect  '/active/news',        :action =>  'active_news'
     active.connect  '/active/login',       :action =>  'login'
     active.connect  '/active/logout',      :action =>  'logout'
-    active.connect '/active/take_part_in', :action =>  'take_part_in'
-  end
-  
+    active.connect '/active/join', :action =>  'take_part_in'
+    active.connect '/active/create_comment', :action =>  'comment',:method => "post"
+    active.connect '/:user_name/active', :action =>  'player'
+  end  
   
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"  

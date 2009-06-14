@@ -8,7 +8,9 @@ class CreateActiveVotes < ActiveRecord::Migration
 
       t.string  :user_name,:null => false
 
-      t.string  :ip
+      t.string  :ip,:null => false
+
+      t.text    :message
 
       t.integer :voter_id,:null => false,:default => 0
       

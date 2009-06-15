@@ -10,7 +10,7 @@
               <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
                 <div class="gift_t">
                 <p>投票给李黎阳</p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
-                <% form_tag '/active/vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
+                <% form_tag '/active/post_vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
                 <div class="gift_m">
                   <div class="gift_main">
                     <label><br>
@@ -19,7 +19,7 @@
                       <tbody>                        
                         <tr>
                           <td height="40">&nbsp;<span id="vote_notice"></span></td>
-                          <td align="center">
+                          <td align="center" id="simple_captcha_td">
                             <%= show_simple_captcha :label => "请输入验证码",:image_style => 'simply_red', :distortion => 'medium'  %>
                           </td>
                         </tr>
@@ -27,11 +27,10 @@
                   </div>
                   <input type="hidden" name="active_vote[user_id]" value="<%= @user.user_id %>">
                   <input type="hidden" name="active_vote[user_name]" value="<%= @user.user_name %>">
-                  <div class="gift_bd">
+                  <div class="gift_bd" id="vote_message">
                     <strong>附言</strong> <span class="huise">(可选项)</span><br>
-                    <textarea cols="45" rows="" name="active_vote[message]"></textarea>
+                    <textarea cols="45" rows="" name="active_vote[message]" id="vote_message"></textarea>
                     <div class="h12"></div>
-
                   </div>
                   <div class="gift_btn"><a href="#" onclick="post_vote();return false"><img src="/images/active/btn_qdtp.jpg" alt="确定"></a></div>
                 </div>

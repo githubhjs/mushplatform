@@ -74,7 +74,7 @@ class ActiveController < ApplicationController
     end
   end
 
-  def vote
+  def post_vote    
     debugger
     error_msg = ''
     if current_user
@@ -89,7 +89,7 @@ class ActiveController < ApplicationController
           error_msg = "30分钟后再来投票"
         end
       else
-        error_msg  = '请输入验证码'
+        error_msg  = '请输入正确验证码'
       end
     else
       error_msg  = '请登陆后再投'
@@ -97,20 +97,24 @@ class ActiveController < ApplicationController
     unless error_msg.blank?
       render :update  do |page|
         page.replace_html "vote_notice",error_msg
-        page.alert  "投票成功，谢谢你的投票!"
+        page.replace_html  'simple_captcha_td',:partial => '/active/simple_captcha'
       end
     else
       render :update  do |page|
-        page.hidden "vot_div"
-      end
+        page.hide   "vote_div"
+        page.replace_html  'simple_captcha_td',:partial => '/active/simple_captcha'
+        page.replace_html 'vote_message',:partial => '/active/vote_message'
+        page.alert  "投票成功，谢谢你的投票!"        
+      end      
     end
+    return true
   end
 
   def login    
     session[:user] = params[:user].blank? ? nil : User.authenticate(params[:user][:user_name],params[:user][:password])
     if session[:user]
       render :update do |page|
-        page.replace_html 'login_bar_div', :partial => "active/login_info"
+        page.replace_html 'login_bar_div', :partial => "/active/login_info"
       end
     else
       render :update do |page|

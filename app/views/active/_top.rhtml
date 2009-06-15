@@ -1,7 +1,7 @@
 <div class="w100">
   <img src="/images/active/tu_jdb.jpg" border="0" usemap="#Map" />
   <map name="Map" id="Map">
-    <area shape="rect" coords="183,11,226,33" href="#" alt="更多" />
+    <area shape="rect" coords="183,11,226,33" href="/active/player" alt="更多" />
   </map>
   <div class="btr_mmm">
     <div class="tab-box2" id="tab_b2">
@@ -17,7 +17,7 @@
       <div class="tab-main2"><!-- 下面五个div类似 -->
         <div class="h12"></div>
         <div class="photo">
-          <ul>
+          <ul><!--TODO my_blog链接-->
             <% for f in @focus_men do %>
                 <% unless f.nil? %>
                   <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
@@ -31,11 +31,11 @@
                             <tr>
                               <td><strong><a class="cblack" href="#"><%=f.real_name%></a></strong>
                                 <label>
-                                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" />
+                                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=f.id%>"/>
                               </label></td>
                             </tr>
                             <tr>
-                              <td>票：<span class="blue">34</span> 文：<a href="#" class="csxred">65</a> 照：<a href="#" class="csxred">56</a></td>
+                              <td>票：<span class="blue"><%= f.vote_count %></span> 文：<a href="#" class="csxred"><%= f.blog_count %></span></a> 照：<a href="#" class="csxred"><%= f.photo_count %></span></a></td>
                             </tr>
                         </table></td>
                       </tr>
@@ -57,13 +57,13 @@
                           <td width="27%" align="center" ><a href="#"><img style="width:48px; height:48px;" src="<%=user_icon(f.id, 'normal')%>" width="48" height="48" /></a></td>
                           <td width="61%"><table width="95%" border="0" cellspacing="0" cellpadding="0">
                               <tr>
-                                <td><strong><a class="cblack" href="#">李涵琪</a></strong>
+                                <td><strong><a class="cblack" href="#"><%=f.real_name%></a></strong>
                                   <label>
-                                    <input name="button2" type="submit" class="button6422" id="button2" value="投票" />
+                                    <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=f.id%>"/>
                                 </label></td>
                               </tr>
                               <tr>
-                                <td>票：<span class="blue">34</span> 文：<a href="#" class="csxred">65</a> 照：<a href="#" class="csxred">56</a></td>
+                                <td>票：<span class="blue"><%= f.vote_count %></span> 文：<a href="#" class="csxred"><%= f.blog_count %></span></a> 照：<a href="#" class="csxred"><%= f.photo_count %></span></a></td>
                               </tr>
                           </table></td>
                         </tr>
@@ -87,11 +87,11 @@
                                 <tr>
                                   <td><strong><a class="cblack" href="#"><%=f.real_name%></a></strong>
                                     <label>
-                                      <input name="button2" type="submit" class="button6422" id="button2" value="投票" />
+                                      <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=f.id%>"/>
                                   </label></td>
                                 </tr>
                                 <tr>
-                                  <td>票：<span class="blue">34</span> 文：<a href="#" class="csxred">65</a> 照：<a href="#" class="csxred">56</a></td>
+                                    <td>票：<span class="blue"><%= f.vote_count %></span> 文：<a href="#" class="csxred"><%= f.blog_count %></span></a> 照：<a href="#" class="csxred"><%= f.photo_count %></span></a></td>
                                 </tr>
                             </table></td>
                           </tr>
@@ -113,11 +113,11 @@
                                   <tr>
                                     <td><strong><a class="cblack" href="#"><%=f.real_name%></a></strong>
                                       <label>
-                                        <input name="button2" type="submit" class="button6422" id="button2" value="投票" />
+                                        <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=f.id%>"/>
                                     </label></td>
                                   </tr>
                                   <tr>
-                                    <td>票：<span class="blue">34</span> 文：<a href="#" class="csxred">65</a> 照：<a href="#" class="csxred">56</a></td>
+                                        <td>票：<span class="blue"><%=  f.vote_count%></span> 文：<a href="#" class="csxred"><%= f.blog_count %></span></a> 照：<a href="#" class="csxred"><%= f.photo_count %></span></a></td>
                                   </tr>
                               </table></td>
                             </tr>
@@ -140,11 +140,11 @@
                                     <tr>
                                       <td><strong><a class="cblack" href="#"><%=f.real_name%></a></strong>
                                         <label>
-                                          <input name="button2" type="submit" class="button6422" id="button2" value="投票" />
+                                          <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=f.id%>"/>
                                       </label></td>
                                     </tr>
                                     <tr>
-                                      <td>票：<span class="blue">34</span> 文：<a href="#" class="csxred">65</a> 照：<a href="#" class="csxred">56</a></td>
+                                        <td>票：<span class="blue"><%= f.vote_count%></span> 文：<a href="#" class="csxred"><%= f.blog_count %></span></a> 照：<a href="#" class="csxred"><%= f.photo_count %></span></a></td>
                                     </tr>
                                 </table></td>
                               </tr>
@@ -153,12 +153,12 @@
                     </ul>
                   </div>
                 </div>
-              </div>
+                </div>
               <SCRIPT type="text/javascript">
                 var tabb = TB.widget.SimpleTab.decorate('tab_b2', {eventType:'mouse',currentClass:'selected2'});
                 tabb.switchTab(Math.floor(Math.random() * $text));
               </SCRIPT>
               <div class="h12"></div>
-            </div>
+              </div>
             <div class="btr_bbb"></div>
           </div>

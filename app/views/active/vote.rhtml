@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>投票</title>
+<link href="/stylesheets/active.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="gift">
+    	<div class="gift_t">
+    	  <p>投票给<%= @user.real_name %></p><span><a href="#"><img src="/active/images/close.gif" alt="关闭" /></a></span></div>
+          <% form_tag "/active/vote", :method => "post" do %>
+        <div class="gift_m">
+        	 <div class="gift_main">
+        	   <label><br /> 
+        	   </label>
+        	   <table width="90%" border="0" cellspacing="0" cellpadding="0">
+                 <tr>
+                   <td width="23%" height="40"><strong>请输入验证码:</strong>
+                     <label></label></td>
+                   <td width="77%" align="left"><input name="textfield" type="text" id="textfield" size="40" /></td>
+                 </tr>
+                 <tr>
+                   <td height="40">&nbsp;</td>
+                   <td align="left"><img src="/active/images/tu_yzm.jpg" width="130" height="53" align="absmiddle" /> <a href="#"><strong>看不清楚？换一个</strong></a></td>
+                 </tr>
+               </table>
+        	 </div>
+            <div class="gift_bd">
+             <strong>附言</strong> <span class="huise">(可选项)</span><br />
+             <textarea cols="45" rows="" name="description"></textarea>
+             <div class="h12"></div>
+          </div>
+          <div class="gift_btn">
+            <input type="submit" style="background-image:url(/images/active/btn_qdtp.jpg);width:100px;height:40px;" value="">
+           </div>
+      </div>
+      <%end%>
+        <div class="gift_b"></div>
+    </div>
+</body>
+</html>
+
+

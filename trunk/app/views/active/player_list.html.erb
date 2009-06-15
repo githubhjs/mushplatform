@@ -1,0 +1,33 @@
+<div class="left">
+        	<div class="onebg">
+                  <div class="height20"></div>
+                  <div class="bt1_t">
+<div class="bt1_tb">
+<lable style="margin:15px 0px 15px 15px;font-size:14px;">   参赛人员列表 >></lable>
+</div>
+</div>
+    <div class="height20"></div>
+    <div class="list">
+      <ul>
+        <% for user in @users %>
+<% unless user.nil? %>
+          <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.id, 'small')%>" /></a><br />
+                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
+                      <label>
+                        <input type="hidden" id="vote" value="<%=user.id%>">
+                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=user.id%>" />
+                      </label><br />
+                      来自：客户世界机构<br />
+                      <!-- TODO 这里的两个链接要修改成动态的-->
+                    票：<span class="blue"><%=user.vote_count%></span> 文：<a href="my_blog.html" class="csxred"><%=user.blog_count%></a> 照：<a href="my_photo.html" class="csxred"><%=user.photo_count%></a></li>
+          <%end%>
+        <%end%>
+      </ul>
+    </div>
+    <div class="height20"></div>
+    <div class="jogger">
+      <%= will_paginate @users, {:prev_label => '上一页', :next_label => '下一页'} %>
+    </div>
+  </div>
+</div>
+<%= render :partial => "right" %>

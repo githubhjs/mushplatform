@@ -1,0 +1,19 @@
+<div class="left">
+        	<div class="onebg">
+                  <div class="bt1_t">
+<div class="bt1_tb">
+  <lable style="margin:15px 0px 15px 15px;font-size:14px;">  评论列表 >></lable>
+</div>
+<div class="height20"></div>
+</div>
+    <div class="list">
+      <% for comment in @comments %>
+        <%= render :partial => "comment_list", :locals => {:comment => comment} %>
+      <%end%>
+    </div>
+    <div class="height20"></div>
+    <div class="jogger">
+      <%= will_paginate @comments, {:prev_label => '上一页', :next_label => '下一页'} %>
+    </div>
+    </div></div>
+        <%= render :partial => "right" %>

@@ -1,29 +1,26 @@
 class ActiveController < ApplicationController
   
   before_filter :login_required, :only => [:take_part_in]
-
+  before_filter :find_players, :only => [:active_news, :active_arrange, :active_player, :active_contact, :player_list, :comment_list, :blog_list, :search]
+#  layout :active, :except => :to_vote
+  skip_before_filter :verify_authenticity_token,:only => [:login, :logout, :search, :vote]  
+  before_filter :set_statics_data
+  
   before_filter  :set_ranking_list ,:only => [:index,:active_news,:arrange,:player]
   
+
   Player_Blog_Perpage     = 20
   Player_Photo_Perpage    = 20
   Player_Comments_Perpage = 5
 
   Player_Count_Perpage    = 16
 
-  def index    
+  def index
     @blogs     =  Blog.find :all, :limit => 10
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
     @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'
-    @comments  =  Comment.find :all, :limit => 10    
+    @comments  =  PlayerComment.find :all, :limit => 10    
   end  
-  
-  def active_news
-    
-  end  
-  
-  def arrange
-    
-  end
   
   #  @blogs = Blog.find :all, :conditions => "user_id = #{current_user.id}" ,:limit => 10
   #  @focus_men = User.find :all, :limit => 10
@@ -113,7 +110,7 @@ class ActiveController < ApplicationController
     session[:user] = params[:user].blank? ? nil : User.authenticate(params[:user][:user_name],params[:user][:password])
     if session[:user]
       render :update do |page|
-        page.replace_html 'login_bar_div', :partial => "/active/login_info"
+        page.replace_html 'login_bar_div', :partial => "active/login_info"
       end
     else
       render :update do |page|
@@ -129,9 +126,58 @@ class ActiveController < ApplicationController
     end
   end
   
-  protected
-  def set_ranking_list    
-    @focus_men =  Player.find :all, :limit => 16,:order =>'rand()'
+  def active_news
+  end  
+  
+  def active_arrange
   end
-
+  
+   def active_player
+  end
+  
+    def active_contact
+  end
+  #查出所有的参与者分页显示
+  def player_list
+  end
+  
+  def vote
+  end
+  
+  def search
+    conditions = params[:q].blank? ? nil : "user_name LIKE '%#{params[:q]}%' or real_name LIKE '%#{params[:q]}%'"
+    @search_users = Player.paginate(:page => params[:page]||1, :per_page => Player_Count_Perpage , :conditions => conditions, :order => 'created_at desc')
+  end
+  
+  def blog_list
+    @blogs = Blog.paginate(:page => params[:page]||1,:per_page => Player_Blog_Perpage ,:order => 'created_at desc')
+  end
+  
+  def comment_list
+    @comments = PlayerComment.paginate(:page => params[:page]||1,:per_page => Player_Comments_Perpage ,:order => 'created_at desc')
+  end
+ 
+  protected 
+  
+#  def active
+#    return 'active'  
+#  end
+  
+  def find_players
+    @users = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
+    @focus_men = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
+  end
+  
+  def set_ranking_list
+    @focus_men =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'
+  end
+  
+  def set_statics_data
+    @player_count = Player.count || 0
+    @blog_count = Blog.count || 0
+    @photo_count = Photo.count || 0
+    @comment_count = PlayerComment.count || 0
+    @vote_count = Vote.count ||0
+    @day_hits = 0 #TODO how to get 
+  end 
 end

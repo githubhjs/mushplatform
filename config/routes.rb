@@ -123,6 +123,7 @@ ActionController::Routing::Routes.draw do |map|
   map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'
 
   map.with_options :controller => 'active' do |active|
+    
     active.connect  '/active',:action => 'index'
     active.connect  '/active/news',        :action =>  'active_news'
     active.connect  '/active/arrange',        :action =>  'active_arrange'
@@ -139,7 +140,7 @@ ActionController::Routing::Routes.draw do |map|
     active.connect '/active/blog_list', :action =>  'blog_list'
     active.connect '/active/comment_list', :action =>  'comment_list'
     
-    active.connect '/active/vote',:action => "vote",:method => "post"
+    active.connect '/active/post_vote',:action => "post_vote",:method => "post"
   end  
   map.with_options :controller => 'vip' do |vip|
     vip.connect '/vip', :action => 'index'

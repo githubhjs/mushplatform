@@ -19,12 +19,13 @@
         <div class="nav_a"></div>
         <div class="nav_b">
           <div class="nav">
-            <ul>
-              <li class="n_index"><a  href="/active" title="大赛首页"><span>大赛首页</span></a></li>  
-              <li class="n_plan"><a href="a" title="赛事安排"><span>赛事安排</span></a></li>
-              <li class="n_gold"><a href="#" title="奖项设置"><span>奖项设置</span></a></li>
-              <li class="n_vip"><a href="player.html" title="参赛选手"><span>参赛选手</span></a></li>
-              <li class="n_contact"><a href="contact.html" title="联系我们"><span>联系我们</span></a></li>
+            <ul id ="top_nav">
+              <li class="<%= action_name == "index" ? "n_index" :"" %>"><a href="/active" title="大赛首页"><span>大赛首页</span></a></li>
+              <li class="<%= action_name == "active_news" ? "n_index" :"n_news" %>"><a href="/active/news" title="大赛新闻"><span>大赛新闻</span></a></li>
+              <li class="<%= action_name == "active_arrange" ? "n_index" :"n_plan" %>"><a href="/active/arrange" title="赛事安排"><span>赛事安排</span></a></li>
+              <li class="<%= action_name == "active_gold" ? "n_index" :"n_gold" %>"><a href="/active/prizes" title="奖项设置"><span>奖项设置</span></a></li>
+              <li class="<%= action_name == "active_player" ? "n_index" :"n_vip" %>"><a href="/active/player" title="参赛选手"><span>参赛选手</span></a></li>
+              <li class="<%= action_name == "active_contact" ? "n_index" :"n_contact" %>"><a href="/active/contact" title="联系我们"><span>联系我们</span></a></li>
             </ul>
           </div>
           <div class="join"><a href="/active/join" title="我要参赛"><img src="/images/active/btn_wycs.jpg" alt="我要参赛" /></a></div>
@@ -33,29 +34,32 @@
       </div>
       <div class="soso">
         <div class="soso_a"></div>
+        <% form_tag "/active/search", :method => "post" do %>
         <div class="soso_b"><img src="/images/active/tu_soso.jpg" align="absmiddle" />
           <label>
             <select name="select" id="select">
-              <option>团队</option>
-              <option>个人</option>
-              <option>新闻</option>
+              <option value="1">团队</option>
+              <option value="2" selected>个人</option>
+              <option value="3">新闻</option>
             </select>
           </label>
-          <label>
-            <input name="textfield" type="text" id="textfield" size="40" />
-          <img src="/images/active/btn_soso.jpg" alt="搜索" width="53" height="22" align="absmiddle" /></label>
+          <label id="m">
+            <%= text_field_tag :q, params[:q], :size => 40 %>
+            </label>
+              <label>
+                <input type="submit" style="background-image:url(/images/active/btn_soso.jpg);width:66px;height:22px;" value="">
+          </label>
         </div>
+        <%end%>
         <div class="soso_c"></div>
       </div>
       <div class="clear"></div>
     </div>
     <div class="w960">
       <div class="main">
-
-        <%= yield :layout %>
-
+            <%= yield :layout %>
         <!--在自己的页面只需要放不同的左和右-->
-        <div class="clear" id="second_clear"></div>
+        <div class="clear"></div>
         <div class="link">
           <div class="link_t"></div>
           <div class="link_m"><strong>友情链接站点：</strong> <a href="#">新浪科技</a> | <a href="#">比特网</a> | <a href="#">亿八佰</a> | <a href="#">CTI论坛</a> | <a href="#">CNET科技资讯网</a> | <a href="#">CIO时代</a> | <a href="#">支点网</a> | <a href="#">全球VoIP联盟</a> | <a href="#">AMT</a> | <a href="#">中国服务营销网</a> | <a href="#">中国商业智能网</a> | <a href="#">51Callcenter</a> | <a href="#">中国整合营销网</a> | <a href="#">CNCCA</a> | <a href="#">信息服务外包网</a> | <a href="#">畅享网</a> | <a href="#">通信世界</a> | <a href="#">电子商务世界</a> | <a href="#">赛迪网</a> | <a href="#">明通新闻专线</a> | <a href="#">企业档案在线</a> | <a href="#">Chinasourcing</a> | <a href="#">计世网</a> | <a href="#">IT经理世界</a> | <a href="#">IT专家网</a> | </div>
@@ -73,14 +77,5 @@
     “好客会”服务热线：400-779-7070 </div>
   </body>
   <script type="text/javascript">
-    function sP2(e) { $(e).style.visibility = 'visible'; }
-    function hP2(e) { $(e).style.visibility = 'hidden'; }
-    $j(document).ready(function(){
-      $j('input[id="button_tp"]').click(function(){
-<%#*user_id = $j('input[id="vote"]');%>
-<%#*url = "/vip/index";%>
-<%#*window.location.href(url);%>
-    });
-  });
   </script>
 </html>

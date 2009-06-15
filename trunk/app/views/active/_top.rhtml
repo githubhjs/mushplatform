@@ -18,24 +18,27 @@
         <div class="h12"></div>
         <div class="photo">
           <ul><!--TODO my_blog链接-->
-            <% for f in @focus_men do %>
-                <% unless f.nil? %>
+            <% for user in @focus_men do %>
+                <% unless user.nil? %>
                   <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
                       <tr>
                         <td width="12%" align="center"><img src="/images/active/pm_01.jpg" width="18" height="11" /></td>
                         <td width="27%" align="center" >
-                          <a href="#"><img style="width:48px; height:48px;" src="<%=user_icon(f.id, 'normal')%>" width="48" height="48" /></a>
+                          <a href="<%= user.player_url %>">
+                            <img style="width:48px; height:48px;" src="<%=user_icon(user.user_id, 'normal')%>" width="48" height="48" />
+                          </a>
                         </td>
                         <td width="61%">
                           <table width="95%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                              <td><strong><a class="cblack" href="#"><%=f.real_name%></a></strong>
+                              <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
                                 <label>
-                                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=f.id%>"/>
+                                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=user.id%>"/>
                               </label></td>
                             </tr>
                             <tr>
-                              <td>票：<span class="blue"><%= f.vote_count %></span> 文：<a href="#" class="csxred"><%= f.blog_count %></span></a> 照：<a href="#" class="csxred"><%= f.photo_count %></span></a></td>
+                              <td>票：<span class="blue"><%= user.vote_count %></span> 文：<a href="#" class="csxred"><%= user.blog_count %></span></a> 照：<a href="#" class="csxred"><%= user.photo_count %></span></a>
+                              </td>
                             </tr>
                         </table></td>
                       </tr>

@@ -55,8 +55,7 @@ class ActiveController < ApplicationController
       @comment.user_id = user.id
       @comment.user_name = user.user_name
       @comment.real_name = user.real_name
-      if @comment.save
-        Player.connection.execute("update players set comment_count = comment_count + 1 where id=#{@comment.player_id}")
+      if @comment.save        
         render :update do |page|
           page.insert_html :bottom, 'comments',:partial => "/active/comment_list",:locals => {:comment => @comment }
         end
@@ -74,15 +73,13 @@ class ActiveController < ApplicationController
     end
   end
 
-  def post_vote    
-    debugger
+  def post_vote        
     error_msg = ''
     if current_user
       if simple_captcha_valid?
         if ActiveVote.should_vote_agin?(request.remote_ip)
           active_vote = ActiveVote.new(params[:active_vote])
-          active_vote.user_id = current_user.id
-          active_vote.user_name = current_user.user_name
+          active_vote.voter_id = current_user.id
           active_vote.ip     = request.remote_ip
           active_vote.save
         else

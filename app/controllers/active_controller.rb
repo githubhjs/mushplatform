@@ -3,7 +3,7 @@ class ActiveController < ApplicationController
   before_filter :login_required, :only => [:take_part_in]
   before_filter :find_players, :only => [:index, :player, :active_news, :active_arrange, :active_player, :active_contact, :comment_list, :blog_list, :search]
   skip_before_filter :verify_authenticity_token,:only => [:login, :logout, :search, :simple_vote]  
-  before_filter :set_statics_data, :except => [:simple_vote, :post_vote]
+  before_filter :set_statics_data, :except => [:simple_vote, :post_vote,:login]
   
   before_filter  :set_ranking_list ,:only => [:index,:active_news,:active_arrange,:active_player,:player]
   
@@ -18,13 +18,11 @@ class ActiveController < ApplicationController
   def index
     @blogs     =  Blog.paginate :page => params[:page]||1,:per_page => 1,:order => 'created_at desc'
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
-    @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'
+    @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'    
     @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'created_at desc'
     
   end  
   
-  #  @blogs = Blog.find :all, :conditions => "user_id = #{current_user.id}" ,:limit => 10
-  #  @focus_men = User.find :all, :limit => 10
   def take_part_in
     unless Player.find_by_user_id(current_user.id).nil?
       render :template => '/active/already_join'
@@ -32,8 +30,9 @@ class ActiveController < ApplicationController
     end
     player = Player.new(:user_id => current_user.id,:user_name => current_user.user_name,
       :real_name => current_user.real_name)
-    player.blog_count = current_user.blogs.count
+    player.blog_count  = current_user.blogs.count
     player.photo_count = current_user.photos.count
+    player.user_type   = current_user.user_type
     player.save
     redirect_to player.player_url
   end   
@@ -134,7 +133,8 @@ class ActiveController < ApplicationController
   def active_arrange
   end
   
-   def active_player
+  def active_player
+    @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'
   end
   
     def active_contact
@@ -151,14 +151,10 @@ class ActiveController < ApplicationController
   
   def comment_list
     @comments = PlayerComment.paginate(:page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'created_at desc')
-#    render :update do |page|
-#       page.replace_html 'comment', :partial => "small_comment_list"
-#    end
   end
   
-  def simple_vote
-    debugger
-    error_msg = '您，'
+  def simple_vote    
+    error_msg = ''
     if current_user
         if ActiveVote.should_vote_agin?(request.remote_ip)
           active_vote = ActiveVote.new
@@ -179,7 +175,7 @@ class ActiveController < ApplicationController
       end
     else
       render :update  do |page|
-        page.alert "投票失败！"
+        page.alert error_msg
       end
     end
   end
@@ -191,7 +187,8 @@ class ActiveController < ApplicationController
     @new_entry = Player.find :all, :limit => Player_Count_Perpage, :order => 'created_at desc'
     @users = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
     #top
-    @personals = Player.find :all, :limit => Player_Count_List, :order => 'vote_count + comment_count + blog_count desc'
+    @personals = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=0",:order => 'vote_count + comment_count + blog_count desc'
+    @teams_players = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=1" ,:order => 'vote_count + comment_count + blog_count desc'
     @week_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 7 day)" ,:limit => Player_Count_List, :order => 'created_at, vote_count + comment_count + blog_count desc'
     @month_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 30 day)", :limit => Player_Count_List, :order => 'created_at, vote_count + comment_count + blog_count desc'
   end
@@ -207,5 +204,6 @@ class ActiveController < ApplicationController
     @comment_count = PlayerComment.count || 0
     @vote_count = Vote.count ||0
     @day_hits = 0 #TODO how to get 
-  end 
+  end
+  
 end

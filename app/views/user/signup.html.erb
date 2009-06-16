@@ -56,6 +56,13 @@
         <%= u_field.text_field(:email, :class => "InpTxt")%>
       &nbsp;<font style="color:#de363a;">*</font> 请填写真实的邮件，并有机会享受我们更多的服务</td>
     </tr>
+    <tr>
+      <td align="right">注册类型：</td>
+      <td>
+        <%= generate_user_type_radio('user[user_type]',@user.user_type) %>
+        &nbsp;<font style="color:#de363a;">*</font> 请选择注册类型
+      </td>
+    </tr>
   <%end%>
   <tr>
     <td colspan="2"></td>

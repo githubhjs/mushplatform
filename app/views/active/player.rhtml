@@ -1,6 +1,6 @@
 <div class="left">
   <div class="onebg">
-    <div class="bt6"><div class="name fht20 red"><%=@user.user_name%></div><span class="f14">[目前得票数：<span class="ftime25 greencao"><%= @user.vote_count %></span>票   总排名：<span class="ftime25 greencao"><%= @ranking %></span>位]</span></div>
+    <div class="bt6"><div class="name fht20 red"><%=@user.real_name%></div><span class="f14">[目前得票数：<span class="ftime25 greencao"><%= @user.vote_count %></span>票   总排名：<span class="ftime25 greencao"><%= @ranking %></span>位]</span></div>
     <div class="h12"></div>
     <div class="w90 gray">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -9,7 +9,7 @@
             <p><a href="#" onclick="Element.show('vote_div');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
               <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
                 <div class="gift_t">
-                <p>投票给<%=@user.user_name%></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
+                <p>投票给<%=@user.real_name%></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
                 <% form_tag '/active/post_vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
                 <div class="gift_m">
                   <div class="gift_main">
@@ -137,7 +137,7 @@
     <div class="bt3">
       <div class="bt3_a"></div>
       <div class="bt3_b">
-      <p><img src="/images/active/tb_wjj.jpg" width="8" height="10" align="absmiddle" /> 最新留言</p><span><a class="csxred" href="/active/comments">查看全部</a></span></div>
+      <p><img src="/images/active/tb_wjj.jpg" width="8" height="10" align="absmiddle" /> 最新留言</p><span><a class="csxred" href="/active/comment_list">查看全部</a></span></div>
       <div class="bt3_c"></div>
     </div>
     <div class="w95">

@@ -1,12 +1,11 @@
 class ActiveController < ApplicationController
   
   before_filter :login_required, :only => [:take_part_in]
-  before_filter :find_players, :only => [:active_news, :active_arrange, :active_player, :active_contact, :player_list, :comment_list, :blog_list, :search]
-#  layout :active, :except => :to_vote
-  skip_before_filter :verify_authenticity_token,:only => [:login, :logout, :search, :vote]  
-  before_filter :set_statics_data
+  before_filter :find_players, :only => [:index, :player, :active_news, :active_arrange, :active_player, :active_contact, :comment_list, :blog_list, :search]
+  skip_before_filter :verify_authenticity_token,:only => [:login, :logout, :search, :simple_vote]  
+  before_filter :set_statics_data, :except => [:simple_vote, :post_vote]
   
-  before_filter  :set_ranking_list ,:only => [:index,:active_news,:arrange,:player]
+  before_filter  :set_ranking_list ,:only => [:index,:active_news,:active_arrange,:active_player,:player]
   
 
   Player_Blog_Perpage     = 20
@@ -14,12 +13,14 @@ class ActiveController < ApplicationController
   Player_Comments_Perpage = 5
 
   Player_Count_Perpage    = 16
+  Player_Count_List = 10
 
   def index
-    @blogs     =  Blog.find :all, :limit => 10
+    @blogs     =  Blog.paginate :page => params[:page]||1,:per_page => 1,:order => 'created_at desc'
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
     @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'
-    @comments  =  PlayerComment.find :all, :limit => 10    
+    @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'created_at desc'
+    
   end  
   
   #  @blogs = Blog.find :all, :conditions => "user_id = #{current_user.id}" ,:limit => 10
@@ -73,7 +74,7 @@ class ActiveController < ApplicationController
     end
   end
 
-  def post_vote        
+  def post_vote
     error_msg = ''
     if current_user
       if simple_captcha_valid?
@@ -138,35 +139,61 @@ class ActiveController < ApplicationController
   
     def active_contact
   end
-  #查出所有的参与者分页显示
-  def player_list
-  end
-  
-  def vote
-  end
   
   def search
     conditions = params[:q].blank? ? nil : "user_name LIKE '%#{params[:q]}%' or real_name LIKE '%#{params[:q]}%'"
-    @search_users = Player.paginate(:page => params[:page]||1, :per_page => Player_Count_Perpage , :conditions => conditions, :order => 'created_at desc')
+    @search_users = Player.paginate(:page => params[:page], :per_page => Player_Count_Perpage , :conditions => conditions, :order => 'created_at desc')
   end
   
   def blog_list
-    @blogs = Blog.paginate(:page => params[:page]||1,:per_page => Player_Blog_Perpage ,:order => 'created_at desc')
+    @blogs = Blog.paginate(:page => params[:page],:per_page => Player_Blog_Perpage ,:order => 'created_at desc')
   end
   
   def comment_list
-    @comments = PlayerComment.paginate(:page => params[:page]||1,:per_page => Player_Comments_Perpage ,:order => 'created_at desc')
+    @comments = PlayerComment.paginate(:page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'created_at desc')
+#    render :update do |page|
+#       page.replace_html 'comment', :partial => "small_comment_list"
+#    end
+  end
+  
+  def simple_vote
+    debugger
+    error_msg = '您，'
+    if current_user
+        if ActiveVote.should_vote_agin?(request.remote_ip)
+          active_vote = ActiveVote.new
+          active_vote.user_id = params[:user_id]
+          active_vote.voter_id = current_user.id
+          active_vote.user_name = (Player.find params[:user_id]).real_name
+          active_vote.ip = request.remote_ip
+          error_msg = "" if active_vote.save!
+        else
+          error_msg = "30分钟后再来投票"
+        end
+    else
+      error_msg  = '请登陆后再投'
+    end
+    if error_msg.blank?
+      render :update  do |page|
+        page.alert  "投票成功，谢谢你的投票!"
+      end
+    else
+      render :update  do |page|
+        page.alert "投票失败！"
+      end
+    end
   end
  
   protected 
-  
-#  def active
-#    return 'active'  
-#  end
-  
+  #TODO
   def find_players
+   #left
+    @new_entry = Player.find :all, :limit => Player_Count_Perpage, :order => 'created_at desc'
     @users = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
-    @focus_men = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
+    #top
+    @personals = Player.find :all, :limit => Player_Count_List, :order => 'vote_count + comment_count + blog_count desc'
+    @week_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 7 day)" ,:limit => Player_Count_List, :order => 'created_at, vote_count + comment_count + blog_count desc'
+    @month_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 30 day)", :limit => Player_Count_List, :order => 'created_at, vote_count + comment_count + blog_count desc'
   end
   
   def set_ranking_list

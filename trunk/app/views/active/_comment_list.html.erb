@@ -1,6 +1,19 @@
-<a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id) %>"></a>
-<dl>
-  <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
-  <dd><%= comment.content %></dd>
-</dl>
+  <table style="padding-left: 1px;padding-top: 10px;" width="98%">
+  <tr>
+        <td width="28%" align="center">
+          <span class="blog_nav">
+            <a href="<%= comment.user.space_url %>">
+            <img src="<%= user_icon(comment.user_id, "small") %>" style="width: 48px; height: 48px;">
+            </a>
+            <a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> 
+            </span>
+            <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span>Said > 
+        </td>
+         <td>
+         <span style="padding-top:10px;"><%= comment.content %></span>
+          <br/>
+       </td>
+       </tr>
+        </table>
+        <hr style="border-bottom: 1px solid #DFDFDF;">
 <div class="height12"></div>

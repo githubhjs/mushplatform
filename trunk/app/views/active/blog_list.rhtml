@@ -2,7 +2,7 @@
         	<div class="onebg">
                   <div class="bt1_t">
 <div class="bt1_tb">
-  <lable style="margin:15px 0px 15px 15px;font-size:14px;">  博客列表 >></lable>
+  <span>  博客列表 >></span>
 </div>
 <div class="height20"></div>
 </div>
@@ -13,7 +13,7 @@
             <div class="blog">
                 <dl>
                 <dt><a href="<%= blog.user.space_url %>/entry/<%= blog.id %>" target="_blank"><%=blog.title%></a></dt>
-                <dd><span><%=blog.user.real_name%> </span>发表于<strong><%= blog.created_at %></strong> | 阅读(<a href="#">82</a>) | 评论(<a href="#">30</a>) | 收藏(<a href="#">1</a>) </dd>
+                <dd><span><%=blog.user.real_name%> </span>发表于<strong><%= blog.created_at.strftime("%Y-%m-%d %H:%M:%S") %></strong> | 阅读(<a href="#">82</a>) | 评论(<a href="#">30</a>) | 收藏(<a href="#">1</a>) </dd>
                 </dl>
                 <p><%=blog.body%><br />
                <a href="#">查看全文</a> &gt;&gt;</p><!--TODO 链接没有加-->

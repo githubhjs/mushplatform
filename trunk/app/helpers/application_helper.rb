@@ -52,6 +52,14 @@ module ApplicationHelper
     radio_boxes.join('')
   end
 
+  def generate_user_type_radio(attr_name,selected_value)
+    selected_value ||= 0
+    radio_boxes = []
+    radio_boxes <<  (radio_button_tag(attr_name,0,selected_value == 0) + '个人')
+    radio_boxes <<  (radio_button_tag(attr_name,1,selected_value == 1) + '团队')
+    radio_boxes.join('')
+  end
+
   def generate_sex_radio_for_search(select_value = Const::Sex_Unknown )
     select_value ||= Const::Sex_Unknown
     radio_boxes = []

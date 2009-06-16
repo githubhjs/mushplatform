@@ -15,6 +15,11 @@
           <td class="txtx"><%= file_column_field 'user_profile', 'avatar' %> <%= submit_tag '上传头像' %>
           <br>格式：jpg,png,gif 尺寸：120x120 (超出自动剪裁)</td>
         </tr>
+        <tr>
+          <td width="11%" align="right" height="79">注册类型：</td>
+          <td width="2%">&nbsp;</td>
+          <td class="txtx" width="87%"><%= generate_user_type_radio('user[user_type]',@user.user_type) %></td>
+        </tr>
       </tbody>
     </table>
     <div class="height12xhx"></div>

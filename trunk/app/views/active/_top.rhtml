@@ -1,120 +1,188 @@
 <div class="w100">
-  <img src="/images/active/tu_jdb.jpg" border="0" usemap="#Map" />
-  <map name="Map" id="Map">
-    <area shape="rect" coords="183,11,226,33" href="/active/player" alt="更多" />
-  </map>
-  <div class="btr_mmm">
-    <div class="tab-box2" id="tab_b2">
-      <div>
-        <ul class="tab-btbt2">
-          <li class="selected2"><a href="#">个人</a></li>
-          <li class="selected2"><a href="#">本周</a></li>
-          <li class="selected2"><a href="#">本月</a></li>
-        </ul>
+<img src="/images/active/tu_jdb.jpg" border="0" usemap="#Map" />
+<map name="Map" id="Map">
+  <area shape="rect" coords="183,11,226,33" href="/active/player" alt="更多" />
+</map>
+<div class="btr_mmm">
+<div class="tab-box2" id="tab_b2">
+<div>
+  <ul class="tab-btbt2">
+    <li class="selected2"><a href="#">个人</a></li>
+    <li class="selected2"><a href="#">团队</a></li>
+    <li class="selected2"><a href="#">本周</a></li>
+    <li class="selected2"><a href="#">本月</a></li>
+  </ul>
+</div>
+<div class="tab-main2"><!-- 下面五个div类似 -->
+<div class="h12"></div>
+<div class="photo">
+<ul><!--TODO my_blog链接-->
+<% i = 1 %>
+<% for user in @personals do %>
+    <% unless user.nil? %>
+      <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
+      <tr>
+      <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
+      <td width="27%" align="center" >
+        <a href="<%= user.player_url %>">
+          <img style="width:48px; height:48px;" src="<%=user_icon(user.user_id, 'normal')%>" width="48" height="48" />
+        </a>
+      </td>
+      <td width="61%">
+      <table width="95%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
+          <label>
+            <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_<%= user.id %>')"/>
+        </label></td>
+      </tr>
+      <tr>
+      <td>票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a>
+      <div class="gift" style="display:none;position:absolute;z-index:500;padding-left:-100px;" id="vote_div_<%= user.id %>">
+        <div class="gift_t">
+        <p>投票给<%=  user.real_name %></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
+        <% form_tag '/active/post_vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
+          <div class="gift_m">
+            <div class="gift_main">
+              <label><br>
+              </label>
+              <table width="90%" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                  <tr>
+                    <td height="40">&nbsp;<span id="vote_notice"></span></td>
+                    <td align="center" id="simple_captcha_td">
+                      <%= show_simple_captcha :label => "请输入验证码",:image_style => 'simply_red', :distortion => 'medium'  %>
+                    </td>
+                  </tr>
+              </tbody></table>
+            </div>
+            <input type="hidden" name="active_vote[user_id]" value="<%= user.user_id %>">
+            <input type="hidden" name="active_vote[user_name]" value="<%= user.user_name %>">
+            <div class="gift_bd" id="vote_message">
+              <strong>附言</strong> <span class="huise">(可选项)</span><br>
+              <textarea cols="45" rows="" name="active_vote[message]" id="vote_message"></textarea>
+              <div class="h12"></div>
+            </div>
+            <div class="gift_btn"><a href="#" onclick="post_vote();return false"><img src="/images/active/btn_qdtp.jpg" alt="确定"></a></div>
+          </div>
+        <%end%>
+        <div class="gift_b"></div>
       </div>
-      <div class="tab-main2"><!-- 下面五个div类似 -->
-        <div class="h12"></div>
-        <div class="photo">
-          <ul><!--TODO my_blog链接-->
-          <% i = 1 %>
-            <% for user in @personals do %>
-                <% unless user.nil? %>
-                  <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
-                      <tr>
-                        <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
-                        <td width="27%" align="center" >
-                          <a href="<%= user.player_url %>">
-                            <img style="width:48px; height:48px;" src="<%=user_icon(user.user_id, 'normal')%>" width="48" height="48" />
-                          </a>
-                        </td>
-                        <td width="61%">
-                          <table width="95%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
-                                <label>
-                                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
-                              </label></td>
-                            </tr>
-                            <tr>
-                              <td>票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a>
-                              </td>
-                            </tr>
-                        </table></td>
-                      </tr>
-                  </table></li>
-                  <% i +=1 %>
-                <%end%>
-              <%end%>
-            </ul>
-          </div>
+      </td>
+      </tr>
+      </table></td>
+      </tr>
+      </table></li>
+      <% i +=1 %>
+    <%end%>
+  <%end%>
+  </ul>
+  </div>
+  </div>
+  <div class="tab-main2"><!-- 下面五个div类似 -->
+  <div class="h12"></div>
+  <div class="photo">
+  <ul><!--TODO my_blog链接-->
+  <% i = 1 %>
+  <% for user in @teams_players do %>
+      <% unless user.nil? %>
+        <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
+        <tr>
+        <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
+        <td width="27%" align="center" >
+          <a href="<%= user.player_url %>">
+            <img style="width:48px; height:48px;" src="<%=user_icon(user.user_id, 'normal')%>" width="48" height="48" />
+          </a>
+        </td>
+        <td width="61%">
+        <table width="95%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
+            <label>
+              <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
+          </label></td>
+        </tr>
+        <tr>
+        <td>票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a>
+        </td>
+        </tr>
+        </table></td>
+        </tr>
+        </table></li>
+        <% i +=1 %>
+      <%end%>
+    <%end%>
+    </ul>
+    </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="tab-main2">
+    <div class="h12"></div>
+    <div class="photo">
+    <ul><% i = 1 %>
+    <% for user in @week_men do %>
+        <% unless user.nil? %>
+          <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
+          <tr>
+          <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
+          <td width="27%" align="center" ><a href="#"><img style="width:48px; height:48px;" src="<%=user_icon(user.id, 'normal')%>" width="48" height="48" /></a></td>
+          <td width="61%"><table width="95%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
+              <label>
+                <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
+            </label></td>
+          </tr>
+          <tr>
+          <td>票：<span class="blue"><%=  user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a></td>
+          </tr>
+          </table></td>
+          </tr>
+          </table></li>
+          <% i+=1 %>
+        <%end%>
+      <%end%>
+      </ul>
+      </div>
+      </div>
+      <!--5-->
+      <div class="tab-main2">
+      <div class="h12"></div>
+      <div class="photo">
+      <ul>
+      <% i = 1 %>
+      <% for user in @month_men do %>
+          <% unless user.nil? %>
+            <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
+            <tr>
+            <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
+            <td width="27%" align="center" ><a href="#"><img style="width:48px; height:48px;" src="<%=user_icon(user.id, 'normal')%>" width="48" height="48" /></a></td>
+            <td width="61%"><table width="95%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
+                <label>
+                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
+              </label></td>
+            </tr>
+            <tr>
+            <td>票：<span class="blue"><%= user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a></td>
+            </tr>
+            </table></td>
+            </tr>
+            </table></li>
+            <% i+=1 %>
+          <%end%>
+        <%end%>
+        </ul>
         </div>
-            <!-- 4 -->
-            <div class="tab-main2">
-              <div class="h12"></div>
-              <div class="photo">
-                <ul><% i = 1 %>
-                    <% for user in @week_men do %>
-                      <% unless user.nil? %>
-                        <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
-                            <tr>
-                              <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
-                              <td width="27%" align="center" ><a href="#"><img style="width:48px; height:48px;" src="<%=user_icon(user.id, 'normal')%>" width="48" height="48" /></a></td>
-                              <td width="61%"><table width="95%" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
-                                      <label>
-                                        <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
-                                    </label></td>
-                                  </tr>
-                                  <tr>
-                                        <td>票：<span class="blue"><%=  user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a></td>
-                                  </tr>
-                              </table></td>
-                            </tr>
-                        </table></li>
-                    <% i+=1 %>
-                    <%end%>
-                    <%end%>
-                  </ul>
-                </div>
-              </div>
-              <!--5-->
-              <div class="tab-main2">
-                <div class="h12"></div>
-                <div class="photo">
-                  <ul>
-                    <% i = 1 %>
-                    <% for user in @month_men do %>
-                        <% unless user.nil? %>
-                          <li><table width="99%" border="0" cellspacing="0" cellpadding="0" class="center">
-                              <tr>
-                                <td width="12%" align="center"><img src="/images/active/pm_<%= i<10 ? i : i%10 %>.jpg" width="18" height="11" /></td>
-                                <td width="27%" align="center" ><a href="#"><img style="width:48px; height:48px;" src="<%=user_icon(user.id, 'normal')%>" width="48" height="48" /></a></td>
-                                <td width="61%"><table width="95%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                      <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
-                                        <label>
-                                          <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
-                                      </label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>票：<span class="blue"><%= user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a></td>
-                                    </tr>
-                                </table></td>
-                              </tr>
-                          </table></li>
-                        <% i+=1 %>
-                        <%end%>
-                      <%end%>
-                    </ul>
-                  </div>
-                </div>
-                </div>
-              <SCRIPT type="text/javascript">
-                var tabb = TB.widget.SimpleTab.decorate('tab_b2', {eventType:'mouse',currentClass:'selected2'});
-                tabb.switchTab(Math.floor(Math.random() * $text));
-              </SCRIPT>
-              <div class="h12"></div>
-              </div>
-            <div class="btr_bbb"></div>
-          </div>
+        </div>
+        </div>
+        <SCRIPT type="text/javascript">
+          var tabb = TB.widget.SimpleTab.decorate('tab_b2', {eventType:'mouse',currentClass:'selected2'});
+          tabb.switchTab(Math.floor(Math.random() * $text));
+        </SCRIPT>
+        <div class="h12"></div>
+        </div>
+        <div class="btr_bbb"></div>
+        </div>

@@ -68,7 +68,7 @@ class Manage::UserProfilesController < Manage::ManageController
     @user_profile = UserProfile.find(params[:id])
     @user = User.find(@user_profile.user_id)
     respond_to do |format|
-      if @user_profile.update_attributes(params[:user_profile])
+      if @user_profile.update_attributes(params[:user_profile]) && @user.update_attributes(params[:user])
         flash[:notice] = 'UserProfile was successfully updated.'
         format.html { redirect_to :action => :index }
         format.xml  { head :ok }

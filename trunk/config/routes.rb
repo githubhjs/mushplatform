@@ -132,13 +132,13 @@ ActionController::Routing::Routes.draw do |map|
     active.connect  '/active/login',       :action =>  'login'
     active.connect  '/active/logout',      :action =>  'logout'
     
-    active.connect '/active/player_list', :action =>  'player_list'
     active.connect '/active/search', :action =>  'search'
     active.connect '/active/join', :action =>  'take_part_in'
     active.connect '/active/create_comment', :action =>  'comment',:method => "post"
     active.connect '/:user_name/active', :action =>  'player'
     active.connect '/active/blog_list', :action =>  'blog_list'
     active.connect '/active/comment_list', :action =>  'comment_list'
+    active.connect '/active/simple_vote', :action =>  'simple_vote'
     
     active.connect '/active/post_vote',:action => "post_vote",:method => "post"
   end  

@@ -23,7 +23,7 @@
               <li class="<%= action_name == "index" ? "n_index" :"" %>"><a href="/active" title="大赛首页"><span>大赛首页</span></a></li>
               <li class="<%= action_name == "active_news" ? "n_index" :"n_news" %>"><a href="/active/news" title="大赛新闻"><span>大赛新闻</span></a></li>
               <li class="<%= action_name == "active_arrange" ? "n_index" :"n_plan" %>"><a href="/active/arrange" title="赛事安排"><span>赛事安排</span></a></li>
-              <li class="<%= action_name == "active_gold" ? "n_index" :"n_gold" %>"><a href="/active/prizes" title="奖项设置"><span>奖项设置</span></a></li>
+              <li class="<%= action_name == "active_gold" ? "n_index" :"n_gold" %>"><a href="#" title="奖项设置"><span>奖项设置</span></a></li>
               <li class="<%= action_name == "active_player" ? "n_index" :"n_vip" %>"><a href="/active/player" title="参赛选手"><span>参赛选手</span></a></li>
               <li class="<%= action_name == "active_contact" ? "n_index" :"n_contact" %>"><a href="/active/contact" title="联系我们"><span>联系我们</span></a></li>
             </ul>
@@ -47,7 +47,9 @@
             <%= text_field_tag :q, params[:q], :size => 40 %>
             </label>
               <label>
-                <input type="submit" style="background-image:url(/images/active/btn_soso.jpg);width:66px;height:22px;" value="">
+                <span>
+                    <input type="submit" value="搜索">
+                </span>
           </label>
         </div>
         <%end%>
@@ -77,5 +79,14 @@
     “好客会”服务热线：400-779-7070 </div>
   </body>
   <script type="text/javascript">
+      function vote(user_id){
+          url = "/active/simple_vote?user_id="+user_id;
+      new Ajax.Request(url, { 
+      asynchronous: true, 
+      evalScripts: true, 
+      method: 'post' 
+    }); 
+      }
+      
   </script>
 </html>

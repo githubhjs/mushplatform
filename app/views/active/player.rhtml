@@ -9,7 +9,7 @@
             <p><a href="#" onclick="Element.show('vote_div');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
               <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
                 <div class="gift_t">
-                <p>投票给李黎阳</p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
+                <p>投票给<%=@user.user_name%></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
                 <% form_tag '/active/post_vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
                 <div class="gift_m">
                   <div class="gift_main">
@@ -207,6 +207,6 @@
   <%= render :partial => "active/top"  %>
   <!--这里以下需要提取出去 数据统计-->
   <div class="h12"></div>
-  <%= render :partial => "active/statics"  %>
+  <%= render :partial => "active/statistics"  %>
   <div class="h12"></div>
 </div>

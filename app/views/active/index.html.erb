@@ -104,7 +104,7 @@
   <div class="bt1">
     <div class="bt1_t">
       <div class="bt1_ta"></div>
-      <div class="bt1_tb"><img src="/images/active/tu_csxs.jpg" /><span><a class="csxred" href="/active/player_list">查看全部</a></span></div>
+      <div class="bt1_tb"><img src="/images/active/tu_csxs.jpg" /><span><a class="csxred" href="/active/player">查看全部</a></span></div>
       <div class="bt1_tc"></div>
     </div>
     <div class="bt1_m">
@@ -124,11 +124,10 @@
                     <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.id, 'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
-                        <input type="hidden" id="vote" value="<%=user.id%>">
-                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="window.location.href ='/active/vote?user_id='+<%=user.id%>" />
+                        <input name="button" type="submit" class="button6422" value="投票" onclick="vote(<%=user.id%>);" />
                       </label><br />
                       来自：客户世界机构<br />
-                    票：<span class="blue"><%=user.vote_count%></span> 文：<a href="my_blog.html" class="csxred"><%=user.blog_count%></a> 照：<a href="my_photo.html" class="csxred"><%= user.photo_count %></a></li>
+                    票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
                   <%end%><!--TODO 链接 -->
                 <%end%>
               </ul>
@@ -142,11 +141,10 @@
                     <li><a href="<%= rand_user.player_url %>"><img src="<%=user_icon(rand_user.id, 'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=rand_user.real_name%></a>
                       <label>
-                        <input type="hidden" id="vote" value="<%=rand_user.id%>">
-                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="window.location.href ='/vip/index?user_id='+<%=rand_user.id%>" />
+                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.id%>)" />
                       </label><br />
                       来自：客户世界机构<br />
-                    票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="my_blog.html" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="my_photo.html" class="csxred"><%=rand_user.photo_count%></a></li>
+                    票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%=rand_user.photo_count%></a></li>
                   <%end%><!--TODO 链接 -->
                 <%end%>
               </ul>
@@ -186,14 +184,17 @@
         </div>
         <div class="h12"></div>
         <div class="alist" id="comment">
-          <ul><% for info in @comments do %>
+<ul><% for info in @comments do %>
                 <% unless info.nil? %>
-                  <li><a href="<%= info.user.space_url %>"><%= info.content %></a></li>
+                  <li><a href="<%= info.user.space_url %>"><%= info.content %></a></li><!--链接到用户的空间了-->
                 <%end%>
               <%end%>
             </ul>
           </div>
           <div class="h12"></div>
+          <div class="tablenav">
+            <%#= will_paginate @comments, {:renderer => 'RemoteLinkRenderer', :params => {:controller => 'active', :action => 'comment_list'}} %>
+          </div>
         </div>
         <div class="w340r">
           <div class="bt3">
@@ -222,6 +223,6 @@
     </div>
     <div class="right" id="second_r">
       <!--共用数据统计-->
-    <%= render :partial => "statics" %>
+    <%= render :partial => "statistics" %>
     </div>
 

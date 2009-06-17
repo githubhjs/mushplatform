@@ -19,7 +19,7 @@
                         <div class="friend">
                 	<ul><% for user in @new_entry do %>
                   <% unless user.nil? %>
-                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.id, 'normal')%>" /></a><br />
+                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
                         <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.id%>);"/>
@@ -39,7 +39,7 @@
                         <div class="friend">
                 	<ul><% for user in @rand_users do %>
                   <% unless user.nil? %>
-                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.id, 'normal')%>" /></a><br />
+                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
                         <input type="hidden" id="vote" value="<%=user.id%>">
@@ -60,7 +60,7 @@
                         <div class="friend">
                 	<ul><% for user in @users do %>
                   <% unless user.nil? %>
-                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.id, 'normal')%>" /></a><br />
+                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
                         <input type="hidden" id="vote" value="<%=user.id%>">

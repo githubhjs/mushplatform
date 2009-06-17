@@ -1,23 +1,23 @@
 <div class="left">
-        	<div class="onebg">
-                  <div class="bt1_t">
-<div class="bt1_tb">
-<img src="/images/active/tu_csxs.jpg"/>
-</div>
-<div class="height20"></div>
-</div>
+  <div class="onebg">
+    <div class="bt1_t">
+      <div class="bt1_tb">
+        <img src="/images/active/tu_csxs.jpg"/>
+      </div>
+      <div class="height20"></div>
+    </div>
     <div class="list">
-    <ul>
+      <ul>
         <% for user in  @search_users %>
-<% unless user.nil? %>
-          <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.id, 'small')%>" /></a><br />
-                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
-                      <label>
-                        <input type="hidden" id="vote" value="<%=user.id%>">
-                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.id%>);" />
-                      </label><br />
-                      来自：客户世界机构<br />
-                    票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
+          <% unless user.nil? %>
+            <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
+              <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
+              <label>
+                <input type="hidden" id="vote" value="<%=user.id%>">
+                <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.id%>);" />
+              </label><br />
+              来自：客户世界机构<br />
+            票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
           <%end%>
         <%end%>
       </ul>
@@ -26,5 +26,5 @@
     <div class="jogger">
       <%= will_paginate @users, {:prev_label => '上一页', :next_label => '下一页'} %>
     </div>
-    </div></div>
-        <%= render :partial => "right" %>
+</div></div>
+<%= render :partial => "right" %>

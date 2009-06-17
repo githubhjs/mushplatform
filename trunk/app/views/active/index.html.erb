@@ -121,7 +121,7 @@
             <ul>
               <% for user in @users do %>
                   <% unless user.nil? %>
-                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id)%>" /></a><br />
+                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id,'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
                         <input name="button" type="submit" class="button6422" value="投票" onclick="vote(<%=user.user_id%>);" />
@@ -138,7 +138,7 @@
             <ul>
               <% for rand_user in @rand_users do %>
                   <% unless user.nil? %>
-                    <li><a href="<%= rand_user.player_url %>"><img src="<%= user_icon(rand_user.user_id)%>" /></a><br />
+                    <li><a href="<%= rand_user.player_url %>"><img src="<%= user_icon(rand_user.user_id,'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=rand_user.real_name%></a>
                       <label>
                         <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.user_id%>)" />

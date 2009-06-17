@@ -56,9 +56,9 @@ task :update_comment_author => :environment do
 end
 #      title = footstep.content.scan(/<a\s+href="[^"]*">(.*?)<\/a>/).first.first
 #      footstep.content = footstep.content.gsub(/href='([^']*)'/,"href='#{footstep.user.space_url}#{'\1'}'")
-taks :init_active_player  => :environment do
-  ['guaguagua','xiao-fox','feichidejinglin','popingjazz','liangshuyan','wangxin842001',
-    'pink-coffee','wangjing','lucyhu830','supergirl'
+task :init_active_player  => :environment do
+  ['guaguagua','xiao-fox','feichidejinglin','popingjazz','liangshuyan',
+    'pink-coffee','wangjing','lucyhu830','supergirl','wangxin842001'
   ].each do |user_name|
     if user = User.find_by_user_name(user_name)
       player = Player.new(:user_id => user.id,:user_name => user.user_name,

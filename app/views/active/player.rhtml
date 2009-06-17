@@ -5,7 +5,7 @@
     <div class="w90 gray">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="31%" align="center"><div class="myphoto"><img src="/images/active/mypic.jpg" alt="我的形象" /></div><br />
+          <td width="31%" align="center"><div class="myphoto"><img src="<%= user_icon(@user.user_id, 'normal') %>" alt="我的形象" /></div><br />
             <p><a href="#" onclick="Element.show('vote_div');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
               <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
                 <div class="gift_t">
@@ -144,7 +144,7 @@
       <div class="h12"></div>
       <div class="message" id="comments">
         <%for comment in @comments %>
-          <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id) %>"></a>
+          <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id,'normal') %>"></a>
           <dl>
             <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
             <dd style="text-align:left"><%= comment.content %></dd>

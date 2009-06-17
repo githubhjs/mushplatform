@@ -150,7 +150,7 @@ class ActiveController < ApplicationController
   end
   
   def comment_list
-    conditions = params[:user_id].blank? ? '' : "user_id=#{params[:user_id]}"
+    conditions = params[:user_id].blank? ? '' : "player_id=#{params[:user_id]}"
     @comments = PlayerComment.paginate(:page => params[:page],:per_page =>Player_Comments_Perpage,
       :conditions => conditions,:order => 'created_at desc')
   end

@@ -137,7 +137,7 @@
     <div class="bt3">
       <div class="bt3_a"></div>
       <div class="bt3_b">
-      <p><img src="/images/active/tb_wjj.jpg" width="8" height="10" align="absmiddle" /> 最新留言</p><span><a class="csxred" href="/active/comment_list">查看全部</a></span></div>
+      <p><img src="/images/active/tb_wjj.jpg" width="8" height="10" align="absmiddle" /> 最新留言</p><span><a class="csxred" href="/active/comment_list?user_id=<%= @user.user_id %>">查看全部</a></span></div>
       <div class="bt3_c"></div>
     </div>
     <div class="w95">
@@ -152,7 +152,7 @@
           <div class="height12"></div>
 
         <%end%>
-        <p>共有 <strong><%= @user.comment_count %></strong> 条留言  <a href="#">查看更多</a></p><!-- TODO 更多链接没有加-->
+        <p>共有 <strong><%= @user.comment_count %></strong> 条留言  <a href="/active/comment_list?user_id=<%= @user.user_id %>">查看更多</a></p>
       </div>
       <div class="h12"></div>
       <div class="saying">

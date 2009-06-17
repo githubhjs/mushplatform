@@ -190,8 +190,8 @@ class ActiveController < ApplicationController
     #top
     @personals = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=0",:order => 'vote_count + comment_count + blog_count desc'
     @teams_players = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=1" ,:order => 'vote_count + comment_count + blog_count desc'
-    @week_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 7 day)" ,:limit => Player_Count_List, :order => 'created_at, vote_count + comment_count + blog_count desc'
-    @month_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 30 day)", :limit => Player_Count_List, :order => 'created_at, vote_count + comment_count + blog_count desc'
+    @week_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 7 day)" ,:limit => Player_Count_List, :order => 'created_at, vote_count  desc'
+    @month_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 30 day)", :limit => Player_Count_List, :order => 'created_at, vote_count desc'
   end
   
   def set_ranking_list

@@ -12,9 +12,8 @@
           <% unless user.nil? %>
             <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
               <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
-              <label>
-                <input type="hidden" id="vote" value="<%=user.id%>">
-                <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.id%>);" />
+              <label>                
+                <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.user_id%>);" />
               </label><br />
               来自：客户世界机构<br />
             票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>

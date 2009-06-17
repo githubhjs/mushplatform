@@ -33,41 +33,13 @@
       <tr>
         <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
           <label>
-            <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_<%= user.id %>')"/>
+            <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.user_id%>)"/>
         </label></td>
       </tr>
       <tr>
-      <td>票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span></a>
-      <div class="gift" style="display:none;position:absolute;z-index:500;padding-left:-100px;" id="vote_div_<%= user.id %>">
-        <div class="gift_t">
-        <p>投票给<%=  user.real_name %></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
-        <% form_tag '/active/post_vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
-          <div class="gift_m">
-            <div class="gift_main">
-              <label><br>
-              </label>
-              <table width="90%" border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                  <tr>
-                    <td height="40">&nbsp;<span id="vote_notice"></span></td>
-                    <td align="center" id="simple_captcha_td">
-                      <%= show_simple_captcha :label => "请输入验证码",:image_style => 'simply_red', :distortion => 'medium'  %>
-                    </td>
-                  </tr>
-              </tbody></table>
-            </div>
-            <input type="hidden" name="active_vote[user_id]" value="<%= user.user_id %>">
-            <input type="hidden" name="active_vote[user_name]" value="<%= user.user_name %>">
-            <div class="gift_bd" id="vote_message">
-              <strong>附言</strong> <span class="huise">(可选项)</span><br>
-              <textarea cols="45" rows="" name="active_vote[message]" id="vote_message"></textarea>
-              <div class="h12"></div>
-            </div>
-            <div class="gift_btn"><a href="#" onclick="post_vote();return false"><img src="/images/active/btn_qdtp.jpg" alt="确定"></a></div>
-          </div>
-        <%end%>
-        <div class="gift_b"></div>
-      </div>
+      <td>票：
+        <span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></span></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></span>
+      </a>
       </td>
       </tr>
       </table></td>
@@ -99,7 +71,7 @@
         <tr>
           <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
             <label>
-              <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
+              <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.user_id%>);"/>
           </label></td>
         </tr>
         <tr>
@@ -131,7 +103,7 @@
           <tr>
             <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
               <label>
-                <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
+                <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.user_id%>);"/>
             </label></td>
           </tr>
           <tr>
@@ -162,7 +134,7 @@
             <tr>
               <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
                 <label>
-                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.id%>);"/>
+                  <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="vote(<%=user.user_id%>);"/>
               </label></td>
             </tr>
             <tr>

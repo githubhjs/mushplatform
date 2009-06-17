@@ -124,7 +124,7 @@
                     <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id)%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
-                        <input name="button" type="submit" class="button6422" value="投票" onclick="vote(<%=user.id%>);" />
+                        <input name="button" type="submit" class="button6422" value="投票" onclick="vote(<%=user.user_id%>);" />
                       </label><br />
                       来自：客户世界机构<br />
                     票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
@@ -141,7 +141,7 @@
                     <li><a href="<%= rand_user.player_url %>"><img src="<%= user_icon(rand_user.user_id)%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=rand_user.real_name%></a>
                       <label>
-                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.id%>)" />
+                        <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="vote(<%=user.user_id%>)" />
                       </label><br />
                       来自：客户世界机构<br />
                     票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%=rand_user.photo_count%></a></li>

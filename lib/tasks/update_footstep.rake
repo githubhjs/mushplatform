@@ -56,3 +56,18 @@ task :update_comment_author => :environment do
 end
 #      title = footstep.content.scan(/<a\s+href="[^"]*">(.*?)<\/a>/).first.first
 #      footstep.content = footstep.content.gsub(/href='([^']*)'/,"href='#{footstep.user.space_url}#{'\1'}'")
+taks :init_active_player  => :environment do
+  ['guaguagua','xiao-fox','feichidejinglin','popingjazz','liangshuyan','wangxin842001',
+    'pink-coffee','wangjing','lucyhu830','supergirl'
+  ].each do |user_name|
+    if user = User.find_by_user_name(user_name)
+      player = Player.new(:user_id => user.id,:user_name => user.user_name,
+        :real_name => user.real_name)
+      player.blog_count  = user.blogs.count
+      player.photo_count = user.photos.count
+      player.user_type   = user.user_type
+      player.save
+    end
+  end
+  
+end

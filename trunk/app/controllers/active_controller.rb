@@ -19,7 +19,7 @@ class ActiveController < ApplicationController
     @blogs     =  Blog.paginate :page => params[:page]||1,:per_page => 1,:order => 'created_at desc'
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
     @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'    
-    @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'created_at desc'
+    @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'id desc'
     
   end  
   
@@ -137,7 +137,7 @@ class ActiveController < ApplicationController
     @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'
   end
   
-    def active_contact
+  def active_contact
   end
   
   def search
@@ -156,16 +156,17 @@ class ActiveController < ApplicationController
   def simple_vote    
     error_msg = ''
     if current_user
-        if ActiveVote.should_vote_agin?(request.remote_ip)
-          active_vote = ActiveVote.new
-          active_vote.user_id = params[:user_id]
-          active_vote.voter_id = current_user.id
-          active_vote.user_name = (Player.find params[:user_id]).real_name
-          active_vote.ip = request.remote_ip
-          error_msg = "" if active_vote.save!
-        else
-          error_msg = "30分钟后再来投票"
-        end
+      if ActiveVote.should_vote_agin?(request.remote_ip)
+        user = Player.find_by_user_id(params[:user_id])
+        active_vote = ActiveVote.new
+        active_vote.user_id = user.user_id
+        active_vote.voter_id = current_user.id
+        active_vote.user_name = user.real_name
+        active_vote.ip = request.remote_ip
+        error_msg = "" if active_vote.save
+      else
+        error_msg = "30分钟后再来投票"
+      end
     else
       error_msg  = '请登陆后再投'
     end
@@ -183,7 +184,7 @@ class ActiveController < ApplicationController
   protected 
   #TODO
   def find_players
-   #left
+    #left
     @new_entry = Player.find :all, :limit => Player_Count_Perpage, :order => 'created_at desc'
     @users = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
     #top

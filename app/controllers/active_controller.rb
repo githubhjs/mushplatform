@@ -75,22 +75,22 @@ class ActiveController < ApplicationController
 
   def post_vote
     error_msg = ''
-    if current_user
-      if simple_captcha_valid?
-        if ActiveVote.should_vote_agin?(request.remote_ip)
-          active_vote = ActiveVote.new(params[:active_vote])
-          active_vote.voter_id = current_user.id
-          active_vote.ip     = request.remote_ip
-          active_vote.save
-        else
-          error_msg = "30分钟后再来投票"
-        end
+    #    if current_user
+    if simple_captcha_valid?
+      if ActiveVote.should_vote_agin?(request.remote_ip,params[:active_vote][:user_id])
+        active_vote = ActiveVote.new(params[:active_vote])
+        #          active_vote.voter_id = current_user.id
+        active_vote.ip     = request.remote_ip
+        active_vote.save
       else
-        error_msg  = '请输入正确验证码'
+        error_msg = "30分钟后再来投票"
       end
     else
-      error_msg  = '请登陆后再投'
+      error_msg  = '请输入正确验证码'
     end
+    #    else
+    #      error_msg  = '请登陆后再投'
+    #    end
     unless error_msg.blank?
       render :update  do |page|
         page.replace_html "vote_notice",error_msg
@@ -155,21 +155,21 @@ class ActiveController < ApplicationController
   
   def simple_vote    
     error_msg = ''
-    if current_user
-      if ActiveVote.should_vote_agin?(request.remote_ip)
-        user = Player.find_by_user_id(params[:user_id])
-        active_vote = ActiveVote.new
-        active_vote.user_id = user.user_id
-        active_vote.voter_id = current_user.id
-        active_vote.user_name = user.real_name
-        active_vote.ip = request.remote_ip
-        error_msg = "" if active_vote.save
-      else
-        error_msg = "30分钟后再来投票"
-      end
+    #    if current_user
+    if ActiveVote.should_vote_agin?(request.remote_ip,params[:user_id])
+      user = Player.find_by_user_id(params[:user_id])
+      active_vote = ActiveVote.new
+      active_vote.user_id = user.user_id
+      #        active_vote.voter_id = current_user.id
+      active_vote.user_name = user.real_name
+      active_vote.ip = request.remote_ip
+      error_msg = "" if active_vote.save
     else
-      error_msg  = '请登陆后再投'
+      error_msg = "30分钟后再来投票"
     end
+    #    else
+    #      error_msg  = '请登陆后再投'
+    #    end
     if error_msg.blank?
       render :update  do |page|
         page.alert  "投票成功，谢谢你的投票!"

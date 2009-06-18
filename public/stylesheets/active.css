@@ -319,14 +319,14 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 
 .foot{ width:100%;height:150px; padding-top:15px; text-align:center;}
 
-.small_gift{ width:177px;height:200px;color:#464646;}
-.small_gift_t{ width:177px; height:23px; background:url(/images/active/gift_t.gif) no-repeat 0 0;}
+.small_gift{ width:217px;height:200px;color:#464646;}
+.small_gift_t{ width:217px; height:23px; background:url(/images/active/gift_t.gif) no-repeat 0 0;}
 .smal_gift_t p{ display:block; float:left; line-height:11px; color:#FFFFFF; font-weight:bold; padding-left:3px;}
 .small_gift_t span{ display:block; float:right; padding-right:3px;}
-.small_gift_m{ width:177px;height:auto;background:url(/images/active/gift_m.gif) repeat-y 0 0;}
+.small_gift_m{ width:217px;height:auto;background:url(/images/active/gift_m.gif) repeat-y 0 0;}
 .small_gift_bt{ width:164px; height:8px; background:#fdecbe; border-bottom:1px dotted #fb6142; line-height:8px; font-weight:bold; margin:0 auto;}
 .small_gift_main{ width:164px; height:30px; border-bottom:1px dotted #fb6142; margin:3px auto; background:url(/images/active/logo_bg.jpg) no-repeat center; text-align:center; line-height:10px; font-size:14px;}
 .small_gift_bd{ width:159px;border-bottom:1px dotted #fb6142; margin:0 auto; line-height:7px; padding-left:6px;}
 .small_gift_btn{ width:164px; height:16px; text-align:center;margin:0 auto; padding-top:3px;}
 
-.small_gift_b{ width:177px; height:4px; background:url(/images/active/gift_b.gif) no-repeat 0 0;}
+.small_gift_b{ width:217px; height:4px; background:url(/images/active/gift_b.gif) no-repeat 0 0;}

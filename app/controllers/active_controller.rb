@@ -1,11 +1,11 @@
 class ActiveController < ApplicationController
   
   before_filter :login_required, :only => [:take_part_in]
-  before_filter :find_players, :only => [:index, :player, :active_news, :active_arrange, :active_player, :active_contact, :comment_list, :blog_list, :search]
+  before_filter :find_players, :only => [:index, :player, :active_news, :active_arrange, :active_player, :active_contact, :comment_list, :blog_list, :search, :active_gold]
   skip_before_filter :verify_authenticity_token,:only => [:login, :logout, :search, :simple_vote]  
   before_filter :set_statics_data, :except => [:simple_vote, :post_vote,:login]
   
-  before_filter  :set_ranking_list ,:only => [:index,:active_news,:active_arrange,:active_player,:player]
+  before_filter  :set_ranking_list ,:only => [:index,:active_news,:active_arrange,:active_player,:player,:active_glod]
   
 
   Player_Blog_Perpage     = 20
@@ -138,6 +138,9 @@ class ActiveController < ApplicationController
   end
   
   def active_contact
+  end
+  
+  def active_gold
   end
   
   def search

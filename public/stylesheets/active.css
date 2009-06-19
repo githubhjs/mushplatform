@@ -1,4 +1,4 @@
-/*<ȫ��css����>*/
+/*<全局css定义>*/
 *{margin:0;padding:0;}
 img{border:0;}
 ul,li{list-style:none;}
@@ -6,12 +6,12 @@ input,select{ font-family:arial,verdana, helvetica, sans-serif;font-size:12px;li
 div,form,img,ul,ol,li,dl,dt,dd,table,td,tr,th{ margin:0;padding:0;border:none;}
 td{line-height:22px;}
 
-body{width:100%;/*<����Ļ��С�Զ�����>*/
-	color:#000;/*<����������ɫ>*/
-	font-size:12px; /*<Ԥ���������С>*/
-	font-family:arial,verdana, helvetica, sans-serif; /*<��������ϵ��>*/
-	word-break:normal;/*<�����ڴʼ任��>*/
-	word-wrap:break-word;/*<���ݽ��ڱ߽��ڻ���>*/
+body{width:100%;/*<随屏幕大小自动充满>*/
+	color:#000;/*<定义字体颜色>*/
+	font-size:12px; /*<预定义字体大小>*/
+	font-family:arial,verdana, helvetica, sans-serif; /*<定义字体系列>*/
+	word-break:normal;/*<允许在词间换行>*/
+	word-wrap:break-word;/*<内容将在边界内换行>*/
 	background:url(/images/active/bg.jpg) repeat-x 0 0 #fffac0;
 }
 
@@ -19,18 +19,18 @@ a:link {line-height:22px;color:#fb6142;text-decoration: none;}
 a:visited{line-height:22px;color:#fb6142;text-decoration: none;}
 a:hover {line-height:22px;color:#000;text-decoration:underline;}
 
-.csxred,a.csxred:link,a.csxred:visited{color:#fb6142; text-decoration:underline;/*<ɽ���>*/}
-.csxred,a.csxred:hover{color:#000000;/*<ɽ�����>*/}
+.csxred,a.csxred:link,a.csxred:visited{color:#fb6142; text-decoration:underline;/*<山西红>*/}
+.csxred,a.csxred:hover{color:#000000;/*<山西红变黑>*/}
 
-.csxdarkred,a.csxdarkred:link,a.csxdarkred:visited{color:#a40000; text-decoration:underline;/*<ɽ�����>*/}
-.csxdarkred,a.csxdarkred:hover{color:#000000; text-decoration:underline;/*<ɽ�������>*/}
+.csxdarkred,a.csxdarkred:link,a.csxdarkred:visited{color:#a40000; text-decoration:underline;/*<山西深红>*/}
+.csxdarkred,a.csxdarkred:hover{color:#000000; text-decoration:underline;/*<山西深红变黑>*/}
 
-.csxblue,a.csxblue:link,a.csxblue:visited{color:#1e539f;/*<ɽ��6>*/}
-.csxblue,a.csxblue:hover{color:#000000;/*<ɽ��6���>*/}
+.csxblue,a.csxblue:link,a.csxblue:visited{color:#1e539f;/*<山西蓝>*/}
+.csxblue,a.csxblue:hover{color:#000000;/*<山西蓝变黑>*/}
 
 .clear{clear:both;width:1px;font-size:1px;height:0;line-height:0;visibility:hidden;}
 
-/*<���幫����ɫ>*/
+/*<定义公共颜色>*/
 .sxred{ color:#fb6142;}
 .red{ color:red;}
 .darkred{ color:darkred;}
@@ -57,48 +57,48 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 .lanhui{color: #0054a6;}
 .zhonghui{color: #565553;}
 
-/*<>*/
-.cred,a.cred:link,a.cred:visited{color:#ff0000;/*<���>*/}
-.cred,a.cred:hover{color:#000000;/*<�����>*/}
+/*<定义公共链接颜色类，类名命名规则：小写字母c加颜色名称>*/
+.cred,a.cred:link,a.cred:visited{color:#ff0000;/*<大红>*/}
+.cred,a.cred:hover{color:#000000;/*<大红变黑>*/}
 
-.cgreen,a.cgreen:link,a.cgreen:visited{color:#00a69e;/*<�н���>*/}
-.cgreen,a.cgreen:hover{color:#000000;/*<�н��̱��>*/}
+.cgreen,a.cgreen:link,a.cgreen:visited{color:#00a69e;/*<中交绿>*/}
+.cgreen,a.cgreen:hover{color:#000000;/*<中交绿变黑>*/}
 
-.cgreen2,a.cgreen2:link,a.cgreen2:visited{color:#00A650; text-decoration:underline;/*<�н���>*/}
-.cgreen2,a.cgreen2:hover{color:#000000; /*<�н��̱��>*/}
+.cgreen2,a.cgreen2:link,a.cgreen2:visited{color:#00A650; text-decoration:underline;/*<中交绿>*/}
+.cgreen2,a.cgreen2:hover{color:#000000; /*<中交绿变黑>*/}
 
-.cyellow,a.cyellow:link,a.cyellow:visited{color:#ffff00;/*<���ʻ�>*/}
-.cyellow,a.cyellow:hover{color:#000000;/*<���ʻƱ��>*/}
+.cyellow,a.cyellow:link,a.cyellow:visited{color:#ffff00;/*<柠檬黄>*/}
+.cyellow,a.cyellow:hover{color:#000000;/*<柠檬黄变黑>*/}
 
-.cwhite,a.cwhite:link,a.cwhite:visited{color:#ffffff;/*<����>*/}
-.cwhite,a.cwhite:hover{color:#000000;/*<���ױ��>*/}
+.cwhite,a.cwhite:link,a.cwhite:visited{color:#ffffff;/*<纯白>*/}
+.cwhite,a.cwhite:hover{color:#000000;/*<纯白变黑>*/}
 
-.corange,a.corange:link,a.corange:visited{color:#ffa500;/*<��ɫ>*/}
-.corange,a.corange:hover{color:#000000;/*<��ɫ���>*/}
+.corange,a.corange:link,a.corange:visited{color:#ffa500;/*<橙色>*/}
+.corange,a.corange:hover{color:#000000;/*<橙色变黑>*/}
 
-.cgray,a.cgray:link,a.cgray:visited{color:#c0c0c0;/*<��ɫ>*/}
-.cgray,a.cgray:hover{color:#000000;/*<��ɫ���>*/}
+.cgray,a.cgray:link,a.cgray:visited{color:#c0c0c0;/*<灰色>*/}
+.cgray,a.cgray:hover{color:#000000;/*<灰色变黑>*/}
 
-.cblue,a.cblue:link,a.cblue:visited{color:#00f;text-decoration: underline;/*<��ɫ>*/}
-.cblue,a.cblue:hover{color:#f00; /*<��ɫ���>*/}
+.cblue,a.cblue:link,a.cblue:visited{color:#00f;text-decoration: underline;/*<灰色>*/}
+.cblue,a.cblue:hover{color:#f00; /*<灰色变黑>*/}
 
-.cblack,a.cblack:link,a.cblack:visited{color:#000;text-decoration: none;/*<��ɫ>*/}
-.cblack,a.cblack:hover{color:#f00; /*<��ɫ���>*/}
+.cblack,a.cblack:link,a.cblack:visited{color:#000;text-decoration: none;/*<灰色>*/}
+.cblack,a.cblack:hover{color:#f00; /*<灰色变黑>*/}
 
-/*<���幫�������࣬�����������Сд��ĸf���������>*/
-.fb{font-weight:bold;/*<����>*/}
-.f14{font-size:14px;/*<14������>*/ }
-.f13{font-size:13px;/*<14������>*/ }
-.f14b{font-size:14px;/*<14������>*/ font-weight:bold;/*<����>*/ line-height:25px;/*<�и�>*/}
+/*<定义公共字体类，类名命名规则：小写字母f加属性名称>*/
+.fb{font-weight:bold;/*<粗体>*/}
+.f14{font-size:14px;/*<14像素字>*/ }
+.f13{font-size:13px;/*<14像素字>*/ }
+.f14b{font-size:14px;/*<14像素字>*/ font-weight:bold;/*<粗体>*/ line-height:25px;/*<行高>*/}
 .fve9{ font-family:verdana, Helvetica, sans-serif; font-size:9px;}
-.fht20{ font-family:"����"; font-size:20px; line-height:25px; }
-.fht16{ font-family:"����"; font-size:16px; line-height:25px; }
+.fht20{ font-family:"黑体"; font-size:20px; line-height:25px; }
+.fht16{ font-family:"黑体"; font-size:16px; line-height:25px; }
 .ftime25{ font-family:"Times New Roman "; font-size:25px; line-height:25px; }
 .hang16{ line-height:16px;}
 .hang20{ line-height:20px;}
 .hang1bg{ background:url(/images/active/hang1.jpg) repeat-x 0 0;}
 
-/*<���幫�����ֽṹ��>*/
+/*<定义公共布局结构类>*/
 .h1{ width:100%; height:1px;clear:both;}
 .h8{ width:100%; height:8px;clear:both;}
 .h10{width:100%; height:10px;clear:both; }
@@ -125,6 +125,7 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 .hand{cursor:pointer;}
 .button6422{ width:40px; height:20px; background: url(/images/active/buttonn6422.jpg) repeat-x 0 0; border:1px solid #fff; color:#fff;
 }
+.bian{ border:1px dotted #ccc; padding:2px;}
 
 
 .pages{width:100%;text-align:center; padding:5px 0; margin:5px 0px;float:left; }
@@ -141,9 +142,9 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 
 .hong_bt{ width:28px; float:left; height:83px; text-align:center; background:url(/images/active/in_gis_bt.jpg) no-repeat 0 0; padding-top:10px; line-height:14px; }
 
-/*<����ҳ�沼�ֽṹ��>*/
+/*<定义页面布局结构类>*/
 #header{ width:100%; margin:0 auto; clear:both;}
-.top{ width:1024px; height:392px; margin:0 auto;}
+.top{ width:1000px; height:392px; margin:0 auto;}
 #dh{ width:960px; height:44px; margin:0 auto; background:url(/images/active/dh_b.jpg) repeat-x 0 0;}
 .nav_a{ width:8px; height:44px; float:left; background:url(/images/active/dh_a.jpg) no-repeat 0 0;}
 .nav_b{ width:943px; height:44px; float:left;}
@@ -272,7 +273,7 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 .bt3_c{ float:right;width:9px; height:32px; background:url(/images/active/bt2_c.jpg) no-repeat 0 0;}
 
 .bt6{ widows:100%; height:40px;margin:0 auto; background:url(/images/active/bt6_bg.jpg) repeat-x 0 0; line-height:40px;}
-.name{display:block; float:left; height:40px;background:url(/images/active/bt6_yes.jpg) no-repeat center; padding:0 15px;line-height:40px;}
+.name{ display:block; float:left; height:40px;background:url(/images/active/bt6_yes.jpg) no-repeat center; padding:0 15px;line-height:40px;}
 
 .btr_ttt{ width:230px; height:30px; background:url(/images/active/bt3_b.jpg) repeat-x 0 0;}
 .btr_ttta{ float:left; width:6px; height:30px; background:url(/images/active/bt3_a.jpg) no-repeat 0 0;}
@@ -287,8 +288,7 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 .message img{ float:left; width:48px; height:48px;}
 .message dl{ float:right; width:87%; overflow:hidden; line-height:20px;}
 .message dt{ width:98%; height:22px; overflow:hidden; color:#94979e;}
-.message p{ display:block; clear:both; width:90%; text-align:left; margin:12px auto;}
-
+.message p{ display:block; clear:both; width:90%; text-align:right; margin:12px auto;}
 
 .saying{ width:90%; margin:0 auto; color:#464646;}
 .saying_bt{ width:100%; height:23px; color:#000000; line-height:23px; background:#e6f0f4; border-bottom:1px dotted #7f9db9;border-top:1px dotted #7f9db9; padding-left:10px;}
@@ -317,16 +317,14 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 
 .gift_b{ width:506px; height:11px; background:url(/images/active/gift_b.gif) no-repeat 0 0;}
 
+.gift2{ width:345px;color:#464646;}
+.gift2_t{ width:345px; height:30px; background:url(/images/active/tp_t.jpg) no-repeat 0 0;}
+.gift2_t p{ display:block; float:left; line-height:30px; color:#FFFFFF; font-weight:bold; padding-left:10px;}
+.gift2_t span{ display:block; float:right;height:25px; padding-right:10px; padding-top:5px;}
+.gift2_m{ width:345px; background:url(/images/active/tp_m.jpg) repeat-y 0 0;}
+.gift2_main{ width:345px; height:230px; margin:0px auto; background:url(/images/active/logo_bg.jpg) no-repeat center; }
+.gift2_b{ width:345px; height:12px; background:url(/images/active/tp_b.jpg) no-repeat 0 0;}
+
 .foot{ width:100%;height:150px; padding-top:15px; text-align:center;}
 
-.small_gift{ width:217px;height:200px;color:#464646;}
-.small_gift_t{ width:217px; height:23px; background:url(/images/active/gift_t.gif) no-repeat 0 0;}
-.smal_gift_t p{ display:block; float:left; line-height:11px; color:#FFFFFF; font-weight:bold; padding-left:3px;}
-.small_gift_t span{ display:block; float:right; padding-right:3px;}
-.small_gift_m{ width:217px;height:auto;background:url(/images/active/gift_m.gif) repeat-y 0 0;}
-.small_gift_bt{ width:164px; height:8px; background:#fdecbe; border-bottom:1px dotted #fb6142; line-height:8px; font-weight:bold; margin:0 auto;}
-.small_gift_main{ width:164px; height:30px; border-bottom:1px dotted #fb6142; margin:3px auto; background:url(/images/active/logo_bg.jpg) no-repeat center; text-align:center; line-height:10px; font-size:14px;}
-.small_gift_bd{ width:159px;border-bottom:1px dotted #fb6142; margin:0 auto; line-height:7px; padding-left:6px;}
-.small_gift_btn{ width:164px; height:16px; text-align:center;margin:0 auto; padding-top:3px;}
 
-.small_gift_b{ width:217px; height:4px; background:url(/images/active/gift_b.gif) no-repeat 0 0;}

@@ -1,4 +1,3 @@
-
 <div class="left" id="first_l">
   <div class="onebg">
     <div class="jrzd">
@@ -59,21 +58,23 @@
             <li class="selected"><a href="#">支持媒体</a></li>
           </ul>
         </div>
-        <div class="tab-main">
+        <div class="tab-main">          
           <div class="alist">
-            <div class="danews fht16"><a href="#">关于选手ID的注册规范注册规范注册规范和集体</a></div>
+            <%unless @articles.blank?%>
+            <% top_article = @articles.first %>
+            <% if top_article %>
+            <div class="danews fht16"><a href="/article/<%= top_article.id   %>"><%= top_article.display_title  %></a></div>
+            <%end%>
             <div class="h12"></div>
             <ul>
-              <li><a href="#">交通资讯输企业经营资企业经营资质企业经营法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">交通资讯运输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">交通资讯运输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">道交通资讯运输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">交通资讯输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">道路旅客运输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">道交通资讯运输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">交通资讯输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
-              <li><a href="#">道路旅客运输企业经营资质管理办法</a><span class="fve9 huise">[04-16]</span></li>
+              <% for article in @articles %>
+              <li>
+                 <a href="/article/<%= top_article.id   %>"><%= article.display_title %></a>
+                 <span class="fve9 huise">[<%= DateUtil.time_day_and_month(article.created_at) %>]</span>
+              </li>
+              <%end%>
             </ul>
+            <%end%>
           </div>
         </div>
         <div class="tab-main">
@@ -163,7 +164,7 @@
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
                       <label>
                         <input name="button" type="submit" class="button6422" value="投票" onclick="Element.show('vote_div_nomal_'+'<%=user.id%>');return false;" />
-                <%= render :partial => "small_vote", :locals => {:user => user, :location => "nomal"} %>
+                        <%= render :partial => "small_vote", :locals => {:user => user, :location => "nomal"} %>
                       </label><br />
                       来自：客户世界机构<br />
                     票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>

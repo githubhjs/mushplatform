@@ -10,17 +10,17 @@ class ActiveController < ApplicationController
 
   Player_Blog_Perpage     = 20
   Player_Photo_Perpage    = 20
-  Player_Comments_Perpage = 5
+  Player_Comments_Perpage = 10
 
   Player_Count_Perpage    = 16
   Player_Count_List = 10
 
   def index
-    @blogs     =  Blog.paginate :page => params[:page]||1,:per_page => 1,:order => 'created_at desc'
+    @blogs     =  Blog.paginate :page => params[:page]||1,:per_page => 10,:conditions =>"user_id in (select user_id from players)",:order => 'id desc'
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
     @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'    
-    @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'id desc'
-    
+    @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'id desc'    
+    @articles  = Article.find(:all,:conditions => "channel_id=16",:order => 'top desc,id desc',:limit => 10)    
   end  
   
   def take_part_in
@@ -72,39 +72,27 @@ class ActiveController < ApplicationController
       end
     end
   end
-
-  def post_vote
-    error_msg = ''
-    #    if current_user
-    if simple_captcha_valid?
-      if ActiveVote.should_vote_agin?(request.remote_ip,params[:active_vote][:user_id])
-        active_vote = ActiveVote.new(params[:active_vote])
-        #          active_vote.voter_id = current_user.id
-        active_vote.ip     = request.remote_ip
-        active_vote.save
+  
+  def post_vote    
+    error_msg = simple_captcha_valid? ?
+      ( ActiveVote.should_vote_agin?(request.remote_ip,params[:active_vote][:user_id])  ?  nil :  '30分钟后再来投票') :
+      '请输入正确验证码'      
+    if error_msg.nil?
+      active_vote     =  ActiveVote.new(params[:active_vote])
+      active_vote.ip  =  request.remote_ip
+      active_vote.save
+    end
+    id_buffix = ((params[:user_id].blank? || params[:location].blank?) ? '' : "_#{params[:location]}_#{params[:user_id]}")
+    render :update  do |page|
+      page.replace_html  "simple_captcha_td#{id_buffix}",:partial => '/active/simple_captcha'
+      unless error_msg.blank?
+        page.replace_html "vote_notice#{id_buffix}",error_msg
       else
-        error_msg = "30分钟后再来投票"
-      end
-    else
-      error_msg  = '请输入正确验证码'
-    end
-    #    else
-    #      error_msg  = '请登陆后再投'
-    #    end
-    unless error_msg.blank?
-      render :update  do |page|
-        page.replace_html "vote_notice",error_msg
-        page.replace_html  'simple_captcha_td',:partial => '/active/simple_captcha'
-      end
-    else
-      render :update  do |page|
-        page.hide   "vote_div"
-        page.replace_html  'simple_captcha_td',:partial => '/active/simple_captcha'
-        page.replace_html 'vote_message',:partial => '/active/vote_message'
+        page.hide   "vote_div#{id_buffix}"
+        page.replace_html "vote_message#{id_buffix}",:partial => '/active/vote_message'
         page.alert  "投票成功，谢谢你的投票!"        
-      end      
-    end
-    return true
+      end   
+    end        
   end
 
   def login    
@@ -158,34 +146,7 @@ class ActiveController < ApplicationController
       :conditions => conditions,:order => 'created_at desc')
   end
   
-  def simple_vote    
-    error_msg = ''
-    #    if current_user
-    if ActiveVote.should_vote_agin?(request.remote_ip,params[:user_id])
-      user = Player.find_by_user_id(params[:user_id])
-      active_vote = ActiveVote.new
-      active_vote.user_id = user.user_id
-      #        active_vote.voter_id = current_user.id
-      active_vote.user_name = user.real_name
-      active_vote.ip = request.remote_ip
-      error_msg = "" if active_vote.save
-    else
-      error_msg = "30分钟后再来投票"
-    end
-    #    else
-    #      error_msg  = '请登陆后再投'
-    #    end
-    if error_msg.blank?
-      render :update  do |page|
-        page.alert  "投票成功，谢谢你的投票!"
-      end
-    else
-      render :update  do |page|
-        page.alert error_msg
-      end
-    end
-  end
- 
+  
   protected 
   #TODO
   def find_players
@@ -213,3 +174,31 @@ class ActiveController < ApplicationController
   end
   
 end
+#def simple_vote
+#    error_msg = ''
+#    #    if current_user
+#    if ActiveVote.should_vote_agin?(request.remote_ip,params[:user_id])
+#      user = Player.find_by_user_id(params[:user_id])
+#      active_vote = ActiveVote.new
+#      active_vote.user_id = user.user_id
+#      #        active_vote.voter_id = current_user.id
+#      active_vote.user_name = user.real_name
+#      active_vote.ip = request.remote_ip
+#      error_msg = "" if active_vote.save
+#    else
+#      error_msg = "30分钟后再来投票"
+#    end
+#    #    else
+#    #      error_msg  = '请登陆后再投'
+#    #    end
+#    if error_msg.blank?
+#      render :update  do |page|
+#        page.alert  "投票成功，谢谢你的投票!"
+#      end
+#    else
+#      render :update  do |page|
+#        page.alert error_msg
+#      end
+#    end
+#  end
+#

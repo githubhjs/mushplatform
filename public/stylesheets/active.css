@@ -242,7 +242,7 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 .friend{ width:95%; margin:0 auto; line-height:20px; color:#8b939e;}
 .friend ul{ width:100%;}
 .friend li{float:left; display:block;width:163px;height:180px;overflow:hidden;text-align:center; margin-bottom:12px; line-height:14px;}
-.friend li img{width:120px;height:120px; border:2px solid  #edebdd; padding:1px;}
+.friend li img{width:120px;border:2px solid  #edebdd; padding:1px;}
 
 .myphoto img{ width:120px;height:120px; border:2px solid  #edebdd; padding:1px;}
 

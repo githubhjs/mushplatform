@@ -42,6 +42,22 @@ function post_vote(){
     return false;
 }
 
+function post_small_vote(location,user_id){
+    var vote_form = $('vote_form_'+location+'_'+user_id);    
+    if(vote_form['captcha'].value != ''){
+        new Ajax.Request(vote_form.action,
+        {
+            method:'post',
+            asynchronous:true,
+            evalScripts:true,
+            parameters:Form.serialize(vote_form)
+        });
+    }else{
+        alert('请输入验证码');
+    }
+    return false;
+}
+
 function ajax_submit(_from){
     new Ajax.Request(_from.action,
     {

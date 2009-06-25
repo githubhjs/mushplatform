@@ -31,6 +31,12 @@ class Channel < CachedModel
   def to_json_with_leaf(options = {})
     self.to_json_without_leaf(options.merge(:methods => :leaf))
   end
+
+  def channel_permalink
+    link = permalink.blank?  ? "/channel/#{id}" : permalink
+    link == '/' ? '' : link
+  end
+
   alias_method_chain :to_json, :leaf
 
   def to_liquid

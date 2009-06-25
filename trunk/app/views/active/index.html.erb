@@ -63,14 +63,14 @@
             <%unless @articles.blank?%>
             <% top_article = @articles.first %>
             <% if top_article %>
-            <div class="danews fht16"><a href="/article/<%= top_article.id   %>"><%= top_article.title  %></a></div>
+            <div class="danews fht16"><a href="<%= top_article.article_permalink %>"><%= top_article.title  %></a></div>
             <%end%>
             <div class="h12"></div>
             <ul>
               <% @articles.each_with_index do |article,index| %>
-                <% next if index==1 %>
+                <% next if index==0 %>
               <li>
-                 <a href="/article/<%= top_article.id   %>"><%= article.title %></a>
+                 <a href="<%= article.article_permalink %>"><%= article.title %></a>
                  <span class="fve9 huise">[<%= DateUtil.time_day_and_month(article.created_at) %>]</span>
               </li>
               <%end%>

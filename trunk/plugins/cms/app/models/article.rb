@@ -52,6 +52,14 @@ class Article < CachedModel
      #atts['editor'] = User.find(atts['user_id']).real_name
      atts
   end
+  
+  def article_permalink
+    return redirect_url unless redirect_url.blank?
+    channel = Channel.find(channel_id)    
+    article_url = permalink.blank? ? id : permalink
+    "#{channel.channel_permalink}/article/#{article_url}"
+  end
+
 
   def normal_word(str)
      str.gsub!(/\\&[a-zA-Z]{1,10};/,'')

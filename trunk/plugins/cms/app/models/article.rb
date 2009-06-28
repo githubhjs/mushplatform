@@ -53,6 +53,10 @@ class Article < CachedModel
      atts
   end
   
+  def article_content_link
+    "#{article_permalink}/content"
+  end
+
   def article_permalink
     return redirect_url unless redirect_url.blank?
     channel = Channel.find(channel_id)    

@@ -63,14 +63,14 @@
             <%unless @articles.blank?%>
             <% top_article = @articles.first %>
             <% if top_article %>
-            <div class="danews fht16"><a href="<%= top_article.article_content_link %>"><%= top_article.title  %></a></div>
+            <div class="danews fht16"><a href="<%= top_article.article_permalink %>"><%= top_article.title  %></a></div>
             <%end%>
             <div class="h12"></div>
             <ul>
               <% @articles.each_with_index do |article,index| %>
                 <% next if index==0 %>
               <li>
-                 <a href="<%= article.article_content_link %>"><%= article.title %></a>
+                 <a href="<%= article.article_permalink %>"><%= article.title %></a>
                  <span class="fve9 huise">[<%= DateUtil.time_day_and_month(article.created_at) %>]</span>
               </li>
               <%end%>
@@ -215,7 +215,11 @@
       <%= render :partial => "top"  %>
     </div>
     <div class="clear"></div>
-    <div class="ad2" id="ad2"><img src="/images/active/ad2.jpg" /></div>
+    <div class="ad2" id="ad2">
+      <a href="http://www.ccmw.net/minisites/2009haokehui/index.html" target="_blank">
+        <img src="/images/active/ad932_80.jpg" />
+       </a>
+    </div>
     <div class="left" id="second_l">
       <div class="onebg">
         <div class="w340l">

@@ -69,5 +69,23 @@ task :init_active_player  => :environment do
       player.save
     end
   end
-  
+end
+
+task :active_group_player  => :environment do
+  user_ids = []
+  ['sz10000','gy10000','otisccc','wz10000','95522','guilinzls','huihuang2007','hichina',
+    '95teleweb','95561','dhlcsd','haier-callcenter','citic','hz10000','sd95519','nm165','neworiental',
+    'alipaycallcente','sinacc','sndakf','fundertech'
+  ].each do |user_name|
+    if user = User.find_by_user_name(user_name)
+      player = Player.new(:user_id => user.id,:user_name => user.user_name,
+        :real_name => user.real_name)
+      player.blog_count  = user.blogs.count
+      player.photo_count = user.photos.count
+      player.user_type   = user.user_type
+      player.save
+      user_ids << user.id
+    end
+  end
+  User.connection.execute("update users set user_type=1 where id in (#{user_ids.join(',')})") unless user_ids.blank?
 end

@@ -33,7 +33,7 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
             <ul id ="top_nav">
               <li class="<%= action_name == "index" ? "n_index" :"" %>"><a href="/active" title="大赛首页"><span>大赛首页</span></a></li>
               <li class="<%= action_name == "active_news" ? "n_index" :"n_news" %>"><a href="/active/news" title="大赛新闻"><span>大赛新闻</span></a></li>
-              <li class="<%= action_name == "active_arrange" ? "n_index" :"n_plan" %>"><a href="/active/arrange" title="赛事安排"><span>赛事安排</span></a></li>
+              <li class="<%= action_name == "active_arrange" ? "n_index" :"n_plan" %>"><a href="/active/arrange" title="大赛背景"><span>大赛背景</span></a></li>
               <li class="<%= action_name == "active_gold" ? "n_index" :"n_gold" %>"><a href="/active/gold" title="奖项设置"><span>奖项设置</span></a></li>
               <li class="<%= action_name == "active_player" ? "n_index" :"n_vip" %>"><a href="/active/player" title="参赛选手"><span>参赛选手</span></a></li>
               <li class="<%= action_name == "active_contact" ? "n_index" :"n_contact" %>"><a href="/active/contact" title="联系我们"><span>联系我们</span></a></li>
@@ -48,10 +48,8 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
         <% form_tag "/active/search", :method => "post" do %>
         <div class="soso_b"><img src="/images/active/tu_soso.jpg" align="absmiddle" />
           <label>
-            <select name="select" id="select">
-              <option value="1">团队</option>
-              <option value="2" selected>个人</option>
-              <option value="3">新闻</option>
+            <select name="user_type" id="select">
+              <%= generate_search_type_options(params[:user_type]) %>
             </select>
           </label>
           <label id="m">

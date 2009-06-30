@@ -57,6 +57,7 @@ module ApplicationHelper
     radio_boxes = []
     radio_boxes <<  (radio_button_tag(attr_name,0,selected_value == 0) + '个人')
     radio_boxes <<  (radio_button_tag(attr_name,1,selected_value == 1) + '团队')
+    radio_boxes <<  (radio_button_tag(attr_name,2,selected_value == 2) + '学员')
     radio_boxes.join('')
   end
 

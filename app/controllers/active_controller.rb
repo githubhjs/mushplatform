@@ -132,8 +132,13 @@ class ActiveController < ApplicationController
   end
   
   def search
-    conditions = params[:q].blank? ? nil : "user_name LIKE '%#{params[:q]}%' or real_name LIKE '%#{params[:q]}%'"
-    @search_users = Player.paginate(:page => params[:page], :per_page => Player_Count_Perpage , :conditions => conditions, :order => 'created_at desc')
+    if params[:q].blank?
+      redirect_to :action => 'index'
+      return true
+    end
+    user_type = params[:user_type].blank? ? 0 : params[:user_type]
+    conditions = ["user_type=#{user_type} and user_name LIKE ? or real_name LIKE ?","%#{params[:q]}%","%#{params[:q]}%"]    
+    @search_users = Player.paginate(:page => params[:page], :per_page => Player_Count_Perpage , :conditions => conditions, :order => 'id desc')
   end
   
   def blog_list
@@ -154,8 +159,9 @@ class ActiveController < ApplicationController
     @new_entry = Player.find :all, :limit => Player_Count_Perpage, :order => 'created_at desc'
     @users = Player.paginate(:page => params[:page]||1,:per_page => Player_Count_Perpage ,:order => 'created_at desc')
     #top
-    @personals = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=0",:order => 'vote_count + comment_count + blog_count desc'
-    @teams_players = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=1" ,:order => 'vote_count + comment_count + blog_count desc'
+    @personals = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=0",:order => 'vote_count  desc'
+    @teams_players = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=1" ,:order => 'vote_count  desc'
+    @student_players = Player.find :all, :limit => Player_Count_List,:conditions => "user_type=2" ,:order => 'vote_count  desc'
     @week_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 7 day)" ,:limit => Player_Count_List, :order => 'created_at, vote_count  desc'
     @month_men = Player.find :all, :conditions => "created_at >= date_sub(NOW(),interval 30 day)", :limit => Player_Count_List, :order => 'created_at, vote_count desc'
   end

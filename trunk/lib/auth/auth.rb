@@ -1,5 +1,5 @@
 module Auth
-
+ 
   protected  
   def login_required(admin=nil)
     if session[:user]
@@ -28,6 +28,9 @@ module Auth
   end
 
   def is_space_admin?
+    if current_user && current_user.user_name == 'admin'
+      return true
+    end
     unless  current_user && current_user.user_name == request.subdomains.first
       flash[:warning]='请登陆'
       session[:return_to] = request.request_uri

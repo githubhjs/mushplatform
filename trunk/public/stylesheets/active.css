@@ -288,7 +288,7 @@ a:hover {line-height:22px;color:#000;text-decoration:underline;}
 .message img{ float:left; width:48px; height:48px;}
 .message dl{ float:right; width:87%; overflow:hidden; line-height:20px;}
 .message dt{ width:98%; height:22px; overflow:hidden; color:#94979e;}
-.message p{ display:block; clear:both; width:90%; text-align:right; margin:12px auto;}
+.message p{ display:block; clear:both; width:90%; text-align:left; margin:12px auto;}
 
 .saying{ width:90%; margin:0 auto; color:#464646;}
 .saying_bt{ width:100%; height:23px; color:#000000; line-height:23px; background:#e6f0f4; border-bottom:1px dotted #7f9db9;border-top:1px dotted #7f9db9; padding-left:10px;}

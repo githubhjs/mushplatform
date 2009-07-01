@@ -4,4 +4,5 @@ zh-CN:
       authorize: "用户管理"
       roles: "角色管理"
       groups: "组管理"
-      users: "用户管理"  
+      users: "用户管理"
+      active: "耳麦天使"

@@ -7,6 +7,7 @@ module Admin::AuthHelper
                     <li><a href='/admin/roles'>#{I18n.t 'text.menu.roles'}</a></li>
                     <li><a href='/admin/groups'>#{I18n.t 'text.menu.groups'}</a></li>
                     <li><a href='/admin/users'>#{I18n.t 'text.menu.users'}</a></li>
+                    <li><a href='/admin/active_member'>#{I18n.t 'text.menu.active'}</a></li>
             </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
         </li>"
     end  

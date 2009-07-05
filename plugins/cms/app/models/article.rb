@@ -58,7 +58,7 @@ class Article < CachedModel
 
   def article_permalink
     return redirect_url unless redirect_url.blank?
-    channel = Channel.find(channel_id)    
+    channel = Channel.find_by_id(channel_id)
     article_url = permalink.blank? ? id : permalink
     "#{channel.channel_permalink}/article/#{article_url}"
   end

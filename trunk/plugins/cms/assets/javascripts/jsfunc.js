@@ -143,13 +143,13 @@ function add_categories() {
   HidWin();
 }
 
-function add_tags() {
+function add_tags(spliter) {
   var tags = document.getElementById('ListCate').getElementsByTagName("input");
   var tag_names = '';
   for (i=0;i<tags.length;i++ ) {
     if ( tags[i].name == 'id[]' && tags[i].checked ){
       var arr_value = tags[i].value.split(',');
-      tag_names = tag_names + ', ' + arr_value[1];
+      tag_names = tag_names + spliter + arr_value[1];
     }
   } 
   tag_names = tag_names.substring(1);

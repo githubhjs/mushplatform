@@ -293,7 +293,9 @@ width:25%;
     </tr>
     <% end %>
     <tr>
-      <td colspan="2" class="btns" ><input type="button" class="InpBtn" value="添加关键词" onClick="add_tags()" />&nbsp;&nbsp;<input type="button" class="InpBtn" value="取消操作" onClick="HidWin()" /></td>
+      <% spliter = ', ' %>
+      <%  spliter = '+' if params['spliter'] == 'plus' %>
+      <td colspan="2" class="btns" ><input type="button" class="InpBtn" value="添加关键词" onClick="add_tags('<%= spliter %>')" />&nbsp;&nbsp;<input type="button" class="InpBtn" value="取消操作" onClick="HidWin()" /></td>
     </tr>
     </table>
     </form>

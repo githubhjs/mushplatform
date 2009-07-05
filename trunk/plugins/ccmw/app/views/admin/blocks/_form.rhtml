@@ -1,0 +1,83 @@
+<%= error_messages_for 'block' %>
+<script src="/plugin_assets/cms/javascripts/dom-drag.js" type="text/javascript"></script>
+<script src="/plugin_assets/cms/javascripts/jsfunc.js" type="text/javascript"></script>
+<script src="/plugin_assets/cms/javascripts/jsfunc4frm.js" type="text/javascript"></script>
+<input type="hidden" name="id" value="<%= @block.id %>">
+<table class="form-table">
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="block_name"><%=  t 'text.block.name' %></label></th>
+    <td>
+        <%= text_field 'block', 'name' %>
+    </td>
+  </tr>
+  <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="block_url"><%=  t 'text.block.tags' %></label></th>
+    <td><input id="article_tag_list" name="block[tags]" size="30" type="text" value="<%= @block.tags %>" /> &nbsp;<a href="javascript:ShowWin('/admin/articles/tags?spliter=plus');">选择关键词</a></td>
+  </tr>
+</table>
+<p class="submit">
+  <input type="submit" class="button" name="submit" value="<%=  t 'text.block.save_block' %>" />
+  or <%= link_to (t 'text.cancel'), links_path, :class => 'cancel' %>
+</p>
+
+<style>
+#SmlWin {position:absolute;width:650px;border:1px solid #ccc;z-index:999;display:none;background:#fff;}
+#SmlFrm {width:100%;}
+
+#SWinWrap {
+width:100%;
+}
+#OpHand {
+background:#CCC none repeat scroll 0 0;
+float:left;
+padding:4px 0;
+float:left;
+width:100%;
+cursor:move;
+}
+#OpHand ul {
+float:right;
+}
+#OpHand h3 {
+float:left;
+margin:0;
+padding:0 5px;
+font-size:12px;
+}
+#OpHand ul li {
+float:left;
+}
+#OpHand ul li.close {
+cursor:pointer;
+padding-right:5px;
+}
+
+#SWinWrap .TitBox {
+display:none;
+}
+
+#SWinWrap .TitBox .Btns {
+float:right;
+padding-right:5px;
+cursor:pointer;
+}
+#SWinWrap .TxtBox {
+clear:both;
+}
+dl,dt,dd,ul,ul li {
+margin:0;
+padding:0;
+list-style:none;
+}
+
+</style>
+<div id="SmlWin" style="left:195px;top:355px;">
+  <div id="OpHand">
+    <h3>当前操作</h3>
+    <ul class="Btns">
+      <li class="close" onClick="HidWin();">×</li>
+
+    </ul>
+  </div>
+  <iframe src="" name="SmlFrm" id="SmlFrm" frameborder="0" scrolling="no"></iframe>
+</div>

@@ -1,0 +1,58 @@
+    <script>set_current_channel('ccmw')</script>
+    <% form_tag('/admin/blocks/destroy', :id => 'posts-filter' ) do %>
+    <h2><%= t 'text.block.manage_blocks' %> (<%= link_to (t 'text.add'), :controller => 'blocks', :action => 'new' %>)</h2>
+
+    <ul class="subsubsub">
+      
+    </ul>
+
+
+    <p id="post-search">
+      <input type="text" id="post-search-input" name="s" value="" />
+      <input type="submit" value="<%= t 'text.search' %>" class="button" />
+    </p>
+
+    <div class="tablenav">
+
+    <div class="alignleft">
+    <input type="button" value="<%= t 'text.delete' %>" name="deleteit" class="button-secondary delete" onclick="$('posts-filter').action='/admin/blocks/destroy';$('posts-filter').submit();" />
+
+    <input type="button" id="post-query-submit" value="<%= t 'text.search' %>" class="button-secondary"  onclick="$('posts-filter').action='/admin/blocks';$('posts-filter').submit();"/>
+
+    </div>
+
+    <br class="clear" />
+    </div>
+
+    <br class="clear" />
+
+    <table class="widefat">
+      <thead>
+      <tr>
+
+      <th scope="col" class="check-column"><input type="checkbox" onclick="checkAll(document.getElementById('posts-filter'));" /></th>
+      <th scope="col"><%=  t 'text.block.name' %></th>
+      <th scope="col"><%=  t 'text.block.tags' %></th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <% for block in @blocks -%>
+        <tr id='post-1' class='alternate author-self status-publish' valign="top">
+          <th scope="row" class="check-column"><input type="checkbox" name="id[]" value="<%= block.id %>" /></th>
+          <td><strong><%= link_to block.name, {:controller => 'admin/blocks', :action => 'edit', :id => block.id}, {:class =>'tow=title'} %></strong></td>
+          <td><a href='?tags=<%= block.tags %>'><%= block.tags %></a></td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <% end  %>
+
+    <div id="ajax-response"></div>
+
+    <div class="tablenav">
+      <%= will_paginate @blocks, :url => '/admin/blocks', :prev_label => (t 'text.previous'), :next_label => (t 'text.next'), :params => {:tags => @tags} %>
+    </div>
+
+    <br class="clear" />

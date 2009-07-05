@@ -23,7 +23,7 @@ class UserProfile < ActiveRecord::Base
   Intrested_Call_Center,Intrested_Client_Manage,Intrested_Data_Buy,Intrested_Server_Buy,Intrested_Other = 1,2,3,4,5
   
   attr_accessor :user_icon
-    
+  before_create :before_create_set_city
   #validates_length_of :city,:minimum => 1,:too_short => "请填写您所在的城市"
   validates_length_of :sex,:minimum => 1,:too_short => "选选择性别"
  
@@ -33,6 +33,10 @@ class UserProfile < ActiveRecord::Base
     Cache.put(UserProfile.profile_cache_key(self.user_id),UserProfile.find_by_id(self.id))
   end
   
+  def before_create_set_city
+      self.city = '全国' if self.city.blank?
+  end
+
   def user_icon=(img)
     unless img.blank?
       img_url,img_path = generate_image_url_and_path(img.original_filename)    

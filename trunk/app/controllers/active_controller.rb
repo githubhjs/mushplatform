@@ -20,7 +20,8 @@ class ActiveController < ApplicationController
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
     @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'    
     @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'id desc'    
-    @articles  = Article.find(:all,:conditions => "channel_id=16",:order => 'top desc,id desc',:limit => 10)    
+    @articles  = Article.find(:all,:conditions => "channel_id=16",:order => 'top desc,id desc',:limit => 10)
+    @rule_articles  = Article.find(:all,:conditions => "channel_id=17",:order => 'top desc,id desc',:limit => 10)
   end  
   
   def take_part_in

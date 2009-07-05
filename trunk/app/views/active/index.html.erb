@@ -79,39 +79,37 @@
           </div>
         </div>
         <div class="tab-main">
-          <div class="h12"></div>
-          <div class="w95 gray hang16">
-            <p>　　相信每一个在呼叫中心工作的人，都不会对耳唛感到陌生。它是我们心灵的窗，是迎向客户的门，是倾听、是诉说，有热忱、有委屈，它纠缠着焦虑和烦恼，也满蕴着欢乐和希望，它是我们工作的全部，带给我们生活的感动、悲喜和启迪。<br />
-              耳唛是呼叫中心从业人员的工作伙伴，是我们的服务图腾。用“耳唛天使”来冠称我们的一线明星和明星班组是全社会对本行业的高度认可。<br />
-            自2006 年起，连续三届的“耳唛人生”呼叫中心图文征集比赛已经成为业界颇具影响力的品牌活动，取得了非常良好的社会效果和宣传效应。参与的呼叫中心机构众多，达到了良好的效果....<a href="/active/arrange"><strong>查看全部&gt;&gt;</strong></a></p>
-            <br />
+          <div class="alist">
+            <%unless @rule_articles.blank?%>
+              <% top_article = @rule_articles.first %>
+              <% if top_article %>
+                <div class="danews fht16"><a href="<%= top_article.article_permalink %>"><%= top_article.title  %></a></div>
+              <%end%>
+              <div class="h12"></div>
+              <ul>
+                <% @rule_articles.each_with_index do |article,index| %>
+                  <% next if index==0 %>
+                  <li>
+                    <a href="<%= article.article_permalink %>"><%= article.title %></a>
+                    <span class="fve9 huise">[<%= DateUtil.time_day_and_month(article.created_at) %>]</span>
+                  </li>
+                <%end%>
+              </ul>
+            <%end%>
           </div>
         </div>
         <div class="tab-main">
           <div class="h12"></div>
-          <div class="w95 f14 huise hang20">
-            <strong>发起单位：</strong><a href="http://www.ccmw.net" target="_blank">客户世界机构</a><br />
-            <p style="text-indent: 2em;">
-              客户世界机构CCMWorld Group创立于2002年，定位于客户关怀及管理领域（Customer Care & Management）的专业化发展，是一个政府支持的第三方行业研究及发展机构，中国权威的客户研究资讯机构。
-            </p>
-            <p style="text-indent: 2em;">
-              CCMWorld全力关注行业发展，关注呼叫中心、CRM、服务营业厅、电子化营销通路等各类客户关怀和管理通路的研究；关注客户生命周期中的识别、获取、发展、保留与重获各阶段的理论与实践。我们汇集业内外、海内外专家的力量，组织业内各类交流活动，促进业内信息沟通，为专业人才成长提供表现舞台。<br/>
-            </p>
-            <p style="text-indent: 2em;">
-              CCMWorld积极总结行业标杆实践，推动标杆体系的建立与相关标准的制定；廓清各种混乱概念，促进专业术语统一，呼吁业界合法权益。致力增强本行业在全社会的认知与影响力，整体推动国内客户关怀及管理现状的改善，推动CRM及呼叫中心产业长久、健康、稳定的发展。
-            </p>
-          </div>
-        </div>
-        <div class="tab-main">
-          <div class="h12"></div>
-          <div class="w95 f14 huise hang20">
-            <p style="text-indent: 2em;">
-              华为技术公司 HUAWEI <img class="bian" src="/images/active/link_11.jpg" alt="华为" width="116" height="51" />
-            </p>
-            <p style="text-indent: 2em;">
-              华为技术是全球领先的下一代电信网络解决方案供应商。公司致力于向客户提供创新的满足其需求的产品、服务和解决方案，为客户创造长期的价值和潜在的增长。目前华为的产品和解决方案已经应用于全球超过100个国家，以及31个全球前50强的运营商，服务全球超过10亿用户。华为是目前中国最大的呼叫中心供应商。现网运行设备超过1600套，呼叫中心座席数累计超过60000个，占到电信领域70％以上的市场分额，并在银行、保险、证券、税务和电力等行业领域有广泛的应用，同时华为呼叫中心产品也在亚太、非洲、拉美等国际各区域市场有越来越多的应用。
-            </p>
-          </div>
+           <div class="w95 f14 huise hang20">
+             <p><strong>冠名赞助：</strong><br />
+             <img class="bian" src="/images/active/link_11.jpg" alt="华为" width="116" height="51" /><br />
+             </p>
+             华为技术公司 HUAWEI<br/><br/>
+             <p><strong>其他赞助：</strong><br />
+             
+             征集中...
+             </p>
+           </div>
         </div>
         <div class="tab-main">
           <div class="h12"></div>

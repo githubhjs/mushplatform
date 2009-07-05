@@ -4,6 +4,8 @@ class UserController < ApplicationController
   
   skip_before_filter :verify_authenticity_token
   
+#  before_filter :join_action
+
   def select
   end
   
@@ -17,7 +19,12 @@ class UserController < ApplicationController
       @profile.user_id = @user.id
       if @profile.save  
         flash[:notice] = 'UserProfile was successfully created.'
-        render :template => 'user/login'
+        if !params[:forward].blank? && params[:forward] == 'join_active'
+          session[:user] = @user
+          redirect_to 'http://www.ccmw.net/active/join'
+        else
+          render :template => 'user/login'
+        end
         return true
       end
     end
@@ -90,16 +97,7 @@ class UserController < ApplicationController
     end
   end
 
-  # Generate a template user for certain actions on get
-#  def generate_blank
-#    case request.method
-#    when :get
-##      @user = User.new
-#      render :layout => get_layout
-#      return true
-#    end
-#    return false
-#  end
+  protected
   
   def get_layout
     params[:admin].blank? ? "site" : false

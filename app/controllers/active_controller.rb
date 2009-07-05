@@ -117,6 +117,7 @@ class ActiveController < ApplicationController
   end
   
   def active_news
+     @articles  = Article.find(:all,:conditions => "channel_id=16",:order => 'top desc,id desc')
   end  
   
   def active_arrange

@@ -9,3 +9,6 @@ map.resources :article_categories, :path_prefix => '/admin', :controller => 'adm
 
 map.connect 'admin/blogs/:action', :controller => 'admin/blogs'
 map.resources :blogs, :path_prefix => '/admin', :controller => 'admin/blogs'
+
+map.connect 'admin/blocks/:action', :controller => 'admin/blocks'
+map.resources :blocks, :path_prefix => '/admin', :controller => 'admin/blocks'

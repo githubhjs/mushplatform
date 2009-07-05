@@ -6,6 +6,7 @@ en-US:
       tags: "Tags"
       links: "Links"
       blogs: "Blogs"
+      blocks: "Blocks"
 
     article:
       category: "Category"
@@ -50,3 +51,11 @@ en-US:
 
       title: "Title"
       author: "Author"
+
+    block:
+      manage_blocks: "Manage Blocks"
+      all_blocks: "All Blocks"
+      save_block: "Save Block"
+
+      name: "Name"
+      tags: "Tags"

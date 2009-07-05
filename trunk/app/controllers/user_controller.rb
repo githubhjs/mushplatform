@@ -11,7 +11,7 @@ class UserController < ApplicationController
   
   def signup
     @user = User.new(params[:user])
-    @user_profile = UserProfile.new(params[:profile])
+    @user_profile = UserProfile.new(params[:user_profile])
     @group = params[:group]    
     if request.method.to_s == 'post' &&  @user.save
       SidebarUser.create_default_sidebars(@user.id)

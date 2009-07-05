@@ -1,6 +1,6 @@
 <div class="L signup">
 <h2><%= group_name(@group) %>注册</h2>
-<%form_tag("/user/signup") do %>
+<%form_tag("/user/signup",:multipart => true) do %>
   <div>
   <%= error_messages_for 'user','profile' %>
   <table>
@@ -82,7 +82,7 @@
   <tr>
     <td colspan="2" class="tit_bg"><div class="ico">会员详细信息</div></td>
   </tr>
-  <% fields_for :profile, @profile do |p_field| %>
+  <% fields_for :profile, @user_profile do |p_field| %>
     <tr>
       <td align="right">真实姓名：</td>
       <td>
@@ -92,7 +92,7 @@
     <tr>
       <td align="right">性别：</td>
       <td>
-        <%= generate_sex_radio('user_profile[sex]',@profile.sex) %>
+        <%= generate_sex_radio('user_profile[sex]',@user_profile.sex) %>
         <font style="color:#de363a;display:none" id="sex_error" >【请选择性别】</font>
       </td>
     </tr>
@@ -105,20 +105,20 @@
     <tr>
       <td align="right">机构性质：</td>
       <td>
-        <%= generate_company_nature_radio(@profile.company_nature)%>
+        <%= generate_company_nature_radio(@user_profile.company_nature)%>
       </td>
     </tr>
     <tr>
       <td align="right">个人照片：</td>
       <td>
-        <input type="file" name="profile[photo]">
+        <input type="file" name="user_profile[avatar]">
       </td>
     </tr>
     <tr>
       <td align="right">所属行业：</td>
       <td>
         <select name="user_profile[vocation_id]" >
-          <%= generate_vocations_select(@profile.vocation_id)%>
+          <%= generate_vocations_select(@user_profile.vocation_id)%>
         </select>
         <font style="color:#de363a;">【供应商和用户请选择行业分类】</font>
       </td>

@@ -11,13 +11,13 @@ class UserController < ApplicationController
   
   def signup
     @user = User.new(params[:user])
-    @profile = UserProfile.new(params[:profile])
+    @user_profile = UserProfile.new(params[:profile])
     @group = params[:group]    
     if request.method.to_s == 'post' &&  @user.save
       SidebarUser.create_default_sidebars(@user.id)
       BlogConfig.find_or_create_by_user_id(@user.id)
-      @profile.user_id = @user.id
-      if @profile.save  
+      @user_profile.user_id = @user.id
+      if @user_profile.save
         flash[:notice] = 'UserProfile was successfully created.'
         if !params[:forward].blank? && params[:forward] == 'join_active'
           session[:user] = @user

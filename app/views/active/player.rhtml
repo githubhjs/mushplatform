@@ -17,7 +17,7 @@
     }
     else{
       clip = new ZeroClipboard.Client();
-      ZeroClipboard.setMoviePath( '/images/active/ZeroClipboard.swf' );
+      //ZeroClipboard.setMoviePath( '/images/active/ZeroClipboard.swf' );
       clip.setHandCursor( true );
       clip.addEventListener('mouseOver', my_mouse_over);
       clip.addEventListener('click', function(){clip.addEventListener('mouseOver', my_mouse_over);});
@@ -193,7 +193,7 @@
 
         </div>
         <div class="height12"></div
-        <% form_tag '/active/create_comment',:id => 'comment_form',:name => 'comment_form',:method => 'post' do  %>
+        <% form_tag '/active/create_comment',:id => 'player_comment_form',:name => 'comment_form',:method => 'post' do  %>
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <tbody>
               <% unless current_user %>

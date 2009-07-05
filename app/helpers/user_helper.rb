@@ -23,7 +23,7 @@ module UserHelper
     options << radio_button_tag('user_profile[company_nature]',
       UserProfile::Company_Nature_Suppliers,selected_value == UserProfile::Company_Nature_Suppliers) + "供应商&nbsp;&nbsp;&nbsp;"
     options << radio_button_tag('user_profile[company_nature]',
-      UserProfile::Company_Nature_User,selected_value == UserProfile::Company_Nature_User) + "用户商&nbsp;&nbsp;&nbsp;"
+      UserProfile::Company_Nature_User,selected_value == UserProfile::Company_Nature_User) + "用户&nbsp;&nbsp;&nbsp;"
   end
   
   def generate_vocations_select(select_value)

@@ -44,11 +44,11 @@ class Player < ActiveRecord::Base
   end
 
   def blog_url
-    "#{space_url}/manage/blogs"
+    "#{space_url}/blogs"
   end
 
   def photo_url
-    "#{space_url}/manage/photos"
+    "#{space_url}/photos"
   end
 
   def user_profile

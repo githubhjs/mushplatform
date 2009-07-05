@@ -97,14 +97,13 @@
       </td>
     </tr>
     <tr>
-      <td align="right">公司名称：</td>
+      <td align="right">机构名称：</td>
       <td>
         <%= p_field.text_field(:company_name, :class => "InpTxt")%>&nbsp;
-        <font style="color:#de363a;">*</font>
       </td>
     </tr>
     <tr>
-      <td align="right">公司性质：</td>
+      <td align="right">机构性质：</td>
       <td>
         <%= generate_company_nature_radio(@profile.company_nature)%>
       </td>
@@ -112,7 +111,7 @@
     <tr>
       <td align="right">个人照片：</td>
       <td>
-        <input type="text" class="InpTxt" id="user_photo" name="profile[photo]" value="" size="10" maxlength="" />&nbsp;<input class="button" name="提交" type="submit" value="上传照片" />
+        <input type="file" name="profile[photo]">
       </td>
     </tr>
     <tr>
@@ -146,6 +145,13 @@
       <td align="right">传真：</td>
       <td>
         <%= p_field.text_field(:fax, :class => "InpTxt")%>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">城市：</td>
+      <td>
+        <%= p_field.text_field(:city, :class => "InpTxt")%>&nbsp;
+        &nbsp;<font style="color:#de363a;">*</font>【请选填写城市】
       </td>
     </tr>
     <tr>
@@ -185,9 +191,8 @@
     <tr>
       <td align="right">个人简介：</td>
       <td>
-        <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50">
-    <%= @profile.introduction%>
-      </textarea></td>
+         <textarea name="user_profile[introduction]" class="txt" rows="4" cols="50"><%= @user_profile.introduction%></textarea>
+      </td>
     </tr>
   <% end%>
   <%#end -%>
@@ -197,16 +202,18 @@
   </tr>
   <tr>
   <td colspan="2">
-  <font style="color:#16309f;">您可以申请成为“好客俱乐部金卡会员”【付费】，会员回报<a class="underline" href="http://www.ccmw.net/minisites/members/members.html">[http://www.ccmw.net/minisites/members/members.html]</a></br>请在此提交申请，我们的会员服务专员将第一时间与您进行联络</font>
+   <font style="color:#16309f;">您可以申请成为“好客俱乐部金卡会员”【付费】，会员回报<a class="underline" href="http://www.ccmw.net/minisites/2009haokehui/index.html">[http://www.ccmw.net/minisites/2009haokehui/index.html]</a></br>请在此提交申请，我们的会员服务专员将第一时间与您进行联络</font>
   </td>
   </tr>
   <tr>
     <td colspan="2" align="center"></td>
   </tr>
+  <input type="hidden" name="forward" value="" id="forward">
   <%#end -%>
   <tr>
     <td colspan="2" align="center">
       <input class="button" name="提交" type="submit" value="提交信息" />
+      <input class="button" name="提交" type="button" value="参加耳麦天使活动" onclick="join_active(this.form);" />
       <input class="button" name="重写" type="reset" value="重新填写" />
     </td>
   </tr>
@@ -220,3 +227,9 @@
   </div>
 <%end%>
 </div><!--class:m_l-->
+<script>
+  function join_active(seingup_form){
+    document.getElementById('forward').value="join_active"
+    seingup_form.submit();
+  }
+</script>

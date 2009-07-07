@@ -177,7 +177,7 @@ class ActiveController < ApplicationController
     @blog_count = Blog.count || 0
     @photo_count = Photo.count || 0
     @comment_count = PlayerComment.count || 0
-    @vote_count = Vote.count ||0
+    @vote_count = ActiveVote.count ||0
     @day_hits = 0 #TODO how to get 
   end
   

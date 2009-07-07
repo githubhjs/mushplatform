@@ -108,7 +108,8 @@
             </p>
             <p><strong>共同主办：</strong><br />
               北京市通信协会呼叫中心专业委员会<br />
-            上海市呼叫中心与无线寻呼协会</p>
+            上海市呼叫中心协会<br />
+            黑龙江省软件协会</p>
 
           </div>
         </div>
@@ -187,8 +188,7 @@
                       <label>
                         <input name="button" type="submit" class="button6422" value="投票" onclick="Element.show('vote_div_nomal_'+'<%=user.id%>');return false;" />
                         <%= render :partial => "small_vote", :locals => {:user => user, :location => "nomal"} %>
-                      </label><br />
-                      来自：客户世界机构<br />
+                      </label><br />                      
                     票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
                   <%end%><!--TODO 链接 -->
                 <%end%>
@@ -205,8 +205,7 @@
                         <label>
                           <input name="button" type="button" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_rand_'+'<%=rand_user.id%>');return false;" />
                           <%= render :partial => "small_vote", :locals => {:user => rand_user, :location => "rand"} %>
-                        </label><br />
-                        来自：客户世界机构<br />
+                        </label><br />                        
                       票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="<%=rand_user.blog_url%>" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="<%=rand_user.photo_url%>" class="csxred"><%=rand_user.photo_count%></a></li>
                     <%end%><!--TODO 链接 -->
                   <%end%>

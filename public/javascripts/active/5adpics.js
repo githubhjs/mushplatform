@@ -16,11 +16,11 @@ slidetext[4]="������ʹ05";
 
 //slidetext����Ϊ����ͼ����ĵ�ַ
 var slidelinks=new Array();
-slidelinks[0]="#";
-slidelinks[1]="#";
-slidelinks[2]="#";
+slidelinks[0]="http://www.ccmw.net/liyin/active";
+slidelinks[1]="http://www.ccmw.net/citic_card/active";
+slidelinks[2]="http://www.ccmw.net/citic_card/active";
 slidelinks[3]="#";
-slidelinks[4]="#";
+slidelinks[4]="http://www.ccmw.net/ sd10086/active";
 
 //����ͼ��ʼ���ݣ���start
 var slidespeed=3000

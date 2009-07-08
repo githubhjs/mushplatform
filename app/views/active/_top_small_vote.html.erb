@@ -1,0 +1,37 @@
+<div class="gift2" style="display:none;position:absolute;z-index:500px;left:550px;" id="vote_div_<%=location%>_<%=user.id%>">
+  <% form_tag "/active/post_vote?user_id=#{user.id}&location=#{location}",:id => "vote_form_#{location}_#{user.id}",:name => "vote_form_#{location}_#{user.id}",:method => 'post' do  %>
+    <div class="gift2_t">
+      <p>投票给<%=user.real_name%></p><span><a href="#" onclick="Element.hide('vote_div_'+'<%=location%>'+'_'+'<%=user.id%>');return false;">
+      <img src="/images/active/close.gif" alt="关闭" style="width:15px;height:15px;"/></a></span>
+    </div>
+    <div class="gift2_m">
+      <div class="gift2_main">
+        <div class="h10"></div>
+        <table width="95%" border="0" cellspacing="0" cellpadding="0" class="center">
+          <tr>
+            <td width="29%" height="20" align="right">
+              <span id="vote_notice_<%= location %>_<%= user.id %>"></span>
+            </td>
+            <td width="71%" align="left" id="simple_captcha_td_<%=location%>_<%=user.id%>">
+              <%= show_simple_captcha :label => "请输入验证码", :image_style => 'simply_red', :distortion => 'medium',:id => "captcha_#{location}_#{user.id}" %>
+            </td>
+          </tr>
+          <tr>
+            <input type="hidden" name="active_vote[user_id]" value="<%= user.user_id %>">
+            <input type="hidden" name="active_vote[user_name]" value="<%= user.user_name %>">
+            <td height="20" align="right"><strong>附言：</strong></td>
+            <td align="left"><label>
+                <textarea cols="16" rows="2" name="active_vote[message]" id="vote_message_<%=location%>_<%=  user.id%>"></textarea>
+                (可选项)
+            </label></td>
+          </tr>
+          <tr>
+            <td height="20" align="right">&nbsp;</td>
+            <td align="left"><a href="#" onclick="post_small_vote('<%= location %>','<%= user.id %>');return false"><img src="/images/active/btn_qdtp.jpg" alt="确定" style="width:112px;height:37px;"/></a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  <%end%>
+  <div class="gift2_b"></div>
+</div>

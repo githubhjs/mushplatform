@@ -4,7 +4,8 @@ class Manage::UserProfilesController < Manage::ManageController
   # GET /user_profiles
   # GET /user_profiles.xml
   def index
-    @user = current_user
+    @user = (current_user.user_name == request.subdomains.first ? current_user : User.find_by_user_name(request.subdomains.first))
+#    @user = current_user
     @user_profile = @user.user_profile || UserProfile.create(:user_id => @user.id, :real_name => @user.user_name,:city => "全国")
     render :template => "/manage/user_profiles/edit"
   end

@@ -34,8 +34,8 @@
       <tr>
         <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
           <label>
-            <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_first_'+'<%=user.id%>');return false;"/>
-            <%= render :partial => "small_vote", :locals => {:user => user, :location => "first"} %>
+            <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show($('vote_div_first_'+'<%=user.id%>'));return false;"/>
+            <%= render :partial => "top_small_vote", :locals => {:user => user, :location => "first"} %>
         </label></td>
       </tr>
       <tr>
@@ -74,7 +74,7 @@
         <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
           <label>
             <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_first_'+'<%=user.id%>');return false;"/>
-            <%= render :partial => "small_vote", :locals => {:user => user, :location => "first"} %>
+            <%= render :partial => "top_small_vote", :locals => {:user => user, :location => "first"} %>
         </label></td>
       </tr>
       <tr>
@@ -113,7 +113,7 @@
           <td><strong><a class="cblack" href="<%=  user.player_url %>"><%=user.real_name%></a></strong>
             <label>
               <input name="button" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_second_'+'<%=user.id%>');return false;" />
-              <%= render :partial => "small_vote", :locals => {:user => user, :location => "second"} %>
+              <%= render :partial => "top_small_vote", :locals => {:user => user, :location => "second"} %>
           </label></td>
         </tr>
         <tr>
@@ -146,7 +146,7 @@
             <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
               <label>
                 <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_third_'+'<%=user.id%>');return false;"/>
-                <%= render :partial => "small_vote", :locals => {:user => user, :location => "third"} %>
+                <%= render :partial => "top_small_vote", :locals => {:user => user, :location => "third"} %>
             </label></td>
           </tr>
           <tr>
@@ -178,7 +178,7 @@
               <td><strong><a class="cblack" href="#"><%=user.real_name%></a></strong>
                 <label>
                   <input name="button2" type="submit" class="button6422" id="button2" value="投票" onclick="Element.show('vote_div_fourth_'+'<%=user.id%>');return false;"/>
-                  <%= render :partial => "small_vote", :locals => {:user => user, :location => "fourth"} %>
+                  <%= render :partial => "top_small_vote", :locals => {:user => user, :location => "fourth"} %>
               </label></td>
             </tr>
             <tr>

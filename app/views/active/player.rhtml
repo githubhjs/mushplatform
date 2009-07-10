@@ -16,12 +16,12 @@
       }
     }
     else{
-      clip = new ZeroClipboard.Client();
+      //clip = new ZeroClipboard.Client();
       //ZeroClipboard.setMoviePath( '/images/active/ZeroClipboard.swf' );
-      clip.setHandCursor( true );
-      clip.addEventListener('mouseOver', my_mouse_over);
-      clip.addEventListener('click', function(){clip.addEventListener('mouseOver', my_mouse_over);});
-      clip.glue( 'copy_url' );
+      //clip.setHandCursor( true );
+      //clip.addEventListener('mouseOver', my_mouse_over);
+      //clip.addEventListener('click', function(){clip.addEventListener('mouseOver', my_mouse_over);});
+      //clip.glue( 'copy_url' );
     }
   }
   function my_mouse_over(client) {
@@ -32,7 +32,7 @@
 <div class="left">
   <div class="onebg">
     <div class="bt6"><div class="name fht20 red"><%=@user.real_name%></div><span class="f14">[目前得票数：<span class="ftime25 greencao"><%= @user.vote_count %></span>票   总排名：<span class="ftime25 greencao"><%= @ranking %></span>位]</span>
-      <span style="float:right;width:100px;height:20px;" id="copy_url"><a href="#" title="复制我的连接" onclick="return false" >复制我的连接</a></span>
+     <!--<span style="float:right;width:100px;height:20px;" id="copy_url"><a href="#" title="复制我的连接" onclick="return false" >复制我的连接</a></span>-->
     </div>
     <div class="h12"></div>
     <div class="w90 gray">
@@ -245,6 +245,6 @@
   <div class="h12"></div>
 </div>
 <script>
-  init_cp();
+  //init_cp();
 </script>
 

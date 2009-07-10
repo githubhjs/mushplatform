@@ -9,7 +9,7 @@
 <body>
 	<div class="gift">
     	<div class="gift_t">
-    	  <p>投票给<%= @user.real_name %></p><span><a href="#"><img src="/active/images/close.gif" alt="关闭" /></a></span></div>
+    	  <p>投票给<%= @user.display_user_name %></p><span><a href="#"><img src="/active/images/close.gif" alt="关闭" /></a></span></div>
           <% form_tag "/active/vote", :method => "post" do %>
         <div class="gift_m">
         	 <div class="gift_main">

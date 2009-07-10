@@ -11,7 +11,7 @@
         <% for user in  @search_users %>
           <% unless user.nil? %>
             <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
-              <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
+              <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
               <label>    
                 <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_s_'+'<%=user.id%>');return false;" />
                 <%= render :partial => "small_vote", :locals => {:user => user, :location => "s"} %>

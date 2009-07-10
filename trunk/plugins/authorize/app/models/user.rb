@@ -138,6 +138,9 @@ class User < CachedModel
     self.attributes.stringify_keys
   end
 
+  def display_user_name
+    real_name.blank? ? user_name : real_name
+  end
   protected
 
   def self.encrypt(pass, salt)

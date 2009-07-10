@@ -25,7 +25,8 @@ class UserProfile < ActiveRecord::Base
   attr_accessor :user_icon
   before_create :before_create_set_city
   after_save  {|record|    
-    Player.connection.execute("update players set real_name='#{record.real_name}' where user_id=#{record.user_id}")    
+    Player.connection.execute("update players set real_name='#{record.real_name}' where user_id=#{record.user_id}")
+    PlayerComment.connection.execute("update player_comments set real_name='#{record.real_name}' where user_id=#{record.user_id}")
   }
   #validates_length_of :city,:minimum => 1,:too_short => "请填写您所在的城市"
   validates_length_of :sex,:minimum => 1,:too_short => "选选择性别"

@@ -31,7 +31,7 @@
 
 <div class="left">
   <div class="onebg">
-    <div class="bt6"><div class="name fht20 red"><%=@user.real_name%></div><span class="f14">[目前得票数：<span class="ftime25 greencao"><%= @user.vote_count %></span>票   总排名：<span class="ftime25 greencao"><%= @ranking %></span>位]</span>
+    <div class="bt6"><div class="name fht20 red"><%=@user.display_user_name%></div><span class="f14">[目前得票数：<span class="ftime25 greencao"><%= @user.vote_count %></span>票   总排名：<span class="ftime25 greencao"><%= @ranking %></span>位]</span>
      <!--<span style="float:right;width:100px;height:20px;" id="copy_url"><a href="#" title="复制我的连接" onclick="return false" >复制我的连接</a></span>-->
     </div>
     <div class="h12"></div>
@@ -42,7 +42,7 @@
             <p><a href="#" onclick="Element.show('vote_div');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
               <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
                 <div class="gift_t">
-                <p>投票给<%=@user.real_name%></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
+                <p>投票给<%=@user.display_user_name%></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
                 <% form_tag '/active/post_vote',:id => 'vote_form',:name => 'vote_form',:method => 'post' do  %>
                   <div class="gift_m">
                     <div class="gift_main">
@@ -75,7 +75,7 @@
           <td width="69%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="16%" align="right"><strong>姓名：</strong></td>
-                <td width="84%"><%=@user.real_name%> [<a class="csxred" href="<%= @user.space_url %>" target="_blank">进入博客</a>]</td>
+                <td width="84%"><%=@user.display_user_name%> [<a class="csxred" href="<%= @user.space_url %>" target="_blank">进入博客</a>]</td>
               </tr>
               <% if prolfile = @user.user_profile %>
                 <tr>
@@ -179,7 +179,7 @@
         <%for comment in @comments %>
           <a href="<%= comment.user.space_url %>"><img src="<%= user_icon(comment.user_id,'normal') %>"></a>
           <dl>
-            <dt><a href="<%= comment.user.space_url %>"><%= comment.real_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
+            <dt><a href="<%= comment.user.space_url %>"><%= comment.display_user_name %></a> <span><%= DateUtil.timelong_for_with_ling(comment.created_at) %></span></dt>
             <dd style="text-align:left"><%= comment.content %></dd>
           </dl>
           <div class="height12"></div>

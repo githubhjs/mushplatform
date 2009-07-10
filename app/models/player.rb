@@ -21,6 +21,10 @@ class Player < ActiveRecord::Base
   def user_profile
     UserProfile.find_by_user_id(self.user_id)
   end
+
+  def display_user_name
+    real_name.blank? ? user_name : real_name
+  end
   
 end
 

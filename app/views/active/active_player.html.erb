@@ -20,7 +20,7 @@
             <ul><% for user in @new_entry do %>
                   <% unless user.nil? %>
                     <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
-                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
+                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
                       <label>
                         <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_pfirst_'+'<%=user.id%>');return false;"/>
                         <%= render :partial => "small_vote", :locals => {:user => user, :location => "pfirst"} %>
@@ -39,7 +39,7 @@
             <div class="friend">
               <ul><% for user in @rand_users do %>
                     <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
-                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
+                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
                       <label>                        
                         <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_psecond_'+'<%=user.id%>');return false;" />
                         <%= render :partial => "small_vote", :locals => {:user => user, :location => "psecond"} %>
@@ -59,7 +59,7 @@
                 <ul><% for user in @users do %>
                       <% unless user.nil? %>
                         <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
-                          <a class="cblack f14b" href="<%= user.player_url %>"><%=user.real_name%></a>
+                          <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
                           <label>                            
                             <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_pthird_'+'<%=user.id%>');return false;" />
                             <%= render :partial => "small_vote", :locals => {:user => user, :location => "pthird"} %>

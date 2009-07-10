@@ -17,10 +17,10 @@ function submit_player_comment(){
     var oEditor = FCKeditorAPI.GetInstance('comment[content]');
     
     document.getElementById('comment_body').value = oEditor.GetXHTML();
-    alert(document.getElementById('comment_body'));
+    
     var player_comment_form = document.getElementById('player_comment_form');
     
-    alert(player_comment_form);
+    
     if(player_comment_form['comment[content]'].value != '' && player_comment_form['comment[content]'].value.length >= 5 ) //&& form['comment[title]'].value != '' && form['comment[title]'].value.length  >= 1 )
     {
     

@@ -17,6 +17,10 @@ class Photo < ActiveRecord::Base
 
   before_save :upload_image
 
+  after_create {|record|
+    Player.connection.execute("update players set photo_count = (select count(*) from photos where user_id=#{record.user_id}) where user_id=#{record.user_id}")
+  }
+
   named_scope :user_photos, lambda { |user_id|
     { :conditions => { :user_id => user_id } }
   }

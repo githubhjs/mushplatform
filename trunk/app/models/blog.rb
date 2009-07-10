@@ -12,6 +12,9 @@ class Blog < ActiveRecord::Base
 
   attr_accessor :tag_names
   before_create :before_create_tell_category
+  after_create {|record|
+    Player.connection.execute("update players set blog_count = (select count(*) from blogs where user_id=#{record.user_id}) where user_id=#{record.user_id}")
+  }
   #validates_length_of :title,:in => 5..120,:too_short => "名字不能少于5个字符",:too_long => "标题不能大于120个字符"
   
   #validates_length_of :body,:minimum => 20,:too_short => "内容不能少于20个字符"

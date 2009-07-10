@@ -102,3 +102,7 @@ task :modify_group_player  => :environment do
   }
   User.connection.execute("update players set user_type=1 where user_id in (#{user_ids.join(',')})") unless user_ids.blank?
 end
+
+task :update_player_real_name  => :environment do
+  Player.connection.execute("update players set real_name=(select real_name from user_profiles where user_profiles.user_id=players.user_id)")
+end

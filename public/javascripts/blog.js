@@ -82,3 +82,13 @@ function ajax_submit(_from){
         parameters:Form.serialize(_from)
     });
 }
+
+function showVoteDiv(event,vote_div){
+    var oEvent  = event || window.event;
+    Position.absolutize(vote_div);
+    page_infos = Position.page(vote_div)
+    vote_div.style.top = Event.pointerX(oEvent);
+    vote_div.style.left = page_infos[1] + 400;
+    alert(vote_div.style.left);
+    Element.show(vote_div);
+}

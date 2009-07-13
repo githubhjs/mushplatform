@@ -76,6 +76,7 @@ class Admin::LinksController < ApplicationController
     @link = Link.find(params[:id])
 
     respond_to do |format|
+      params[:link].delete("uploaded_data") #if params[:link][:uploaded_data] == ''
       if @link.update_attributes(params[:link])
         flash[:notice] = 'Link was successfully updated.'
         format.html { redirect_to :controller => 'admin/links', :action => 'index', :id => @link.id }

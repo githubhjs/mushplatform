@@ -6,7 +6,7 @@ zh-CN:
       tags: "关键词管理"
       links: "文字链接管理"
       blogs: "博客管理"
-      blogs: "区块管理"
+      blocks: "区块管理"
 
     article:
       category: "分类"

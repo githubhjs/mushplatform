@@ -128,6 +128,7 @@ ActionController::Routing::Routes.draw do |map|
     active.connect  '/active/news',        :action =>  'active_news'
     active.connect  '/active/arrange',        :action =>  'active_arrange'
     active.connect  '/active/player',        :action =>  'active_player'
+    active.connect  '/active/player/page/:page',        :action =>  'active_player'
     active.connect  '/active/contact',        :action =>  'active_contact'
     active.connect  '/active/gold',        :action =>  'active_gold'
     active.connect  '/active/login',       :action =>  'login'

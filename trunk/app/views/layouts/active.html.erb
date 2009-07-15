@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>2009-华为杯-耳唛天使-中国呼叫中心服务明星推介活动</title>
-    <link href="/stylesheets/active.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/active.css?<%= Time.now.to_i %>" rel="stylesheet" type="text/css" />
     <script src="/javascripts/active/tbra-widgets.js" type="text/javascript"></script>
     <script src="/javascripts/active/jquery.js" type="text/javascript"></script>
     <script src="/javascripts/prototype.js" type="text/javascript"></script>
@@ -17,13 +17,13 @@
     <div id="hearder">
       <div class="top">
         <script type="text/javascript">
-AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','1000','height','392','src','/images/active/top','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','/images/active/top' ); //end AC code
-</script><noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="1000" height="392">
-        <param name="movie" value="/images/active/top.swf" />
-        <param name="quality" value="high" />
-        <embed src="/images/active/top.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="1000" height="392"></embed>
-      </object>
-	</noscript>
+          AC_FL_RunContent('codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','1000','height','392','src','/images/active/top','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','/images/active/top'); //end AC code
+        </script><noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="1000" height="392">
+            <param name="movie" value="/images/active/top.swf" />
+            <param name="quality" value="high" />
+            <embed src="/images/active/top.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="1000" height="392"></embed>
+          </object>
+        </noscript>
       </div>
       <div id="dh" class="m_index">
         <div class="nav_a"></div>
@@ -45,21 +45,21 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
       <div class="soso">
         <div class="soso_a"></div>
         <% form_tag "/active/search", :method => "post" do %>
-        <div class="soso_b"><img src="/images/active/tu_soso.jpg" align="absmiddle" />
-          <label>
-            <select name="user_type" id="select">
-              <%= generate_search_type_options(params[:user_type]) %>
-            </select>
-          </label>
-          <label id="m">
-            <%= text_field_tag :q, params[:q], :size => 40 %>
+          <div class="soso_b"><img src="/images/active/tu_soso.jpg" align="absmiddle" />
+            <label>
+              <select name="user_type" id="select">
+                <%= generate_search_type_options(params[:user_type]) %>
+              </select>
             </label>
-              <label>
-                <span>
-                    <input type="submit" value="搜索">
-                </span>
-          </label>
-        </div>
+            <label id="m">
+              <%= text_field_tag :q, params[:q], :size => 40 %>
+            </label>
+            <label>
+              <span>
+                <input type="submit" value="搜索">
+              </span>
+            </label>
+          </div>
         <%end%>
         <div class="soso_c"></div>
       </div>
@@ -67,7 +67,7 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
     </div>
     <div class="w960">
       <div class="main">
-            <%= yield :layout %>
+        <%= yield :layout %>
         <!--在自己的页面只需要放不同的左和右-->
         <div class="clear"></div>
         <div class="link">
@@ -89,14 +89,13 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
     “好客会”服务热线：400-779-7070 </div>
   </body>
   <script type="text/javascript">
-      function vote(user_id){
-          url = "/active/simple_vote?user_id="+user_id;
-      new Ajax.Request(url, { 
-      asynchronous: true, 
-      evalScripts: true, 
-      method: 'post' 
-    }); 
-      }
-      
+    function vote(user_id){
+      url = "/active/simple_vote?user_id="+user_id;
+      new Ajax.Request(url, {
+        asynchronous: true,
+        evalScripts: true,
+        method: 'post'
+      });
+    }
   </script>
 </html>

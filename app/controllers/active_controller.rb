@@ -84,8 +84,9 @@ class ActiveController < ApplicationController
       active_vote.save
     end
     id_buffix = ((params[:user_id].blank? || params[:location].blank?) ? '' : "_#{params[:location]}_#{params[:user_id]}")
-    render :update  do |page|
-      page.replace_html  "simple_captcha_td#{id_buffix}",:partial => '/active/simple_captcha'
+    render :update  do |page|      
+#      page.replace_html  "simple_captcha_td#{id_buffix}",:partial => '/active/simple_captcha'
+      page.replace_html  "simple_only_captcha_div",:partial => '/active/simple_captcha'
       unless error_msg.blank?
         page.replace_html "vote_notice#{id_buffix}",error_msg
       else

@@ -39,7 +39,7 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td width="31%" align="center"><div class="myphoto"><img src="<%= user_icon(@user.user_id, 'normal') %>" alt="我的形象" /></div><br />
-            <p><a href="#" onclick="Element.show('vote_div');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
+            <p><a href="#" onclick="showVoteDiv('vote_div','simple_captcha_td');return false"><img src="/images/active/btn_tpda.jpg" alt="投票" /></a>
               <div class="gift" style="display:none;position:absolute;z-index:500" id="vote_div">
                 <div class="gift_t">
                 <p>投票给<%=@user.display_user_name%></p><span><a href="#" onclick="Element.hide('vote_div');return false;"><img src="/images/active/close.gif" alt="关闭"></a></span></div>
@@ -53,7 +53,7 @@
                           <tr>
                             <td height="40">&nbsp;<span id="vote_notice"></span></td>
                             <td align="center" id="simple_captcha_td">
-                              <%= show_simple_captcha :label => "请输入验证码",:image_style => 'simply_red', :distortion => 'medium'  %>
+                              
                             </td>
                           </tr>
                       </tbody></table>

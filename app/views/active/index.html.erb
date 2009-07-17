@@ -187,7 +187,7 @@
                     <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id,'normal')%>" /></a><br />
                       <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
                       <label>
-                        <input name="button" type="submit" class="button6422" value="投票" onclick="Element.show('vote_div_nomal_'+'<%=user.id%>');return false;" />
+                        <input name="button" type="submit" class="button6422" value="投票" onclick="showVoteDiv('vote_div_nomal_'+'<%=user.id%>','simple_captcha_td_nomal_'+'<%=user.id%>');return false;" />
                         <%= render :partial => "small_vote", :locals => {:user => user, :location => "nomal"} %>
                       </label><br />                      
                     票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
@@ -204,7 +204,7 @@
                       <li><a href="<%= rand_user.player_url %>"><img src="<%= user_icon(rand_user.user_id,'normal')%>" /></a><br />
                         <a class="cblack f14b" href="<%= user.player_url %>"><%=rand_user.display_user_name%></a>
                         <label>
-                          <input name="button" type="button" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_rand_'+'<%=rand_user.id%>');return false;" />
+                          <input name="button" type="button" class="button6422" id="button_tp" value="投票" onclick="showVoteDiv('vote_div_rand_'+'<%=user.id%>','simple_captcha_td_rand_'+'<%=user.id%>');return false;" />
                           <%= render :partial => "small_vote", :locals => {:user => rand_user, :location => "rand"} %>
                         </label><br />                        
                       票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="<%=rand_user.blog_url%>" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="<%=rand_user.photo_url%>" class="csxred"><%=rand_user.photo_count%></a></li>

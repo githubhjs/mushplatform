@@ -83,12 +83,7 @@ function ajax_submit(_from){
     });
 }
 
-function showVoteDiv(event,vote_div){
-    var oEvent  = event || window.event;
-    Position.absolutize(vote_div);
-    page_infos = Position.page(vote_div)
-    vote_div.style.top = Event.pointerX(oEvent);
-    vote_div.style.left = page_infos[1] + 400;
-    alert(vote_div.style.left);
-    Element.show(vote_div);
+function showVoteDiv(vote_div_id,captcha_id){    
+    $(captcha_id).update($("simple_only_captcha_div").innerHTML);
+    Element.show(vote_div_id);
 }

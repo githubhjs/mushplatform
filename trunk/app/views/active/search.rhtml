@@ -13,7 +13,7 @@
             <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id, 'normal')%>" /></a><br />
               <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
               <label>    
-                <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="Element.show('vote_div_s_'+'<%=user.id%>');return false;" />
+                <input name="button" type="submit" class="button6422" id="button_tp" value="投票" onclick="showVoteDiv('vote_div_s_'+'<%=user.id%>','simple_captcha_td_s_'+'<%=user.id%>');return false;" />
                 <%= render :partial => "small_vote", :locals => {:user => user, :location => "s"} %>
               </label><br />              
             票：<span class="blue"><%= user.vote_count %></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%= user.blog_count %></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>

@@ -91,7 +91,7 @@ class ActiveController < ApplicationController
         page.replace_html "vote_notice#{id_buffix}",error_msg
       else
         page.hide   "vote_div#{id_buffix}"
-        page.replace_html "vote_message#{id_buffix}",:partial => '/active/vote_message'
+        page.replace_html "vote_message#{id_buffix}",''
         page.alert  "投票成功，谢谢你的投票!"        
       end   
     end        

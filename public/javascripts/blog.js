@@ -83,7 +83,11 @@ function ajax_submit(_from){
     });
 }
 
-function showVoteDiv(vote_div_id,captcha_id){    
+function replaceVoteCaptcha(captcha_id){
     $(captcha_id).update($("simple_only_captcha_div").innerHTML);
+}
+
+function showVoteDiv(vote_div_id,captcha_id){    
+    replaceVoteCaptcha(captcha_id);
     Element.show(vote_div_id);
 }

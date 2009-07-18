@@ -89,6 +89,8 @@ class ActiveController < ApplicationController
       page.replace_html  "simple_only_captcha_div",:partial => '/active/simple_captcha'
       unless error_msg.blank?
         page.replace_html "vote_notice#{id_buffix}",error_msg
+        page.replace_html  "simple_captcha_td#{id_buffix}",:partial => '/active/simple_captcha'
+        page.call(:replaceVoteCaptcha,"simple_captcha_td#{id_buffix}")
       else
         page.hide   "vote_div#{id_buffix}"
         page.replace_html "vote_message#{id_buffix}",''

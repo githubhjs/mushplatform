@@ -1,4 +1,4 @@
-<div class="gift2" style="display:none;position:absolute;z-index:500px;left:550px;" id="vote_div_<%=location%>_<%=user.id%>">
+<div class="gift2" style="display:none;position:absolute;z-index:500;left:550px;" id="vote_div_<%=location%>_<%=user.id%>">
   <% form_tag "/active/post_vote?user_id=#{user.id}&location=#{location}",:id => "vote_form_#{location}_#{user.id}",:name => "vote_form_#{location}_#{user.id}",:method => 'post' do  %>
     <div class="gift2_t">
       <p>投票给<%=user.display_user_name%></p><span><a href="#" onclick="Element.hide('vote_div_'+'<%=location%>'+'_'+'<%=user.id%>');return false;">

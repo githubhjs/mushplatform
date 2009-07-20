@@ -83,8 +83,8 @@ function ajax_submit(_from){
     });
 }
 
-function replaceVoteCaptcha(captcha_id){
-    $(captcha_id).update($("simple_only_captcha_div").innerHTML);
+function replaceVoteCaptcha(captcha_id){    
+    $(captcha_id).innerHTML = $("simple_only_captcha_div").innerHTML;
 }
 
 function showVoteDiv(vote_div_id,captcha_id){    

@@ -46,13 +46,15 @@ module CcmwHelper
   
   def list_links_by_category(args = {})
     category = args.delete(:category)
-    links = Link.find(:all, :conditions => "category = '#{category}' and filename is null")
+    order = args.delete(:order) || "position DESC"
+    links = Link.find(:all, :conditions => "category = '#{category}' and filename is null", :order => order)
     { 'links' => links }
   end
 
   def list_image_links_by_category(args = {})
     category = args.delete(:category)
-    links = Link.find(:all, :conditions => "category = '#{category}' and filename is not null")
+    order = args.delete(:order) || "position DESC"
+    links = Link.find(:all, :conditions => "category = '#{category}' and filename is not null", :order => order)
     { 'links' => links }
   end
   
@@ -99,7 +101,8 @@ module CcmwHelper
   
   def focus_images_from_links(args ={})
     category = args.delete(:category)
-    links = Link.find_all_by_category(category)
+    order = args.delete(:order) || "position DESC"
+    links = Link.find_all_by_category(category, :order => order)
     files, urls, texts = [], [], []
     links.each{|link|
       files << link.public_filename

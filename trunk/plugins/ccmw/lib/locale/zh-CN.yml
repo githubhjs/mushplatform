@@ -39,6 +39,7 @@ zh-CN:
       category: "分类"
       url: "链接"
       image: "图片"
+      position: "位置"
 
     blogs:
       manage_blogs: "博客管理"

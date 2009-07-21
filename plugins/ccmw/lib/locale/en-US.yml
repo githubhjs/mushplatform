@@ -39,6 +39,7 @@ en-US:
       category: "Category"
       url: "URL"
       image: "Image"
+      position: "Position"
 
     blogs:
       manage_blogs: "Manage Blogs"

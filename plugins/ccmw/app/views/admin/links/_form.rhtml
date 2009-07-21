@@ -16,6 +16,10 @@
     </td>
   </tr>
   <tr class="form-field form-required">
+    <th scope="row" valign="top"><label for="tag_position"><%= t 'text.link.position' %></label></th>
+    <td><%= text_field 'link', 'position' %></td>
+  </tr>
+  <tr class="form-field form-required">
     <th scope="row" valign="top"><label for="link_url"><%=  t 'text.link.url' %></label></th>
     <td><%= text_field 'link', 'url' %></td>
   </tr>
@@ -26,7 +30,7 @@
   <tr class="form-field">
     <th scope="row" valign="top">&nbsp;</th>
     <td><%= image_tag(@link.public_filename) if @link.filename %></td>
-  </tr>  
+  </tr>
 </table>
 <p class="submit">
   <input type="submit" class="button" name="submit" value="<%=  t 'text.link.save_link' %>" />

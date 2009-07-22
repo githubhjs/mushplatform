@@ -23,6 +23,7 @@ class User < CachedModel
   has_many :receive_invites ,:class_name => "Invite",:foreign_key => 'user_id'
   has_many :send_invites ,:class_name => "Invite",:foreign_key => 'invitor_id'
   has_many :group_members
+  has_one  :player
 #  has_one  :blog_config
   
   validates_size_of :user_name, :within => 3..60
@@ -31,7 +32,7 @@ class User < CachedModel
   validates_uniqueness_of  :email
   validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-  validates_format_of :user_name, :with => /^[-a-zA-Z0-9]+$/i
+  validates_format_of :user_name, :with => /^[-a-z0-9]+$/i
   
   Status_Valid,Status_Invalid = 0,1
   

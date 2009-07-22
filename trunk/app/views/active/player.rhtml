@@ -96,7 +96,12 @@
                 </tr>
                 <tr>
                   <td align="right" valign="top">&nbsp;</td>
-                  <td><a href="<%= "#{@user.space_url}/profile" %>" class="csxred">查看更多信息</a></td>
+                  <td>
+                    <a href="<%= "#{@user.space_url}/profile" %>" class="csxred">查看更多信息</a>&nbsp;                    
+                    <% if current_user && session[:active_player] && session[:active_player].user_name == current_user.user_name %>
+                      <a href="<%= "#{@user.space_url}/manage" %>" class="csxred">管理博客</a>
+                    <%end%>
+                 </td>
                 </tr>
               <%end%>
           </table></td>

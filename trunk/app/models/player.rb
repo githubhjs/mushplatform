@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
 
   validates_uniqueness_of :user_id
+  belongs_to :user
 
   def player_url
     "/#{self.user_name}/active"

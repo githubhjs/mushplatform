@@ -34,9 +34,15 @@
           <li ><a href="/manage/messages" title="公告"><span>公告</span></a></li>
           <li ><a href="/manage/user_profiles" title="我的资料"><span>我的资料</span></a></li>
           <li ><a href="/manage/themes" title="风格设置"><span>风格设置</span></a></li>
+          <% if player = current_user.player %>
+           <li ><a href="http://www.ccmw.net<%= player.player_url %>" title="风格设置" target="_blank"><span>耳麦天使主页</span></a></li>
+         <%end%>         
         </ul>
       </div>
-      <div class="close"><img src="/images/new/close.jpg" align="absmiddle" /> <a href="/user/logout">安全退出</a></div>
+       
+      <div class="close"><img src="/images/new/close.jpg" align="absmiddle" /> <a href="/user/logout">安全退出</a>&nbsp;&nbsp;
+     
+      </div>
     </div>
     <div class="<%= box_css %>">
       <div class="left">

@@ -15,6 +15,9 @@
   <!--span>|</span>
   <a target="_blank" href="http://forum.ccmw.net/login.php?action=login&jumpurl=&step=2&cktime=31536000">论坛</a-->
   <span>|</span>
+  <% if player = session[:user].player %>
+      <a href="http://www.ccmw.net<%= player.player_url %>" target="_blank">耳麦天使主页</a><span>|</span>
+  <%end%>
   <%= link_to '退出', :controller => 'user', :action => 'logout', :page => 'index' %>
 <% else  %>
   <a href="/user/login">登录</a> |

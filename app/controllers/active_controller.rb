@@ -44,6 +44,7 @@ class ActiveController < ApplicationController
       render :template => '/active/not_join'
       return
     end
+    session[:active_player] = @user
     @blogs  = Blog.find(:all,:conditions => "user_id=#{@user.user_id}" ,:order => 'id desc',:limit => Player_Blog_Perpage )
     @photos = Photo.find(:all,:conditions => "user_id=#{@user.user_id}" ,:order => 'id desc',:limit => Player_Photo_Perpage )
     @comments = PlayerComment.find(:all,:conditions => "player_id=#{@user.user_id}",:order => 'id desc',:limit => Player_Comments_Perpage)

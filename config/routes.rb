@@ -140,6 +140,7 @@ ActionController::Routing::Routes.draw do |map|
     active.connect '/:user_name/active', :action =>  'player'
     active.connect '/active/blog_list', :action =>  'blog_list'
     active.connect '/active/comment_list', :action =>  'comment_list'
+    active.connect '/active/comment_list/page/:page', :action =>  'comment_list'
     active.connect '/active/simple_vote', :action =>  'simple_vote'
     
     active.connect '/active/post_vote',:action => "post_vote",:method => "post"

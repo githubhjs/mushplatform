@@ -16,7 +16,7 @@
     <div class="height20"></div>
     <div class="height20"></div>
     <div class="jogger">
-      <%= will_paginate @comments, {:prev_label => '上一页', :next_label => '下一页'} %>
+      <%= url_f(will_paginate(@comments, {:prev_label => '上一页', :next_label => '下一页'}),'/active/comment_list') %>
     </div>
     </div></div>
  <%= render :partial => "right" %>

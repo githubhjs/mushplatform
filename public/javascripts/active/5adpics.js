@@ -12,7 +12,7 @@ slidetext[0]="李印";
 slidetext[1]="中信银行信用卡客服部";
 slidetext[2]="催贵芝";
 slidetext[3]="������ʹ04";
-slidetext[4]="山东移动第一客服中心";
+slidetext[4]="徐倩雯";
 
 //slidetext����Ϊ����ͼ����ĵ�ַ
 var slidelinks=new Array();
@@ -20,7 +20,7 @@ slidelinks[0]="http://www.ccmw.net/liyin/active";
 slidelinks[1]="http://www.ccmw.net/citic_card/active";
 slidelinks[2]="http://www.ccmw.net/cuigz/active";
 slidelinks[3]="#";
-slidelinks[4]="http://www.ccmw.net/sd10086/active";
+slidelinks[4]="http://www.ccmw.net/xuqw/active";
 
 //����ͼ��ʼ���ݣ���start
 var slidespeed=3000

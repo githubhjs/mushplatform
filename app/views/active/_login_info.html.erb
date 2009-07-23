@@ -11,7 +11,10 @@
       </tr>
       <tr>
         <td align="left" height="30">
-          <%= link_to_remote "<img src='/images/active/btn_tc.jpg' alt='退出' width='66' height='22'>",:url => '/active/logout' %>          
+          <%= link_to_remote "<img src='/images/active/btn_tc.jpg' alt='退出' width='66' height='22'>",:url => '/active/logout' %>
+          <% if current_user && player = current_user.player %>
+            <a href="http://www.ccmw.net<%= player.player_url %>" target="_blank">耳麦天使主页</a>
+          <%end%>
         </td>
       </tr>
   </tbody></table>

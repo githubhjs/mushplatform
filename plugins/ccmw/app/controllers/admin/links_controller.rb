@@ -17,6 +17,7 @@ class Admin::LinksController < ApplicationController
 #      @links = Link.paginate_by_category '', conditions
     else
       conditions[:conditions] = "category = '#{@category}'"
+       conditions[:per_page] = 300
       @links = Link.paginate conditions
     end
 

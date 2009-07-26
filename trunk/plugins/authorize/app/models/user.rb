@@ -32,7 +32,7 @@ class User < CachedModel
   validates_uniqueness_of  :email
   validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-  validates_format_of :user_name, :with => /^[-a-z0-9]+$/i
+  validates_format_of :user_name, :with => /^[-a-z0-9]+$/
   
   Status_Valid,Status_Invalid = 0,1
   

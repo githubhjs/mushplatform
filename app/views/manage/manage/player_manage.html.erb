@@ -36,7 +36,7 @@
         <% for user in @players -%>
           <li style="width:100px;">
             <p><a href="<%= "http://www.#{Domain_Name}#{user.player_url}" %>" target="_blank"><img src="<%= user_icon(user.user_id) %>"/></a></p>
-            <p style="overflow: hidden; width: 100px; height: 22px;"><a href="<%= "http://www.#{Domain_Name}#{user.player_url}" %>" target="_blank"><%= user.real_name %> </a></p>
+            <p style="overflow: hidden; width: 100px; height: 22px;"><a href="<%= "http://www.#{Domain_Name}#{user.player_url}" %>" target="_blank"><%= user.display_user_name %> </a></p>
             <span><a href="#" onclick="Element.toggle('vote_div_user<%= user.id %>');return false;">修改票数<b id="vote_count_user<%= user.id %>">(<%= user.vote_count %>)</b></a></span>
             <div class="main" style="display:none;position:absolute;z-index:500;" id="vote_div_user<%= user.id %>">
               <% remote_form_for user,:url => "/manage/update_player" do |f| %>

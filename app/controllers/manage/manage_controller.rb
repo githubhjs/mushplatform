@@ -12,7 +12,7 @@ class Manage::ManageController < ApplicationController
 
   before_filter :is_space_admin?
   
-  before_filter :is_super_admin?,:only => :player_manage
+  before_filter :is_super_admin?,:only => [:player_manage,:update_player]
 
   def index    
     @friends = current_user.friends.find(:all,:limit => Latest_Friend_Count,:order => 'friends.created_at desc')

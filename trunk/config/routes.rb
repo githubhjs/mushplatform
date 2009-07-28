@@ -63,6 +63,9 @@ ActionController::Routing::Routes.draw do |map|
     theme.connect    "/manage/themes/switchto",:action => "switchto"
   end
   map.connect "/manage",:controller => "manage/manage",:action => 'index'
+  map.connect "/manage/player_manage",:controller => "manage/manage",:action => 'player_manage'
+  map.connect "/manage/update_player",:controller => "manage/manage",:action => 'update_player'
+
   map.namespace :manage do |manage|
     manage.resources :blog_configs
     manage.resources :photos,:collection => {:friend_photos => :get,:ajax_create_alubm => :get}

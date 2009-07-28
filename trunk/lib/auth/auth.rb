@@ -27,8 +27,12 @@ module Auth
     @blog_owner ||= User.find_by_user_name(request.subdomains.first)
   end
 
+  def is_super_admin?
+    current_user && current_user.user_name == 'admin'
+  end
+
   def is_space_admin?
-    if current_user && current_user.user_name == 'admin'
+    if is_super_admin?
       return true
     end
     unless  current_user && current_user.user_name == request.subdomains.first

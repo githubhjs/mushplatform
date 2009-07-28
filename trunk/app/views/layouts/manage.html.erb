@@ -34,6 +34,9 @@
           <li ><a href="/manage/messages" title="公告"><span>公告</span></a></li>
           <li ><a href="/manage/user_profiles" title="我的资料"><span>我的资料</span></a></li>
           <li ><a href="/manage/themes" title="风格设置"><span>风格设置</span></a></li>
+          <% if is_super_admin? %>
+           <li ><a href="/manage/player_manage" title="耳麦选手管理"><span>耳麦选手管理</span></a></li>
+          <%end%>
           <% if player = current_user.player %>
            <li ><a href="http://www.ccmw.net<%= player.player_url %>" title="风格设置" target="_blank"><span>耳麦天使主页</span></a></li>
          <%end%>         

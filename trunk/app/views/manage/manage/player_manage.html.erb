@@ -1,0 +1,65 @@
+﻿<style type="text/css">
+  <!--
+  .clear{/*<清除左右浮动>*/
+    clear:both;/*<清除左右浮动>*/
+    width:1px;/*<隐藏宽度>*/
+    font-size:1px;/*<隐藏字体>*/
+    height:0;/*<隐藏高度>*/
+    line-height:0;/*<隐藏行高>*/
+    visibility:hidden;/*<隐藏元素>*/
+  }
+  .main { width:320px; height:110px; border:1px solid #98b1c8; padding:1px;background-color:#FFFAF0; }
+  .bt{ width:100%; height:22px; line-height:22px; background:#e0ebf9;border-bottom:1px solid #98b1c8;}
+  .name{width:98%;height:60px; margin:0 auto; overflow:auto; }
+  .name ul{ width:300px; margin:0 auto;}
+  .name li{ float:left; display:block; width:auto; height:25px; line-height:25px; list-style:none;border-bottom:1px dotted  #ccc;}
+  .sel{width:100%;height:25px; text-align:left;}
+
+  -->
+</style>
+<div class="right2">
+  <div class="dbt">
+  <p><a href="http://www.ccmw.net/active"><img src="/images/new/group_32.png" align="absmiddle"></a>耳麦天使</p>
+  <% form_tag "/manage/player_manage" ,:name => 'search_form',:onsubmit => "return submitSearchForm();" do |f| %>
+    <span>
+      <input name="keywords" id="textfield" value="搜索选手" type="text" onclick="if(this.value==this.defaultValue) this.value=''">&nbsp;&nbsp;
+      <input type="submit" value="搜索">
+    </span>
+  <%end%>
+</div>
+<div class="tabs6"> 
+</div>
+  <div class="w90">
+    <div class="height20"></div>
+    <div class="friend">
+      <ul>
+        <% for user in @players -%>
+          <li>
+            <p><a href="<%= "http://www.#{Domain_Name}#{user.player_url}" %>" target="_blank"><img src="<%= user_icon(user.id) %>"/></a></p>
+            <p style="overflow: hidden; width: 78px; height: 22px;"><a href="<%= user.space_url %>" target="_blank"><%= user.real_name %> </a></p>
+            <span><a href="#" onclick="Element.toggle('vote_div_user<%= user.id %>');return false;">修改票数<b id="vote_count_user<%= user.id %>">(<%= user.vote_count %>)</b></a></span>
+            <div class="main" style="display:none;position:absolute;z-index:500;" id="vote_div_user<%= user.id %>">
+              <% remote_form_for user,:url => "/manage/update_player" do |f| %>
+                <div class="bt">&nbsp;请填写新票数</div>
+                <div class="name">
+                  <ul>
+                    <li><input name="player[vote_count]" value="<%= user.vote_count %>"></li>
+                  </ul>
+                  <input type='hidden' name="id"  value="<%= user.id %>">
+                </div>
+                <div class="sel">&nbsp;                  
+                  <input type='submit' name="确认" onclick="select_friend();" value="修 改">
+                  <input type='button' name="确认" onclick="Element.hide('vote_div_user<%= user.id %>')" value="取 消">
+                </div>
+                <%end%>
+              </div>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="height20"></div>
+    <div class="jogger">
+     <%= url_f(will_paginate(@players, {:prev_label => '上一页', :next_label => '下一页'}),'/active/comment_list')%>
+   </div>
+  </div>
+</div>

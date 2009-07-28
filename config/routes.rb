@@ -64,6 +64,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.connect "/manage",:controller => "manage/manage",:action => 'index'
   map.connect "/manage/player_manage",:controller => "manage/manage",:action => 'player_manage'
+  map.connect "/manage/player_manage/page/:page",:controller => "manage/manage",:action => 'player_manage'
   map.connect "/manage/update_player",:controller => "manage/manage",:action => 'update_player'
 
   map.namespace :manage do |manage|

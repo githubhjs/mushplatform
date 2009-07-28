@@ -58,6 +58,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :is_blog_admin?
   helper_method :is_friend_with_blog_admin?
+  helper_method :is_super_admin?
   
   protected
   def redirect_to_stored

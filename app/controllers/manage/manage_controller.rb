@@ -11,6 +11,8 @@ class Manage::ManageController < ApplicationController
   layout "manage"
 
   before_filter :is_space_admin?
+  
+  before_filter :is_super_admin?,:only => :player_manage
 
   def index    
     @friends = current_user.friends.find(:all,:limit => Latest_Friend_Count,:order => 'friends.created_at desc')
@@ -31,6 +33,20 @@ class Manage::ManageController < ApplicationController
     @new_gifts_count = current_user.receive_gifts.count(:conditions => "created_at >= date_sub(now() , INTERVAL 1 day)")
     @new_regards_count = current_user.receive_gifts.count(:conditions => "created_at >= date_sub(now() , INTERVAL 1 day)")
     @visitores = current_user.visitors.find(:all,:limit => 12,:order => "id desc")
+  end
+
+  def player_manage
+    conditions = params[:keywords].blank?  ? '' : ["real_name like ? or user_name like ?","%#{params[:keywords]}%","%#{params[:keywords]}%"]
+    @players = Player.paginate(:page => params[:page]||1,:conditions => conditions,:order => 'id')
+  end
+  
+  def update_player
+    player = Player.find(params[:id])
+    player.update_attributes(params[:player])
+    render :update do |page|
+      page.hide "vote_div_user#{player.id}"
+      page.replace_html("vote_count_user#{player.id}", "<front style='color:red'>(#{player.vote_count})</front>")
+    end
   end
   
 end

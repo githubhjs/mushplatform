@@ -18,7 +18,7 @@ class ActiveController < ApplicationController
   def index
     @blogs     =  Blog.paginate :page => params[:page]||1,:per_page => 10,:conditions =>"user_id in (select user_id from players)",:order => 'id desc'
     @users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'id desc'
-    @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()'    
+    @rand_users     =  Player.find :all, :limit => Player_Count_Perpage,:order =>'rand()',:conditions => "user_id in (select id from user_profiles where avatar is not null)"
     @comments  =  PlayerComment.paginate :page => params[:page],:per_page =>Player_Comments_Perpage,:order => 'id desc'    
     @articles  = Article.find(:all,:conditions => "channel_id=16",:order => 'top desc,id desc',:limit => 10)
     @rule_articles  = Article.find(:all,:conditions => "channel_id=17",:order => 'top desc,id desc',:limit => 10)

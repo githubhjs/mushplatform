@@ -108,9 +108,9 @@
             </p>
             <p><strong>共同主办：</strong><br />
               北京市通信协会呼叫中心专业委员会<br />
-            上海市呼叫中心协会<br />
-            西安呼叫中心产业联盟<br />
-            苏州市呼叫中心行业协会<br />
+              上海市呼叫中心协会<br />
+              西安呼叫中心产业联盟<br />
+              苏州市呼叫中心行业协会<br />
             黑龙江省软件协会</p>
 
           </div>
@@ -118,16 +118,16 @@
 
         <div class="tab-main">
           <div class="h12"></div>
-           <div class="w95 f14 huise hang20">
-             <p><strong>冠名赞助：</strong><br />
-             <img class="bian" src="/images/active/link_11.jpg" alt="华为" width="116" height="51" /><br />
-             </p>
-             华为技术公司 HUAWEI<br/><br/>
-             <p><strong>其他赞助：</strong><br />
-             
-             征集中...
-             </p>
-           </div>
+          <div class="w95 f14 huise hang20">
+            <p><strong>冠名赞助：</strong><br />
+              <img class="bian" src="/images/active/link_11.jpg" alt="华为" width="116" height="51" /><br />
+            </p>
+            华为技术公司 HUAWEI<br/><br/>
+            <p><strong>其他赞助：</strong><br />
+
+              征集中...
+            </p>
+          </div>
         </div>
         <div class="tab-main">
           <div class="h12"></div>
@@ -175,40 +175,40 @@
       <div class="tab-box3" id="tab_b3">
         <div>
           <ul class="tab-btbt3">
-            <li class="selected3"><a href="#">最新加入</a></li>
             <li class="selected3"><a href="#">随机展示</a></li>
+            <li class="selected3"><a href="#">最新加入</a></li>
           </ul>
           <div class="h12"></div>
         </div>
         <div class="tab-main3">
           <div class="friend">
             <ul>
-              <% for user in @users do %>
-                  <% unless user.nil? %>
-                    <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id,'normal')%>" /></a><br />
-                      <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
+              <% for rand_user in @rand_users do %>
+                  <% unless rand_user.nil? %>
+                    <li><a href="<%= rand_user.player_url %>"><img src="<%= user_icon(rand_user.user_id,'normal')%>" /></a><br />
+                      <a class="cblack f14b" href="<%= rand_user.player_url %>"><%=rand_user.display_user_name%></a>
                       <label>
-                        <input name="button" type="submit" class="button6422" value="投票" onclick="showVoteDiv('vote_div_nomal_'+'<%=user.id%>','simple_captcha_td_nomal_'+'<%=user.id%>');return false;" />
-                        <%= render :partial => "small_vote", :locals => {:user => user, :location => "nomal"} %>
-                      </label><br />                      
-                    票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
+                        <input name="button" type="button" class="button6422" id="button_tp" value="投票" onclick="showVoteDiv('vote_div_rand_'+'<%=rand_user.id%>','simple_captcha_td_rand_'+'<%=rand_user.id%>');return false;" />
+                        <%= render :partial => "small_vote", :locals => {:user => rand_user, :location => "rand"} %>
+                      </label><br />
+                    票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="<%=rand_user.blog_url%>" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="<%=rand_user.photo_url%>" class="csxred"><%=rand_user.photo_count%></a></li>
                   <%end%><!--TODO 链接 -->
                 <%end%>
               </ul>
             </div>
           </div>
-          <div class="tab-main3" sttle="display:none">
+          <div class="tab-main3" style="display:none">
             <div class="friend">
               <ul>
-                <% for rand_user in @rand_users do %>
+                <% for user in @users do %>
                     <% unless user.nil? %>
-                      <li><a href="<%= rand_user.player_url %>"><img src="<%= user_icon(rand_user.user_id,'normal')%>" /></a><br />
-                        <a class="cblack f14b" href="<%= user.player_url %>"><%=rand_user.display_user_name%></a>
+                      <li><a href="<%= user.player_url %>"><img src="<%=user_icon(user.user_id,'normal')%>" /></a><br />
+                        <a class="cblack f14b" href="<%= user.player_url %>"><%=user.display_user_name%></a>
                         <label>
-                          <input name="button" type="button" class="button6422" id="button_tp" value="投票" onclick="showVoteDiv('vote_div_rand_'+'<%=rand_user.id%>','simple_captcha_td_rand_'+'<%=rand_user.id%>');return false;" />
-                          <%= render :partial => "small_vote", :locals => {:user => rand_user, :location => "rand"} %>
-                        </label><br />                        
-                      票：<span class="blue"><%=rand_user.vote_count%></span> 文：<a href="<%=rand_user.blog_url%>" class="csxred"><%=rand_user.blog_count%></a> 照：<a href="<%=rand_user.photo_url%>" class="csxred"><%=rand_user.photo_count%></a></li>
+                          <input name="button" type="submit" class="button6422" value="投票" onclick="showVoteDiv('vote_div_nomal_'+'<%=user.id%>','simple_captcha_td_nomal_'+'<%=user.id%>');return false;" />
+                          <%= render :partial => "small_vote", :locals => {:user => user, :location => "nomal"} %>
+                        </label><br />
+                      票：<span class="blue"><%=user.vote_count%></span> 文：<a href="<%=user.blog_url%>" class="csxred"><%=user.blog_count%></a> 照：<a href="<%=user.photo_url%>" class="csxred"><%= user.photo_count %></a></li>
                     <%end%><!--TODO 链接 -->
                   <%end%>
                 </ul>

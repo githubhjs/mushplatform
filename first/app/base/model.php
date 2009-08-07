@@ -60,7 +60,19 @@ class Model {
     return $data;
   }
 
-  function add($sql) {
+  function insert($sql) {
+    $this->_execute($sql);
+  }
+
+  function update($sql) {
+    $this->_execute($sql);
+  }
+
+  function remove($sql) {
+    $this->_execute($sql);
+  }
+
+  private function _execute($sql) {
     $conn = $this->connect();
     $result = mysql_query($sql, $conn);
     if (!$result) {

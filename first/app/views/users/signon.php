@@ -18,7 +18,7 @@ input {width:150px;}
 <div>验证：<input type="text" name="scode" /></div>
 <div>　　　<img id="captcha" src="/first/captcha.php" onclick="document.getElementById('captcha').src='/first/captcha.php?'+Math.random();" style="cursor:pointer" ></div>
 <div>　　　点击图片刷新验证码</div>
-<div>　　　<input type="submit" name="submit" value="登录" /> <a href="/first/index.php/users/signup">注册</a></div>
+<div>　　　<input type="submit" name="submit" value="登录" style="width:40px;" /> <a href="/first/index.php/users/signup">注册</a></div>
 </form>
 
 </body>

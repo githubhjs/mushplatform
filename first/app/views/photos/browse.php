@@ -10,7 +10,8 @@
   <span style="font-size: 14px;">
     <a href="/first/index.php/photos/upload">上传</a>
     <a href="/first/index.php/photos/browse">浏览</a>
-    <a href="/first/index.php/users/signoff">登出</a>
+    <a href="/first/index.php/users/signoff">登出</a> 
+    (<?=$_SESSION['user']['name']?>)
   </span>
 </h1>
 

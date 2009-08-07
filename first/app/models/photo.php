@@ -5,23 +5,37 @@ class Photo extends Model {
   public $table_name = 'photos';
 
   function __construct() {
-    foreach ($this->columns('users') as $c) {
+    parent::__construct();
+    foreach ($this->columns($this->table_name) as $c) {
       $this->atts[$c] = '';
     }
   }
 
-  function find_by_email($email) {
+  function find_by_user_id($user_id) {
     $conn = $this->connect();
-    $sql = "select * from users where email = '%s'";
-    $query = sprintf($sql, mysql_real_escape_string($email,$conn));
+    $sql = "select * from photos where user_id = '%d'";
+    $query = sprintf($sql, mysql_real_escape_string($user_id,$conn));
+    $photos = $this->query($query, array_keys($this->atts), $conn);
+//    $this->close($conn);
+    return $photos;
+  }
+
+  function find_by_id($id) {
+    $photo = self::$cache->get('photo_'.$id);
+    if ($photo != NULL) return $photo;
+    echo 'not from cache';
+    $conn = $this->connect();
+    $sql = "select * from photos where id = %d";
+    $query = sprintf($sql, mysql_real_escape_string($id,$conn));
     $data = $this->query($query, array_keys($this->atts), $conn);
     if (count($data)>0) {
-      $user = $data[0];
+      $photo = $data[0];
+      self::$cache->set('photo_'.$photo['id'], $photo, false, 600);
     } else {
-      $user = null;
+      $photo = null;
     }
 //    $this->close($conn);
-    return $user;
+    return $photo;
   }
 
   function create($data) {
@@ -29,31 +43,30 @@ class Photo extends Model {
     foreach ($data as $key=>$value) {
       $data[$key] = mysql_real_escape_string($value,$conn);
     }
-
-    $name = $data['name'];
-    $salt = uniqid(mt_rand());
-    $salted_password = sha1(md5($data['password']).$salt);
-    $email = $data['email'];
+    
     $created_at = date('Y-m-d H:i:s');
-    $sql = "insert into users(name, salt, salted_password, email, created_at) values ('%s', '%s', '%s', '%s', '%s')";
-    $create = sprintf($sql,$name, $salt, $salted_password, $email, $created_at);
+    $sql = "insert into photos(filename, title, user_id, created_at) values ('%s', '%s', '%d', '%s')";
+    $create = sprintf($sql, $data['filename'], $data['title'], $data['user_id'], $created_at);
     $result =  $this->insert($create);
 //    $this->close($conn);
     return $result;
   }
 
-  function authenticate($email, $password) {
-    $user = $this->find_by_email($email);
-    if($user != NULL) {
-      $input_salted_password = sha1(md5($password).$user['salt']);
-      if ($input_salted_password == $user['salted_password']) {
-        return $user;
-      } else {
-        return false;
-      }
+  function thumbnail($filename, $width, $height) {
+    $file = UPLOAD_PATH.'/'.$filename;
+    $ext = substr($file, strlen($file)-4);
+    $file_without_ext = substr($file, 0, strripos($file, '.'));
+    $thumbnail_file = $file_without_ext.'-'.$width.'x'.$height.$ext;
+    copy($file, $thumbnail_file);
+
+    $image = new Imagick($thumbnail_file);
+    if ($width == $height) {
+      $image->cropThumbnailImage($width, $height);
     } else {
-      return false;
+      $image->scaleImage($width, $height, true);
     }
+    $image->writeImage();
+    $image->destroy();
   }
 
 }

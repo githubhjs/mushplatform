@@ -2,8 +2,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>用户登录</title>
+<style>
+input {width:150px;}
+</style>
 <head>
-
 <body>
 
 <h1>用户登录</h1>

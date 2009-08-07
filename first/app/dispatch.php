@@ -24,6 +24,7 @@ try{
   } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $instance->params = $_POST;
   }
+  $instance->files = $_FILES;
   #if($_SESSION == NULL) 
   session_start();
   $instance->session = $_SESSION;
@@ -36,6 +37,7 @@ try{
   //echo $out;
 } catch (Exception $e) {
   echo "Nothing happended ...";
+  echo $e;
 }
 
 ?>

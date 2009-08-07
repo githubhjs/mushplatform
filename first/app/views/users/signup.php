@@ -2,6 +2,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>用户注册</title>
+<style>
+input {width:150px;}
+</style>
 <head>
 
 <body>

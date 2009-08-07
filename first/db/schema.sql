@@ -11,9 +11,9 @@ CREATE TABLE `users` (
 
 CREATE TABLE `photos` (
   `id` int(11) NOT NULL auto_increment,
+  `filename` varchar(255) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text,
-  `url` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` datetime default NULL,
   PRIMARY KEY  (`id`)

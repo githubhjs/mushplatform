@@ -5,7 +5,8 @@ class User extends Model {
   public $table_name = 'users';
 
   function __construct() {
-    foreach ($this->columns('users') as $c) {
+    parent::__construct();
+    foreach ($this->columns($this->table_name) as $c) {
       $this->atts[$c] = '';
     }
   }

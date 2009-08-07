@@ -1,5 +1,5 @@
 <?php
-require pathinfo(__FILE__, PATHINFO_DIRNAME).'/../models/user.php';
+require APP_PATH.'/models/user.php';
 
 class UsersController extends Controller {
   function signup() {

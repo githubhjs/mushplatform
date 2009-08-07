@@ -3,6 +3,7 @@
 class Controller {
 
   public $params;
+  public $files;
   public $session;
   
   function render($template, $data) {

@@ -7,7 +7,15 @@ class Model {
   private $db_password = '';
   private $db_name = 'first';
 
+  //define memcached client instance
+  public static $cache;
+
   public $atts;
+
+  function __construct() {
+    self::$cache = new Memcache();
+    self::$cache->connect('127.0.0.1', 11211) or die ("Could not connect");
+  }
 
   function connect() {
     $conn = mysql_connect($this->db_host, $this->db_username, $this->db_password);

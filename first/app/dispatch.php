@@ -24,15 +24,14 @@ try{
   } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $instance->params = $_POST;
   }
+  #if($_SESSION == NULL) 
+  session_start();
+  $instance->session = $_SESSION;
 
   // invoke specified fucntion
   $function = $controller->getMethod($function_name);
-  $data = $function->invoke($instance);
+  $function->invoke($instance);
 
-  // render content
-  extract($data, EXTR_SKIP);
-  //ob_start();
-  @include APP_PATH.'/views/'.$class_name.'/'.$function_name.'.php';
   //$out = ob_end_clean();
   //echo $out;
 } catch (Exception $e) {

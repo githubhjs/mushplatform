@@ -7,6 +7,8 @@ class Model {
   private $db_password = '';
   private $db_name = 'first';
 
+  public $atts;
+
   function connect() {
     $conn = mysql_connect($this->db_host, $this->db_username, $this->db_password);
     if (!$conn) {
@@ -41,9 +43,9 @@ class Model {
     return $columns;
   }
 
-  function query($sql, $columns) {
+  function query($sql, $columns, $conn = null) {
     $data = array();
-    $conn = $this->connect();
+    if ($conn == NULL) $conn = $this->connect();
     $result = mysql_query($sql, $conn);
     if (!$result) {
       die('Query execution problem: ' . mysql_error($conn));
@@ -61,15 +63,15 @@ class Model {
   }
 
   function insert($sql) {
-    $this->_execute($sql);
+    return $this->_execute($sql);
   }
 
   function update($sql) {
-    $this->_execute($sql);
+    return $this->_execute($sql);
   }
 
   function remove($sql) {
-    $this->_execute($sql);
+    return $this->_execute($sql);
   }
 
   private function _execute($sql) {
@@ -79,6 +81,7 @@ class Model {
      die('Query execution problem: ' . mysql_error($conn));
     }
     $this->close($conn);
+    return $result;
   }
 
 }

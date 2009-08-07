@@ -1,8 +1,8 @@
 <?php
 require pathinfo(__FILE__, PATHINFO_DIRNAME).'/../base/model.php';
 
-class User extends Model {
-  public $table_name = 'users';
+class Photo extends Model {
+  public $table_name = 'photos';
 
   function __construct() {
     foreach ($this->columns('users') as $c) {

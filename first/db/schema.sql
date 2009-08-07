@@ -5,7 +5,17 @@ CREATE TABLE `users` (
   `salted_password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL unique,
   `created_at` datetime default NULL,
-  `update_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `photos` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(100) NOT NULL,
+  `description` text,
+  `url` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

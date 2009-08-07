@@ -1,4 +1,5 @@
 <?php
+default('UPLOAD_PATH', BASE_PATH.'/public/images/upload')
 require pathinfo(__FILE__, PATHINFO_DIRNAME).'/../models/photo.php';
 
 class PhotosController extends Controller {

@@ -15,7 +15,7 @@ class SiteSweeper < ActionController::Caching::Sweeper
     cache_dir = ActionController::Base.page_cache_directory
     unless cache_dir == RAILS_ROOT+"/public"
       FileUtils.rm_r(Dir.glob(cache_dir+"/#{pattern}")) rescue Errno::ENOENT
-      #RAILS_DEFAULT_LOGGER.info("Cache directory '#{cache_dir}' fully swept.")
+      RAILS_DEFAULT_LOGGER.info("#{cache_dir}/#{pattern}")
     end
   end
 end

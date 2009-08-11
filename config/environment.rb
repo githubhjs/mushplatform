@@ -50,7 +50,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_domain => '.ccmw.net',
+    #:session_domain => '.ccmw.net',
     :session_key => '_mushplatform_session',
     :secret      => '6d420a423d1249c80b5a6ab34523f907a41c910d54b0a3aa8aee41d18debeed8275d1374de6f0879a60c5e944cda227519b2e2a47e8daf020208544e8cf03ffb'
   }
@@ -84,7 +84,7 @@ Rails::Initializer.run do |config|
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
   # Activate observers that should always be running
-  config.active_record.observers = :footstep_observer
+  config.active_record.observers = :footstep_observer, :site_sweeper
   config.plugins = [:engines, :liquid, :fckeditor, :core, :authorize, :cms, :all]
   config.gem "calendar_date_select"
 end

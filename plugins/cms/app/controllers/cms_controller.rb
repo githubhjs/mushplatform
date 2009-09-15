@@ -2,7 +2,7 @@ class CmsController < ApplicationController
   caches_page :dispatch, :if => Proc.new { |c| c.request.format.html? }
   
   def dispatch
-    if request.subdomains(1)[0] != "www" or request.request_uri.rindex('.') != null
+    if request.subdomains(1)[0] != "www" or request.request_uri.rindex('.') != nil
       render :text => ""
       return
     end

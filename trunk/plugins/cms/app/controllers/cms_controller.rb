@@ -1,8 +1,8 @@
 class CmsController < ApplicationController
-  caches_page :dispatch
+  caches_page :dispatch, :if => Proc.new { |c| c.request.format.html? }
   
   def dispatch
-    if request.subdomains(1) != "www"
+    if request.subdomains(1)[0] != "www"
       render :text => ""
       return
     end

@@ -2,6 +2,10 @@ class CmsController < ApplicationController
   caches_page :dispatch
   
   def dispatch
+    if request.subdomains(1) != "www"
+      render ""
+      return
+    end
     path = params[:path]
     if path.index('content')
       channel_layout, content, title = recognize_content(path)

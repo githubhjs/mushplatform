@@ -3,7 +3,7 @@ class CmsController < ApplicationController
   
   def dispatch
     if request.subdomains(1) != "www"
-      render ""
+      render :text => ""
       return
     end
     path = params[:path]

@@ -55,6 +55,25 @@ module CmsHelper
     { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
   end
 
+  def list_articles_by_tags_category(args = {})
+    category = args.delete(:category)
+    tags = args.delete(:dynamics) if tags.nil? and args[:dynamics]
+    order = args.delete(:order) || 'created_at DESC'
+    per_page = args.delete(:per_page) || 20
+    offset = args.delete(:offset) || 0
+    page = args.delete(:page) || 1
+    will_args = args
+    if category
+      tags = Tags.find_by_category(category)
+      if tags
+        articles = tag_paginator(Article, tags.split('+'), nil, per_page.to_i, page.to_i, offset)
+      end
+    end
+    permalink = "/tags/#{tags}"
+    { 'articles' => articles, 'path' => permalink, 'will_paginate_options' => {:path => permalink}.merge(will_args) }
+  end
+
+
   def list_articles_by_block(args = {})
     block = args.delete(:block)
     block = args.delete(:dynamics) if block.nil? and args[:dynamics]

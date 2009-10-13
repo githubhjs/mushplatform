@@ -64,8 +64,9 @@ module CmsHelper
     page = args.delete(:page) || 1
     will_args = args
     if category
-      tags = Tag.find_by_category(category).collect {|t| t.name}
+      tags = Tag.find_all_by_category(category)
       if tags
+        tags = tags.collect {|t| t.name}
         articles = tag_paginator(Article, tags.split('+'), nil, per_page.to_i, page.to_i, offset)
       end
     end

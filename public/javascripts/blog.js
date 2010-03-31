@@ -87,7 +87,8 @@ function replaceVoteCaptcha(captcha_id){
     $(captcha_id).innerHTML = $("simple_only_captcha_div").innerHTML;
 }
 
-function showVoteDiv(vote_div_id,captcha_id){    
-    replaceVoteCaptcha(captcha_id);
-    Element.show(vote_div_id);
+function showVoteDiv(vote_div_id,captcha_id){
+    alert("活动已经结束");
+//    replaceVoteCaptcha(captcha_id);
+//    Element.show(vote_div_id);
 }
